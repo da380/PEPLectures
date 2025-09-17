@@ -1,0 +1,167 @@
+\documentclass[a4paper,12pt]{paper}
+
+\usepackage{mycommands}
+\usepackage{amsmath}
+
+\title{Seismology Problem Set 2 - Solutions}
+\author{David Al-Attar \\ Michaelmas Term, \the\year}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+\item From Lecture 18, we know that the least squares solution for the given problem is
+\begin{equation*}
+    \mathbf{m}=(\mathbf{A}^{T}\mathbf{C}^{-1}\mathbf{A}+\lambda \mathbf{B})^{-1}\mathbf{A}^{T}\mathbf{C}^{-1}\mathbf{d}
+\end{equation*}
+with $\mathbf{d}$ the data vector. Here we take $\mathbf{d}=\mathbf{A}\mathbf{m}_{in}$, and hence find that
+\begin{equation*}
+    \mathbf{m}_{out}=(\mathbf{A}^{T}\mathbf{C}^{-1}\mathbf{A}+\lambda \mathbf{B})^{-1}\mathbf{A}^{T}\mathbf{C}^{-1}\mathbf{A}\mathbf{m}_{in}.
+\end{equation*}
+It follows that the resolution matrix takes the form
+\begin{equation*}
+    \mathbf{R}=(\mathbf{A}^{T}\mathbf{C}^{-1}\mathbf{A}+\lambda \mathbf{B})^{-1}\mathbf{A}^{T}\mathbf{C}^{-1}\mathbf{A}.
+\end{equation*}
+The resolution matrix relates the input and output of a synthetic inversion that does not include data errors. In an ideal case, we would like the resulting model to be equal to the input, and hence we want $\mathbf{R}$ to be close to the identity matrix.
+
+\item A suitable Lagrangian for this problem can be defined by
+\begin{equation*}
+    L=J(\mathbf{u})-\int_{M}\frac{\partial}{\partial x_{j}}(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}})u_{i}'\dd^{3}\mathbf{x}+\int_{\partial M}[\hat{n}_{j}(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}})-\sigma g_{i}]w_{i}'\dd S,
+\end{equation*}
+where we have used the elastic tensor $A_{ijkl}=\lambda\delta_{ij}\delta_{kl}+\mu(\delta_{ik}\delta_{jl}+\delta_{il}\delta_{jk})$, and $u_{i}'$ and $w_{i}'$ are Lagrange multipliers. As usual, variation w.r.t to the multipliers just gives the forward problem. Varying $u_{i}$, however, leads to the new condition
+\begin{equation*}
+    \int_{\partial M}h_{i}'\delta u_{i}\dd S-\int_{M}\frac{\partial}{\partial x_{j}}(A_{ijkl}\frac{\partial\delta u_{k}}{\partial x_{l}})u_{i}'\dd^{3}\mathbf{x}+\int_{\partial M}\hat{n}_{j}(A_{ijkl}\frac{\partial\delta u_{k}}{\partial x_{l}})w_{i}'\dd S=0,
+\end{equation*}
+where we have defined
+\begin{equation*}
+    \mathbf{h}'(\mathbf{x})=\sum_{i=1}^{m}\frac{1}{\sigma_{i}^{2}}[\mathbf{u}(\mathbf{x}_{i})-\mathbf{u}_{i}^{obs}]\delta(\mathbf{x}-\mathbf{x}_{i}),
+\end{equation*}
+to simplify the contribution associated with $J(\mathbf{u})$. To proceed, we need to integrate by parts to isolate $\delta u_{i}$. The key step is
+\begin{align*}
+    -\int_{M}&\frac{\partial}{\partial x_{j}}(A_{ijkl}\frac{\partial\delta u_{k}}{\partial x_{l}})u_{i}'\dd^{3}\mathbf{x} \\
+    &=-\int_{M}\frac{\partial}{\partial x_{j}}(A_{ijkl}\frac{\partial\delta u_{k}}{\partial x_{l}}u_{i}')\dd^{3}\mathbf{x}+\int_{M}A_{ijkl}\frac{\partial\delta u_{k}}{\partial x_{l}}\frac{\partial u_{i}'}{\partial x_{j}}\dd^{3}\mathbf{x} \\
+    &=-\int_{\partial M}\hat{n}_{j}(A_{ijkl}\frac{\partial\delta u_{k}}{\partial x_{l}})u_{i}'\dd S+\int_{M}A_{klij}\frac{\partial\delta u_{i}}{\partial x_{j}}\frac{\partial u_{k}'}{\partial x_{l}}\dd^{3}\mathbf{x} \\
+    &=-\int_{\partial M}\hat{n}_{j}(A_{ijkl}\frac{\partial\delta u_{k}}{\partial x_{l}})u_{i}'\dd S+\int_{M}\frac{\partial}{\partial x_{j}}(A_{ijkl}\delta u_{i}\frac{\partial u_{k}'}{\partial x_{l}})\dd^{3}\mathbf{x} -\int_{M}\delta u_{i}\frac{\partial}{\partial x_{j}}(A_{ijkl}\frac{\partial u_{k}'}{\partial x_{l}})\dd^{3}\mathbf{x} \\
+    &=-\int_{\partial M}\hat{n}_{j}(A_{ijkl}\frac{\partial\delta u_{k}}{\partial x_{l}})u_{i}'\dd S+\int_{\partial M}\delta u_{i}\hat{n}_{j}(A_{ijkl}\frac{\partial u_{k}'}{\partial x_{l}})\dd S -\int_{M}\delta u_{i}\frac{\partial}{\partial x_{j}}(A_{ijkl}\frac{\partial u_{k}'}{\partial x_{l}})\dd^{3}\mathbf{x},
+\end{align*}
+where we note that the hyperelastic symmetry $A_{ijkl}=A_{klij}$ has been used. Using this result, the condition now reads
+\begin{equation*}
+    \int_{\partial M}[h_{i}'+\hat{n}_{j}(A_{ijkl}\frac{\partial u_{k}'}{\partial x_{l}})]\delta u_{i}\dd S-\int_{M}\delta u_{i}\frac{\partial}{\partial x_{j}}(A_{ijkl}\frac{\partial u_{k}'}{\partial x_{l}})\dd^{3}\mathbf{x} +\int_{\partial M}\hat{n}_{j}(A_{ijkl}\frac{\partial\delta u_{k}}{\partial x_{l}})(w_{i}'-u_{i}')\dd S=0.
+\end{equation*}
+It follows that $u_{i}'$ must satisfy
+\begin{equation*}
+    \frac{\partial}{\partial x_{j}}(A_{ijkl}\frac{\partial u_{k}'}{\partial x_{l}})=0,
+\end{equation*}
+subject to the boundary condition
+\begin{equation*}
+    \hat{n}_{j}(A_{ijkl}\frac{\partial u_{k}'}{\partial x_{l}})=-h_{i}',
+\end{equation*}
+while also $w_{i}'=u_{i}'$ on $\partial M$. These are the adjoint equations for this problem. Having solved the forward and adjoint problems, the first-order perturbation to $J$ can be written
+\begin{equation*}
+    \delta J = -\int_{M}\frac{\partial}{\partial x_{j}}(\delta A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}})u_{i}'\dd^{3}\mathbf{x} + \int_{\partial M}[\hat{n}_{j}(\delta A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}})-\delta\sigma g_{i}]u_{i}'\dd S.
+\end{equation*}
+Performing an integration by parts, this simplifies to
+\begin{equation*}
+    \delta J=\int_{M}\delta A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\frac{\partial u_{i}'}{\partial x_{j}}\dd^{3}\mathbf{x}-\int_{\partial M}\delta\sigma g_{i}u_{i}'\dd S.
+\end{equation*}
+From this we see that the sensitivity kernel w.r.t $\sigma$ is equal to $K_{\sigma}=-g_{i}u_{i}'$. To get the kernels for $\lambda$ and $\mu$, we note that
+\begin{equation*}
+    \delta A_{ijkl}=\delta\lambda\delta_{ij}\delta_{kl}+\delta\mu(\delta_{ik}\delta_{jl}+\delta_{il}\delta_{jk}),
+\end{equation*}
+from which we find
+\begin{equation*}
+    \delta J=\int_{M}\delta\lambda\frac{\partial u_{i}}{\partial x_{i}}\frac{\partial u_{j}'}{\partial x_{j}}\dd^{3}\mathbf{x}+\int_{M}\delta\mu\left(\frac{\partial u_{i}}{\partial x_{j}}+\frac{\partial u_{j}}{\partial x_{i}}\right)\left(\frac{\partial u_{i}'}{\partial x_{j}}+\frac{\partial u_{j}'}{\partial x_{i}}\right)\dd^{3}\mathbf{x},
+\end{equation*}
+where we have set $\delta\sigma=0$ as that term has been dealt with. From this expression, we can now read off the desired sensitivity kernels
+\begin{gather*}
+    K_{\lambda}=\frac{\partial u_{i}}{\partial x_{i}}\frac{\partial u_{j}'}{\partial x_{j}}, \\
+    K_{\mu}=\left(\frac{\partial u_{i}}{\partial x_{j}}+\frac{\partial u_{j}}{\partial x_{i}}\right)\left(\frac{\partial u_{i}'}{\partial x_{j}}+\frac{\partial u_{j}'}{\partial x_{i}}\right).
+\end{gather*}
+As is typical with the adjoint method, we see that these sensitivity kernels depend on both the solution of the forward and adjoint problems. These two problems are identical in form, differing only in their force terms, and hence the overall cost of the calculations is that of two forward calculations.
+
+\item The cross correlation is defined by
+\begin{equation*}
+    C(\tau)=\int_{-\infty}^{\infty}s^{obs}(t-\tau)s(\mathbf{x}_{s},t)\dd t,
+\end{equation*}
+and so the optimality condition is given explicitly by
+\begin{equation*}
+    \frac{dC}{d\tau}(\overline{\tau})=-\int_{-\infty}^{\infty}\dot{s}^{obs}(t-\overline{\tau})s(\mathbf{x}_{s},t)\dd t=0.
+\end{equation*}
+If we perturb the synthetic seismogram $s$ to $s+\delta s$ and write $\delta\overline{\tau}$ for the change in $\overline{\tau}$, we then obtain to first-order accuracy that
+\begin{equation*}
+    -\int_{-\infty}^{\infty}[-\delta\overline{\tau}\ddot{s}^{obs}(t-\overline{\tau})]s(\mathbf{x}_{s},t) \dd t - \int_{-\infty}^{\infty}\dot{s}^{obs}(t-\overline{\tau})\delta s(\mathbf{x}_{s},t)\dd t=0,
+\end{equation*}
+which we can solve to obtain
+\begin{equation*}
+    \delta\overline{\tau}=\frac{\int_{-\infty}^{\infty}\dot{s}^{obs}(t-\overline{\tau})\delta s(\mathbf{x}_{s},t)\dd t}{\int_{-\infty}^{\infty}\ddot{s}^{obs}(t-\overline{\tau})s(\mathbf{x}_{s},t)\dd t}.
+\end{equation*}
+
+\item The part of the Lagrangian that depends explicitly on the motion is
+\begin{equation*}
+    -\frac{1}{2}G\int_{M}\frac{\rho\rho'}{\{[\varphi_{i}-\varphi_{i}'][ \varphi_{i}-\varphi_{i}']\}^{\frac{1}{2}}}\dd^{3}\mathbf{x}',
+\end{equation*}
+where it is understood that un-primed functions depend on $\mathbf{x}$ and primed ones on the dummy integration variable $\mathbf{x}'$. Perturbing the motion to $\boldsymbol{\varphi}+\delta\boldsymbol{\varphi}$ and expanding to first-order accuracy we find
+\begin{equation*}
+    \int_{M}\frac{\delta\mathcal{L}}{\delta\varphi_{i}}\delta\varphi_{i}\dd^{3}\mathbf{x}=-\frac{1}{2}G\int_{M}\int_{M}\frac{\rho\rho'(\varphi_{i}-\varphi_{i}')(\delta\varphi_{i}-\delta\varphi_{i}')}{\{[\varphi_{j}-\varphi_{j}'][ \varphi_{j}-\varphi_{j}']\}^{\frac{3}{2}}}\dd^{3}\mathbf{x}'\dd^{3}\mathbf{x}.
+\end{equation*}
+Splitting this expression into two parts we find
+\begin{align*}
+    \int_{M}\frac{\delta\mathcal{L}}{\delta\varphi_{i}}\delta\varphi_{i}\dd^{3}\mathbf{x} = &-\frac{1}{2}G\int_{M}\int_{M}\frac{\rho\rho'(\varphi_{i}-\varphi_{i}')\delta\varphi_{i}}{\{[\varphi_{j}-\varphi_{j}'][ \varphi_{j}-\varphi_{j}']\}^{\frac{3}{2}}}\dd^{3}\mathbf{x}'\dd^{3}\mathbf{x} \\
+    &+\frac{1}{2}G\int_{M}\int_{M}\frac{\rho\rho'(\varphi_{i}-\varphi_{i}')\delta\varphi_{i}'}{\{[\varphi_{j}-\varphi_{j}'][ \varphi_{j}-\varphi_{j}']\}^{\frac{3}{2}}}\dd^{3}\mathbf{x}'\dd^{3}\mathbf{x},
+\end{align*}
+but by interchanging the order of integration and relabelling dummy variables $\mathbf{x} \leftrightarrow \mathbf{x}'$, we note that the two terms are actually equal, and hence
+\begin{equation*}
+    \int_{M}\frac{\delta\mathcal{L}}{\delta\varphi_{i}}\delta\varphi_{i}\dd^{3}\mathbf{x}=-G\int_{M}\delta\varphi_{i} \left( \int_{M}\frac{\rho\rho'(\varphi_{i}-\varphi_{i}')}{\{[\varphi_{j}-\varphi_{j}'][ \varphi_{j}-\varphi_{j}']\}^{\frac{3}{2}}}\dd^{3}\mathbf{x}' \right) \dd^{3}\mathbf{x},
+\end{equation*}
+which implies
+\begin{equation*}
+    \frac{\delta\mathcal{L}}{\delta\varphi_{i}}=-G\rho\int_{M}\frac{\rho'(\varphi_{i}-\varphi_{i}')}{\{[\varphi_{j}-\varphi_{j}'][ \varphi_{j}-\varphi_{j}']\}^{\frac{3}{2}}}\dd^{3}\mathbf{x}'=\rho\gamma_{i},
+\end{equation*}
+as required.
+
+\item The solution for this problem is provided in the lecture notes and is not reproduced here.
+
+\item We are told
+\begin{equation*}
+    \mathbf{u}(\mathbf{x},t) = \sum_{km}\left\{\int_{0}^{t}\frac{\sin[\omega_{k}(t-t')]}{\omega_{k}}\int_{M}\overline{S}_{ij}(\mathbf{x}',t')\frac{\partial|km\rangle^{*}}{\partial x'_{j}}(\mathbf{x}')\dd^{3}\mathbf{x}'\dd t'\right\}|km\rangle(\mathbf{x}),
+\end{equation*}
+noting that arguments have now been included for clarity. In the case of a moment tensor point source, we see immediately that
+\begin{equation*}
+    \int_{M}\overline{S}_{ij}(\mathbf{x}',t')\frac{\partial|km\rangle^{*}}{\partial x'_{j}}(\mathbf{x}')\dd^{3}\mathbf{x}' = M_{ij}\frac{\partial|km\rangle^{*}}{\partial x_{j}}(\mathbf{x}_{s})H(t'-t_{s}),
+\end{equation*}
+while the necessary time integral is readily evaluated for $t\ge t_{s}$:
+\begin{align*}
+    &\int_{0}^{t}\frac{\sin[\omega_{k}(t-t')]}{\omega_{k}}H(t'-t_{s})\dd t' = \int_{t_s}^{t}\frac{\sin[\omega_{k}(t-t')]}{\omega_{k}}\dd t' \\ &= \left[\frac{\cos[\omega_k(t-t')]}{\omega_k^2}\right]_{t_s}^t = \frac{1-\cos[\omega_{k}(t-t_{s})]}{\omega_{k}^{2}},
+\end{align*}
+and hence the eigenfunction expansion reduces to
+\begin{equation*}
+    \mathbf{u}(\mathbf{x},t)=\sum_{km}\frac{1-\cos[\omega_{k}(t-t_{s})]}{\omega_{k}^{2}}M_{ij}\frac{\partial|km\rangle^{*}}{\partial x_{j}}(\mathbf{x}_{s})|km\rangle(\mathbf{x}),
+\end{equation*}
+for $t\ge t_{s}$ and zero before this. This final expression depends on ten source parameters, assuming that Earth structure is known. The dependence on the moment tensor is linear, but that on the source locations and source time is non-linear. There are several possible methods for solving the inverse problem. The most obvious is to define some sort of least-squares misfit between observed and predicted seismograms, and then optimise to find the best fitting source parameters. To do this gradient-based methods could be applied, and here the derivatives with respect to the source parameters could be calculated directly with relative ease. Note that in this problem there are likely to be more data than model parameters, and hence it is likely to be over-determined. As a result, regularisation would not be needed. Because the problem is non-linear, it is not certain that the optimal solution obtained would be a global minimum. Due to the size of the inverse problem and the low cost of implementing mode summation (in a spherically symmetric earth at least) the application of Bayesian methods via something like MCMC would be feasible, and this could address the possible issue of local minima, while also providing a quantification of uncertainty.
+
+\item Within the eigenvalue problem we take the test function equal to $\mathbf{s}$ and so obtain
+\begin{equation*}
+    -\omega^{2}+i\omega\langle \mathbf{s}|\mathbf{W}|\mathbf{s}\rangle+\langle \mathbf{s}|\mathbf{H}|\mathbf{s}\rangle=0,
+\end{equation*}
+where we have used the normalisation condition. This is a quadratic equation for $\omega$, and its solution yields
+\begin{equation*}
+    \omega=\frac{1}{2}i\langle \mathbf{s}|\mathbf{W}|\mathbf{s}\rangle\pm\sqrt{\langle \mathbf{s}|\mathbf{H}|\mathbf{s}\rangle-\frac{1}{4}\langle \mathbf{s}|\mathbf{W}|\mathbf{s}\rangle^{2}},
+\end{equation*}
+as required. Note that that the Coriolis operator is anti-Hermitian, and hence $\langle \mathbf{s}|\mathbf{W}|\mathbf{s}\rangle$ is an imaginary number. For this reason the expression for $\omega$ is real so long as
+\begin{equation*}
+    \langle \mathbf{s}|\mathbf{H}|\mathbf{s}\rangle-\frac{1}{4}\langle \mathbf{s}|\mathbf{W}|\mathbf{s}\rangle^{2}>0,
+\end{equation*}
+with the contribution from the Coriolis term always being non-negative. We see that in the rotating eigenvalue problem the Coriolis force always contributes to the stability of the earth model. As with the non-rotating case, the question of stability reduces to the properties of the potential energy form which here includes an additional contribution from centrifugal forces. This latter part can be written explicitly as
+\begin{equation*}
+    \int_{M}\rho\epsilon_{ijk}\epsilon_{klm}s_{i}^{*}\Omega_{j}\Omega_{l}s_{m}\dd^{3}\mathbf{x}
+\end{equation*}
+and using the identity $\epsilon_{ijk}\epsilon_{klm}=\delta_{il}\delta_{jm}-\delta_{im}\delta_{jl}$ this becomes
+\begin{equation*}
+    \int_{M}\rho\epsilon_{ijk}\epsilon_{klm}s_{i}^{*}\Omega_{j}\Omega_{l}s_{m}\dd^{3}\mathbf{x}=\int_{M}\rho[|(\mathbf{s}\cdot\boldsymbol{\Omega})|^2-||\mathbf{s}||^2||\boldsymbol{\Omega}||^2]\dd^{3}\mathbf{x}.
+\end{equation*}
+Applying the Cauchy-Schwarz inequality we note that this term is always non-positive, and hence centrifugal forces are destabilising.
+
+\end{enumerate}
+
+\end{document}

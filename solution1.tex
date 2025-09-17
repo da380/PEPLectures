@@ -1,0 +1,277 @@
+\documentclass[a4paper,12pt]{paper}
+
+\usepackage{mycommands}
+\usepackage{amsmath}
+
+\title{Seismology Problem Set 1 – Solutions}
+\author{David Al-Attar \\ Michaelmas Term, \the\year}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+\item Starting with the equations of motion
+\begin{equation*}
+    \rho\frac{\partial v_{i}}{\partial t}-\frac{\partial T_{ij}}{\partial x_{j}}=0,
+\end{equation*}
+we integrate over $U$ to obtain
+\begin{equation*}
+    \int_{U}\rho\frac{\partial v_{i}}{\partial t}\dd^{3}\mathbf{x}-\int_{U}\frac{\partial T_{ij}}{\partial x_{j}}\dd^{3}\mathbf{x}=0.
+\end{equation*}
+Applying the divergence theorem to the second term gives
+\begin{equation*}
+    \int_{U}\frac{\partial T_{ij}}{\partial x_{j}}\dd^{3}\mathbf{x}=\int_{\partial U}T_{ij}\hat{n}_{j}\dd S,
+\end{equation*}
+and hence we obtain the desired result
+\begin{equation*}
+    \frac{d}{dt}\int_{U}\rho v_{i}\dd^{3}\mathbf{x}=\int_{\partial U}T_{ij}\hat{n}_{j}\dd S,
+\end{equation*}
+where we can bring the time derivative out of the first integral because both $\rho$ and $U$ are time-independent. The term $\int_{U}\rho v_{i}\dd^{3}\mathbf{x}$ is clearly the linear momentum of the particles lying in $U$, and hence we have obtained Newton's second law for this sub-body. The total force acting on the sub-body is expressed as an integral of the traction $t_{i}=T_{ij}\hat{n}_{j}$ over the reference boundary $\partial U$. This represents contact forces acting on the sub-body due to its surroundings, with the traction being a force per unit area relative to the reference boundary. Here we also see that stress tensors relate the orientation of a surface to the forces per unit area acting on it. Here we could choose to work either with a referential surface or its instantaneous image in physical space. In the former case we end up with the first Piola-Kirchhoff stress, while the latter leads to the Cauchy stress, this being the one generally used in fluid mechanics.
+
+Differentiating the expression for the angular momentum, we obtain
+\begin{align*}
+    \frac{d}{dt}\int_{U}\rho\epsilon_{ijk}\varphi_{j}v_{k}\dd^{3}\mathbf{x} &= \int_{U}\rho\epsilon_{ijk}\varphi_{j}\frac{\partial v_{k}}{\partial t}\dd^{3}\mathbf{x}+\int_{U}\rho\epsilon_{ijk}v_{j}v_{k}\dd^{3}\mathbf{x} \\
+    &= \int_{U}\rho\epsilon_{ijk}\varphi_{j}\frac{\partial v_{k}}{\partial t}\dd^{3}\mathbf{x},
+\end{align*}
+where we have used $\epsilon_{ijk}v_{j}v_{k}=0$. Substituting in the equations of motion (i.e. the conservation of linear momentum), we find
+\begin{equation*}
+    \frac{d}{dt}\int_{U}\rho\epsilon_{ijk}\varphi_{j}v_{k}\dd^{3}\mathbf{x}=\int_{U}\epsilon_{ijk}\varphi_{j}\frac{\partial T_{kl}}{\partial x_{l}}\dd^{3}\mathbf{x},
+\end{equation*}
+and integrating by parts this becomes
+\begin{align*}
+    \frac{d}{dt}\int_{U}\rho\epsilon_{ijk}\varphi_{j}v_{k}\dd^{3}\mathbf{x} &= \int_{U}\frac{\partial}{\partial x_{l}}(\epsilon_{ijk}\varphi_{j}T_{kl})\dd^{3}\mathbf{x}-\int_{U}\epsilon_{ijk}F_{jl}T_{kl}\dd^{3}\mathbf{x} \\
+    &= \int_{\partial U}\epsilon_{ijk}\varphi_{j}t_{k}\dd S-\int_{U}\epsilon_{ijk}F_{jl}T_{kl}\dd^{3}\mathbf{x},
+\end{align*}
+where the first term on the right hand side is the torque on the sub-body due to contact forces acting on its boundary. If angular momentum is to be conserved, we must then have
+\begin{equation*}
+    \int_{U}\epsilon_{ijk}F_{jl}T_{kl}\dd^{3}\mathbf{x}=0,
+\end{equation*}
+and as $U$ is arbitrary, this implies $\epsilon_{ijk}F_{jl}T_{kl}=0$. This latter condition can only be met if $F_{jl}T_{kl}$ is a symmetric tensor (the sufficiency is clear, for necessity, act $\epsilon_{ipq}$ on the identity and use $\epsilon_{ipq}\epsilon_{ijk}=\delta_{pj}\delta_{qk}-\delta_{pk}\delta_{qj}$). We conclude that $\mathbf{F}\mathbf{T}^{T}$ is symmetric. If we then define $\mathbf{S}$ through $\mathbf{T}=\mathbf{F}\mathbf{S}$ we see that
+\begin{equation*}
+    \mathbf{F}\mathbf{S}^{T}\mathbf{F}^{T}=(\mathbf{F}\mathbf{S}^{T}\mathbf{F}^{T})^{T}=\mathbf{F}\mathbf{S}\mathbf{F}^{T}
+\end{equation*}
+and hence $\mathbf{S}$ is indeed symmetric.
+
+\item We are given the Lagrangian density
+\begin{equation*}
+    \mathcal{L}=\frac{1}{2}\rho\frac{\partial u_{i}}{\partial t}\frac{\partial u_{i}}{\partial t}-\frac{1}{2}A_{ijkl}\frac{\partial u_{i}}{\partial x_{j}}\frac{\partial u_{k}}{\partial x_{l}}+\overline{S}_{ij}\frac{\partial u_{i}}{\partial x_{j}},
+\end{equation*}
+and can assume the standard form of the Euler Lagrange equations
+\begin{equation*}
+    \frac{\partial\mathcal{L}}{\partial u_{i}}-\frac{\partial}{\partial t}\frac{\partial\mathcal{L}}{\partial v_{i}}-\frac{\partial}{\partial x_{j}}\frac{\partial\mathcal{L}}{\partial F_{ij}}=0,
+\end{equation*}
+where we have written $v_{i}=\frac{\partial u_{i}}{\partial t}$ and $F_{ij}=\frac{\partial u_{i}}{\partial x_{j}}$ for convenience. Differentiating the Lagrangian, we find
+\begin{equation*}
+    \frac{\partial\mathcal{L}}{\partial u_{i}}=0, \quad \frac{\partial\mathcal{L}}{\partial v_{i}}=\rho\frac{\partial u_{i}}{\partial t}, \quad \frac{\partial\mathcal{L}}{\partial F_{ij}}=-A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}+\overline{S}_{ij},
+\end{equation*}
+and hence the equations of motion read
+\begin{equation*}
+    \rho\frac{\partial^{2}u_{i}}{\partial t^{2}}-\frac{\partial}{\partial x_{j}}(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}})=-\frac{\partial\overline{S}_{ij}}{\partial x_{j}}
+\end{equation*}
+which is what we obtained in lectures by linearisation of the exact equations. The natural boundary conditions take the general form
+\begin{equation*}
+    \frac{\partial\mathcal{L}}{\partial F_{ij}}\hat{n}_{j}=0,
+\end{equation*}
+on $\partial M$, and hence reduce to
+\begin{equation*}
+    A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\hat{n}_{j}=\overline{S}_{ij}\hat{n}_{j}.
+\end{equation*}
+For the next part, we have the energy density
+\begin{equation*}
+    E=\frac{1}{2}\rho\frac{\partial u_{i}}{\partial t}\frac{\partial u_{i}}{\partial t}+\frac{1}{2}A_{ijkl}\frac{\partial u_{i}}{\partial x_{j}}\frac{\partial u_{k}}{\partial x_{l}},
+\end{equation*}
+which we differentiate to obtain
+\begin{equation*}
+    \frac{\partial E}{\partial t}=\rho\frac{\partial u_{i}}{\partial t}\frac{\partial^{2}u_{i}}{\partial t^{2}}+A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\frac{\partial}{\partial x_{j}}\frac{\partial u_{i}}{\partial t},
+\end{equation*}
+where we have used the hyperelastic symmetry $A_{ijkl}=A_{klij}$. Applying the product rule to the second term on the right hand side, we have
+\begin{equation*}
+    A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\frac{\partial}{\partial x_{j}}\frac{\partial u_{i}}{\partial t}=\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\frac{\partial u_{i}}{\partial t}\right)-\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\right)\frac{\partial u_{i}}{\partial t},
+\end{equation*}
+from which we obtain
+\begin{equation*}
+    \frac{\partial E}{\partial t}+\frac{\partial}{\partial x_{j}}\left(-A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\frac{\partial u_{i}}{\partial t}\right)=0,
+\end{equation*}
+on use of the equations of motion in the absence of a stress glut. Here we have a conservation law of the correct form, and identify
+\begin{equation*}
+    s_{j}=-A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\frac{\partial u_{i}}{\partial t}.
+\end{equation*}
+Physically, this vector represents the flux of energy associated with the displacement field. Indeed, integrating the conservation law over an arbitrary volume, $U$, and applying the divergence theorem we obtain the integral statement
+\begin{equation*}
+    \frac{d}{dt}\int_{U}E~\dd^{3}\mathbf{x}=\int_{\partial U}s_{j}\hat{n}_{j}\dd S,
+\end{equation*}
+which makes the physical interpretation obvious.
+
+\item We need to evaluate
+\begin{equation*}
+    A_{ijkl}=\frac{\partial^{2}W}{\partial F_{ij}\partial F_{kl}}
+\end{equation*}
+using the relation $W(\mathbf{F})=U(\mathbf{C})$ with $\mathbf{C}=\mathbf{F}^{T}\mathbf{F}$. For the first derivative we repeat the calculation from Lecture 12
+\begin{equation*}
+    \frac{\partial W}{\partial F_{ij}}=\frac{\partial U}{\partial C_{mn}}\frac{\partial C_{mn}}{\partial F_{ij}}=\frac{\partial U}{\partial C_{mn}}\frac{\partial}{\partial F_{ij}}(F_{km}F_{kn})=2F_{im}\frac{\partial U}{\partial C_{mj}},
+\end{equation*}
+where we have used the identity
+\begin{equation*}
+    \frac{\partial C_{kl}}{\partial F_{ij}}=\delta_{ik}F_{jl}+\delta_{il}F_{jk}.
+\end{equation*}
+We can then differentiate again in the same manner to obtain
+\begin{align*}
+    \frac{\partial^2 W}{\partial F_{ij}\partial F_{kl}} &= \frac{\partial}{\partial F_{kl}}\left(2F_{im}\frac{\partial U}{\partial C_{mj}}\right) \\
+    &= 2F_{im}\frac{\partial^{2}U}{\partial C_{mj}\partial C_{pq}}\frac{\partial C_{pq}}{\partial F_{kl}}+2\delta_{ik}\frac{\partial U}{\partial C_{lj}} \\
+    &= 4F_{im}F_{kp}\frac{\partial^{2}U}{\partial C_{mj}\partial C_{pq}}+2\delta_{ik}\frac{\partial U}{\partial C_{lj}},
+\end{align*}
+where we have used the symmetry of $C_{ij}$. Evaluating this result at $\mathbf{F}=\mathbf{C}=\mathbf{I}$, we finally obtain
+\begin{equation*}
+    A_{ijkl}=4\frac{\partial^{2}U}{\partial C_{ij}\partial C_{kl}},
+\end{equation*}
+where we note that the term proportional to $\frac{\partial U}{\partial C_{lj}}$ vanishes as the equilibrium has been assumed to be stress free. Using this expression, the symmetry of $C_{ij}$ then trivially implies that
+\begin{equation*}
+    A_{ijkl}=A_{jikl}=A_{ijlk}.
+\end{equation*}
+To determine the number of independent components of the elastic tensor, the easiest method is to first note that $A_{ijkl}$ maps symmetric second-order tensors into symmetric second order tensors. Such second-order tensors are equivalent to six-dimensional vectors, and hence the elastic tensor can be identified with a $6\times6$ matrix, and hence has at most 36 independent components. Next, the hyperelastic symmetry $A_{ijkl}=A_{klij}$ implies that such a matrix is actually symmetric, and hence the number of independent components is equal to $6+5+4+3+2+1=21$.
+
+If the initial stress does not vanish, the elastic tensor takes the form
+\begin{equation*}
+    A_{ijkl}=4\frac{\partial^{2}U}{\partial C_{ij}\partial C_{kl}}+\delta_{ik}\sigma_{lj}
+\end{equation*}
+where $\sigma_{ij}=2\frac{\partial U}{\partial C_{ij}}$ is the (symmetric) equilibrium stress. Here the first term on the right has the full elastic symmetries, but the term depending on the equilibrium stress only obeys the hyperelastic symmetry. Thus, in a pre-stressed medium the elastic tensor loses some of its symmetries. Moreover, it can be shown that for a non-hydrostatic equilibrium stress, the second term is associated with anisotropy.
+
+\item For this question we need to recall that the Christoffel matrix has components
+\begin{equation*}
+    \Gamma_{ik}(\mathbf{p})=\frac{1}{\rho}A_{ijkl}p_{j}p_{l},
+\end{equation*}
+along with the Christoffel equation
+\begin{equation*}
+    \boldsymbol{\Gamma}(\hat{\mathbf{p}})\mathbf{a}=c^{2}\mathbf{a}
+\end{equation*}
+which determines the phase speeds, $c$, and polarisation vectors, $\mathbf{a}$, for plane waves propagating in the direction $\hat{\mathbf{p}}$. For the given elastic tensor we find
+\begin{align*}
+    \Gamma_{ik}(\hat{\mathbf{p}}) = \frac{\lambda+\mu}{\rho}\hat{p}_{i}\hat{p}_{k}+\frac{\mu}{\rho}\delta_{ik} &+ \frac{8\gamma}{\rho}\cos^{2}\theta\hat{\nu}_{i}\hat{\nu}_{k}+\frac{4\xi}{\rho}\cos\theta(\hat{\nu}_{i}\hat{p}_{k}+\hat{p}_{i}\hat{\nu}_{k}) \\
+    &-\frac{\zeta}{\rho}[\hat{\nu}_{i}\hat{\nu}_{k}+\cos\theta(\hat{\nu}_{i}\hat{p}_{k}+\hat{p}_{i}\hat{\nu}_{k})+\cos^{2}\theta\delta_{ik}],
+\end{align*}
+where $\theta$ is the angle between the propagation direction and the symmetry axis. Note that the first two terms are those associated with an isotropic medium, while the remainder will be assumed to be small in the perturbation calculations.
+
+\item Considering the quasi P-wave, we can use non-degenerate perturbation theory, and hence simply apply the formula
+\begin{equation*}
+    \delta\alpha=\frac{1}{2\alpha}\hat{\mathbf{p}}\cdot\delta\boldsymbol{\Gamma}(\hat{\mathbf{p}})\hat{\mathbf{p}}
+\end{equation*}
+derived in Lecture 14, where $\delta\boldsymbol{\Gamma}$ is the anisotropic perturbation to the Christoffel matrix. In this case, we find that
+\begin{equation*}
+    \hat{\mathbf{p}}\cdot\delta\boldsymbol{\Gamma}(\hat{\mathbf{p}})\hat{\mathbf{p}}=\frac{8\gamma}{\rho}\cos^{4}\theta+\frac{8\xi}{\rho}\cos^{2}\theta-\frac{\zeta}{\rho}[\cos^{2}\theta+2\cos^{2}\theta+\cos^{2}\theta] = \frac{8\gamma}{\rho}\cos^{4}\theta+\frac{8\xi-4\zeta}{\rho}\cos^{2}\theta,
+\end{equation*}
+and hence for the quasi P-waves the phase speed perturbation is
+\begin{equation*}
+    \delta\alpha=\frac{1}{2\alpha}\left(\frac{8\gamma}{\rho}\cos^{4}\theta+\frac{8\xi-4\zeta}{\rho}\cos^{2}\theta\right).
+\end{equation*}
+
+\item We are told to consider the wavefunction
+\begin{equation*}
+    \psi(\mathbf{x},t)=a\exp\left[\frac{-i(E t-\mathbf{p}\cdot\mathbf{x})}{\hbar}\right].
+\end{equation*}
+Putting this into the equation for a free particle, we find that the solution works so long as we have the expected relation
+\begin{equation*}
+    E=\frac{1}{2m}||\mathbf{p}||^{2}.
+\end{equation*}
+We now look at the more complicated wavefunction
+\begin{equation*}
+    \psi(\mathbf{x},t)=a(\mathbf{x})\exp\left\{\frac{-i[E t-\varphi(\mathbf{x})]}{\hbar}\right\},
+\end{equation*}
+where $a$ and $\varphi$ are functions of position. Differentiating this wavefunction with respect to time we obtain
+\begin{equation*}
+    i\hbar\frac{\partial\psi}{\partial t}=E a e^{-i(Et-\varphi)/\hbar}.
+\end{equation*}
+Taking the spatial gradient of the wavefunction, and retaining only leading-order terms in $1/\hbar$, we find that
+\begin{equation*}
+    \nabla\psi=\frac{i}{\hbar}\nabla\varphi a e^{-i(Et-\varphi)/\hbar}+O(1).
+\end{equation*}
+In the same manner, we find that the Laplacian of $\psi$ takes the form
+\begin{equation*}
+    \nabla^{2}\psi=-\frac{1}{\hbar^{2}}||\nabla\varphi||^{2}a e^{-i(Et-\varphi)/\hbar}+O(1/\hbar).
+\end{equation*}
+Putting these expressions into the time-dependent Schrödinger equation we find
+\begin{equation*}
+    \left(E-\frac{1}{2m}||\nabla\varphi||^{2}-V\right)a e^{-i(Et-\varphi)/\hbar}=O(\hbar).
+\end{equation*}
+To leading order, we then obtain
+\begin{equation*}
+    E=\frac{1}{2m}||\nabla\varphi||^{2}+V,
+\end{equation*}
+which does indeed take the form $E=H(\mathbf{x},\nabla\varphi)$ with $H$ the classical Hamiltonian. To solve for the phase function, we apply the method of characteristics, defining $\mathbf{p}=\nabla\varphi$ to be the local momentum. The eikonal equation restricts $(\mathbf{x}, \mathbf{p})$ to lie on a three-dimensional level surface on which the Hamiltonian is equal to the energy $E$. Given appropriate initial conditions, we can form this level surface through integration of Hamilton's equations
+\begin{equation*}
+    \frac{d\mathbf{x}}{d\sigma}=\frac{\partial H}{\partial \mathbf{p}}, \quad \frac{d\mathbf{p}}{d\sigma}=-\frac{\partial H}{\partial \mathbf{x}}
+\end{equation*}
+with $\sigma$ the generating parameter. Note that these equations take the expected classical form
+\begin{equation*}
+    \frac{d\mathbf{x}}{d\sigma}=\frac{1}{m}\mathbf{p},\quad \frac{d\mathbf{p}}{d\sigma}=-\nabla V.
+\end{equation*}
+Moreover, once the classical path is known in phase space, we get
+\begin{equation*}
+    \frac{d}{d\sigma}\varphi[\mathbf{x}(\sigma)]=\nabla\varphi\cdot\frac{d\mathbf{x}}{d\sigma}=\frac{1}{m}||\mathbf{p}||^{2}=2(E-V),
+\end{equation*}
+and hence the phase function can be recovered through the integral
+\begin{equation*}
+    \varphi[\mathbf{x}(\sigma)]=\varphi_{0}+2\int_{0}^{\sigma}\{E-V[\mathbf{x}(\sigma')]\}d\sigma',
+\end{equation*}
+taken along the classical trajectory.
+
+\item We are told that the travel time can be expressed in the form
+\begin{equation*}
+    T=\int_{0}^{1}\frac{1}{\alpha(\mathbf{x})}\sqrt{\frac{dx_{i}}{d\gamma}\frac{dx_{i}}{d\gamma}}\dd\gamma,
+\end{equation*}
+where $\gamma$ parameterises the curve over the unit interval. Note that such a fixed-length parameterisation is necessary so that variations of this functional can be easily handled. We need to compute the first variation of this expression. This can be done from first-principles (and is a good exercise), but we will jump straight to the usual Euler-Lagrange equations
+\begin{equation*}
+    \frac{\ddns}{\ddns\gamma}\frac{\partial\mathcal{Z}}{\partial \mathbf{x}'}-\frac{\partial\mathcal{Z}}{\partial \mathbf{x}}=0,
+\end{equation*}
+where the Lagrangian here is
+\begin{equation*}
+    \mathcal{Z}(\mathbf{x},\mathbf{x}')=\frac{1}{\alpha(\mathbf{x})}\sqrt{\frac{dx_{i}}{d\gamma}\frac{dx_{i}}{d\gamma}} = \frac{||\mathbf{x}'||}{\alpha(\mathbf{x})}
+\end{equation*}
+and where we write primes for derivatives with respect to $\gamma$ as we have already used dots for those with respect to $\sigma$. Simple calculations show that
+\begin{equation*}
+    \frac{\partial\mathcal{Z}}{\partial \mathbf{x}}=-\frac{||\mathbf{x}'||}{\alpha^{2}}\nabla\alpha, \quad \frac{\partial\mathcal{Z}}{\partial \mathbf{x}'}=\frac{1}{\alpha}\frac{\mathbf{x}'}{||\mathbf{x}'||},
+\end{equation*}
+and so we obtain the following second-order system of ODEs
+\begin{equation*}
+    \frac{\ddns}{\ddns\gamma}\left(\frac{1}{\alpha}\frac{\mathbf{x}'}{||\mathbf{x}'||}\right)+\frac{||\mathbf{x}'||}{\alpha^{2}}\nabla\alpha=0.
+\end{equation*}
+By contrast, the Hamiltonian form of the ray equations are obtained by starting from the p-wave Hamiltonian
+\begin{equation*}
+    H(\mathbf{x},\mathbf{p})=\frac{1}{2}\alpha(\mathbf{x})^{2}||\mathbf{p}||^{2}
+\end{equation*}
+where $\alpha$ is the p-wave speed. The Hamiltonian ray equations are then
+\begin{equation*}
+    \dot{\mathbf{x}}=\frac{\partial H}{\partial \mathbf{p}}, \quad \dot{\mathbf{p}}=-\frac{\partial H}{\partial \mathbf{x}},
+\end{equation*}
+where we use dots to denote derivatives with respect to the ray generating parameter $\sigma$. From the given form of the Hamiltonian, we obtain
+\begin{equation*}
+    \dot{\mathbf{x}}=\alpha^{2}\mathbf{p}, \quad \dot{\mathbf{p}}=-\alpha||\mathbf{p}||^2 \nabla\alpha = -\frac{1}{\alpha}\nabla\alpha
+\end{equation*}
+where we have made use of the eikonal equation $H(\mathbf{x},\mathbf{p})=\frac{1}{2}$ which implies $||\mathbf{p}||=\alpha^{-1}$. These two sets of equations are defined with respect to different independent variables $\sigma$ and $\gamma$, and so to compare them it will be necessary to perform suitable transformations. To do this, we note that the differential arc length along the ray satisfies by simple geometry
+\begin{equation*}
+    ds=||\mathbf{x}'||\dd\gamma=\alpha~\dd\sigma,
+\end{equation*}
+and that this leads to
+\begin{equation*}
+    \frac{\ddns\sigma}{\ddns\gamma}=\frac{||\mathbf{x}'||}{\alpha}.
+\end{equation*}
+Using the chain rule, we then see that
+\begin{equation*}
+    \dot{\mathbf{x}}=\frac{\alpha}{||\mathbf{x}'||}\mathbf{x}', \quad \dot{\mathbf{p}}=\frac{\alpha}{||\mathbf{x}'||}\mathbf{p}',
+\end{equation*}
+and so Hamilton's equations become
+\begin{equation*}
+    \frac{\alpha}{||\mathbf{x}'||}\mathbf{x}'=\alpha^{2}\mathbf{p}, \quad \frac{\alpha}{||\mathbf{x}'||}\mathbf{p}'=-\frac{1}{\alpha}\nabla\alpha.
+\end{equation*}
+From the first of these equations we have
+\begin{equation*}
+    \mathbf{p}=\frac{1}{\alpha||\mathbf{x}'||}\mathbf{x}'
+\end{equation*}
+and substituting this into the second of the equations we arrive at
+\begin{equation*}
+    \frac{\ddns}{\ddns\gamma}\left(\frac{1}{\alpha}\frac{\mathbf{x}'}{||\mathbf{x}'||}\right)+\frac{||\mathbf{x}'||}{\alpha^{2}}\nabla\alpha=0,
+\end{equation*}
+which is precisely the Euler-Lagrange equation obtained from Fermat's principle. Note that Fermat's principle can be established in a general anisotropic body, but here there is a bit more work involved, and it is actually simpler to obtain the result using a Legendre transformation to pass between the equations of Hamiltonian and Lagrangian mechanics. You do not have to know how to do this!
+\end{enumerate}
+
+\end{document}
