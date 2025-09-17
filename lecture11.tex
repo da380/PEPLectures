@@ -1,12 +1,9 @@
-\documentclass{article}
-\usepackage{amsmath}
-\usepackage{graphicx}
-\usepackage{amssymb}
-\usepackage{bm}
+\documentclass[a4paper,12pt]{paper}
+\usepackage{mycommands}
+
 
 \title{Lecture 22: Free Oscillations}
-\author{David Al-Attar, Michaelmas term 2024}
-\date{}
+\author{David Al-Attar \\ Michaelmas Term, \the\year}
 
 \begin{document}
 
@@ -14,17 +11,26 @@
 
 \section*{Outline and Motivation}
 
-Having obtained the equations of motion for a self-gravitating earth model, we begin our study of the Earth's free oscillations or normal modes (the terms are synonymous). The starting point is developing a concise operator notation that closely resembles what you know from quantum mechanics. We analyse the associated eigenvalue problem in a non-rotating earth model, with the mathematics again being near identical to that in quantum physics. In particular, the forced response of such an earth model is obtained as an eigenfunction expansion, with the frequency-domain response having resonances at each of the eigenfrequencies. It is due to this fact that the observations of the eigenfrequencies can be made from sufficiently long time-series, with these data providing important constraints on Earth structure. Indeed, such frequencies form the principal constraint on the Earth's density. To conclude, we outline the steps required to account for rotation, this involving solution of two non-linear eigenvalue problems.
+Having obtained the equations of motion for a self-gravitating earth model, we begin our study of the Earth's 
+free oscillations or normal modes (the terms are synonymous). The starting point is developing a concise operator 
+notation that closely resembles what you know from quantum mechanics. We analyse the associated eigenvalue problem in a 
+non-rotating earth model, with the mathematics again being near identical to that in quantum physics. In particular, 
+the forced response of such an earth model is obtained as an eigenfunction expansion, with the frequency-domain 
+response having resonances at each of the eigenfrequencies. It is due to this fact that the observations of the 
+eigenfrequencies can be made from sufficiently long time-series, with these data providing important constraints on 
+Earth structure. Indeed, such frequencies form the principal constraint on the Earth's density. 
 
 \section*{Linearised equations of motion}
 
 Within Lecture 20 we obtained the following linearised equations of motion
 \begin{equation}
-\rho\left(\frac{\partial^{2}u_{i}}{\partial t^{2}}+2\epsilon_{ijk}\Omega_{j}\frac{\partial u_{k}}{\partial t}+\epsilon_{ijk}\epsilon_{klm}\Omega_{j}\Omega_{l}u_{m}\right)-\frac{\partial}{\partial x_{j}}(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}})-\rho\gamma_{i}^{1}=-\frac{\partial\overline{S}_{ij}}{\partial x_{j}},
+\rho\left(\frac{\partial^{2}u_{i}}{\partial t^{2}}+2\epsilon_{ijk}\Omega_{j}\frac{\partial u_{k}}{\partial t}
++\epsilon_{ijk}\epsilon_{klm}\Omega_{j}\Omega_{l}u_{m}\right)-\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\right)
+-\rho\gamma_{i}^{1}=-\frac{\partial\overline{S}_{ij}}{\partial x_{j}},
 \end{equation}
 for a self-gravitating and rotating elastic earth model relative to a co-rotating reference frame. Here $\rho$ is the equilibrium density, $u_{i}$ the displacement vector, $\Omega_{i}$ is the angular velocity, $A_{ijkl}$ the elastic tensor, $\gamma_{i}^{1}$ the perturbation to the gravitational acceleration which is given concretely by
 \begin{equation}
-\gamma_{i}^{1}=-G\int_{M}\rho'\left(\frac{\delta_{ij}}{[(x_{k}-x_{k}')(x_{k}-x_{k}')]^{3/2}}-\frac{3(x_{i}-x_{i}')(x_{j}-x_{j}')}{[(x_{k}-x_{k}')(x_{k}-x_{k}')]^{5/2}}\right)(u_{j}-u_{j}')d^{3}x',
+\gamma_{i}^{1}=-G\int_{M}\rho'\left(\frac{\delta_{ij}}{[(x_{k}-x_{k}')(x_{k}-x_{k}')]^{3/2}}-\frac{3(x_{i}-x_{i}')(x_{j}-x_{j}')}{[(x_{k}-x_{k}')(x_{k}-x_{k}')]^{5/2}}\right)(u_{j}-u_{j}')\dd\mathbf{x}',
 \end{equation}
 where it is understood that primed terms are functions of the integration variable, and finally $\overline{S}_{ij}$ is the stress glut associated with a seismic source. The boundary conditions for the problem are
 \begin{equation}
@@ -34,17 +40,17 @@ on $\partial M$. While these equations express quite simple physics, they do hav
 
 As a first step to doing this, we will express the equations in what is known as the weak form. Letting $w_{i}$ be an arbitrary function we find from eq.(1) that
 \begin{equation}
-\int_{M}\left[\rho\left(\frac{\partial^{2}u_{i}}{\partial t^{2}}+2\epsilon_{ijk}\Omega_{j}\frac{\partial u_{k}}{\partial t}+\epsilon_{ijk}\epsilon_{klm}\Omega_{j}\Omega_{l}u_{m}\right)-\frac{\partial}{\partial x_{j}}(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}-\overline{S}_{ij})-\rho\gamma_{i}^{1}\right]w_{i}^{*}d^{3}x=0.
+\int_{M}\left[\rho\left(\frac{\partial^{2}u_{i}}{\partial t^{2}}+2\epsilon_{ijk}\Omega_{j}\frac{\partial u_{k}}{\partial t}+\epsilon_{ijk}\epsilon_{klm}\Omega_{j}\Omega_{l}u_{m}\right)-\frac{\partial}{\partial x_{j}}(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}-\overline{S}_{ij})-\rho\gamma_{i}^{1}\right]w_{i}^{*}\dd\mathbf{x}=0.
 \end{equation}
 where we note that $\mathbf{w}$ has been allowed to be complex-valued and $^*$ denotes a complex conjugate\footnote{The reason for this generality is that later we will consider an associated eigenvalue problem, and in this context complex-valued fields naturally occur.}. Performing an integration by parts and using the boundary conditions this becomes
 \begin{equation}
-\int_{M}\left[\rho\left(\frac{\partial^{2}u_{i}}{\partial t^{2}}+2\epsilon_{ijk}\Omega_{j}\frac{\partial u_{k}}{\partial t}+\epsilon_{ijk}\epsilon_{klm}\Omega_{j}\Omega_{l}u_{m}-\gamma_{i}^{1}\right)w_{i}^{*}+(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}-\overline{S}_{ij})\frac{\partial w_{i}^{*}}{\partial x_{j}}\right]d^{3}x=0.
+\int_{M}\left[\rho\left(\frac{\partial^{2}u_{i}}{\partial t^{2}}+2\epsilon_{ijk}\Omega_{j}\frac{\partial u_{k}}{\partial t}+\epsilon_{ijk}\epsilon_{klm}\Omega_{j}\Omega_{l}u_{m}-\gamma_{i}^{1}\right)w_{i}^{*}+(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}-\overline{S}_{ij})\frac{\partial w_{i}^{*}}{\partial x_{j}}\right]\dd\mathbf{x}=0.
 \end{equation}
 We have obtained this result for arbitrary $\mathbf{w}$ whenever $\mathbf{u}$ satisfies eq. (1) and (3). Conversely, the argument can be reversed to show that if eq.(5) holds for all $\mathbf{w}$, then the field $\mathbf{u}$ must satisfy eq.(1) and (3), this being the weak form of the problem.
 
 Eq.(5) involves several terms that depend linearly on $\mathbf{u}$ and conjugate-linearly on $\mathbf{w}$, with such objects known as a sesquilinear forms\footnote{The term "sesqui" is used instead of "bilinear" to indicate that the form is linear in one argument and conjugate linear in the other.}. For example, if we define
 \begin{equation}
-\langle \mathbf{w}|P|\mathbf{u}\rangle=\int_{M}\rho w_{i}^{*}u_{i}d^{3}x,
+\langle \mathbf{w}|P|\mathbf{u}\rangle=\int_{M}\rho w_{i}^{*}u_{i}\dd\mathbf{x},
 \end{equation}
 then we can write the acceleration term in the weak form as
 \begin{equation}
@@ -52,15 +58,15 @@ then we can write the acceleration term in the weak form as
 \end{equation}
 where time-derivatives are denoted using dots. Hopefully the notation here should remind you of bra-ket notation. We will call $\langle \mathbf{w}|P|\mathbf{u}\rangle$ the kinetic energy form, and note that it may be associated with an operator P that acts on displacement vectors by $(P\mathbf{u})_{i}=\rho u_{i}$. In a similar manner we define
 \begin{equation}
-\langle \mathbf{w}|W|\mathbf{u}\rangle=\int_{M}2\rho\epsilon_{ijk}w_{i}^{*}\Omega_{j}u_{k}d^{3}x
+\langle \mathbf{w}|W|\mathbf{u}\rangle=\int_{M}2\rho\epsilon_{ijk}w_{i}^{*}\Omega_{j}u_{k}\dd\mathbf{x}
 \end{equation}
 which we call the Coriolis form, this being associated with an operator W defined by $(W\mathbf{u})_{i}=2\rho\epsilon_{ijk}\Omega_{j}u_{k}$. We finally have the potential energy form
 \begin{equation}
-\langle \mathbf{w}|H|\mathbf{u}\rangle=\int_{M}\left(\rho\epsilon_{ijk}\epsilon_{klm}w_{i}^{*}\Omega_{j}\Omega_{l}u_{m}+A_{ijkl}\frac{\partial w_{i}^{*}}{\partial x_{j}}\frac{\partial u_{k}}{\partial x_{l}}-\rho w_{i}^{*}\gamma_{i}^{1}\right)d^{3}x,
+\langle \mathbf{w}|H|\mathbf{u}\rangle=\int_{M}\left(\rho\epsilon_{ijk}\epsilon_{klm}w_{i}^{*}\Omega_{j}\Omega_{l}u_{m}+A_{ijkl}\frac{\partial w_{i}^{*}}{\partial x_{j}}\frac{\partial u_{k}}{\partial x_{l}}-\rho w_{i}^{*}\gamma_{i}^{1}\right)\dd\mathbf{x},
 \end{equation}
 and write the force term as
 \begin{equation}
-\langle \mathbf{w}|\mathbf{f}\rangle=\int_{M}\overline{S}_{ij}\frac{\partial w_{i}^{*}}{\partial x_{j}}d^{3}x.
+\langle \mathbf{w}|\mathbf{f}\rangle=\int_{M}\overline{S}_{ij}\frac{\partial w_{i}^{*}}{\partial x_{j}}\dd\mathbf{x}.
 \end{equation}
 In this manner, we can concisely express the weak form of the equations of motion as
 \begin{equation}
@@ -79,17 +85,17 @@ If we look at the kinetic energy form, then it is clear that
 \end{equation}
 and we say that the form is self-adjoint. Equivalently we can say that the associated operator P is self-adjoint. We also note that $\langle \mathbf{u}|P|\mathbf{u}\rangle$ is positive for any non-zero vector field $\mathbf{u}$, and hence the kinetic energy form defines an inner product. In contrast, for the Coriolis form, we find that
 \begin{equation}
-\langle \mathbf{w}|W|\mathbf{u}\rangle=\int_{M}2\rho\epsilon_{ijk}w_{i}^{*}\Omega_{j}u_{k}d^{3}x = -\left(\int_{M}2\rho\epsilon_{ijk}u_{i}^{*}\Omega_{j}w_{k}d^{3}x\right)^{*} = -\langle \mathbf{u}|W|\mathbf{w}\rangle^{*},
+\langle \mathbf{w}|W|\mathbf{u}\rangle=\int_{M}2\rho\epsilon_{ijk}w_{i}^{*}\Omega_{j}u_{k}\dd\mathbf{x} = -\left(\int_{M}2\rho\epsilon_{ijk}u_{i}^{*}\Omega_{j}w_{k}\dd\mathbf{x}\right)^{*} = -\langle \mathbf{u}|W|\mathbf{w}\rangle^{*},
 \end{equation}
 this meaning that it is anti self-adjoint. This implies, in particular, that $\langle \mathbf{u}|W|\mathbf{u}\rangle$ is purely imaginary for any $\mathbf{u}$, while it vanishes if the field has real components.
 
 For the potential energy form it is readily checked that the term associated with elasticity is self-adjoint due to the hyperelastic symmetry $A_{ijkl}=A_{klij}$. Similarly for the centrifugal term we have
 \begin{equation}
-\int_{M}\rho\epsilon_{ijk}\epsilon_{klm}w_{i}^{*}\Omega_{j}\Omega_{l}u_{m}d^{3}x=\left(\int_{M}\rho\epsilon_{ijk}\epsilon_{klm}w_{i}\Omega_{j}\Omega_{l}u_{m}^{*}d^{3}x\right)^{*} = \left(\int_{M}\rho\epsilon_{ijk}\epsilon_{klm}u_{i}^{*}\Omega_{j}\Omega_{l}w_{m}d^{3}x\right)^{*},
+\int_{M}\rho\epsilon_{ijk}\epsilon_{klm}w_{i}^{*}\Omega_{j}\Omega_{l}u_{m}\dd\mathbf{x}=\left(\int_{M}\rho\epsilon_{ijk}\epsilon_{klm}w_{i}\Omega_{j}\Omega_{l}u_{m}^{*}\dd\mathbf{x}\right)^{*} = \left(\int_{M}\rho\epsilon_{ijk}\epsilon_{klm}u_{i}^{*}\Omega_{j}\Omega_{l}w_{m}\dd\mathbf{x}\right)^{*},
 \end{equation}
 where to obtain the final equality we have just relabelled and permuted the indices appropriately. What takes more work is to show that
 \begin{equation}
-\int\rho w_{i}^{*}\gamma_{i}^{1}(\mathbf{u})d^{3}x=\int\rho\gamma_{i}^{1}(\mathbf{w})^{*}u_{i}d^{3}x.
+\int\rho w_{i}^{*}\gamma_{i}^{1}(\mathbf{u})\dd\mathbf{x}=\int\rho\gamma_{i}^{1}(\mathbf{w})^{*}u_{i}\dd\mathbf{x}.
 \end{equation}
 where we have included arguments to show which displacement vector the gravitational acceleration term corresponds to. Proof of this identity not difficult but nor is it enlightening. The end result is that the potential energy form is also self-adjoint.
 
@@ -130,21 +136,31 @@ Taking $\mathbf{s}_{1}=\mathbf{s}_{2}$, and recalling that $\langle \mathbf{u}|P
 \end{equation}
 this meaning that eigenfunctions with different squared-eigenfrequencies are orthogonal relative to the inner product defined by kinetic energy form. Orthogonality relative to such a "mass weighted" inner product should be familiar from your prior study of linear oscillations of finite-dimensional mechanical systems.
 
-The following additional properties of these eigenfunctions and eigenfrequencies will be stated without proof\footnote{The validity of these results in solid earth models can be established rigorously based on the theory of elliptic partial differential operators. Their proof, and indeed general validity, within models containing in-viscid fluid regions like the outer core remains an open problem.}:
+The following additional properties of these eigenfunctions and eigenfrequencies will be stated without proof\footnote{The validity 
+of these results in solid earth models can be established rigorously based on the theory of elliptic partial differential operators. 
+Their proof, and indeed general validity, within models containing in-viscid fluid regions like the outer core remains an open problem.}:
 \begin{enumerate}
-    \item Each squared-eigenfrequency is associated with a finite-dimensional eigenspace. This means that while there may be more than one linearly independent eigenfunction associated with a squared-eigenfrequency, there is always a finite-dimensional basis for this linear subspace. Eigenfunctions within the same eigenspace need not be orthogonal, but we can always select a basis such that they are.
-    \item There is a countable infinity of squared-eigenfrequencies. Their values are bounded from below, and accumulate only at infinity. The latter point means that in a finite-interval there can only be a finite number of squared-eigenfrequencies.
-    \item The eigenfunctions form a complete orthonormal basis for vector fields in the earth model. This means that an arbitrary vector field can be expressed as a convergent sum of the eigenfunctions, with the necessary expansion coefficients readily determined due to their orthogonality.
+    \item Each squared-eigenfrequency is associated with a finite-dimensional eigenspace.  Eigenfunctions within the same eigenspace need not be orthogonal, but we can always select a basis such that they are.
+    \item There is a countable infinity of squared-eigenfrequencies. Their values are bounded from below, and accumulate only at infinity. 
+    The latter point means that in a finite-interval there can only be a finite number of squared-eigenfrequencies.
+    \item The eigenfunctions form a complete orthonormal basis for vector fields in the earth model. This means that an arbitrary vector 
+    field can be expressed as a convergent sum of the eigenfunctions, with the necessary expansion coefficients readily determined due to 
+    their orthogonality.
 \end{enumerate}
-To proceed, we let $k=0,...,\infty$ label the different squared eigenfrequencies, $\omega_{k}^{2}$. For each k, there is then a finite-dimensional eigenspace, and we use a second index m to label the elements of its basis. Note that the range of m can vary with k, but we leave this implicit within the notation. The mth eigenfunction belonging to the kth eigenspace will be written $|km\rangle$ in a manner familiar from quantum mechanics. These eigenfunctions can be orthonormalised relative to the kinetic energy form, this meaning that
+To proceed, we let $k=0,...,\infty$ label the different squared eigenfrequencies, $\omega_{k}^{2}$. For each $k$, there is then a 
+finite-dimensional eigenspace, and we use a second index $m$ to label the elements of its basis. Note that the range of $m$ can 
+vary with $k$, but we leave this implicit within the notation. The $m$th eigenfunction belonging to the $k$th eigenspace will be 
+written $|km\rangle$ in a manner familiar from quantum mechanics. These eigenfunctions can be orthonormalised relative to the kinetic 
+energy form, this meaning that
 \begin{equation}
 \langle km|P|k'm'\rangle=\delta_{kk'}\delta_{mm'},
 \end{equation}
-for all possible indices. Using this notation, we can then express the completeness of the eigenfunctions by noting that a displacement field $\mathbf{u}$ can be expanded as
+for all possible indices. Using this notation, we can then express the completeness of the eigenfunctions by noting that a displacement 
+field $\mathbf{u}$ can be expanded as
 \begin{equation}
 \mathbf{u}=\sum_{km}\langle km|P|\mathbf{u}\rangle|km\rangle ,
 \end{equation}
-where $\langle km|P|\mathbf{u}\rangle$ are the expansion coefficients of the (k,m)th term.
+where $\langle km|P|\mathbf{u}\rangle$ are the expansion coefficients of the $(k,m)$th term.
 
 \subsection*{Eigenfunction expansions}
 Recall that the equations of motion in weak form are given by
@@ -171,7 +187,7 @@ which can be simplified using the eigenvalue problem satisfied by $|k'm'\rangle$
 \begin{equation}
 \sum_{k'm'}(-\omega^{2}+\omega_{k'}^{2})\langle \mathbf{w}|P|k'm'\rangle\langle k'm'|P|\tilde{\mathbf{u}}\rangle=\langle \mathbf{w}|\tilde{\mathbf{f}}\rangle .
 \end{equation}
-Finally, we take the test function equal to $|km\rangle$, and use the orthonormality condition in eq.(25) to find that the (k,m)th coefficient of $\tilde{\mathbf{u}}$ is given by
+Finally, we take the test function equal to $|km\rangle$, and use the orthonormality condition in eq.(25) to find that the $(k,m)$th coefficient of $\tilde{\mathbf{u}}$ is given by
 \begin{equation}
 \langle km|P|\tilde{\mathbf{u}}\rangle=\frac{\langle km|\tilde{\mathbf{f}}\rangle}{\omega_{k}^{2}-\omega^{2}}
 \end{equation}
@@ -206,11 +222,11 @@ we can set the test function equal to $|km\rangle$ to obtain
 \end{equation}
 where we have made use of the eigenfunction normalisation condition. It follows that the sign of the squared eigenfrequency is set by the potential energy form. In the non-gravitating case, this term is given by
 \begin{equation}
-\langle \mathbf{u}|H|\mathbf{u}\rangle=\int_{M}A_{ijkl}\frac{\partial u_{i}^{*}}{\partial x_{j}}\frac{\partial u_{k}}{\partial x_{l}}d^{3}x,
+\langle \mathbf{u}|H|\mathbf{u}\rangle=\int_{M}A_{ijkl}\frac{\partial u_{i}^{*}}{\partial x_{j}}\frac{\partial u_{k}}{\partial x_{l}}\dd\mathbf{x},
 \end{equation}
 which is real due to the hyperelastic symmetry. We know from the first problem set that in the absence of pre-stress the elastic tensor has the additional symmetries $A_{ijkl}=A_{jikl}=A_{ijlk}$, and hence the above expression becomes
 \begin{equation}
-\langle \mathbf{u}|H|\mathbf{u}\rangle=\frac{1}{4}\int_{M}A_{ijkl}\left(\frac{\partial u_{i}}{\partial x_{j}}+\frac{\partial u_{j}}{\partial x_{i}}\right)^{*}\left(\frac{\partial u_{k}}{\partial x_{l}}+\frac{\partial u_{l}}{\partial x_{k}}\right)d^{3}x,
+\langle \mathbf{u}|H|\mathbf{u}\rangle=\frac{1}{4}\int_{M}A_{ijkl}\left(\frac{\partial u_{i}}{\partial x_{j}}+\frac{\partial u_{j}}{\partial x_{i}}\right)^{*}\left(\frac{\partial u_{k}}{\partial x_{l}}+\frac{\partial u_{l}}{\partial x_{k}}\right)\dd\mathbf{x},
 \end{equation}
 where we have explicitly symmetrised the spatial derivatives. We will say that the elastic tensor is pointwise stable at $\mathbf{x}$ if
 \begin{equation}
@@ -218,7 +234,7 @@ A_{ijkl}(\mathbf{x})e_{ij}^{*}e_{kl}>ke_{ij}^{*}e_{ij}
 \end{equation}
 for some constant $k>0$, and all symmetric tensors $e_{ij}$. If such a condition holds at all points in the earth model, then we say that the elastic tensor is uniformly pointwise stable. Assuming this is true, we then have
 \begin{equation}
-\langle \mathbf{u}|H|\mathbf{u}\rangle=\frac{1}{4}\int_{M}A_{ijkl}\left(\frac{\partial u_{i}}{\partial x_{j}}+\frac{\partial u_{j}}{\partial x_{i}}\right)^{*}\left(\frac{\partial u_{k}}{\partial x_{l}}+\frac{\partial u_{l}}{\partial x_{k}}\right)d^{3}x>0,
+\langle \mathbf{u}|H|\mathbf{u}\rangle=\frac{1}{4}\int_{M}A_{ijkl}\left(\frac{\partial u_{i}}{\partial x_{j}}+\frac{\partial u_{j}}{\partial x_{i}}\right)^{*}\left(\frac{\partial u_{k}}{\partial x_{l}}+\frac{\partial u_{l}}{\partial x_{k}}\right)\dd\mathbf{x}>0,
 \end{equation}
 so long as the linearised strain $e_{ij}=\frac{1}{2}(\frac{\partial u_{i}}{\partial x_{j}}+\frac{\partial u_{j}}{\partial x_{i}})$ is not everywhere equal to zero. It is not difficult to show that $e_{ij}$ vanishes identically for a non-trivial displacement vector if and only if it takes the form
 \begin{equation}
@@ -228,51 +244,12 @@ with $a_{i}$ a constant vector, and $A_{ij}$ an anti-symmetric matrix. Such a di
 
 To summarise, we have seen that in the case of a non-gravitating earth model the squared-eigenfrequencies are all non-negative so long as the elastic tensor is uniformly pointwise stable. There is a six-dimensional eigenspace at zero-frequency associated with rigid body motions. Recalling, however, that the force term in the problem is
 \begin{equation}
-\langle \mathbf{w}|\mathbf{f}\rangle=\int_{M}\overline{S}_{ij}\frac{\partial w_{i}^{*}}{\partial x_{j}}d^{3}x,
+\langle \mathbf{w}|\mathbf{f}\rangle=\int_{M}\overline{S}_{ij}\frac{\partial w_{i}^{*}}{\partial x_{j}}\dd\mathbf{x},
 \end{equation}
 with $S_{ij}$ symmetric, we see that these trivial modes cannot be excited by a seismic source. Thus under a reasonable restriction on the elastic tensor, we see that a non-gravitating earth model is always stable to internal perturbations\footnote{Here we are ignoring fluid regions which are associated with an infinite number of trivial modes, but these again cannot be excited by seismic sources.}.
 
-Once gravitation is added into the problem it remains true that there is a six-dimensional eigenspace at zero-frequency associated with rigid body motions. The issue of stability of the remaining modes is, however, complicated by the fact that the potential energy has a gravitational contribution. While it is possible to examine this problem quantitatively, it requires some fairly advanced techniques from functional analysis. The physically important point, however, is that self-gravitation is an inherently destabilising force. Consider, for example, a spherically symmetric and self-gravitating planet at equilibrium. If we could compress this planet uniformly, then there would be an increase in elastic potential energy. At the same time, the mass of the planet has been brought into a smaller volume, and hence the gravitational binding energy must decrease\footnote{Recall that this is a negative quantity, and hence it has increased in magnitude.}. The net effect on the potential energy depends on the relative magnitude of these terms. If the elastic constants are sufficiently large, then the elastic term will dominate and the planet will be stable with respect to such a perturbation. But if gravity is sufficiently strong then the planet will keep pulling itself inwards until non-linear effects take over.
+With gravitation  added to the problem there remains a six-dimensional eigenspace at zero-frequency associated with rigid body motions. The issue of stability of the remaining modes is, however, complicated by the fact that the potential energy has a gravitational contribution. While it is possible to examine this problem quantitatively, it requires some fairly advanced techniques from functional analysis. The physically important point, however, is that self-gravitation is an inherently destabilising force. Consider, for example, a spherically symmetric and self-gravitating planet at equilibrium. If we could compress this planet uniformly, then there would be an increase in elastic potential energy. At the same time, the mass of the planet has been brought into a smaller volume, and hence the gravitational binding energy must decrease\footnote{Recall that this is a negative quantity, and hence it has increased in magnitude.}. The net effect on the potential energy depends on the relative magnitude of these terms. If the elastic constants are sufficiently large, then the elastic term will dominate and the planet will be stable with respect to such a perturbation. But if gravity is sufficiently strong then the planet will keep pulling itself inwards until non-linear effects take over.
 
-\subsection*{Eigenfunctions and eigenvalues in a rotating earth model}
-We conclude the lecture by discussing modifications to the theory required to account for rotation. Working again in the frequency-domain, the equations of motion are
-\begin{equation}
--\omega^{2}\langle \mathbf{w}|P|\tilde{\mathbf{u}}\rangle+i\omega\langle \mathbf{w}|W|\tilde{\mathbf{u}}\rangle+\langle \mathbf{w}|H|\tilde{\mathbf{u}}\rangle=\langle \mathbf{w}|\tilde{\mathbf{f}}\rangle,
-\end{equation}
-which must hold for an arbitrary test function $\mathbf{w}$. Suppose that, for fixed $\omega$, there exists a non-trivial solution, $\mathbf{s}$, of the equation
-\begin{equation}
--\omega^{2}\langle \mathbf{w}|P|\mathbf{s}\rangle+i\omega\langle \mathbf{w}|W|\mathbf{s}\rangle+\langle \mathbf{w}|H|\mathbf{s}\rangle=0,
-\end{equation}
-for all $\mathbf{w}$. If this holds, then from any solution, $\tilde{\mathbf{u}}$, of eq.(45) we could obtain another solution $\tilde{\mathbf{u}}+\lambda \mathbf{s}$ with $\lambda$ an arbitrary scalar. Unique solutions of eq.(45) can, therefore, only exist if eq.(46) has no non-trivial solutions.
-
-Next, suppose that there exists a non-trivial solution, $\overline{\mathbf{s}}$, of the equation
-\begin{equation}
--\omega^{2}\langle\overline{\mathbf{s}}|P|\mathbf{w}\rangle+i\omega\langle\overline{\mathbf{s}}|W|\mathbf{w}\rangle+\langle\overline{\mathbf{s}}|H|\mathbf{w}\rangle=0,
-\end{equation}
-for all $\mathbf{w}$. If we take such an $\overline{\mathbf{s}}$ as the test function in eq. (45) we obtain
-\begin{equation}
-\langle\overline{\mathbf{s}}|\mathbf{f}\rangle=0.
-\end{equation}
-It follows that if eq.(47) has non-trivial solutions, then the frequency-domain problem in eq.(45) admits solutions only if eq.(48) holds. In this manner we have arrived at two necessary conditions for eq.(45) to be solvable in a unique way. It can be shown that these two conditions are also sufficient. For clarity we restate the main conclusions:
-\begin{enumerate}
-    \item The frequency-domain problem in eq.(45) has solutions if and only if eq. (48) holds for any non-trivial solutions of eq.(47);
-    \item The solutions of eq. (45) are uniquely defined if and only if eq.(46) admits no non-trivial solutions.
-\end{enumerate}
-Writing eq. (46) again for convenience
-\begin{equation}
--\omega^{2}\langle \mathbf{w}|P|\mathbf{s}\rangle+i\omega\langle \mathbf{w}|W|\mathbf{s}\rangle+\langle \mathbf{w}|H|\mathbf{s}\rangle=0,
-\end{equation}
-we note that this is a type of eigenvalue problem, with $\omega$ the eigenvalue parameter and $\mathbf{s}$ the eigenfunction. Indeed, if we set $\Omega_{i}$ equal to zero the problem reduces to eq. (19), which is an eigenvalue problem of standard form with $\omega^{2}$ the eigenvalue parameter. Because in eq.(46) the eigenvalue parameter appears non-linearly within the equation, we say that it is a non-linear eigenvalue problem.
-
-Turning to eq.(47), we use symmetries of the different terms to to re-write it as
-\begin{equation}
--\overline{\omega}^{2}\langle \mathbf{w}|P|\overline{\mathbf{s}}\rangle+i\overline{\omega}\langle \mathbf{w}|W|\overline{\mathbf{s}}\rangle+\langle \mathbf{w}|H|\overline{\mathbf{s}}\rangle=0,
-\end{equation}
-where we have defined $\overline{\omega}=\omega^{*}$. This again is a non-linear eigenvalue problem with eigenvalue parameter $\overline{\omega}$ and eigenfunction $\overline{\mathbf{s}}$. In fact, the eigenvalue problems in eq.(46) and (50) have the same form. It can be shown that non-trivial solutions to eq. (46) and eq. (50) exist only for a countably infinite number of frequencies. This is then the same as in the non-rotating case, though note that we gave no proof for that result either. Similarly, the eigenspaces are all finite-dimensional, and the eigenfunctions from either problem form a complete basis. What is different, however, is that the eigenfunctions belonging to distinct eigenspaces are no longer orthogonal relative to the kinetic energy form. This fact complicates significantly the derivation of a solution to the forced problem as an eigenfunction expansion, and we will not enter into the details. Such a solution is, however, not widely used, with the mode coupling approach discussed in the next lecture being more useful. Nonetheless, the basic form of the eigenfunction expansion is similar, with the eigenfunction, $\mathbf{s}_{k}$ with eigenfrequency $\omega_{k}$ contributing a term proportional to
-\begin{equation}
-\frac{1}{\omega-\omega_{k}}
-\end{equation}
-within the eigenfunction expansion. There are still, therefore, resonances associated with each eigenfrequency that can be measured from sufficiently long seismograms.
 
 \section*{What you need to know and be able to do}
 \begin{itemize}
@@ -281,7 +258,6 @@ within the eigenfunction expansion. There are still, therefore, resonances assoc
     \item[(iii)] How to obtain a solution of the forced equations of motion in a non-rotating planet as an eigenfunction expansion in the frequency-domain. You do not need to know how to recover the time-domain solution, but may be asked to verify that such a solution works.
     \item[(iv)] That eigenfrequencies are associated with resonance peaks in the amplitude spectra obtained from seismograms, and why it is necessary to look at data from large earthquakes to obtain adequate resolution.
     \item[(v)] What it means for a non-rotating earth model to be stable in terms of the eigenfrequencies. You should understand the quantitative argument for the non-gravitating case, and the qualitative one when gravity is included.
-    \item[(vi)] How the non-linear eigenvalue problems for a rotating earth model arises, along with its qualitative properties. This include the role of rotation within stability of the earth model as discussed in the second problem set.
 \end{itemize}
 
 \end{document}
