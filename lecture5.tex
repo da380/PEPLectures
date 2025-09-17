@@ -211,7 +211,7 @@ In this manner, the initial data for the problem specifies a two-dimensional lev
 
 Let $(\mathbf{x}^{0},\mathbf{p}^{0})$ be a point on the initial plane $S^{0}$, and consider the solution of Hamilton's canonical equations for the ray Hamiltonian $H_{k}$ as defined by
 \begin{equation}
-\frac{dx_{i}}{d\sigma}=\frac{\partial H_{k}}{\partial p_{i}}, \quad \frac{dp_{i}}{d\sigma}=-\frac{\partial H_{k}}{\partial x_{i}}
+\frac{\ddns x_{i}}{d\sigma}=\frac{\partial H_{k}}{\partial p_{i}}, \quad \frac{\ddns p_{i}}{d\sigma}=-\frac{\partial H_{k}}{\partial x_{i}}
 \end{equation}
 subject to the initial conditions
 \begin{equation}
@@ -219,7 +219,7 @@ x_{i}(0)=x_{i}^{0}, \quad p_{i}(0)=p_{i}^{0}.
 \end{equation}
 Within these equations, $\sigma$ is a generating parameter whose physical interpretation will become clear as we proceed. A key property of Hamilton's equations is that the Hamiltonian is conserved along their solutions. Indeed, using the chain rule we obtain
 \begin{equation}
-\frac{d}{d\sigma}H[x(\sigma), p(\sigma)]=\frac{\partial H}{\partial x_{i}}\frac{dx_{i}}{d\sigma}+\frac{\partial H}{\partial p_{i}}\frac{dp_{i}}{d\sigma} = -\frac{dp_{i}}{d\sigma}\frac{dx_{i}}{d\sigma}+\frac{dx_{i}}{d\sigma}\frac{dp_{i}}{d\sigma}=0,
+\frac{\ddns}{\ddns\sigma}H[x(\sigma), p(\sigma)]=\frac{\partial H}{\partial x_{i}}\frac{\ddns x_{i}}{\ddns\sigma}+\frac{\partial H}{\partial p_{i}}\frac{\ddns p_{i}}{d\sigma} = -\frac{\ddns p_{i}}{d\sigma}\frac{\ddns x_{i}}{\ddns\sigma}+\frac{\ddns x_{i}}{d\sigma}\frac{\ddns p_{i}}{\ddns\sigma}=0,
 \end{equation}
 where on the right hand side we have suppressed arguments for clarity. As we have $H_{k}(\mathbf{x}^{0},\mathbf{p}^{0})=\frac{1}{2}$ at this point on the initial plane, it follows that $H_{k}[\mathbf{x}(\sigma), \mathbf{p}(\sigma)]=\frac{1}{2}$ along the 
 curve within phase space obtained by integration of eq.(30) subject to the given initial conditions. What we can then do is take in turn each point $(\mathbf{x}^{0},\mathbf{p}^{0})$ of the initial plane, and integrate Hamilton's equations to produce a 
@@ -238,7 +238,7 @@ caustic due to an area of low velocity.}
 
 Having constructed the level surface $S$, how do we recover the travel time $T$? We first make use of eq.(7) and (30) to obtain
 \begin{equation}
-\frac{d}{d\sigma}T[\mathbf{x}(\sigma)]=\frac{\partial T}{\partial x_{i}}\frac{dx_{i}}{d\sigma}=p_{i}\frac{\partial H}{\partial p_{i}}
+\frac{\ddns}{\ddns\sigma}T[\mathbf{x}(\sigma)]=\frac{\partial T}{\partial x_{i}}\frac{\ddns x_{i}}{\ddns \sigma}=p_{i}\frac{\partial H}{\partial p_{i}}
 \end{equation}
 To simplify the result, we note that the ray Hamiltonian $H_{k}(\mathbf{x},\mathbf{p})$ is a homogeneous function of p of degree two, meaning
 \begin{equation}
@@ -250,7 +250,7 @@ p_{i}\frac{\partial H}{\partial p_{i}}=2H_{k},
 \end{equation}
 and from eq.(28) we conclude that
 \begin{equation}
-\frac{d}{d\sigma}T[\mathbf{x}(\sigma)]=1.
+\frac{\ddns }{\ddns \sigma}T[\mathbf{x}(\sigma)]=1.
 \end{equation}
 On the initial surface $S^{0}$ the travel time is everywhere equal to zero, and so eq.(36) has the trivial solution
 \begin{equation}
