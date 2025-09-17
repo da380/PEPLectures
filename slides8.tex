@@ -1,0 +1,180 @@
+\documentclass{beamer}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% Choose a theme
+\usetheme{Madrid}
+\usecolortheme{default}
+\usefonttheme{serif}
+
+% --- CUSTOM FOOTER ---
+% Redefine the footline to remove author/institute and keep title/page number
+\makeatletter
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+% --- END CUSTOM FOOTER ---
+
+\title[Lecture 19: Waveform tomography]{Lecture 19: Waveform tomography}
+\author{David Al-Attar}
+\institute{Michaelmas term 2024}
+\date{}
+
+\begin{document}
+
+% --- INTRODUCTION ---
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}{Outline and Motivation}
+    Today we discuss \textbf{waveform tomography}, a modern and powerful successor to the delay-time tomography method from the last lecture.
+    \begin{itemize}
+        \item Unlike delay-time methods which use only arrival times, waveform tomography uses the \textbf{entire seismogram}.
+        \pause
+        \item It fully accounts for the complex physics of wave propagation by using numerical solutions to the elastic wave equation.
+        \pause
+        \item It treats the inverse problem as fundamentally \textbf{non-linear}.
+        \pause
+        \item Our focus will be on how to solve this large-scale inverse problem using \textbf{gradient-based optimisation}.
+    \end{itemize}
+\end{frame}
+
+% --- METHOD ---
+
+\begin{frame}{Waveform Misfit}
+    The first step is to quantify the difference between an observed seismogram, $u^{obs}(t)$, and a synthetic seismogram, $u(t)$, calculated in a given Earth model.
+    \pause
+    \begin{block}{Least-Squares Misfit Function}
+        A simple choice is the squared L2-norm of the difference between the waveforms:
+        $$ J = \frac{1}{2}\int_{0}^{T} ||\mathbf{u}(\mathbf{x}_{r},t)-\mathbf{u}^{obs}(t)||^{2}dt $$
+    \end{block}
+    \pause
+    \begin{itemize}
+        \item The value of the misfit $J$ depends on the synthetic wavefield $\mathbf{u}$, which in turn depends on the underlying Earth model parameters, $\mathbf{m}$. We can therefore think of the misfit as a function $J(\mathbf{m})$.
+        \pause
+        \item \textbf{The goal of waveform tomography is to find the model $\mathbf{m}$ that minimises this misfit function.}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Solving the Inverse Problem: Optimisation}
+    We want to find a model $\overline{\mathbf{m}}$ that is a minimum of the misfit function $J(\mathbf{m})$. This occurs where the gradient (or functional derivative) of the misfit is zero:
+    $$ DJ(\overline{\mathbf{m}}) = 0 $$
+    \pause
+    \begin{itemize}
+        \item The model space is extremely high-dimensional, so methods like grid search or random sampling (MCMC) are computationally impossible.
+        \pause
+        \item We must use \textbf{local, gradient-based optimisation methods}. These iteratively improve an initial model by moving it in a direction related to the negative gradient.
+        \pause
+        \item A major drawback is that these methods can get stuck in a \textbf{local minimum} of the misfit function, which may not be the true global minimum.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{The Steepest Descent Algorithm}
+    The simplest gradient-based method is steepest descent. It is an iterative process:
+    \pause
+    \begin{enumerate}
+        \item Start with an initial guess for the model, $\mathbf{m}_0$.
+        \pause
+        \item At the current model $\mathbf{m}_k$, calculate the gradient of the misfit, $DJ(\mathbf{m}_k)$. The direction of steepest descent is $-\,DJ(\mathbf{m}_k)$.
+        \pause
+        \item Update the model by taking a step in that direction:
+        $$ \mathbf{m}_{k+1} = \mathbf{m}_k - \lambda \, DJ(\mathbf{m}_k) $$
+        \pause
+        \item Find the optimal step length $\lambda$ using a line search to achieve the largest misfit reduction.
+        \pause
+        \item Repeat until the gradient is nearly zero or the misfit stops decreasing.
+    \end{enumerate}
+\end{frame}
+
+% --- ADJOINT METHOD ---
+
+\begin{frame}{Calculating the Gradient}
+    The key challenge is calculating the gradient $DJ(\mathbf{m})$ efficiently.
+    \begin{block}{A Bad Idea: Finite Differences}
+        We could approximate the derivative by perturbing each model parameter one by one and running a new simulation for each.
+        $$ \frac{\partial J}{\partial m_i} \approx \frac{J(\mathbf{m} + \epsilon \mathbf{e}_i) - J(\mathbf{m})}{\epsilon} $$
+        This would require $N+1$ wavefield simulations, where $N$ is the number of model parameters. Since $N$ can be millions, this is computationally prohibitive.
+    \end{block}
+    \pause
+    \begin{alertblock}{A Good Idea: The Adjoint Method}
+        There is a much more efficient way to calculate the exact gradient, known as the \textbf{adjoint method}.
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{The Adjoint Method (1/2): Concept}
+    The adjoint method uses the method of Lagrange multipliers to find the gradient of a function ($J$) subject to a constraint (the wave equation).
+    \begin{itemize}
+        \item The derivation is lengthy, but the conceptual result is elegant.
+        \pause
+        \item It introduces an \textbf{adjoint wavefield}, $u'$. This adjoint field satisfies the same wave equation as the normal "forward" wavefield.
+        \pause
+        \item However, the source for the adjoint wavefield is the \textbf{data residual} ($u - u^{obs}$), but applied as a force at the \textit{receiver} location and running \textbf{backwards in time}.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{The Adjoint Method (2/2): The Payoff}
+    \begin{block}{Calculating the Sensitivity Kernel}
+        The gradient of the misfit with respect to any model parameter can be calculated by combining the forward field ($\mathbf{u}$) and the adjoint field ($\mathbf{u}'$). For example, the sensitivity to density, $\rho$, is:
+        $$ K_{\rho} = \int_{0}^{T} \frac{\partial \mathbf{u}}{\partial t} \cdot \frac{\partial \mathbf{u}'}{\partial t} dt $$
+        Similar expressions exist for elastic parameters.
+    \end{block}
+    \pause
+    \begin{alertblock}{Computational Advantage}
+        The total cost to compute the gradient for \textbf{all} model parameters is:
+        \begin{enumerate}
+            \item One forward simulation to get $\mathbf{u}$ and the data residual.
+            \item One backward (adjoint) simulation to get $\mathbf{u}'$.
+            \item One step to combine the saved fields.
+        \end{enumerate}
+        The cost is independent of the number of model parameters, making large-scale tomography feasible.
+    \end{alertblock}
+\end{frame}
+
+% --- BANANA DOUGHNUT KERNELS ---
+
+\begin{frame}{Banana-Doughnut Kernels}
+    The sensitivity kernels calculated with the adjoint method have a particular structure.
+    \begin{itemize}
+        \item Let's consider the sensitivity of a travel-time measurement to wave speed (a case related to both delay-time and waveform tomography).
+        \pause
+        \item Ray theory states that the sensitivity is confined to an infinitely thin geometric ray path.
+        \pause
+        \item The full-wave theory shows that the sensitivity is actually spread out over a volumetric region around the ray path. This region is the first \textbf{Fresnel zone}.
+        \pause
+        \item Curiously, the sensitivity is zero exactly on the geometric ray itself.
+    \end{itemize}
+    \pause
+    \begin{center}
+    \textit{This shape -- broad around the ray path but hollow in the middle -- led to the name \textbf{"banana-doughnut kernel"}.}
+    \end{center}
+\end{frame}
+
+% --- SUMMARY ---
+
+\begin{frame}{Summary: What You Need to Know}
+    \begin{itemize}
+        \item \textbf{Waveform Tomography} aims to minimise the misfit between observed and synthetic seismograms, using the full waveform.
+        \pause
+        \item The inverse problem is highly non-linear and solved with iterative, \textbf{gradient-based optimisation} methods like steepest descent.
+        \pause
+        \item The gradient of the misfit function is calculated efficiently using the \textbf{adjoint method}, which involves one forward and one backward (adjoint) wave simulation.
+        \pause
+        \item The cost of the adjoint method is independent of the number of model parameters, making large-scale problems computationally tractable.
+        \pause
+        \item Full-wave sensitivity kernels (\textbf{banana-doughnut kernels}) have finite width related to the Fresnel zone, differing from the infinitely thin sensitivities of ray theory.
+    \end{itemize}
+\end{frame}
+
+\end{document}

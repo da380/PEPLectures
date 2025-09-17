@@ -1,0 +1,252 @@
+\documentclass{beamer}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% Choose a theme
+\usetheme{Madrid}
+\usecolortheme{default}
+\usefonttheme{serif}
+
+% --- CUSTOM FOOTER ---
+% Redefine the footline to remove author/institute and keep title/page number
+\makeatletter
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+% --- END CUSTOM FOOTER ---
+
+\title[Lecture 13: Constitutive theory]{Lecture 13: Constitutive theory}
+\author{David Al-Attar}
+\institute{Michaelmas term 2024}
+\date{}
+
+\begin{document}
+
+% --- INTRODUCTION ---
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}{Outline and Motivation}
+    In the last lecture, we derived the equations of motion for a hyperelastic body. Now, we'll explore the material properties.
+    \pause
+    \begin{itemize}
+        \item Use the principle of material frame indifference to find the precise form of the strain energy function, $W$.
+        \pause
+        \item Derive the \textbf{linearised equations of motion} for small deformations around a stress-free state. These are crucial for seismology.
+        \pause
+        \item Discuss \textbf{material symmetries} (e.g., isotropy) to simplify the equations for real materials.
+    \end{itemize}
+\end{frame}
+
+% --- FRAME INDIFFERENCE & POLAR DECOMPOSITION ---
+
+\begin{frame}{Material Frame Indifference Revisited}
+    Recall that the strain energy, $W$, must be independent of superimposed rigid body rotations.
+    \begin{alertblock}{Mathematical Condition}
+        For any rotation matrix $\mathbf{Q}$, the strain energy function must satisfy:
+        $$ W(\mathbf{x}, \mathbf{Q}\mathbf{F}) = W(\mathbf{x}, \mathbf{F}) $$
+    \end{alertblock}
+    \pause
+    To understand what this means for the form of $W$, we need a key result from linear algebra.
+\end{frame}
+
+\begin{frame}{The Polar Decomposition Theorem}
+    \begin{block}{The Theorem}
+        Any invertible matrix $\mathbf{F}$ (with $\det \mathbf{F} > 0$) can be uniquely decomposed as:
+        $$ \mathbf{F} = \mathbf{R}\mathbf{U} $$
+        where:
+        \begin{itemize}
+            \item $\mathbf{R}$ is a rotation matrix (the rotation part).
+            \item $\mathbf{U}$ is a symmetric, positive-definite matrix (the stretch part).
+        \end{itemize}
+    \end{block}
+    \pause
+    \begin{exampleblock}{Geometric Interpretation}
+        Any deformation can be seen as a pure stretch ($\mathbf{U}$) followed by a rigid rotation ($\mathbf{R}$).
+    \end{exampleblock}
+    \small\textit{Note: The proof of this theorem is non-examinable.}
+\end{frame}
+
+\begin{frame}{Implications for the Strain Energy (1/2)}
+    Let's apply the polar decomposition, $\mathbf{F} = \mathbf{R}\mathbf{U}$, to the frame indifference condition:
+    $$ W(\mathbf{x}, \mathbf{F}) = W(\mathbf{x}, \mathbf{R}\mathbf{U}) $$
+    \pause
+    The principle states that for any rotation $\mathbf{Q}$, $W(\mathbf{x}, \mathbf{Q}\mathbf{F}) = W(\mathbf{x}, \mathbf{F})$. If we choose $\mathbf{Q}=\mathbf{R}^{-1}$, we find:
+    $$ W(\mathbf{x}, \mathbf{F}) = W(\mathbf{x}, \mathbf{R}^{-1}(\mathbf{R}\mathbf{U})) = W(\mathbf{x}, \mathbf{U}) $$
+    \pause
+    This means the strain energy is independent of the rotational part of the deformation.
+\end{frame}
+
+\begin{frame}{Implications for the Strain Energy (2/2)}
+    \begin{alertblock}{Conclusion}
+        The strain energy depends on $\mathbf{F}$ only through the stretch part $\mathbf{U}$.
+        \pause
+        It's more convenient to use the \textbf{Right Cauchy-Green deformation tensor}, $\mathbf{C} = \mathbf{F}^T\mathbf{F} = \mathbf{U}^2$. The final form is:
+        $$ W(\mathbf{x}, \mathbf{F}) = \mathcal{U}(\mathbf{x}, \mathbf{C}) $$
+        Here, $\mathcal{U}$ is an auxiliary function that defines the material's properties.
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Stress Tensors \& Angular Momentum}
+    \begin{block}{Piola-Kirchhoff Stress Tensors}
+        The relationship $W(\mathbf{F}) = \mathcal{U}(\mathbf{C})$ allows us to define two useful stress tensors.
+        \begin{itemize}
+            \item \textbf{1st Piola-Kirchhoff Stress}: $T_{ij} = \frac{\partial W}{\partial F_{ij}}$.
+            \item \textbf{2nd Piola-Kirchhoff Stress}: $S_{ij} = 2\frac{\partial \mathcal{U}}{\partial C_{ij}}$.
+        \end{itemize}
+        They are related by $\mathbf{T} = \mathbf{F}\mathbf{S}$.
+    \end{block}
+    \pause
+    \begin{alertblock}{Conservation of Angular Momentum}
+        Because $\mathbf{S}$ is symmetric by definition, the condition $\mathbf{T} = \mathbf{F}\mathbf{S}$ is equivalent to the conservation of angular momentum, which is therefore automatically satisfied.
+    \end{alertblock}
+\end{frame}
+
+% --- LINEARISATION ---
+
+\begin{frame}{Linearised Equations of Motion}
+    Our goal is to study small vibrations (like seismic waves) around an equilibrium state.
+    \begin{itemize}
+        \item We assume the body starts in a \textbf{stress-free equilibrium configuration}, where $\boldsymbol{\varphi}^0(\mathbf{x}) = \mathbf{x}$ and the initial stress $\mathbf{T}^0$ is zero.
+        \pause
+        \item We consider a small displacement $\mathbf{u}(\mathbf{x}, t)$ from this state, seeking a solution of the form:
+        $$ \varphi_i(\mathbf{x}, t) = x_i + s u_i(\mathbf{x}, t) + O(s^2) $$
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Hooke's Law}
+    We expand the stress tensor for small displacements. Since the initial stress is zero, the first-order term in the expansion is:
+    $$ T_{ij} = s A_{ijkl}(\mathbf{x}) \frac{\partial u_k}{\partial x_l} + O(s^2) $$
+    \pause
+    \begin{block}{The Elastic Tensor}
+        The quantity $\mathbf{A}$ is the \textbf{elastic tensor}, defined as:
+        $$ A_{ijkl}(\mathbf{x}) = \frac{\partial^2 W}{\partial F_{ij}\partial F_{kl}}(\mathbf{x}, \mathbf{I}) $$
+        This linear stress-strain relationship is \textbf{Hooke's Law}.
+    \end{block}
+    \pause
+    \begin{alertblock}{Hyperelastic Symmetry}
+        From the equality of mixed partials, the elastic tensor has a crucial symmetry:
+        $$ A_{ijkl} = A_{klij} $$
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{The Linearised Wave Equation}
+    Substituting the linearised expressions for velocity and stress into the full equation of motion gives the fundamental equation for elastic waves.
+    \begin{alertblock}{Linearised Equation of Motion}
+        $$ \rho\frac{\partial^2 u_{i}}{\partial t^2} - \frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\right) = 0 $$
+    \end{alertblock}
+    \pause
+    \begin{block}{Linearised Boundary Condition}
+        The traction-free boundary condition becomes:
+        $$ n_{j}A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}} = 0 $$
+    \end{block}
+\end{frame}
+
+
+% --- MATERIAL SYMMETRIES ---
+
+\begin{frame}{Material Symmetries}
+    The elastic tensor $\mathbf{A}$ can have up to 21 independent components. For many materials, this number is reduced due to symmetries.
+    \pause
+    \begin{block}{Material Symmetry Group}
+        A material has a symmetry described by a rotation matrix $\mathbf{Q}$ if its strain energy is unchanged by that rotation:
+        $$ W(\mathbf{x}, \mathbf{F}\mathbf{Q}) = W(\mathbf{x}, \mathbf{F}) $$
+        The set of all such rotations $\mathbf{Q}$ is the \textbf{material symmetry group}.
+    \end{block}
+    \pause
+    \begin{itemize}
+        \item \textbf{Isotropic}: The material looks the same in all directions.
+        \item \textbf{Anisotropic}: The material properties depend on direction.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Isotropic Materials (1/2)}
+    A material is \textbf{isotropic} if its properties are the same in all directions.
+    \pause
+    \begin{itemize}
+        \item For seismology, this is often a good approximation for the Earth.
+        \item For an isotropic material, the strain energy $\mathcal{U}(\mathbf{C})$ can only depend on the eigenvalues of $\mathbf{C}$.
+    \end{itemize}
+    \pause
+    \begin{block}{Isotropic Elastic Tensor}
+        This symmetry simplifies the elastic tensor to a form with just two constants, the \textbf{Lamé parameters} $\lambda$ and $\mu$:
+        $$ A_{ijkl} = \lambda\delta_{ij}\delta_{kl} + \mu(\delta_{ik}\delta_{jl} + \delta_{il}\delta_{kj}) $$
+        The parameter $\mu$ is the \textbf{shear modulus}.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Isotropic Materials (2/2)}
+    \begin{alertblock}{Isotropic Wave Equation}
+        For a \textbf{homogeneous} isotropic material (where $\rho, \lambda, \mu$ are constant), the linearised equation of motion becomes the familiar wave equation:
+        $$ \rho\frac{\partial^2 \mathbf{u}}{\partial t^2} - (\lambda + \mu)\nabla(\nabla\cdot \mathbf{u}) - \mu\nabla^2 \mathbf{u} = 0 $$
+    \end{alertblock}
+    \pause
+    \begin{exampleblock}{Context}
+        This requires assumptions of:
+        \begin{itemize}
+            \item Small (linearised) motion
+            \item Stress-free initial state
+            \item Isotropy \& Homogeneity
+        \end{itemize}
+    \end{exampleblock}
+\end{frame}
+
+\begin{frame}{Other Material Types}
+    \begin{block}{Transversely Isotropic Materials}
+        These materials have a preferred direction (an axis of symmetry, $\hat{\boldsymbol{\nu}}$). They are symmetric with respect to any rotation about that axis.
+        \begin{itemize}
+            \item The elastic tensor is more complex, requiring 5 elastic constants.
+        \end{itemize}
+    \end{block}
+    \pause
+    \begin{block}{Elastic Fluids}
+        Our theory also applies to compressible, non-viscous fluids (e.g., the Earth's outer core).
+        \begin{itemize}
+            \item A fluid has a preferred volume, but not a preferred shape.
+            \item This is equivalent to an isotropic material with \textbf{zero shear modulus}.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+% --- SUMMARY ---
+
+\begin{frame}{Summary (1/2): Key Concepts}
+    \begin{itemize}
+        \item \textbf{Frame Indifference:} Understand the polar decomposition theorem ($\mathbf{F}=\mathbf{R}\mathbf{U}$) and how it restricts the strain energy to depend only on the stretch, represented via $\mathbf{C} = \mathbf{F}^T\mathbf{F}$.
+        \pause
+        \item \textbf{Linearisation:} Know the concept of a stress-free equilibrium and the process of linearising the equations of motion for small displacements ($\mathbf{u}$).
+        \pause
+        \item \textbf{Material Symmetries:} Understand the physical meaning of the material symmetry group and know the definitions of:
+        \begin{itemize}
+            \item Isotropic \& Anisotropic
+            \item Elastic Fluid (zero shear modulus)
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Summary (2/2): Key Equations}
+     \begin{alertblock}{The Linearised Equation of Motion}
+     You must be able to derive and state this equation:
+     $$ \rho\frac{\partial^2 u_{i}}{\partial t^2} - \frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\right) = 0 $$
+    \end{alertblock}
+    \pause
+     \begin{block}{The Elastic Tensor ($\mathbf{A}$)}
+        This tensor contains the material properties. Remember its most important property, the \textbf{hyperelastic symmetry}:
+        $$ A_{ijkl} = A_{klij} $$
+        This symmetry is a direct consequence of the existence of a strain energy function $W$.
+     \end{block}
+\end{frame}
+
+\end{document}

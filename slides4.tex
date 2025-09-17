@@ -1,0 +1,287 @@
+\documentclass{beamer}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% Choose a theme
+\usetheme{Madrid}
+\usecolortheme{default}
+\usefonttheme{serif}
+
+% --- CUSTOM FOOTER ---
+% Redefine the footline to remove author/institute and keep title/page number
+\makeatletter
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+% --- END CUSTOM FOOTER ---
+
+\title[Lecture 15: Plane wave propagation]{Lecture 15: Plane wave propagation}
+\author{David Al-Attar}
+\institute{Michaelmas term 2024}
+\date{}
+
+\begin{document}
+
+% --- INTRODUCTION ---
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}{Outline and Motivation}
+    We will now study the simplest type of elastic waves: plane waves.
+    \begin{itemize}
+        \item We will analyze wave propagation in a \textbf{homogeneous} whole space (constant material parameters).
+        \pause
+        \item We will show that up to three different types of plane waves can propagate in any given direction.
+        \pause
+        \item For the special case of \textbf{isotropic} materials, we will derive the familiar P- and S-waves.
+        \pause
+        \item We will then use perturbation theory to see how these waves are affected by slight anisotropy.
+        \pause
+        \item Finally, we will qualitatively discuss how plane waves interact with boundaries (reflection and conversion).
+    \end{itemize}
+\end{frame}
+
+% --- CHRISTOFFEL EQUATION ---
+
+\begin{frame}{The Setup: Plane Waves in a Homogeneous Medium}
+    We start with the linearised equations of motion for a \textbf{homogeneous} body, where $\rho$ and $A_{ijkl}$ are constant:
+    $$ \rho\frac{\partial^{2}u_{i}}{\partial t^{2}} - A_{ijkl}\frac{\partial^2 u_{k}}{\partial x_{j}\partial x_{l}}=0 $$
+    \pause
+    We look for \textbf{plane wave} solutions of the form:
+    $$ u_{i}(\mathbf{x},t)=f(t-\mathbf{p}\cdot\mathbf{x})a_{i} $$
+    \pause
+    \begin{columns}
+    \column{0.5\textwidth}
+        \begin{block}{Slowness Vector ($\mathbf{p}$)}
+            \begin{itemize}
+                \item Direction of $\mathbf{p}$ is the propagation direction.
+                \item Magnitude sets the phase speed, $c = 1/||\mathbf{p}||$.
+            \end{itemize}
+        \end{block}
+    \column{0.5\textwidth}
+        \begin{block}{Polarisation Vector ($\mathbf{a}$)}
+            \begin{itemize}
+                \item A unit vector describing the direction of particle motion.
+            \end{itemize}
+        \end{block}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Deriving the Christoffel Equation}
+    We substitute the plane wave form $u_{i}=f(t-\mathbf{p}\cdot\mathbf{x})a_{i}$ into the equation of motion.
+    \begin{itemize}
+        \item The time derivative term is:
+        $$ \rho\frac{\partial^{2}u_{i}}{\partial t^{2}} = \rho f'' a_i $$
+        \pause
+        \item The spatial derivative term is:
+        $$ A_{ijkl}\frac{\partial^{2}u_{k}}{\partial x_{j}\partial x_{l}} = A_{ijkl} (f'' p_j p_l a_k) $$
+    \end{itemize}
+    \pause
+    Equating these and cancelling the common factor $f''$ gives:
+    $$ \rho a_i = A_{ijkl} p_j p_l a_k $$
+    \pause
+    Rearranging this gives the fundamental condition for a plane wave to exist.
+\end{frame}
+
+\begin{frame}{The Christoffel Equation}
+    \begin{block}{The Christoffel Matrix}
+        We define the Christoffel matrix $\mathbf{\Gamma}(\mathbf{p})$ as:
+        $$ \Gamma_{ik}(\mathbf{p})=\frac{1}{\rho}A_{ijkl}p_{j}p_{l} $$
+    \end{block}
+    \pause
+    \begin{alertblock}{The Christoffel Equation}
+        The condition for plane wave solutions can now be written compactly as:
+        $$ \Gamma_{ik}a_k = a_i \quad \text{or} \quad [\mathbf{\Gamma}(\mathbf{p})-\mathbf{I}]\mathbf{a}=0 $$
+        This is a homogeneous system of linear equations for the polarisation vector $\mathbf{a}$.
+    \end{alertblock}
+    \pause
+    \begin{itemize}
+        \item For a non-trivial solution ($\mathbf{a} \neq 0$) to exist, the determinant of the matrix must be zero:
+        $$ \det[\mathbf{\Gamma}(\mathbf{p})-\mathbf{I}]=0 $$
+        This equation defines the set of all possible slowness vectors, a surface known as the \textbf{slowness surface}.
+    \end{itemize}
+\end{frame}
+
+% --- EIGENVALUE PROBLEM ---
+
+\begin{frame}{Reduction to a Symmetric Eigenvalue Problem}
+    We can rewrite the Christoffel equation in a more familiar form.
+    \begin{itemize}
+        \item Let the slowness vector be $\mathbf{p} = \frac{1}{c}\hat{\mathbf{p}}$, where $c$ is the phase speed and $\hat{\mathbf{p}}$ is the direction.
+        \pause
+        \item The Christoffel matrix has the property $\mathbf{\Gamma}(\lambda \mathbf{p}) = \lambda^2 \mathbf{\Gamma}(\mathbf{p})$. Using this, the Christoffel equation becomes:
+        $$ \mathbf{\Gamma}(\hat{\mathbf{p}})\mathbf{a} = c^2 \mathbf{a} $$
+    \end{itemize}
+    \pause
+    \begin{alertblock}{An Eigenvalue Problem}
+        For a fixed propagation direction $\hat{\mathbf{p}}$, this is an eigenvalue problem where the eigenvalues are the squared phase speeds ($c^2$) and the eigenvectors are the polarisation vectors ($\mathbf{a}$).
+    \end{alertblock}
+    \pause
+    \begin{block}{Symmetry}
+        Using the hyperelastic symmetry ($A_{ijkl}=A_{klij}$), one can show that the Christoffel matrix $\mathbf{\Gamma}(\hat{\mathbf{p}})$ is always symmetric.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Qualitative Solution}
+    Because $\mathbf{\Gamma}(\hat{\mathbf{p}})$ is a $3 \times 3$ symmetric matrix, we know the properties of its solutions from linear algebra.
+    \begin{itemize}
+        \item It has \textbf{three real eigenvalues}: $c_1^2, c_2^2, c_3^2$.
+        \pause
+        \item It has \textbf{three corresponding eigenvectors} that are mutually \textbf{orthogonal}: $\mathbf{a}_1, \mathbf{a}_2, \mathbf{a}_3$.
+    \end{itemize}
+    \pause
+    \begin{alertblock}{Physical Interpretation}
+        In any given propagation direction $\hat{\mathbf{p}}$, there are (up to) \textbf{three distinct types of plane waves}.
+        \begin{itemize}
+            \item Each wave type has its own phase speed ($c_1, c_2, c_3$).
+            \item The particle motions (polarisations $\mathbf{a}_1, \mathbf{a}_2, \mathbf{a}_3$) of these three waves are mutually orthogonal.
+        \end{itemize}
+    \end{alertblock}
+\end{frame}
+
+% --- ISOTROPIC CASE ---
+
+\begin{frame}{Isotropic Case: P- and S-Waves}
+    For an isotropic material, we can solve the eigenvalue problem explicitly. The Christoffel matrix becomes:
+    $$ \Gamma_{ik}(\hat{\mathbf{p}})=\frac{\lambda+\mu}{\rho}\hat{p}_{i}\hat{p}_{k}+\frac{\mu}{\rho}\delta_{ik} $$
+    \pause
+    We can immediately find the eigenvectors and eigenvalues.
+    \begin{block}{P-waves (Longitudinal)}
+        If we choose the polarisation vector parallel to the propagation direction, $\mathbf{a} = \hat{\mathbf{p}}$:
+        $$ \mathbf{\Gamma}(\hat{\mathbf{p}})\hat{\mathbf{p}} = \left(\frac{\lambda+2\mu}{\rho}\right) \hat{\mathbf{p}} $$
+        \begin{itemize}
+            \item This is a longitudinal wave, called a \textbf{P-wave}.
+            \item The phase speed is $c_P = \alpha = \sqrt{(\lambda+2\mu)/\rho}$.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Isotropic Case: S-Waves and Summary}
+    \begin{block}{S-waves (Transverse)}
+        If we choose $\mathbf{a}$ to be any vector orthogonal to $\hat{\mathbf{p}}$ (i.e., $\mathbf{a} \cdot \hat{\mathbf{p}}=0$):
+        $$ \mathbf{\Gamma}(\hat{\mathbf{p}})\mathbf{a} = \left(\frac{\mu}{\rho}\right) \mathbf{a} $$
+        \begin{itemize}
+            \item This is a transverse wave, called an \textbf{S-wave}.
+            \item The phase speed is $c_S = \beta = \sqrt{\mu/\rho}$.
+            \item Since there are two orthogonal directions transverse to $\hat{\mathbf{p}}$, this eigenvalue is \textbf{two-fold degenerate}.
+        \end{itemize}
+    \end{block}
+    \pause
+    \begin{alertblock}{Summary for Isotropic Media}
+        \begin{itemize}
+            \item One type of P-wave with speed $\alpha$.
+            \item Two types of S-waves with the same speed $\beta$.
+            \item Speeds are independent of propagation direction.
+            \item We always have $\alpha > \beta > 0$ in a solid.
+        \end{itemize}
+    \end{alertblock}
+\end{frame}
+
+% --- PERTURBATION THEORY ---
+
+\begin{frame}{Slightly Anisotropic Materials}
+    In some parts of the Earth, the material is slightly anisotropic. We can analyze this using perturbation theory.
+    \begin{itemize}
+        \item We write the elastic tensor as an isotropic part plus a small anisotropic perturbation:
+        $$ A_{ijkl} = A^{\text{iso}}_{ijkl} + s~\delta A_{ijkl} $$
+        \pause
+        \item This leads to a perturbed Christoffel matrix:
+        $$ \mathbf{\Gamma}(\hat{\mathbf{p}}) = \mathbf{\Gamma}^{\text{iso}}(\hat{\mathbf{p}}) + s~\delta\mathbf{\Gamma}(\hat{\mathbf{p}}) $$
+        \pause
+        \item We then find the first-order corrections to the isotropic eigenvalues ($c^2$) and eigenvectors ($\mathbf{a}$).
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Perturbation of P- and S-waves}
+    \begin{block}{Quasi P-wave}
+        The non-degenerate P-wave is perturbed slightly.
+        \begin{itemize}
+            \item The wave is now a \textbf{quasi P-wave} (qP).
+            \item The polarisation is almost, but not exactly, parallel to $\hat{\mathbf{p}}$.
+            \item The phase speed now depends on the propagation direction.
+        \end{itemize}
+    \end{block}
+    \pause
+    \begin{block}{Quasi S-waves and Shear-Wave Splitting}
+        The two-fold S-wave degeneracy is the most interesting case.
+        \begin{itemize}
+            \item Perturbation theory shows that the degeneracy is almost always lifted. The two S-waves now have slightly different speeds.
+            \item This phenomenon is called \textbf{shear-wave splitting}.
+            \item The resulting waves are \textbf{quasi S-waves} (qS1, qS2) with nearly transverse, orthogonal polarisations.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Geophysical Significance of Shear-Wave Splitting}
+    \begin{exampleblock}{Probing Mantle Flow}
+        \begin{itemize}
+            \item While most of the Earth appears isotropic to seismic waves (due to random crystal orientations), some regions in the mantle exhibit slight anisotropy.
+            \pause
+            \item This is caused by the large-scale alignment of mineral grains due to convective flow.
+            \pause
+            \item By observing shear-wave splitting, seismologists can make inferences about the direction and nature of flow within the Earth's mantle.
+        \end{itemize}
+    \end{exampleblock}
+\end{frame}
+
+% --- REFLECTION/TRANSMISSION ---
+
+\begin{frame}{Waves at an Interface: Snell's Law}
+    Consider two different homogeneous half-spaces meeting at a planar interface.
+    \begin{itemize}
+        \item An incident plane wave will strike the boundary. To satisfy the boundary conditions (continuity of displacement and traction), reflected and transmitted waves must be generated.
+        \pause
+        \item For the boundary conditions to hold true everywhere on the interface, the phase of all waves must match.
+    \end{itemize}
+    \pause
+    \begin{alertblock}{Snell's Law}
+        This phase-matching condition requires that the component of the slowness vector parallel to the interface must be conserved for all incident, reflected, and transmitted waves.
+        $$ p_{\text{horizontal}} = \text{constant} $$
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Wave Conversion}
+    \begin{block}{Reflection, Transmission, and Conversion}
+        \begin{itemize}
+            \item A single incident wave (e.g., a P-wave) will generally generate a full set of reflected and transmitted waves.
+            \pause
+            \item For an isotropic solid-solid interface, an incident P-wave will produce a reflected P-wave, a reflected S-wave, a transmitted P-wave, and a transmitted S-wave.
+            \pause
+            \item The generation of waves of a different type (e.g., an S-wave from an incident P-wave) is known as \textbf{wave conversion}.
+        \end{itemize}
+    \end{block}
+    \pause
+    \begin{exampleblock}{Complexity of Seismograms}
+        Wave conversion is a fundamental property of elasticity and is a major reason why observed seismograms are so complex, containing many more arrivals than just the direct P- and S-waves.
+    \end{exampleblock}
+\end{frame}
+
+% --- SUMMARY ---
+
+\begin{frame}{Summary: What You Need to Know}
+    \begin{itemize}
+        \item How to derive the \textbf{Christoffel equation} from the equations of motion for a plane wave.
+        \pause
+        \item That this reduces to a \textbf{symmetric eigenvalue problem}, implying up to three orthogonal wave types in any direction.
+        \pause
+        \item How to solve the Christoffel equation for an isotropic solid to find \textbf{P-waves} (longitudinal) and \textbf{S-waves} (transverse, degenerate).
+        \pause
+        \item The effect of slight anisotropy: P-waves become \textbf{quasi-P}, and S-waves exhibit \textbf{shear-wave splitting}.
+        \pause
+        \item The basics of wave interaction at a boundary: \textbf{Snell's Law} (conservation of horizontal slowness) and \textbf{wave conversion}.
+    \end{itemize}
+\end{frame}
+
+\end{document}

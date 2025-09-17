@@ -1,0 +1,218 @@
+\documentclass{beamer}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% Choose a theme
+\usetheme{Madrid}
+\usecolortheme{default}
+\usefonttheme{serif}
+
+% --- CUSTOM FOOTER ---
+% Redefine the footline to remove author/institute and keep title/page number
+\makeatletter
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+% --- END CUSTOM FOOTER ---
+
+\title[Lecture 22: Free Oscillations]{Lecture 22: Free Oscillations}
+\author{David Al-Attar}
+\institute{Michaelmas term 2024}
+\date{}
+
+\begin{document}
+
+% --- INTRODUCTION ---
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}{Outline and Motivation}
+    Today we begin our study of the Earth's \textbf{free oscillations}, also known as its normal modes. After a large earthquake, the whole Earth "rings like a bell" at a set of discrete frequencies.
+    \begin{itemize}
+        \item We will develop a concise operator notation for the equations of motion, similar to that used in quantum mechanics.
+        \pause
+        \item We will analyse the resulting eigenvalue problem for a non-rotating Earth to find the properties of the normal modes.
+        \pause
+        \item We will show how the forced response to an earthquake has \textbf{resonances} at the Earth's eigenfrequencies.
+        \pause
+        \item Observing these frequencies provides the main constraint on the Earth's density structure.
+    \end{itemize}
+\end{frame}
+
+% --- OPERATOR FORMULATION ---
+
+\begin{frame}{A More Abstract Formulation}
+    The full linearised equations of motion are complex. To simplify, we rewrite them in a \textbf{weak form}.
+    \begin{itemize}
+        \item We multiply the equation by an arbitrary complex test function $\mathbf{w}^*$ and integrate over the Earth's volume.
+        \pause
+        \item Using integration by parts, we can move all spatial derivatives from the displacement field $\mathbf{u}$ onto the test function $\mathbf{w}$. This has the advantage of building the boundary conditions directly into the formulation.
+    \end{itemize}
+    \pause
+    \begin{block}{Operator Notation}
+        The resulting weak form can be written very concisely using a notation similar to the bra-ket formalism:
+        $$ \langle \mathbf{w}|P|\ddot{\mathbf{u}}\rangle + \langle \mathbf{w}|W|\dot{\mathbf{u}}\rangle + \langle \mathbf{w}|H|\mathbf{u}\rangle = \langle \mathbf{w}|\mathbf{f}\rangle $$
+    \end{block}
+\end{frame}
+
+\begin{frame}{Properties of the Operators}
+    The operators $P$, $W$, and $H$ represent the physical terms in the equation and have important symmetry properties.
+    \begin{itemize}
+        \item \textbf{P (Kinetic Energy):} Represents inertia ($Pu = \rho u$). It is \textbf{self-adjoint} ($\langle \mathbf{w}|P|\mathbf{u}\rangle = \langle \mathbf{u}|P|\mathbf{w}\rangle^{*}$) and defines a mass-weighted inner product.
+        \pause
+        \item \textbf{W (Coriolis):} Represents the Coriolis force. It is \textbf{anti self-adjoint} ($\langle \mathbf{w}|W|\mathbf{u}\rangle = -\langle \mathbf{u}|W|\mathbf{w}\rangle^{*}$).
+        \pause
+        \item \textbf{H (Potential Energy):} Represents elastic, gravitational, and centrifugal potential energy. It is \textbf{self-adjoint}.
+    \end{itemize}
+    These properties are crucial for understanding the nature of the free oscillations.
+\end{frame}
+
+% --- NON-ROTATING CASE ---
+
+\begin{frame}{The Non-Rotating Case: An Eigenvalue Problem}
+    To begin, we neglect rotation ($W=0$) and external forcing ($f=0$). The equation becomes:
+    $$ \langle \mathbf{w}|P|\ddot{\mathbf{u}}\rangle + \langle \mathbf{w}|H|\mathbf{u}\rangle = 0 $$
+    \pause
+    We look for time-harmonic solutions, the normal modes, of the form $\mathbf{u}(\mathbf{x},t) = \mathbf{s}(\mathbf{x})e^{i\omega t}$.
+    \pause
+    Substituting this into the equation gives:
+    \begin{alertblock}{The Eigenvalue Problem}
+        $$ \langle \mathbf{w}|H|\mathbf{s}\rangle = \omega^2 \langle \mathbf{w}|P|\mathbf{s}\rangle $$
+    \end{alertblock}
+    \pause
+    This is a generalised eigenvalue problem for the eigenfrequencies $\omega$ and eigenfunctions (mode shapes) $\mathbf{s}$.
+\end{frame}
+
+\begin{frame}{Properties of the Normal Modes (1/3): Reality}
+    Because $P$ and $H$ are self-adjoint, we can prove key properties of the solutions.
+    \begin{block}{Eigenfrequencies are Real}
+        \textbf{Sketch Proof:}
+        \begin{itemize}
+            \item Let $\mathbf{s}$ be an eigenfunction with eigenfrequency $\omega$. The eigenvalue equation is $\langle \mathbf{s}|H|\mathbf{s}\rangle = \omega^2 \langle \mathbf{s}|P|\mathbf{s}\rangle$.
+            \pause
+            \item The term $\langle \mathbf{s}|H|\mathbf{s}\rangle$ is the potential energy of the mode, which is real because $H$ is self-adjoint.
+            \pause
+            \item The term $\langle \mathbf{s}|P|\mathbf{s}\rangle$ is related to kinetic energy, which is real and positive because $P$ is self-adjoint and positive-definite.
+            \pause
+            \item Therefore, $\omega^2 = \frac{\text{real number}}{\text{positive real number}}$ must be a real number.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Properties of the Normal Modes (2/3): Orthogonality Setup}
+    \begin{block}{Eigenfunctions are Orthogonal}
+        \textbf{Sketch Proof (Part 1):}
+        \begin{itemize}
+            \item Let $\mathbf{s}_1$ and $\mathbf{s}_2$ be two modes with distinct eigenfrequencies, $\omega_1^2 \neq \omega_2^2$.
+            \pause
+            \item By definition, they satisfy:
+            $$ \langle \mathbf{s}_2|H|\mathbf{s}_1\rangle = \omega_1^2 \langle \mathbf{s}_2|P|\mathbf{s}_1\rangle \quad (1) $$
+            \pause
+            $$ \langle \mathbf{s}_1|H|\mathbf{s}_2\rangle = \omega_2^2 \langle \mathbf{s}_1|P|\mathbf{s}_2\rangle \quad (2) $$
+            \pause
+            \item Our goal is to show that $\langle \mathbf{s}_2|P|\mathbf{s}_1\rangle = 0$.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Properties of the Normal Modes (3/3): Orthogonality Proof}
+    \begin{block}{Eigenfunctions are Orthogonal}
+        \textbf{Sketch Proof (Part 2):}
+        \begin{itemize}
+            \item We use the self-adjoint property of H: $\langle \mathbf{s}_2|H|\mathbf{s}_1\rangle = \langle \mathbf{s}_1|H|\mathbf{s}_2\rangle^*$.
+            \pause
+            \item Taking the complex conjugate of Eq. (2) and using the self-adjointness of P gives:
+            $$ \langle \mathbf{s}_1|H|\mathbf{s}_2\rangle^* = \omega_2^2 \langle \mathbf{s}_2|P|\mathbf{s}_1\rangle $$
+            \pause
+            \item Now the left hand sides are equal, so we can equate the right hand sides of this and Eq. (1):
+            $$ \omega_1^2 \langle \mathbf{s}_2|P|\mathbf{s}_1\rangle = \omega_2^2 \langle \mathbf{s}_2|P|\mathbf{s}_1\rangle $$
+            $$ (\omega_1^2 - \omega_2^2)\langle \mathbf{s}_2|P|\mathbf{s}_1\rangle = 0 $$
+            \pause
+            \item Since $\omega_1^2 \neq \omega_2^2$, the orthogonality condition must hold: $\langle \mathbf{s}_2|P|\mathbf{s}_1\rangle = 0$.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+% --- OBSERVATIONS ---
+
+\begin{frame}{Forced Response and Resonances}
+    Using the complete set of orthonormal eigenfunctions $|km\rangle$, we can solve the forced problem.
+    \begin{alertblock}{The Frequency-Domain Solution}
+        The solution for the displacement in the frequency domain is found by an eigenfunction expansion:
+        $$ \tilde{\mathbf{u}}(\omega) = \sum_{km}\frac{\langle km|\tilde{\mathbf{f}}\rangle}{\omega_{k}^{2}-\omega^{2}}|km\rangle $$
+    \end{alertblock}
+    \pause
+    \begin{block}{Resonance}
+        \begin{itemize}
+            \item The response becomes infinite when the driving frequency $\omega$ matches one of the Earth's eigenfrequencies $\omega_k$. This is a \textbf{resonance}.
+            \pause
+            \item After a large earthquake, the Fourier transform of a long seismogram shows a series of sharp peaks.
+            \pause
+            \item The locations of these peaks are the Earth's normal mode frequencies.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Gravitational Stability}
+    \begin{itemize}
+        \item The sign of an eigenfrequency squared, $\omega_k^2$, is determined by the potential energy of the mode, $\langle km|H|km\rangle$.
+        \pause
+        \item If $\omega_k^2$ were negative, the solution would contain exponentially growing terms, meaning the Earth is unstable.
+        \pause
+        \item The potential energy $H$ contains a positive (stabilising) elastic part and a negative (destabilising) gravitational part.
+    \end{itemize}
+    \pause
+    \begin{exampleblock}{Elastic vs. Gravitational Energy}
+        Imagine uniformly compressing a planet.
+        \begin{itemize}
+            \item Elastic energy increases (resists compression).
+            \item Gravitational binding energy decreases (becomes more negative).
+        \end{itemize}
+        The planet is stable only if the elastic energy increase outweighs the gravitational energy decrease for all possible deformations.
+    \end{exampleblock}
+\end{frame}
+
+% --- ROTATING CASE ---
+
+\begin{frame}{The Effect of Rotation}
+    Including rotation re-introduces the Coriolis term into the eigenvalue problem:
+    \begin{alertblock}{Non-Linear Eigenvalue Problem}
+         $$ -\omega^{2}\langle \mathbf{w}|P|\mathbf{s}\rangle + i\omega\langle \mathbf{w}|W|\mathbf{s}\rangle + \langle \mathbf{w}|H|\mathbf{s}\rangle = 0 $$
+    \end{alertblock}
+    \pause
+    \begin{itemize}
+        \item The eigenvalue $\omega$ now appears as both $\omega^2$ and $\omega$. This is a \textbf{non-linear} (or quadratic) eigenvalue problem.
+        \pause
+        \item The mathematics is more complex, and the eigenfunctions are no longer orthogonal in the simple sense.
+        \pause
+        \item However, the fundamental result remains: the forced response still exhibits resonances at a discrete set of eigenfrequencies.
+    \end{itemize}
+\end{frame}
+
+% --- SUMMARY ---
+
+\begin{frame}{Summary: What You Need to Know}
+    \begin{itemize}
+        \item The equations of motion can be written concisely in a \textbf{weak form} using operator notation.
+        \pause
+        \item For a non-rotating Earth, the free oscillations are solutions to a \textbf{self-adjoint eigenvalue problem}. This implies that the squared-eigenfrequencies are \textbf{real} and the eigenfunctions are \textbf{orthogonal}.
+        \pause
+        \item The forced response to an earthquake can be found using an \textbf{eigenfunction expansion}, which shows \textbf{resonances} at the eigenfrequencies.
+        \pause
+        \item The \textbf{stability} of the Earth depends on a balance between stabilising elastic forces and destabilising gravitational forces.
+    \end{itemize}
+\end{frame}
+
+\end{document}

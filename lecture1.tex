@@ -1,0 +1,268 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx} % Required for figures, even if not explicitly used for the figure itself
+\usepackage[margin=1in]{geometry} % Adjust margins as needed
+
+\begin{document}
+
+\title{Lecture 12: Finite Elasticity}
+\author{David Al-Attar, Michaelmas term 2024}
+\date{} % No date
+
+\maketitle
+
+\section*{Outline and motivation}
+In this lecture, we derive the equations of motion for an elastic body. These equations provide a good though not complete model for understanding seismic wave propagation and other related topics in geophysics. Most of you will have encountered elasticity within earlier courses, but here we will go back to first principles. In particular, we discuss finite elasticity, meaning that there is no assumption that the deformation is small. Within later applications it will actually be sufficient to consider linearised motions about an equilibrium state, but by starting with the exact theory it is easier to appreciate the underlying physics.
+
+\section*{Basic definitions}
+We start by considering the kinematics of a solid body. At an instant in time, $t$, the body occupies a subset $M_{t}$ of physical space, $\mathbb{R}^{3}$. A useful way to describe the motion is through the introduction of a reference body, $M$. Each point $\mathbf{x}$ in the reference body corresponds to a unique particle. At time $t$, the particle $\mathbf{x}$ sits at a point in physical space that we denote by $\varphi(\mathbf{x},t)$. In this manner we see that the body's motion is completely described by this time-dependent mapping, $\varphi(\cdot,t)$, from the reference body into physical space. We will call $\varphi$ the motion of the body, this being the field within this classical field theory. We will not consider motions for which the body is torn or fractured. As a result, we suppose that $\varphi$ is continuously differentiable, and that at each fixed time, $t$, it establishes a one-to-one correspondence between $M$ and $M_{t}$. These ideas are summarised graphically within Fig.1.
+
+% Figure 1 placeholder (as requested, not recreating the image itself)
+% \begin{figure}[h!]
+%     \centering
+%     \includegraphics[width=0.8\textwidth]{placeholder_for_figure_1.png} % Replace with your figure file
+%     \caption{A schematic illustration of the mapping from the reference body M into the body's instantaneous position in physical space.}
+%     \label{fig:1}
+% \end{figure}
+
+In making these definitions we have not specified how the reference body is chosen.
+
+\newpage
+Indeed, it turns out that there are infinitely many ways of doing this. Nevertheless, a common approach is to let points in the reference body correspond to the position of the particles at some reference time, $t_{0}$. Having done this, we then have
+\begin{equation}
+\varphi(\mathbf{x},t_{0})=\mathbf{x}
+\label{eq:1}
+\end{equation}
+for all $\mathbf{x}$. It can, however, sometimes be useful to select a different reference body for both theoretical and computational reasons.
+
+\section*{Velocity, deformation gradient, and Jacobian}
+If we fix attention to a particle $\mathbf{x}$, then the function $t\mapsto\varphi(\mathbf{x},t)$ describes its trajectory through space. Differentiating with respect to time, we obtain the velocity
+\begin{equation}
+v_{i}(\mathbf{x},t)=\frac{\partial\varphi_{i}}{\partial t}(\mathbf{x},t)
+\label{eq:2}
+\end{equation}
+Note that this is the velocity of a fixed particle, and not at a fixed spatial point. This differs from what is commonly done in fluid mechanics.
+
+A second quantity that will be important is the so-called deformation gradient, $\mathbf{F}$, which is defined by
+\begin{equation}
+F_{ij}=\frac{\partial\varphi_{i}}{\partial x_{j}}
+\label{eq:3}
+\end{equation}
+Physically, the deformation gradient quantifies how the motion differs between nearby points in the reference body. For example, if we consider particles $\mathbf{x}$ and $\mathbf{x}+\delta\mathbf{x}$ with $\delta\mathbf{x}$ small, then we can use a Taylor expansion to obtain
+\begin{equation}
+\varphi_{i}(\mathbf{x}+\delta\mathbf{x},t)=\varphi_{i}(\mathbf{x},t)+F_{ij}(\mathbf{x},t)\delta x_{j}+\cdots,
+\label{eq:4}
+\end{equation}
+which is accurate to first-order in $\delta\mathbf{x}$. The deformation gradient is related to the concept of strain, with correspondence discussed further in the next lecture.
+
+Because we have assumed that the motion establishes a one-to-one correspondence between $M$ and $M_{t}$ at each time, it can be shown that $\mathbf{F}(\mathbf{x},t)$ is an invertible matrix at each point.\footnote{This follows from a result known as the inverse function theorem.} The determinant of the deformation gradient is known as the Jacobian of the motion, and is written
+\begin{equation}
+J(\mathbf{x},t)=\text{det}~\mathbf{F}(\mathbf{x},t).
+\label{eq:5}
+\end{equation}
+Invertibility of the deformation gradient implies that $J$ is never equal to zero, while continuity of $\varphi$ implies that it is always of one sign. We will assume that $J$ is always positive. This implies in particular that a right-handed set of basis vectors in $M$ is mapped to a right-handed set of vectors in $M_{t}$.
+
+Consider a function $f$ defined in the instantaneous body $M_{t}$, and its integral
+\begin{equation}
+I=\int_{M_{t}}f(\mathbf{y})d^{3}\mathbf{y}.
+\label{eq:6}
+\end{equation}
+Using the motion at this instance in time, we can change variables in this integral to write it as one over the reference body
+\begin{equation}
+I=\int_{M}f[\varphi(\mathbf{x},t)]J(\mathbf{x},t)d^{3}\mathbf{x}.
+\label{eq:7}
+\end{equation}
+This ability to easily transform integrals between the instantaneous and reference bodies proves very useful within the theory.
+
+\newpage
+\section*{Conservation of mass}
+Let $U$ be a subset of the reference body and $U_{t}$ the region of physical space it occupies at time $t$. The mass of this sub-body can be written
+\begin{equation}
+\int_{U_{t}}\rho(\mathbf{y},t)d^{3}\mathbf{y},
+\label{eq:8}
+\end{equation}
+where $\rho(\mathbf{y},t)$ is the density at the point $\mathbf{y}$ in $M_{t}$ and time $t$. During the deformation matter is not created nor destroyed. This means that the mass of this arbitrary sub-body is constant, and hence we must have
+\begin{equation}
+\frac{d}{dt}\int_{U_{t}}\rho(\mathbf{y},t)d^{3}\mathbf{y}=0.
+\label{eq:9}
+\end{equation}
+To simplify this expression we use the motion to transform the integration in eq.(\ref{eq:9}) to the reference body
+\begin{equation}
+\frac{d}{dt}\int_{U}J(\mathbf{x},t)\rho[\varphi(\mathbf{x},t),t]d^{3}\mathbf{x}=0.
+\label{eq:10}
+\end{equation}
+This integral is over a fixed domain, and so we can interchange the order of differentiation and integration. Furthermore, as $U$ is an arbitrary subset of $M$, the equality can hold if and only if
+\begin{equation}
+\frac{\partial}{\partial t}\{J(\mathbf{x},t)\rho[\varphi(\mathbf{x},t),t]\}=0.
+\label{eq:11}
+\end{equation}
+It follows we can introduce a time-independent referential density $\rho_{0}$ such that
+\begin{equation}
+\rho_{0}(\mathbf{x})=J(\mathbf{x},t)\rho[\varphi(\mathbf{x},t),t]
+\label{eq:12}
+\end{equation}
+This is a statement of mass conservation expressed within the reference body. Note that if the reference body is chosen such that eq.(\ref{eq:1}) holds at some time $t=t_{0}$ then at this time eq.(\ref{eq:12}) simplifies to
+\begin{equation}
+\rho_{0}(\mathbf{x})=\rho(\mathbf{x},t_{0}).
+\label{eq:13}
+\end{equation}
+Thus, when using this common choice of reference body, the referential density is nothing more than the actual density at the reference time.
+
+\section*{Kinetic energy}
+By analogy with particle mechanics, the kinetic energy density of the body per-unit volume within the reference body $M$ is defined as
+\begin{equation}
+\frac{1}{2}\rho_{0}(\mathbf{x})||\mathbf{v}(\mathbf{x},t)||^{2},
+\label{eq:14}
+\end{equation}
+and summing up such contributions, we see that the total kinetic energy can be written
+\begin{equation}
+\mathcal{T}(t)=\frac{1}{2}\int_{M}\rho_{0}(\mathbf{x})||\mathbf{v}(\mathbf{x},t)||^{2}d^{3}\mathbf{x}.
+\label{eq:15}
+\end{equation}
+
+\newpage
+\section*{Potential energy}
+What should the potential energy of an elastic body look like? The basic idea is that it has a preferred shape and volume, and that energy is required to deform the body away from this equilibrium state. As a starting point we assume that the potential energy can be expressed in the form
+\begin{equation}
+\mathcal{V}(t)=\int_{M}W[\mathbf{x},t,\varphi(\mathbf{x},t),\mathbf{F}(\mathbf{x},t)]d^{3}\mathbf{x},
+\label{eq:16}
+\end{equation}
+where $W$ is a potential energy density measured per unit volume within the reference body. This is not the most general form that the potential energy could take, but serves to define what is known as a simple hyperelastic body. That a body is hyperelastic means that it has a well-defined potential energy. A consequence of this assumption that you will establish in the problem sets is that energy is conserved during the deformation of the body, and hence our theory does not include any dissipative processes. Energy dissipation is obviously relevant to seismology, and it can be built into the theory. But it is a relatively minor effect that we will neglect in this course. The term simple in the above context means that the potential energy depends in a local manner on only the motion and its first spatial derivative. It is not obvious that this must be the case, but it is a reasonable place to start, and one that is able to explain the behaviour of a wide range of materials.
+
+\subsection*{Simplifying the potential energy using symmetries}
+Having accepted the form of the potential energy in eq. (\ref{eq:16}), we are now in a position to obtain the equations of motion using Hamilton's principle. Before doing this it is worth noting that the form of the potential energy density can be simplified by imposing certain physical constraints:
+
+\begin{enumerate}
+    \item[(i)] \textbf{Time-translation invariance} Consider a motion $\varphi(\mathbf{x},t)$ and its time-translation $\varphi^{\prime}(\mathbf{x},t)=\varphi(\mathbf{x},t-\tau)$ for some $\tau$. The second motion takes exactly the same form but is just shifted in time, and hence it is natural to require that their respective potential energies satisfy
+    \begin{equation}
+    \mathcal{V}^{\prime}(t)=\mathcal{V}(t-\tau).
+    \label{eq:17}
+    \end{equation}
+    This condition is automatically met if the potential energy density has no explicit dependence on time, and hence we simply its form to
+    \begin{equation}
+    \mathcal{V}(t)=\int_{M}W[\mathbf{x},\varphi(\mathbf{x},t),\mathbf{F}(\mathbf{x},t)]d^{3}\mathbf{x}.
+    \label{eq:18}
+    \end{equation}
+    The necessity of this condition can also be established.
+
+    \item[(ii)] \textbf{Invariance under rigid body motions} As stated above, an elastic body has a preferred shape and volume, and the potential energy is associated with deformations of the body away from this. Motions that do not alter its shape nor volume should not, therefore, be associated with a change in potential energy. Within Euclidean space, motions that do not change the relative lengths between points arise through a combination of rotations and translations. If $\varphi$ is a motion of the body, we can define a second motion $\varphi^{\prime}$ by setting
+    \begin{equation}
+    \varphi^{\prime}(\mathbf{x},t)=\mathbf{a}(t)+\mathbf{Q}(t)\varphi(\mathbf{x},t)
+    \label{eq:19}
+    \end{equation}
+
+\newpage
+    where $\mathbf{Q}(t)$ is a rotation matrix. Because these motions differ only by a superimposed rigid body motion, they must be associated with the same potential energy. Noting that $\mathbf{F}^{\prime}(\mathbf{x},t)=\mathbf{Q}(t)\mathbf{F}(\mathbf{x},t)$ it follows that this invariance condition will be met so long as the potential energy density satisfies
+    \begin{equation}
+    W[\mathbf{x},\varphi(\mathbf{x},t),\mathbf{F}(\mathbf{x},t)]=W[\mathbf{x},\mathbf{a}(t)+\mathbf{Q}(t)\varphi(\mathbf{x},t),\mathbf{Q}(t)\mathbf{F}(\mathbf{x},t)].
+    \label{eq:20}
+    \end{equation}
+    Again, necessity of this condition can also be proven. Assuming that $\mathbf{Q}(t)=\mathbf{1}$ this identity reduces to
+    \begin{equation}
+    W[\mathbf{x},\varphi(\mathbf{x},t),\mathbf{F}(\mathbf{x},t)]=W[\mathbf{x},\mathbf{a}(t)+\varphi(\mathbf{x},t),\mathbf{F}(\mathbf{x},t)].
+    \label{eq:21}
+    \end{equation}
+    For fixed $(\mathbf{x}, t)$, we can vary $\mathbf{a}(t)$ such that the second argument on the right hand side takes any possible value. It follows that the potential energy density must be independent of its second argument. Given this result, it is useful to again re-define the potential energy density to depend only on $\mathbf{x}$ and $\mathbf{F}(\mathbf{x},t)$, and having done this the condition in eq. (\ref{eq:20}) reduces to
+    \begin{equation}
+    W[\mathbf{x},\mathbf{F}(\mathbf{x},t)]=W[\mathbf{x},\mathbf{Q}(t)\mathbf{F}(\mathbf{x},t)],
+    \label{eq:22}
+    \end{equation}
+    for all deformation gradients, and all rotation matrices $\mathbf{Q}(t)$. This condition limits the allowable form of the potential energy density, and we will explore its consequences further within the next lecture.
+\end{enumerate}
+In summary, we find that the potential energy takes the simpler form
+\begin{equation}
+\mathcal{V}(t)=\int_{M}W[\mathbf{x},\mathbf{F}(\mathbf{x},t)]d^{3}\mathbf{x}.
+\label{eq:23}
+\end{equation}
+where $W$ is subject to eq. (\ref{eq:22}). Within continuum mechanics this potential energy density is usually called the strain energy function, and this what we will say from now on. The invariance of the potential energy under (i) time-translation, and (ii) superimposed rigid body motions, goes under the collective name of the principle of material frame indifference. This idea was introduced by Clifford Truesdell in the 1950s, and plays a central role within all branches of theoretical continuum mechanics. Here we have only formulated this principle for a simple hyperelastic body, but it can be generalised to other types of material, and to incorporate thermodynamics and electromagnetism.
+
+\section*{Hamilton's principle}
+A Lagrangian density for a hyperelastic body is defined in the usual manner as the difference between the kinetic and potential energy densities
+\begin{equation}
+\mathcal{L}(\mathbf{x},t,\varphi,\mathbf{v},\mathbf{F})=\frac{1}{2}\rho_{0}(\mathbf{x})||\mathbf{v}||^{2}-W(\mathbf{x},\mathbf{F})
+\label{eq:24}
+\end{equation}
+while the the associated action is
+\begin{equation}
+\mathcal{S}(\varphi)=\int_{0}^{T}\int_{M}\mathcal{L}[\mathbf{x},t,\varphi(\mathbf{x},t),\mathbf{v}(\mathbf{x},t),\mathbf{F}(\mathbf{x},t)]d^{3}\mathbf{x}~dt,
+\label{eq:25}
+\end{equation}
+where $[0, T]$ is the time-interval of interest, and it is understood that the referential velocity and deformation gradient on the right hand side are those associated with the given
+
+\newpage
+motion. Note that the Lagrangian density in eq.(\ref{eq:24}) shows no explicit dependence on $t$ nor $\varphi$, but we shall retain this more general expression in what follows. Hamilton's principle states that the true motion is a stationary point of the action with respect to all smooth variations $\delta\varphi$ which satisfy the fixed end-point condition
+\begin{equation}
+\delta\varphi(\mathbf{x},0)=\delta\varphi(\mathbf{x},T)=0.
+\label{eq:26}
+\end{equation}
+Mathematically, this means that we require the first-variation of the action
+\begin{equation}
+\delta\mathcal{S}=\lim_{h\rightarrow0}\frac{1}{h}[\mathcal{S}(\varphi+h~\delta\varphi)-\mathcal{S}(\varphi)]
+\label{eq:27}
+\end{equation}
+be equal to zero for all smooth variations $\delta\varphi$ satisfying eq.(\ref{eq:26}). We readily find that this first-variation can be written
+\begin{equation}
+\delta\mathcal{S}=\int_{0}^{T}\int_{M}\left\{\frac{\partial\mathcal{L}}{\partial\varphi_{i}}\delta\varphi_{i}+\frac{\partial\mathcal{L}}{\partial v_{i}}\delta v_{i}+\frac{\partial\mathcal{L}}{\partial F_{ij}}\delta F_{ij}\right\}d^{3}\mathbf{x}~dt,
+\label{eq:28}
+\end{equation}
+where the variations in the referential velocity and deformation gradient are given by
+\begin{align}
+\delta v_{i}&=\frac{\partial\delta\varphi_{i}}{\partial t} \label{eq:29a}\\
+\delta F_{ij}&=\frac{\partial\delta\varphi_{i}}{\partial x_{j}} \label{eq:29b}
+\end{align}
+and we have suppressed all arguments for clarity. From the following identities
+\begin{align}
+\frac{\partial\mathcal{L}}{\partial v_{i}}\delta v_{i}&=\frac{\partial}{\partial t}\left(\frac{\partial\mathcal{L}}{\partial v_{i}}\delta\varphi_{i}\right)-\frac{\partial}{\partial t}\left(\frac{\partial\mathcal{L}}{\partial v_{i}}\right)\delta\varphi_{i} \label{eq:30}\\
+\frac{\partial\mathcal{L}}{\partial F_{ij}}\delta F_{ij}&=\frac{\partial}{\partial x_{j}}\left(\frac{\partial\mathcal{L}}{\partial F_{ij}}\delta\varphi_{i}\right)-\frac{\partial}{\partial x_{j}}\left(\frac{\partial\mathcal{L}}{\partial F_{ij}}\right)\delta\varphi_{i}, \label{eq:31}
+\end{align}
+along with eq.(\ref{eq:26}) and the divergence theorem, we obtain
+\begin{equation}
+\delta\mathcal{S}=\int_{0}^{T}\int_{M}\left\{\frac{\partial\mathcal{L}}{\partial\varphi_{i}}-\frac{\partial}{\partial t}\left(\frac{\partial\mathcal{L}}{\partial v_{i}}\right)-\frac{\partial}{\partial x_{j}}\left(\frac{\partial\mathcal{L}}{\partial F_{ij}}\right)\right\}\delta\varphi_{i}d^{3}\mathbf{x}dt+\int_{0}^{T}\int_{\partial M}\frac{\partial\mathcal{L}}{\partial F_{ij}}\hat{n}_{j}\delta\varphi_{i}dSdt,
+\label{eq:32}
+\end{equation}
+where $\hat{\mathbf{n}}$ denotes the outward unit normal vector to $\partial M$, and $dS$ is the surface element. As $\delta\varphi$ is arbitrary, this first variation can vanish only if both the volumetric term and boundary term are independently equal to zero\footnote{If this statement is not obvious, then you might wish to ask in a supervision. But for the purposes of this course it is sufficient to know how to apply this method.}. Hamilton's principle, therefore, implies that the Euler-Lagrange equations
+\begin{equation}
+\frac{\partial\mathcal{L}}{\partial\varphi_{i}}-\frac{\partial}{\partial t}\left(\frac{\partial\mathcal{L}}{\partial v_{i}}\right)-\frac{\partial}{\partial x_{j}}\left(\frac{\partial\mathcal{L}}{\partial F_{ij}}\right)=0,
+\label{eq:33}
+\end{equation}
+hold within the body, while on $\partial M$ we also have the natural boundary conditions
+\begin{equation}
+\frac{\partial\mathcal{L}}{\partial F_{ij}}\hat{n}_{j}=0,
+\label{eq:34}
+\end{equation}
+on $\partial M$. Note that these boundary conditions are called ``natural'' because they have arisen directly from the variational principle, and not because of some prior restriction on the class of admissible motions.
+
+\newpage
+For the Lagrangian density in eq.(\ref{eq:24}) we readily find that
+\begin{align}
+\frac{\partial\mathcal{L}}{\partial\varphi_{i}}&=0, \label{eq:35a}\\
+\frac{\partial\mathcal{L}}{\partial v_{i}}&=\rho_{0} v_{i} \label{eq:35b}\\
+\frac{\partial\mathcal{L}}{\partial F_{ij}}&=-\frac{\partial W}{\partial F_{ij}}. \label{eq:35c}
+\end{align}
+The first Piola-Kirchhoff stress tensor is defined by
+\begin{equation}
+T_{ij}(\mathbf{x},t)=\frac{\partial W}{\partial F_{ij}}[\mathbf{x},\mathbf{F}(\mathbf{x},t)],
+\label{eq:36}
+\end{equation}
+so that the Euler-Lagrange equations can be written
+\begin{equation}
+\rho_{0}\frac{\partial v_{i}}{\partial t}-\frac{\partial T_{ij}}{\partial x_{j}}=0,
+\label{eq:37}
+\end{equation}
+while the boundary condition becomes
+\begin{equation}
+T_{ij}\hat{n}_{j}=0.
+\label{eq:38}
+\end{equation}
+The vector $\mathbf{t}=T\hat{\mathbf{n}}$ occurring in the boundary conditions is known as the traction. Within the first problem set you will see that it represents a surface force measured per unit area within the reference body. Indeed, what the first Piola-Kirchhoff stress does is relate the orientation of a surface within the reference body to the force per unit area acting on the instantaneous image of that surface within physical space. As a final comment, the equations of motion to be solved are defined on the fixed reference body, and hence we need not worry about applying boundary conditions on a moving boundary as is sometimes required in fluid mechanics problems. This fact considerably simplifies the solution of free-boundary problems in elasticity, and is one of the reasons for working with a referential description of the motion.
+
+\section*{What you need to know and be able to do}
+\begin{enumerate}
+    \item[(i)] Understand the terminology needed to described the kinematics of an elastic body.
+    \item[(ii)] Use the conservation of mass to derive the relation between the spatial and referential densities.
+    \item[(iii)] State expressions for the kinetic and potential energies of a simple hyperelastic body, and to explain the underlying physical ideas and assumptions.
+    \item[(iv)] Give a statement of Hamilton's principle in the context of finite elasticity, and use it to derive the equations of motion and associated boundary conditions.
+\end{enumerate}
+
+\end{document}

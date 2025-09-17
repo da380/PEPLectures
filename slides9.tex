@@ -1,0 +1,170 @@
+\documentclass{beamer}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% Choose a theme
+\usetheme{Madrid}
+\usecolortheme{default}
+\usefonttheme{serif}
+
+% --- CUSTOM FOOTER ---
+% Redefine the footline to remove author/institute and keep title/page number
+\makeatletter
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+% --- END CUSTOM FOOTER ---
+
+\title[Lecture 20: Self-gravitation and rotation]{Lecture 20: Self-gravitation and rotation}
+\author{David Al-Attar}
+\institute{Michaelmas term 2024}
+\date{}
+
+\begin{document}
+
+% --- INTRODUCTION ---
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}{Outline and Motivation}
+    So far, our models have neglected two important physical effects.
+    \begin{itemize}
+        \item We have not yet considered the Earth's **density**, a key parameter for understanding composition and dynamics.
+        \pause
+        \item To properly model density, we must include the effects of **self-gravitation**, which becomes important for long-period phenomena like the Earth's free oscillations.
+        \pause
+        \item We will also incorporate the effects of the Earth's **rotation**.
+        \pause
+        \item Finally, a scaling analysis will show us when it is valid to neglect these effects, justifying our earlier, simpler models for high-frequency seismic waves.
+    \end{itemize}
+\end{frame}
+
+% --- GRAVITATION ---
+
+\begin{frame}{Including Self-Gravitation}
+    To include gravity, we must add the gravitational potential energy to our system.
+    \begin{block}{Gravitational Binding Energy}
+        The gravitational binding energy, $ \mathcal{V}_g $, is the energy required to assemble the body from matter dispersed at infinity. It can be expressed as an integral over the body's density $ \rho $ and its gravitational potential $ \phi $:
+        $$ \mathcal{V}_{g}(t)=\frac{1}{2}\int_{M_{t}}\rho(\mathbf{y},t)\phi(\mathbf{y},t)d^{3}y $$
+    \end{block}
+    \pause
+    \begin{alertblock}{A Non-Local Lagrangian}
+        We add this energy to the Lagrangian. Because gravity is an "action-at-a-distance" force, the potential at one point depends on the mass distribution everywhere. This makes the Lagrangian \textbf{non-local}.
+        $$ \mathcal{L} = \underbrace{\frac{1}{2}\rho||\mathbf{v}||^{2}}_{\text{Kinetic}} - \underbrace{W(\mathbf{F})}_{\text{Elastic}} - \underbrace{\frac{1}{2}\rho\zeta}_{\text{Gravitational}} $$
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Equations of Motion with Gravity}
+    Applying Hamilton's principle to the new, non-local Lagrangian yields the equations of motion for a self-gravitating elastic body.
+    \begin{itemize}
+        \item The variational principle works as before, but the non-local term requires careful handling of the functional derivatives.
+    \end{itemize}
+    \pause
+    \begin{alertblock}{Equation of Motion in an Inertial Frame}
+        The result is an additional body force term in the equation of motion, equal to the gravitational force.
+        $$ \rho\frac{\partial v_{i}}{\partial t} - \frac{\partial T_{ij}}{\partial x_{j}} - \rho\gamma_{i} = 0 $$
+        Here, $ \gamma_i $ is the referential gravitational acceleration.
+    \end{alertblock}
+\end{frame}
+
+% --- ROTATION ---
+
+\begin{frame}{Working in a Co-Rotating Frame}
+    The Earth rotates, so it is convenient to work in a non-inertial reference frame that rotates with it at a constant angular velocity $ \mathbf{\Omega} $.
+    \pause
+    \begin{itemize}
+        \item To do this, we relate the acceleration in the inertial frame to the acceleration measured in the rotating frame.
+        \pause
+        \item This introduces the familiar apparent forces.
+    \end{itemize}
+    \pause
+    \begin{block}{The Equation of Motion in a Rotating Frame}
+        The final equation includes two new acceleration terms:
+        $$ \rho\left(\frac{\partial\overline{v}_{i}}{\partial t} + \underbrace{2\epsilon_{ijk}\Omega_{j}\overline{v}_{k}}_{\text{Coriolis}} + \underbrace{\epsilon_{ijk}\epsilon_{klm}\Omega_{j}\Omega_{l}\overline{\varphi}_{m}}_{\text{Centrifugal}}\right)-\frac{\partial\overline{T}_{ij}}{\partial x_{j}}-\rho\overline{\gamma}_{i}=0 $$
+        From now on, we will work in this frame and drop the overbars for simplicity.
+    \end{block}
+\end{frame}
+
+% --- LINEARISED EQUATIONS & SCALING ---
+
+\begin{frame}{The Full Linearised Equations of Motion}
+    We can now linearise the full equations about an equilibrium state of steady rotation. The resulting equation for a small displacement $ \mathbf{u} $ is:
+    \pause
+    \begin{alertblock}{Linearised Equation with Gravity and Rotation}
+        $$ \rho\frac{\partial^{2}u_{i}}{\partial t^{2}} + 2\rho\epsilon_{ijk}\Omega_{j}\frac{\partial u_{k}}{\partial t} - \frac{\partial}{\partial x_{j}}(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}) - \rho\gamma_{i}^{1} + \dots = \text{Source} $$
+    \end{alertblock}
+    \pause
+    \begin{itemize}
+        \item This equation includes inertial, Coriolis, elastic, and gravitational perturbation ($ \gamma_i^1 $) terms.
+        \pause
+        \item The gravitational term $ \gamma_i^1 $ is an integral over the entire body, making this an \textbf{integro-partial differential equation}.
+        \pause
+        \item Note: The equilibrium state is no longer stress-free. Centrifugal force must be balanced by internal stresses and gravity.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Scaling Analysis (1/2): When is Gravity Important?}
+    To see when we can neglect gravity and rotation, we perform a scaling analysis, comparing the magnitude of each term. Let $L$ be the length scale and $T$ be the time scale of the deformation.
+    \pause
+    \begin{block}{Gravitational vs. Elastic Forces}
+        $$ \frac{\text{Gravitational Force}}{\text{Elastic Force}} \sim \frac{4\pi G\overline{\rho}^{2}U}{\overline{\mu}U / L^{2}} = \frac{4\pi G\overline{\rho}L^{2}}{\overline{v}^{2}} $$
+    \end{block}
+    \pause
+    \begin{itemize}
+        \item The ratio scales with $ L^2 $.
+        \item For short-wavelength seismic waves ($L$ is small), gravity is negligible compared to elastic forces.
+        \pause
+        \item For planet-scale deformations where $L$ is the Earth's radius, this ratio is of order 1. \textbf{Gravity is crucial for whole-Earth phenomena}.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Scaling Analysis (2/2): When is Rotation Important?}
+    \begin{block}{Coriolis vs. Inertial Term}
+        $$ \frac{\text{Coriolis Term}}{\text{Inertial Term}} \sim \frac{\overline{\rho}\Omega U / T}{\overline{\rho}U / T^{2}} = \Omega T $$
+        The ratio scales with the period of the motion, $T$.
+    \end{block}
+    \pause
+    \begin{itemize}
+        \item For short-period seismic waves ($T \ll 24$ hours), the Coriolis effect is small.
+        \pause
+        \item For long-period phenomena like solid-Earth tides or the Earth's free oscillations ($T$ is hours to days), rotation is very important.
+    \end{itemize}
+    \pause
+    \begin{alertblock}{Conclusion}
+        The simpler equations of motion used in the first part of the course are valid for high-frequency seismic waves. For the long-period free oscillations of the Earth, we must include both self-gravitation and rotation.
+    \end{alertblock}
+\end{frame}
+
+% --- SUMMARY ---
+
+\begin{frame}{Summary: What You Need to Know}
+    \begin{itemize}
+        \item Self-gravitation is included in elastodynamics by adding the \textbf{gravitational binding energy} to the Lagrangian, which makes it non-local.
+        \pause
+        \item This adds a gravitational body force term ($ -\rho\gamma_i $) to the equation of motion.
+        \pause
+        \item Working in a \textbf{co-rotating reference frame} introduces the \textbf{Coriolis} and \textbf{centrifugal} forces.
+        \pause
+        \item A **scaling analysis** shows that:
+        \begin{itemize}
+            \item Self-gravitation is important for long-wavelength (planet-scale) deformations.
+            \item Rotation is important for long-period motions.
+        \end{itemize}
+        \pause
+        \item Both effects are crucial for understanding the Earth's free oscillations but can be neglected for high-frequency body waves.
+    \end{itemize}
+\end{frame}
+
+\end{document}
