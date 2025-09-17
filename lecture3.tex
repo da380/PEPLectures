@@ -1,11 +1,10 @@
-\documentclass{article}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{graphicx}
+\documentclass [a4paper,12pt]{paper}
+
+\usepackage{mycommands}
 
 \title{Lecture 14: Seismic sources}
-\author{David Al-Attar, Michaelmas term 2024}
-\date{}
+\author{David Al-Attar \\ Michaelmas Term, \the\year}
+
 
 \begin{document}
 
@@ -13,24 +12,44 @@
 
 \section*{Outline and motivation}
 
-We now turn our attention to the generation of seismic waves during an earthquake. In doing so, we see immediately that our equations of motion imply that earthquakes cannot happen. To rectify things, we will not produce a complete dynamical theory for earthquakes as no such theory yet exists. Instead, we just seek to modify our equations in a phenomenological manner to account for a specified displacement across a fault. Because this displacement is regarded as a parameter and not as a dynamic variable, this approach is known as the kinematic approximation source. The resulting theory has been found to work very well in practice, and it allows us to set up an inverse problem to determine the displacement across the fault from recorded seismic waves. In the final part of the lecture we begin to think more about inverse problems, this being a topic we will return to throughout these lectures.
+We now turn our attention to the generation of seismic waves during an earthquake. In doing so, we see immediately that our equations of motion imply that earthquakes cannot happen. To rectify things, 
+we will not produce a complete dynamical theory for earthquakes as no such theory yet exists. Instead, we just seek to modify our equations in a phenomenological manner to account for a specified displacement 
+across a fault. Because this displacement is regarded as a parameter and not as a dynamic variable, this approach is known as the kinematic approximation source. The resulting theory has been found to work very 
+well in practice, and it allows us to set up an inverse problem to determine the displacement across the fault from recorded seismic waves. In the final part of the lecture we begin to think more about inverse 
+problems, this being a topic we will return to throughout these lectures.
 
 \section*{The elastic rebound theory for earthquakes}
 
 \begin{figure}[h]
-    \centering
-    % Figure skipped as per instruction
+    \centering     
+     \includegraphics[width=0.7\textwidth]{figures/L3F1.png} 
     \caption{A schematic diagram of a fault. You do not need to learn the associated terminology.}
+    \label{fig:1}
 \end{figure}
 
-The majority of natural earthquakes occur due to motion across faults within the Earth, with this motion resulting from the slow build up, and then rapid release, of energy accumulated during long-term tectonic deformation. This long-term deformation is associated with processes such as mantle convection and plate tectonics. Indeed, most earthquakes occur at or near plate boundaries, and the type of motion across the fault is determined broadly by the plate tectonic setting. The exceptions to this picture are (i) earthquakes associated with motion of fluids within volcanic systems and (ii) deep earthquakes occurring within subducted slabs whose cause remains uncertain\footnote{At these depths it is thought that rocks will be too hot to undergo brittle failure, and so the process must seemingly be different than for shallow earthquakes. In terms of the seismic waves generated, however, there is little to distinguish deep earthquakes from shallower ones caused by brittle failure.}. There are also man-made earthquakes, including nuclear weapon tests, and explosions generated as part of oil prospecting, and small earthquakes produced by fracking. Natural earthquakes cannot be stopped, and can sometimes have tragic results. But we can at least hope that man-made ones will become a thing of the past.
+The majority of natural earthquakes occur due to motion across \textbf{faults} within the Earth, with this motion resulting from the slow build up, and then rapid release, of energy accumulated during long-term tectonic deformation. This long-term
+ deformation is associated with processes such as mantle convection and plate tectonics. Indeed, most earthquakes occur at or near plate boundaries, and the type of motion across the fault is determined broadly by the plate tectonic setting. 
+ The exceptions to this picture are (i) earthquakes associated with motion of fluids within volcanic systems and (ii) deep earthquakes occurring within subducted slabs whose cause remains uncertain\footnote{At these depths it is thought that 
+ rocks will be too hot to undergo brittle failure, and so the process must seemingly be different than for shallow earthquakes. In terms of the seismic waves generated, however, there is little to distinguish deep earthquakes from shallower 
+ ones caused by brittle failure.}. There are also man-made earthquakes, including nuclear weapon tests, and explosions generated as part of oil prospecting, and small earthquakes produced by fracking.
 
-The idea that earthquakes are produced by rapid motion across a fault was formulated by Harry Fielding Reid (1859-1944) following a large earthquake in San Francisco in 1909. Based on observations around San Francisco, Reid arrived at his elastic rebound theory as summarised in fig.2. Prior to the earthquake, deformation is gradually built up on either side of the locked fault due to tectonic processes, and this stores energy within the system. At some point, the tractions across the fault become sufficiently large to overcome frictional resistance, rupture occurs rapidly, and seismic waves radiate away some of the stored energy. While this "theory" is light on details, it is surely correct in a broad sense, and subsequent work has tried to make things more precise. Key questions include: (i) the nature of frictional resistance on the fault, (ii) the conditions under which rupture will occur, and (iii) the factors that determine when rupture stops. Why, for example, are some earthquakes on the same fault small and others big? The physics of earthquakes is a large and difficult subject, about which much remains to be learned.\footnote{It is also one I am very much not an expert in!} In this course, however, we will approximate the full physics by regarding the motion on the fault as simply a parameter within the theory, and calculate the seismic waves generated. Within this kinematic source approximation, any interaction between the radiated waves and rupture propagation is neglected, but it is thought that this is a good approximation in most circumstances.
+The idea that earthquakes are produced by rapid motion across a fault was formulated by Harry Fielding Reid (1859-1944) following a large earthquake in San Francisco in 1906. Based on 
+observations around San Francisco, Reid arrived at his \textbf{elastic rebound theory} as summarised in fig.2. Prior to the earthquake, deformation is gradually built up on either 
+side of the locked fault due to tectonic processes, and this stores energy within the system. At some point, the tractions across the fault become sufficiently large to overcome 
+frictional resistance, rupture occurs rapidly, and seismic waves radiate away some of the stored energy.
+
+While this "theory" is light on details, it is surely correct in a broad sense, 
+and subsequent work has tried to make things more precise. Key questions include: (i) the nature of frictional resistance on the fault, (ii) the conditions under which rupture will occur,
+and (iii) the factors that determine when rupture stops. Why, for example, are some earthquakes on the same fault small and others big? The physics of earthquakes is a large and difficult 
+subject, about which much remains to be learned. In this course, however, we will approximate the full physics by regarding the motion 
+on the fault as simply a parameter within the theory, and calculate the seismic waves generated. Within this \textbf{kinematic source approximation}, any interaction between the radiated waves and rupture propagation 
+is neglected, but it is thought that this is a good approximation in most circumstances.
 
 \begin{figure}[h]
-    \centering
-    % Figure skipped as per instruction
+    \centering    
+     \includegraphics[width=0.7\textwidth]{figures/L3F2.png} 
     \caption{A graphical representation of Reid's elastic rebound theory.}
+    \label{fig:2}
 \end{figure}
 
 \section*{Introduction of the stress glut}
@@ -41,11 +60,11 @@ Our aim is to incorporate motion on a fault into the equations of motion for an 
 \end{equation}
 for the finite motion of a hyperelastic body, while the associated action is
 \begin{equation}
-\mathcal{S}(\boldsymbol{\varphi}) = \int_{0}^{T}\int_{M}\mathcal{L}[\mathbf{x}, t, \boldsymbol{\varphi}(\mathbf{x}, t), \mathbf{v}(\mathbf{x}, t), \mathbf{F}(\mathbf{x}, t)]d^3x\,dt,
+\mathcal{S}(\boldsymbol{\varphi}) = \int_{0}^{T}\int_{M}\mathcal{L}[\mathbf{x}, t, \boldsymbol{\varphi}(\mathbf{x}, t), \mathbf{v}(\mathbf{x}, t), \mathbf{F}(\mathbf{x}, t)]\dd^{3}\mathbf{x}\dd t,
 \end{equation}
 where $[0, T]$ is the time-interval of interest. From the resulting equations of motion it is readily shown that the total energy of the elastic body is conserved
 \begin{equation}
-\frac{d}{dt}\int_{M}E(\mathbf{x}, t)d^3x = 0,
+\frac{d}{dt}\int_{M}E(\mathbf{x}, t)\dd^{3}\mathbf{x} = 0,
 \end{equation}
 where the energy density is defined in the expected manner
 \begin{equation}
@@ -53,17 +72,19 @@ E(\mathbf{x}, t) = \frac{1}{2}\rho(\mathbf{x})||\mathbf{v}(\mathbf{x}, t)||^2 + 
 \end{equation}
 If the body is initially in a stable equilibrium configuration, then any spontaneous non-trivial\footnote{Meaning, not a rigid-body motion, but one that causes a change in shape and/or volume.} deformation will, by definition, raise the potential energy
 \begin{equation}
-\mathcal{V}(t) = \int_{M}W[\mathbf{x}, \mathbf{F}(\mathbf{x}, t)]d^3x.
+\mathcal{V}(t) = \int_{M}W[\mathbf{x}, \mathbf{F}(\mathbf{x}, t)]\dd^{3}\mathbf{x}.
 \end{equation}
-and as the kinetic energy is non-negative, this must lead to the overall energy of the body being increased. Eq. (3) implies that such an increase in the total energy cannot occur, and so if a body is initially at rest, then it will remain so for all later times. In this manner, we have proven through elegant theory that earthquakes are impossible!
+Because the kinetic energy is non-negative, this must lead to the overall energy of the body being increased. Eq. (3) implies that such an increase in the total energy cannot occur, and so if a body is initially at rest, then it will remain so for all
+later times. 
 
-Hopefully it is clear that something is missing from our theory, and that it needs to be modified to account for earthquakes. The potential energy is the obvious place to look as this is the part whose form was essentially guessed at. We recall that the principle of material frame indifference requires that the potential energy $\mathcal{V}(t)$ of the body be:
+It is clear that our theory needs to be modified in some way to account for earthquakes. The potential energy is the obvious place to look as this is the part whose form was essentially guessed at. We recall that the principle of material frame indifference requires that the potential energy $\mathcal{V}(t)$ of the body be:
 \begin{enumerate}
     \item invariant under time-translations;
     \item invariant under superimposed rigid body translations;
     \item invariant under superimposed rigid body rotations.
 \end{enumerate}
-A kinematic description of a seismic source necessarily breaks the first of these invariance properties, as the onset of motion on the fault gives a distinguished point in time. We shall still retain the final two invariance properties of the potential energy. Indeed, they are necessary for the seismic source to represent an internal process that does not alter the net linear nor angular momentum of the Earth. Having dropped the time-translation invariance, we can generalise the Lagrangian density to become
+A kinematic description of a seismic source necessarily breaks the first of these invariance properties, as the onset of motion on the fault gives a distinguished point in time. We shall still retain the final two invariance properties of the potential energy. Indeed,
+ they are necessary for the seismic source to represent an internal process that does not alter the net linear nor angular momentum of the Earth. Having dropped the time-translation invariance, we can generalise the Lagrangian density to become
 \begin{equation}
 \mathcal{L}(\mathbf{x}, t, \boldsymbol{\varphi}, \mathbf{v}, \mathbf{F}) = \frac{1}{2}\rho(\mathbf{x})||\mathbf{v}||^2 - W(\mathbf{x}, t, \mathbf{F}),
 \end{equation}
@@ -83,15 +104,17 @@ Within Lecture 13, we saw that the invariance of the potential energy under supe
 \begin{equation}
 W(\mathbf{x}, t, \mathbf{F}) = U(\mathbf{x}, \mathbf{C}) - \frac{1}{2}\overline{S}_{ij}(\mathbf{x}, t)C_{ij}
 \end{equation}
-where $\overline{S}_{ij}$ is a given time-dependent symmetric second-order tensor field. Here $U$ describes the assumed constitutive properties of the material, which do not change with time, while $\overline{S}_{ij}$ represents the effects of the seismic source. Though this is not the most general possible modification to the strain energy, more general terms do not remain once we pass to the linearised equations. Using eq. (9), we see that eq. (10) implies
+where $\overline{S}_{ij}$ is a given time-dependent symmetric second-order tensor field. Here $U$ describes the assumed constitutive properties of the material, which do not change with time, while $\overline{S}_{ij}$ represents the effects of the seismic source. Though this is not the most general possible modification to the strain energy,
+more general forms do not change the  linearised equations of motion. Using eq. (9), we see that eq. (10) implies
 \begin{equation}
 T_{ij}(\mathbf{x}, t) = F_{ik}(\mathbf{x}, t)\left\{2\frac{\partial U}{\partial C_{kj}}[\mathbf{x}, \mathbf{C}(\mathbf{x}, t)] - \overline{S}_{kj}(\mathbf{x}, t)\right\}.
 \end{equation}
-and can use this relation to introduce the stress glut $\overline{\sigma}_{ij}$ through the identity
+and can use this relation to introduce the \textbf{stress glut}, $\overline{T}_{ij}$, through the identity
 \begin{equation}
-\overline{\sigma}_{ij}(\mathbf{x}, t) = F_{ik}(\mathbf{x}, t)\overline{S}_{kj}(\mathbf{x}, t) = 2F_{ik}(\mathbf{x}, t)\frac{\partial U}{\partial C_{kj}}[\mathbf{x}, \mathbf{C}(\mathbf{x}, t)] - T_{ij}(\mathbf{x}, t).
+\overline{T}_{ij}(\mathbf{x}, t) = F_{ik}(\mathbf{x}, t)\overline{S}_{kj}(\mathbf{x}, t) = 2F_{ik}(\mathbf{x}, t)\frac{\partial U}{\partial C_{kj}}[\mathbf{x}, \mathbf{C}(\mathbf{x}, t)] - T_{ij}(\mathbf{x}, t).
 \end{equation}
-Physically, the stress glut represents the difference between the stress predicted by the assumed elastic constitutive relation and its true value. It can, therefore, be interpreted as arising from a failure of elasticity to correctly determine stresses within the body. This point of view is broadly consistent with elastic rebound theory, with material near to a fault undoubtedly failing to be elastic.
+Physically, the stress glut represents the difference between the stress predicted by the  elastic constitutive relation and its true value. It can, therefore, be interpreted as arising 
+from a \emph{failure of elasticity to correctly determine stresses within the body}. This point of view is  consistent with elastic rebound theory, with material near to a fault undoubtedly failing to be elastic.
 
 \section*{Linearised equations of motion incorporating a stress glut}
 
@@ -115,16 +138,36 @@ while the boundary conditions become
 \begin{equation}
 A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\hat{n}_{j} = \overline{S}_{ij}\hat{n}_{j}
 \end{equation}
-on $\partial M$. In this manner, we see that the seismic source enters into the linearised equations of motion as an effective body force and an effective surface traction, with each determined from the stress glut. Note that within this linearised theory the tensors $S_{ij}$ and $\overline{T}_{ij}$ agree to first order, with either being called the stress glut.
+on $\partial M$. In this manner, we see that the seismic source enters into the linearised equations of motion as an effective body force and an effective surface traction, with 
+each determined from the stress glut. Note that within this linearised theory the tensors $\overline{S}_{ij}$ and $\overline{T}_{ij}$ agree to first order, with either being called the stress glut.
+In particular, within the linearised equations of motion, the stress glut is necessarily symmetric.
 
 \section*{The stress glut for an idealised fault}
 
-We wish to determine the appropriate stress glut for an idealised fault. On a real fault, there will be large non-elastic deformation within some finite fault zone. We shall, however, neglect such complexities, and suppose that the elastic constitutive relation fails only on the fault surface across which the displacement is discontinuous. Such an approximation is appropriate so long as we consider waves having wavelength substantially larger that the width of the fault zone, and this is true for most seismological applications (e.g. seismic wavelengths of kilometres and fault zones widths of metres).
-We assume that the fault plane $\Sigma$ passes through the origin, and lies within the $(x_1, x_2)$-plane. The discontinuity in the displacement vector on the fault plane is assumed to be only in its tangential component so that there is no separation or interpenetration of material, and hence it can be decomposed in the form
+
+\begin{figure}[h]
+    \centering    
+     \includegraphics[width=0.7\textwidth]{figures/L3F3.png} 
+    \caption{A fault in cross section, where the offset of the strata on either side can be clearly
+seen. It is also apparent that the fault is not a single surface along which the
+motion is discontinuous, but rather a zone of finite-width which has undergone
+severe localised deformation.}
+    \label{fig:3}
+\end{figure}
+
+We wish to determine the appropriate stress glut for an \textbf{idealised fault}. On a real fault, there will be large non-elastic deformation within some finite fault zone. We shall, 
+however, neglect such complexities, and suppose that the elastic constitutive relation fails only on the fault surface across which the displacement is discontinuous. Such an approximation 
+is appropriate so long as we consider waves having wavelength substantially larger that the width of the fault zone, and this is true for most seismological applications (e.g. 
+seismic wavelengths of kilometres and fault zones widths of metres).
+
+We assume that the \textbf{fault plane }, $\Sigma$,  passes through the origin, and lies within the $(x_1, x_2)$-plane. The discontinuity 
+in the displacement vector on the fault plane is assumed to be only in its tangential component so that there is no separation or interpenetration of material, and hence it can be decomposed in the form
 \begin{equation}
 u_{i}(x_1, x_2, x_3, t) = u_{i}^{0}(x_1, x_2, x_3, t) + w_{i}(x_1, x_2, t)H(x_3),
 \end{equation}
-where $u_i^0$ is continuous, $w_i$ is tangential on $\Sigma$ (i.e. $w_3=0$), and $H(\cdot)$ denotes the Heaviside step function. We call $\mathbf{w}$ the displacement discontinuity vector. We wish to determine the linearised first Piola-Kirchhoff stress tensor associated with this displacement vector field using the assumed hyperelastic constitutive relation. To do this, we must first differentiate the displacement vector to obtain
+where $u_i^0$ is continuous, $w_i$ is tangential on $\Sigma$ (i.e. $w_3=0$), and $H(\cdot)$ denotes the Heaviside step function. We call $\mathbf{w}$ the \textbf{displacement discontinuity vector}. 
+We wish to determine the linearised first Piola-Kirchhoff stress tensor associated with this displacement vector field using the assumed hyperelastic constitutive relation. To do this, 
+we must first differentiate the displacement vector to obtain
 \begin{equation}
 \frac{\partial u_{i}}{\partial x_{j}} = \frac{\partial u_{i}^{0}}{\partial x_{j}} + \frac{\partial w_{i}}{\partial x_{j}}H(x_3) + w_{i}\delta_{j3}\delta(x_3),
 \end{equation}
@@ -132,17 +175,20 @@ where we have used the well-known identity $H'(x) = \delta(x)$. It follows that 
 \begin{equation}
 A_{ijkl}\frac{\partial u_{k}^{0}}{\partial x_{l}} + A_{ijkl}\frac{\partial w_{k}}{\partial x_{l}}H(x_3) + A_{ijk3}w_{k}\delta(x_3).
 \end{equation}
-The first term here is everywhere continuous, the second is bounded but discontinuous on the fault plane, while the third is non-zero only on the fault plane but is singular there. That the stress might be discontinuous across the fault plane is physically acceptable, with this property approximating rapid but continuous variations in stress across the finite-width of a fault zone. It is, therefore, only the final singular term within eq. (20) that is non-physical and needs to be removed by inclusion of a stress glut. Specialising eq. (12) to the linearised case, we see that a suitable choice is given by
+The first term here is everywhere continuous, the second has a jump discontinuity the fault plane, while the third is non-zero only on the fault plane but is singular there. 
+That the stress might be discontinuous across the fault plane is physically acceptable, with this property approximating rapid but continuous variations in stress across the finite-width of a fault zone. It is, 
+therefore, only the final singular term within eq. (20) that is non-physical and needs to be removed by inclusion of a stress glut. Specialising eq. (12) to the linearised case, we see that a suitable choice is given by
 \begin{equation}
 \overline{S}_{ij} = A_{ijk3}w_{k}\delta(x_3).
 \end{equation}
-It is worth emphasising that this result is really more of a definition we have motivated rather than something we have derived. Indeed, an ideal fault is just a mathematical abstraction, providing a useful model for something far more complicated. These ideas extend immediately to general fault $\Sigma$, for which the appropriate stress glut is
+It is worth emphasising that this result is really more of a definition than  something we have derived. Indeed, an ideal fault is just a mathematical abstraction, providing a useful model for 
+something far more complicated. These ideas extend immediately to a general fault whose surface,  $\Sigma$, need not be planar. The appropriate stress glut is
 \begin{equation}
 \overline{S}_{ij} = A_{ijkl}w_{k}n_{l}\delta_{\Sigma},
 \end{equation}
 where the displacement discontinuity vector is everywhere tangent to $\Sigma$, $\hat{\mathbf{n}}$ is the unit normal vector to the surface, and $\delta_{\Sigma}$ is the Dirac surface distribution for $\Sigma$ which is defined through the relation
 \begin{equation}
-\int_{M}f\,\delta_{\Sigma}d^3x = \int_{\Sigma}f\,dS,
+\int_{M}f\,\delta_{\Sigma}\dd^{3}\mathbf{x} = \int_{\Sigma}f\,dS,
 \end{equation}
 for any smooth $f$.
 
@@ -166,29 +212,42 @@ Within these equations we can identify a number of physical parameters:
     \item The displacement discontinuity vector, $w_i$.
     \item Geometric parameters describing the shape of the earth model including any internal discontinuities and of the fault plane.
 \end{enumerate}
-Given all this information it is possible, with sufficient effort, to solve the equations though this generally requires use of a computer. Suppose now we have made seismic observations following an earthquake. Let $X_i$ for $i=1, ..., n$ denote the surface locations of the seismometers, with each instrument providing recordings over some time interval, $I = [t_1, t_2]$. As noted above, given suitable model parameters we can simulate seismic wave propagation to produce synthetic seismograms at each seismometer location. This is an example of solving a forward problem, which is to say performing a mapping from model parameters to observable quantities. To each forward problem there is an associated inverse problem in which we try to work backwards from the observations to the underlying model parameters.
+Given all this information it is possible, with sufficient effort, to solve the equations though this generally requires use of a computer. Suppose now we have made seismic observations following an earthquake. Let $\mathbf{x}_i$ for $i=1, ..., n$ denote the surface locations of the seismometers, 
+with each instrument providing recordings over some time interval, $I = [t_1, t_2]$. As noted above, given suitable model parameters we can simulate seismic wave propagation to produce synthetic seismograms at each seismometer location. This is an example of
+ solving a \textbf{forward problem}, which is to say performing a mapping from model parameters to observable quantities. To each forward problem there is an associated \textbf{inverse problem} in which we try to work backwards from the observations to the underlying model parameters.
 
-Both the forward and inverse problems are concerned with transforming one kind of information into another. There is, however, a fundamental difference between these two problems, and this is best expressed through the concept of being well- or ill-posed. For a problem to be well-posed the following three things must hold:
+Both the forward and inverse problems are concerned with transforming one kind of information into another. There is, however, a fundamental difference between these two problems, and this is best expressed through the concept of being well- or ill-posed. For a problem to be \textbf{well-posed}
+ the following three things must hold:
 \begin{enumerate}
     \item For any given set of inputs, there exists an output.
     \item There is a unique output for each given input.
     \item The output depends continuously on the input.
 \end{enumerate}
-Note that these conditions only make sense sequentially; if the first does not hold, then the second does not make sense, etc. A problem that is not well-posed is said to be ill-posed. These definitions can be illustrated by considering a simple example. Suppose for distinct points $x_i$, $i=1, ..., n$ on the real line we are given corresponding function values $\{y_i\}_{i=1}^n$. We can then ask if there is a polynomial, $p(x)$ of degree $m$ such that
+Note that these conditions only make sense sequentially; if the first does not hold, then the second does not make sense, etc. A problem that is not well-posed is said to be \textbf{ill-posed}. These definitions can be illustrated by considering a simple example.
+ Suppose for distinct points $x_i$, $i=1, ..., n$ on the real line we are given corresponding function values $\{y_i\}_{i=1}^n$. We can then ask if there is a polynomial, $p(x)$ of degree $m$ such that
 \begin{equation}
 p(x_i) = y_i.
 \end{equation}
-Here the inputs to the problem are the values $\{y_i\}_{i=1}^n$, and the desired outputs are the $m+1$ coefficients of the polynomial. Considering first the existence question, it should be clear that if $m+1 \ge n$, then a suitable polynomial can always be found. If $m+1 < n$, then, in general, there can be no such polynomial. But a solution can be possible for certain inputs (e.g. the $y_i$ all lie on a line, and $m>1$). Assuming existence has been established, we can turn to uniqueness. Here, again, we can readily see that the polynomial is unique if and only if $m+1 = n$, while if $m+1 > n$ there are an infinite number of possible answers. Finally, assuming that uniqueness has been established, it is possible to show that the coefficients of the polynomial depend continuously on the data, and hence a stable solution can be obtained.
+Here the inputs to the problem are the values $\{y_i\}_{i=1}^n$, and the desired outputs are the $m+1$ coefficients of the polynomial. Considering first the existence question, it should be clear that if $m+1 \ge n$, then a suitable polynomial can always be 
+found. If $m+1 < n$, then, in general, there is no such polynomial. But a solution is possible for certain inputs (e.g. the $y_i$ all lie on a line, and $m>1$). Assuming existence has been established, we can turn to uniqueness. Here, again, we can 
+readily see that the polynomial is unique if and only if $m+1 = n$, while if $m+1 > n$ there are an infinite number of possible answers. Finally, assuming that uniqueness has been established, it is possible to show that the coefficients of the polynomial 
+depend continuously on the data, and hence a stable solution can be obtained.
 
 A few additional comments can be made. First, reflecting the fact that all real measurements have uncertainties, we might choose to modify the problem to
 \begin{equation}
 p(x_i) = y_i + z_i,
 \end{equation}
-where $z_i$ are unknown random errors drawn from a known distribution. In addressing the existence question we must then broaden what it means for a solution to be found (the fit need not be exact, but in a statistical sense). As a result, our statements on existence in terms of $n$ and $m$ might need to be modified. Next, we can see that one potential cause of non-uniqueness is if the problem is underdetermined: we have fewer knowns than unknowns. For geophysical inverse problems this is almost always the case. As you might already imagine, uncertainty quantification within underdetermined problems is challenging, and this remains a major research topic.
+where $z_i$ are unknown random errors drawn from a known distribution. In addressing the existence question we must then broaden what it means for a solution to be found, with  fit to the data need not be exact, but in a statistical sense.
+As a result, our statements on existence in terms of $n$ and $m$ might need to be modified. Next, we can see that one potential cause of non-uniqueness is if the problem is underdetermined: we have fewer knowns than unknowns. For 
+geophysical inverse problems this is almost always the case. As you might already imagine, uncertainty quantification within underdetermined problems is challenging, and this remains a major research topic.
 
-Any plausible physical theory should be well-posed. If this were not the case, then it would not be possible to test it experimentally. For example, suppose that a physical theory satisfied the first two conditions above, but not the third. We could formulate an experiment to test our theory by comparing its predictions against observations made from known inputs. But the issue is that we can never know our inputs with complete precision. The lack of continuity within the theory means that tiny errors within these inputs can map onto arbitrarily large differences in the output, and this renders comparison between predictions and observations meaningless.
+Any plausible physical theory should be well-posed. If this were not the case, then it would not be possible to test it experimentally. For example, suppose that a physical theory satisfied the first two conditions above, 
+but not the third. We could formulate an experiment to test our theory by comparing its predictions against observations made from known inputs. But the issue is that we can never know our inputs with complete precision. 
+The lack of continuity within the theory means that tiny errors within these inputs can map onto arbitrarily large differences in the output, and this renders comparison between predictions and observations meaningless.
 
-It can be shown that the seismological forward problem defined above is well-posed so long as the model parameters are subject to reasonable physical constraints (e.g. density should always be positive). By contrast, the inverse problem is almost always ill-posed. As noted above, the main reason is a lack of information. Real data sets are necessarily finite-dimensional, but the model parameters are functions, and hence live in infinite-dimensional spaces. Later in this course we will see a number of practical methods for dealing with ill-posed inverse problems. None are perfect, and all must be applied with care. But these techniques do seem to have produced useful and reliable information about the Earth.
+It can be shown that the seismological forward problem defined above is well-posed so long as the model parameters are subject to reasonable physical constraints (e.g. density should always be positive). By contrast, the inverse problem is 
+almost always ill-posed. As noted above, the main reason is a lack of information. Real data sets are necessarily finite-dimensional, but the model parameters are functions, and hence live in infinite-dimensional spaces. Later in this course 
+we will see a number of practical methods for dealing with ill-posed inverse problems. None are perfect, and all must be applied with care. But these techniques do seem to have produced useful and reliable information about the Earth.
 
 \section*{What you need to know and be able to do}
 \begin{itemize}
