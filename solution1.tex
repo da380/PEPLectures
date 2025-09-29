@@ -1,4 +1,4 @@
-\documentclass[a4paper,12pt]{paper}
+\documentclass[a4paper,10pt]{paper}
 
 \usepackage{mycommands}
 \usepackage{amsmath}
@@ -11,6 +11,9 @@
 \maketitle
 
 \begin{enumerate}
+
+    \item 
+    \begin{enumerate}
 \item Starting with the equations of motion
 \begin{equation*}
     \rho\frac{\partial v_{i}}{\partial t}-\frac{\partial T_{ij}}{\partial x_{j}}=0,
@@ -28,7 +31,7 @@ and hence we obtain the desired result
     \frac{d}{dt}\int_{U}\rho v_{i}\dd^{3}\mathbf{x}=\int_{\partial U}T_{ij}\hat{n}_{j}\dd S,
 \end{equation*}
 where we can bring the time derivative out of the first integral because both $\rho$ and $U$ are time-independent. The term $\int_{U}\rho v_{i}\dd^{3}\mathbf{x}$ is clearly the linear momentum of the particles lying in $U$, and hence we have obtained Newton's second law for this sub-body. The total force acting on the sub-body is expressed as an integral of the traction $t_{i}=T_{ij}\hat{n}_{j}$ over the reference boundary $\partial U$. This represents contact forces acting on the sub-body due to its surroundings, with the traction being a force per unit area relative to the reference boundary. Here we also see that stress tensors relate the orientation of a surface to the forces per unit area acting on it. Here we could choose to work either with a referential surface or its instantaneous image in physical space. In the former case we end up with the first Piola-Kirchhoff stress, while the latter leads to the Cauchy stress, this being the one generally used in fluid mechanics.
-
+\item
 Differentiating the expression for the angular momentum, we obtain
 \begin{align*}
     \frac{d}{dt}\int_{U}\rho\epsilon_{ijk}\varphi_{j}v_{k}\dd^{3}\mathbf{x} &= \int_{U}\rho\epsilon_{ijk}\varphi_{j}\frac{\partial v_{k}}{\partial t}\dd^{3}\mathbf{x}+\int_{U}\rho\epsilon_{ijk}v_{j}v_{k}\dd^{3}\mathbf{x} \\
@@ -52,7 +55,7 @@ and as $U$ is arbitrary, this implies $\epsilon_{ijk}F_{jl}T_{kl}=0$. This latte
     \mathbf{F}\mathbf{S}^{T}\mathbf{F}^{T}=(\mathbf{F}\mathbf{S}^{T}\mathbf{F}^{T})^{T}=\mathbf{F}\mathbf{S}\mathbf{F}^{T}
 \end{equation*}
 and hence $\mathbf{S}$ is indeed symmetric.
-
+\end{enumerate}
 \item We are given the Lagrangian density
 \begin{equation*}
     \mathcal{L}=\frac{1}{2}\rho\frac{\partial u_{i}}{\partial t}\frac{\partial u_{i}}{\partial t}-\frac{1}{2}A_{ijkl}\frac{\partial u_{i}}{\partial x_{j}}\frac{\partial u_{k}}{\partial x_{l}}+\overline{S}_{ij}\frac{\partial u_{i}}{\partial x_{j}},
@@ -152,7 +155,7 @@ which determines the phase speeds, $c$, and polarisation vectors, $\mathbf{a}$, 
 \end{align*}
 where $\theta$ is the angle between the propagation direction and the symmetry axis. Note that the first two terms are those associated with an isotropic medium, while the remainder will be assumed to be small in the perturbation calculations.
 
-\item Considering the quasi P-wave, we can use non-degenerate perturbation theory, and hence simply apply the formula
+ Considering the quasi P-wave, we can use non-degenerate perturbation theory, and hence simply apply the formula
 \begin{equation*}
     \delta\alpha=\frac{1}{2\alpha}\hat{\mathbf{p}}\cdot\delta\boldsymbol{\Gamma}(\hat{\mathbf{p}})\hat{\mathbf{p}}
 \end{equation*}
@@ -221,15 +224,15 @@ taken along the classical trajectory.
 \end{equation*}
 where $\gamma$ parameterises the curve over the unit interval. Note that such a fixed-length parameterisation is necessary so that variations of this functional can be easily handled. We need to compute the first variation of this expression. This can be done from first-principles (and is a good exercise), but we will jump straight to the usual Euler-Lagrange equations
 \begin{equation*}
-    \frac{\ddns}{\ddns\gamma}\frac{\partial\mathcal{Z}}{\partial \mathbf{x}'}-\frac{\partial\mathcal{Z}}{\partial \mathbf{x}}=0,
+    \frac{\ddns}{\ddns\gamma}\frac{\partial\mathscr{L}}{\partial \mathbf{x}'}-\frac{\partial\mathscr{L}}{\partial \mathbf{x}}=0,
 \end{equation*}
 where the Lagrangian here is
 \begin{equation*}
-    \mathcal{Z}(\mathbf{x},\mathbf{x}')=\frac{1}{\alpha(\mathbf{x})}\sqrt{\frac{dx_{i}}{d\gamma}\frac{dx_{i}}{d\gamma}} = \frac{||\mathbf{x}'||}{\alpha(\mathbf{x})}
+    \mathscr{L}(\mathbf{x},\mathbf{x}')=\frac{1}{\alpha(\mathbf{x})}\sqrt{\frac{dx_{i}}{d\gamma}\frac{dx_{i}}{d\gamma}} = \frac{||\mathbf{x}'||}{\alpha(\mathbf{x})}
 \end{equation*}
 and where we write primes for derivatives with respect to $\gamma$ as we have already used dots for those with respect to $\sigma$. Simple calculations show that
 \begin{equation*}
-    \frac{\partial\mathcal{Z}}{\partial \mathbf{x}}=-\frac{||\mathbf{x}'||}{\alpha^{2}}\nabla\alpha, \quad \frac{\partial\mathcal{Z}}{\partial \mathbf{x}'}=\frac{1}{\alpha}\frac{\mathbf{x}'}{||\mathbf{x}'||},
+    \frac{\partial\mathscr{L}}{\partial \mathbf{x}}=-\frac{||\mathbf{x}'||}{\alpha^{2}}\nabla\alpha, \quad \frac{\partial\mathscr{L}}{\partial \mathbf{x}'}=\frac{1}{\alpha}\frac{\mathbf{x}'}{||\mathbf{x}'||},
 \end{equation*}
 and so we obtain the following second-order system of ODEs
 \begin{equation*}
@@ -272,6 +275,60 @@ and substituting this into the second of the equations we arrive at
     \frac{\ddns}{\ddns\gamma}\left(\frac{1}{\alpha}\frac{\mathbf{x}'}{||\mathbf{x}'||}\right)+\frac{||\mathbf{x}'||}{\alpha^{2}}\nabla\alpha=0,
 \end{equation*}
 which is precisely the Euler-Lagrange equation obtained from Fermat's principle. Note that Fermat's principle can be established in a general anisotropic body, but here there is a bit more work involved, and it is actually simpler to obtain the result using a Legendre transformation to pass between the equations of Hamiltonian and Lagrangian mechanics. You do not have to know how to do this!
+
+
+
+\item We are told the ray travels down into the half-space monotonically until the turning depth $z_{t}$. This means that along this segment of the ray, we can use $z$ as a generating parameter, and hence the differential arc length can be written
+\begin{equation*}
+    ds=\sqrt{1+\left\|\frac{d\mathbf{x}}{dz}\right\|^{2}}dz.
+\end{equation*}
+Using this result, we obtain trivially
+\begin{equation*}
+    T=\int_{0}^{z_{t}}\frac{2}{\alpha}\sqrt{1+\left\|\frac{d\mathbf{x}}{dz}\right\|^{2}}dz,
+\end{equation*}
+where the factor of two is due to the upwards going half of the ray. Within the above expression for $T$, the horizontal position vector $\mathbf{x}$ as a function of $z$ is not determined. To do this we can use Fermat's principle, and set the variation of $T$ with respect to $\mathbf{x}$ to be zero. Let $\mathscr{L}(\mathbf{x},\mathbf{x}')$ denote the integrand within the expression for $T,$ where $\mathbf{x}'=d\mathbf{x}/dz$. The Euler-Lagrange equations for the problem are
+\begin{equation*}
+    \frac{\partial\mathscr{L}}{\partial x}-\frac{d}{dz}\left(\frac{\partial\mathscr{L}}{\partial x'}\right)=0, \quad \frac{\partial\mathscr{L}}{\partial y}-\frac{d}{dz}\left(\frac{\partial\mathscr{L}}{\partial y'}\right)=0.
+\end{equation*}
+But here we see that the Lagrangian is independent of the horizontal co-ordinates, and so we get the conservation laws
+\begin{equation*}
+    \frac{\partial\mathscr{L}}{\partial x'}=c_{x}, \quad \frac{\partial\mathscr{L}}{\partial y'}=c_{y},
+\end{equation*}
+where $c_{x}$ and $c_{y}$ are constants to be determined. A simple calculation shows that these conservation laws take the specific form
+\begin{equation*}
+    \frac{2}{\alpha}\frac{x'}{\sqrt{1+(x')^{2}+(y')^{2}}}=c_{x},\quad \frac{2}{\alpha}\frac{y'}{\sqrt{1+(x')^{2}+(y')^{2}}}=c_{y}.
+\end{equation*}
+Considering the initial direction of the ray lies in the $x-z$ plane, it follows that $c_{y}=0$, and hence $y'=0$, meaning that the ray stays within this initial plane. From simple geometry, we then see that
+\begin{equation*}
+    \frac{x'}{\sqrt{1+(x')^{2}+(y')^{2}}}=\sin\theta,
+\end{equation*}
+where $\theta$ is the angle between the vertical and the ray's tangent vector. This suggests we define a new constant $q=c_{x}/2$, and hence arrive at
+\begin{equation*}
+    \frac{\sin\theta}{\alpha}=q,
+\end{equation*}
+which is the familiar form of Snell's law. At the turning depth, we have $\theta=\pi/2$ by definition, and hence
+\begin{equation*}
+    \alpha(z_{t})=q^{-1}.
+\end{equation*}
+Because $\alpha$ increases monotonically, this equation has a unique solution for each initial ray orientation. Along the down-going part of the ray path we have
+\begin{equation*}
+    \frac{dx}{dz}=\tan\theta=\frac{\sin\theta}{\sqrt{1-\sin^{2}\theta}},
+\end{equation*}
+and using Snell's law we can eliminate $\theta$ from the right hand side to give
+\begin{equation*}
+    \frac{dx}{dz}=\frac{q\alpha}{\sqrt{1-q^{2}\alpha^{2}}},
+\end{equation*}
+and hence we obtain
+\begin{equation*}
+    X=\int_{0}^{z_{t}}\frac{2q\alpha~dz}{\sqrt{1-q^{2}\alpha^{2}}}.
+\end{equation*}
+Using the expression for $x'$ in the original formula for $T$ we then also obtain
+\begin{equation*}
+    T=\int_{0}^{z_{t}}\frac{2}{\alpha}\frac{dz}{\sqrt{1-q^{2}\alpha^{2}}}.
+\end{equation*}
+
 \end{enumerate}
+
+
 
 \end{document}

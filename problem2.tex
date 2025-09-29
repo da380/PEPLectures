@@ -1,4 +1,4 @@
-\documentclass[a4paper,12pt]{paper}
+\documentclass[a4paper,10pt]{paper}
 
 \usepackage{mycommands}
 \usepackage{amsmath}
@@ -22,6 +22,40 @@ Suppose that the data takes the form $\mathbf{d}=\mathbf{A}\mathbf{m}_{in}$ with
 \end{equation*}
 where $\mathbf{R}$ is a matrix to be determined. Discuss the significance of this so-called resolution matrix, explaining why, in particular, it would be desirable for its value to be close to the identity matrix.
 
+\item
+
+Consider a linear inverse problem of the standard form
+\begin{equation*}
+    \mathbf{d} = \mathbf{A}\mathbf{m}+\mathbf{e}, 
+\end{equation*}
+with $\mathbf{d}$ an $n$-dimensional data vector, $\mathbf{m}$ an $m$-dimensional model vector, $\mathbf{A}$ an $n\times m$ matrix, and $\mathbf{e}$ and $n$-dimensional vector of random errors. We assume $m > n$, which 
+is to say that there are more unknown model parameters than available data. 
+Here we suppose that the data has been processed such that the components of $\mathbf{e}$ are uncorrelated and have unit standard deviations (this corresponds to the data covariance, $\mathbf{C}$, being the $n\times n$ identity matrix).
+
+
+
+\begin{enumerate}
+
+    \item  A model $\mathbf{m}$ is said to be compatible with the data if
+\begin{equation*}
+    \|\mathbf{A}\mathbf{m}-\mathbf{d}\|^{2} \le \chi^{2}_{c}, 
+\end{equation*}
+where $\chi^{2}_{c}$ is a critical value for the so-called chi-squared statistic. What type of geometric region of the model-space is defined by this inequality? 
+
+\item Supposing that $ \|\mathbf{d}\|^{2} > \chi^{2}_{c}$, the region of the model space defined by the inequality in (a) does not contain the origin. In such 
+cases, the closest point within this region to the origin must lie on the boundary-set defined by 
+\begin{equation*}
+    \|\mathbf{A}\mathbf{m}-\mathbf{d}\|^{2} = \chi^{2}_{c}.
+\end{equation*}
+Using the method of Lagrange multipliers, we can determine this \emph{minimum norm solution} by considering the Lagrangian
+\begin{equation*}
+    \mathcal{L}(\mathbf{m},\mu)=\|\mathbf{m}\|^{2}+\mu(\|\mathbf{A}\mathbf{m}-\mathbf{d}\|^{2}-\chi^{2}_{c}), 
+\end{equation*}
+where $\mu$ is a Lagrange multiplier. Derive the equations for $\mathbf{m}$ and $\mu$ that must hold at the minimum norm solution. 
+Discuss the relationship between this approach and regularised least squares. 
+\end{enumerate}
+
+
 \item Consider the deformation of an isotropic elastic body due to an applied surface load, $\sigma$. The relevant linearised equations of motion are
 \begin{gather*}
     -\frac{\partial T_{ij}}{\partial x_{j}}=0; \\
@@ -39,19 +73,9 @@ Suppose that observations, $\mathbf{u}_{i}^{obs}$, of the displacement vector ha
 \end{equation*}
 where $\sigma_{i}$ is the standard deviation for the $i$-th observation. Adapt the approach within Lecture 19 to derive sensitivity kernels for $J$ with respect to $\lambda$, $\mu$, and $\sigma$, showing how they can be calculated through one solution of the forward problem and one of an appropriate adjoint problem.
 
-\item Within Lecture 19 the idea of a cross correlation travel time was introduced. This is based on finding the shift, $\overline{\tau}$, that maximises the cross correlation
-\begin{equation*}
-    C(\tau)=\int_{-\infty}^{\infty}s^{obs}(t-\tau)s(\mathbf{x}_{s},t)\dd t,
-\end{equation*}
-between an observed waveform, $s^{obs}$, at a surface location $\mathbf{x}_{s}$ and a synthetic one, $s$, both having been suitably windowed. By perturbing the optimality condition
-\begin{equation*}
-    \frac{dC}{d\tau}(\overline{\tau})=0
-\end{equation*}
-with respect to $s$, show that to first-order accuracy
-\begin{equation*}
-    \delta\overline{\tau}=\frac{\int_{-\infty}^{\infty}\dot{s}^{obs}(t-\overline{\tau})\delta s(\mathbf{x}_{s},t)\dd t}{\int_{-\infty}^{\infty}\ddot{s}^{obs}(t-\overline{\tau})s(\mathbf{x}_{s},t)\dd t},
-\end{equation*}
-where dots denote time derivatives. From this result, it is a simple matter to obtain adjoint tractions required for the calculation of banana doughnut kernels.
+
+
+
 
 \item Recall that the Lagrangian for a self-gravitating elastic body is given by
 \begin{equation*}

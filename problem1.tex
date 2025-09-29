@@ -1,4 +1,4 @@
-\documentclass[a4paper,12pt]{paper}
+\documentclass[a4paper,10pt]{paper}
 
 \usepackage{mycommands}
 \usepackage{amsmath}
@@ -16,17 +16,28 @@
 \begin{equation*}
     \rho\frac{\partial v_{i}}{\partial t}-\frac{\partial T_{ij}}{\partial x_{j}}=0;
 \end{equation*}
-for an elastic body. Here $\rho$ is the referential density, $\boldsymbol{\varphi}$ the motion, and $\mathbf{T}$ the first Piola-Kirchhoff stress tensor. For an arbitrary sub-body, $U$, of the reference body, $M$, show that the equality
-\begin{equation*}
-    \frac{d}{dt}\int_{U}\rho v_{i}\dd^{3}\mathbf{x}=\int_{\partial U}T_{ij}\hat{n}_{j}\dd S,
-\end{equation*}
-holds, where $\partial U$ is the boundary of $U$. What is the physical significance of this result? In particular, what does the vector $T_{ij}\hat{n}_{j}$ represent?
+for an elastic body. Here $\rho$ is the referential density, $v_{i} = \frac{\partial \varphi_{i}}{\partial t}$ the velocity with $\bm{\varphi}$ the motion, and $\mathbf{T}$ the first Piola-Kirchhoff stress tensor.
 
-The angular momentum of the sub-body $U$ is defined by
-\begin{equation*}
-    \int_{U}\rho\epsilon_{ijk}\varphi_{j}v_{k}\dd^{3}\mathbf{x}.
-\end{equation*}
-Show that a necessary and sufficient condition for this quantity to be conserved for any such $U$ is that $\mathbf{F}\mathbf{T}^{T}$ is a symmetric tensor. Defining the second Piola-Kirchhoff stress, $\mathbf{S}$, through $\mathbf{T}=\mathbf{F}\mathbf{S}$, conclude that $\mathbf{S}$ is symmetric.
+\begin{enumerate}
+     \item 
+     For an arbitrary sub-body, $U$, of the reference body, $M$, show that the equality
+    \begin{equation*}
+        \frac{d}{dt}\int_{U}\rho v_{i}\dd^{3}\mathbf{x}=\int_{\partial U}T_{ij}\hat{n}_{j}\dd S,
+    \end{equation*}
+    holds, where $\partial U$ is the boundary of $U$. What is the physical significance of this result? In particular, what does the vector $T_{ij}\hat{n}_{j}$ represent?
+
+
+    \item
+    The angular momentum of the sub-body $U$ about the origin is given by
+    \begin{equation*}
+        \int_{U}\rho\epsilon_{ijk}\varphi_{j}v_{k}\dd^{3}\mathbf{x}.
+    \end{equation*}
+    Show that a necessary and sufficient condition for this quantity to be conserved for any such $U$ is that $\mathbf{F}\mathbf{T}^{T}$ is a symmetric tensor. Defining the second Piola-Kirchhoff stress, $\mathbf{S}$, through $\mathbf{T}=\mathbf{F}\mathbf{S}$, conclude that $\mathbf{S}$ is symmetric.
+
+   
+    
+
+\end{enumerate}
 
 \item The Lagrangian density for the linearised motion for an elastic body is given by
 \begin{equation*}
