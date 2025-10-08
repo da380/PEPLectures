@@ -1,4 +1,4 @@
-\documentclass [a4paper,12pt]{paper}
+\documentclass [a4paper,10pt]{paper}
 
 \usepackage{mycommands}
 
@@ -17,20 +17,19 @@
 In this lecture, we derive the equations of motion for an elastic body. These equations provide a good though not
 complete model for understanding seismic wave propagation and other related topics in geophysics. Most of you will
 have encountered elasticity within earlier courses, but here we will go back to first principles. In particular, we
-discuss \textbf{finite elasticity}, this meaning that there is no assumption that the deformation has to remain  small
-in an appropriate sense. Within later applications
-it will actually be sufficient to consider linearised motions about an equilibrium state, but by starting with the
-exact theory it is easier to appreciate the underlying physics.
+discuss \textbf{finite elasticity}, this meaning that there is no assumption that the deformation has to remain  small.
+Within later applications it will actually be sufficient to consider linearised motions about an equilibrium state, but
+by starting with the exact theory it is easier to appreciate the underlying physics.
 
 \section*{Basic definitions}
 We start by considering the kinematics of a solid body. At an instant in time, $t$, the body occupies a subset $M_{t}$ 
-of physical space, $\mathbb{R}^{3}$. A useful way to describe the motion is through the introduction of a reference body, 
+of physical space, $\mathbb{R}^{3}$. A useful way to describe the motion is through the introduction of a \textbf{reference body}, 
 $M$. Each point $\mathbf{x}$ in the reference body corresponds to a unique particle. At time $t$, the particle $\mathbf{x}$ 
-sits at a point in physical space that we denote by $\bphi(\mathbf{x},t)$. In this manner we see that the body's motion is 
-completely described by this time-dependent mapping, $\bphi(\cdot,t)$, from the reference body into physical space. We will 
-call $\bphi$ the \textbf{motion} of the body, this being the field within this classical field theory. We will not consider motions 
-for which the body is torn or fractured. As a result, we suppose that $\bphi$ is continuously differentiable, and that at 
-each fixed time, $t$, it establishes a one-to-one correspondence between $M$ and $M_{t}$. These ideas are summarised 
+sits at a point in physical space that we denote by $\bphi(\mathbf{x},t)$. In this manner we see that the evolution of the 
+body  is completely described by this time-dependent mapping, $\bphi(\cdot,t)$, from the reference body into physical space.
+We will call $\bphi$ the \textbf{motion} of the body, this being the ``field'' within this classical field theory. We will not
+consider motions for which the body is torn or fractured. As a result, we suppose that $\bphi$ is continuously differentiable,
+and that at each fixed time, $t$, it establishes a one-to-one correspondence between $M$ and $M_{t}$. These ideas are summarised 
 graphically within Fig.1.
 
 
@@ -46,11 +45,11 @@ are infinitely many ways of doing this. Nevertheless, a common approach is to
 let points in the reference body correspond to the position of the particles at some reference time, $t_{0}$. 
 Having done this, we then have
 \begin{equation}
-\bphi(\mathbf{x},t_{0})=\mathbf{x}
+\bphi(\mathbf{x},t_{0})=\mathbf{x},
 \label{eq:1}
 \end{equation}
-for all $\mathbf{x}$. It can, however, sometimes be useful to select a different reference body for both theoretical 
-and computational reasons.
+for all $\mathbf{x}$. There are circumstance in which it is useful to select a different reference body, but 
+we will not worry about that within this course. 
 
 \section*{Velocity, deformation gradient, and Jacobian}
 If we fix attention to a particle $\mathbf{x}$, then the function $t\mapsto\bphi(\mathbf{x},t)$ describes its 
@@ -61,7 +60,9 @@ v_{i}(\mathbf{x},t)=\frac{\partial\varphi_{i}}{\partial t}(\mathbf{x},t)
 \end{equation}
 Note that this is the velocity of a fixed particle, and not at a fixed spatial point. This differs from what is commonly 
 done in fluid mechanics. In what follows, we will generally drop the term ``referential'' and just say ``velocity'' for this 
-vector field. 
+vector field\footnote{I prefer the descriptive terms ``referential'' and ``spatial'' to describe the two means by which quantities can be 
+described within a continuum. Some authors instead use ``Lagrangian'' and ``Eulerian'' for these concepts, though
+ both perspectives were introduced by Euler. }. 
 
 A second quantity that will be important is the  \textbf{deformation gradient}, $\mathbf{F}$, which is defined by
 \begin{equation}
@@ -111,7 +112,7 @@ sub-body can be written
 \label{eq:8}
 \end{equation}
 where $\rho(\mathbf{y},t)$ is the density at the point $\mathbf{y}$ in $M_{t}$ and time $t$. During the deformation matter is not 
-created nor destroyed. This means that the mass of this arbitrary sub-body is constant, and hence we must have
+created nor destroyed. This means that the mass of this arbitrary sub-body is constant, and hence 
 \begin{equation}
 \frac{d}{dt}\int_{U_{t}}\rho(\mathbf{y},t)\dd^{3}\mathbf{y}=0.
 \label{eq:9}
@@ -141,7 +142,7 @@ that eq.(\ref{eq:1}) holds at some time $t=t_{0}$ then at this time eq.(\ref{eq:
 Thus, when using this common choice of reference body, the referential density is precisely the  density at the reference time.
 
 \section*{Kinetic energy}
-By analogy with particle mechanics, the kinetic energy density of the body per-unit volume within the reference body $M$ is defined as
+By analogy with particle mechanics, the \textbf{kinetic energy density} of the body per-unit volume within the reference body $M$ is defined as
 \begin{equation}
 \frac{1}{2}\rho_{0}(\mathbf{x})||\mathbf{v}(\mathbf{x},t)||^{2},
 \label{eq:14}
@@ -161,7 +162,7 @@ potential energy can be expressed in the form
 \mathcal{V}(t)=\int_{M}W[\mathbf{x},t,\bphi(\mathbf{x},t),\mathbf{F}(\mathbf{x},t)]\dd^{3}\mathbf{x},
 \label{eq:16}
 \end{equation}
-where $W$ is a potential energy density measured per unit volume within the reference body. This is not the most general form 
+where $W$ is a \textbf{potential energy density} measured per unit volume within the reference body. This is not the most general form 
 that the potential energy could take, but defines what is known as a \textbf{simple hyperelastic body}. That a body is 
 \textbf{hyperelastic} means that it has a well-defined potential energy. A consequence of this assumption -- that you will establish 
 in the first problem set -- is that energy is conserved during the deformation of the body, and hence within this theory
@@ -170,6 +171,9 @@ conservative forces, i.e., those forces that are derived from a potential energy
 Energy dissipation is  relevant to seismology, but it 
 is a relatively minor effect that we will neglect in this course. The term \textbf{simple} in the above context means that the 
 potential energy density at a point, $\mathbf{x}$, depends only on the motion and the deformation gradient at the same point. 
+By contrast, we might have allowed the potential energy density to depend on higher-order spatial derivatives of the motion, 
+or on the motion in some non-local manner. But there seems to be no need for such generalisations for geophysical 
+applications. 
 
 
 \subsection*{Simplifying the potential energy using symmetries}
@@ -298,12 +302,12 @@ where $\hat{\mathbf{n}}$ denotes the outward unit normal vector to $\partial M$,
 As $\delta\bphi$ is arbitrary, this first variation can vanish only if both the volumetric term and boundary term are 
 independently equal to zero\footnote{If this statement is not obvious, then you might wish to ask in a supervision. But for the 
 purposes of this course it is sufficient to know how to apply this method.}. Hamilton's principle, therefore, implies that 
-the Euler-Lagrange equations
+the \textbf{Euler-Lagrange equations}
 \begin{equation}
 \frac{\partial\mathcal{L}}{\partial\varphi_{i}}-\frac{\partial}{\partial t}\left(\frac{\partial\mathcal{L}}{\partial v_{i}}\right)-\frac{\partial}{\partial x_{j}}\left(\frac{\partial\mathcal{L}}{\partial F_{ij}}\right)=0,
 \label{eq:33}
 \end{equation}
-hold within the body, while on $\partial M$ we also have the natural boundary conditions
+hold within the body, while on $\partial M$ we also have the \textbf{natural boundary conditions}
 \begin{equation}
 \frac{\partial\mathcal{L}}{\partial F_{ij}}\hat{n}_{j}=0,
 \label{eq:34}
@@ -333,10 +337,19 @@ while the boundary condition becomes
 T_{ij}\hat{n}_{j}=0.
 \label{eq:38}
 \end{equation}
-The vector $\mathbf{t}=\mathbf{T}\hat{\mathbf{n}}$ occurring in the boundary conditions is known as the traction. Within the 
-first problem set you will see that it represents a surface force measured per unit area within the reference body. 
+The vector $\mathbf{t}=\mathbf{T}\hat{\mathbf{n}}$ occurring in the boundary conditions is known as the \textbf{traction}. Within the 
+first problem set you will see that it represents a \emph{surface force measured per unit area} within the reference body. 
 Indeed, what the first Piola-Kirchhoff stress does is relate the orientation of a surface within the reference body 
 to the force per unit area acting on the instantaneous image of that surface within physical space. 
+
+There are other stress tensors that can be defined. For example, within spatial descriptions of continuum mechanics, 
+there is the \textbf{Cauchy stress tensor} which relates the orientation of surfaces in the instantaneous body 
+to the force per unit area acting on this instantaneous surface. The Cauchy stress tensor is the one that 
+is mostly used within fluid mechanics (including in the earlier parts of this course). In the next lecture, 
+we will see that within linearised theories about a stress-free equilibrium state the first Piola-Kirchhoff
+stress and the Cauchy stress are equal, with this result accounting for the fact that their distinction 
+is not made or emphasised within elementary courses on continuum mechanics. 
+
 
 As a final comment, 
 the equations of motion  are defined on the \emph{fixed} reference body, and hence we need not worry about applying 
@@ -349,7 +362,7 @@ of the motion.
 \begin{enumerate}
     \item[(i)] Understand the terminology needed to described the kinematics of an elastic body.
     \item[(ii)] Use the conservation of mass to derive the relation between the spatial and referential densities.
-    \item[(iii)] State expressions for the kinetic and potential energies of a simple hyperelastic body, and to 
+    \item[(iii)] State expressions for the kinetic and potential energies of a simple hyperelastic body, and 
     explain the underlying physical ideas and assumptions.
     \item[(iv)] Give a statement of Hamilton's principle in the context of finite elasticity, and use it to derive 
     the equations of motion and associated boundary conditions.
