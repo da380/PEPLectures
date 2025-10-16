@@ -18,8 +18,8 @@ Within the previous lecture, we obtained the equations of motion for a simple hy
 of such bodies are defined by a referential density, $\rho$, and a strain energy function, $W$. Using the principle of material 
 frame indifference, we obtained conditions that must be satisfied by the strain energy function. Within the first part of this lecture, 
 we will explore these restrictions in more detail to determine concretely the form the strain energy function must take. We then consider 
-linearised motions about a stress-free equilibrium configuration. The resulting equations of motion are appropriate for studying most 
-situations within seismology. To conclude we discuss material symmetries which occur in many real materials due to their underlying 
+\textbf{linearised motions} about a \textbf{stress-free equilibrium configuration}. The resulting equations of motion are appropriate for studying most 
+situations within seismology. To conclude we discuss \textbf{material symmetries} which occur in many real materials due to their underlying 
 microscopic structure. By taking account of such symmetries the form of the equations of motion can be significantly simplified.
 
 \section*{The polar decomposition theorem}
@@ -94,9 +94,9 @@ is known as the \textbf{right Cauchy-Green deformation tensor}\footnote{$\mathbf
  \textbf{left Cauchy-Green deformation} tensor which is useful in some circumstances.}. To summarise, we have shown 
  that a strain energy function satisfies the principle of material frame indifference if and only if it takes the form
 \begin{equation}
-W(\mathbf{x}, \mathbf{F}) = \mathcal{U}(\mathbf{x}, \mathbf{C}),
+W(\mathbf{x}, \mathbf{F}) = U(\mathbf{x}, \mathbf{C}),
 \end{equation}
-where $\mathcal{U}$ is some auxiliary strain energy function dependent on the right Cauchy-Green deformation tensor. Note that we use $\mathbf{C}$ instead of $\mathbf{U}$ in this formula because it simplifies later calculations.
+where $U$ is some auxiliary strain energy function dependent on the right Cauchy-Green deformation tensor. Note that we use $\mathbf{C}$ instead of $\mathbf{U}$ in this formula because it simplifies later calculations.
 
 Combining eq. (9) with the definition of the first Piola-Kirchhoff stress tensor
 \begin{equation}
@@ -104,7 +104,7 @@ T_{ij} = \frac{\partial W}{\partial F_{ij}}
 \end{equation}
 we use the chain rule to obtain
 \begin{equation}
-T_{ij} = \frac{\partial \mathcal{U}}{\partial C_{kl}}\frac{\partial C_{kl}}{\partial F_{ij}}.
+T_{ij} = \frac{\partial U}{\partial C_{kl}}\frac{\partial C_{kl}}{\partial F_{ij}}.
 \end{equation}
 From the definition of the right Cauchy-Green deformation tensor, a routine calculation shows that
 \begin{equation}
@@ -112,11 +112,11 @@ From the definition of the right Cauchy-Green deformation tensor, a routine calc
 \end{equation}
 and using the symmetry of $\mathbf{C}$ we arrive at the identity
 \begin{equation}
-T_{ij} = 2F_{ik}\frac{\partial \mathcal{U}}{\partial C_{kj}}
+T_{ij} = 2F_{ik}\frac{\partial U}{\partial C_{kj}}
 \end{equation}
 If we define the \textbf{second Piola-Kirchhoff stress tensor} to be
 \begin{equation}
-S_{ij} = 2\frac{\partial \mathcal{U}}{\partial C_{ij}}
+S_{ij} = 2\frac{\partial U}{\partial C_{ij}}
 \end{equation}
 the first Piola-Kirchhoff stress tensor can be decomposed in the form
 \begin{equation}
@@ -128,7 +128,7 @@ or in matrix form as $\mathbf{T} = \mathbf{F}\mathbf{S}$. It is clear that $\mat
 \mathbf{F}^{-1}\mathbf{T}
 \end{equation}
 of the deformation gradient and the first Piola-Kirchhoff stress tensor is symmetric. In the first 
-problem set you will show that this condition is equivalent to the conservation of angular momentum. It follows, therefore, 
+problem set you will show that this condition is equivalent to the \textbf{conservation of angular momentum}. It follows, therefore, 
 that angular momentum is automatically conserved during the motion of a simple hyperelastic body\footnote{For those
  that know about such things, this also follows from Noether's theorem.}. Within other forms of
  continuum mechanics, such as for viscous fluids, angular momentum conservation needs to be explicitly imposed within the governing equations.
@@ -143,7 +143,7 @@ and are subject to the traction-free boundary conditions
 \begin{equation}
 T_{ij}\hat{n}_{j} = 0.
 \end{equation}
-An equilibrium configuration $\bphi^0$ is a time-independent solution of these equations, and therefore satisfies
+An \textbf{equilibrium configuration} $\bphi^0$ is a time-independent solution of these equations, and therefore satisfies
 \begin{equation}
 -\frac{\partial T_{ij}^{0}}{\partial x_{j}} = 0
 \end{equation}
@@ -161,12 +161,15 @@ As the choice of reference body $M$ is arbitrary, we are free to require that fo
 \bphi^0(\mathbf{x}) = \mathbf{x}.
 \end{equation}
 It follows that $\mathbf{F}^0(\mathbf{x}) = \mathbf{I}$, and recalling eq. (15) we see that at equilibrium the first 
-and second Piola-Kirchhoff stresses are equal, and hence both are symmetric. 
+and second Piola-Kirchhoff stresses are equal, and hence both are symmetric. Indeed, within such a configuration these
+tensors are also equal to the Cauchy stress occurring within spatial formulations of continuum mechanics.
+
+
 
 We assume for the first part of this course that $\mathbf{T}^0(\mathbf{x}) = \mathbf{0}$ for every $\mathbf{x} \in M$
  which is a non-unique solution of the equations of motion in eq. (19) and the associated boundary conditions in eq.(20). 
- Such an equilibrium configuration is said to be stress-free, and corresponds physically to the equilibrium state being one 
- of minimum elastic potential energy. Prior to an earthquake, the Earth is certainly not stress-free, and we will return to this 
+ Such an equilibrium configuration is said to be \textbf{stress-free}, and corresponds physically to the equilibrium state being one 
+ of \textbf{minimum elastic potential energy}. Prior to an earthquake, the Earth is certainly not stress-free, and we will return to this 
  issue later. For many applications, however, it turns out that the neglect of equilibrium stress is an acceptable approximation.
 
 \section*{Linearised equations of motion}
@@ -174,11 +177,11 @@ We assume for the first part of this course that $\mathbf{T}^0(\mathbf{x}) = \ma
 We can now rapidly obtain the equations of motion about a stress-free equilibrium configuration. Suppose that at $t = 0$ the 
 body is displaced from equilibrium, with the initial motion taking the form
 \begin{equation}
-\varphi_{i}(\mathbf{x}, 0) = x_{i} + s U_{i}(\mathbf{x})
+\varphi_{i}(\mathbf{x}, 0) = x_{i} + s u_{i}^{0}(\mathbf{x})
 \end{equation}
-for some given vector $\mathbf{U}$, while for some $\mathbf{V}$ the initial velocity is given by
+for some given vector $\mathbf{u}^{0}$, while for some $\mathbf{v}^{0}$ the initial velocity is given by
 \begin{equation}
-v_{i}(\mathbf{x}, 0) = s V_{i}(\mathbf{x}).
+v_{i}(\mathbf{x}, 0) = s v_{i}^{0}(\mathbf{x}).
 \end{equation}
 Here $s$ is a dimensionless number that indicates the order of terms in a perturbation series. We shall assume that the 
 subsequent motion can be expanded in powers of $s$, and hence seek a solution of the form
@@ -206,9 +209,11 @@ so that we can write the stress tensor more concisely as
 \begin{equation}
 T_{ij} = s A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}} + O(s^2).
 \end{equation}
-This linearised relationship is \textbf{Hooke's law}. But please note that this is not a "law" of nature nor an 
-empirical result. It arises solely as an approximation to finite elasticity which is valid for sufficiently small 
-displacements about equilibrium. Due to the equality of mixed partial derivatives, the elastic tensor $A_{ijkl}$ 
+This linearised relationship is \textbf{Hooke's law}. But please note that this is not a ``law'' of nature nor only an
+empirical result. It arises as an approximation to finite elasticity which is valid for sufficiently small 
+deformations about equilibrium.
+
+Due to the equality of mixed partial derivatives, the elastic tensor $A_{ijkl}$ 
 possesses the so-called \textbf{hyperelastic symmetry}
 \begin{equation}
 A_{ijkl} = A_{klij}.
@@ -259,7 +264,7 @@ for any deformation gradient $\mathbf{F}$. Using the second part of the polar de
  have $\mathbf{F} = \mathbf{V}\mathbf{R}$, with $\mathbf{V}$ symmetric and positive-definite, while $\mathbf{R}$ is a
   rotation matrix. It follows that $\mathbf{F}$ and $\mathbf{F}\mathbf{Q}$ represent the same magnitude of stretching,
    but oriented about different axes. Thus we can say that in eq. (38) there is a symmetry of the strain energy with 
-   respect to \emph{orientation of stretching}. The collection of all such rotation matrices forms the \textbf{material symmetry 
+   respect to \textbf{orientation of stretching}. The collection of all such rotation matrices forms the \textbf{material symmetry 
    group}\footnote{If you care to, check that this really is a group.} at the point $\mathbf{x}$. 
    
    If the material symmetry 
@@ -279,15 +284,16 @@ W(\mathbf{F}\mathbf{Q}) = W(\mathbf{F}),
 \end{equation}
 for all $\mathbf{F}$ and any rotation matrix $\mathbf{Q}$. From material frame indifference, however, we know that we can always write
 \begin{equation}
-W(\mathbf{F}) = \mathcal{U}(\mathbf{C})
+W(\mathbf{F}) = U(\mathbf{C})
 \end{equation}
 with $\mathbf{C} = \mathbf{F}^{T}\mathbf{F}$. And hence for an isotropic material we must have
 \begin{equation}
-\mathcal{U}(\mathbf{C}) = \mathcal{U}(\mathbf{Q}^{T}\mathbf{C}\mathbf{Q}).
+U(\mathbf{C}) = U(\mathbf{Q}^{T}\mathbf{C}\mathbf{Q}).
 \end{equation}
 Because $\mathbf{C}$ is symmetric, the matrix $\mathbf{Q}^{T}\mathbf{C}\mathbf{Q}$ can be made diagonal for
  an appropriate choice of rotation matrix $\mathbf{Q}$. We conclude that in an isotropic material the strain 
- energy depends \emph{only on $\mathbf{C}$ through its eigenvalues}. Using this result it is only a matter of tedious algebra (which we will skip) to obtain the general form of the elastic tensor in an isotropic material. The end result is that
+ energy depends only on $\mathbf{C}$ through its eigenvalues. Using this result it is only a matter of tedious algebra 
+ (which we will skip) to obtain the general form of the elastic tensor in an isotropic material. The end result is that
 \begin{equation}
 A_{ijkl} = \lambda\delta_{ij}\delta_{kl} + \mu(\delta_{ik}\delta_{jl} + \delta_{il}\delta_{kj}),
 \end{equation}
@@ -334,7 +340,7 @@ extension of these ideas to so-called \textbf{elastic fluids}. This means that t
 but to have no viscosity. Within seismological applications this is a good approximation when considering wave propagation within 
 the oceans or in the Earth's outer core. All our basic equations already apply to elastic fluids, and the only difference 
 is the form of the strain energy function. We stated in the previous lecture that an elastic body has a preferred shape 
-and/or volume. In an elastic fluid, however, there is only a preferred volume. This means that \emph{deformations that leave the 
+and/or volume. In an elastic fluid, however, there is only a preferred volume. This means that \textbf{deformations that leave the 
 volume fixed have no effect on the strain energy}. Mathematically this is expressed by requiring that
 \begin{equation}
 W(\mathbf{x}, \mathbf{F}\mathbf{Q}) = W(\mathbf{x}, \mathbf{F}),
