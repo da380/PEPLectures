@@ -136,7 +136,7 @@ which can be solved quite easily. Having now arrived at a new model, $\mathbf{m}
 misfit we can simply repeat the whole process until the gradient vanishes and a local minimum has been 
 found\footnote{In practice, the process might be stopped when the misfit has decreased sufficiently much from a
  statistical perspective.}. The above method is the simplest example of gradient-based optimisation known as
-\textbf{the method of steepest descent}. More sophisticated algorithms for choosing the descent direction 
+\textbf{the method of steepest descent}. More sophisticated algorithmism for choosing the descent direction 
 tend to be used in practice which have superior convergence properties. In all cases, however, this direction 
 is built from linear combinations of the current and past gradients of the misfit.
 
@@ -151,10 +151,10 @@ the \textbf{finite-difference approximation}
 \end{equation}
 Using this formula, we can get the derivative of the misfit along any direction at the cost of two forward calculations.
 Suppose we introduce an $m$-dimensional
-parameterisation for the model space. Using $m+1$ forward calculations we could then approximate the gradient relative to this
+parametrisation for the model space. Using $m+1$ forward calculations we could then approximate the gradient relative to this
 basis. The advantage of this approach is that it requires no additional theory or coding once a numerical wave propagation 
 code has been developed. The problem is, as noted before, the number of model parameters, $m$, is typically large and so the
-overall cost is too high to compute a single gradient in this manner, let alone the many different gradients needed in 
+overall cost is too high to compute a single gradient in this manner, let alone the many differenti gradients needed in 
 iterative solution of the optimisation problem.
 
 \section*{How you should calculate the gradient of $J$}
