@@ -76,8 +76,8 @@ cannot in general write an explicit formula for $T$ in terms of the velocity, $v
 variations within the Earth seem to be small we can simplify the problem by seeking an approximate \textbf{linearised relation}
 between the observed delay time and velocity perturbations within the Earth. 
 
-Let us write $T(v)$ for the travel time of a certain seismic phase as determined by the velocity model, $v$. This 
-is a mapping from the velocity, which is a scalar-function in the earth model, to the real numbers, and so the 
+Let us write $T(v)$ for the travel time of a certain seismic phase as deterimed by the velocity model, $v$. This 
+is a mapping from the velocity, which is a scalar-funciton in the earth model, to the real numbers, and so the 
 mapping $v\mapsto T(v) $ defines a
 \textbf{functional}. To proceed, we need to introduce the 
 \textbf{functional derivative} of  $T$ with respect to $v$ as defined through a first-order Taylor expansion
@@ -180,10 +180,10 @@ will typically have $n \neq m$ the inverse of this matrix cannot be defined.
 
 We could, of course, select the number of model 
 parameters to be equal to the number of data ($n=m$), but there is no physical reason why this should be the case. Indeed, it 
-is better to determine the model parameterisation based on some idea of what the data should reasonably be able to resolve 
+is better to determine the model parametrisation based on some idea of what the data should reasonably be able to resolve 
 within the Earth. For example, if we are looking at waves of a given dominant frequency, then we can estimate their wavelength 
 in different parts of the Earth using the reference velocity structure. We would not expect to resolve features within the 
-Earth whose size is substantially less than the wavelength of the seismic waves, and can build our model parameterisation 
+Earth whose size is substantially less than the wavelength of the seismic waves, and can build our model parametrisation 
 accordingly. When this is done it is often the case that $m \gg n$, which is to say that there are many more model parameters than data.
 
 Considering first the idealised case in which there are no data errors, suppose we have found a solution, $\mathbf{m}$, of the equation
@@ -363,22 +363,22 @@ and a little effort shows that the exponentiated term can be factored into the f
     p(\mathbf{m}|\mathbf{d}) \propto \exp\left[-\frac{1}{2}(\mathbf{m}-\mathbf{m}_{p})^{T}\mathbf{C}_{p}^{-1}
     (\mathbf{m}-\mathbf{m}_{p})\right]
 \end{equation}
-where we have defined the \textbf{posterior mean}
+where we have defined the \textbf{posteriori mean}
 \begin{equation}
     \mathbf{m}_{p} = (\mathbf{A}^{T}\mathbf{C}^{-1}\mathbf{A} + \mathbf{C}_{m}^{-1})^{-1} (\mathbf{A}^{T}
     \mathbf{C}^{-1}\mathbf{d} + \mathbf{C}_{m}^{-1}\mathbf{m}_{0}),
 \end{equation}
-and the \textbf{posterior model covariance}
+and the \textbf{posteriori model covariance}
 \begin{equation}
     \mathbf{C}_{p} = (\mathbf{A}^{T}\mathbf{C}^{-1}\mathbf{A} + \mathbf{C}_{m}^{-1})^{-1}.
 \end{equation}
-We conclude that in this special case the posterior distribution is Gaussian, and can be determined in closed-form. 
-Moreover, the posterior mean is precisely that obtained via the regularised least squares method subject to the 
+We conclude that in this special case the posteriori distribution is Gaussian, and can be determined in closed-form. 
+Moreover, the posteriori mean is precisely that obtained via the regularised least squares method subject to the 
 choice $\lambda \mathbf{B} = \mathbf{C}_{m}^{-1}$. In this manner we see that solving a regularised least squares 
 problem returns the mean model corresponding to a certain prior distribution. It is sometimes argued that this 
 result justifies use of the regularised least squares, with the prior distribution 
 determining the appropriate choice of regularisation. But note that this does not 
-solve the problem of which form of regularisation should be used, but only re-frames it. 
+solve the problem of which form of regularisation should be used, but only reframes it. 
 
 \section*{What you need to know and be able to do}
 \begin{itemize}
