@@ -139,7 +139,7 @@ u_{i}(x,t)=\frac{1}{2\pi}\int_{\mathbb{R}}\sum_{n=0}^{\infty}\frac{a_{i}^{n}(x)}
 where we note that the $n$ in $a_{i}^{n}$ is a superscript and not an exponent. This expression is known as the \textbf{elastodynamic 
 ray series}. The $n=0$ term within this expression is equivalent to the eq.(9). The physical meaning or need for the additional terms 
 within the expansion is less clear, and indeed, these terms are typically ignored within practical applications. But 
-as an initial comment, we note that each successive term within the series is divided by a factor of $1/(i\omega)$, and within the Fourier domain 
+as an initial commment, we note that each successive term within the series is divided by a factor of $1/(i\omega)$, and within the Fourier domain 
 this is equivalent to a temporal integration. Thus the terms within this series are getting progressively smoother and smoother.
 
 \subsection*{Substitution into the equations of motion}
@@ -199,7 +199,7 @@ can be solved for $T$ and all the $a^{n}$ then it would seem that we have obtain
 For this to be a valid conclusion, however, we must then think carefully about the sense in which the ray series converges. 
 Though we will not enter into this topic in detail, the key point is \textbf{the ray series  is  not convergent in any usual sense}. 
 Indeed, the problem is at low frequencies, with the series being very badly behaved at $\omega=0$. To force this series to converge, 
-we could zero-out the solution in some neighbourhood of $\omega=0$, but by doing this we would be left with  an approximate 
+we could zero-out the solution in some neighborhood of $\omega=0$, but by doing this we would be left with  an approximate 
 solution to the equations of motion. Because, however, the error lies only within a bounded range of frequencies it must be a smooth 
 function. Building on such ideas, it can be shown that the ray theoretic solution \textbf{exactly predicts the 
  singular part of the wavefield}, but that there is a \textbf{smooth error term whose size need not be small}\footnote{These ideas are
