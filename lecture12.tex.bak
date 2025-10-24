@@ -261,7 +261,7 @@ Within the first-order splitting calculations earlier, we consider a Hermitian e
 \end{equation}
 The perturbations to the singlet eigenfrequencies are equal to the eigenvalues of the matrix on the left hand side. 
 Based on so-called \textbf{selection rules} for the matrix elements\footnote{That are near identical to those arising in the quantum theory
-of angular momentum}, it can be shown that this matrix has zero-trace. Because the trace of a matrix is invariant under
+of angular mommentum}, it can be shown that this matrix has zero-trace. Because the trace of a matrix is invariant under
 similarity transforms, it follows that the singlet eigenfrequency perturbations sum to zero. 
 This result is known as the \textbf{diagonal sum rule} and was obtained by Freeman Gilbert in 1971 and played an key role in early studies of
 Earth structure using observations of free oscillation. 
