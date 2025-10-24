@@ -39,7 +39,7 @@ see that we have only three equations for six unknown functions. The problem is,
 to uniquely determine stress tensor\footnote{This counting argument is suggestive but not entirely correct. Rather, the relevant 
 point is that there exist non-zero symmetric tensor fields having vanishing divergence. This can be compared to divergence-free vector 
 fields with which you will be very familiar (i.e. divergence of a curl is zero). In fact, a method for generating divergence-free tensor 
-fields exists using an extension of the curl operator that generates divergence-free symmetric tensor fields.}.
+fields exists using an extension of the curl operator that generates diverence-free symmetric tensor fields.}.
 
 \subsection*{Hydrostatic equilibrium}
 You have seen in the first part of this course that over thousands of years the interior of the Earth flows 
@@ -150,7 +150,7 @@ We model the rotating planet through a first-order perturbation of a spherical r
 the reference model will be written $\rho_{0}$, and similarly for other quantities. Within the rotating planet we then have
 \begin{align}
 \rho&=\rho_{0}+s\rho_{1}+\cdot\cdot\cdot, \\
-p&=p_{0}+s\,p_{1}+\cdot\cdot\cdot, \\
+p&=p_{0}+sp_{1}+\cdot\cdot\cdot, \\
 \phi&=\phi_{0}+s~\phi_{1}+\cdot\cdot\cdot, \\
 \psi&=s~\psi_{1},
 \end{align}
@@ -258,8 +258,9 @@ Having done this we can then use eq.(35) to determine the other parameters for t
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.6\textwidth]{figures/L10F1.png}
-\caption{The upper panel shows variations in the Earth’s spherically averaged density structure as determined from free 
-oscillation data along with mass and moment of inertia constraints. The lower figure then plots the reciprocal of the ellipticity as
+\caption{The upper panel shows variations in the Earth’s spherically averaged density struc-
+ture as determined from free oscillation data along with mass and moment of in-
+ertia constraints. The lower figure then plots the reciprocal of the ellipticity as
 determined through numerical solution of Clairaut’s equation.}
 \label{fig:fig1}
 \end{figure}

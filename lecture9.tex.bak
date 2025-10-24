@@ -292,14 +292,15 @@ results we have shown that the equations of motion are equivalent to
 \end{equation}
 These equations are identical in form to those in an inertial frame except for the inclusion of the Coriolis and 
 centrifugal accelerations -- the Euler acceleration has been removed because we have restricted attention to a 
-steadily rotating frame. From this point on we will consistently work in the approximately co-rotating frame, 
-and hence will simplify notations by dropping overlines on terms linked to the relative motion. 
+sreadily rotating frame. From this point on we will consistently work in the approximately co-rotating frame, 
+and hence will simplify notations by writing $\bphi$ for $\overline{\boldsymbol{\varphi}}$ and 
+similarly for other terms.
 
 \subsection*{Linearised equations of motion}
 
 As ever, our main concern is with the linearised equations of motion about an equilibrium state.
 Strictly, we should  use the term \textbf{relative equilibrium}, as the body is now 
-undergoing a steadily rotation relative to inertial space. We consider a disturbance to the body
+undergoing a steadily rotation relative to inertial space. We consider a disturbace to the body
 caused by a stress glut, and  hence the strain energy to be
 \begin{equation}
 W(\mathbf{x},t,\mathbf{F})=U(\mathbf{x},\mathbf{C})-s\frac{1}{2}\overline{S}_{ij}(\mathbf{x},t)C_{ij}
