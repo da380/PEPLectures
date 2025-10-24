@@ -250,7 +250,7 @@ In this manner, we have obtained the \textbf{eigenfunction expansion solution}
 \tilde{\mathbf{u}}=\sum_{km}\frac{\langle km|\tilde{\mathbf{f}}\rangle}{\omega_{k}^{2}-\omega^{2}}|km\rangle ,
 \end{equation}
 for the frequency-domain problem. Inversion of this solution into the time-domain can be readily done using contour integration. Such 
-techniques are not necessary for this course, but in the final problem set you will be given and make use of the resulting time-domain solution. 
+techniques are not necessary for this course, but in the final problem set you will be given and make use of the resuting time-domain solution. 
 
 
 
