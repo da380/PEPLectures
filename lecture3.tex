@@ -75,7 +75,7 @@ is neglected, but it is thought that this is a good approximation in most circum
 Our aim is to incorporate motion on a fault into the equations of motion for an elastic body. To do this, we will 
 actually take a more general, and yet ultimately simpler, approach. Returning to the material of Lecture 12, we introduced the Lagrangian density
 \begin{equation}
-\mathcal{L}(\mathbf{x}, t, \boldsymbol{\varphi}, \mathbf{v}, \mathbf{F}) = \frac{1}{2}\rho(\mathbf{x})||\mathbf{v}||^2 - W(\mathbf{x}, \mathbf{F}).
+\mathcal{L}(\mathbf{x}, t, \boldsymbol{\varphi}, \mathbf{v}, \mathbf{F}) = \frac{1}{2}\rho(\mathbf{x})||\mathbf{v}||^2 - W(\mathbf{x}, \mathbf{F}),
 \end{equation}
 for the finite motion of a hyperelastic body, while the associated action is
 \begin{equation}
@@ -84,7 +84,7 @@ for the finite motion of a hyperelastic body, while the associated action is
 where $[0, T]$ is the time-interval of interest. From the resulting equations of motion it is readily shown that the 
 \textbf{total energy} of the elastic body is conserved
 \begin{equation}
-\frac{d}{dt}\int_{M}E(\mathbf{x}, t)\dd^{3}\mathbf{x} = 0,
+\frac{\ddns}{\ddns t}\int_{M}E(\mathbf{x}, t)\dd^{3}\mathbf{x} = 0,
 \end{equation}
 where the \textbf{energy density} is defined in the expected manner
 \begin{equation}

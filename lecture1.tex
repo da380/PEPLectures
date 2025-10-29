@@ -108,35 +108,35 @@ This ability to easily transform integrals between the instantaneous and referen
 Let $U$ be a subset of the reference body and $U_{t}$ the region of physical space it occupies at time $t$. The mass of this 
 sub-body can be written
 \begin{equation}
-\int_{U_{t}}\rho(\mathbf{y},t)\dd^{3}\mathbf{y},
+\int_{U_{t}}\varrho(\mathbf{y},t)\dd^{3}\mathbf{y},
 \label{eq:8}
 \end{equation}
 where $\rho(\mathbf{y},t)$ is the density at the point $\mathbf{y}$ in $M_{t}$ and time $t$. During the deformation matter is not 
 created nor destroyed. This means that the mass of this arbitrary sub-body is constant, and hence 
 \begin{equation}
-\frac{d}{dt}\int_{U_{t}}\rho(\mathbf{y},t)\dd^{3}\mathbf{y}=0.
+\frac{\ddns}{\ddns t}\int_{U_{t}}\varrho(\mathbf{y},t)\dd^{3}\mathbf{y}=0.
 \label{eq:9}
 \end{equation}
 To simplify this expression we use the motion to transform the integration in eq.(\ref{eq:9}) to the reference body
 \begin{equation}
-\frac{d}{dt}\int_{U}J(\mathbf{x},t)\rho[\bphi(\mathbf{x},t),t]\dd^{3}\mathbf{x}=0.
+\frac{\ddns}{\ddns t}\int_{U}J(\mathbf{x},t)\varrho[\bphi(\mathbf{x},t),t]\dd^{3}\mathbf{x}=0.
 \label{eq:10}
 \end{equation}
 This integral is over a fixed domain, and so we can interchange the order of differentiation and integration. Furthermore, as 
 $U$ is an arbitrary subset of $M$, the equality can hold if and only if
 \begin{equation}
-\frac{\partial}{\partial t}\{J(\mathbf{x},t)\rho[\bphi(\mathbf{x},t),t]\}=0.
+\frac{\partial}{\partial t}\{J(\mathbf{x},t)\varrho[\bphi(\mathbf{x},t),t]\}=0.
 \label{eq:11}
 \end{equation}
-It follows we can introduce a time-independent \textbf{referential density} $\rho_{0}$ such that
+It follows we can introduce a time-independent \textbf{referential density} $\rho$ such that
 \begin{equation}
-\rho_{0}(\mathbf{x})=J(\mathbf{x},t)\rho[\bphi(\mathbf{x},t),t]
+\rho(\mathbf{x})=J(\mathbf{x},t)\varrho[\bphi(\mathbf{x},t),t]
 \label{eq:12}
 \end{equation}
 This is a statement of mass conservation expressed within the reference body. Note that if the reference body is chosen such 
 that eq.(\ref{eq:1}) holds at some time $t=t_{0}$ then at this time eq.(\ref{eq:12}) simplifies to
 \begin{equation}
-\rho_{0}(\mathbf{x})=\rho(\mathbf{x},t_{0}).
+\rho(\mathbf{x})=\varrho(\mathbf{x},t_{0}).
 \label{eq:13}
 \end{equation}
 Thus, when using this common choice of reference body, the referential density is precisely the  density at the reference time.
@@ -144,12 +144,12 @@ Thus, when using this common choice of reference body, the referential density i
 \section*{Kinetic energy}
 By analogy with particle mechanics, the \textbf{kinetic energy density} of the body per-unit volume within the reference body $M$ is defined as
 \begin{equation}
-\frac{1}{2}\rho_{0}(\mathbf{x})||\mathbf{v}(\mathbf{x},t)||^{2},
+\frac{1}{2}\rho(\mathbf{x})||\mathbf{v}(\mathbf{x},t)||^{2},
 \label{eq:14}
 \end{equation}
 and summing up such contributions, we see that the total kinetic energy can be written
 \begin{equation}
-\mathcal{T}(t)=\frac{1}{2}\int_{M}\rho_{0}(\mathbf{x})||\mathbf{v}(\mathbf{x},t)||^{2}\dd^{3}\mathbf{x}.
+\mathcal{T}(t)=\frac{1}{2}\int_{M}\rho(\mathbf{x})||\mathbf{v}(\mathbf{x},t)||^{2}\dd^{3}\mathbf{x}.
 \label{eq:15}
 \end{equation}
 
@@ -249,7 +249,7 @@ A Lagrangian density for a hyperelastic body is defined in the usual manner\foot
 the necessary ideas are developed here from first principles. But please ask either in the supervisions or otherwise if you would 
 like any additional help with this material.} as the difference between the kinetic and potential energy densities
 \begin{equation}
-\mathcal{L}(\mathbf{x},t,\bphi,\mathbf{v},\mathbf{F})=\frac{1}{2}\rho_{0}(\mathbf{x})||\mathbf{v}||^{2}-W(\mathbf{x},\mathbf{F})
+\mathcal{L}(\mathbf{x},t,\bphi,\mathbf{v},\mathbf{F})=\frac{1}{2}\rho(\mathbf{x})||\mathbf{v}||^{2}-W(\mathbf{x},\mathbf{F})
 \label{eq:24}
 \end{equation}
 while the the associated action is
@@ -319,7 +319,7 @@ variational principle, and not because of some prior restriction on the class of
 For the Lagrangian density in eq.(\ref{eq:24}) we readily find that
 \begin{align}
 \frac{\partial\mathcal{L}}{\partial\varphi_{i}}&=0, \label{eq:35a}\\
-\frac{\partial\mathcal{L}}{\partial v_{i}}&=\rho_{0} v_{i} \label{eq:35b}\\
+\frac{\partial\mathcal{L}}{\partial v_{i}}&=\rho v_{i} \label{eq:35b}\\
 \frac{\partial\mathcal{L}}{\partial F_{ij}}&=-\frac{\partial W}{\partial F_{ij}}. \label{eq:35c}
 \end{align}
 The \textbf{first Piola-Kirchhoff stress tensor} is defined by
@@ -329,7 +329,7 @@ T_{ij}(\mathbf{x},t)=\frac{\partial W}{\partial F_{ij}}[\mathbf{x},\mathbf{F}(\m
 \end{equation}
 so that the Euler-Lagrange equations can be written
 \begin{equation}
-\rho_{0}\frac{\partial v_{i}}{\partial t}-\frac{\partial T_{ij}}{\partial x_{j}}=0,
+\rho\frac{\partial v_{i}}{\partial t}-\frac{\partial T_{ij}}{\partial x_{j}}=0,
 \label{eq:37}
 \end{equation}
 while the boundary condition becomes
