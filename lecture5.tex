@@ -121,7 +121,7 @@ to the slowness vector within homogeneous regions where the travel time depends 
 To proceed, it is useful to decompose displacement vector fields into an integral 
 over harmonic plane waves
 \begin{equation}
-u_{i}(x,t)=\frac{1}{2\pi}\int_{\mathbb{R}}\tilde{f}(\omega)e^{i\omega[t-T(x)]}a_{i}(x)\dd\omega,
+u_{i}(x,t)=\frac{1}{2\pi}\int_{\mathbb{R}}\tilde{f}(\omega)e^{\ii[t-T(x)]}a_{i}(x)\dd\omega,
 \end{equation}
 It is clear that eq.(5) is the temporal convolution of the singular plane wave
 \begin{equation}
@@ -134,12 +134,12 @@ We could try to use the ansatz in eq.(9) as a
 starting point for the development of ray theory, but experience has shown that it is necessary to consider 
 instead the following generalisation
 \begin{equation}
-u_{i}(x,t)=\frac{1}{2\pi}\int_{\mathbb{R}}\sum_{n=0}^{\infty}\frac{a_{i}^{n}(x)}{(i\omega)^{n}}e^{i\omega[t-T(x)]}\dd\omega,
+u_{i}(x,t)=\frac{1}{2\pi}\int_{\mathbb{R}}\sum_{n=0}^{\infty}\frac{a_{i}^{n}(x)}{(\ii\omega)^{n}}e^{\ii\omega[t-T(x)]}\dd\omega,
 \end{equation}
 where we note that the $n$ in $a_{i}^{n}$ is a superscript and not an exponent. This expression is known as the \textbf{elastodynamic 
 ray series}. The $n=0$ term within this expression is equivalent to the eq.(9). The physical meaning or need for the additional terms 
 within the expansion is less clear, and indeed, these terms are typically ignored within practical applications. But 
-as an initial comment, we note that each successive term within the series is divided by a factor of $1/(i\omega)$, and within the Fourier domain 
+as an initial comment, we note that each successive term within the series is divided by a factor of $1/(\ii\omega)$, and within the Fourier domain 
 this is equivalent to a temporal integration. Thus the terms within this series are getting progressively smoother and smoother.
 
 \subsection*{Substitution into the equations of motion}
@@ -154,33 +154,33 @@ where we are not here allowing a body force associated with a seismic source. Wi
 where for simplicity we use the same symbol for the displacement vector and its Fourier transform. From eq.(10) we see that the 
 ray series in the Fourier domain is simply
 \begin{equation}
-u_{i}(x,\omega)=\sum_{n=0}^{\infty}\frac{a_{i}^{n}(x)}{(i\omega)^{n}}e^{-i\omega T(x)}.
+u_{i}(x,\omega)=\sum_{n=0}^{\infty}\frac{a_{i}^{n}(x)}{(\ii\omega)^{n}}e^{-\ii\omega T(x)}.
 \end{equation}
 From eq.(7) and eq.(13) we find that
 \begin{align}
-\frac{\partial u_{k}}{\partial x_{l}}&=\sum_{n=0}^{\infty}\frac{1}{(i\omega)^{n}}\left(\frac{\partial a_{k}^{n}}{\partial x_{l}}
--i\omega p_{l}a_{k}^{n}\right)e^{-i\omega T}, \\
-A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}&=\sum_{n=0}^{\infty}\frac{1}{(i\omega)^{n}}A_{ijkl}\left(\frac{\partial a_{k}^{n}}
-{\partial x_{l}}-i\omega p_{l}a_{k}^{n}\right)e^{-i\omega T}.
+\frac{\partial u_{k}}{\partial x_{l}}&=\sum_{n=0}^{\infty}\frac{1}{(\ii\omega)^{n}}\left(\frac{\partial a_{k}^{n}}{\partial x_{l}}
+-\ii\omega p_{l}a_{k}^{n}\right)e^{-\ii\omega T}, \\
+A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}&=\sum_{n=0}^{\infty}\frac{1}{(\ii\omega)^{n}}A_{ijkl}\left(\frac{\partial a_{k}^{n}}
+{\partial x_{l}}-\ii\omega p_{l}a_{k}^{n}\right)e^{-\ii\omega T}.
 \end{align}
 Taking the divergence of the second expression, we  obtain
 \begin{multline}
 \frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\right)=\sum_{n=0}^{\infty}\frac{1}
-{(i\omega)^{n}}\left[\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial a_{k}^{n}}{\partial x_{l}}\right)
--i\omega\frac{\partial}{\partial x_{j}}(A_{ijkl}p_{l}a_{k}^{n}) \right. \\
-\left. -i\omega A_{ijkl}p_{j}\frac{\partial a_{k}^{n}}{\partial x_{l}}+(i\omega)^{2}A_{ijkl}p_{j}p_{l}a_{k}^{n}\right]e^{-i\omega T}.
+{(\ii\omega)^{n}}\left[\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial a_{k}^{n}}{\partial x_{l}}\right)
+-\ii\omega\frac{\partial}{\partial x_{j}}(A_{ijkl}p_{l}a_{k}^{n}) \right. \\
+\left. -\ii\omega A_{ijkl}p_{j}\frac{\partial a_{k}^{n}}{\partial x_{l}}+(\ii\omega)^{2}A_{ijkl}p_{j}p_{l}a_{k}^{n}\right]e^{-\ii\omega T}.
 \end{multline}
 and substituting into the frequency domain equations of motion in eq.(12) we arrive at
 \begin{multline}
-\sum_{n=0}^{\infty}\frac{1}{(i\omega)^{n}}\left[\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial a_{k}^{n}}{\partial x_{l}}\right)-i\omega\frac{\partial}{\partial x_{j}}(A_{ijkl}p_{l}a_{k}^{n}) \right. \\
-\left. -i\omega A_{ijkl}p_{j}\frac{\partial a_{k}^{n}}{\partial x_{l}}+(i\omega)^{2}A_{ijkl}p_{j}p_{l}a_{k}^{n}-(i\omega)^{2}\rho a_{i}^{n}\right]e^{-i\omega T}=0 .
+\sum_{n=0}^{\infty}\frac{1}{(\ii\omega)^{n}}\left[\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial a_{k}^{n}}{\partial x_{l}}\right)-\ii\omega\frac{\partial}{\partial x_{j}}(A_{ijkl}p_{l}a_{k}^{n}) \right. \\
+\left. -\ii\omega A_{ijkl}p_{j}\frac{\partial a_{k}^{n}}{\partial x_{l}}+(\ii\omega)^{2}A_{ijkl}p_{j}p_{l}a_{k}^{n}-(\ii\omega)^{2}\rho a_{i}^{n}\right]e^{-\ii\omega T}=0 .
 \end{multline}
 
-The above equation must hold for all frequencies, and this can only be true if the coefficient of each power of $i\omega$ is separately equal to zero. From the coefficients of the highest-order term $(i\omega)^{2}$ we obtain
+The above equation must hold for all frequencies, and this can only be true if the coefficient of each power of $\ii\omega$ is separately equal to zero. From the coefficients of the highest-order term $(\ii\omega)^{2}$ we obtain
 \begin{equation}
 [A_{ijkl}p_{j}p_{l}-\rho\delta_{ik}]a_{k}^{0}=0,
 \end{equation}
-while those for the $i\omega$ term take the form
+while those for the $\ii\omega$ term take the form
 \begin{equation}
 [A_{ijkl}p_{j}p_{l}-\rho\delta_{ik}]a_{k}^{1}=\frac{\partial}{\partial x_{j}}(A_{ijkl}p_{l}a_{k}^{0})+A_{ijkl}p_{j}\frac{\partial a_{k}^{0}}{\partial x_{l}},
 \end{equation}
@@ -292,7 +292,7 @@ Within these equations, $\sigma$ is a \textbf{generating parameter} whose physic
 initially is just a parameterisation for the resulting integral curves.
 A key property of Hamilton's equations is that the \textbf{Hamiltonian is conserved along their solutions}. Indeed, using the chain rule we obtain
 \begin{equation}
-\frac{\ddns}{\ddns\sigma}H[x(\sigma), p(\sigma)]=\frac{\partial H}{\partial x_{i}}\frac{\ddns x_{i}}{\ddns\sigma}+\frac{\partial H}{\partial p_{i}}\frac{\ddns p_{i}}{d\sigma} = -\frac{\ddns p_{i}}{d\sigma}\frac{\ddns x_{i}}{\ddns\sigma}+\frac{\ddns x_{i}}{d\sigma}\frac{\ddns p_{i}}{\ddns\sigma}=0,
+\frac{\ddns}{\ddns\sigma}H[\mathbf{x}(\sigma), \mathbf{p}(\sigma)]=\frac{\partial H}{\partial x_{i}}\frac{\ddns x_{i}}{\ddns\sigma}+\frac{\partial H}{\partial p_{i}}\frac{\ddns p_{i}}{d\sigma} = -\frac{\ddns p_{i}}{d\sigma}\frac{\ddns x_{i}}{\ddns\sigma}+\frac{\ddns x_{i}}{d\sigma}\frac{\ddns p_{i}}{\ddns\sigma}=0,
 \end{equation}
 where on the right hand side we have suppressed arguments for clarity. As we have $H_{k}(\mathbf{x}^{0},\mathbf{p}^{0})=\frac{1}{2}$ each point
  on the initial surface, it follows that $H_{k}[\mathbf{x}(\sigma), \mathbf{p}(\sigma)]=\frac{1}{2}$ along the 
@@ -379,4 +379,7 @@ in material parameters along internal boundaries so long as they are smooth rela
 
 
 
+
 \end{document}
+
+
