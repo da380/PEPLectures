@@ -47,7 +47,7 @@ like a fluid, this being due to solid-state creep. Considering for simplicity a 
 stress tensor\footnote{This is the Cauchy stress that occurs within spatial formulations of continuum mechanics. But note that 
 at equilibrium the referential and spatial pictures coincide due to our choice of reference body.} takes the form
 \begin{equation}
-\tau_{ij}=-p~\delta_{ij}+\eta\left(\frac{\partial v_{i}}{\partial x_{j}}+\frac{\partial v_{j}}{\partial x_{i}}-\frac{2}{3}\frac{\partial v_{k}}{\partial x_{k}}\delta_{ij}\right)
+\sigma_{ij}=-p~\delta_{ij}+\eta\left(\frac{\partial v_{i}}{\partial x_{j}}+\frac{\partial v_{j}}{\partial x_{i}}-\frac{2}{3}\frac{\partial v_{k}}{\partial x_{k}}\delta_{ij}\right)
 \end{equation}
 where $p$ is the pressure, $\eta$ the viscosity, and $v_{i}$ the velocity. Note that the given expression is valid in a 
 \textbf{compressible fluid}, but it reduces to that for an incompressible one by requiring the velocity be divergence-free. 
@@ -83,14 +83,14 @@ where we have defined
 \end{equation}
 Moving to vector notation, the hydrostatic equilibrium equation takes the simple form
 \begin{equation}
-\nabla p+\rho\nabla\gamma=0,
+\nabla p+\rho\nabla\gamma=\mathbf{0},
 \end{equation}
 where we have introduced the \textbf{gravity potential}, $\gamma=\phi+\psi$. Note that ``gravity'' is used
  here for the \textbf{combined effect of gravitational and centrifugal forces}.
 
 An immediate consequence of eq.(9) is that $\nabla p$ and $\nabla\gamma$ are parallel, and hence the level surfaces of these fields are coincident. In particular, pressure vanishes on the surface of the planet, and so this must also be an equipotential of gravity. If we take the curl of eq.(9), recalling $\nabla\times\nabla f=0$ for any scalar field, we find
 \begin{equation}
-\nabla\rho\times\nabla\gamma=0,
+\nabla\rho\times\nabla\gamma=\mathbf{0},
 \end{equation}
 and so note that $\rho$ and $\gamma$ also have coincident level surfaces. In conclusion we have seen 
 that for an planet to be in hydrostatic equilibrium the level surfaces of $p$, $\rho$, and $\gamma$ must all be the same.
@@ -108,7 +108,7 @@ As a starting point, suppose that the planet does not rotate, and hence $\psi=0$
 spherical in shape, and that density varies only with radius. We then know that $\phi$ is also spherically symmetric, 
 and hence eq.(9) reduces to
 \begin{equation}
-\nabla p+\rho\frac{\ddns \phi}{\ddns r}\hat{\mathbf{r}}=0
+\nabla p+\rho\frac{\ddns \phi}{\ddns r}\hat{\mathbf{r}}=\mathbf{0},
 \end{equation}
 with $\hat{\mathbf{r}}$ a radial unit vector. To solve this equation we can clearly take $p$ to be a function of $r$ 
 alone, and hence need only integrate
@@ -164,7 +164,7 @@ with $(\theta,\varphi)$ spherical polar co-ordinates.
 
 Putting the above expansions into the equilibrium equations we find at first-order
 \begin{equation}
-\nabla p_{1}+\rho_{0}\nabla\gamma_{1}+\rho_{1}g_{0}\hat{\mathbf{r}}=0,
+\nabla p_{1}+\rho_{0}\nabla\gamma_{1}+\rho_{1}g_{0}\hat{\mathbf{r}}=\mathbf{0},
 \end{equation}
 where $\gamma_{1}=\phi_{1}+\psi_{1}$, and we have written $g_{0}=\frac{\ddns \phi_{0}}{\ddns r}$ for convenience. 
 The boundary condition on pressure is applied on the perturbed surface, and hence
@@ -188,7 +188,7 @@ p_{1}-\rho_{0}g_{0}h_{1}=0.
 We will show that eq.(22) and (26) allow the density, pressure, and boundary perturbations to be expressed in terms of 
 that for the gravity potential. First, we take the cross product of eq.(22) with the unit vector $\hat{\mathbf{r}}$ to obtain
 \begin{equation}
-\hat{\mathbf{r}}\times\nabla p_{1}+\hat{\mathbf{r}}\times\rho_{0}\nabla\gamma_{1}=0.
+\hat{\mathbf{r}}\times\nabla p_{1}+\hat{\mathbf{r}}\times\rho_{0}\nabla\gamma_{1}=\mathbf{0}.
 \end{equation}
 Noting that
 \begin{equation}
@@ -198,7 +198,7 @@ Noting that
 \end{equation}
 eq.(27) can be written
 \begin{equation}
-\hat{\mathbf{r}}\times\nabla(p_{1}+\rho_{0}\gamma_{1})=0.
+\hat{\mathbf{r}}\times\nabla(p_{1}+\rho_{0}\gamma_{1})=\mathbf{0}.
 \end{equation}
 This relation tells us that the gradient of $p_{1}+\rho_{0}\gamma_{1}$ is parallel to $\hat{\mathbf{r}}$, and hence this function
  depends on radius alone. We are free to assume that the perturbations all average to zero over spherical surfaces\footnote{If not, 
@@ -214,11 +214,11 @@ h_{1}=-\frac{\gamma_{1}}{g_{0}}
 
 For the second stage of the argument, we take the curl of eq.(22) to obtain
 \begin{equation}
-\frac{\ddns \rho_{0}}{\ddns r}\hat{\mathbf{r}}\times\nabla\gamma_{1}+g_{0}\nabla\rho_{1}\times\hat{\mathbf{r}}=0.
+\frac{\ddns \rho_{0}}{\ddns r}\hat{\mathbf{r}}\times\nabla\gamma_{1}+g_{0}\nabla\rho_{1}\times\hat{\mathbf{r}}=\mathbf{0}.
 \end{equation}
 Using the same trick as before, this is equivalent to
 \begin{equation}
-\hat{\mathbf{r}}\times\nabla\left(\frac{\ddns \rho_{0}}{\ddns r}\gamma_{1}-g_{0}\rho_{1}\right)=0,
+\hat{\mathbf{r}}\times\nabla\left(\frac{\ddns \rho_{0}}{\ddns r}\gamma_{1}-g_{0}\rho_{1}\right)=\mathbf{0},
 \end{equation}
 from which we see that the density perturbation is given by
 \begin{equation}
