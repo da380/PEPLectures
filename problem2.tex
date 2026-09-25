@@ -1,137 +1,14 @@
 \documentclass[a4paper,10pt]{paper}
 
 \usepackage{mycommands}
-\usepackage{amsmath}
 
-\title{Problem Set 2}
+\title{Seismology Problem Set 2}
 \author{David Al-Attar \\ Michaelmas Term, \the\year}
 
 \begin{document}
 
 \maketitle
 
-\begin{enumerate}
-
-\item Consider the regularised least squares solution to a linear(ised) inverse problem obtained by minimising the function
-\begin{equation*}
-    J(\mathbf{m})=\frac{1}{2}(\mathbf{A}\mathbf{m}-\mathbf{d})^{T}\mathbf{C}^{-1}(\mathbf{A}\mathbf{m}-\mathbf{d})+\frac{\lambda}{2}\mathbf{m}^{T}\mathbf{B}\mathbf{m}.
-\end{equation*}
-Suppose that the data takes the form $\mathbf{d}=\mathbf{A}\mathbf{m}_{in}$ with $\mathbf{m}_{in}$ a specified input model. Show that the resulting least squares solution, $\mathbf{m}_{out}$, takes the form
-\begin{equation*}
-    \mathbf{m}_{out}=\mathbf{R}\mathbf{m}_{in},
-\end{equation*}
-where $\mathbf{R}$ is a matrix to be determined. Discuss the significance of this so-called resolution matrix, explaining why, in particular, it would be desirable for its value to be close to the identity matrix.
-
-\item
-
-Consider a linear inverse problem of the standard form
-\begin{equation*}
-    \mathbf{d} = \mathbf{A}\mathbf{m}+\mathbf{e}, 
-\end{equation*}
-with $\mathbf{d}$ an $n$-dimensional data vector, $\mathbf{m}$ an $m$-dimensional model vector, $\mathbf{A}$ an $n\times m$ matrix, and $\mathbf{e}$ and $n$-dimensional vector of random errors. We assume $m > n$, which 
-is to say that there are more unknown model parameters than available data. 
-We further suppose  that the data has been processed such that the components of the random errors are uncorrelated and have unit standard deviations (this corresponds to the data covariance, $\mathbf{C}$, being the $n\times n$ identity matrix).
-
-
-
-\begin{enumerate}
-
-    \item  A model $\mathbf{m}$ is said to be compatible with the data if
-\begin{equation*}
-    \|\mathbf{A}\mathbf{m}-\mathbf{d}\|^{2} \le \chi^{2}_{c}, 
-\end{equation*}
-where $\chi^{2}_{c}$ is a critical value for the so-called chi-squared statistic. What type of geometric region of the model-space is defined by this inequality? 
-
-\item Supposing that $ \|\mathbf{d}\|^{2} > \chi^{2}_{c}$, the region of the model space defined by the inequality in (a) does not contain the origin. In such 
-cases, the closest point within this region to the origin must lie on the boundary-set defined by 
-\begin{equation*}
-    \|\mathbf{A}\mathbf{m}-\mathbf{d}\|^{2} = \chi^{2}_{c}.
-\end{equation*}
-Using the method of Lagrange multipliers, we can determine this \emph{minimum norm solution} by considering the Lagrangian
-\begin{equation*}
-    \mathcal{L}(\mathbf{m},\mu)=\|\mathbf{m}\|^{2}+\mu(\|\mathbf{A}\mathbf{m}-\mathbf{d}\|^{2}-\chi^{2}_{c}), 
-\end{equation*}
-where $\mu$ is a Lagrange multiplier. Derive the equations for $\mathbf{m}$ and $\mu$ that must hold at the minimum norm solution. 
-Discuss the relationship between this approach and regularised least squares. 
-\end{enumerate}
-
-
-\item Consider the deformation of an isotropic elastic body due to an applied surface load, $\sigma$. The relevant linearised equations of motion are
-\begin{gather*}
-    -\frac{\partial T_{ij}}{\partial x_{j}}=0; \\
-    T_{ij}=\lambda\frac{\partial u_{k}}{\partial x_{k}}\delta_{ij}+\mu\left(\frac{\partial u_{i}}{\partial x_{j}}+\frac{\partial u_{j}}{\partial x_{i}}\right),
-\end{gather*}
-within the reference body $M$, and subject to boundary conditions
-\begin{equation*}
-    T_{ij}\hat{n}_{j}=\sigma g_{i}
-\end{equation*}
-on its boundary, $\partial M$. Here $g_{i}$ is the acceleration due to gravity prior to the deformation. Note that self-gravitation is being ignored within these equations.
-
-Suppose that observations, $\mathbf{u}_{i}^{obs}$, of the displacement vector have been made at surface locations $\mathbf{x}_i$ for $i=1,...,m$. An inverse problem could then be formulated to estimate the Lamé parameters, $\lambda$ and $\mu$, as well as the load, $\sigma$. To this end, we can seek to minimise the misfit
-\begin{equation*}
-    J=\frac{1}{2}\sum_{i=1}^{m}\frac{1}{\sigma_{i}^2}||\mathbf{u}(\mathbf{x}_{i})-\mathbf{u}_{i}^{obs}||^{2}
-\end{equation*}
-where $\sigma_{i}$ is the standard deviation for the $i$-th observation. Adapt the approach within Lecture 19 to derive sensitivity kernels for $J$ with respect to $\lambda$, $\mu$, and $\sigma$, showing how they can be calculated through one solution of the forward problem and one of an appropriate adjoint problem.
-
-
-
-
-
-\item Recall that the Lagrangian for a self-gravitating elastic body is given by
-\begin{equation*}
-    \mathcal{L}(\mathbf{x},t,\boldsymbol{\varphi},\mathbf{v},\mathbf{F})=\frac{1}{2}\rho(\mathbf{x})||\mathbf{v}||^{2}-W(\mathbf{x},t,\mathbf{F})-\frac{1}{2}\rho(\mathbf{x})\zeta(\mathbf{x},t),
-\end{equation*}
-where $\zeta$ is the referential gravitational potential
-\begin{equation*}
-    \zeta(\mathbf{x},t)=-G\int_{M}\frac{\rho(\mathbf{x}')}{\{[\varphi_{i}(\mathbf{x},t)-\varphi_{i}(\mathbf{x}',t)][\varphi_{i}(\mathbf{x},t)-\varphi_{i}(\mathbf{x}',t)]\}^{\frac{1}{2}}}\dd^{3}\mathbf{x}'.
-\end{equation*}
-By calculating the appropriate functional derivative, show that
-\begin{equation*}
-    \frac{\delta\mathcal{L}}{\delta\varphi_{i}}=\rho\gamma_{i}
-\end{equation*}
-where $\gamma_{i}$ is the referential gravitational acceleration.
-
-\item Consider a planet at equilibrium occupying the volume $M$ and with density $\rho$. Its gravitational potential, $\phi$, is a solution of Poisson's equation
-\begin{equation*}
-    \nabla^{2}\phi=4\pi G\rho,
-\end{equation*}
-where it is understood that $\rho$ vanishes outside of $M$. Across the surface $\partial M$ we then have continuity conditions on $\phi$ and its normal derivative, and finally require that $\phi$ tend to zero at infinity. Suppose that the planet is only slightly aspherical, with boundary
-\begin{equation*}
-    r=b+sh_{1}(\theta,\varphi)+\cdot\cdot\cdot,
-\end{equation*}
-in spherical polar co-ordinates, and its density decomposed as
-\begin{equation*}
-    \rho=\rho_{0}+s \rho_{1}+\cdot\cdot\cdot,
-\end{equation*}
-with $\rho_{0}$ spherically symmetric. Here $s$ is a perturbation parameter, and the dots denote higher-order terms that are to be neglected. Similarly writing the potential in the form $\phi=\phi_{0}+s \phi_{1}+\cdot\cdot\cdot$ show that across the reference surface $r=b$ we require continuity of both $\phi_{1}$ and
-\begin{equation*}
-    \frac{\partial\phi_{1}}{\partial r}+4\pi G\rho_{0}h_{1}.
-\end{equation*}
-
-\item Using results from Lecture 22 along with residue calculus (which you don't need to know for this course), it can be shown that the time-domain solution of the elastodynamic equations in a non-rotating earth model can be expressed as the following eigenfunction expansion
-\begin{equation*}
-    \mathbf{u}(\mathbf{x},t)=\sum_{km}\left\{\int_{0}^{t}\frac{\sin[\omega_{k}(t-t')]}{\omega_{k}}\int_{M}\overline{S}_{ij}(\mathbf{x}',t')\frac{\partial|km\rangle^{*}}{\partial x'_{j}}(\mathbf{x}')\dd^{3}\mathbf{x}'\dd t'\right\}|km\rangle(\mathbf{x}).
-\end{equation*}
-Simplify this expression in the case of a point source for which
-\begin{equation*}
-    \overline{S}_{ij}(\mathbf{x},t)=M_{ij}\delta(\mathbf{x}-\mathbf{x}_{s})H(t-t_{s}),
-\end{equation*}
-with $M_{ij}$ known as the moment tensor, $\mathbf{x}_{s}$ the source location, and $t_{s}$ the source time. Describe briefly and qualitatively how an inverse problem might be formulated to estimate the ten source parameters $(M_{ij},\mathbf{x}_{s},t_{s})$ from recorded seismograms.
-
-\item Consider the eigenvalue problem for a rotating earth model
-\begin{equation*}
-    -\omega^{2}\langle \mathbf{w}|\mathbf{P}|\mathbf{s}\rangle+\ii\omega\langle \mathbf{w}|\mathbf{W}|\mathbf{s}\rangle+\langle \mathbf{w}|\mathbf{H}|\mathbf{s}\rangle=0
-\end{equation*}
-where $\mathbf{s}$ is the eigenfunction, $\omega$ the eigenvalue, and $\mathbf{w}$ an arbitrary test function. Assuming the eigenfunction normalisation condition
-\begin{equation*}
-    \langle \mathbf{s}|\mathbf{P}|\mathbf{s}\rangle=1,
-\end{equation*}
-show that the eigenfrequency can be written
-\begin{equation*}
-    \omega=\frac{1}{2}\ii\langle \mathbf{s}|\mathbf{W}|\mathbf{s}\rangle\pm\sqrt{\langle \mathbf{s}|\mathbf{H}|\mathbf{s}\rangle-\frac{1}{4}\langle \mathbf{s}|\mathbf{W}|\mathbf{s}\rangle^{2}}.
-\end{equation*}
-Use this result to discuss qualitatively the stability of a rotating earth model, including, in particular, the role of the Coriolis and centrifugal forces.
-
-\end{enumerate}
+\input{problem2_body}
 
 \end{document}
