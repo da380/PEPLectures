@@ -38,7 +38,7 @@ for ax, (A, rho, title) in zip(axes, [(A_ti, rho_ti, "transversely isotropic"), 
     ax.set_xticks([-0.2, -0.1, 0, 0.1, 0.2]); ax.set_yticks([-0.2, -0.1, 0, 0.1, 0.2])
     ax.grid(True, ls=":", lw=0.5)
     ax.set_title(title, fontsize=11)
-axes[0].legend(loc="upper right", fontsize=8, frameon=False)
+axes[0].legend(loc="upper right", fontsize=11, frameon=False)
 fig.tight_layout()
 fig.savefig(str(FIG / "L4F1.pdf"))
 fig.savefig(str(FIG / "L4F1.png"), dpi=200)

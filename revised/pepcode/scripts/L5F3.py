@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 from pepseis.raytrace2d import Medium, plane_wave_fan, gaussian_lens
 from pepseis.paths import FIG
 
-plt.rcParams.update({"font.family": "serif", "mathtext.fontset": "cm", "font.size": 11})
+plt.rcParams.update({"font.family": "serif", "mathtext.fontset": "cm", "font.size": 12})
 
 x = np.linspace(0, 5, 401)
 z = np.linspace(0, 3, 241)

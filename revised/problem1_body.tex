@@ -39,7 +39,7 @@ where $W$ is the strain energy function, so that $T_{ij}=\frac{\partial W}{\part
 \begin{equation*}
     \frac{\partial E}{\partial t}+\frac{\partial s_{i}}{\partial x_{i}}=0,
 \end{equation*}
-where $s_{i}$ is a vector field to be determined. By integrating this identity over an arbitrary sub-body, $U$, explain the physical meaning of $s_{i}$, and hence show that the total energy of the body is conserved.
+where $s_{i}$ is a vector field to be determined. By integrating this identity over an arbitrary sub-body, $U$, explain the physical meaning of $s_{i}$, and hence show that the total energy of the body is conserved, using the traction-free boundary condition $T_{ij}\hat{n}_{j}=0$ on $\partial M$.
 
 \item The Lagrangian density for the linearised motion of an elastic body subject to a stress glut is given by
 \begin{equation*}
@@ -66,9 +66,10 @@ How many independent components does such an elastic tensor have? Do these symme
         \rho\frac{\partial^{2}u_{i}}{\partial t^{2}}-\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\right)=f_{i}\quad\text{in }M,\qquad A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\hat{n}_{j}=t_{i}\quad\text{on }\partial M,
     \end{equation*}
     with the body at rest prior to $t=0$. The solution of this problem can be expressed in terms of a Green function, $G_{ij}(\mathbf{x},t;\mathbf{x}',t')$, in the form
-    \begin{equation*}
-        u_{i}(\mathbf{x},t)=\int_{0}^{t}\int_{M}G_{ij}(\mathbf{x},t;\mathbf{x}',t')f_{j}(\mathbf{x}',t')\dd^{3}\mathbf{x}'\dd t'+\int_{0}^{t}\int_{\partial M}G_{ij}(\mathbf{x},t;\mathbf{x}',t')t_{j}(\mathbf{x}',t')\dd S'\dd t',
-    \end{equation*}
+    \begin{multline*}
+        u_{i}(\mathbf{x},t)=\int_{0}^{t}\int_{M}G_{ij}(\mathbf{x},t;\mathbf{x}',t')f_{j}(\mathbf{x}',t')\dd^{3}\mathbf{x}'\dd t' \\
+        +\int_{0}^{t}\int_{\partial M}G_{ij}(\mathbf{x},t;\mathbf{x}',t')t_{j}(\mathbf{x}',t')\dd S'\dd t',
+    \end{multline*}
     where the detailed form of $G_{ij}$ will not be needed. Recall that a stress glut, $\overline{S}_{ij}$, enters the linearised equations of motion as an effective body force $f_{i}=-\partial\overline{S}_{ij}/\partial x_{j}$ together with an effective traction $t_{i}=\overline{S}_{ij}\hat{n}_{j}$, where $\hat{\mathbf{n}}$ is the outward unit normal to $\partial M$. Note that within the integrals above $f_{j}$, $t_{j}$ and $\hat{\mathbf{n}}$ are all evaluated at the integration point $\mathbf{x}'$. Show that the resulting displacement can be written as a single integral over the stress glut,
     \begin{equation*}
         u_{i}(\mathbf{x},t)=\int_{0}^{t}\int_{M}\frac{\partial G_{ij}}{\partial x_{k}'}(\mathbf{x},t;\mathbf{x}',t')\overline{S}_{jk}(\mathbf{x}',t')\dd^{3}\mathbf{x}'\dd t'.
@@ -82,15 +83,15 @@ How many independent components does such an elastic tensor have? Do these symme
 
 \item Consider plane wave propagation in a homogeneous and transversely isotropic whole space. For such a material the elastic tensor takes the form
 \begin{align*}
-A_{ijkl} = {}&(A-2N)\delta_{ij}\delta_{kl} + N(\delta_{ik}\delta_{jl} + \delta_{il}\delta_{jk})
-+ (F-A+2N)(\delta_{ij}\hat{\nu}_{k}\hat{\nu}_{l} + \hat{\nu}_{i}\hat{\nu}_{j}\delta_{kl}) \\
-&+ (L-N)(\hat{\nu}_{i}\hat{\nu}_{k}\delta_{jl} + \hat{\nu}_{j}\hat{\nu}_{k}\delta_{il} + \hat{\nu}_{j}\hat{\nu}_{l}\delta_{ik} + \hat{\nu}_{i}\hat{\nu}_{l}\delta_{jk})
-+ (A+C-2F-4L)\hat{\nu}_{i}\hat{\nu}_{j}\hat{\nu}_{k}\hat{\nu}_{l},
+A_{ijkl} = {}&(A-2N)\delta_{ij}\delta_{kl} + N(\delta_{ik}\delta_{jl} + \delta_{il}\delta_{jk}) \\
+&+ (F-A+2N)(\delta_{ij}\hat{\nu}_{k}\hat{\nu}_{l} + \hat{\nu}_{i}\hat{\nu}_{j}\delta_{kl})
++ (A+C-2F-4L)\hat{\nu}_{i}\hat{\nu}_{j}\hat{\nu}_{k}\hat{\nu}_{l} \\
+&+ (L-N)(\hat{\nu}_{i}\hat{\nu}_{k}\delta_{jl} + \hat{\nu}_{j}\hat{\nu}_{k}\delta_{il} + \hat{\nu}_{j}\hat{\nu}_{l}\delta_{ik} + \hat{\nu}_{i}\hat{\nu}_{l}\delta_{jk}),
 \end{align*}
 where $A$, $C$, $F$, $L$ and $N$ are elastic moduli, and $\hat{\bm{\nu}}$ is a unit vector along the symmetry axis. Let $\theta$ denote the angle between the propagation direction, $\hat{\mathbf{p}}$, and the symmetry axis, and regard the departure of the medium from isotropy as small.
 \begin{enumerate}
     \item Using first-order perturbation theory, obtain an expression for the phase speed of a quasi P-wave as a function of $\theta$.
-    \item Using degenerate perturbation theory, obtain the first-order phase speeds of the two quasi S-waves as functions of $\theta$, and describe their polarisations. Check your results against the exact phase speeds for propagation along and perpendicular to the symmetry axis. [Hint: choose one of the unperturbed polarisation vectors to lie in the plane containing $\hat{\mathbf{p}}$ and $\hat{\bm{\nu}}$, and the other perpendicular to this plane.]
+    \item Using degenerate perturbation theory, obtain the first-order phase speeds of the two quasi S-waves as functions of $\theta$, and describe their polarisations. Check your results against the exact phase speeds for propagation along and perpendicular to the symmetry axis (these follow from the components $A_{3333}=C$, $A_{1313}=L$, $A_{1111}=A$ and $A_{1212}=N$ quoted in Lecture~14). [Hint: choose one of the unperturbed polarisation vectors to lie in the plane containing $\hat{\mathbf{p}}$ and $\hat{\bm{\nu}}$, and the other perpendicular to this plane.]
 \end{enumerate}
 
 \item Show that the time-dependent Schrödinger equation for a free particle

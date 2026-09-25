@@ -1,7 +1,7 @@
 \documentclass [a4paper,12pt]{paper}
 %DIF LATEXDIFF DIFFERENCE FILE
 %DIF DEL lecture2.tex             Tue Aug 18 14:40:12 2026
-%DIF ADD diffs/lecture2_new.tex   Fri Sep 25 09:46:48 2026
+%DIF ADD diffs/lecture2_new.tex   Fri Sep 25 16:34:47 2026
 
 \usepackage{mycommands}
 %DIF PREAMBLE EXTENSION ADDED BY LATEXDIFF
@@ -55,12 +55,12 @@
 %DIFDELCMD < %%%
 \DIFdelend \section*{Outline and motivation}
 
-Within the previous lecture, we obtained the equations of motion for a simple hyperelastic body. The mechanical properties
+\DIFdelbegin \DIFdel{Within }\DIFdelend \DIFaddbegin \DIFadd{In }\DIFaddend the previous lecture, we obtained the equations of motion for a simple hyperelastic body. The mechanical properties
 of such bodies are defined by a referential density, $\rho$, and a strain energy function, $W$. Using the principle of material 
 frame indifference, we obtained conditions that must be satisfied by the strain energy function. Within the first part of this lecture, 
 we will explore these restrictions in more detail to determine concretely the form the strain energy function must take. We then consider 
 \textbf{linearised motions} about a \textbf{stress-free equilibrium configuration}. The resulting equations of motion are appropriate for studying most 
-situations within seismology. To conclude we discuss \textbf{material symmetries} which occur in many real materials due to their underlying 
+situations within seismology. To conclude we discuss \textbf{material symmetries}\DIFaddbegin \DIFadd{, }\DIFaddend which occur in many real materials due to their underlying 
 microscopic structure. By taking account of such symmetries the form of the equations of motion can be significantly simplified.
 
 \section*{The polar decomposition theorem}
@@ -70,7 +70,7 @@ In the previous lecture, we showed that the principle of material frame indiffer
 \DIFdel{W(\mathbf{x}, \mathbf{Q}\mathbf{F}) = W(\mathbf{x}, \mathbf{F}),
 }\end{displaymath}%DIFAUXCMD
 \DIFdelend \DIFaddbegin \begin{equation}
-\DIFadd{W(\mathbf{x}, \mathbf{Q}\mathbf{F}) = W(\mathbf{x}, \mathbf{F}),
+\DIFadd{W(\mathbf{x}, \mathbf{F}) = W(\mathbf{x}, \mathbf{Q}\mathbf{F}),
 \label{eq:1}
 }\end{equation}\DIFaddend 
 for any deformation gradient $\mathbf{F}$ and any rotation matrix $\mathbf{Q}$. Physically, this states that the potential
@@ -95,31 +95,32 @@ can be seen in Fig.~\ref{fig:1}.
      \DIFdelbeginFL %DIFDELCMD < \includegraphics[width=0.7\textwidth]{figures/L2F1.png} 
 %DIFDELCMD <      %%%
 \DIFdelendFL \DIFaddbeginFL \includegraphics[width=0.7\textwidth]{figures/L2F1.pdf} 
-     \DIFaddendFL \caption{Under an invertible matrix $\mathbf{F}$, a sphere is mapped to an ellipsoid. Using this
+     \DIFaddendFL \caption{Under an invertible matrix $\mathbf{F}$, a \DIFaddbeginFL \DIFaddFL{circle (in three dimensions, a }\DIFaddendFL sphere\DIFaddbeginFL \DIFaddFL{) }\DIFaddendFL is mapped to an \DIFaddbeginFL \DIFaddFL{ellipse (}\DIFaddendFL ellipsoid\DIFaddbeginFL \DIFaddFL{)}\DIFaddendFL . Using this
     fact, the geometric meaning of the polar decomposition theorem is shown. An
     undeformed circle is shown in the centre of the upper row, with the dashed lines
-    along the eigenvectors of the symmetric matrix $\mathbf{U}$.}
+    along the eigenvectors of the symmetric matrix $\mathbf{U}$\DIFaddbeginFL \DIFaddFL{; in the other panels the dashed lines show the images of these axes}\DIFaddendFL .}
      \label{fig:1}
  \end{figure}
 
 \subsection*{Proof of the polar decomposition theorem \DIFdelbegin \DIFdel{- NON-EXAMINABLE}\DIFdelend \DIFaddbegin \DIFadd{(non-examinable)}\DIFaddend }
 
-You do not need to know the proof of this theorem, but it is simple enough to sketch for those interested. First we define a symmetric matrix
-\DIFdelbegin \begin{displaymath}
+You do not need to know the proof of this theorem, but it is simple enough to sketch for those interested. First we define \DIFdelbegin \DIFdel{a symmetric matrix
+}\begin{displaymath}
 \DIFdel{\mathbf{C} = \mathbf{F}^{T}\mathbf{F},
 }\end{displaymath}%DIFAUXCMD
-\DIFdelend \DIFaddbegin \begin{equation}
+\DIFdelend \DIFaddbegin \DIFadd{the symmetric matrix
+}\begin{equation}
 \DIFadd{\mathbf{C} = \mathbf{F}^{T}\mathbf{F},
 \label{eq:3}
 }\end{equation}\DIFaddend 
-which is positive-definite because $\mathbf{F}$ is invertible. It follows that the square root of $\mathbf{C}$ can be
+\DIFaddbegin \DIFadd{known as the }\textbf{\DIFadd{right Cauchy--Green deformation tensor}}\DIFadd{, }\DIFaddend which is positive-definite because $\mathbf{F}$ is invertible. It follows that the square root of $\mathbf{C}$ can be
  defined\DIFdelbegin \footnote{\DIFdel{This is done by first diagonalising $\mathbf{C} = \mathbf{Q} \text{diag}(\lambda_1, \lambda_2, \lambda_3) 
  \mathbf{Q}^T$ with $\mathbf{Q}$ orthogonal, and then setting $\mathbf{U} = \mathbf{Q} \text{diag}(\sqrt{\lambda_1}, \sqrt{\lambda_2}, 
  \sqrt{\lambda_3}) \mathbf{Q}^T$ which is well-defined as the eigenvalues are all positive.}}%DIFAUXCMD
 \addtocounter{footnote}{-1}%DIFAUXCMD
-\DIFdel{,}\DIFdelend \DIFaddbegin \DIFadd{,}\footnote{\DIFadd{This is done by first diagonalising $\mathbf{C} = \mathbf{Q} \mathrm{diag}(\lambda_1, \lambda_2, \lambda_3) 
- \mathbf{Q}^T$ with $\mathbf{Q}$ orthogonal, and then setting $\mathbf{U} = \mathbf{Q} \mathrm{diag}(\sqrt{\lambda_1}, \sqrt{\lambda_2}, 
- \sqrt{\lambda_3}) \mathbf{Q}^T$, which is well-defined as the eigenvalues are all positive.}} \DIFaddend and we set $\mathbf{U} = \sqrt{\mathbf{C}}$ which
+\DIFdel{,}\DIFdelend \DIFaddbegin \DIFadd{,}\footnote{\DIFadd{This is done by first diagonalising $\mathbf{C} = \mathbf{P}\,\mathrm{diag}(\lambda_1, \lambda_2, \lambda_3) 
+ \mathbf{P}^T$ with $\mathbf{P}$ orthogonal, and then setting $\mathbf{U} = \mathbf{P}\,\mathrm{diag}(\sqrt{\lambda_1}, \sqrt{\lambda_2}, 
+ \sqrt{\lambda_3}) \mathbf{P}^T$, which is well-defined as the eigenvalues are all positive.}} \DIFaddend and we set $\mathbf{U} = \sqrt{\mathbf{C}}$ which
   is symmetric and positive-definite by construction. Our claim is that $\mathbf{R} = \mathbf{F}\mathbf{U}^{-1}$ is a rotation matrix. This 
   requires that $\mathbf{R}^{T}\mathbf{R} = \mathbf{I}$ and also $\det \mathbf{R} = 1$. For the first identity we have
 \DIFdelbegin \begin{displaymath}
@@ -130,8 +131,8 @@ which is positive-definite because $\mathbf{F}$ is invertible. It follows that t
 \label{eq:4}
 }\end{equation}\DIFaddend 
 but $\mathbf{F}^{T}\mathbf{F} = \mathbf{C} = \mathbf{U}^2$, and hence $\mathbf{R}^{T}\mathbf{R} = \mathbf{I}$ as required. For
- the determinant condition we note that $\det(\mathbf{R}) = \frac{\det \mathbf{F}}{\det \mathbf{U}}$, while $\mathbf{U}^2 = 
- \mathbf{F}^T\mathbf{F}$ implies $\det \mathbf{U} = |\det \mathbf{F}|$. Since we assume $\det \mathbf{F} > 0$, we have $\det \mathbf{R} = 1$.
+ the determinant condition we note that \DIFdelbegin \DIFdel{$\det(\mathbf{R}) = \frac{\det \mathbf{F}}{\det \mathbf{U}}$}\DIFdelend \DIFaddbegin \DIFadd{$\det \mathbf{R} = \det \mathbf{F}/\det \mathbf{U}$}\DIFaddend , while $\mathbf{U}^2 = 
+ \mathbf{F}^T\mathbf{F}$ \DIFdelbegin \DIFdel{implies }\DIFdelend \DIFaddbegin \DIFadd{and $\det \mathbf{U} > 0$ imply }\DIFaddend $\det \mathbf{U} = |\det \mathbf{F}|$. Since we assume $\det \mathbf{F} > 0$, we have $\det \mathbf{R} = 1$.
   For the second \DIFdelbegin \DIFdel{identity}\DIFdelend \DIFaddbegin \DIFadd{form of the decomposition}\DIFaddend , we merely note that
 \DIFdelbegin \begin{displaymath}
 \DIFdel{\mathbf{F} = \mathbf{R}\mathbf{U} = \mathbf{R}\mathbf{U}\mathbf{R}^T\mathbf{R},
@@ -152,7 +153,7 @@ Using the polar decomposition theorem, the deformation gradient can be written
 \DIFadd{\mathbf{F} = \mathbf{R}\mathbf{U},
 \label{eq:6}
 }\end{equation}\DIFaddend 
-with $\mathbf{R}$ a rotation matrix, while $\mathbf{U} = \sqrt{\mathbf{C}}$ with $\mathbf{C} = \mathbf{F}^{T}\mathbf{F}$. It follows from eq.\DIFdelbegin \DIFdel{(1) that
+with $\mathbf{R}$ a rotation matrix, while $\mathbf{U} = \sqrt{\mathbf{C}}$ with \DIFdelbegin \DIFdel{$\mathbf{C} = \mathbf{F}^{T}\mathbf{F}$}\DIFdelend \DIFaddbegin \DIFadd{$\mathbf{C}$ the right Cauchy--Green deformation tensor of eq.~(\ref{eq:3})}\DIFaddend . It follows from eq.\DIFdelbegin \DIFdel{(1) that
 }\begin{displaymath}
 \DIFdel{W(\mathbf{x}, \mathbf{F}) = W(\mathbf{x}, \mathbf{R}\mathbf{U}) = W(\mathbf{x}, \mathbf{U}),
 }\end{displaymath}%DIFAUXCMD
@@ -162,20 +163,16 @@ with $\mathbf{R}$ a rotation matrix, while $\mathbf{U} = \sqrt{\mathbf{C}}$ with
 \label{eq:7}
 }\end{equation}\DIFaddend 
 and we conclude that the strain energy depends on the deformation gradient only through the symmetric matrix $\mathbf{U}$,
- or equivalently \DIFdelbegin \DIFdel{on }\DIFdelend \DIFaddbegin \DIFadd{through }\DIFaddend $\mathbf{C}$. Within continuum mechanics, the symmetric matrix
-\DIFdelbegin \begin{displaymath}
+ or equivalently \DIFdelbegin \DIFdel{on }\DIFdelend \DIFaddbegin \DIFadd{through the right Cauchy--Green deformation tensor }\DIFaddend $\mathbf{C}$ \DIFdelbegin \DIFdel{. Within continuum mechanics, the symmetric matrix
+}\begin{displaymath}
 \DIFdel{\mathbf{C} = \mathbf{F}^{T}\mathbf{F}
 }\end{displaymath}%DIFAUXCMD
-\DIFdelend \DIFaddbegin \begin{equation}
-\DIFadd{\mathbf{C} = \mathbf{F}^{T}\mathbf{F}
-\label{eq:8}
-}\end{equation}\DIFaddend 
-is known as the \textbf{right \DIFdelbegin \DIFdel{Cauchy-Green }\DIFdelend \DIFaddbegin \DIFadd{Cauchy--Green }\DIFaddend deformation tensor\DIFdelbegin %DIFDELCMD < \MBLOCKRIGHTBRACE%%%
+\DIFdel{is known as the }\textbf{\DIFdel{right Cauchy-Green deformation tensor}}%DIFAUXCMD
 \footnote{\DIFdel{$\mathbf{F}\mathbf{F}^T$ is the
  }\textbf{\DIFdel{left Cauchy-Green deformation}} %DIFAUXCMD
 \DIFdel{tensor which is useful in some circumstances.}}%DIFAUXCMD
 \addtocounter{footnote}{-1}%DIFAUXCMD
-\DIFdel{.}\DIFdelend \DIFaddbegin }\DIFadd{.}\footnote{\DIFadd{$\mathbf{F}\mathbf{F}^T$ is the
+\DIFdel{.}\DIFdelend \DIFaddbegin \DIFadd{defined in eq.~(\ref{eq:3}).}\footnote{\DIFadd{$\mathbf{F}\mathbf{F}^T$ is the
  }\textbf{\DIFadd{left Cauchy--Green deformation tensor}}\DIFadd{, which is useful in some circumstances.}} \DIFaddend To summarise, we have shown 
  that a strain energy function satisfies the principle of material frame indifference if and only if it takes the form
 \DIFdelbegin \begin{displaymath}
@@ -236,7 +233,7 @@ the first \DIFdelbegin \DIFdel{Piola-Kirchhoff }\DIFdelend \DIFaddbegin \DIFadd{
 \DIFadd{T_{ij} = F_{ik}S_{kj},
 \label{eq:15}
 }\end{equation}\DIFaddend 
-or in matrix form as $\mathbf{T} = \mathbf{F}\mathbf{S}$. It is clear that $\mathbf{S}$ is a symmetric matrix,
+or in matrix form as $\mathbf{T} = \mathbf{F}\mathbf{S}$. It is clear that $\mathbf{S}$ is a symmetric matrix \DIFaddbegin \DIFadd{(with $\partial U/\partial C_{ij}$ understood to be symmetric in $i$ and $j$)}\DIFaddend ,
  and so we see that the principle of material frame indifference implies that the following combination
 \DIFdelbegin \begin{displaymath}
 \DIFdel{\mathbf{F}^{-1}\mathbf{T}
@@ -277,7 +274,7 @@ An \textbf{equilibrium configuration} $\bphi^0$ is a time-independent solution o
 \DIFdel{-\frac{\partial T_{ij}^{0}}{\partial x_{j}} = 0,
 }\end{displaymath}%DIFAUXCMD
 \DIFdelend \DIFaddbegin \begin{equation}
-\DIFadd{-\frac{\partial T_{ij}^{0}}{\partial x_{j}} = 0,
+\DIFadd{\frac{\partial T_{ij}^{0}}{\partial x_{j}} = 0,
 \label{eq:19}
 }\end{equation}\DIFaddend 
 along with the boundary condition
@@ -309,7 +306,10 @@ with $\mathbf{F}^0$ the deformation gradient of $\bphi^0$.
 }\end{equation}\DIFaddend 
 It follows that $\mathbf{F}^0(\mathbf{x}) = \mathbf{I}$, and recalling eq.\DIFdelbegin \DIFdel{(15}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:15}}\DIFaddend ) we see that at equilibrium the first 
 and second \DIFdelbegin \DIFdel{Piola-Kirchhoff }\DIFdelend \DIFaddbegin \DIFadd{Piola--Kirchhoff }\DIFaddend stresses are equal, and hence both are symmetric. Indeed, within such a configuration these
-tensors are also equal to the Cauchy stress occurring within spatial formulations of continuum mechanics.
+tensors are also equal to the Cauchy stress occurring within spatial formulations of continuum mechanics. \DIFaddbegin \DIFadd{For the linearised motions 
+about a stress-free equilibrium considered below, the same is true to first order in the perturbation, since $\mathbf{F}$ then differs 
+from $\mathbf{I}$ only by a term of first order and the stresses are themselves of first order.
+}\DIFaddend 
 
 
 
@@ -330,7 +330,7 @@ body is displaced from equilibrium, with the initial motion taking the form
 \DIFadd{\varphi_{i}(\mathbf{x}, 0) = x_{i} + s u_{i}^{0}(\mathbf{x}),
 \label{eq:23}
 }\end{equation}\DIFaddend 
-for some given vector $\mathbf{u}^{0}$, while for some $\mathbf{v}^{0}$ the initial velocity is given by
+for some given vector \DIFaddbegin \DIFadd{field }\DIFaddend $\mathbf{u}^{0}$, while for some \DIFaddbegin \DIFadd{vector field }\DIFaddend $\mathbf{v}^{0}$ the initial velocity is given by
 \DIFdelbegin \begin{displaymath}
 \DIFdel{v_{i}(\mathbf{x}, 0) = s v_{i}^{0}(\mathbf{x}).
 }\end{displaymath}%DIFAUXCMD
@@ -404,7 +404,7 @@ possesses the so-called \textbf{hyperelastic symmetry}
 \DIFadd{A_{ijkl} = A_{klij}.
 \label{eq:31}
 }\end{equation}\DIFaddend 
-We shall see through this course that this innocuous-looking symmetry plays a central role within the theory of elastic wave propagation!
+We shall see \DIFdelbegin \DIFdel{through }\DIFdelend \DIFaddbegin \DIFadd{throughout }\DIFaddend this course that this innocuous-looking symmetry plays a central role within the theory of elastic wave propagation!
  In the first problem set you will show that this tensor has additional symmetries
 \DIFdelbegin \begin{displaymath}
 \DIFdel{A_{ijkl} = A_{jikl} = A_{ijlk}
@@ -425,28 +425,21 @@ final two indices means that
 \label{eq:33}
 }\end{equation}\DIFaddend 
 where on the right-hand side we identify what is commonly called the strain tensor. More properly, this quantity is the 
-\textbf{linearised strain tensor}, which is obtained through linearisation of the \textbf{\DIFdelbegin \DIFdel{finite-strain}\DIFdelend \DIFaddbegin \DIFadd{finite strain tensor}\DIFaddend } $\mathbf{E} = \frac{1}{2}[\mathbf{C} - 
-\mathbf{I}]$ which vanishes in the equilibrium configuration. It is possible to develop the general theory 
+\textbf{linearised strain tensor}, which is obtained through linearisation of the \textbf{\DIFdelbegin \DIFdel{finite-strain}\DIFdelend \DIFaddbegin \DIFadd{finite strain tensor}\DIFaddend } \DIFdelbegin \DIFdel{$\mathbf{E} = \frac{1}{2}[\mathbf{C} - 
+\mathbf{I}]$ }\DIFdelend \DIFaddbegin \DIFadd{$\mathbf{E} = \frac{1}{2}(\mathbf{C} - 
+\mathbf{I})$, }\DIFaddend which vanishes in the equilibrium configuration. It is possible to develop the general theory 
 in terms of $\mathbf{E}$ \DIFdelbegin \DIFdel{and not }\DIFdelend \DIFaddbegin \DIFadd{rather than }\DIFaddend $\mathbf{C}$\DIFaddbegin \DIFadd{, }\DIFaddend but there is little gained by doing this.
 
 
-The exact equations of motion for the body are
-\DIFdelbegin \begin{displaymath}
+\DIFdelbegin \DIFdel{The }\DIFdelend \DIFaddbegin \DIFadd{Substituting the preceding expansions for $\mathbf{v}$ and $\mathbf{T}$ into the }\DIFaddend exact equations of motion \DIFdelbegin \DIFdel{for the body are
+}\begin{displaymath}
 \DIFdel{\rho\frac{\partial v_{i}}{\partial t} - \frac{\partial T_{ij}}{\partial x_{j}} = 0,
 }\end{displaymath}%DIFAUXCMD
-\DIFdelend \DIFaddbegin \begin{equation}
-\DIFadd{\rho\frac{\partial v_{i}}{\partial t} - \frac{\partial T_{ij}}{\partial x_{j}} = 0,
-\label{eq:34}
-}\end{equation}\DIFaddend 
-and are subject to the traction-free boundary conditions
-\DIFdelbegin \begin{displaymath}
+\DIFdel{and are subject to the traction-free boundary conditions}\begin{displaymath}
 \DIFdel{T_{ij}\hat{n}_{j} = 0.
 }\end{displaymath}%DIFAUXCMD
-\DIFdelend \DIFaddbegin \begin{equation}
-\DIFadd{T_{ij}\hat{n}_{j} = 0.
-\label{eq:35}
-}\end{equation}\DIFaddend 
-Using the preceding expansions for $\mathbf{v}$ and $\mathbf{T}$ and equating first-order terms, we obtain the linearised equations of motion
+\DIFdel{Using the preceding expansions for $\mathbf{v}$ and $\mathbf{T}$ }\DIFdelend \DIFaddbegin \DIFadd{and boundary conditions, 
+eqs.~(\ref{eq:17}) and (\ref{eq:18}), }\DIFaddend and equating first-order terms, we obtain the linearised equations of motion
 \DIFdelbegin \begin{displaymath}
 \DIFdel{\rho\frac{\partial^2 u_{i}}{\partial t^2} - \frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\right) = 0,
 }\end{displaymath}%DIFAUXCMD
@@ -462,7 +455,7 @@ along with the linearised boundary conditions
 \DIFadd{\hat{n}_{j}A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}} = 0.
 \label{eq:37}
 }\end{equation}\DIFaddend 
-Eqs.\DIFdelbegin \DIFdel{(36}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:36}}\DIFaddend ) and (\DIFdelbegin \DIFdel{37}\DIFdelend \DIFaddbegin \DIFadd{\ref{eq:37}}\DIFaddend ) are the basic equations governing elastic wave propagation, and in later lectures we will look at their properties. Within these equations there are two physical parameters: the density $\rho$, and the elastic tensor $\mathbf{A}$. Both are functions that can vary smoothly within the body. There might also be discontinuities in these parameters across internal surfaces such as the \DIFdelbegin \DIFdel{core-mantle }\DIFdelend \DIFaddbegin \DIFadd{core--mantle }\DIFaddend boundary, across which continuity of displacement and traction must be imposed.
+Eqs.\DIFdelbegin \DIFdel{(36}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:36}}\DIFaddend ) and (\DIFdelbegin \DIFdel{37}\DIFdelend \DIFaddbegin \DIFadd{\ref{eq:37}}\DIFaddend ) are the basic equations governing elastic wave propagation, and in later lectures we will look at their properties. \DIFdelbegin \DIFdel{Within }\DIFdelend \DIFaddbegin \DIFadd{In }\DIFaddend these equations there are two physical parameters: the density $\rho$, and the elastic tensor $\mathbf{A}$. Both are functions that can vary smoothly within the body. There might also be discontinuities in these parameters across internal surfaces such as the \DIFdelbegin \DIFdel{core-mantle }\DIFdelend \DIFaddbegin \DIFadd{core--mantle }\DIFaddend boundary, across which continuity of displacement and traction must be imposed.
 
 \section*{Material symmetries}
 
@@ -475,12 +468,16 @@ the presence of \textbf{material symmetries}. Let us fix a point $\mathbf{x}$, a
 \DIFadd{W(\mathbf{x}, \mathbf{F}\mathbf{Q}) = W(\mathbf{x}, \mathbf{F}),
 \label{eq:38}
 }\end{equation}\DIFaddend 
-for any deformation gradient $\mathbf{F}$. Using the second part of the polar decomposition theorem we
- have $\mathbf{F} = \mathbf{V}\mathbf{R}$, with $\mathbf{V}$ symmetric and positive-definite, while $\mathbf{R}$ is a
-  rotation matrix. It follows that $\mathbf{F}$ and $\mathbf{F}\mathbf{Q}$ represent the same magnitude of stretching,
-   but oriented about different axes. Thus we can say that in eq.\DIFdelbegin \DIFdel{(38}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:38}}\DIFaddend ) there is a symmetry of the strain energy with 
+for any deformation gradient $\mathbf{F}$. Using the \DIFdelbegin \DIFdel{second part of the }\DIFdelend polar decomposition theorem we have \DIFdelbegin \DIFdel{$\mathbf{F} = \mathbf{V}\mathbf{R}$, }\DIFdelend \DIFaddbegin \DIFadd{$\mathbf{F} = \mathbf{R}\mathbf{U}$, and hence 
+ $\mathbf{F}\mathbf{Q} = (\mathbf{R}\mathbf{Q})(\mathbf{Q}^{T}\mathbf{U}\mathbf{Q})$, }\DIFaddend with \DIFdelbegin \DIFdel{$\mathbf{V}$ symmetric and positive-definite, while $\mathbf{R}$ is }\DIFdelend \DIFaddbegin \DIFadd{$\mathbf{R}\mathbf{Q}$ }\DIFaddend a rotation matrix 
+  \DIFaddbegin \DIFadd{and $\mathbf{Q}^{T}\mathbf{U}\mathbf{Q}$ symmetric and positive-definite}\DIFaddend . It follows that \DIFdelbegin \DIFdel{$\mathbf{F}$ and }\DIFdelend $\mathbf{F}\mathbf{Q}$ \DIFdelbegin \DIFdel{represent the same magnitude of stretching,
+   but oriented about different axes }\DIFdelend \DIFaddbegin \DIFadd{has the same principal stretches as $\mathbf{F}$,
+   but about a rotated set of axes within the reference body}\DIFaddend . Thus we can say that in eq.\DIFdelbegin \DIFdel{(38}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:38}}\DIFaddend ) there is a symmetry of the strain energy with 
    respect to \textbf{orientation of stretching}. The collection of all such rotation matrices forms the \textbf{material symmetry 
-   group}\footnote{If you care to, check that this really is a group.} at the point $\mathbf{x}$.
+   group} \DIFdelbegin \footnote{\DIFdel{If you care to, check that this really is a group.}} %DIFAUXCMD
+\addtocounter{footnote}{-1}%DIFAUXCMD
+\DIFdelend at the point $\mathbf{x}$.\DIFaddbegin \footnote{\DIFadd{If you care to, check that this really is a group.}}
+\DIFaddend 
 
 If the material symmetry
 group at $\mathbf{x}$ comprises all rotation matrices, we say that the material is \textbf{isotropic} at this point. If the material 
@@ -525,7 +522,7 @@ Because $\mathbf{C}$ is symmetric, the matrix $\mathbf{Q}^{T}\mathbf{C}\mathbf{Q
 \DIFdel{A_{ijkl} = \lambda\delta_{ij}\delta_{kl} + \mu(\delta_{ik}\delta_{jl} + \delta_{il}\delta_{kj}),
 }\end{displaymath}%DIFAUXCMD
 \DIFdelend \DIFaddbegin \begin{equation}
-\DIFadd{A_{ijkl} = \lambda\delta_{ij}\delta_{kl} + \mu(\delta_{ik}\delta_{jl} + \delta_{il}\delta_{kj}),
+\DIFadd{A_{ijkl} = \lambda\delta_{ij}\delta_{kl} + \mu(\delta_{ik}\delta_{jl} + \delta_{il}\delta_{jk}),
 \label{eq:42}
 }\end{equation}\DIFaddend 
 where $\lambda$ and $\mu$ are collectively known as the \textbf{Lamé parameters}, and $\mu$ is 
@@ -549,7 +546,13 @@ For reference, note that the isotropic elastic tensor can also be expressed usin
 \DIFadd{\kappa = \lambda + \frac{2}{3}\mu.
 \label{eq:44}
 }\end{equation}\DIFaddend 
-As a comment, you might ask why I have taken almost two lectures to get to an equation most of you will already know! There are 
+\DIFaddbegin \DIFadd{In terms of $\kappa$ and $\mu$, eq.~(\ref{eq:42}) becomes
+}\begin{equation}
+\DIFadd{A_{ijkl} = \kappa\delta_{ij}\delta_{kl} + \mu\left(\delta_{ik}\delta_{jl} + \delta_{il}\delta_{jk} - \tfrac{2}{3}\delta_{ij}\delta_{kl}\right),
+\label{eq:44b}
+}\end{equation}
+\DIFadd{which separates the volumetric and shear parts of the response.
+}\DIFaddend As a comment, you might ask why I have taken almost two lectures to get to an equation most of you will already know! There are 
 two reasons. First, eq.\DIFdelbegin \DIFdel{(43}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:43}}\DIFaddend ) is not the equation of motion for a general elastic body, but for the linearised motion subject to a 
 whole host of simplifying assumptions (e.g.\DIFaddbegin \DIFadd{\ }\DIFaddend isotropy, homogeneity, no initial stress, no gravitation). Such assumptions are generally 
 invalid within seismological applications, and hence we do in practice need to consider more general formulations. But beyond this, I 
@@ -580,8 +583,9 @@ A_{ijkl} = {}&(A-2N)\delta_{ij}\delta_{kl} + N(\delta_{ik}\delta_{jl} + \delta_{
 where \DIFdelbegin \DIFdel{$\lambda$ }\DIFdelend \DIFaddbegin \DIFadd{$A$, $C$, $F$, $L$ and $N$ are five independent elastic moduli, this being the notation introduced by Love. 
 If the symmetry axis is taken along $\hat{\mathbf{x}}_{3}$, these moduli are the components $A_{1111}=A$, $A_{3333}=C$, $A_{1133}=F$, 
 $A_{1313}=L$ }\DIFaddend and \DIFdelbegin \DIFdel{$\mu$ are as before, while $\gamma, \xi$, }\DIFdelend \DIFaddbegin \DIFadd{$A_{1212}=N$. In the isotropic case we have $A=C=\lambda+2\mu$, $F=\lambda$ }\DIFaddend and \DIFdelbegin \DIFdel{$\zeta$ are additional elastic moduli}\DIFdelend \DIFaddbegin \DIFadd{$L=N=\mu$, and 
-eq.~(\ref{eq:45}) reduces to eq.~(\ref{eq:42})}\DIFaddend . Do not fear, 
-you do not need to remember any such complicated tensor expressions! The point here is just to indicate concretely that 
+eq.~(\ref{eq:45}) reduces to eq.~(\ref{eq:42})}\DIFaddend . Do not fear\DIFdelbegin \DIFdel{, 
+}\DIFdelend \DIFaddbegin \DIFadd{: 
+}\DIFaddend you do not need to remember any such complicated tensor expressions! The point here is just to indicate concretely that 
 there is more to the world than isotropic elasticity.
 
 \subsection*{Elastic fluids}
@@ -602,7 +606,7 @@ volume fixed have no effect on the strain energy}. Mathematically this is expres
 }\end{equation}\DIFaddend 
 for all $\mathbf{F}$ and all matrices $\mathbf{Q}$ with determinant equal to one\DIFdelbegin \footnote{\DIFdel{If you know some group theory, we can say that an elastic fluid has symmetry group equal to $\mathrm{SL}(3)$, while for a solid the symmetry group is a subgroup of $\mathrm{SO}(3)$. It can be shown that there is no proper subgroup intermediate between $\mathrm{SO}(3)$ and $\mathrm{SL}(3)$, and hence there is no ``intermediate'' state between solids and fluids. This approach to classifying elastic materials is due to Walter Noll (1925-2017).}}%DIFAUXCMD
 \addtocounter{footnote}{-1}%DIFAUXCMD
-\DIFdel{.}\DIFdelend \DIFaddbegin \DIFadd{.}\footnote{\DIFadd{If you know some group theory, we can say that an elastic fluid has symmetry group equal to $\mathrm{SL}(3)$, while for a solid the symmetry group is a subgroup of $\mathrm{SO}(3)$. It can be shown that there is no proper subgroup intermediate between $\mathrm{SO}(3)$ and $\mathrm{SL}(3)$, and hence there is no ``intermediate'' state between solids and fluids. This approach to classifying elastic materials is due to Walter Noll (1925--2017).}} \DIFaddend It follows readily that the strain energy depends on $\mathbf{F}$ only through its determinant, and hence we can write
+\DIFdel{.}\DIFdelend \DIFaddbegin \DIFadd{.}\footnote{\DIFadd{If you know some group theory, we can say that an elastic fluid has symmetry group equal to $\mathrm{SL}(3)$, while for a solid the symmetry group is a subgroup of $\mathrm{SO}(3)$. It can be shown that no subgroup of $\mathrm{SL}(3)$ lies strictly between $\mathrm{SO}(3)$ and $\mathrm{SL}(3)$, and hence there is no ``intermediate'' state between solids and fluids. This approach to classifying elastic materials is due to Walter Noll (1925--2017).}} \DIFaddend It follows readily that the strain energy depends on $\mathbf{F}$ only through its determinant, and hence we can write
 \DIFdelbegin \begin{displaymath}
 \DIFdel{W(\mathbf{x}, \mathbf{F}) = V(\mathbf{x}, J),
 }\end{displaymath}%DIFAUXCMD
@@ -618,13 +622,13 @@ for some function $V$, where $J = \det(\mathbf{F})$. In terms of the linearised 
 \DIFadd{A_{ijkl} = \kappa\delta_{ij}\delta_{kl},
 \label{eq:48}
 }\end{equation}\DIFaddend 
-which is that of an isotropic solid but with vanishing shear modulus.
+\DIFdelbegin \DIFdel{which is that }\DIFdelend \DIFaddbegin \DIFadd{where $\kappa = \frac{\partial^{2}V}{\partial J^{2}}(\mathbf{x}, 1)$ is the bulk modulus of the fluid. This is the elastic tensor }\DIFaddend of an isotropic solid but with vanishing shear modulus.
 
 \section*{What you need to know and be able to do}
 
 \begin{enumerate}
     \item[(i)] The statement of the polar decomposition theorem, and how this can be used to restrict the allowable form of the strain energy function. The proof of the polar decomposition theorem is non-examinable.
-    \item[(ii)] What a stress-free equilibrium configuration is, and how to derive the linearised equations of motion for small disturbances about such a configuration. Within this course, you will become very familiar with these linearised equations of motion, and it will be necessary to memorise their form (in the non-gravitating case discussed in this lecture) for the exam.
+    \item[(ii)] What a stress-free equilibrium configuration is, and how to derive the linearised equations of motion for small disturbances about such a configuration. \DIFdelbegin \DIFdel{Within }\DIFdelend \DIFaddbegin \DIFadd{In }\DIFaddend this course, you will become very familiar with these linearised equations of motion, and it will be necessary to memorise their form (in the non-gravitating case discussed in this lecture) for the exam.
     \item[(iii)] The definition of the material symmetry group, and its physical interpretation.
     \item[(iv)] The meaning of the terms elastic solid, elastic fluid, isotropic, anisotropic, and transversely isotropic. You do not need to remember the form of the elastic tensor in any particular case, but you should memorise the hyperelastic symmetry $A_{ijkl} = A_{klij}$ due to its great physical importance.
 \end{enumerate}

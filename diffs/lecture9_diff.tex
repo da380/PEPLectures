@@ -1,7 +1,7 @@
 \documentclass[a4paper,12pt]{paper}
 %DIF LATEXDIFF DIFFERENCE FILE
 %DIF DEL lecture9.tex             Thu Nov 13 02:11:28 2025
-%DIF ADD diffs/lecture9_new.tex   Fri Sep 25 12:46:06 2026
+%DIF ADD diffs/lecture9_new.tex   Fri Sep 25 16:34:56 2026
 
 \usepackage{mycommands}
 
@@ -76,7 +76,7 @@ body satisfies Poisson\DIFdelbegin \DIFdel{equation
 \DIFadd{\nabla^{2}\phi=4\pi G\varrho,
 \label{eq:1}
 }\end{equation}\DIFaddend 
-in $\mathbb{R}^{3}$, where $G$ is the universal gravitational constant, and $\varrho$ is the density. The gravitational 
+in $\mathbb{R}^{3}$, where $G$ is the universal gravitational constant, and $\varrho$ is the \DIFaddbegin \DIFadd{spatial }\DIFaddend density. The gravitational 
 acceleration associated with this potential is given by
 \DIFdelbegin \begin{displaymath}
 \DIFdel{g_{i}=-\frac{\partial\phi}{\partial x_{i}}
@@ -201,8 +201,8 @@ the resulting change in gravitational potential, we can write this increment to 
 \dd^{3}\mathbf{y}=\frac{1}{4\pi G}\int_{\mathbb{R}^{3}}\left(\frac{\partial^{2}\delta\phi}{\partial x_{i}\partial x_{i}}\right)\phi\dd^{3}\mathbf{y},
 }\end{displaymath}%DIFAUXCMD
 \DIFdelend \DIFaddbegin \begin{equation}
-\DIFadd{\delta\mathcal{V}_{g}=\frac{1}{4\pi G}\int_{M_{t}}\left(\frac{\partial^{2}\delta\phi}{\partial x_{i}\partial x_{i}}\right)\phi
-\dd^{3}\mathbf{y}=\frac{1}{4\pi G}\int_{\mathbb{R}^{3}}\left(\frac{\partial^{2}\delta\phi}{\partial x_{i}\partial x_{i}}\right)\phi\dd^{3}\mathbf{y},
+\DIFadd{\delta\mathcal{V}_{g}=\frac{1}{4\pi G}\int_{M_{t}}\left(\frac{\partial^{2}\delta\phi}{\partial y_{i}\partial y_{i}}\right)\phi
+\dd^{3}\mathbf{y}=\frac{1}{4\pi G}\int_{\mathbb{R}^{3}}\left(\frac{\partial^{2}\delta\phi}{\partial y_{i}\partial y_{i}}\right)\phi\dd^{3}\mathbf{y},
 \label{eq:12}
 }\end{equation}\DIFaddend 
 where the final equality follows from the fact that $\nabla^{2}\delta\phi=0$ outside of the instantaneous 
@@ -212,8 +212,8 @@ body $M_{t}$. Using the identity
 \left(\phi\frac{\partial\delta\phi}{\partial x_{i}}\right)-\frac{\partial\phi}{\partial x_{i}}\frac{\partial\delta\phi}{\partial x_{i}}
 }\end{displaymath}%DIFAUXCMD
 \DIFdelend \DIFaddbegin \begin{equation}
-\DIFadd{\left(\frac{\partial^{2}\delta\phi}{\partial x_{i}\partial x_{i}}\right)\phi=\frac{\partial}{\partial x_{i}}
-\left(\phi\frac{\partial\delta\phi}{\partial x_{i}}\right)-\frac{\partial\phi}{\partial x_{i}}\frac{\partial\delta\phi}{\partial x_{i}},
+\DIFadd{\left(\frac{\partial^{2}\delta\phi}{\partial y_{i}\partial y_{i}}\right)\phi=\frac{\partial}{\partial y_{i}}
+\left(\phi\frac{\partial\delta\phi}{\partial y_{i}}\right)-\frac{\partial\phi}{\partial y_{i}}\frac{\partial\delta\phi}{\partial y_{i}},
 \label{eq:13}
 }\end{equation}\DIFaddend 
 and applying the divergence theorem we obtain
@@ -221,18 +221,19 @@ and applying the divergence theorem we obtain
 \DIFdel{\delta\mathcal{V}_{g}=-\frac{1}{4\pi G}\int_{\mathbb{R}^{3}}\frac{\partial\phi}{\partial x_{i}}\frac{\partial\delta\phi}{\partial x_{i}}\dd^{3}\mathbf{y}.
 }\end{displaymath}%DIFAUXCMD
 \DIFdelend \DIFaddbegin \begin{equation}
-\DIFadd{\delta\mathcal{V}_{g}=-\frac{1}{4\pi G}\int_{\mathbb{R}^{3}}\frac{\partial\phi}{\partial x_{i}}\frac{\partial\delta\phi}{\partial x_{i}}\dd^{3}\mathbf{y},
+\DIFadd{\delta\mathcal{V}_{g}=-\frac{1}{4\pi G}\int_{\mathbb{R}^{3}}\frac{\partial\phi}{\partial y_{i}}\frac{\partial\delta\phi}{\partial y_{i}}\dd^{3}\mathbf{y},
 \label{eq:14}
 }\end{equation}\DIFaddend 
 where we have used the continuity of the potentials and their normal derivatives across $\partial M_{t}$, while the 
-surface integral at infinity vanishes because $\phi\sim r^{-1}$ and \DIFdelbegin \DIFdel{$||\nabla\delta\phi||\sim r^{-2}$ }\DIFdelend \DIFaddbegin \DIFadd{$\|\nabla\delta\phi\|\sim r^{-2}$ }\DIFaddend as $r\rightarrow\infty$. It follows that the increment to the gravitational binding energy can be written
+surface integral at infinity vanishes \DIFdelbegin \DIFdel{because $\phi\sim r^{-1}$ and $||\nabla\delta\phi||\sim r^{-2}$ as $r\rightarrow\infty$}\DIFdelend \DIFaddbegin \DIFadd{since, at large distances $r$, $\phi$ decays like $r^{-1}$ and $\|\nabla\delta\phi\|$ 
+like $r^{-2}$}\DIFaddend . It follows that the increment to the gravitational binding energy can be written
 \DIFdelbegin \begin{displaymath}
 \DIFdel{\delta\mathcal{V}_{g}=\delta\left(-\frac{1}{8\pi G}\int_{\mathbb{R}^{3}}\frac{\partial\phi}{\partial x_{i}}
 \frac{\partial\phi}{\partial x_{i}}\dd^{3}\mathbf{y}\right)
 }\end{displaymath}%DIFAUXCMD
 \DIFdelend \DIFaddbegin \begin{equation}
-\DIFadd{\delta\mathcal{V}_{g}=\delta\left(-\frac{1}{8\pi G}\int_{\mathbb{R}^{3}}\frac{\partial\phi}{\partial x_{i}}
-\frac{\partial\phi}{\partial x_{i}}\dd^{3}\mathbf{y}\right),
+\DIFadd{\delta\mathcal{V}_{g}=\delta\left(-\frac{1}{8\pi G}\int_{\mathbb{R}^{3}}\frac{\partial\phi}{\partial y_{i}}
+\frac{\partial\phi}{\partial y_{i}}\dd^{3}\mathbf{y}\right),
 \label{eq:15}
 }\end{equation}\DIFaddend 
 and so we arrive at the result
@@ -240,7 +241,7 @@ and so we arrive at the result
 \DIFdel{\mathcal{V}_{g}=-\frac{1}{8\pi G}\int_{\mathbb{R}^{3}}\frac{\partial\phi}{\partial x_{i}}\frac{\partial\phi}{\partial x_{i}}\dd^{3}\mathbf{y}.
 }\end{displaymath}%DIFAUXCMD
 \DIFdelend \DIFaddbegin \begin{equation}
-\DIFadd{\mathcal{V}_{g}=-\frac{1}{8\pi G}\int_{\mathbb{R}^{3}}\frac{\partial\phi}{\partial x_{i}}\frac{\partial\phi}{\partial x_{i}}\dd^{3}\mathbf{y}.
+\DIFadd{\mathcal{V}_{g}=-\frac{1}{8\pi G}\int_{\mathbb{R}^{3}}\frac{\partial\phi}{\partial y_{i}}\frac{\partial\phi}{\partial y_{i}}\dd^{3}\mathbf{y}.
 \label{eq:16}
 }\end{equation}\DIFaddend 
 
@@ -251,9 +252,9 @@ Using \DIFdelbegin \DIFdel{the Poisson}\DIFdelend \DIFaddbegin \DIFadd{Poisson's
 \partial x_{i}}\right)=\frac{\partial}{\partial x_{i}}\left(\phi\frac{\partial\phi}{\partial x_{i}}\right)-4\pi G\varrho\phi,
 }\end{displaymath}%DIFAUXCMD
 \DIFdelend \DIFaddbegin \begin{equation}
-\DIFadd{\frac{\partial\phi}{\partial x_{i}}\frac{\partial\phi}{\partial x_{i}}=\frac{\partial}{\partial x_{i}}
-\left(\phi\frac{\partial\phi}{\partial x_{i}}\right)-\phi\left(\frac{\partial^{2}\phi}{\partial x_{i}
-\partial x_{i}}\right)=\frac{\partial}{\partial x_{i}}\left(\phi\frac{\partial\phi}{\partial x_{i}}\right)-4\pi G\varrho\phi,
+\DIFadd{\frac{\partial\phi}{\partial y_{i}}\frac{\partial\phi}{\partial y_{i}}=\frac{\partial}{\partial y_{i}}
+\left(\phi\frac{\partial\phi}{\partial y_{i}}\right)-\phi\left(\frac{\partial^{2}\phi}{\partial y_{i}
+\partial y_{i}}\right)=\frac{\partial}{\partial y_{i}}\left(\phi\frac{\partial\phi}{\partial y_{i}}\right)-4\pi G\varrho\phi,
 \label{eq:17}
 }\end{equation}\DIFaddend 
 and applying the divergence theorem we obtain
@@ -410,12 +411,13 @@ we see that the velocity relative to inertial space can be written
 \DIFadd{v_{i}=\frac{\ddns \Phi_{i}}{\ddns t}+R_{ij}\left(\frac{\partial\overline{\varphi}_{j}}{\partial t}+R_{kj}\frac{\ddns R_{kl}}{\ddns t}\overline{\varphi}_{l}\right),
 \label{eq:30}
 }\end{equation}\DIFaddend 
-where we have used the identity $R_{kj}R_{kl}=\delta_{jl}$ for rotation matrices. 
-In fact, if we differentiate this latter identity we find
-\DIFdelbegin \begin{displaymath}
+where we have used the identity \DIFdelbegin \DIFdel{$R_{kj}R_{kl}=\delta_{jl}$ }\DIFdelend \DIFaddbegin \DIFadd{$R_{ij}R_{kj}=\delta_{ik}$ }\DIFaddend for rotation matrices. \DIFdelbegin \DIFdel{In fact, if we differentiate this latter identity we find
+}\begin{displaymath}
 \DIFdel{\frac{\ddns R_{kj}}{\ddns t}R_{kl}+R_{kj}\frac{\ddns R_{kl}}{\ddns t}=0.
 }\end{displaymath}%DIFAUXCMD
-\DIFdelend \DIFaddbegin \begin{equation}
+\DIFdelend \DIFaddbegin \DIFadd{If we differentiate the
+companion identity $R_{kj}R_{kl}=\delta_{jl}$ we find
+}\begin{equation}
 \DIFadd{\frac{\ddns R_{kj}}{\ddns t}R_{kl}+R_{kj}\frac{\ddns R_{kl}}{\ddns t}=0,
 \label{eq:31}
 }\end{equation}\DIFaddend 
@@ -463,7 +465,7 @@ which corresponds to a frame whose \textbf{origin is static} relative to the \DI
 with the angular velocity chosen so that the frame \textbf{approximately co-rotates with the Earth}. The advantage of this 
 choice is its simplicity. But it does mean that orbital, rotational, and relative motion of the Earth are mixed 
 up within the term $\overline{\bphi}$. A preferable approach is to use the so-called 
-\textbf{Tisserand frame} which is defined such that the relative motion, $\overline{\bphi}$ carries no net linear
+\textbf{Tisserand frame} which is defined such that the relative motion, $\overline{\bphi}$\DIFaddbegin \DIFadd{, }\DIFaddend carries no net linear
  \DIFdelbegin \DIFdel{nor angular momentum}\footnote{\DIFdel{See ``On the elastodynamics of rotating planets'' by Maitra \& Al-Attar (2024) for details.}}%DIFAUXCMD
 \addtocounter{footnote}{-1}%DIFAUXCMD
 \DIFdel{.}\DIFdelend \DIFaddbegin \DIFadd{or angular momentum.}\footnote{\DIFadd{See Maitra \& Al-Attar (2024) for details.}}
@@ -479,7 +481,7 @@ To complete the derivation of the equations of motion in the non-inertial frame,
 \label{eq:36}
 }\end{equation}\DIFaddend 
 with $\overline{\mathbf{F}}$ the deformation gradient associated with relative motion. Due to material frame 
-indifference, we then have $W(\mathbf{x},\mathbf{F})=W(\mathbf{x},\overline{\mathbf{F}})$ as should be physically 
+indifference, we then have \DIFdelbegin \DIFdel{$W(\mathbf{x},\mathbf{F})=W(\mathbf{x},\overline{\mathbf{F}})$ }\DIFdelend \DIFaddbegin \DIFadd{$W(\mathbf{x},t,\mathbf{F})=W(\mathbf{x},t,\overline{\mathbf{F}})$ }\DIFaddend as should be physically  
 expected. Using the chain rule, we find
 \DIFdelbegin \begin{displaymath}
 \DIFdel{\overline{T}_{ij}=\frac{\partial W}{\partial\overline{F}_{ij}}(\overline{\mathbf{F}})=\frac{\partial}{\partial
@@ -525,7 +527,7 @@ results we have shown that the equations of motion are equivalent to
 These equations are identical in form to those in an inertial frame except for the inclusion of the Coriolis and 
 centrifugal accelerations -- the Euler acceleration has been removed because we have restricted attention to a 
 steadily rotating frame. From this point on we will consistently work in the approximately co-rotating frame, 
-and hence will simplify notations by dropping overlines on terms linked to the relative motion. 
+and hence will simplify \DIFdelbegin \DIFdel{notations }\DIFdelend \DIFaddbegin \DIFadd{notation }\DIFaddend by dropping overlines on terms linked to the relative motion. 
 
 \subsection*{Linearised equations of motion}
 
@@ -643,7 +645,9 @@ Taking the gradient of this expression twice, we obtain
 (x_{k}-x_{k}')]^{3/2}}-\frac{3(x_{i}-x_{i}')(x_{j}-x_{j}')}{[(x_{k}-x_{k}')(x_{k}-x_{k}')]^{5/2}}\right)\dd^{3}\mathbf{x}',
 \label{eq:52}
 }\end{equation}\DIFaddend 
-and using \DIFdelbegin \DIFdel{the Poisson}\DIFdelend \DIFaddbegin \DIFadd{Poisson's }\DIFaddend equation $\nabla^{2}\zeta_{0}=4\pi G\rho$ along with eq.\DIFdelbegin \DIFdel{(45}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:45}}\DIFaddend ) we arrive at the desired scaling estimate
+\DIFdelbegin \DIFdel{and using the Poisson equation }\DIFdelend \DIFaddbegin \DIFadd{Comparing eqs.~(\ref{eq:45}) and (\ref{eq:52}), the contribution of $u_{j}$ to $\gamma_{i}^{1}$ is
+$-u_{j}\,\partial^{2}\zeta_{0}/\partial x_{i}\partial x_{j}$, whose magnitude is set by the trace }\DIFaddend $\nabla^{2}\zeta_{0}=4\pi G\rho$
+\DIFdelbegin \DIFdel{along with eq.(45) }\DIFdelend \DIFaddbegin \DIFadd{given by Poisson's equation, and hence }\DIFaddend we arrive at the desired scaling estimate
 \DIFdelbegin \begin{displaymath}
 \DIFdel{\rho\gamma_{i}^{1}\sim4\pi G\overline{\rho}^{2}U
 }\end{displaymath}%DIFAUXCMD
@@ -676,7 +680,7 @@ Recalling that \DIFdelbegin \DIFdel{$G=6.67\times10^{-11} \, \text{m}^{3}\text{k
 \DIFadd{\frac{\text{gravitational forces}}{\text{elastic forces}}\sim3.
 \label{eq:55}
 }\end{equation}\DIFaddend 
-For such planetary scale deformations, it follows that gravitational forces are of the same order of magnitude as elastic forces, 
+For such \DIFdelbegin \DIFdel{planetary scale }\DIFdelend \DIFaddbegin \DIFadd{planetary-scale }\DIFaddend deformations, it follows that gravitational forces are of the same order of magnitude as elastic forces, 
 and so cannot be neglected within the dynamics. 
 
 Next, we consider the ratio of the Coriolis and inertial terms, and find
@@ -693,8 +697,9 @@ is limited to periods shorter than about one hour, and so rotational effects pla
 role \DIFaddbegin \DIFadd{in }\DIFaddend the problem. There are, however, processes at longer periods, e.g.\DIFaddbegin \DIFadd{\ }\DIFaddend those associated with solid-Earth tides, for which 
 rotation becomes very important.
 
-\DIFaddbegin \DIFadd{The conclusions of this scaling analysis can be checked directly by computing synthetic seismograms in a spherically 
-symmetric earth model with and without self-gravitation, as shown in Fig.~\ref{fig:2}, where attenuation has been 
+\DIFaddbegin \DIFadd{The conclusions of this scaling analysis can be checked directly by computing synthetic seismograms in a spherically
+symmetric earth model with gravitation and with all gravitational effects switched off, i.e.\ with neither the equilibrium
+gravitational field nor its perturbation included in the equations of motion, as shown in Fig.~\ref{fig:2}, where attenuation has been  
 neglected so that the long-period waves persist over the six hours shown.}\footnote{\DIFadd{The calculations use the 
 program }\texttt{\DIFadd{yspec}}\DIFadd{, which solves the equations of motion of this lecture in a spherically symmetric earth model by direct 
 numerical integration in the frequency domain (Al-Attar \& Woodhouse 2008).}} \DIFadd{Over the full frequency band of the 
@@ -715,12 +720,13 @@ altered by self-gravitation.
 \centering
 \includegraphics[width=0.95\textwidth]{figures/L9F2.pdf}
 \caption{\DIFaddFL{Synthetic vertical-component acceleration seismograms in the earth model PREM for an earthquake of moment magnitude 8 at 
-$20\,\mathrm{km}$ depth, recorded at an epicentral angle of $90^{\circ}$, computed with (black) and without (red) 
-self-gravitation. The top trace shows the full band of the calculation, from $0.3$ to $50\,\mathrm{mHz}$, and those below 
-it the same seismogram band-pass filtered in successively lower frequency bands. Each trace is normalised by its 
-maximum. The 
+$20\,\mathrm{km}$ depth, recorded at an epicentral angle of $90^{\circ}$, computed with gravitation (black) and with all
+gravitational effects switched off (red), i.e.\ with neither the equilibrium gravitational field nor its perturbation.
+The top trace shows the full band of the calculation, from $0.3$ to $50\,\mathrm{mHz}$, and those below
+it the same seismogram band-pass filtered in successively lower frequency bands. In each panel both traces are normalised
+by the maximum of the gravitating one. The  
 calculations neglect attenuation, so that the surface waves continue to circle the Earth undiminished over the six hours 
-shown. The two calculations differ only in the lowest bands, and there the differences grow with time as the 
+shown. The two calculations differ appreciably only in the lowest bands, and there the differences grow with time as the  
 long-period surface waves circle the Earth.}}
 \label{fig:2}
 \end{figure}

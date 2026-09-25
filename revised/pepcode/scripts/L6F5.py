@@ -25,8 +25,8 @@ if __name__ == "__main__":
     r, a = profile(prem.vp); ax.plot(a, r, "k", lw=1.2, solid_capstyle="round")
     r, b = profile(prem.vs); ax.plot(b, r, "tab:red", lw=1.2, solid_capstyle="round")
     for rb, lab in [(prem.R_CMB, "CMB"), (prem.R_ICB, "ICB")]:
-        ax.axhline(rb, color="0.6", lw=0.6, ls="--"); ax.text(13.9, rb + 60, lab, ha="right", fontsize=9, color="0.4")
-    ax.text(12.2, 4700, r"$\alpha$", fontsize=13); ax.text(6.9, 4900, r"$\beta$", fontsize=13, color="tab:red")
+        ax.axhline(rb, color="0.6", lw=0.6, ls="--"); ax.text(2.6, rb + 70, lab, ha="left", fontsize=9, color="0.4")
+    ax.text(12.9, 5000, r"$\alpha$", fontsize=13); ax.text(6.9, 4900, r"$\beta$", fontsize=13, color="tab:red")
     ax.set_xlim(0, 14); ax.set_ylim(0, 6400)
     ax.set_xlabel(r"wave speed / km s$^{-1}$"); ax.set_ylabel("radius / km")
     ax.grid(True, ls=":", lw=0.5)

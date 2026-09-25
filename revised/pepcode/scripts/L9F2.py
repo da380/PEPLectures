@@ -1,5 +1,5 @@
 """Lecture 21, Fig. 2: synthetic vertical-component acceleration seismograms in PREM computed
-with and without self-gravitation (yspec; see run_yspec.py), for an Mw 8 source at 20 km depth
+with gravitation (yspec switch 2) and with all gravitational effects switched off (switch 0; see run_yspec.py), for an Mw 8 source at 20 km depth
 recorded at an epicentral angle of 90 degrees.  Top: the full band of the calculation
 (0.3-50 mHz); below: the same seismogram band-passed in successively lower frequency bands.  A cosine taper at the start of each trace, two periods
 of its lowest frequency long, removes a transient at the origin time; the record is six hours long, without attenuation."""
@@ -35,7 +35,7 @@ def bandpass(x, dt, f1, f2, taper=0.15):
 
 bands = [None, (20e-3, 45e-3), (10e-3, 20e-3), (5e-3, 10e-3), (2e-3, 5e-3), (1e-3, 2e-3)]
 labels = ["0.3–50 mHz", "20–45 mHz", "10–20 mHz", "5–10 mHz", "2–5 mHz", "1–2 mHz"]
-fig, axes = plt.subplots(len(bands), 1, figsize=(9.6, 9.6), sharex=True, constrained_layout=True)
+fig, axes = plt.subplots(len(bands), 1, figsize=(9.6, 6.2), sharex=True, constrained_layout=True)
 for ax, band, lab in zip(axes, bands, labels):
     if band is None:
         y0, y2 = z0, z2
@@ -47,11 +47,11 @@ for ax, band, lab in zip(axes, bands, labels):
     T = 120.0 if band is None else min(2.0 / band[0], 1800.0)
     ramp = np.ones_like(t); m = t < T; ramp[m] = 0.5 * (1 - np.cos(np.pi * t[m] / T))
     y0, y2 = y0 * ramp, y2 * ramp
-    scale = np.abs(y2).max()
-    ax.plot(t / 60, y2 / scale, "k", lw=0.7, label="with self-gravitation")
-    ax.plot(t / 60, y0 / scale, "tab:red", lw=0.7, alpha=0.85, label="without gravitation")
+    scale = np.abs(y2).max()                            # both traces normalised by the maximum of the gravitating one
+    ax.plot(t / 60, y2 / scale, "k", lw=0.7, label="with gravitation")
+    ax.plot(t / 60, y0 / scale, "tab:red", lw=0.7, alpha=0.85, label="all gravitational effects switched off")
     ax.set_ylim(-1.15, 1.15); ax.set_yticks([-1, 0, 1]); ax.grid(True, ls=":", lw=0.5)
     ax.text(0.01, 0.9, lab, transform=ax.transAxes, fontsize=9, va="top")
-axes[0].legend(loc="upper right", fontsize=8, frameon=False)
+axes[0].legend(loc="upper center", fontsize=8, frameon=False)
 axes[-1].set_xlabel("time after the earthquake / minutes"); axes[-1].set_xlim(0, 360)
 fig.savefig(str(FIG / "L9F2.pdf")); fig.savefig(str(FIG / "L9F2.png"), dpi=200)

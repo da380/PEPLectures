@@ -28,22 +28,23 @@ def ocean_pick(f, vec, pen):
     return max(cand)[1]
 
 M50 = PremModes(order=5, element_size_km=50.0); M100 = PremModes(order=5, element_size_km=100.0)
-panels = [(M100, 1, cat_f(1, 1), 0.3e-3, None, r"${}_1S_1$ (Slichter mode)"),
-          (M50, 16, cat_f(16, 2), 4e-3, None, r"${}_2S_{16}$ (CMB Stoneley mode)"),
-          (M50, 8, cat_f(8, 4), 4e-3, None, r"${}_4S_{8}$ (ICB Stoneley mode)"),
-          (M50, 2, cat_f(2, 11), 5e-3, None, r"${}_{11}S_{2}$ (inner-core mode)")]
-fig, axes = plt.subplots(1, 4, figsize=(10.5, 4.4), sharey=True, constrained_layout=True)
+panels = [(M100, 1, cat_f(1, 1), 0.3e-3, None, r"${}_1S_1$" "\nSlichter mode"),
+          (M50, 16, cat_f(16, 2), 4e-3, None, r"${}_2S_{16}$" "\nCMB Stoneley mode"),
+          (M50, 8, cat_f(8, 4), 4e-3, None, r"${}_4S_{8}$" "\nICB Stoneley mode"),
+          (M50, 2, cat_f(2, 11), 5e-3, None, r"${}_{11}S_{2}$" "\ninner-core mode")]
+# drawn at its printed width (\textwidth) so that the fonts appear at their nominal size
+fig, axes = plt.subplots(1, 4, figsize=(6.5, 3.6), sharey=True, constrained_layout=True)
 for ax, (pm, l, ft, fmax, pick, name) in zip(axes, panels):
     f, r, U, V = state(pm, l, ft, fmax, pick)
     zeta = np.sqrt(l * (l + 1)); scale = max(np.abs(U).max(), np.abs(zeta * V).max())
     ax.plot(U / scale, r, "k", lw=1.3, label=r"$U$"); ax.plot(zeta * V / scale, r, "tab:red", lw=1.3, ls="--", label=r"$\zeta V$")
-    per = "period %.1f h" % (1 / f / 3600) if f < 1e-4 else "period %.1f min" % (1 / f / 60)
-    ax.set_title(name + "\n%.4f mHz, %s" % (1e3 * f, per), fontsize=9.5)
+    per = "%.1f h" % (1 / f / 3600) if f < 1e-4 else "%.1f min" % (1 / f / 60)
+    ax.set_title(name + "\n%.4f mHz, %s" % (1e3 * f, per), fontsize=8)
     for rb in (prem.R_CMB, prem.R_ICB):
         ax.axhline(rb, color="0.6", lw=0.6, ls="--")
     ax.axvline(0, color="0.8", lw=0.6); ax.set_xlim(-1.1, 1.1); ax.grid(True, ls=":", lw=0.4)
     ax.set_ylim(0, 6371)
-    ax.set_xlabel("normalised eigenfunction")
     print(name, "f = %.5f mHz" % (1e3 * f))
+fig.supxlabel("normalised eigenfunction")
 axes[0].set_ylabel("radius / km"); axes[0].legend(loc="lower right", fontsize=9, frameon=False)
 fig.savefig(str(FIG / "L12F8.pdf")); fig.savefig(str(FIG / "L12F8.png"), dpi=200)

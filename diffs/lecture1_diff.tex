@@ -1,7 +1,7 @@
 \documentclass[a4paper,12pt]{paper}
 %DIF LATEXDIFF DIFFERENCE FILE
 %DIF DEL lecture1.tex             Tue Aug 18 14:37:36 2026
-%DIF ADD diffs/lecture1_new.tex   Fri Sep 25 14:00:05 2026
+%DIF ADD diffs/lecture1_new.tex   Fri Sep 25 16:34:46 2026
 
 \usepackage{mycommands}
 %DIF PREAMBLE EXTENSION ADDED BY LATEXDIFF
@@ -109,7 +109,7 @@ vector field\DIFdelbegin \footnote{\DIFdel{I prefer the descriptive terms ``refe
 described within a continuum. Some authors instead use ``Lagrangian'' and ``Eulerian'' for these concepts, though
  both perspectives were introduced by Euler. }}%DIFAUXCMD
 \addtocounter{footnote}{-1}%DIFAUXCMD
-\DIFdel{.}\DIFdelend \DIFaddbegin \DIFadd{.}\footnote{\DIFadd{I prefer the descriptive terms ``referential'' and ``spatial'' to describe the two means by which quantities can be 
+\DIFdel{.}\DIFdelend \DIFaddbegin \DIFadd{.}\footnote{\DIFadd{I prefer the descriptive terms ``referential'' and ``spatial'' for the two ways in which quantities can be 
 described within a continuum. Some authors instead use ``Lagrangian'' and ``Eulerian'' for these concepts, though
  both perspectives were introduced by Euler.}} 
 \DIFaddend 
@@ -127,7 +127,7 @@ use a Taylor expansion to obtain
 \label{eq:4}
 \end{equation}
 which is accurate to \DIFdelbegin \DIFdel{first-order }\DIFdelend \DIFaddbegin \DIFadd{first order }\DIFaddend in $\delta\mathbf{x}$. The deformation gradient is related to, but not identical with,
-the concept of \textbf{strain}, with this correspondence discussed further in the next lecture.
+the concept of \textbf{strain}, \DIFdelbegin \DIFdel{with this }\DIFdelend \DIFaddbegin \DIFadd{a }\DIFaddend correspondence discussed further in the next lecture.
 
 Because we have assumed that the motion establishes a one-to-one correspondence between $M$ and $M_{t}$ at each time, it can 
 be shown that $\mathbf{F}(\mathbf{x},t)$ is an invertible matrix at each point.\footnote{This follows from a result known as 
@@ -138,7 +138,7 @@ J(\mathbf{x},t)=\det\mathbf{F}(\mathbf{x},t).
 \label{eq:5}
 \end{equation}
 Invertibility of the deformation gradient implies that $J$ is never equal to zero, while continuity of $J$, which follows 
-from the continuous differentiability of $\bphi$, implies that it is of one sign throughout the body. We will assume that $J$ is always positive. This implies in particular that a right-handed set of 
+from the continuous differentiability of $\bphi$, implies that it is of one sign throughout the body \DIFaddbegin \DIFadd{(assumed connected)}\DIFaddend . We will assume that $J$ is always positive. This implies in particular that a right-handed set of 
 basis vectors in $M$ is mapped to a right-handed set of basis vectors in $M_{t}$.
 
 Consider a function $f$ defined in the instantaneous body $M_{t}$, and its integral
@@ -161,7 +161,7 @@ sub-body can be written
 \int_{U_{t}}\varrho(\mathbf{y},t)\dd^{3}\mathbf{y},
 \label{eq:8}
 \end{equation}
-where $\varrho(\mathbf{y},t)$ is the \textbf{spatial density} at the point $\mathbf{y}$ in $M_{t}$ at time $t$. During the deformation matter is 
+where $\varrho(\mathbf{y},t)$ is the \textbf{spatial density} at the point $\mathbf{y}$ in $M_{t}$ at time $t$. During the deformation\DIFaddbegin \DIFadd{, }\DIFaddend matter is 
 neither created nor destroyed. This means that the mass of this arbitrary sub-body is constant, and hence 
 \begin{equation}
 \frac{\ddns}{\ddns t}\int_{U_{t}}\varrho(\mathbf{y},t)\dd^{3}\mathbf{y}=0.
@@ -214,8 +214,8 @@ potential energy can be expressed in the form
 \end{equation}
 where $W$ is a \textbf{potential energy density} measured per unit volume within the reference body. This is not the most general form 
 that the potential energy could take, but defines what is known as a \textbf{simple hyperelastic body}. That a body is 
-\textbf{hyperelastic} means that it has a well-defined potential energy. A consequence of this assumption -- that you will establish 
-in the first problem set -- is that energy is conserved during the deformation of the body, and hence within this theory
+\textbf{hyperelastic} means that it has a well-defined potential energy. A consequence of this assumption\DIFdelbegin \DIFdel{-- that }\DIFdelend \DIFaddbegin \DIFadd{, which }\DIFaddend you will establish 
+in the first problem set\DIFdelbegin \DIFdel{-- }\DIFdelend \DIFaddbegin \DIFadd{, }\DIFaddend is that energy is conserved during the deformation of the body, and hence within this theory
 we are discounting dissipative processes\DIFdelbegin \footnote{\DIFdel{The situation is analogous to particle mechanics restricted to the case of 
 conservative forces, i.e., those forces that are derived from a potential energy.}}%DIFAUXCMD
 \addtocounter{footnote}{-1}%DIFAUXCMD
@@ -268,7 +268,7 @@ be simplified by imposing certain physical constraints:
     +\mathbf{Q}(t)\bphi(\mathbf{x},t),\mathbf{Q}(t)\mathbf{F}(\mathbf{x},t)].
     \label{eq:20}
     \end{equation}
-    Again, \DIFaddbegin \DIFadd{the }\DIFaddend necessity of this condition can also be proven. Setting $\mathbf{Q}(t)=\mathbf{1}$, this identity reduces to
+    Again, \DIFaddbegin \DIFadd{the }\DIFaddend necessity of this condition can also be proven. Setting \DIFdelbegin \DIFdel{$\mathbf{Q}(t)=\mathbf{1}$}\DIFdelend \DIFaddbegin \DIFadd{$\mathbf{Q}(t)=\mathbf{I}$}\DIFaddend , this identity reduces to
     \begin{equation}
     W[\mathbf{x},\bphi(\mathbf{x},t),\mathbf{F}(\mathbf{x},t)]=W[\mathbf{x},\mathbf{a}(t)+\bphi(\mathbf{x},t),\mathbf{F}(\mathbf{x},t)].
     \label{eq:21}
@@ -298,9 +298,11 @@ mechanics. Here we have only formulated this principle for a simple hyperelastic
 of material, and to incorporate thermodynamics and electromagnetism.
 
 \section*{Hamilton's principle}
-A Lagrangian density for a hyperelastic body is defined in the usual manner\footnote{For those with less experience with variational principles, 
+A Lagrangian density for a hyperelastic body is defined in the usual manner \DIFdelbegin \footnote{\DIFdel{For those with less experience with variational principles, 
 the necessary ideas are developed here from first principles. But please ask in a supervision, or otherwise, if you would 
-like any additional help with this material.} as the difference between the kinetic and potential energy densities
+like any additional help with this material.}} %DIFAUXCMD
+\addtocounter{footnote}{-1}%DIFAUXCMD
+\DIFdelend as the difference between the kinetic and potential energy densities
 \begin{equation}
 \mathcal{L}(\mathbf{x},t,\bphi,\mathbf{v},\mathbf{F})=\frac{1}{2}\rho(\mathbf{x})\|\mathbf{v}\|^{2}-W(\mathbf{x},\mathbf{F}),
 \label{eq:24}
@@ -311,7 +313,9 @@ while the associated action is
 \label{eq:25}
 \end{equation}
 where $[0, T]$ is the time interval of interest, and it is understood that the referential velocity and deformation 
-gradient on the \DIFdelbegin \DIFdel{right hand }\DIFdelend \DIFaddbegin \DIFadd{right-hand }\DIFaddend side are those associated with the given motion. Note that the Lagrangian density in eq.\DIFaddbegin \DIFadd{~}\DIFaddend (\ref{eq:24}) 
+gradient on the \DIFdelbegin \DIFdel{right hand }\DIFdelend \DIFaddbegin \DIFadd{right-hand }\DIFaddend side are those associated with the given motion.\DIFaddbegin \footnote{\DIFadd{For those with less experience with variational principles, 
+the necessary ideas are developed here from first principles. But please ask in a supervision, or otherwise, if you would 
+like any additional help with this material.}} \DIFaddend Note that the Lagrangian density in eq.\DIFaddbegin \DIFadd{~}\DIFaddend (\ref{eq:24}) 
 shows no explicit dependence on either $t$ or $\bphi$, but we shall 
 retain this more general expression in what follows. Hamilton's principle states that the true motion is a stationary point 
 of the action with respect to all smooth variations $\delta\bphi$ which satisfy the fixed end-point condition
@@ -328,8 +332,7 @@ Mathematically, this means that we require the first variation of the action
 \DIFadd{\delta\mathcal{S}=\lim_{h\rightarrow0}\frac{1}{h}[\mathcal{S}(\bphi+h\,\delta\bphi)-\mathcal{S}(\bphi)]
 \label{eq:27}
 }\end{equation}\DIFaddend 
-vanish for all smooth variations $\delta\bphi$ satisfying eq.\DIFaddbegin \DIFadd{~}\DIFaddend (\ref{eq:26}). \DIFaddbegin \DIFadd{The first variation depends linearly on 
-$\delta\bphi$, and it is often convenient to make this explicit by writing 
+vanish for all smooth variations $\delta\bphi$ satisfying eq.\DIFaddbegin \DIFadd{~}\DIFaddend (\ref{eq:26}). \DIFaddbegin \DIFadd{The first variation depends linearly on $\delta\bphi$, and it is often convenient to write 
 $\delta\mathcal{S}=\langle D\mathcal{S}(\bphi)|\delta\bphi\rangle$, where $D\mathcal{S}(\bphi)$ is called the 
 }\textbf{\DIFadd{functional derivative}} \DIFadd{of the action at $\bphi$, and the angled brackets denote its linear action on a 
 variation; we shall meet this notation again in later lectures. }\DIFaddend We readily find that this 

@@ -41,14 +41,17 @@ model_posterior = inverse_problem.model_posterior_measure(data_obs, solver, prec
 print("CG iterations:", solver.iterations, "; model space dimension:", model_space.dim)
 posterior_std = model_posterior.sample_pointwise_std(200)
 
-fig, axes = plt.subplots(1, 3, figsize=(11.5, 3.9), constrained_layout=True)
-vmax = float(np.max(np.abs(model_true.data)))
+fig, axes = plt.subplots(1, 3, figsize=(11.5, 4.4), constrained_layout=True)
+vmax = float(max(np.max(np.abs(model_true.data)), np.max(np.abs(model_posterior.expectation.data))))
+src_style = {"marker": "*", "color": "black", "s": 60, "edgecolor": "black"}      # as in the toy-problem figures
+rec_style = {"marker": "v", "color": "black", "s": 35, "edgecolor": "black"}
 for ax, field, title in [(axes[0], model_true, "true model"), (axes[1], model_posterior.expectation, "posterior expectation")]:
-    plot(model_space, field, ax=ax, colorbar=False, symmetric=True, cmap="RdBu_r")
-    plot_geodesic_network(paths, ax=ax, alpha=0.15, color="black")
+    _, im = plot(model_space, field, ax=ax, colorbar=False, cmap="RdBu_r", vmin=-vmax, vmax=vmax)
+    plot_geodesic_network(paths, ax=ax, alpha=0.3, linewidth=0.4, color="black", source_kwargs=src_style, receiver_kwargs=rec_style)
     ax.set_title(title, fontsize=11); ax.set_aspect("equal"); ax.set_xticks([]); ax.set_yticks([])
-plot(model_space, posterior_std, ax=axes[2], colorbar=True, symmetric=False, cmap="viridis",
-     colorbar_kwargs={"label": "standard deviation", "shrink": 0.8})
+cb = fig.colorbar(im, ax=axes[:2], orientation="horizontal", shrink=0.5, pad=0.04); cb.set_label("model value")
+_, im2 = plot(model_space, posterior_std, ax=axes[2], colorbar=False, cmap="viridis")
+cb2 = fig.colorbar(im2, ax=axes[2], orientation="horizontal", shrink=0.8, pad=0.04); cb2.set_label("standard deviation")
 axes[2].set_title("posterior standard deviation", fontsize=11); axes[2].set_aspect("equal"); axes[2].set_xticks([]); axes[2].set_yticks([])
 for ax in axes:                                   # avoid hairline seams between cells in PDF viewers
     for coll in ax.collections:

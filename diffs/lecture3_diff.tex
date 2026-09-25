@@ -1,7 +1,7 @@
 \documentclass [a4paper,12pt]{paper}
 %DIF LATEXDIFF DIFFERENCE FILE
 %DIF DEL lecture3.tex             Wed Oct 29 04:34:40 2025
-%DIF ADD diffs/lecture3_new.tex   Fri Sep 25 09:46:48 2026
+%DIF ADD diffs/lecture3_new.tex   Fri Sep 25 16:34:48 2026
 
 \usepackage{mycommands}
 
@@ -71,7 +71,7 @@ problems, this being a topic we will return to throughout these lectures.
      \DIFdelbeginFL %DIFDELCMD < \includegraphics[width=0.7\textwidth]{figures/L3F1.png} 
 %DIFDELCMD <     %%%
 \DIFdelendFL \DIFaddbeginFL \includegraphics[width=0.7\textwidth]{figures/L3F1.pdf} 
-    \DIFaddendFL \caption{A schematic diagram of a fault. You do not need to learn the associated terminology.}
+    \DIFaddendFL \caption{A schematic \DIFdelbeginFL \DIFdelFL{diagram of }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{cross-section through }\DIFaddendFL a \DIFaddbeginFL \DIFaddFL{normal }\DIFaddendFL fault. You do not need to learn the associated terminology.}
     \label{fig:1}
 \end{figure}
 
@@ -89,11 +89,14 @@ ones caused by brittle failure.}}%DIFAUXCMD
 rocks will be too hot to undergo brittle failure, and so the process must seemingly be different from that for shallow earthquakes. 
 In terms of the seismic waves generated, however, there is little to distinguish deep earthquakes from shallower 
 ones caused by brittle failure.}} \DIFaddend There are also man-made earthquakes, including nuclear weapon tests, \DIFdelbegin \DIFdel{and }\DIFdelend explosions generated 
-as part of oil prospecting, and small\footnote{But sometimes still quite damaging.} earthquakes associated with fracking or extraction of natural gas.
+as part of oil prospecting, and small \DIFdelbegin \footnote{\DIFdel{But sometimes still quite damaging.}} %DIFAUXCMD
+\addtocounter{footnote}{-1}%DIFAUXCMD
+\DIFdelend earthquakes associated with fracking or extraction of natural gas.\DIFaddbegin \footnote{\DIFadd{These are small, but sometimes still quite damaging.}}
+\DIFaddend 
 
 The idea that earthquakes are produced by rapid motion across a fault was formulated by Harry Fielding Reid (\DIFdelbegin \DIFdel{1859-1944}\DIFdelend \DIFaddbegin \DIFadd{1859--1944}\DIFaddend ) following
 a large earthquake in San Francisco in 1906. Based on 
-observations around San Francisco, Reid arrived at his \textbf{elastic rebound theory} as summarised in \DIFdelbegin \DIFdel{fig.2}\DIFdelend \DIFaddbegin \DIFadd{Fig.~\ref{fig:2}}\DIFaddend . Prior 
+observations around San Francisco, Reid arrived at his \textbf{elastic rebound theory} \DIFaddbegin \DIFadd{(Reid 1910) }\DIFaddend as summarised in \DIFdelbegin \DIFdel{fig.2}\DIFdelend \DIFaddbegin \DIFadd{Fig.~\ref{fig:2}}\DIFaddend . Prior 
 to the earthquake, deformation is gradually built up on either 
 side of the locked fault due to tectonic processes, and this stores energy within the system. At some point, the tractions across 
 the fault become sufficiently large to overcome 
@@ -103,7 +106,7 @@ While this \DIFdelbegin \DIFdel{"theory" }\DIFdelend \DIFaddbegin \DIFadd{``theo
 and subsequent work has tried to make things more precise. Key questions include: (i) the nature of frictional resistance on 
 the fault, (ii) the conditions under which rupture will occur,
 and (iii) the factors that determine when rupture stops. Why, for example, are some earthquakes on the same fault small and others big? 
-Such work also informs ideas about earthquake predictability, though the consensus in the field is that earthquakes are 
+Such work also informs ideas about earthquake predictability, though \DIFdelbegin \DIFdel{the consensus in the field }\DIFdelend \DIFaddbegin \DIFadd{a widely held view }\DIFaddend is that earthquakes are 
 a so-called \textbf{critical \DIFdelbegin \DIFdel{phenomena}\DIFdelend \DIFaddbegin \DIFadd{phenomenon}\DIFaddend }, with the size of a particular earthquake being so sensitive to initial 
 conditions that meaningful predictions are impossible. 
 The physics of earthquakes is a large and difficult 
@@ -116,7 +119,7 @@ is neglected, but it is thought that this is a good approximation in most circum
     \centering    
      \DIFdelbeginFL %DIFDELCMD < \includegraphics[width=0.7\textwidth]{figures/L3F2.png} 
 %DIFDELCMD <     %%%
-\DIFdelendFL \DIFaddbeginFL \includegraphics[width=0.7\textwidth]{figures/L3F2.pdf} 
+\DIFdelendFL \DIFaddbeginFL \includegraphics[width=\textwidth]{figures/L3F2.pdf} 
     \DIFaddendFL \caption{A graphical representation of Reid's elastic rebound theory.}
     \label{fig:2}
 \end{figure}
@@ -124,7 +127,7 @@ is neglected, but it is thought that this is a good approximation in most circum
 \section*{Introduction of the stress glut}
 
 Our aim is to incorporate motion on a fault into the equations of motion for an elastic body. To do this, we will 
-actually take a more general, and yet ultimately simpler, approach. Returning to the material of Lecture\DIFdelbegin \DIFdel{12}\DIFdelend \DIFaddbegin \DIFadd{~13}\DIFaddend , we introduced the Lagrangian density
+actually take a more general, and yet ultimately simpler, approach. \DIFdelbegin \DIFdel{Returning to the material of Lecture12, }\DIFdelend \DIFaddbegin \DIFadd{In Lecture~13 }\DIFaddend we introduced the Lagrangian density
 \DIFdelbegin \begin{displaymath}
 \DIFdel{\mathcal{L}(\mathbf{x}, t, \boldsymbol{\varphi}, \mathbf{v}, \mathbf{F}) = \frac{1}{2}\rho(\mathbf{x})||\mathbf{v}||^2 - W(\mathbf{x}, \mathbf{F}),
 }\end{displaymath}%DIFAUXCMD
@@ -153,12 +156,15 @@ where the \textbf{energy density} is defined in the expected manner\DIFdelbegin 
 }\begin{equation}\DIFadd{\label{eq:4}
 E(\mathbf{x}, t) = \frac{1}{2}\rho(\mathbf{x})\|\mathbf{v}(\mathbf{x}, t)\|^2 + W}[\DIFadd{\mathbf{x}, \mathbf{F}(\mathbf{x}, t)}]\DIFadd{.
 }\end{equation}\DIFaddend 
-If the body is initially in a stable equilibrium configuration, then any spontaneous non-trivial\footnote{Meaning, not a rigid-body motion, 
-but one that causes a change in shape and/or volume.} deformation will, by definition, raise the potential energy\DIFdelbegin \begin{displaymath}
+If the body is initially in a stable equilibrium configuration, then any spontaneous non-trivial \DIFdelbegin \footnote{\DIFdel{Meaning, not a rigid-body motion, 
+but one that causes a change in shape and/or volume.}} %DIFAUXCMD
+\addtocounter{footnote}{-1}%DIFAUXCMD
+\DIFdelend deformation will, by definition, raise the potential energy\DIFdelbegin \begin{displaymath}
 \DIFdel{\mathcal{V}(t) = \int_{M}W}[\DIFdel{\mathbf{x}, \mathbf{F}(\mathbf{x}, t)}]\DIFdel{\dd^{3}\mathbf{x}.
 }\end{displaymath}%DIFAUXCMD
-\DIFdelend \DIFaddbegin \DIFadd{,
-}\begin{equation}\DIFadd{\label{eq:5}
+\DIFdelend \DIFaddbegin \DIFadd{,}\footnote{\DIFadd{By non-trivial we mean a deformation that is not a rigid-body motion, 
+but one that causes a change in shape and/or volume.}}
+\begin{equation}\DIFadd{\label{eq:5}
 \mathcal{V}(t) = \int_{M}W}[\DIFadd{\mathbf{x}, \mathbf{F}(\mathbf{x}, t)}]\DIFadd{\dd^{3}\mathbf{x}.
 }\end{equation}\DIFaddend 
 Because the kinetic energy is non-negative, this must lead to the overall energy of the body being increased. Eq.\DIFdelbegin \DIFdel{(3}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:3}}\DIFaddend ) implies that such an 
@@ -268,7 +274,7 @@ Motivated by eq.\DIFdelbegin \DIFdel{(10}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{
 \DIFdel{W(\mathbf{x}, t, \mathbf{F}) = U(\mathbf{x}, \mathbf{C}) - s\frac{1}{2}\overline{S}_{ij}(\mathbf{x}, t)C_{ij},
 }\end{displaymath}%DIFAUXCMD
 \DIFdelend \DIFaddbegin \begin{equation}\DIFadd{\label{eq:15}
-W(\mathbf{x}, t, \mathbf{F}) = U(\mathbf{x}, \mathbf{C}) - s\frac{1}{2}\overline{S}_{ij}(\mathbf{x}, t)C_{ij},
+W(\mathbf{x}, t, \mathbf{F}) = U(\mathbf{x}, \mathbf{C}) - \frac{s}{2}\overline{S}_{ij}(\mathbf{x}, t)C_{ij},
 }\end{equation}\DIFaddend 
 where we note that the time-dependent term has no zeroth-order part. Following the method in Lecture\DIFdelbegin \DIFdel{13}\DIFdelend \DIFaddbegin \DIFadd{~14}\DIFaddend , it is a simple 
 matter to obtain the corresponding linearised equations of motion\DIFdelbegin \begin{displaymath}
@@ -300,11 +306,13 @@ In particular, within the linearised equations of motion, the \textbf{stress glu
 
 \begin{figure}[ht]
     \centering    
-     \includegraphics[width=0.7\textwidth]{figures/L3F3.png} 
-    \caption{A fault in cross section, where the offset of the strata on either side can be clearly
+     \DIFdelbeginFL %DIFDELCMD < \includegraphics[width=0.7\textwidth]{figures/L3F3.png} 
+%DIFDELCMD <     %%%
+\DIFdelendFL \DIFaddbeginFL \includegraphics[width=0.55\textwidth]{figures/L3F3.png} 
+    \DIFaddendFL \caption{A fault in cross section, where the offset of the strata on either side can be clearly
 seen. It is also apparent that the fault is not a single surface along which the
 motion is discontinuous, but rather a zone of \DIFdelbeginFL \DIFdelFL{finite-width }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{finite width }\DIFaddendFL which has undergone
-severe localised deformation.}
+severe localised deformation. \DIFaddbeginFL \DIFaddFL{Photograph: source unknown; the road at the bottom gives the scale, the exposure being a few metres high.}\DIFaddendFL }
     \label{fig:3}
 \end{figure}
 
@@ -344,7 +352,8 @@ A_{ijkl}\frac{\partial u_{k}^{0}}{\partial x_{l}} + A_{ijkl}\frac{\partial w_{k}
 }\end{equation}\DIFaddend 
 The first term here is everywhere continuous, the second has a jump discontinuity \DIFaddbegin \DIFadd{across }\DIFaddend the fault plane, while the third is non-zero only 
 on the fault plane but is singular there. 
-That the stress might be discontinuous across the fault plane is physically acceptable, with this property approximating rapid but 
+That the stress might be discontinuous across the fault plane \DIFaddbegin \DIFadd{(in its tangential components; continuity of traction is enforced by 
+the equations of motion themselves) }\DIFaddend is physically acceptable, with this property approximating rapid but 
 continuous variations in stress across the \DIFdelbegin \DIFdel{finite-width }\DIFdelend \DIFaddbegin \DIFadd{finite width }\DIFaddend of a fault zone. It is, 
 therefore, only the final singular term within eq.\DIFdelbegin \DIFdel{(20}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:20}}\DIFaddend ) that is non-physical and needs to be removed by inclusion of a stress 
 glut. Specialising eq.\DIFdelbegin \DIFdel{(12}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:12}}\DIFaddend ) to the linearised case, we see that a suitable choice is given by
@@ -406,8 +415,8 @@ Within these equations we can identify a number of \textbf{model parameters}:
 \end{enumerate}
 Given all this information it is possible, with sufficient effort, to solve the equations\DIFaddbegin \DIFadd{, }\DIFaddend though this generally requires use of a computer. 
 
-Suppose we have made seismic observations following an earthquake. Let $\mathbf{x}_i$ for \DIFdelbegin \DIFdel{$i=1, ..., n$ }\DIFdelend \DIFaddbegin \DIFadd{$i=1,\dots,n$ }\DIFaddend denote the surface locations
-of the seismometers, with each instrument providing recordings over some time interval, $I = [t_1, t_2]$. As noted above, given 
+Suppose we have made seismic observations following an earthquake. Let \DIFdelbegin \DIFdel{$\mathbf{x}_i$ for $i=1, ..., n$ }\DIFdelend \DIFaddbegin \DIFadd{$\mathbf{x}^{(k)}$, $k=1,\dots,n$, }\DIFaddend denote the surface locations
+of the seismometers, with each instrument providing recordings over some time interval \DIFdelbegin \DIFdel{, $I = [t_1, t_2]$}\DIFdelend \DIFaddbegin \DIFadd{$[t_1, t_2]$}\DIFaddend . As noted above, given 
 suitable model parameters we can simulate seismic wave propagation to produce \textbf{synthetic seismograms} at each seismometer location. 
 This is an example of solving a \textbf{forward problem}, which is to say performing a mapping from model parameters to observable quantities. 
 To each forward problem there is an associated \textbf{inverse problem} in which we try to work backwards from the observations to the 
@@ -422,7 +431,7 @@ the following three things must hold:
     \item There is a unique output for each given input.
     \item The output depends continuously on the input.
 \end{enumerate}
-Note that these conditions only make sense sequentially; if the first does not hold, then the second does not make sense, etc. A 
+Note that these conditions only make sense sequentially; if the first does not hold, then the second \DIFdelbegin \DIFdel{does not make sense, etc}\DIFdelend \DIFaddbegin \DIFadd{is meaningless, and so on}\DIFaddend . A 
 problem that is not well-posed is said to be \textbf{ill-posed}. 
 
 These definitions can be illustrated by considering a simple example.

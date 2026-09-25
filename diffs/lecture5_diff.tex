@@ -1,7 +1,7 @@
 
 %DIF LATEXDIFF DIFFERENCE FILE
 %DIF DEL lecture5.tex             Thu Nov  6 02:44:42 2025
-%DIF ADD diffs/lecture5_new.tex   Fri Sep 25 10:17:08 2026
+%DIF ADD diffs/lecture5_new.tex   Fri Sep 25 16:34:51 2026
 \documentclass [a4paper,12pt]{paper}
 
 \usepackage{mycommands}
@@ -67,14 +67,14 @@ being the subject in which the behaviour of quantum mechanical systems \DIFdelbe
 
 We consider the linearised motion of an elastic body occupying a whole space whose material parameters are 
 constant everywhere except a bounded region in which $\rho$ and $A_{ijkl}$ can vary smoothly. 
-For definiteness, let $p_{i}^{0}$ be the slowness vector of elastic waves within the homogeneous part of the body, and 
+For definiteness, let $p_{i}^{0}$ be the slowness vector of \DIFdelbegin \DIFdel{elastic waves within }\DIFdelend \DIFaddbegin \DIFadd{a chosen plane wave in }\DIFaddend the homogeneous part of the body, and 
 assume that the heterogeneous region is contained within the \DIFdelbegin \DIFdel{half-plane }\DIFdelend \DIFaddbegin \DIFadd{half-space }\DIFaddend $p_{i}^{0}x_{i}\ge0$. 
 Within the homogeneous \DIFdelbegin \DIFdel{half plane }\DIFdelend \DIFaddbegin \DIFadd{half-space }\DIFaddend $p_{i}^{0}x_{i}<0$ we know that plane wave solutions are possible of the form
 \DIFdelbegin \begin{displaymath}
 \DIFdel{u_{i}(x,t)=f(t-p_{i}^{0}x_{i})a_{i}^{0}
 }\end{displaymath}%DIFAUXCMD
 \DIFdelend \DIFaddbegin \begin{equation}
-\DIFadd{u_{i}(\mathbf{x},t)=f(t-p_{i}^{0}x_{i})a_{i}^{0},
+\DIFadd{u_{i}(\mathbf{x},t)=f(t-p_{j}^{0}x_{j})a_{i}^{0},
 \label{eq:1}
 }\end{equation}\DIFaddend 
 and our aim is to extend this solution suitably into the heterogeneous region. In general there exists no exact
@@ -91,7 +91,7 @@ relatively little physical insight, and so we shall focus on physically motivate
 \DIFaddendFL \caption{\DIFdelbeginFL \DIFdelFL{Scattering }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{Snapshot from a numerical simulation of the scattering }\DIFaddendFL of a plane \DIFdelbeginFL \DIFdelFL{p-wave }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{P-wave }\DIFaddendFL in a homogeneous background model due to its \DIFdelbeginFL \DIFdelFL{inter-
 action }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{interaction 
 }\DIFaddendFL with a heterogeneity having a typical \DIFdelbeginFL \DIFdelFL{length-scale }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{length scale }\DIFaddendFL approximately equal to
-the \DIFdelbeginFL \DIFdelFL{length-scale }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{length scale }\DIFaddendFL of the incident wave. The \DIFaddbeginFL \DIFaddFL{colours show the magnitude of the displacement, the }\DIFaddendFL arrows show the particle motion, and \DIFdelbeginFL \DIFdelFL{we }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{the dashed line marks the extent of the heterogeneity. We }\DIFaddendFL see that the scattered \DIFdelbeginFL \DIFdelFL{wave field }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{wavefield }\DIFaddendFL is comprised of both P-waves and S-waves.}
+the \DIFdelbeginFL \DIFdelFL{length-scale }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{length scale }\DIFaddendFL of the incident wave. The \DIFaddbeginFL \DIFaddFL{colours show the magnitude of the displacement, the }\DIFaddendFL arrows show the particle motion, and \DIFdelbeginFL \DIFdelFL{we see that }\DIFdelendFL the \DIFaddbeginFL \DIFaddFL{dashed line marks the extent of the heterogeneity; the colour scale is saturated so as to show the weak }\DIFaddendFL scattered \DIFdelbeginFL \DIFdelFL{wave }\DIFdelendFL field\DIFaddbeginFL \DIFaddFL{. The box }\DIFaddendFL is \DIFdelbeginFL \DIFdelFL{comprised }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{about 13 wavelengths }\DIFaddendFL of \DIFaddbeginFL \DIFaddFL{the incident wave wide and 6 high. We see that the scattered wavefield comprises }\DIFaddendFL both P-waves and S-waves.}
 \DIFdelbeginFL %DIFDELCMD < \label{fig:fig1}
 %DIFDELCMD < %%%
 \DIFdelendFL \DIFaddbeginFL \label{fig:1}
@@ -99,7 +99,7 @@ the \DIFdelbeginFL \DIFdelFL{length-scale }\DIFdelendFL \DIFaddbeginFL \DIFaddFL
 
 In broad terms there are three possible approaches for studying this problem, with the appropriate choice being determined
 by the relative length scales of the incident wave and the heterogeneous structure. Let $\lambda$ 
-denote the \textbf{dominant wavelength for the plane wave}, and denote by $L$ the \textbf{smallest length scale over which 
+\DIFaddbegin \DIFadd{(not to be confused with the Lam\'{e} parameter) }\DIFaddend denote the \textbf{dominant wavelength for the plane wave}, and denote by $L$ the \textbf{smallest length scale over which 
 the material parameters vary to an appreciable extent}. If their ratio satisfies
 \DIFdelbegin \begin{displaymath}
 \DIFdel{\frac{L}{\lambda}\approx1
@@ -108,7 +108,7 @@ the material parameters vary to an appreciable extent}. If their ratio satisfies
 \DIFadd{\frac{L}{\lambda}\approx1,
 \label{eq:2}
 }\end{equation}\DIFaddend 
-then we expect the incident wave to be \textbf{scattered by the heterogeneity}. There is not sufficient time in this course to 
+then we expect the incident wave to be \textbf{scattered by the heterogeneity} \DIFaddbegin \DIFadd{(see Fig.~\ref{fig:1})}\DIFaddend . There is not sufficient time in this course to 
 discuss scattering of seismic waves further, though it is an important physical process within the Earth, 
 and can be analysed using the \textbf{Born approximation} that you may know from quantum mechanics. 
 
@@ -122,7 +122,7 @@ In this lecture we shall focus on situations when
 }\end{equation}\DIFaddend 
 which is to say the length scale of the heterogeneity is much greater than the length scale of the incident wave. Here we 
 do not expect to see significant scattering of the incident wave, but instead a smooth evolution of the 
-wavefront as it propagates through the heterogeneity, along with associated amplitude variations due to focusing effects. This 
+wavefront as it propagates through the heterogeneity, along with associated amplitude variations due to focusing effects \DIFaddbegin \DIFadd{(see Fig.~\ref{fig:2})}\DIFaddend . This 
 is the domain of \textbf{geometric ray theory}.
 
 
@@ -241,7 +241,7 @@ We recall that the linearised equations of motion for an elastic body can be wri
 \DIFadd{\rho\frac{\partial^{2}u_{i}}{\partial t^{2}}-\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\right)=0,
 \label{eq:11}
 }\end{equation}\DIFaddend 
-where we are not here allowing a body force associated with a seismic source. Within the temporal Fourier domain this equation becomes
+where we \DIFdelbegin \DIFdel{are not here allowing }\DIFdelend \DIFaddbegin \DIFadd{do not include }\DIFaddend a body force associated with a seismic source. Within the temporal Fourier domain this equation becomes
 \DIFdelbegin \begin{displaymath}
 \DIFdel{-\omega^{2}\rho u_{i}-\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\right)=0
 }\end{displaymath}%DIFAUXCMD
@@ -346,7 +346,7 @@ and reduces their solution to the integration of systems of ordinary differentia
 solution of these ordinary differential equations that rays will enter into the theory in a natural manner.
 
 Before applying this technique, we must first reduce eq.\DIFdelbegin \DIFdel{(18) into }\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:18}) to }\DIFaddend a single partial differential equation for the travel time. 
-To do this, it will be useful to define the \textbf{local Christoffel operator} through
+To do this, it will be useful to define the \textbf{local Christoffel \DIFdelbegin \DIFdel{operator}\DIFdelend \DIFaddbegin \DIFadd{matrix}\DIFaddend } through
 \DIFdelbegin \begin{displaymath}
 \DIFdel{\Gamma_{ik}(x,\mathbf{p})=\frac{1}{\rho(\mathbf{x})}A_{ijkl}(\mathbf{x})p_{j}p_{l}.
 }\end{displaymath}%DIFAUXCMD
@@ -388,8 +388,9 @@ local phase speed. For simplicity, we shall only consider materials whose local 
 \label{eq:24}
 }\end{equation}\DIFaddend 
 where $A_{0}(\mathbf{x})$ \DIFaddbegin \DIFadd{is }\DIFaddend a scalar amplitude, and $\hat{\mathbf{a}}^{0}(\mathbf{x})$ is the appropriate normalised eigenvector which is 
-determined uniquely up to its sign. We have assumed that the local slowness surfaces within the body are everywhere non-degenerate, 
-and can therefore \DIFdelbegin \DIFdel{, }\DIFdelend always write the eikonal equation unambiguously in the form
+determined uniquely up to its sign. \DIFdelbegin \DIFdel{We have assumed that the local slowness surfaces within the body are everywhere non-degenerate, and can therefore, }\DIFdelend \DIFaddbegin \DIFadd{In an isotropic medium the two S-wave sheets of the slowness surface coincide, and so this assumption 
+fails; the reduction of the eikonal equation described below remains unambiguous in that case, but the polarisation of the S-wave is no longer 
+determined uniquely by eq.~(\ref{eq:22}). Under this non-degeneracy assumption we can therefore }\DIFaddend always write the eikonal equation unambiguously in the form
 \DIFdelbegin \begin{displaymath}
 \DIFdel{\{||\mathbf{p}(\mathbf{x})||^{2}c_{1}[\mathbf{x},\hat{\mathbf{p}}(\mathbf{x})]^{2}-1\}\{||\mathbf{p}(\mathbf{x})||^{2}c_{2}[\mathbf{x},\hat{\mathbf{p}}(\mathbf{x})]^{2}-1\}\{||p(\mathbf{x})||^{2}c_{3}[\mathbf{x},\hat{\mathbf{p}}(\mathbf{x})]^{2}-1\}=0
 }\end{displaymath}%DIFAUXCMD
@@ -419,7 +420,7 @@ introduce the \textbf{ray Hamiltonian} for the $k$th sheet of the local slowness
 \DIFadd{H_{k}(\mathbf{x},\mathbf{p})=\frac{1}{2}\|\mathbf{p}\|^{2}c_{k}(\mathbf{x},\hat{\mathbf{p}})^{2},
 \label{eq:27}
 }\end{equation}\DIFaddend 
-which is defined on a six-dimensional \textbf{phase space} comprised of points $(\mathbf{x}, \mathbf{p})$, and allows us 
+which is defined on a six-dimensional \textbf{phase space} \DIFdelbegin \DIFdel{comprised of }\DIFdelend \DIFaddbegin \DIFadd{comprising }\DIFaddend points $(\mathbf{x}, \mathbf{p})$, and allows us 
 to write the eikonal equation\DIFdelbegin \DIFdel{eq.(26)in the alternate form
 }\begin{displaymath}
 \DIFdel{H_{k}[\mathbf{x},\mathbf{p}(\mathbf{x})]=\frac{1}{2}, \quad \mathbf{p}(\mathbf{x})=(\nabla T)(\mathbf{x}).
@@ -429,8 +430,8 @@ to write the eikonal equation\DIFdelbegin \DIFdel{eq.(26)in the alternate form
 \DIFadd{H_{k}[\mathbf{x},\mathbf{p}(\mathbf{x})]=\frac{1}{2}, \quad \mathbf{p}(\mathbf{x})=(\nabla T)(\mathbf{x}).
 \label{eq:28}
 }\end{equation}\DIFaddend 
-Eq.\DIFdelbegin \DIFdel{(28}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:28}}\DIFaddend ) states that the desired solution, $T$, of the eikonal equation corresponds to a \textbf{three-dimensional level \DIFdelbegin \DIFdel{surfaces}\DIFdelend \DIFaddbegin \DIFadd{surface}\DIFaddend }
- $H_{k}(\mathbf{x},\mathbf{p})=\frac{1}{2}$ of the ray Hamiltonian. This 
+Eq.\DIFdelbegin \DIFdel{(28}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:28}}\DIFaddend ) states that the desired solution, $T$, of the eikonal equation corresponds to a \textbf{three-dimensional \DIFdelbegin \DIFdel{level surfaces}\DIFdelend \DIFaddbegin \DIFadd{surface}\DIFaddend } \DIFaddbegin \DIFadd{$S=\{(\mathbf{x},\nabla T(\mathbf{x}))\}$ lying within 
+ the level set }\DIFaddend $H_{k}(\mathbf{x},\mathbf{p})=\frac{1}{2}$ of the ray Hamiltonian. This 
 geometric viewpoint is central to the method of characteristics. 
 
 The \textbf{initial data} we have for the problem is that on the plane
@@ -445,11 +446,11 @@ the travel time is constant, and we are free to set this value equal to zero. We
 the heterogeneous region $p_{i}^{0}x_{i}\ge0$. 
 Each point $\mathbf{x}^{0}$ on this initial plane corresponds to a point $(\mathbf{x}^{0},\mathbf{p}^{0})$ within the phase space, 
 and at such points eq.\DIFdelbegin \DIFdel{(28}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:28}}\DIFaddend ) is satisfied.
-In this manner, the initial data for the problem specifies a \textbf{two-dimensional level surface $S^{0}$ of the ray Hamiltonian}, and to 
-solve the eikonal equation, we must construct
- a three-dimensional level surface $S$ containing $S^{0}$.
+In this manner, the initial data for the problem specifies a \textbf{two-dimensional \DIFdelbegin \DIFdel{level }\DIFdelend surface $S^{0}$ \DIFdelbegin \DIFdel{of the ray Hamiltonian}\DIFdelend \DIFaddbegin \DIFadd{lying within this level set}\DIFaddend }, and to 
+solve the eikonal equation \DIFdelbegin \DIFdel{, }\DIFdelend we must construct
+ a three-dimensional \DIFdelbegin \DIFdel{level }\DIFdelend surface $S$ \DIFdelbegin \DIFdel{containing }\DIFdelend \DIFaddbegin \DIFadd{within the level set that contains }\DIFaddend $S^{0}$.
 
-Let $(\mathbf{x}^{0},\mathbf{p}^{0})$ be a point on the initial plane $S^{0}$, and consider the solution of 
+Let $(\mathbf{x}^{0},\mathbf{p}^{0})$ be a point on the initial \DIFdelbegin \DIFdel{plane }\DIFdelend \DIFaddbegin \DIFadd{surface }\DIFaddend $S^{0}$, and consider the solution of 
 \textbf{Hamilton's canonical equations} for the ray Hamiltonian $H_{k}$ as defined by
 \DIFdelbegin \begin{displaymath}
 \DIFdel{\frac{\ddns x_{i}}{d\sigma}=\frac{\partial H_{k}}{\partial p_{i}}, \quad \frac{\ddns p_{i}}{d\sigma}=-\frac{\partial H_{k}}{\partial x_{i}}
@@ -479,9 +480,9 @@ A key property of Hamilton's equations is that the \textbf{Hamiltonian is conser
 where on the \DIFdelbegin \DIFdel{right hand }\DIFdelend \DIFaddbegin \DIFadd{right-hand }\DIFaddend side we have suppressed arguments for clarity. As we have $H_{k}(\mathbf{x}^{0},\mathbf{p}^{0})=\frac{1}{2}$ \DIFaddbegin \DIFadd{at }\DIFaddend each point
  on the initial surface, it follows that $H_{k}[\mathbf{x}(\sigma), \mathbf{p}(\sigma)]=\frac{1}{2}$ along the 
 curve within phase space obtained by integration of eq.\DIFdelbegin \DIFdel{(30}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:30}}\DIFaddend ) subject to the given initial conditions. What we can then do is take in 
-turn each point $(\mathbf{x}^{0},\mathbf{p}^{0})$ of the initial plane, and integrate Hamilton's equations to produce a 
+turn each point $(\mathbf{x}^{0},\mathbf{p}^{0})$ of the initial \DIFdelbegin \DIFdel{plane}\DIFdelend \DIFaddbegin \DIFadd{surface $S^{0}$}\DIFaddend , and integrate Hamilton's equations to produce a 
 curve on which the ray Hamiltonian is equal to one half. The union of all these curves defines a smooth three-dimensional 
-surface within the phase space, and this gives us the desired solution of the eikonal equation in geometric form. 
+surface \DIFdelbegin \DIFdel{within the phase space}\DIFdelend \DIFaddbegin \DIFadd{$S$ lying within the level set $H_{k}=\frac{1}{2}$}\DIFaddend , and this gives us the desired solution of the eikonal equation in geometric form. 
 
 In detail, this 
 solution is usually defined only locally near to $S^{0}$, and we shall return to this point in a moment. Furthermore, it is not 
@@ -513,7 +514,7 @@ numerical integration }\DIFaddendFL of \DIFaddbeginFL \DIFaddFL{Hamilton's equat
 \DIFdelendFL \DIFaddbeginFL \label{fig:3}
 \DIFaddendFL \end{figure}
 
-Having constructed the level surface $S$, how do we recover the travel time $T$? We first make use of \DIFdelbegin \DIFdel{eq.(7}\DIFdelend \DIFaddbegin \DIFadd{eqs.~(\ref{eq:7}}\DIFaddend ) and (\DIFdelbegin \DIFdel{30}\DIFdelend \DIFaddbegin \DIFadd{\ref{eq:30}}\DIFaddend ) to obtain
+Having constructed the \DIFdelbegin \DIFdel{level }\DIFdelend surface $S$, how do we recover the travel time $T$? We first make use of \DIFdelbegin \DIFdel{eq.(7}\DIFdelend \DIFaddbegin \DIFadd{eqs.~(\ref{eq:7}}\DIFaddend ) and (\DIFdelbegin \DIFdel{30}\DIFdelend \DIFaddbegin \DIFadd{\ref{eq:30}}\DIFaddend ) to obtain
 \DIFdelbegin \begin{displaymath}
 \DIFdel{\frac{\ddns}{\ddns\sigma}T}[\DIFdel{\mathbf{x}(\sigma)}]\DIFdel{=\frac{\partial T}{\partial x_{i}}\frac{\ddns x_{i}}{\ddns \sigma}=p_{i}\frac{\partial H}{\partial p_{i}}
 }\end{displaymath}%DIFAUXCMD
@@ -530,13 +531,13 @@ degree two, meaning
 \DIFadd{H_{k}(\mathbf{x},\gamma \mathbf{p})=\gamma^{2}H_{k}(\mathbf{x},\mathbf{p}),
 \label{eq:35}
 }\end{equation}\DIFaddend 
-for all real $\gamma$. Euler's homogeneous function theorem\footnote{
+for all \DIFdelbegin \DIFdel{real $\gamma$. }\DIFdelend \DIFaddbegin \DIFadd{$\gamma>0$, and so }\DIFaddend Euler's \DIFdelbegin \DIFdel{homogeneous function theorem }\DIFdelend \DIFaddbegin \DIFadd{theorem for homogeneous functions can be applied.}\DIFaddend \footnote{
     \DIFdelbegin \DIFdel{You }\DIFdelend \DIFaddbegin \DIFadd{A proof of this theorem is given in the appendix to this lecture, but you }\DIFaddend do not need to know \DIFdelbegin \DIFdel{this theorem}\DIFdelend \DIFaddbegin \DIFadd{it}\DIFaddend . In isotropic media the necessary calculation can be performed explicitly, 
-    and this is the only case \DIFaddbegin \DIFadd{in which }\DIFaddend you might be asked to reproduce this derivation.} then implies
-\DIFdelbegin \begin{displaymath}
+    and this is the only case \DIFaddbegin \DIFadd{in which }\DIFaddend you might be asked to reproduce this derivation.} \DIFdelbegin \DIFdel{then implies }\begin{displaymath}
 \DIFdel{p_{i}\frac{\partial H}{\partial p_{i}}=2H_{k},
 }\end{displaymath}%DIFAUXCMD
-\DIFdelend \DIFaddbegin \begin{equation}
+\DIFdelend \DIFaddbegin \DIFadd{It implies that
+}\begin{equation}
 \DIFadd{p_{i}\frac{\partial H_{k}}{\partial p_{i}}=2H_{k},
 \label{eq:36}
 }\end{equation}\DIFaddend 
@@ -572,7 +573,7 @@ different }\DIFaddend points on the initial plane\DIFdelbegin \DIFdel{are called
 }\textbf{\DIFadd{caustic}}\DIFadd{, and on a caustic }\DIFaddend ray theory breaks down. Though we do not have 
 time to look quantitatively at the \DIFdelbegin \DIFdel{the }\DIFdelend behaviour of the scalar amplitude \DIFdelbegin \DIFdel{$A^{0}(\mathbf{x})$ }\DIFdelend \DIFaddbegin \DIFadd{$A_{0}(\mathbf{x})$ }\DIFaddend introduced in eq.\DIFdelbegin \DIFdel{(24}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:24}}\DIFaddend ), 
 it can be shown that this ray theoretical amplitude becomes \textbf{infinite \DIFdelbegin \DIFdel{at caustics}\DIFdelend \DIFaddbegin \DIFadd{on a caustic}\DIFaddend }. In reality, caustics are characterised by 
-large but finite amplitudes (the name comes from the Latin for ``to burn''), and more 
+large but finite amplitudes (the name comes from the \DIFdelbegin \DIFdel{Latin for ``to burn}\DIFdelend \DIFaddbegin \DIFadd{Greek for ``burning}\DIFaddend ''), and more 
 sophisticated asymptotic techniques allow them to be handled quantitatively. \DIFaddbegin \DIFadd{The formation of a caustic behind a region of low 
 wave speed is shown in Fig.~\ref{fig:3}, while Fig.~\ref{fig:4} shows rays from an initially plane wavefront passing through a 
 smooth random medium. In the latter case there is nothing special about the structure, and yet caustics still form once the rays 
@@ -589,7 +590,7 @@ a few correlation lengths of the heterogeneity.}}
 \end{figure}
 \DIFaddend 
 
-Though within this lecture, we have focused on a problem of an initially plane wave entering into a heterogeneous region, it should
+Though within this lecture \DIFdelbegin \DIFdel{, }\DIFdelend we have focused on \DIFdelbegin \DIFdel{a }\DIFdelend \DIFaddbegin \DIFadd{the }\DIFaddend problem of an initially plane wave entering into a heterogeneous region, it should
  be apparent that ray theory can be applied to problems having more general initial conditions. For example, the initial data for the 
  travel time can be specified on a curve or even at a point. Furthermore, it is possible to extend the method to allow for discontinuities
 in material parameters along internal boundaries so long as they are smooth relative to the wavelength of the waves considered.
@@ -599,7 +600,7 @@ in material parameters along internal boundaries so long as they are smooth rela
 %DIFDELCMD <     %%%
 \DIFdelend \DIFaddbegin \begin{enumerate}
     \DIFaddend \item[(i)] The form of the ray-series expansion, and understand its underlying physical motivation.
-    \item[(ii)] How to obtain the eikonal equation and transport equations by substituting the ray expansion into the equations of motion. The full derivation given in the lecture is too involved to occur within an exam, but you may be asked to apply these methods within simpler situations.
+    \item[(ii)] How to obtain the eikonal equation and transport equations by substituting the ray expansion into the equations of motion. The full derivation given in the lecture is too involved to \DIFdelbegin \DIFdel{occur within }\DIFdelend \DIFaddbegin \DIFadd{be set in }\DIFaddend an exam, but you may be asked to apply these methods within simpler situations.
     \item[(iii)] Understand how the eikonal equation can be interpreted geometrically within a six-dimensional phase space, and be able to explain how solutions can be obtained through integration of Hamilton's equations.
     \item[(iv)] Be able to solve the Hamiltonian ray equations in simple cases, and also to deduce some of their properties. Practice in this will be given in the next lecture and within the \DIFdelbegin \DIFdel{final example sheet}\DIFdelend \DIFaddbegin \DIFadd{first problem set}\DIFaddend .
     \item[(v)] What a caustic is, and why ray theory breaks down there.

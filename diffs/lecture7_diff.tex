@@ -1,7 +1,7 @@
 \documentclass[a4paper,12pt]{paper}
 %DIF LATEXDIFF DIFFERENCE FILE
 %DIF DEL lecture7.tex             Thu Oct 23 08:40:48 2025
-%DIF ADD diffs/lecture7_new.tex   Fri Sep 25 15:23:53 2026
+%DIF ADD diffs/lecture7_new.tex   Fri Sep 25 16:34:53 2026
 
 \usepackage{mycommands}
 
@@ -53,7 +53,7 @@
 %DIFDELCMD < %%%
 \DIFdelend \section*{Outline and \DIFdelbegin \DIFdel{Motivation}\DIFdelend \DIFaddbegin \DIFadd{motivation}\DIFaddend }
 
-In the previous lecture we discussed the use of ray theory in determining the Earth's spherical velocity structure. 
+In the previous lecture we discussed the use of ray theory in determining the Earth's \DIFdelbegin \DIFdel{spherical }\DIFdelend \DIFaddbegin \DIFadd{spherically symmetric }\DIFaddend velocity structure. 
 We now consider an extension of these ideas, known as \textbf{delay time tomography}, that can be used to produce quantitative 
 images of lateral velocity variations within the Earth. This method falls into a class of techniques known 
 as \textbf{seismic tomography}, and we will say more about some other variants in later lectures. Such work is 
@@ -74,28 +74,19 @@ the \textbf{laterally varying perturbations}. An early example of such a tomogra
 }\DIFaddend 
 
 \DIFdelbegin %DIFDELCMD < \begin{figure}[ht]
-%DIFDELCMD <     \centering
-%DIFDELCMD <     \includegraphics[width=0.7\textwidth]{figures/L7F1.png}    
 %DIFDELCMD <     %%%
-%DIFDELCMD < \caption{%
-{%DIFAUXCMD
-\DIFdelFL{An image of a tomographic model of S-wave velocity variations within the Earth produced by John Woodhouse and Adam 
-    Dziewonski in 1989. The colours show the perturbation in S-wave velocity relative to a spherical reference model, with blue areas being
-     faster than normal, and red areas slower. Areas of faster velocity are thought to be colder than normal, while those that are
-      slower are hotter, and hence the chosen colour scale. These temperature anomalies have associated changes in density, and
-       so the models tell us something about the buoyancy forces that drive mantle convection.}}
-    %DIFAUXCMD
-\DIFdelendFL \DIFaddbeginFL \begin{center}
-    \includegraphics[width=0.42\textwidth]{figures/L7F1.png}    
-    \captionof{figure}{An image of a tomographic model of S-wave velocity variations within the Earth produced by Woodhouse \& Dziewonski (1989). The colours show the perturbation in S-wave velocity relative to a spherical reference model, with blue areas being
+\DIFdelendFL \DIFaddbeginFL \begin{figure}[!ht]
+    \DIFaddendFL \centering
+    \DIFdelbeginFL %DIFDELCMD < \includegraphics[width=0.7\textwidth]{figures/L7F1.png}    
+%DIFDELCMD <     %%%
+\DIFdelendFL \DIFaddbeginFL \includegraphics[width=0.42\textwidth]{figures/L7F1.png}
+    \DIFaddendFL \caption{An image of a tomographic model of S-wave velocity variations within the Earth produced by \DIFdelbeginFL \DIFdelFL{John }\DIFdelendFL Woodhouse \DIFdelbeginFL \DIFdelFL{and Adam 
+    }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{\& }\DIFaddendFL Dziewonski \DIFdelbeginFL \DIFdelFL{in 1989. }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{(1989). }\DIFaddendFL The colours show the perturbation in S-wave velocity relative to a spherical reference model, with blue areas being
      faster than normal, and red areas slower. Areas of faster velocity are thought to be colder than normal, while those that are
       slower are hotter, and hence the chosen colour scale. These temperature anomalies have associated changes in density, and
        so the models tell us something about the buoyancy forces that drive mantle convection.}
-    \DIFaddendFL \label{fig:1}
-\DIFdelbeginFL %DIFDELCMD < \end{figure}
-%DIFDELCMD < %%%
-\DIFdelend \DIFaddbegin \end{center}
-\DIFaddend 
+    \label{fig:1}
+\end{figure}
 
 The basic idea underlying seismic tomography is that if we knew the Earth's internal structure then we could calculate what
 would be observed after an earthquake, and so we can try to work backwards to determine this structure from seismic observations.
@@ -120,14 +111,14 @@ For a given travel time measurement, we define its associated \textbf{delay time
 }\end{equation}\DIFaddend 
 where $T$ is the \textbf{measured} travel time, and $T_{0}$ is the travel time of the seismic phase \textbf{predicted}
 by a spherically symmetric reference model. We note that this definition is such that the delay time will be positive if the observed 
-phase arrives later than expected. Such delay times can be measured for many source-receiver pairs and for many seismic 
+phase arrives later than expected. Such delay times can be measured for many \DIFdelbegin \DIFdel{source-receiver }\DIFdelend \DIFaddbegin \DIFadd{source--receiver }\DIFaddend pairs and for many seismic 
 phases, and constitute the data in delay time tomography. To some extent these times can be measured by hand. But more 
 often this is done using signal processing tools such as cross-correlation, or increasingly using forms of machine 
 learning.
 
 \section*{Relating delay times to lateral variations}
 
-Suppose we have obtained the delay time of a seismic phase for a given source-receiver pair. Neglecting for the moment 
+Suppose we have obtained the delay time of a seismic phase for a given \DIFdelbegin \DIFdel{source-receiver }\DIFdelend \DIFaddbegin \DIFadd{source--receiver }\DIFaddend pair. Neglecting for the moment 
 observational errors, this delay time would vanish if the Earth's velocity structure \DIFdelbegin \DIFdel{was }\DIFdelend \DIFaddbegin \DIFadd{were }\DIFaddend equal to that of the spherical 
 reference model. In practice, measured delay times are small (e.g.\DIFaddbegin \DIFadd{\ }\DIFaddend tens of seconds for a phase whose travel time is tens 
 of minutes), and so we can conclude that the Earth's true structure cannot be too far from the spherical reference model. 
@@ -186,7 +177,7 @@ the conventional inner product
     \DIFadd{\langle u|w \rangle = \int_{M} uw \dd^{3}\mathbf{x},
     \label{eq:5}
 }\end{equation}\DIFaddend 
-for any two real-valued scalar fields defined in the earth model. Looking at eq.\DIFdelbegin \DIFdel{(4}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:4}}\DIFaddend ), it follows that the functional derivative 
+for any two real-valued scalar fields\DIFdelbegin \DIFdel{defined in }\DIFdelend \DIFaddbegin \DIFadd{, where $M$ denotes the region occupied by }\DIFaddend the earth model. Looking at eq.\DIFdelbegin \DIFdel{(4}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:4}}\DIFaddend ), it follows that the functional derivative 
 can be suitably defined only if we allow it to be a generalised function that is non-zero only along the reference ray path, 
 while along the ray path it is infinite in such a way that
 \DIFdelbegin \begin{displaymath}
@@ -197,13 +188,13 @@ while along the ray path it is infinite in such a way that
     \label{eq:6}
 }\end{equation}\DIFaddend 
 This definition should be compared with the familiar one for a Dirac delta function. The singular nature of this functional 
-derivative causes difficulties in some approaches to solving the inverse problem, but these issues are avoided (but at a cost) 
+derivative causes difficulties in some approaches to solving the inverse problem, \DIFdelbegin \DIFdel{but }\DIFdelend \DIFaddbegin \DIFadd{though }\DIFaddend these issues are avoided (\DIFdelbegin \DIFdel{but }\DIFdelend at a cost) 
 within the most common approach discussed below.
 
 \section*{Setting up the inverse problem}
 
 We now consider how the inverse problem can be formulated. Our data in such a study \DIFdelbegin \DIFdel{comprises }\DIFdelend \DIFaddbegin \DIFadd{comprise }\DIFaddend delay times for a variety of seismic 
-phases measured from many source-receiver pairs. Typically the number of delay times used will be of order \DIFdelbegin \DIFdel{$10^{5}-10^{8}$}\DIFdelend \DIFaddbegin \DIFadd{$10^{5}$--$10^{8}$}\DIFaddend . For 
+phases measured from many \DIFdelbegin \DIFdel{source-receiver }\DIFdelend \DIFaddbegin \DIFadd{source--receiver }\DIFaddend pairs. Typically the number of delay times used will be of order \DIFdelbegin \DIFdel{$10^{5}-10^{8}$}\DIFdelend \DIFaddbegin \DIFadd{$10^{5}$--$10^{8}$}\DIFaddend . For 
 definiteness, we focus on P-wave phases, meaning the data are only sensitive to variations in the P-wave velocity, $\alpha$. \DIFdelbegin \DIFdel{Near 
 }\DIFdelend \DIFaddbegin \DIFadd{Nearly 
 }\DIFaddend identical methods can be applied to studies based on S-waves, or those that consider both P- and S-wave measurements simultaneously.
@@ -259,7 +250,7 @@ which gives a system of linear equations relating the velocity expansion coeffic
     \label{eq:10}
 }\end{equation}\DIFaddend 
 where $\mathbf{d}$ is an $n$-dimensional vector of the measured delay times, $\mathbf{m}$ is an $m$-dimensional vector of the 
-velocity expansion coefficients, and $\mathbf{e}$ is a vector of the random errors. The elements of the $n$-by-$m$ matrix 
+velocity expansion coefficients, and $\mathbf{e}$ is a vector of the random errors. The elements of the \DIFdelbegin \DIFdel{$n$-by-$m$ }\DIFdelend \DIFaddbegin \DIFadd{$n\times m$ }\DIFaddend matrix 
 $\mathbf{A}$ are given by
 \DIFdelbegin \begin{displaymath}
     \DIFdel{A_{ij} = -\int_{\text{ray}_{i}} \frac{\varphi_{j}}{\alpha^{2}} \dd s,
@@ -280,7 +271,8 @@ what matters most is a good iterative method, and that is a topic beyond this co
 \DIFadd{To illustrate the ideas of this lecture we will make use of a toy problem, shown in Fig.~\ref{fig:2}, in which straight 
 rays cross a square region that has been divided into $24\times24$ blocks (a ``pixel'' basis), the data being the delay 
 times along each ray with added Gaussian errors. The model to be recovered is the fractional slowness perturbation in each 
-block, and the input model used to generate the data is a smooth random field.
+block, the slowness being $p = 1/\alpha$, so that $\delta\alpha/\alpha = -\delta p/p$, and the input model used to generate 
+the data is a smooth random field.
 }
 
 \begin{figure}[ht]
@@ -296,17 +288,12 @@ block, and the input model used to generate the data is a smooth random field.
 \DIFaddend 
 
 \section*{Non-uniqueness and the null space}
-Having reduced delay time tomography \DIFdelbegin \DIFdel{into }\DIFdelend \DIFaddbegin \DIFadd{to }\DIFaddend a set of linear algebraic equations
-\DIFdelbegin \begin{displaymath}
+Having reduced delay time tomography \DIFdelbegin \DIFdel{into a set of linear algebraic equations }\begin{displaymath}
     \DIFdel{\mathbf{d} = \mathbf{A}\mathbf{m} + \mathbf{e}
 }\end{displaymath}%DIFAUXCMD
-\DIFdelend \DIFaddbegin \begin{equation}
-    \DIFadd{\mathbf{d} = \mathbf{A}\mathbf{m} + \mathbf{e},
-    \label{eq:12}
-}\end{equation}\DIFaddend 
-we can start to think how the model $\mathbf{m}$ might be recovered. If we assume that the observational errors are negligible, 
+\DIFdelend \DIFaddbegin \DIFadd{to the linear equations of eq.~(\ref{eq:10}), }\DIFaddend we can start to think \DIFaddbegin \DIFadd{about }\DIFaddend how the model $\mathbf{m}$ might be recovered. If we assume that the observational errors are negligible, 
 then we might be tempted to solve this equation using the inverse of $\mathbf{A}$. However, we recall that $\mathbf{A}$ is an 
-$n$-by-$m$ matrix, where $n$ is the number of delay time measurements, and $m$ is the number of model parameters, and as we 
+\DIFdelbegin \DIFdel{$n$-by-$m$ }\DIFdelend \DIFaddbegin \DIFadd{$n\times m$ }\DIFaddend matrix, where $n$ is the number of delay time measurements, and $m$ is the number of model parameters, and as we 
 will typically have $n \neq m$ the inverse of this matrix cannot be defined. 
 
 We could, of course, select the number of model 
@@ -315,7 +302,7 @@ is better to determine the model parameterisation based on some idea of what the
 within the Earth. For example, if we are looking at waves of a given dominant frequency, then we can estimate their wavelength 
 in different parts of the Earth using the reference velocity structure. We would not expect to resolve features within the 
 Earth whose size is substantially less than the wavelength of the seismic waves, and can build our model parameterisation 
-accordingly. When this is done it is often the case that $m \gg n$, which is to say that there are many more model parameters than data.
+accordingly. When this is done \DIFaddbegin \DIFadd{in regional studies with limited data, }\DIFaddend it is often the case that $m \gg n$, which is to say that there are many more model parameters than data.
 
 Considering first the idealised case in which there are no data errors, suppose we have found a solution, $\mathbf{m}$, of the equation
 \DIFdelbegin \begin{displaymath}
@@ -325,12 +312,13 @@ Considering first the idealised case in which there are no data errors, suppose 
     \DIFadd{\mathbf{d} = \mathbf{A}\mathbf{m}.
     \label{eq:13}
 }\end{equation}\DIFaddend 
-If there exists a model vector $\mathbf{m}_{0}$ such that
-\DIFdelbegin \begin{displaymath}
+If there exists a model vector \DIFdelbegin \DIFdel{$\mathbf{m}_{0}$ such that
+}\begin{displaymath}
     \DIFdel{\mathbf{A}\mathbf{m}_{0} = \mathbf{0}
 }\end{displaymath}%DIFAUXCMD
-\DIFdelend \DIFaddbegin \begin{equation}
-    \DIFadd{\mathbf{A}\mathbf{m}_{0} = \mathbf{0},
+\DIFdelend \DIFaddbegin \DIFadd{$\mathbf{m}_{\mathrm{null}}$ such that
+}\begin{equation}
+    \DIFadd{\mathbf{A}\mathbf{m}_{\mathrm{null}} = \mathbf{0},
     \label{eq:14}
 }\end{equation}\DIFaddend 
 then it is clear that for any scalar $a$ we have
@@ -338,11 +326,11 @@ then it is clear that for any scalar $a$ we have
     \DIFdel{\mathbf{A}(\mathbf{m} + a\mathbf{m}_{0}) = \mathbf{A}\mathbf{m} + a\mathbf{A}\mathbf{m}_{0} = \mathbf{A}\mathbf{m} = \mathbf{d},
 }\end{displaymath}%DIFAUXCMD
 \DIFdelend \DIFaddbegin \begin{equation}
-    \DIFadd{\mathbf{A}(\mathbf{m} + a\mathbf{m}_{0}) = \mathbf{A}\mathbf{m} + a\mathbf{A}\mathbf{m}_{0} = \mathbf{A}\mathbf{m} = \mathbf{d},
+    \DIFadd{\mathbf{A}(\mathbf{m} + a\mathbf{m}_{\mathrm{null}}) = \mathbf{A}\mathbf{m} + a\mathbf{A}\mathbf{m}_{\mathrm{null}} = \mathbf{A}\mathbf{m} = \mathbf{d},
     \label{eq:15}
 }\end{equation}\DIFaddend 
-and so $\mathbf{m} + a\mathbf{m}_{0}$ is still an exact solution to the problem. The set of these vectors forms a linear subspace 
-known as the \textbf{null space} of $\mathbf{A}$. If the null space is \DIFdelbegin \DIFdel{not empty }\DIFdelend \DIFaddbegin \DIFadd{non-trivial (i.e.\ contains non-zero vectors) }\DIFaddend then it is clear that the inverse problem cannot 
+and so \DIFdelbegin \DIFdel{$\mathbf{m} + a\mathbf{m}_{0}$ }\DIFdelend \DIFaddbegin \DIFadd{$\mathbf{m} + a\mathbf{m}_{\mathrm{null}}$ }\DIFaddend is still an exact solution to the problem. The set of \DIFdelbegin \DIFdel{these vectors }\DIFdelend \DIFaddbegin \DIFadd{all vectors $\mathbf{m}_{\mathrm{null}}$ 
+satisfying eq.~(\ref{eq:14}) }\DIFaddend forms a linear subspace known as the \textbf{null space} of $\mathbf{A}$. If the null space is \DIFdelbegin \DIFdel{not empty }\DIFdelend \DIFaddbegin \DIFadd{non-trivial (i.e.\ contains non-zero vectors) }\DIFaddend then it is clear that the inverse problem cannot 
 have a unique solution.
 
 When there are more model parameters than data then $\mathbf{A}$ will always have a \DIFdelbegin \DIFdel{non-empty }\DIFdelend \DIFaddbegin \DIFadd{non-trivial }\DIFaddend null space, 
@@ -358,10 +346,10 @@ within the well-covered region, and adding any such model to the input model pro
     \DIFdelbeginFL %DIFDELCMD < \includegraphics[width=\textwidth]{figures/L7F2.png}        
 %DIFDELCMD <     %%%
 \DIFdelendFL \DIFaddbeginFL \includegraphics[width=\textwidth]{figures/L7F3.pdf}        
-    \DIFaddendFL \caption{\DIFdelbeginFL \DIFdelFL{An example }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{A model lying in the null space }\DIFaddendFL of \DIFdelbeginFL \DIFdelFL{a simple two-dimensional }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{the toy }\DIFaddendFL tomographic problem \DIFaddbeginFL \DIFaddFL{shown in Fig}\DIFaddendFL .\DIFdelbeginFL \DIFdelFL{There are a number of ``earthquakes'' and ``seismometers''}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{~\ref{fig:2} (left)}\DIFaddendFL , and the \DIFdelbeginFL \DIFdelFL{straight lines denote ray paths. The colours plotted denote the velocity perturbation. On the left is the }\DIFdelendFL input model \DIFdelbeginFL \DIFdelFL{,
-      and }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{of 
-    that figure with this null-space model added (right). The two models }\DIFaddendFL on the right \DIFdelbeginFL \DIFdelFL{the inverted model obtained using a certain technique}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{of Fig}\DIFaddendFL .\DIFdelbeginFL \DIFdelFL{In regions where there is no }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{~\ref{fig:2} and here produce 
-    identical delay times along every }\DIFaddendFL ray\DIFdelbeginFL \DIFdelFL{coverage}\DIFdelendFL , \DIFaddbeginFL \DIFaddFL{and so cannot be distinguished by }\DIFaddendFL the \DIFdelbeginFL \DIFdelFL{recovered
+    \DIFaddendFL \caption{\DIFdelbeginFL \DIFdelFL{An example }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{A model lying in the null space }\DIFaddendFL of \DIFdelbeginFL \DIFdelFL{a simple two-dimensional }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{the toy }\DIFaddendFL tomographic problem \DIFaddbeginFL \DIFaddFL{shown in Fig}\DIFaddendFL .\DIFdelbeginFL \DIFdelFL{There are a number of ``earthquakes'' and ``seismometers''}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{~\ref{fig:2} (left)}\DIFaddendFL , and the \DIFdelbeginFL \DIFdelFL{straight lines denote ray paths}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{input model of 
+    that figure with this null-space model added (right)}\DIFaddendFL . The \DIFdelbeginFL \DIFdelFL{colours plotted denote the velocity perturbation. On }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{input model on }\DIFaddendFL the left \DIFdelbeginFL \DIFdelFL{is }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{of Fig.~\ref{fig:2} and }\DIFaddendFL the \DIFdelbeginFL \DIFdelFL{input }\DIFdelendFL model \DIFdelbeginFL \DIFdelFL{,
+      and }\DIFdelendFL on the right 
+    \DIFdelbeginFL \DIFdelFL{the inverted model obtained using a certain technique. In regions where there is no }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{here produce identical delay times along every }\DIFaddendFL ray\DIFdelbeginFL \DIFdelFL{coverage}\DIFdelendFL , \DIFaddbeginFL \DIFaddFL{and so cannot be distinguished by }\DIFaddendFL the \DIFdelbeginFL \DIFdelFL{recovered
        model sets the velocity to zero}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{data}\DIFaddendFL .}
     \DIFdelbeginFL %DIFDELCMD < \label{fig:2}
 %DIFDELCMD < %%%
@@ -393,17 +381,18 @@ This decomposition tells us more than just the null space. A coefficient $a_{j}$
 $s_{j}a_{j}\mathbf{u}_{j}$ to the data, and so if $s_{j}$ is small this contribution is easily lost within the measurement 
 errors. Directions in the model space associated with small singular values are, therefore, effectively unresolved even 
 though they do not lie within the null space, and any attempt to recover them will amplify the noise in the data. 
-Fig.~\ref{fig:4} shows the singular values of the toy problem along with two of the singular vectors: the first is 
-concentrated where many rays cross, and so is well constrained, while the other lies almost entirely within a few poorly 
-sampled cells.
+Figure~\ref{fig:4} shows the singular values of the toy problem along with two of the singular vectors: the first is 
+concentrated where many rays cross, and so is well constrained, while the other, whose singular value is smaller by a factor 
+of more than a thousand, lies almost entirely within a few poorly sampled cells.
 }
 
 \begin{figure}[ht]
     \centering    
     \includegraphics[width=\textwidth]{figures/L7F4.pdf}        
     \caption{\DIFaddFL{The non-zero singular values of the toy problem, in decreasing order and relative to the largest (left), 
-    together with the singular vectors having the largest singular value (centre) and the 251st (right). There are 280 
-    data and 576 blocks, so at most 280 singular values are non-zero and the null space has dimension of at least 296.}}
+    together with the singular vectors having the largest singular value (centre) and the 278th (right), colours on an 
+    arbitrary scale. There are 280 data and 576 blocks, so at most 280 singular values are non-zero and the null space has 
+    dimension at least 296.}}
     \label{fig:4}
 \DIFaddendFL \end{figure}
 
@@ -428,13 +417,13 @@ where the factor of one half has been included for later convenience. If we intr
 }\end{equation}\DIFaddend 
 This second expression is also valid for a general covariance matrix that accounts for correlations between the different
  measurement errors. The problem with this approach is that there is not a unique model that minimises this chosen misfit.
-  Indeed, suppose there exists a non-zero vector $\mathbf{m}_{0}$ lying in the null space of $\mathbf{A}$. It is then clear
-   that $J(\mathbf{m} + a\mathbf{m}_{0}) = J(\mathbf{m})$ for all scalars $a$.
+  Indeed, suppose there exists a non-zero vector \DIFdelbegin \DIFdel{$\mathbf{m}_{0}$ }\DIFdelend \DIFaddbegin \DIFadd{$\mathbf{m}_{\mathrm{null}}$ }\DIFaddend lying in the null space of $\mathbf{A}$. It is then clear
+   that \DIFdelbegin \DIFdel{$J(\mathbf{m} + a\mathbf{m}_{0}) = J(\mathbf{m})$ }\DIFdelend \DIFaddbegin \DIFadd{$J(\mathbf{m} + a\mathbf{m}_{\mathrm{null}}) = J(\mathbf{m})$ }\DIFaddend for all scalars $a$.
 
 A non-ideal but pragmatic way around this problem is to seek a model that not only fits the data well, but possesses
  a property that we see as desirable. For example, we might think that the true velocity structure must be close to that
   of the spherical reference model, and hence prefer models that are small in some sense. A common way to measure the
-   ``size'' of the velocity perturbation is through the $L^{2}$ norm
+   ``size'' of the velocity perturbation is through the \DIFaddbegin \DIFadd{square of the }\DIFaddend $L^{2}$ norm
 \DIFdelbegin \begin{displaymath}
     \DIFdel{\int_{M} \delta\alpha^{2} \dd^{3}\mathbf{x}.
 }\end{displaymath}%DIFAUXCMD
@@ -484,7 +473,7 @@ provides a means of \DIFdelbegin \DIFdel{trading-off }\DIFdelend \DIFaddbegin \D
 closely, while larger values favour models compatible with our preconceptions. \DIFaddbegin \DIFadd{The effect of the damping parameter on the 
 toy problem is shown in Fig.~\ref{fig:5}, along with the corresponding trade-off between data misfit and model norm. 
 How, then, should $\lambda$ be chosen? A natural criterion is to require that the data are fit to within their errors, 
-but no better, so that the misfit takes its expected value $\chi^{2}\approx n$. This is known as the }\textbf{\DIFadd{discrepancy 
+but no better, so that $\chi^{2}\approx n$, its expected value for the true model. This is known as the }\textbf{\DIFadd{discrepancy 
 principle}}\DIFadd{, and it was used to fix the damping in Fig.~\ref{fig:2}; it will be met again in the second problem set. 
 Fitting the data more closely than this serves only to fit the noise.
 }
@@ -494,7 +483,7 @@ Fitting the data more closely than this serves only to fit the noise.
     \includegraphics[width=0.9\textwidth]{figures/L7F5.pdf}        
     \caption{\DIFaddFL{Regularised least squares solutions of the toy problem for three values of the damping parameter, where $\lambda_{*}$ is 
     the value given by the discrepancy principle, along with the trade-off curve of model norm against data misfit 
-    as $\lambda$ is varied (the three models are marked). Too small a value of $\lambda$ fits the noise in the data, while too large 
+    as $\lambda$ is varied (the three models are marked: square $\lambda_{*}/100$, circle $\lambda_{*}$, triangle $100\lambda_{*}$). Too small a value of $\lambda$ fits the noise in the data, while too large 
     a value suppresses the model.}}
     \label{fig:5}
 \end{figure}
@@ -531,7 +520,7 @@ and so
     \DIFadd{=}& \DIFadd{A_{pi}^{T}C_{ik}^{-1}(A_{kl}m_{l}-d_{k}) + \lambda B_{pj}m_{j}.
     \label{eq:27}
 }\end{align}\DIFaddend 
-Reverting \DIFdelbegin \DIFdel{back to matrix vector }\DIFdelend \DIFaddbegin \DIFadd{to matrix-vector }\DIFaddend notation this result becomes
+\DIFdelbegin \DIFdel{Reverting back to matrix vector }\DIFdelend \DIFaddbegin \DIFadd{Here the symmetry of $\mathbf{C}$ and $\mathbf{B}$ has been used in the final step. Reverting to matrix-vector }\DIFaddend notation this result becomes
 \DIFdelbegin \begin{displaymath}
     \DIFdel{\nabla J(\mathbf{m}) = (\mathbf{A}^{T}\mathbf{C}^{-1}\mathbf{A} + \lambda \mathbf{B})\mathbf{m} - \mathbf{A}^{T}\mathbf{C}^{-1}\mathbf{d}.
 }\end{displaymath}%DIFAUXCMD
@@ -547,11 +536,12 @@ Setting this derivative equal to zero we arrive at the linear equations
     \DIFadd{(\mathbf{A}^{T}\mathbf{C}^{-1}\mathbf{A} + \lambda \mathbf{B})\mathbf{m} = \mathbf{A}^{T}\mathbf{C}^{-1}\mathbf{d},
     \label{eq:29}
 }\end{equation}\DIFaddend 
-which will have a unique solution so long as the $m \times m$ symmetric matrix
-\DIFdelbegin \begin{displaymath}
+which will have a unique solution so long as the \DIFdelbegin \DIFdel{$m \times m$ symmetric matrix
+}\begin{displaymath}
     \DIFdel{\mathbf{A}^{T}\mathbf{C}^{-1}\mathbf{A} + \lambda \mathbf{B}
 }\end{displaymath}%DIFAUXCMD
-\DIFdelend \DIFaddbegin \begin{equation}
+\DIFdelend \DIFaddbegin \DIFadd{$m\times m$ symmetric matrix
+}\begin{equation}
     \DIFadd{\mathbf{A}^{T}\mathbf{C}^{-1}\mathbf{A} + \lambda \mathbf{B}
     \label{eq:30}
 }\end{equation}\DIFaddend 
@@ -571,8 +561,8 @@ with $\mathbf{m}$ the eigenvector and $\mu$ the corresponding eigenvalue. Taking
     \DIFadd{(\mathbf{A}\mathbf{m})^{T}\mathbf{C}^{-1}(\mathbf{A}\mathbf{m}) + \lambda \mathbf{m}^{T}\mathbf{B}\mathbf{m} = \mu,
     \label{eq:32}
 }\end{equation}\DIFaddend 
-where we have assumed that the eigenvector is normalised. The first term on the \DIFdelbegin \DIFdel{left hand }\DIFdelend \DIFaddbegin \DIFadd{left-hand }\DIFaddend side is clearly non-negative, 
-while the second is positive by definition. Thus all eigenvalues are positive, and the matrix is invertible. In this 
+where we have assumed that the eigenvector is normalised. The first term on the \DIFdelbegin \DIFdel{left hand side is clearly }\DIFdelend \DIFaddbegin \DIFadd{left-hand side is }\DIFaddend non-negative \DIFaddbegin \DIFadd{because $\mathbf{C}$ is a covariance matrix}\DIFaddend , 
+while the second is positive by \DIFdelbegin \DIFdel{definition}\DIFdelend \DIFaddbegin \DIFadd{eq.~(\ref{eq:22}) since the basis functions are linearly independent}\DIFaddend . Thus all eigenvalues are positive, and the matrix is invertible. In this 
 manner we have shown that the unique solution of \DIFdelbegin \DIFdel{$\nabla J(\mathbf{m})=0$ }\DIFdelend \DIFaddbegin \DIFadd{$\nabla J(\mathbf{m})=\mathbf{0}$ }\DIFaddend is given by the simple formula
 \DIFdelbegin \begin{displaymath}
     \DIFdel{\mathbf{m} = (\mathbf{A}^{T}\mathbf{C}^{-1}\mathbf{A} + \lambda \mathbf{B})^{-1} \mathbf{A}^{T}\mathbf{C}^{-1}\mathbf{d}.
@@ -600,12 +590,14 @@ Damping thus acts by discarding those parts of the model to which the data are l
 }\DIFaddend 
 
 There \DIFdelbegin \DIFdel{are }\DIFdelend \DIFaddbegin \DIFadd{is }\DIFaddend a range of different schemes for regularisation including, for example, those that seek as smooth a model as possible. 
-Indeed, a more general least squares function to minimise is
-\DIFdelbegin \begin{displaymath}
+\DIFdelbegin \DIFdel{Indeed, a more general least squares function to minimise
+is
+}\begin{displaymath}
     \DIFdel{J(\mathbf{m}) = \frac{1}{2}(\mathbf{A}\mathbf{m}-\mathbf{d})^{T}\mathbf{C}^{-1}(\mathbf{A}\mathbf{m}-\mathbf{d})
      + \frac{\lambda}{2}(\mathbf{m}-\mathbf{m}_{0})^{T}\mathbf{B}(\mathbf{m}-\mathbf{m}_{0}),
 }\end{displaymath}%DIFAUXCMD
-\DIFdelend \DIFaddbegin \begin{equation}
+\DIFdelend \DIFaddbegin \DIFadd{More generally, one may minimise
+}\begin{equation}
     \DIFadd{J(\mathbf{m}) = \frac{1}{2}(\mathbf{A}\mathbf{m}-\mathbf{d})^{T}\mathbf{C}^{-1}(\mathbf{A}\mathbf{m}-\mathbf{d})
      + \frac{\lambda}{2}(\mathbf{m}-\mathbf{m}_{0})^{T}\mathbf{B}(\mathbf{m}-\mathbf{m}_{0}),
     \label{eq:35}
@@ -636,12 +628,12 @@ maps input models to recovered models, and this }\textbf{\DIFadd{resolution matr
 
 \begin{figure}[ht]
     \centering    
-    \includegraphics[width=0.85\textwidth]{figures/L7F6.pdf}        
+    \includegraphics[width=0.8\textwidth]{figures/L7F6.pdf}        
     \caption{\DIFaddFL{Spike tests for the toy problem. Noise-free synthetic data are calculated for an input model that is non-zero only 
     within a single block (left), and are inverted with the regularisation used in Fig.~\ref{fig:2} (right). For a spike in a 
-    well-covered block (upper row, crossed by 39 rays) about two thirds of the amplitude is recovered in the right place, with some 
-    smearing along the rays that cross it. For a spike in a poorly covered block (lower row, crossed by four rays) only about 
-    a fifth of the amplitude is recovered, and the anomaly is spread along the few rays that sample it: such a block is 
+    well-covered block (upper row, crossed by 38 rays) about 70 per cent of the amplitude is recovered in the right place, with some 
+    smearing along the rays that cross it. For a spike in a poorly covered block (lower row, crossed by three rays) only about 
+    a quarter of the amplitude is recovered, and the anomaly is spread along the few rays that sample it: such a block is 
     barely constrained by the data, and the damping suppresses it.}}
     \label{fig:6}
 \end{figure}
@@ -660,8 +652,8 @@ the data, $\mathbf{d}$, \DIFdelbegin \DIFdel{has }\DIFdelend \DIFaddbegin \DIFad
 where $p(\mathbf{d}|\mathbf{m})$, which is known as the \textbf{likelihood}, is the PDF for observing $\mathbf{d}$ from the model $\mathbf{m}$, 
 and $p(\mathbf{m})$ is the PDF of $\mathbf{m}$ prior to observing any data. In words, this theorem tells us how to update uncertain 
 knowledge of the model in light of our observations. This result is fully general, and can be applied to non-linear inverse problems 
-with complicated priors. To do so in practice, however, requires random sampling techniques such as the \textbf{Markov \DIFdelbegin \DIFdel{Chain }\DIFdelend \DIFaddbegin \DIFadd{chain }\DIFaddend Monte Carlo} (MCMC) 
-algorithm, and this is generally possible only for relatively low-dimensional problems for which forward calculations have a 
+with complicated priors. To do so in practice, however, requires random sampling techniques such as \DIFdelbegin \DIFdel{the }\DIFdelend \textbf{Markov \DIFdelbegin \DIFdel{Chain }\DIFdelend \DIFaddbegin \DIFadd{chain }\DIFaddend Monte Carlo} (MCMC) 
+\DIFdelbegin \DIFdel{algorithm}\DIFdelend \DIFaddbegin \DIFadd{methods}\DIFaddend , and this is generally possible only for relatively low-dimensional problems for which forward calculations have a 
 low computational cost.
 
 As a special case, suppose we consider a linear inverse problem with Gaussian data errors, and assume a Gaussian 
@@ -675,7 +667,7 @@ prior on the model with mean $\mathbf{m}_{0}$ and covariance $\mathbf{C}_{m}$. T
     \mathbf{C}_{m}^{-1}(\mathbf{m}-\mathbf{m}_{0})\right],
     \label{eq:38}
 }\end{equation}\DIFaddend 
-where we recall that $m$ is the number of basis vectors for the model. Similarly with Gaussian errors, the likelihood can be written
+where we recall that $m$ is the number of basis \DIFdelbegin \DIFdel{vectors }\DIFdelend \DIFaddbegin \DIFadd{functions }\DIFaddend for the model. Similarly with Gaussian errors, the likelihood can be written
 \DIFdelbegin \begin{displaymath}
     \DIFdel{p(\mathbf{d}|\mathbf{m}) = \frac{1}{\sqrt{(2\pi)^{n}\det \mathbf{C}}} \exp\left[-\frac{1}{2}(\mathbf{A}\mathbf{m}
     -\mathbf{d})^{T}\mathbf{C}^{-1}(\mathbf{A}\mathbf{m}-\mathbf{d})\right].
@@ -695,7 +687,7 @@ From Bayes' theorem we then find
     -\mathbf{m}_{0}) - \frac{1}{2}(\mathbf{A}\mathbf{m}-\mathbf{d})^{T}\mathbf{C}^{-1}(\mathbf{A}\mathbf{m}-\mathbf{d})\right],
     \label{eq:40}
 }\end{equation}\DIFaddend 
-and a little effort shows that the exponentiated term can be factored into the form
+and a little effort shows that the exponentiated term can be \DIFdelbegin \DIFdel{factored }\DIFdelend \DIFaddbegin \DIFadd{rearranged, by completing the square, }\DIFaddend into the form
 \DIFdelbegin \begin{displaymath}
     \DIFdel{p(\mathbf{m}|\mathbf{d}) \propto \exp\left[-\frac{1}{2}(\mathbf{m}-\mathbf{m}_{p})^{T}\mathbf{C}_{p}^{-1}
     (\mathbf{m}-\mathbf{m}_{p})\right]
@@ -726,9 +718,9 @@ and the \textbf{posterior model covariance}
 We conclude that in this special case the posterior distribution is Gaussian, and can be determined in \DIFdelbegin \DIFdel{closed-form}\DIFdelend \DIFaddbegin \DIFadd{closed form}\DIFaddend . 
 Moreover, the posterior mean is precisely that obtained via the regularised least squares method subject to the 
 choice $\lambda \mathbf{B} = \mathbf{C}_{m}^{-1}$. \DIFaddbegin \DIFadd{The posterior covariance provides, in addition, a measure of the 
-uncertainty in the recovered model. Fig.~\ref{fig:7} shows the posterior mean and standard deviation for the toy problem 
+uncertainty in the recovered model. Figure~\ref{fig:7} shows the posterior mean and standard deviation for the toy problem 
 using a Gaussian prior whose covariance between two cells decays with their separation over a correlation length of 
-about a sixth of the box, this encoding the expectation that the slowness perturbation is smooth. The posterior mean 
+$0.15$ times the box side, this encoding the expectation that the slowness perturbation is smooth. The posterior mean 
 recovers the input model closely, including within regions crossed by few rays, where the prior correlation carries 
 information from neighbouring cells, and the posterior standard deviation shows where this recovery can be trusted.
 }
@@ -740,7 +732,9 @@ information from neighbouring cells, and the posterior standard deviation shows 
     a standard deviation of $0.003$: the input model (left), the posterior mean (centre), and the posterior standard 
     deviation (right), which approaches that of the prior only in the corners far from any ray.}}
     \label{fig:7}
-\end{figure} \DIFaddend In this manner we see that solving a regularised least squares 
+\end{figure}
+
+\DIFaddend In this manner we see that solving a regularised least squares 
 problem returns the mean model corresponding to a certain prior distribution. It is sometimes argued that this 
 result justifies \DIFdelbegin \DIFdel{use of the }\DIFdelend \DIFaddbegin \DIFadd{the use of }\DIFaddend regularised least squares, with the prior distribution 
 determining the appropriate choice of regularisation. \DIFdelbegin \DIFdel{But note that this does not solve the problem of which form of regularisation should be used, but only re-frames it . 
@@ -754,27 +748,26 @@ formulation simply makes it honest and visible.
 }
 
 \subsection*{\DIFadd{Inversion in function spaces}}
-\DIFadd{Throughout this lecture the model was reduced at the outset to a finite set of coefficients through the expansion of 
+\DIFadd{Throughout this lecture the model has been reduced at the outset to a finite set of coefficients through the expansion of 
 eq.~(\ref{eq:8}), and the choice of basis made there is arbitrary. An alternative, developed over roughly the past fifteen years, is to 
 pose and solve the inverse problem for the function $\delta\alpha$ itself. The model is taken to lie within a suitable space of 
 functions, one in which smoothness can be measured, the prior becomes a Gaussian probability measure on this space, and the 
 data remain finite in number. Bayes' theorem can be formulated in this setting, and for a linear forward problem with Gaussian 
-errors the posterior is again a Gaussian measure, with mean and covariance given by expressions that mirror eqs.~(\ref{eq:39}) 
-and (\ref{eq:40}). Only once the problem has been solved in this form is it discretised for the purposes of computation, and 
+errors the posterior is again a Gaussian measure, with mean and covariance given by expressions that mirror eqs.~(\ref{eq:42}) 
+and (\ref{eq:43}). Only once the problem has been solved in this form is it discretised for the purposes of computation, and 
 the essential point is that as the discretisation is refined the discrete answers converge to the function-space solution. 
 The result is a method whose answers do not depend on an arbitrary parameterisation, and in which the prior states directly 
-what is being assumed about the function. You are not expected to understand these ideas in any detail; the essential point 
-to take away is that the problem need not be discretised arbitrarily at the outset, and that when a discretisation is introduced 
-it approximates a well-defined answer. Fig.~\ref{fig:8} shows a tomographic problem of the kind considered in this lecture 
+what is being assumed about the function. You are not expected to understand these ideas in any detail; what you should take away is that the problem need not be discretised arbitrarily at the outset, and that when a discretisation is introduced 
+it approximates a well-defined answer. Figure~\ref{fig:8} shows a tomographic problem of the kind considered in this lecture 
 solved in this way, using the Python package }\texttt{\DIFadd{pygeoinf}}\DIFadd{: the true model is a random draw from the prior, and the posterior 
 expectation and standard deviation are shown.}\footnote{\DIFadd{The theory is set out in the review by Stuart (2010).}}
 
 \begin{figure}[ht]
     \centering    
-    \includegraphics[width=\textwidth]{figures/L7F8.pdf}        
-    \caption{\DIFaddFL{A path-average tomography problem posed and solved in a function space: the true model, which is a random draw 
-    from the prior (left), the posterior expectation (centre), and the posterior standard deviation (right). Stars mark sources 
-    and circles receivers. The calculations have, of course, still been discretised, as they must be on a computer, but the 
+    \includegraphics[width=0.9\textwidth]{figures/L7F8.pdf}        
+    \caption{\DIFaddFL{A straight-ray delay time problem of the kind considered in this lecture, posed and solved in a function space: the true 
+    model, which is a random draw from the prior (left), the posterior expectation (centre), and the posterior standard deviation 
+    (right). The prior has unit standard deviation. Stars mark sources and triangles receivers. The calculations have, of course, still been discretised, as they must be on a computer, but the 
     discretisation is of a well-defined problem and has been taken far enough for the results to have converged in practice. 
     The results are therefore independent of the particular discretisation used, in contrast to those of the pixel basis in 
     the earlier figures. Calculated with }\texttt{\DIFaddFL{pygeoinf}}\DIFaddFL{.}}

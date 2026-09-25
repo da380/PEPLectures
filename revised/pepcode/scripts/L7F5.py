@@ -18,5 +18,5 @@ for f, mk in [(0.01, "s"), (1.0, "o"), (100.0, "^")]:
     m = T.solve(f * lam_star); ax.loglog(T.chi2_per_datum(m), np.linalg.norm(m), "r" + mk, ms=7)
 ax.axvline(1.0, color="0.6", lw=0.6, ls="--")
 ax.set_xlabel(r"data misfit $\chi^{2}/n$"); ax.set_ylabel(r"model norm $\|\mathbf{m}\|$"); ax.set_title("trade-off curve", fontsize=11)
-cb = fig.colorbar(im, ax=axes[:, 0], fraction=0.03, pad=0.03, shrink=0.6, location="left"); cb.set_label(r"$\delta p/p$")
+cb = fig.colorbar(im, ax=axes[1, 0], fraction=0.05, pad=0.03, shrink=0.8, location="bottom"); cb.set_label(r"$\delta p/p$")
 fig.savefig(str(FIG / "L7F5.pdf"), dpi=200); fig.savefig(str(FIG / "L7F5.png"), dpi=200)

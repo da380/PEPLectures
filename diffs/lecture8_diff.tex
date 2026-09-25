@@ -1,7 +1,7 @@
 \documentclass[a4paper,12pt]{paper}
 %DIF LATEXDIFF DIFFERENCE FILE
 %DIF DEL lecture8.tex             Fri Nov 14 00:45:20 2025
-%DIF ADD diffs/lecture8_new.tex   Fri Sep 25 13:57:12 2026
+%DIF ADD diffs/lecture8_new.tex   Fri Sep 25 16:34:55 2026
 
 \usepackage{mycommands}
 \usepackage{amsmath} % Ensure amsmath is loaded for align environment
@@ -55,7 +55,7 @@
 \DIFdelend \section*{Outline and motivation}
 
 In the previous lecture we discussed delay time tomography, this being the first and simplest tomographic method developed. 
-While this approach is still used, it has been superseded by \textbf{waveform tomography}. Delay time tomography is based on the 
+While this approach is still \DIFaddbegin \DIFadd{widely }\DIFaddend used, it \DIFdelbegin \DIFdel{has been }\DIFdelend \DIFaddbegin \DIFadd{is increasingly being }\DIFaddend superseded by \textbf{waveform tomography}. Delay time tomography is based on the 
 measurement of a small number of delay times from each seismogram, with these data modelled using linearised ray theory. 
 By contrast, waveform tomography uses more of the data contained in the seismograms, fully accounts for the complexities 
 of elastic wave propagation in the Earth, and does not linearise the inverse problem. This lecture will outline the ideas 
@@ -73,13 +73,14 @@ data from around \DIFdelbegin \DIFdel{$10^{2}-10^{3}$ earthquakes }\DIFdelend \D
 simulation is required for each \DIFdelbegin \DIFdel{one}\DIFdelend \DIFaddbegin \DIFadd{earthquake}\DIFaddend . This means that the time for solving the necessary forward \DIFdelbegin \DIFdel{problem }\DIFdelend \DIFaddbegin \DIFadd{problems }\DIFaddend is of 
 order hours or more. 
 
-\DIFaddbegin \begin{center}
-        \includegraphics[width=0.66\textwidth]{figures/L8F1.pdf}    
-    \captionof{figure}{The 2160 earthquakes used to construct the global waveform tomographic model GLAD-M35 (see Fig.~\ref{fig:3}): 
-    (a) locations, each event being drawn as a visual representation of its moment tensor, coloured by depth; (b) the distribution of magnitudes; (c) the distribution of 
-    hypocentre depths; (d) the number of events by year. From Cui et al.\ (2024).}
+\DIFaddbegin \begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.66\textwidth]{figures/L8F1.pdf}
+    \caption{\DIFaddFL{The 2160 earthquakes used to construct the global waveform tomographic model GLAD-M35 (see Fig.~\ref{fig:6}):
+    (a) locations, each event being drawn as a visual representation of its moment tensor, coloured by depth; (b) the distribution of magnitudes; (c) the distribution of
+    hypocentre depths; (d) the number of events by year. From Cui et al.\ (2024).}}
     \label{fig:1}
-\end{center}
+\end{figure}
 
 \DIFaddend \section*{Waveform measurements}
 
@@ -87,7 +88,7 @@ Let \DIFdelbegin \DIFdel{$\mathbf{u}^{obs}(t)$ }\DIFdelend \DIFaddbegin \DIFadd{
  $\mathbf{x}_{r}$\DIFaddbegin \DIFadd{, }\DIFaddend following an earthquake. In reality, seismographs do not record the displacement vector directly,
   with the signal instead being modified due to the mechanical and electronic properties of the instrument along with 
   additional processing done by the seismologist. For simplicity, however, we neglect such effects, but they can be 
-  incorporated at the cost of only more complicated notation.
+  incorporated at the cost \DIFdelbegin \DIFdel{of only }\DIFdelend \DIFaddbegin \DIFadd{only of }\DIFaddend more complicated notation.
 
 \DIFdelbegin %DIFDELCMD < \begin{figure}[ht]
 %DIFDELCMD <     %%%
@@ -96,9 +97,10 @@ Let \DIFdelbegin \DIFdel{$\mathbf{u}^{obs}(t)$ }\DIFdelend \DIFaddbegin \DIFadd{
     \DIFdelbeginFL %DIFDELCMD < \includegraphics[width=0.7\textwidth]{figures/L8F1.png}    
 %DIFDELCMD <     %%%
 \DIFdelendFL \DIFaddbeginFL \includegraphics[width=0.7\textwidth]{figures/L8F2.png}    
-    \DIFaddendFL \caption{An example of observed and synthetic three-component seismograms from a waveform tomographic study of 
-    Southern California. Data \DIFdelbeginFL \DIFdelFL{is }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{are }\DIFaddendFL shown in black, and synthetics in red. On the left the comparison is made prior 
-    to inversion, with the synthetics calculated in a laterally homogeneous model. The \DIFdelbeginFL \DIFdelFL{right hand }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{right-hand }\DIFaddendFL side then shows the
+    \DIFaddendFL \caption{An example of observed and synthetic three-component seismograms from a waveform tomographic study of
+    Southern California. Data \DIFdelbeginFL \DIFdelFL{is }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{are }\DIFaddendFL shown in black, and synthetics in red\DIFaddbeginFL \DIFaddFL{; the rows show the vertical (Z), radial (R) and
+    transverse (T) components, and time is in seconds}\DIFaddendFL . On the left \DIFaddbeginFL \DIFaddFL{(1D) }\DIFaddendFL the comparison is made prior
+    to inversion, with the synthetics calculated in \DIFdelbeginFL \DIFdelFL{a }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{the initial, }\DIFaddendFL laterally homogeneous\DIFaddbeginFL \DIFaddFL{, }\DIFaddendFL model. The \DIFdelbeginFL \DIFdelFL{right hand }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{right-hand }\DIFaddendFL side \DIFaddbeginFL \DIFaddFL{(m16) }\DIFaddendFL then shows the
      data fit following inversion involving 16 iterative model updates. Taken from Tape et al.\DIFaddbeginFL \DIFaddFL{\ }\DIFaddendFL (2010).}
     \DIFdelbeginFL %DIFDELCMD < \label{fig:1}
 %DIFDELCMD < %%%
@@ -151,7 +153,7 @@ minimising $\mathbf{m}\mapsto J(\mathbf{m})$. For a small model perturbation, $\
 \label{eq:2}
 }\end{equation}\DIFaddend 
 where $DJ(\mathbf{m})$ denotes the functional derivative of \DIFdelbegin \DIFdel{J }\DIFdelend \DIFaddbegin \DIFadd{$J$ }\DIFaddend with respect to $\mathbf{m}$ and $\langle \cdot | \cdot \rangle$ is an 
-appropriate inner product. As an example, supposing that the shear velocity, $\beta$, is the only model parameter\DIFaddbegin \DIFadd{, }\DIFaddend we can concretely write
+appropriate inner product. As an example, supposing that the shear \DIFdelbegin \DIFdel{velocity}\DIFdelend \DIFaddbegin \DIFadd{wave speed}\DIFaddend , $\beta$, is the only model parameter\DIFaddbegin \DIFadd{, }\DIFaddend we can concretely write
 \DIFdelbegin \begin{displaymath}
 \DIFdel{\langle DJ(\mathbf{m})|\delta \mathbf{m}\rangle=\int_{M}K_{\beta}\delta\beta\dd^{3}\mathbf{x}
 }\end{displaymath}%DIFAUXCMD
@@ -172,11 +174,12 @@ If $\overline{\mathbf{m}}$ is a minimum of $J$, then for any sufficiently small 
 \DIFadd{J(\overline{\mathbf{m}}+\delta \mathbf{m})\ge J(\overline{\mathbf{m}}),
 \label{eq:4}
 }\end{equation}\DIFaddend 
-which is true if and only if
-\DIFdelbegin \begin{displaymath}
+which \DIFdelbegin \DIFdel{is true if and only if
+}\begin{displaymath}
 \DIFdel{DJ(\overline{\mathbf{m}})=\mathbf{0}.
 }\end{displaymath}%DIFAUXCMD
-\DIFdelend \DIFaddbegin \begin{equation}
+\DIFdelend \DIFaddbegin \DIFadd{requires that
+}\begin{equation}
 \DIFadd{DJ(\overline{\mathbf{m}})=\mathbf{0}.
 \label{eq:5}
 }\end{equation}\DIFaddend 
@@ -184,13 +187,13 @@ This condition is, of course, familiar from calculus in finite-dimensional space
 
 There are a number of approaches to solve this optimisation problem. One is a systematic \DIFdelbegin \DIFdel{"grid search" }\DIFdelend \DIFaddbegin \DIFadd{``grid search'' }\DIFaddend of the model space. 
 Doing this would require the model space to be discretised using a finite-dimensional basis as in Lecture\DIFdelbegin \DIFdel{18. }\DIFdelend \DIFaddbegin \DIFadd{~19. }\DIFaddend The issue with 
-this method is the computational cost. Suppose, for example, that the discretised model space had \DIFdelbegin \DIFdel{n-dimensions}\DIFdelend \DIFaddbegin \DIFadd{$n$ dimensions}\DIFaddend , and that along 
-each dimension experience had shown that \DIFdelbegin \DIFdel{m }\DIFdelend \DIFaddbegin \DIFadd{$m$ }\DIFaddend points needed to be tested. The number of forward calculations required would then be
-$m^{n}$. In realistic problems, \DIFdelbegin \DIFdel{n }\DIFdelend \DIFaddbegin \DIFadd{$n$ }\DIFaddend is of order thousands or millions, while we have already noted the high cost of solving the 
+this method is the computational cost. Suppose, for example, that the discretised model space had \DIFdelbegin \DIFdel{n-dimensions}\DIFdelend \DIFaddbegin \DIFadd{$m$ dimensions}\DIFaddend , and that along
+each dimension experience had shown that \DIFdelbegin \DIFdel{m }\DIFdelend \DIFaddbegin \DIFadd{$N$ }\DIFaddend points needed to be tested. The number of forward calculations required would then be
+\DIFdelbegin \DIFdel{$m^{n}$}\DIFdelend \DIFaddbegin \DIFadd{$N^{m}$}\DIFaddend . In realistic problems, \DIFdelbegin \DIFdel{n }\DIFdelend \DIFaddbegin \DIFadd{$m$ }\DIFaddend is of order thousands or millions, while we have already noted the high cost of solving the 
 forward problem. The result is that grid search methods are not viable. 
 
 Random sampling methods such as Markov \DIFdelbegin \DIFdel{Chain }\DIFdelend \DIFaddbegin \DIFadd{chain }\DIFaddend Monte Carlo (MCMC) simulations perform better within high-dimensional spaces 
-(the number of forward calculations scales with something like $n^{2}$), but the costs are still far too high to be used 
+(the number of forward calculations scales with something like \DIFdelbegin \DIFdel{$n^{2}$}\DIFdelend \DIFaddbegin \DIFadd{$m^{2}$}\DIFaddend ), but the costs are still far too high to be used 
 practically in waveform tomography. 
 
 As a result, tomographers must rely on local optimisation methods that seek a point such that eq.\DIFdelbegin \DIFdel{(5}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:5}}\DIFaddend ) holds. 
@@ -198,7 +201,7 @@ An obvious downside to this approach is that the model obtained may only be a \t
 the misfit}. But this is typically all that is currently possible, and there do exist approximate but useful methods available 
 for uncertainty quantification\DIFdelbegin \footnote{\DIFdel{About which there is not sufficient time to discuss.}}%DIFAUXCMD
 \addtocounter{footnote}{-1}%DIFAUXCMD
-\DIFdel{.}\DIFdelend \DIFaddbegin \DIFadd{.}\footnote{\DIFadd{About which there is not sufficient time to discuss.}}
+\DIFdel{.}\DIFdelend \DIFaddbegin \DIFadd{.}\footnote{\DIFadd{There is not sufficient time to discuss these here.}}
 \DIFaddend 
 
 Suppose we start from an initial model $\mathbf{m}_{0}$. At this point we can calculate the value of the misfit,
@@ -336,7 +339,7 @@ the first term on the \DIFdelbegin \DIFdel{right hand side as
 \DIFadd{\langle DJ(\mathbf{u})|\delta \mathbf{u}\rangle=\int_{0}^{T}[u_{i}(\mathbf{x}_{r},t)-u_{i}^{\mathrm{obs}}(t)]\delta u_{i}(\mathbf{x}_{r},t)\dd t.
 \label{eq:17}
 }\end{equation}\DIFaddend 
-Making use of the Dirac delta function, this can be conveniently written
+Making use of \DIFdelbegin \DIFdel{the }\DIFdelend \DIFaddbegin \DIFadd{a }\DIFaddend Dirac delta function \DIFaddbegin \DIFadd{on the surface $\partial M$}\DIFaddend , this can be conveniently written
 \DIFdelbegin \begin{displaymath}
 \DIFdel{\langle DJ(\mathbf{u})|\delta \mathbf{u}\rangle=\int_{0}^{T}\int_{\partial M}h_{i}'\delta u_{i}\dd S\dd t,
 }\end{displaymath}%DIFAUXCMD
@@ -504,8 +507,11 @@ along with the boundary condition
 h_{i}^{\dagger}(\mathbf{x},t)=h_{i}'(\mathbf{x},T-t),
 \label{eq:33b}
 }\end{equation}
-\DIFadd{and the terminal conditions in eq.~(\ref{eq:28}) become the initial conditions 
-$u_{i}^{\dagger}(\mathbf{x},0)=\partial_{t}u_{i}^{\dagger}(\mathbf{x},0)=0$. The problem for $\mathbf{u}^{\dagger}$ is therefore an 
+\DIFadd{and the terminal conditions in eq.~(\ref{eq:28}) become the initial conditions
+}\begin{equation*}
+\DIFadd{u_{i}^{\dagger}(\mathbf{x},0)=\frac{\partial u_{i}^{\dagger}}{\partial t}(\mathbf{x},0)=0.
+}\end{equation*}
+\DIFadd{The problem for $\mathbf{u}^{\dagger}$ is therefore an  
 initial value problem of precisely the same form as the forward problem, driven at the receiver by the time-reversed residual 
 $h_{i}^{\dagger}$, and it can be solved with the same numerical code. In terms of $\mathbf{u}^{\dagger}$ the sensitivity kernels read
 }\begin{align}
@@ -515,8 +521,8 @@ $h_{i}^{\dagger}$, and it can be solved with the same numerical code. In terms o
 \label{eq:33e}
 }\end{align}
 \DIFadd{where the sign change in $K_{\rho}$ comes from the time derivative of the reversed field. These expressions make the 
-structure of the kernels clear: the forward field at time $t$ is paired with the field that has spread out from the receiver 
-for a time $T-t$, which is just the time remaining for anything happening at $(\mathbf{x},t)$ to be felt within the observation window. 
+structure of the kernels clear: the forward field at time $t$ is paired with the adjoint field after it has evolved for a time $T-t$, 
+which is just the time remaining for anything happening at $(\mathbf{x},t)$ to be felt within the observation window. 
 The time reversal is nothing more than a convenient way of converting a terminal value problem into an initial value one, and 
 plays no fundamental role in the theory.
 }\DIFaddend 
@@ -546,7 +552,7 @@ adjoint calculation}\DIFaddend . Even so, the saving relative to the finite-diff
 approach is by a factor of $\frac{3}{m+1}$ where $m$ is the number of model parameters. Given that $m$ in practice 
 is of order \DIFdelbegin \DIFdel{$10^{4}-10^{6}$ }\DIFdelend \DIFaddbegin \DIFadd{$10^{4}$--$10^{6}$, }\DIFaddend this is an enormous improvement and justifies a few pages of algebra! 
 It is the adjoint method that allows waveform inversion to be a practical tool within seismology and also 
-in a range of other fields. Indeed, it is this method that underlies numerical weather prediction.
+in a range of other fields. Indeed, it is this method that underlies \DIFaddbegin \DIFadd{data assimilation in }\DIFaddend numerical weather prediction.
 
 It is worth commenting that though we have obtained the adjoint equations for a specific choice of misfit, the form of $J$
  only enters into the problem through the adjoint traction $h_{i}'$ \DIFaddbegin \DIFadd{(or, equivalently, its time reverse $h_{i}^{\dagger}$)}\DIFaddend . This means that the theory can be readily applied to 
@@ -605,7 +611,10 @@ the \textbf{cross-correlation} of these two time series as defined by
 }\end{equation}\DIFaddend 
 This quantity will be largest when \DIFdelbegin \DIFdel{$s^{obs}$ and s }\DIFdelend \DIFaddbegin \DIFadd{$s^{\mathrm{obs}}$ and $s$ }\DIFaddend are maximally aligned, and hence the associated value 
 of $\tau$ gives a measurement of the delay time between the observed and synthetic waveforms. Indeed, this 
-is typically what is done in practice to automate delay time measurements. The condition for $\overline{\tau}$ 
+is typically what is done in practice to automate delay time measurements. \DIFaddbegin \DIFadd{Note that with the definition in eq.~(\ref{eq:36})
+an observed phase that arrives later than the synthetic gives a negative value of $\overline{\tau}$, the opposite sign to the delay
+time of Lecture~19; nothing below depends on this choice, since it is only the perturbation $\delta\overline{\tau}$ that enters
+the sensitivity kernels. }\DIFaddend The condition for $\overline{\tau}$
 to maximise the cross-correlation of the waveforms is given by
 \DIFdelbegin \begin{displaymath}
 \DIFdel{\frac{dC}{d\tau}(\overline{\tau})=0
@@ -633,8 +642,9 @@ and this acts to define $\overline{\tau}$ implicitly as a function of the synthe
 \label{eq:39}
 }\end{equation}
 \DIFadd{If the observed and synthetic waveforms differ only by the time shift, so that $s^{\mathrm{obs}}(t-\overline{\tau})=s(\mathbf{x}_{r},t)$, 
-which is a reasonable approximation when the reference model is close to the truth, then an integration by parts (the 
-window removing any boundary terms) gives $\int\ddot{s}s\dd t=-\int\dot{s}^{2}\dd t$, and hence
+which is a reasonable approximation when the reference model is close to the truth, then
+$\dot{s}^{\mathrm{obs}}(t-\overline{\tau})=\dot{s}(\mathbf{x}_{r},t)$ in the first term, while an integration by parts (the
+window removing any boundary terms) gives $\int\ddot{s}s\dd t=-\int\dot{s}^{2}\dd t$ in the second, and hence
 }\begin{equation}
 \DIFadd{\delta\overline{\tau}=-\frac{1}{N}\int_{-\infty}^{\infty}\dot{s}(\mathbf{x}_{r},t)\,\delta s(\mathbf{x}_{r},t)\dd t,
 \quad N=\int_{-\infty}^{\infty}\dot{s}(\mathbf{x}_{r},t)^{2}\dd t.
@@ -675,7 +685,9 @@ obtained using Fermat's principle, with \DIFdelbegin \DIFdel{c }\DIFdelend \DIFa
 adjoint method exactly as derived above. An explosive point source generates a P-wave that is recorded at a receiver, the 
 delay time of the arrival is defined through cross-correlation, and the corresponding adjoint source is the time-reversed 
 windowed velocity of the synthetic seismogram applied at the receiver. The adjoint field $\mathbf{u}^{\dagger}$ spreads out 
-from the receiver as an ordinary initial value problem, and the kernel for the P-wave speed, 
+from the receiver as an ordinary initial value problem, and the kernel for the P-wave speed, which follows from
+eq.~(\ref{eq:33d}) since $\delta A_{ijkl}=2\rho\alpha\,\delta\alpha\,\delta_{ij}\delta_{kl}$ when $\rho$ and $\beta$
+are held fixed,
 }\begin{equation*}
 \DIFaddFL{K_{\alpha}(\mathbf{x})=-2\rho\alpha\int_{0}^{T}\nabla\cdot\mathbf{u}(\mathbf{x},t)\,
 \nabla\cdot\mathbf{u}^{\dagger}(\mathbf{x},T-t)\dd t,
@@ -691,15 +703,14 @@ directly; the kernel predicts this change to within about ten per cent for a per
     \DIFdelbeginFL %DIFDELCMD < \includegraphics[width=0.7\textwidth]{figures/L8F3.png}        
 %DIFDELCMD <     %%%
 \DIFdelendFL \DIFaddbeginFL \includegraphics[width=\textwidth]{figures/L8F3.pdf}
-    \captionsetup{justification=raggedright}
     \DIFaddendFL \caption{\DIFdelbeginFL \DIFdelFL{Cross sections through the functional derivative }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{Construction }\DIFaddendFL of a cross-correlation \DIFdelbeginFL \DIFdelFL{delay time for a P-wave 
     phase with respect to $\alpha$ as calculated }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{delay-time kernel }\DIFaddendFL by the adjoint method \DIFaddbeginFL \DIFaddFL{in a two-dimensional homogeneous 
     body}\DIFaddendFL . \DIFdelbeginFL \DIFdelFL{Here we see that }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{The star marks an explosive source and }\DIFaddendFL the \DIFdelbeginFL \DIFdelFL{delay time 
     }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{triangle a receiver. The kernel is 
     \mbox{$K_{\alpha}(\mathbf{x})=-2\rho\alpha\int_{0}^{T}\nabla\cdot\mathbf{u}(\mathbf{x},t)\,\nabla\cdot\mathbf{u}^{\dagger}(\mathbf{x},T-t)\dd t$}, 
-    and each row shows one instant $t$: the divergence }\DIFaddendFL of the 
-    \DIFdelbeginFL \DIFdelFL{same phase can be measured at different frequencies by filtering }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{forward field $\mathbf{u}(\mathbf{x},t)$; }\DIFaddendFL the \DIFdelbeginFL \DIFdelFL{data }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{divergence of the adjoint field $\mathbf{u}^{\dagger}(\mathbf{x},T-t)$, 
-    which has spread out from the receiver for a time $T-t$; the integrand, that is the instantaneous contribution to the 
+    and each row shows one instant $t$ (times are in nondimensional units, with $T\approx2$): the divergence }\DIFaddendFL of the
+    \DIFdelbeginFL \DIFdelFL{same phase can be measured at different frequencies by filtering }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{forward field $\mathbf{u}(\mathbf{x},t)$; }\DIFaddendFL the \DIFdelbeginFL \DIFdelFL{data }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{divergence of the adjoint field $\mathbf{u}^{\dagger}(\mathbf{x},T-t)$
+    after it has evolved for a time $T-t$ from the receiver; the integrand, that is the instantaneous contribution to the 
     kernel; }\DIFaddendFL and \DIFdelbeginFL \DIFdelFL{synthetic waveforms}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{the kernel accumulated over times up to $t$}\DIFaddendFL . The \DIFdelbeginFL \DIFdelFL{dominant sensitivity lies within }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{integrand, and hence }\DIFaddendFL the \DIFdelbeginFL \DIFdelFL{first Fresnel zone}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{kernel}\DIFaddendFL , \DIFdelbeginFL \DIFdelFL{but it curiously vanishes along }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{is non-zero only where }\DIFaddendFL the \DIFdelbeginFL \DIFdelFL{ray path. 
     Figure taken from Liu \& Tromp (2008)}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{two 
     fields overlap}\DIFaddendFL .}
@@ -710,7 +721,8 @@ directly; the kernel predicts this change to within about ten per cent for a per
     \centering
     \includegraphics[width=\textwidth]{figures/L8F4.pdf}
     \caption{\DIFaddFL{The finished two-dimensional kernel of Fig.~\ref{fig:3} (left; the colour scale is clipped near the source 
-    and receiver, where the kernel is singular) and a cross-section through it at the mid-point of the ray (right). The kernel 
+    and receiver, where the kernel is singular) and a cross-section through it at the mid-point of the ray (right), where $z$ is the coordinate across the ray, in units of the 
+    box height. The kernel  
     is negative throughout the first Fresnel zone, since an increase in wave speed there advances the arrival, and 
     changes sign in the surrounding zones. Unlike the three-dimensional kernels of Fig.~\ref{fig:5}, it does not vanish on 
     the ray itself, though it is somewhat smaller there than on either side.}}
@@ -728,10 +740,13 @@ people: ray theory says that all the sensitivity is along the ray path, but the 
 \DIFaddbegin \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/L8F5.png}        
-    \caption{\DIFaddFL{Cross-sections through the functional derivative of a cross-correlation delay time for a P-wave 
-    phase with respect to $\alpha$ as calculated by the adjoint method. Here we see that the delay time 
-    of the same phase can be measured at different frequencies by filtering the data and synthetic waveforms. 
-    The dominant sensitivity lies within the first Fresnel zone, but it curiously vanishes along the ray path. 
+    \caption{\DIFaddFL{Cross-sections through the functional derivative of a cross-correlation delay time for a P-wave
+    phase with respect to $\alpha$ as calculated by the adjoint method. The delay time
+    of the same phase can be measured at different frequencies by filtering the data and synthetic waveforms:
+    panels (a)--(c) show the kernel for three different period bands, each on its own colour scale, and (d) the
+    filtered synthetic seismograms at an epicentral distance of $60^{\circ}$, with the box marking the window
+    around the P arrival used for the measurement.
+    The dominant sensitivity lies within the first Fresnel zone, but it curiously vanishes along the ray path.
     Figure taken from Liu \& Tromp (2008).}}
     \label{fig:5}
 \end{figure}
@@ -757,7 +772,7 @@ them \textbf{banana doughnut kernels}, and this remains the usual term used.
     \centering    
     \includegraphics[width=0.66\textwidth]{figures/L8F6.pdf}    
     \caption{\DIFaddFL{The global waveform tomographic model GLAD-M35 of Cui et al.\ (2024), the third generation of models produced 
-    at Princeton using the adjoint method, at depths from $140\,\mathrm{km}$ to $2800\,\mathrm{km}$. The columns show the 
+    at Princeton using the adjoint method (the first, GLAD-M15, is described by Bozda\u{g} et al.\ 2016), at depths of (from the top) 140, 600, 1300, 1700, 2100, 2500 and $2800\,\mathrm{km}$. The columns show the  
     perturbations in shear wave speed, bulk sound speed and compressional wave speed relative to a spherically symmetric 
     reference model. The inversion used waveforms from 2160 earthquakes recorded at 11\,575 stations and 35 iterations of 
     gradient-based optimisation in total. From Cui et al.\ (2024).}}
@@ -804,7 +819,7 @@ conduits, or plumes, rising through the mantle beneath them.
 
 \begin{figure}[htbp]
     \centering    
-    \includegraphics[width=0.66\textwidth]{figures/L8F8.pdf}    
+    \includegraphics[width=\textwidth]{figures/L8F8.pdf}        
     \caption{\DIFaddFL{Six global models that provide both P- and S-wave speeds, at a depth of $2800\,\mathrm{km}$. From the top: GLAD-M35 
     (Cui et al.\ 2024), GyPSuM (Simmons et al.\ 2010), LOWE (van Herwaarden et al.\ 2020), SP12RTS (Koelemeijer et al.\ 2016), 
     TX2019 (Lu et al.\ 2019) and REVEAL (Thrastarson et al.\ 2024). The columns show the perturbations in shear wave speed, bulk 

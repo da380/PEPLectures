@@ -8,7 +8,8 @@ from pepseis.modes import PremModes
 from pepseis.paths import FIG
 plt.rcParams.update({"font.family": "serif", "mathtext.fontset": "cm", "font.size": 10})
 M = PremModes()
-fig, axes = plt.subplots(2, 4, figsize=(10.5, 7.0), sharey=True, constrained_layout=True)
+# drawn at its printed width (\textwidth) so that the fonts appear at their nominal size
+fig, axes = plt.subplots(2, 4, figsize=(6.5, 4.8), sharey=True, constrained_layout=True)
 tor = [(2, 0), (2, 1), (10, 0), (40, 0)]
 for ax, (l, n) in zip(axes[0], tor):
     f, r, W = M.toroidal(l, n)
@@ -32,6 +33,5 @@ for ax in axes.ravel():
     ax.grid(True, ls=":", lw=0.4)
 for ax in axes[:, 0]:
     ax.set_ylabel("radius / km")
-for ax in axes[1]:
-    ax.set_xlabel("normalised eigenfunction")
+fig.supxlabel("normalised eigenfunction")
 fig.savefig(str(FIG / "L12F6.pdf")); fig.savefig(str(FIG / "L12F6.png"), dpi=200)

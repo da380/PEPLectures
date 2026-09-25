@@ -41,7 +41,7 @@ for d in [0, 30, 60, 90, 150, 180]:
     ax.text(1.06 * sphray.R_TOP * np.sin(t), 1.06 * sphray.R_TOP * np.cos(t), r"$%d^\circ$" % d, ha="center", va="center", fontsize=9)
 ax.plot([0], [sphray.R_TOP], "k*", ms=10, zorder=5)
 ax.text(-300, sphray.R_TOP + 250, "source", ha="right", va="center", fontsize=9)
-ax.text(-2200, 1500, "P", color="tab:blue"); ax.text(-1400, -800, "PKP", color="tab:red"); ax.text(-600, -100, "PKIKP", color="tab:green")
+ax.text(5050, -2050, "P", color="tab:blue"); ax.text(-1400, -800, "PKP", color="tab:red"); ax.text(-600, -100, "PKIKP", color="tab:green")
 ax.set_aspect("equal"); ax.axis("off")
 ax.set_xlim(-1.15 * sphray.R_TOP, 1.75 * sphray.R_TOP); ax.set_ylim(-1.2 * sphray.R_TOP, 1.2 * sphray.R_TOP)
 fig.tight_layout()

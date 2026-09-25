@@ -6,7 +6,6 @@
 \author{David Al-Attar \\ Michaelmas Term, \the\year}
 
 \begin{document}
-\providecommand{\item}{\refstepcounter{enumi}\item[\labelenumi$^{\dagger}$]}
 
 
 \maketitle
@@ -25,8 +24,8 @@ but the integrand vanishes there, and so only the explicit dependence contribute
     \frac{\dd\tau}{\dd q}=-2\int_{r_{t}}^{b}\frac{q}{\sqrt{\eta^{2}-q^{2}}}\frac{\dd r}{r}=-\int_{r_{t}}^{b}\frac{2\alpha q}{r\sqrt{r^{2}-\alpha^{2}q^{2}}}\dd r=-\Delta.
 \end{equation*}
 Since $T=\tau+q\Delta$, we have $\dd T/\dd q=\dd\tau/\dd q+\Delta+q\,\dd\Delta/\dd q=q\,\dd\Delta/\dd q$, and hence $\dd T/\dd\Delta=q$. The slope 
-of the travel-time curve at a given epicentral angle is therefore the ray parameter of the arrival, which is also, by the 
-definition $q=r\sin\theta/\alpha$, the horizontal slowness of the wave at the receiver.
+of the travel-time curve at a given epicentral angle is therefore the ray parameter of the arrival, which is $b$ times the 
+horizontal slowness of the wave at the receiver, i.e. the horizontal slowness measured per radian of epicentral angle.
 \item With $\eta$ as the variable of integration, $\dd r/r=(\dd\ln r/\dd\eta)\dd\eta$, the turning point $r_{t}$ corresponds to $\eta=q$, and 
 the surface to $\eta=\eta_{b}$, so that
 \begin{equation*}
@@ -61,7 +60,7 @@ downwards; note that the integral for a given depth requires the travel-time cur
 that depth. If the velocity decreases with depth so rapidly that $\eta$ increases with depth, then rays entering that region are bent 
 downwards rather than turning, and no ray turns within the \emph{low-velocity zone}. There is then a range of $\eta$ with no corresponding 
 turning radius, the change of variables in (b) fails, and the velocity within the zone cannot be recovered from the travel-time curve at all; 
-the zone produces a gap in the curve (a shadow zone) followed by a jump in $\Delta$, and the depths inferred below it are in error unless the 
+the zone produces a gap in the travel-time curve (a shadow zone), $\Delta(q)$ jumping discontinuously as $q$ passes the value at the top of the zone, and the depths inferred below it are in error unless the 
 zone is accounted for separately. At a discontinuity across which the velocity increases with depth, $\eta$ jumps downwards and there 
 is a range of ray parameters for which the rays are totally reflected at the interface. Rays turning just beneath it emerge at larger epicentral 
 angles than those turning just above, so the travel-time curve folds back on itself to form a \emph{triplication}: over a range of $\Delta$ 
@@ -135,7 +134,7 @@ where we have used the elastic tensor $A_{ijkl}=\lambda\delta_{ij}\delta_{kl}+\m
 \end{equation*}
 where we have defined
 \begin{equation*}
-    \mathbf{h}'(\mathbf{x})=\sum_{i=1}^{m}\frac{1}{\varepsilon_{i}^{2}}[\mathbf{u}(\mathbf{x}_{i})-\mathbf{u}_{i}^{\mathrm{obs}}]\delta(\mathbf{x}-\mathbf{x}_{i}),
+    \mathbf{h}'(\mathbf{x})=\sum_{r=1}^{N}\frac{1}{\varepsilon_{r}^{2}}[\mathbf{u}(\mathbf{x}_{r})-\mathbf{u}_{r}^{\mathrm{obs}}]\delta(\mathbf{x}-\mathbf{x}_{r}),
 \end{equation*}
 to simplify the contribution associated with $J(\mathbf{u})$. To proceed, we need to integrate by parts to isolate $\delta u_{i}$. The key step is
 \begin{align*}
@@ -146,9 +145,10 @@ to simplify the contribution associated with $J(\mathbf{u})$. To proceed, we nee
     &=-\int_{\partial M}\hat{n}_{j}\left(A_{ijkl}\frac{\partial\delta u_{k}}{\partial x_{l}}\right)u_{i}'\dd S+\int_{\partial M}\delta u_{i}\hat{n}_{j}\left(A_{ijkl}\frac{\partial u_{k}'}{\partial x_{l}}\right)\dd S -\int_{M}\delta u_{i}\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}'}{\partial x_{l}}\right)\dd^{3}\mathbf{x},
 \end{align*}
 where we note that the hyperelastic symmetry $A_{ijkl}=A_{klij}$ has been used. Using this result, the condition now reads
-\begin{equation*}
-    \int_{\partial M}[h_{i}'+\hat{n}_{j}\left(A_{ijkl}\frac{\partial u_{k}'}{\partial x_{l}}\right)]\delta u_{i}\dd S-\int_{M}\delta u_{i}\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}'}{\partial x_{l}}\right)\dd^{3}\mathbf{x} +\int_{\partial M}\hat{n}_{j}\left(A_{ijkl}\frac{\partial\delta u_{k}}{\partial x_{l}}\right)(w_{i}'-u_{i}')\dd S=0.
-\end{equation*}
+\begin{multline*}
+    \int_{\partial M}[h_{i}'+\hat{n}_{j}\left(A_{ijkl}\frac{\partial u_{k}'}{\partial x_{l}}\right)]\delta u_{i}\dd S \\
+    -\int_{M}\delta u_{i}\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}'}{\partial x_{l}}\right)\dd^{3}\mathbf{x} +\int_{\partial M}\hat{n}_{j}\left(A_{ijkl}\frac{\partial\delta u_{k}}{\partial x_{l}}\right)(w_{i}'-u_{i}')\dd S=0.
+\end{multline*}
 It follows that $u_{i}'$ must satisfy
 \begin{equation*}
     \frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}'}{\partial x_{l}}\right)=0,
@@ -182,6 +182,17 @@ As is typical with the adjoint method, we see that these sensitivity kernels dep
 
 
 
+A remark on the footnote in the question. A static problem with traction data alone is solvable only if the load exerts no net 
+force or torque on the body, since otherwise no equilibrium is possible, and its solution is then determined only up to a rigid-body 
+displacement, which produces no strain and so no stress. The applied load $\sigma\mathbf{g}$ satisfies the first requirement for any 
+physically consistent load, but the adjoint traction $-\mathbf{h}'$, a set of point forces at the receivers, in general does not. 
+The resolution is to fix the rigid-body motion explicitly, for example by requiring the displacement to have zero mean 
+translation and rotation, which is how the observed displacements are in any case referred to a frame. Imposing these 
+constraints through Lagrange multipliers adds to both the forward and the adjoint problems a load that exactly cancels the 
+net force and torque, making both well posed, and the additional terms make no contribution to the sensitivity kernels 
+because rigid-body motions are strain-free. The derivation above therefore stands, with $\mathbf{u}$ and $\mathbf{u}'$ understood 
+to be the solutions with rigid-body motions removed.
+
 \item The part of the Lagrangian that depends explicitly on the motion is
 \begin{equation*}
     \frac{1}{2}G\int_{M}\frac{\rho\rho'}{\{[\varphi_{i}-\varphi_{i}'][ \varphi_{i}-\varphi_{i}']\}^{\frac{1}{2}}}\dd^{3}\mathbf{x}',
@@ -209,14 +220,14 @@ as required.
 \begin{enumerate}
 \item Expanding about the source point,
 \begin{equation*}
-    \frac{\partial|km\rangle^{*}}{\partial x'_{j}}(\mathbf{x}')=\frac{\partial|km\rangle^{*}}{\partial x_{j}}(\mathbf{x}_{s})
-    +(x'_{l}-x_{s,l})\frac{\partial^{2}|km\rangle^{*}}{\partial x_{j}\partial x_{l}}(\mathbf{x}_{s})+\cdots,
+    \frac{\partial|km\rangle_{i}^{*}}{\partial x'_{j}}(\mathbf{x}')=\frac{\partial|km\rangle_{i}^{*}}{\partial x_{j}}(\mathbf{x}_{s})
+    +(x'_{l}-x_{s,l})\frac{\partial^{2}|km\rangle_{i}^{*}}{\partial x_{j}\partial x_{l}}(\mathbf{x}_{s})+\cdots,
 \end{equation*}
 and so the spatial integral in the mode sum becomes
 \begin{multline*}
-    \int_{M}\overline{S}_{ij}(\mathbf{x}',t')\frac{\partial|km\rangle^{*}}{\partial x'_{j}}(\mathbf{x}')\dd^{3}\mathbf{x}'
-    =M_{ij}(t')\frac{\partial|km\rangle^{*}}{\partial x_{j}}(\mathbf{x}_{s}) \\
-    +\frac{\partial^{2}|km\rangle^{*}}{\partial x_{j}\partial x_{l}}(\mathbf{x}_{s})
+    \int_{M}\overline{S}_{ij}(\mathbf{x}',t')\frac{\partial|km\rangle_{i}^{*}}{\partial x'_{j}}(\mathbf{x}')\dd^{3}\mathbf{x}'
+    =M_{ij}(t')\frac{\partial|km\rangle_{i}^{*}}{\partial x_{j}}(\mathbf{x}_{s}) \\
+    +\frac{\partial^{2}|km\rangle_{i}^{*}}{\partial x_{j}\partial x_{l}}(\mathbf{x}_{s})
     \int_{M}(x'_{l}-x_{s,l})\overline{S}_{ij}(\mathbf{x}',t')\dd^{3}\mathbf{x}'+\cdots.
 \end{multline*}
 The first term is exactly what is obtained from the point source with moment tensor $M_{ij}(t)$, and the second is smaller than it by a 
@@ -229,11 +240,11 @@ $v/L=50\,\mathrm{mHz}$, so the approximation is reasonable below perhaps $10\,\m
 wavelengths above $500\,\mathrm{km}$) and certainly for the free oscillations discussed in the lectures.
 \item We are told
 \begin{equation*}
-    \mathbf{u}(\mathbf{x},t) = \sum_{km}\left\{\int_{0}^{t}\frac{\sin[\omega_{k}(t-t')]}{\omega_{k}}\int_{M}\overline{S}_{ij}(\mathbf{x}',t')\frac{\partial|km\rangle^{*}}{\partial x'_{j}}(\mathbf{x}')\dd^{3}\mathbf{x}'\dd t'\right\}|km\rangle(\mathbf{x}),
+    \mathbf{u}(\mathbf{x},t) = \sum_{km}\left\{\int_{0}^{t}\frac{\sin[\omega_{k}(t-t')]}{\omega_{k}}\int_{M}\overline{S}_{ij}(\mathbf{x}',t')\frac{\partial|km\rangle_{i}^{*}}{\partial x'_{j}}(\mathbf{x}')\dd^{3}\mathbf{x}'\dd t'\right\}|km\rangle(\mathbf{x}),
 \end{equation*}
 noting that arguments have now been included for clarity. In the case of a moment tensor point source, we see immediately that
 \begin{equation*}
-    \int_{M}\overline{S}_{ij}(\mathbf{x}',t')\frac{\partial|km\rangle^{*}}{\partial x'_{j}}(\mathbf{x}')\dd^{3}\mathbf{x}' = M_{ij}\frac{\partial|km\rangle^{*}}{\partial x_{j}}(\mathbf{x}_{s})H(t'-t_{s}),
+    \int_{M}\overline{S}_{ij}(\mathbf{x}',t')\frac{\partial|km\rangle_{i}^{*}}{\partial x'_{j}}(\mathbf{x}')\dd^{3}\mathbf{x}' = M_{ij}\frac{\partial|km\rangle_{i}^{*}}{\partial x_{j}}(\mathbf{x}_{s})H(t'-t_{s}),
 \end{equation*}
 while the necessary time integral is readily evaluated for $t\ge t_{s}$:
 \begin{align*}
@@ -241,7 +252,7 @@ while the necessary time integral is readily evaluated for $t\ge t_{s}$:
 \end{align*}
 and hence the eigenfunction expansion reduces to
 \begin{equation*}
-    \mathbf{u}(\mathbf{x},t)=\sum_{km}\frac{1-\cos[\omega_{k}(t-t_{s})]}{\omega_{k}^{2}}M_{ij}\frac{\partial|km\rangle^{*}}{\partial x_{j}}(\mathbf{x}_{s})|km\rangle(\mathbf{x}),
+    \mathbf{u}(\mathbf{x},t)=\sum_{km}\frac{1-\cos[\omega_{k}(t-t_{s})]}{\omega_{k}^{2}}M_{ij}\frac{\partial|km\rangle_{i}^{*}}{\partial x_{j}}(\mathbf{x}_{s})|km\rangle(\mathbf{x}),
 \end{equation*}
 for $t\ge t_{s}$ and zero before this. This final expression depends on ten source parameters, assuming that Earth structure is known. The dependence on the moment tensor is linear, but that on the source location and source time is non-linear. There are several possible methods for solving the inverse problem. The most obvious is to define some sort of least-squares misfit between observed and predicted seismograms, and then optimise to find the best-fitting source parameters. To do this gradient-based methods could be applied, and here the derivatives with respect to the source parameters could be calculated directly with relative ease. Note that in this problem there are likely to be more data than model parameters, and hence it is likely to be overdetermined. As a result, regularisation would not be needed. Because the problem is non-linear, it is not certain that the optimal solution obtained would be a global minimum. Due to the size of the inverse problem and the low cost of implementing mode summation (in a spherically symmetric earth model at least) the application of Bayesian methods via something like MCMC would be feasible, and this could address the possible issue of local minima, while also providing a quantification of uncertainty.
 
@@ -255,7 +266,7 @@ where we have used the normalisation condition. This is a quadratic equation for
 \begin{equation*}
     \omega=\frac{1}{2}\ii\langle \mathbf{s}|W|\mathbf{s}\rangle\pm\sqrt{\langle \mathbf{s}|H|\mathbf{s}\rangle-\frac{1}{4}\langle \mathbf{s}|W|\mathbf{s}\rangle^{2}},
 \end{equation*}
-as required. Note that the Coriolis operator is anti-Hermitian, and hence $\langle \mathbf{s}|W|\mathbf{s}\rangle$ is an imaginary number. For this reason the expression for $\omega$ is real so long as
+as required. Note that the Coriolis operator is anti-self-adjoint, and hence $\langle \mathbf{s}|W|\mathbf{s}\rangle$ is an imaginary number. For this reason the expression for $\omega$ is real so long as
 \begin{equation*}
     \langle \mathbf{s}|H|\mathbf{s}\rangle-\frac{1}{4}\langle \mathbf{s}|W|\mathbf{s}\rangle^{2}>0,
 \end{equation*}
@@ -275,9 +286,9 @@ Applying the Cauchy--Schwarz inequality we note that this term is always non-pos
 assembled is $m(r)=\tfrac{4}{3}\pi\rho r^{3}$, and adding a shell of mass $\dd m=4\pi\rho r^{2}\dd r$ releases energy $Gm\,\dd m/r$. Thus
 \begin{equation*}
     E_{g}=-\int_{0}^{a}\frac{Gm(r)}{r}4\pi\rho r^{2}\dd r=-\frac{16\pi^{2}}{3}G\rho^{2}\int_{0}^{a}r^{4}\dd r=-\frac{16\pi^{2}}{15}G\rho^{2}a^{5}
-    =-\frac{3GM^{2}}{5a},
+    =-\frac{3GM_{\mathrm{p}}^{2}}{5a},
 \end{equation*}
-where $M=\tfrac{4}{3}\pi\rho a^{3}$.
+where $M_{\mathrm{p}}=\tfrac{4}{3}\pi\rho a^{3}$.
 \item Within a uniform sphere the gravitational acceleration is $g(r)=\tfrac{4}{3}\pi G\rho r$ directed inwards, and the
 hydrostatic equation $\dd p_{0}/\dd r=-\rho g$ with $p_{0}(a)=0$ integrates to the given expression. Then
 \begin{equation*}
@@ -287,7 +298,7 @@ hydrostatic equation $\dd p_{0}/\dd r=-\rho g$ with $p_{0}(a)=0$ integrates to t
 This is a form of the virial theorem for a body in hydrostatic equilibrium.
 \item The mass is unchanged while the radius becomes $a(1-\epsilon)$, so
 \begin{equation*}
-    \Delta E_{g}=-\frac{3GM^{2}}{5a}\left[\frac{1}{1-\epsilon}-1\right]=-\frac{3GM^{2}}{5a}(\epsilon+\epsilon^{2})+O(\epsilon^{3}).
+    \Delta E_{g}=-\frac{3GM_{\mathrm{p}}^{2}}{5a}\left[\frac{1}{1-\epsilon}-1\right]=-\frac{3GM_{\mathrm{p}}^{2}}{5a}(\epsilon+\epsilon^{2})+O(\epsilon^{3}).
 \end{equation*}
 As expected, contraction releases gravitational energy.
 \item Under the uniform compression every material element has its linear dimensions scaled by $1-\epsilon$, so its
@@ -301,18 +312,18 @@ and summing over the planet gives the stated result. Note that because the compr
 so the shear modulus plays no role.
 \item Adding the two contributions, the first-order terms are
 \begin{equation*}
-    3\epsilon\int_{M}p_{0}\dd^{3}\mathbf{x}-\frac{3GM^{2}}{5a}\epsilon=\epsilon\left[3\int_{M}p_{0}\dd^{3}\mathbf{x}+E_{g}\right]=0,
+    3\epsilon\int_{M}p_{0}\dd^{3}\mathbf{x}-\frac{3GM_{\mathrm{p}}^{2}}{5a}\epsilon=\epsilon\left[3\int_{M}p_{0}\dd^{3}\mathbf{x}+E_{g}\right]=0,
 \end{equation*}
 by part (b). This had to be so because the initial state is an equilibrium, and hence a stationary point of the total energy. Using
-$\int_{M}p_{0}\dd^{3}\mathbf{x}=-E_{g}/3=GM^{2}/5a$, the second-order terms are
+$\int_{M}p_{0}\dd^{3}\mathbf{x}=-E_{g}/3=GM_{\mathrm{p}}^{2}/(5a)$, the second-order terms are
 \begin{equation*}
-    \Delta E=\epsilon^{2}\left[\frac{9}{2}\kappa V-3\int_{M}p_{0}\dd^{3}\mathbf{x}-\frac{3GM^{2}}{5a}\right]
-    =\epsilon^{2}\left[\frac{9}{2}\kappa V-\frac{6GM^{2}}{5a}\right]=\frac{9}{2}V\epsilon^{2}\left[\kappa-\frac{4}{3}\bar{p}_{0}\right],
+    \Delta E=\epsilon^{2}\left[\frac{9}{2}\kappa V-3\int_{M}p_{0}\dd^{3}\mathbf{x}-\frac{3GM_{\mathrm{p}}^{2}}{5a}\right]
+    =\epsilon^{2}\left[\frac{9}{2}\kappa V-\frac{6GM_{\mathrm{p}}^{2}}{5a}\right]=\frac{9}{2}V\epsilon^{2}\left[\kappa-\frac{4}{3}\bar{p}_{0}\right],
 \end{equation*}
-where $\bar{p}_{0}=\frac{1}{V}\int_{M}p_{0}\dd^{3}\mathbf{x}=GM^{2}/5aV$. Stability with respect to uniform compression therefore
+where $\bar{p}_{0}=\frac{1}{V}\int_{M}p_{0}\dd^{3}\mathbf{x}=GM_{\mathrm{p}}^{2}/(5aV)$. Stability with respect to uniform compression therefore
 requires $\kappa>\tfrac{4}{3}\bar{p}_{0}$; the second-order gravitational term
-alone would be balanced by an elastic energy twice as small, and it is the release of energy stored in the hydrostatic pressure
-that accounts for the rest. Using $M=\tfrac{4}{3}\pi\rho a^{3}$ and $V=\tfrac{4}{3}\pi a^{3}$ we find $\bar{p}_{0}=\tfrac{4\pi}{15}G\rho^{2}a^{2}$,
+alone would be balanced by an elastic energy half as large, and it is the release of energy stored in the hydrostatic pressure
+that accounts for the rest. Using $M_{\mathrm{p}}=\tfrac{4}{3}\pi\rho a^{3}$ and $V=\tfrac{4}{3}\pi a^{3}$ we find $\bar{p}_{0}=\tfrac{4\pi}{15}G\rho^{2}a^{2}$,
 and hence $\kappa>\tfrac{16\pi}{45}G\rho^{2}a^{2}$. The surface gravity is $g=\tfrac{4}{3}\pi G\rho a$, so this can be written as
 \begin{equation*}
     \frac{\kappa}{\rho}>\frac{4}{15}ga,
@@ -346,15 +357,15 @@ Taking $\mathbf{s}=|km\rangle$, so that $\langle\mathbf{s}|H|\mathbf{s}\rangle=\
     \omega=m\Omega\beta+\sqrt{\omega_{k}^{2}+m^{2}\Omega^{2}\beta^{2}}=\omega_{k}+m\Omega\beta+O(\Omega^{2}),
 \end{equation*}
 in agreement with the first-order result.
-\item We need $\langle km|W|km\rangle=\int_{M}2\rho\,\mathbf{s}^{*}\cdot(\bm{\Omega}\times\mathbf{s})\dd^{3}\mathbf{x}$ with $\mathbf{s}=W\mathbf{C}_{lm}$. 
+\item We need $\langle km|W|km\rangle=\int_{M}2\rho\,\mathbf{s}^{*}\cdot(\bm{\Omega}\times\mathbf{s})\dd^{3}\mathbf{x}$ with $\mathbf{s}=W(r)\mathbf{C}_{lm}$, where $W(r)$ is the radial eigenfunction (not to be confused with the Coriolis operator $W$). 
 Writing $Y$ for $Y_{lm}$, and using $\hat{\mathbf{r}}\times\hat{\bm{\theta}}=\hat{\bm{\varphi}}$ and $\hat{\mathbf{r}}\times\hat{\bm{\varphi}}=-\hat{\bm{\theta}}$,
 \begin{equation*}
-    \mathbf{C}_{lm}=\hat{\mathbf{r}}\times\nabla_{1}Y=\partial_{\theta}Y\,\hat{\bm{\varphi}}-\frac{\ii m}{\sin\theta}Y\,\hat{\bm{\theta}}.
+    \mathbf{C}_{lm}=-\hat{\mathbf{r}}\times\nabla_{1}Y=-\partial_{\theta}Y\,\hat{\bm{\varphi}}+\frac{\ii m}{\sin\theta}Y\,\hat{\bm{\theta}}.
 \end{equation*}
 With $\hat{\mathbf{z}}=\cos\theta\,\hat{\mathbf{r}}-\sin\theta\,\hat{\bm{\theta}}$ we have 
 $\hat{\mathbf{z}}\times\hat{\bm{\theta}}=\cos\theta\,\hat{\bm{\varphi}}$ and $\hat{\mathbf{z}}\times\hat{\bm{\varphi}}=-\cos\theta\,\hat{\bm{\theta}}-\sin\theta\,\hat{\mathbf{r}}$, so that
 \begin{equation*}
-    \hat{\mathbf{z}}\times\mathbf{C}_{lm}=-\partial_{\theta}Y(\cos\theta\,\hat{\bm{\theta}}+\sin\theta\,\hat{\mathbf{r}})-\frac{\ii m\cos\theta}{\sin\theta}Y\,\hat{\bm{\varphi}},
+    \hat{\mathbf{z}}\times\mathbf{C}_{lm}=\partial_{\theta}Y(\cos\theta\,\hat{\bm{\theta}}+\sin\theta\,\hat{\mathbf{r}})+\frac{\ii m\cos\theta}{\sin\theta}Y\,\hat{\bm{\varphi}},
 \end{equation*}
 and therefore
 \begin{equation*}
@@ -374,7 +385,7 @@ the boundary term vanishing because $Y$ vanishes at the poles for $m\ne0$, and t
 using the stated normalisation, and so $\beta=1/[l(l+1)]$. (The off-diagonal elements $m'\ne m$ vanish because the integrand is then 
 proportional to $\ee^{\ii(m-m')\varphi}$, which integrates to zero.) A check on the spheroidal formula quoted in the question is that the 
 same manipulations applied to $\mathbf{s}=U\,Y\hat{\mathbf{r}}+V\nabla_{1}Y$ give the angular integral $-\ii m(2UV+V^{2})$.
-\item With $\Omega=2\pi/86164\,\mathrm{s}=7.29\times10^{-5}\,\mathrm{s^{-1}}$, the rotation frequency is $\Omega/2\pi=11.6\,\mu\mathrm{Hz}$, and 
+\item With $\Omega=2\pi/(86164\,\mathrm{s})=7.29\times10^{-5}\,\mathrm{s^{-1}}$, the rotation frequency is $\Omega/2\pi=11.6\,\mu\mathrm{Hz}$, and 
 the spacing between adjacent singlets is $\beta\Omega/2\pi$: $1.9\,\mu\mathrm{Hz}$ for ${}_{0}T_{2}$ ($\beta=1/6$), $4.6\,\mu\mathrm{Hz}$ for ${}_{0}S_{2}$ 
 and $2.2\,\mu\mathrm{Hz}$ for ${}_{0}S_{3}$. The observed spectra show ${}_{0}S_{2}$ singlets separated by about $4.6$--$4.8\,\mu\mathrm{Hz}$ 
 and ${}_{0}S_{3}$ singlets by about $2.2\,\mu\mathrm{Hz}$, so that the splitting of these gravest modes is almost entirely due to rotation. 

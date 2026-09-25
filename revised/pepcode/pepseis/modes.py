@@ -248,3 +248,39 @@ def modal_q_and_dispersion(pm, l, n):
     Q = 1 / inv_q
     f1 = f0 * (1 + np.log(f0 * pm.model.reference_period_s) / (np.pi * Q))
     return f0, Q, f1
+
+
+def toroidal_q_and_dispersion(pm, l, n):
+    """Q of nT_l from the analytic K_mu and PREM's Q_mu, and the frequency corrected for physical
+    dispersion from the 1 s reference period; returns (f_elastic, Q, f_anelastic) in Hz."""
+    f, r, w, K_mu, K_rho = pm.toroidal_kernels(l, n)
+    rows = pm.model.rows
+    rr = np.array([row.radius_m for row in rows]) / 1e3
+    qm = np.array([row.q_mu for row in rows])
+    inv_qm = np.interp(r, rr, np.where(qm > 0, 1 / np.where(qm > 0, qm, 1), 0.0))
+    kap, mu = prem.moduli(np.clip(r, prem.R_CMB + 1e-6, 6368 - 1e-6))
+    om = 2 * np.pi * f
+    inv_q = 2 * np.trapezoid(K_mu * mu * inv_qm, r * 1e3) / om
+    Q = 1 / inv_q
+    return f, Q, f * (1 + np.log(f * pm.model.reference_period_s) / (np.pi * Q))
+
+
+def fundamental_frequencies_corrected(l_max=20, cache=None):
+    """Dispersion-corrected PREM frequencies (Hz) of 0S_l (l = 0..l_max) and 0T_l (l = 2..l_max),
+    cached in data/modes/fundamentals_corrected.npz."""
+    import os
+    if cache is None:
+        d = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data", "modes")
+        os.makedirs(d, exist_ok=True); cache = os.path.join(d, "fundamentals_corrected_l%d.npz" % l_max)
+    if os.path.exists(cache):
+        z = np.load(cache); return z["lS"], z["fS"], z["lT"], z["fT"]
+    pm = PremModes(order=5, element_size_km=50.0)
+    lS, fS, lT, fT = [], [], [], []
+    for l in range(0, l_max + 1):
+        if l == 1:
+            continue
+        lS.append(l); fS.append(modal_q_and_dispersion(pm, l, 0)[2])
+    for l in range(2, l_max + 1):
+        lT.append(l); fT.append(toroidal_q_and_dispersion(pm, l, 0)[2])
+    out = tuple(np.array(x) for x in (lS, fS, lT, fT)); np.savez(cache, lS=out[0], fS=out[1], lT=out[2], fT=out[3])
+    return out

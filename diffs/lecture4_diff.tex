@@ -1,7 +1,7 @@
 
 %DIF LATEXDIFF DIFFERENCE FILE
 %DIF DEL lecture4.tex             Wed Oct 29 04:35:38 2025
-%DIF ADD diffs/lecture4_new.tex   Fri Sep 25 10:17:07 2026
+%DIF ADD diffs/lecture4_new.tex   Fri Sep 25 16:34:50 2026
 \documentclass [a4paper,12pt]{paper}
 
 \usepackage{mycommands}
@@ -55,7 +55,7 @@
 %DIFDELCMD < %%%
 \DIFdelend \section*{Outline and motivation}
 
-In this lecture, we step back from realistic applications that depend on numerical calculations to consider the 
+In this lecture, we step back from realistic \DIFdelbegin \DIFdel{applications that depend on numerical calculations }\DIFdelend \DIFaddbegin \DIFadd{earth models }\DIFaddend to consider the 
 propagation of \textbf{plane elastic waves} within a whole space with constant material parameters.
 We show that under reasonable restrictions on the elastic tensor, up to \textbf{three} different types of plane 
 wave can propagate in each direction. The existence of multiple wave types is a fundamental property of
@@ -66,7 +66,7 @@ the slight anisotropy present in some regions of the Earth.
 
 \section*{Derivation of the Christoffel equation}
 
-In a previous lecture we obtained the linearised equations of motion
+In \DIFdelbegin \DIFdel{a previous lecture }\DIFdelend \DIFaddbegin \DIFadd{Lecture~14 }\DIFaddend we obtained the linearised equations of motion
 \DIFdelbegin \begin{displaymath}
 \DIFdel{\rho\frac{\partial^{2}u_{i}}{\partial t^{2}}-\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\right)=0,
 }\end{displaymath}%DIFAUXCMD
@@ -74,8 +74,9 @@ In a previous lecture we obtained the linearised equations of motion
 \DIFadd{\rho\frac{\partial^{2}u_{i}}{\partial t^{2}}-\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\right)=0,
 \label{eq:1}
 }\end{equation}\DIFaddend 
-where $\rho$ is the referential density, and $A_{ijkl}$ the elastic tensor. We recall that the elastic tensor possesses the symmetry $A_{ijkl}=A_{klij}$, and will start to see the significance of this property as we proceed today. 
-In the first part of this lecture we will assume that the reference body is equal to $\mathbb{R}^{3}$, and that the material parameters are independent of position. We say that a body is \textbf{homogeneous} if its material parameters 
+where $\rho$ is the referential density, and $A_{ijkl}$ the elastic tensor. We recall that the elastic tensor possesses the symmetry $A_{ijkl}=A_{klij}$, and will start to see the significance of this property as we proceed \DIFdelbegin \DIFdel{today. 
+In the first part of }\DIFdelend \DIFaddbegin \DIFadd{through this lecture. 
+Throughout }\DIFaddend this lecture we \DIFdelbegin \DIFdel{will }\DIFdelend assume that the reference body is equal to $\mathbb{R}^{3}$, and that the material parameters are independent of position. We say that a body is \textbf{homogeneous} if its material parameters 
 are independent of position, and otherwise it is said to be \textbf{heterogeneous}.
 
 Note that though the terms ``homogeneous'' and ``isotropic'' are sometimes confused\DIFaddbegin \DIFadd{, }\DIFaddend they mean completely different things. The first refers to the 
@@ -247,23 +248,23 @@ The phase speed of each wave is set by the corresponding eigenvalue of the Chris
 Note that the Christoffel matrix might have \textbf{degenerate eigenvalues}, meaning that an eigenvalue has more than one linearly independent eigenvector. If this occurs, then these eigenvectors need not be orthogonal, but we 
 can always pick an orthogonal basis that spans the eigenspace. We will see below that such degeneracies occur in the case of isotropic materials, and hence this situation cannot be discounted.
 
-The above discussion has implicitly assumed that the eigenvalues of the Christoffel matrix are all non-negative, and hence lead to well-defined phase speeds. This requirement places a physical constraint on the components of the elastic tensor. 
+The above discussion has \DIFdelbegin \DIFdel{implicitly }\DIFdelend assumed that the eigenvalues of the Christoffel matrix are all non-negative, and hence lead to well-defined phase speeds. This requirement places a physical constraint on the components of the elastic tensor. 
 We will not look into this issue in any detail, but note that it is met in all real materials. Moreover, in a solid the three phase speeds are always positive, while in a fluid there is one positive phase speed and two that vanish.
 
 \DIFdelbegin %DIFDELCMD < \begin{figure}[h]
+%DIFDELCMD < \centering
+%DIFDELCMD < \includegraphics[width=0.8\textwidth]{figures/L4F1.png}
 %DIFDELCMD < %%%
-\DIFdelendFL \DIFaddbeginFL \begin{figure}[ht]
-\DIFaddendFL \centering
-\DIFdelbeginFL %DIFDELCMD < \includegraphics[width=0.8\textwidth]{figures/L4F1.png}
-%DIFDELCMD < %%%
-\DIFdelendFL \DIFaddbeginFL \includegraphics[width=\textwidth]{figures/L4F1.pdf}
-\DIFaddendFL \caption{Plane sections through the slowness \DIFdelbeginFL \DIFdelFL{surface associated with }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{surfaces of }\DIFaddendFL two \DIFdelbeginFL \DIFdelFL{randomly selected }\DIFdelendFL anisotropic \DIFdelbeginFL \DIFdelFL{elastic }\DIFdelendFL materials\DIFaddbeginFL \DIFaddFL{, calculated numerically from the Christoffel equation. On the left is a transversely isotropic medium, with the section containing the symmetry axis (which is vertical); on the right is a single crystal of olivine, an orthorhombic mineral that makes up much of the upper mantle, using the elastic constants of Abramson et al.\ (1997)}\DIFaddendFL . The three sheets of the slowness surface are shown in different colours\DIFaddbeginFL \DIFaddFL{, and there are directions along which two of the sheets touch}\DIFaddendFL .}
-\DIFdelbeginFL %DIFDELCMD < \label{fig:slowness}
-%DIFDELCMD < %%%
-\DIFdelendFL \DIFaddbeginFL \label{fig:1}
-\DIFaddendFL \end{figure}
+%DIFDELCMD < \caption{%
+{%DIFAUXCMD
+\DIFdelFL{Plane sections through the slowness surface associated with two randomly selected anisotropic elastic materials. The three sheets of the slowness surface are shown in different colours.}}
+%DIFAUXCMD
+%DIFDELCMD < \label{fig:slowness}
+%DIFDELCMD < \end{figure}
+%DIFDELCMD < 
 
-\subsection*{Determination of the slowness surface}
+%DIFDELCMD < %%%
+\DIFdelend \subsection*{Determination of the slowness surface}
 
 Having now determined the form of solutions of the Christoffel equation in a fixed propagation direction\DIFaddbegin \DIFadd{, }\DIFaddend all we need do is vary $\hat{\mathbf{p}}$ over the unit sphere to obtain a complete description 
 of the possible plane waves in the body. For each direction we get (allowing for possible degeneracies) three possible phase speeds, and hence three values of $\mathbf{p}$. Let us write $c_{1}(\hat{\mathbf{p}})$,
@@ -295,8 +296,15 @@ We note also that the defining relation in eq.\DIFdelbegin \DIFdel{(13}\DIFdelen
 }\end{equation}\DIFaddend 
 with each factor defining a sheet of the slowness surface.
 
-For a general elastic tensor the determination of the slowness surface requires solution of the symmetric eigenvalue problem in each possible propagation direction. Such calculations are, of course, very easy to do numerically. 
-In \DIFdelbegin \DIFdel{fig.1 }\DIFdelend \DIFaddbegin \DIFadd{Fig.~\ref{fig:1} }\DIFaddend we illustrate these properties of the slowness surface by plotting slices through a number of examples that have been calculated numerically. We note, in particular, that the innermost sheet of the slowness surface is always 
+\DIFaddbegin \begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{figures/L4F1.pdf}
+\caption{\DIFaddFL{Plane sections through the slowness surfaces of two anisotropic materials, calculated numerically from the Christoffel equation. On the left is a transversely isotropic medium with Love moduli $A=240$, $C=200$, $F=70$, $L=60$ and $N=72$~GPa and density $3300$~kg\,m$^{-3}$, with the section containing the symmetry axis (which is vertical); on the right is a single crystal of olivine (section in the }[\DIFaddFL{100}]\DIFaddFL{--}[\DIFaddFL{001}] \DIFaddFL{plane), an orthorhombic mineral that makes up much of the upper mantle, using the elastic constants of Abramson et al.\ (1997). The three sheets of the slowness surface are shown in different colours, and there are directions along which two of the sheets touch.}}
+\label{fig:1}
+\end{figure}
+
+\DIFaddend For a general elastic tensor the determination of the slowness surface requires solution of the symmetric eigenvalue problem in each possible propagation direction. Such calculations are, of course, very easy to do numerically. 
+In \DIFdelbegin \DIFdel{fig.1 }\DIFdelend \DIFaddbegin \DIFadd{Fig.~\ref{fig:1} }\DIFaddend we illustrate these properties of the slowness surface by plotting slices through \DIFdelbegin \DIFdel{a number of }\DIFdelend \DIFaddbegin \DIFadd{two }\DIFaddend examples that have been calculated numerically. We note, in particular, that the innermost sheet of the slowness surface is always 
 convex in these examples. This is, in fact, a general property, and a proof might be sought if someone is particularly interested\DIFdelbegin \footnote{\DIFdel{As a hint, note that eq.(13) is a sextic polynomial in $\mathbf{p}$, and hence along a fixed line in $\mathbb{R}^{3}$ there can be no more than six roots.}}%DIFAUXCMD
 \addtocounter{footnote}{-1}%DIFAUXCMD
 \DIFdel{.}\DIFdelend \DIFaddbegin \DIFadd{.}\footnote{\DIFadd{As a hint, note that eq.~(\ref{eq:13}) is a sextic polynomial in $\mathbf{p}$, and hence along a fixed line in $\mathbb{R}^{3}$ there can be no more than six roots.}}
@@ -330,7 +338,7 @@ There is, however, a quicker way to proceed which is worth learning. First we re
 \DIFadd{\Gamma_{ik}(\hat{\mathbf{p}})=\frac{\lambda+2\mu}{\rho}\hat{p}_{i}\hat{p}_{k}+\frac{\mu}{\rho}(\delta_{ik}-\hat{p}_{i}\hat{p}_{k}).
 \label{eq:23}
 }\end{equation}\DIFaddend 
-We can now identify two terms with a geometric significance. $\hat{p}_{i}\hat{p}_{k}$ are the components of \DIFdelbegin \DIFdel{a }\DIFdelend \DIFaddbegin \DIFadd{the }\DIFaddend matrix that projects a vector parallel to $\hat{\mathbf{p}}$\DIFaddbegin \DIFadd{, }\DIFaddend while $\delta_{ik}-\hat{p}_{i}\hat{p}_{k}$ are those of the matrix that projects orthogonally
+We can now identify two terms with a geometric significance. $\hat{p}_{i}\hat{p}_{k}$ are the components of \DIFdelbegin \DIFdel{a }\DIFdelend \DIFaddbegin \DIFadd{the }\DIFaddend matrix that projects a vector \DIFdelbegin \DIFdel{parallel to }\DIFdelend \DIFaddbegin \DIFadd{onto the direction }\DIFaddend $\hat{\mathbf{p}}$\DIFaddbegin \DIFadd{, }\DIFaddend while $\delta_{ik}-\hat{p}_{i}\hat{p}_{k}$ are those of the matrix that projects orthogonally
  to $\hat{\mathbf{p}}$. It follows that if we take the polarisation vector \DIFdelbegin \DIFdel{parallel }\DIFdelend \DIFaddbegin \DIFadd{equal }\DIFaddend to the propagation direction we obtain
 \DIFdelbegin \begin{displaymath}
 \DIFdel{\bm{\Gamma}(\hat{\mathbf{p}})\hat{\mathbf{a}}=\frac{\lambda+2\mu}{\rho}\hat{\mathbf{a}}.
@@ -407,10 +415,10 @@ The corresponding Christoffel matrix can then be written
 \DIFdel{\Gamma_{ik}(\hat{\mathbf{p}})=\frac{\lambda+\mu}{\rho}\hat{p}_{i}\hat{p}_{k}+\frac{\mu}{\rho}\delta_{ik}+s\,\delta\Gamma_{ik}(\hat{\mathbf{p}}),
 }\end{displaymath}%DIFAUXCMD
 \DIFdelend \DIFaddbegin \begin{equation}
-\DIFadd{\Gamma_{ik}(\hat{\mathbf{p}})=\frac{\lambda+\mu}{\rho}\hat{p}_{i}\hat{p}_{k}+\frac{\mu}{\rho}\delta_{ik}+s\,\delta\Gamma_{ik}(\hat{\mathbf{p}}),
+\DIFadd{\Gamma_{ik}(\hat{\mathbf{p}})=\Gamma^{0}_{ik}(\hat{\mathbf{p}})+s\,\delta\Gamma_{ik}(\hat{\mathbf{p}}),
 \label{eq:31}
 }\end{equation}\DIFaddend 
-where the zeroth-order part is that for an isotropic material given in eq.\DIFdelbegin \DIFdel{(22}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:22}}\DIFaddend ), while the \DIFdelbegin \DIFdel{first order }\DIFdelend \DIFaddbegin \DIFadd{first-order }\DIFaddend term is given by
+where the zeroth-order part \DIFaddbegin \DIFadd{$\bm{\Gamma}^{0}(\hat{\mathbf{p}})$ }\DIFaddend is that for an isotropic material given in eq.\DIFdelbegin \DIFdel{(22}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:22}}\DIFaddend ), while the \DIFdelbegin \DIFdel{first order }\DIFdelend \DIFaddbegin \DIFadd{first-order }\DIFaddend term is given by
 \DIFdelbegin \begin{displaymath}
 \DIFdel{\delta\Gamma_{ik}(\hat{\mathbf{p}})=\frac{1}{\rho}\delta A_{ijkl}\hat{p}_{j}\hat{p}_{l}.
 }\end{displaymath}%DIFAUXCMD
@@ -423,10 +431,11 @@ The eigenvalue problem to be solved can, therefore, be written
 [\DIFdel{\bm{\Gamma}(\hat{\mathbf{p}})+s\,\delta\bm{\Gamma}(\hat{\mathbf{p}})}]\DIFdel{\mathbf{a}=c^{2}\mathbf{a}
 }\end{displaymath}%DIFAUXCMD
 \DIFdelend \DIFaddbegin \begin{equation}
-[\DIFadd{\bm{\Gamma}(\hat{\mathbf{p}})+s\,\delta\bm{\Gamma}(\hat{\mathbf{p}})}]\DIFadd{\mathbf{a}=c^{2}\mathbf{a},
+[\DIFadd{\bm{\Gamma}^{0}(\hat{\mathbf{p}})+s\,\delta\bm{\Gamma}(\hat{\mathbf{p}})}]\DIFadd{\mathbf{a}=c^{2}\mathbf{a}.
 \label{eq:33}
 }\end{equation}\DIFaddend 
-where $\bm{\Gamma}(\hat{\mathbf{p}})$ is understood to be the isotropic part of the Christoffel matrix. 
+\DIFdelbegin \DIFdel{where $\bm{\Gamma}(\hat{\mathbf{p}})$ is understood to be the isotropic part of the Christoffel matrix. 
+}\DIFdelend 
 
 While a numerical solution of the problem is always possible, significant insight 
 can be gained through an application of \textbf{first-order eigenvalue perturbation theory}. Some of you will have seen these 
@@ -454,7 +463,7 @@ Putting these expansions into the eigenvalue problem and isolating the first-ord
 \mathbf{a}+2\alpha\delta\alpha\hat{\mathbf{p}}.
 }\end{displaymath}%DIFAUXCMD
 \DIFdelend \DIFaddbegin \begin{equation}
-\DIFadd{\bm{\Gamma}(\hat{\mathbf{p}})\delta \mathbf{a}+\delta\bm{\Gamma}(\hat{\mathbf{p}})\hat{\mathbf{p}}=\alpha^{2}\delta 
+\DIFadd{\bm{\Gamma}^{0}(\hat{\mathbf{p}})\delta \mathbf{a}+\delta\bm{\Gamma}(\hat{\mathbf{p}})\hat{\mathbf{p}}=\alpha^{2}\delta 
 \mathbf{a}+2\alpha\,\delta\alpha\,\hat{\mathbf{p}}.
 \label{eq:36}
 }\end{equation}\DIFaddend 
@@ -465,7 +474,7 @@ with $\hat{\mathbf{p}}$ and noting that
  \mathbf{a}=\alpha^{2}\hat{\mathbf{p}}\cdot\delta \mathbf{a}, 
 }\end{displaymath}%DIFAUXCMD
 \DIFdelend \DIFaddbegin \begin{equation}
-\DIFadd{\hat{\mathbf{p}}\cdot[\bm{\Gamma}(\hat{\mathbf{p}})\delta \mathbf{a}]=}[\DIFadd{\bm{\Gamma}(\hat{\mathbf{p}})\hat{\mathbf{p}}}]\DIFadd{\cdot\delta
+\DIFadd{\hat{\mathbf{p}}\cdot[\bm{\Gamma}^{0}(\hat{\mathbf{p}})\delta \mathbf{a}]=}[\DIFadd{\bm{\Gamma}^{0}(\hat{\mathbf{p}})\hat{\mathbf{p}}}]\DIFadd{\cdot\delta
  \mathbf{a}=\alpha^{2}\hat{\mathbf{p}}\cdot\delta \mathbf{a}, 
 \label{eq:37}
 }\end{equation}\DIFaddend 
@@ -502,7 +511,7 @@ first-order term is given by
 a_{2}\hat{\mathbf{t}}_{2})=\beta^{2}\delta \mathbf{a}+2\beta\delta\beta(a_{1}\hat{\mathbf{t}}_{1}+a_{2}\hat{\mathbf{t}}_{2}).
 }\end{displaymath}%DIFAUXCMD
 \DIFdelend \DIFaddbegin \begin{equation}
-\DIFadd{\bm{\Gamma}(\hat{\mathbf{p}})\delta \mathbf{a}+\delta\bm{\Gamma}(\hat{\mathbf{p}})(a_{1}\hat{\mathbf{t}}_{1}+
+\DIFadd{\bm{\Gamma}^{0}(\hat{\mathbf{p}})\delta \mathbf{a}+\delta\bm{\Gamma}(\hat{\mathbf{p}})(a_{1}\hat{\mathbf{t}}_{1}+
 a_{2}\hat{\mathbf{t}}_{2})=\beta^{2}\delta \mathbf{a}+2\beta\,\delta\beta\,(a_{1}\hat{\mathbf{t}}_{1}+a_{2}\hat{\mathbf{t}}_{2}).
 \label{eq:41}
 }\end{equation}\DIFaddend 
@@ -560,7 +569,7 @@ the orientation of flow within parts of the mantle.
     \DIFaddend \item[(i)] How to derive the Christoffel equation from the linearised equations of motion.
     \item[(ii)] Reduction of the problem to a symmetric eigenvalue problem, and a qualitative description of its solution.
     \item[(iii)] How to solve the Christoffel equation for an isotropic solid, and to deduce the properties of plane P- and S-waves.
-    \item[(iv)] How to apply first-order perturbation theory to study the effect of slight anisotropy on plane waves.
+    \item[(iv)] How to \DIFdelbegin \DIFdel{apply }\DIFdelend \DIFaddbegin \DIFadd{use }\DIFaddend first-order perturbation theory to study the effect of slight anisotropy on plane waves.
 \DIFdelbegin %DIFDELCMD < \end{itemize}
 %DIFDELCMD < %%%
 \DIFdelend \DIFaddbegin \end{enumerate}

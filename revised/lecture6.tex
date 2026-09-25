@@ -39,7 +39,7 @@ mechanisms for seismic waves (which we have not
 discussed) act more strongly at higher frequencies, and so higher frequency components of the wavefield are removed more quickly as 
 they propagate through the Earth. At the highest 
 observed frequencies, the first arriving waves on seismograms are usually quite sharp, and so their arrival times
- can be measured to the accuracy of a few fractions of a second.
+ can be measured to within a fraction of a second.
 
 Given an accurate model of the Earth's seismic velocity structure, and having guessed the hypocentre location $\mathbf{x}_{h}$ and 
 hypocentre time $t_{h}$ for the earthquake, then it is 
@@ -58,10 +58,10 @@ t_{i}=t_{h}+T(\mathbf{x}_{i},\mathbf{x}_{h})+e_{i},
 \end{equation}
 where $T(\mathbf{x}_{i},\mathbf{x}_{h})$ is the ray theoretic travel time of the fastest ray from $\mathbf{x}_{h}$ to $\mathbf{x}_{i}$, 
 and $e_{i}$ denotes a random measurement error which we assume to have zero mean 
-and known variance $\sigma_{i}^{2}$. To estimate the four unknown parameters $(\mathbf{x}_{h},t_{h})$, we minimise the following 
+and known variance $\varsigma_{i}^{2}$ (not to be confused with the ray parameter $\sigma$ introduced below). To estimate the four unknown parameters $(\mathbf{x}_{h},t_{h})$, we minimise the following 
 \textbf{least-squares misfit}
 \begin{equation}
-J(\mathbf{x}_h, t_h) = \sum_{i=1}^{N_s} \frac{[t_h + T(\mathbf{x}_i, \mathbf{x}_h) - t_i]^2}{\sigma_i^2},
+J(\mathbf{x}_h, t_h) = \sum_{i=1}^{N_s} \frac{[t_h + T(\mathbf{x}_i, \mathbf{x}_h) - t_i]^2}{\varsigma_i^2},
 \label{eq:2}
 \end{equation}
 where $N_{s}$ is the total number of seismometers from which we have measurements. The dependence of the calculated travel 
@@ -75,7 +75,7 @@ parameters $(\mathbf{x}_{h},t_{h})$, but we will not enter into the details.
 \centering
 \includegraphics[width=0.8\textwidth]{figures/L6F2.png}
 \caption{A vertical component seismogram recorded in Finland following an earthquake in
-California. The P-wave arrival can be seen very clearly, while later arriving phases
+California (the 1989 Loma Prieta earthquake recorded at station KEV). The P-wave arrival can be seen very clearly, while later arriving phases
 are significantly harder to identify.}
 \label{fig:2}
 \end{figure}
@@ -86,7 +86,7 @@ but this can be assessed using standard error-propagation techniques. Next, the 
  fundamental limit on the accuracy of 
 location estimates. If we record waves at a maximum frequency of $2\,\mathrm{Hz}$, then using a typical P-wave velocity of about $5\,\mathrm{km\,s^{-1}}$ 
 for shallow parts of the Earth, we 
-see that the shortest wavelengths present in the data are about $2.5\,\mathrm{km}$. Such waves cannot distinguish sources separated by more than about 
+see that the shortest wavelengths present in the data are about $2.5\,\mathrm{km}$. Such waves cannot distinguish sources separated by less than about 
 one half or one quarter of their 
 minimum wavelength.\footnote{The precise fraction isn't well-defined, nor is it important.} The accuracy is also dependent on the 
 locations of the seismometers relative to 
@@ -102,7 +102,7 @@ to produce better results.
 
 \section*{The spherically averaged velocity structure of the Earth}
 
-In the remainder of this lecture we consider how the Earth's spherically averaged velocity has been determined.
+In the remainder of this lecture we consider how the Earth's spherically averaged velocity structure has been determined.
  The basic idea is very simple. After an earthquake, seismic waves propagate through the Earth's interior and are 
  recorded at various locations around the globe. The observed 
 seismograms depend on (i) the earthquake source, and (ii) the material that the waves have travelled through. And so, in principle, 
@@ -112,8 +112,8 @@ such observations to make inferences about both the earthquake source and the st
 Studies of earthquakes and of Earth structure are fundamentally linked, and we cannot learn about one without considering the other.
  For example, to locate an earthquake accurately 
 we must know the Earth's velocity structure, and yet these earthquake locations are required if we wish to determine the velocity 
-structure! To proceed it is necessary to 
-either consider these problems simultaneously, or to proceed in an iterative manner with one part of the problem being 
+structure! It is necessary 
+either to consider these problems simultaneously, or to proceed in an iterative manner with one part of the problem being 
 considered solved (i.e.\ that earthquake locations 
 are known) while the other parameters are refined.
 
@@ -144,7 +144,7 @@ and the travel time $T$ along a ray is simply given by $T[\mathbf{x}(\sigma)]=\s
 consideration is spherically symmetric, the P-wave speed, 
 $\alpha$, only depends on the radial distance $r=\|\mathbf{x}\|$ from the centre of the model. Using this fact, we will show that 
 this problem can be solved using quadratures. 
-This situation is analogous to that for a single particle in a potential, and to other \textbf{integrable systems}
+This situation is analogous to that for a single particle in a central potential, and to other \textbf{integrable systems}
  which have sufficiently many conserved quantities.
 
 
@@ -152,8 +152,8 @@ This situation is analogous to that for a single particle in a potential, and to
 \centering
 \includegraphics[width=0.8\textwidth]{figures/L6F3.pdf}
 \caption{P-wave ray paths within the earth model PREM for a source at the surface, calculated using the ray equations 
-of this lecture. Rays that turn within the mantle (blue) emerge at epicentral angles up to about $98^{\circ}$, while 
-those that enter the core (red, and green for rays passing through the inner core) emerge beyond about $145^{\circ}$. 
+of this lecture. Rays that turn within the mantle (blue) emerge at epicentral angles up to about $98^{\circ}$. 
+PKP rays (red), which turn within the outer core, emerge beyond about $145^{\circ}$, while PKIKP rays (green), which pass through the inner core, can emerge within the shadow zone. 
 The sudden reduction in P-wave velocity on entering the fluid outer core thus leads to the so-called ``P-wave shadow zone'', 
 while no S-waves are able to propagate within the outer core at all.}
 \label{fig:3}
@@ -164,20 +164,20 @@ Making use of the P-wave Hamiltonian, we find that the ray equations in eq.~(\re
 \frac{\ddns \mathbf{x}}{\ddns \sigma}=\alpha\hat{\mathbf{p}},\quad \frac{\ddns \mathbf{p}}{\ddns \sigma}=-\frac{1}{\alpha}\frac{\ddns \alpha}{\ddns r}\hat{\mathbf{x}},
 \label{eq:6}
 \end{equation}
-where we have used the eikonal equations to simplify the form of the right-hand sides, and where ``hats'' are used to denote unit vectors. If we define $\mathbf{q}=\mathbf{x}\times \mathbf{p}$, then a simple calculation shows that
+where we have used the eikonal equation to simplify the form of the right-hand sides, and where ``hats'' are used to denote unit vectors. If we define $\mathbf{q}=\mathbf{x}\times \mathbf{p}$, then a simple calculation shows that
 \begin{equation}
 \frac{\ddns }{\ddns \sigma}(\mathbf{x}\times \mathbf{p})=\frac{\ddns \mathbf{x}}{\ddns \sigma}\times \mathbf{p}+\mathbf{x}\times\frac{\ddns \mathbf{p}}{\ddns \sigma} = 
 \alpha\hat{\mathbf{p}}\times \mathbf{p}-\frac{1}{\alpha}\frac{\ddns \alpha}{\ddns r}\mathbf{x}\times\hat{\mathbf{x}}=\mathbf{0}.
 \label{eq:7}
 \end{equation}
 It follows that $\mathbf{q}$ is constant along solutions to these equations, and we mention in passing that this is precisely the conserved quantity associated with the spherical symmetry through 
-Noether's theorem. Noting from eq.~(\ref{eq:6}) that $\ddns \mathbf{x}/\ddns \sigma$ is always parallel to $\mathbf{p}$, it follows that rays always remain within the plane spanned by the initial values of $\mathbf{x}$ and $\mathbf{p}$. 
+Noether's theorem. Since $\mathbf{x}$ and $\mathbf{p}$ are both orthogonal to the constant vector $\mathbf{q}$, rays always remain within the plane spanned by the initial values of $\mathbf{x}$ and $\mathbf{p}$. 
 Furthermore, $q=\|\mathbf{q}\|$ is constant along a ray, and this can be written
 \begin{equation}
 q=\frac{r \sin \theta}{\alpha},
 \label{eq:8}
 \end{equation}
-where $\theta$ is the angle between $\mathbf{x}$ and $\mathbf{p}$ measured positively clockwise. Because $\mathbf{x}$ and $\mathbf{p}$ remain within their initial plane, we can write
+where $\theta \in [0, \pi]$ is the angle between $\mathbf{x}$ and $\mathbf{p}$. Because $\mathbf{x}$ and $\mathbf{p}$ remain within their initial plane, we can write
 \begin{equation}
 \hat{\mathbf{p}}=\cos[\theta(\mathbf{x})]\hat{\mathbf{x}}+\sin[\theta(\mathbf{x})]\hat{\bm{\Delta}}(\mathbf{x}),
 \label{eq:9}
@@ -188,7 +188,7 @@ Making use of eq.~(\ref{eq:8}), we can then write
 \sin \theta=\frac{\alpha q}{r},\quad \cos \theta=\pm\sqrt{1-\frac{\alpha^{2}q^{2}}{r^{2}}},
 \label{eq:10}
 \end{equation}
-where the sign of the second term is determined by whether the ray is up-going ($+$) or down-going ($-$). For definiteness, we consider an initially down-going ray, and using the first of the equations in eq.~(\ref{eq:6}) we find
+where the sign in the second expression is determined by whether the ray is up-going ($+$) or down-going ($-$). For definiteness, we consider an initially down-going ray, and using the first of the equations in eq.~(\ref{eq:6}) we find
 \begin{equation}
 \frac{\ddns \mathbf{x}}{\ddns \sigma}=-\alpha\sqrt{1-\frac{\alpha^{2}q^{2}}{r^{2}}}\hat{\mathbf{x}}+\frac{\alpha^{2}q}{r}\hat{\bm{\Delta}}.
 \label{eq:11}
@@ -216,8 +216,8 @@ Similarly, using the fact that $\ddns T/\ddns \sigma=1$ along a ray, we find
 It is important to note that these equations are only valid in portions of the ray in which the epicentral angle $\Delta$ and the travel time $T$ are single-valued functions of the radius $r$.
 
 Let us now suppose that the P-wave speed, $\alpha$, increases monotonically with depth into the earth model. Consider a ray starting at the surface $r=b$ that is initially 
-travelling into the earth in a non-vertical direction (i.e.\ $\pi/2<\theta<\pi$ initially). The fact that $q=\frac{r \sin \theta}{\alpha}$ is conserved implies that this 
-ray will travel monotonically downwards into the earth with $\Delta$ monotonically increasing until it reaches a \textbf{turning point} $r_{t}$ such that
+travelling into the earth model in a non-vertical direction (i.e.\ $\pi/2<\theta<\pi$ initially). The fact that $q=\frac{r \sin \theta}{\alpha}$ is conserved implies that this 
+ray will travel monotonically downwards into the earth model with $\Delta$ monotonically increasing until it reaches a \textbf{turning point} $r_{t}$ such that
 \begin{equation}
 q=\frac{r_{t}}{\alpha(r_{t})}.
 \label{eq:16}
@@ -234,28 +234,29 @@ T=\int_{r_{t}}^{b}\frac{2r}{\alpha(r)\sqrt{r^{2}-\alpha(r)^{2}q^{2}}}\dd r.
 \label{eq:18}
 \end{equation}
 In this manner, we see that the travel time along a ray path in such a spherical model can be obtained through a simple integral over the velocity structure (the integrands are 
-singular at the turning points, but these are integrable singularities). The extension of these results to models having more complicated velocity structures is 
+singular at the turning point, but this is an integrable singularity). The extension of these results to models having more complicated velocity structures is 
 straightforward in principle, but takes a little effort.
 
 \subsection*{Travel time inversions for spherical velocity structure}
 As we have just seen, ray theory can be used to efficiently determine the travel times of various \textbf{seismic phases} 
 within a spherically symmetric earth model. At a given epicentral 
 angle, there will generally be many distinct seismic phases that arrive at different times and correspond to different ray 
-paths as well as non-geometric phases such as surface 
+paths, as well as non-geometric phases such as surface 
 waves, head waves, and diffracted waves that are not predicted by ray theory. The use of the word ``phase'' here refers to a distinct 
 waveform on a seismogram, and should not 
 be confused with other uses of ``phase'' within these lectures or elsewhere.
 
 Assuming that we know an earthquake's location and origin time, it is possible to measure the travel times of various seismic phases to different seismometers. By repeating 
-this process for many events, globally averaged travel-time curves have been constructed. Given a radial velocity structure, we know how to calculate travel times for 
+this process for many events, globally averaged travel time curves have been constructed. Given a radial velocity structure, we know how to calculate travel times for 
 the different phases, and we aim to find an earth model that is consistent with our observations. This is another example of an inverse problem in which we must work 
 backwards from observations to learn about a set of model parameters.
 
-We will have more to say about inverse problems later in the course, but historically speaking, 
+We will have more to say about inverse problems in the next lecture, but historically speaking, 
 the determination of the Earth's spherically symmetric velocity structure largely pre-dates the introduction of inverse theory, and early studies used more or less ad 
 hoc methods. In this field, the most important figures are Richard Oldham (1858--1936), Beno Gutenberg (1889--1960), Harold Jeffreys (1891--1989), and 
-Inge Lehmann (1888--1993). In particular, it was Oldham who first identified the Earth's core by noting the absence of P-wave arrivals within a certain range of 
-epicentral angles, this being the shadow zone illustrated in Fig.~\ref{fig:3}. Jeffreys first convincingly argued that the core of the Earth must be at least partially fluid, though here the relevant observations were 
+Inge Lehmann (1888--1993). In particular, it was Oldham (1906) who first argued for the existence of the Earth's core, from the anomalously late arrivals of waves at large 
+epicentral angles, while it was Gutenberg (1914) who explained the P-wave shadow zone illustrated in Fig.~\ref{fig:3} and used it to 
+determine the depth of the core--mantle boundary to within a few tens of kilometres of its modern value. Jeffreys first convincingly argued that the core of the Earth must be at least partially fluid, though here the relevant observations were 
 of solid-Earth tides, and not seismic waves. Finally, Lehmann later realised that there exists a solid inner core through careful study of waves travelling 
 through the Earth's central region. There is a famous quote from Oldham's (1906) paper on the Earth's core that is worth repeating:
 \begin{quote}
@@ -264,7 +265,7 @@ speculation, it is little that we can say regarding the constitution of the inte
 times: the central substance of the earth has been supposed to be fiery, fluid, solid, and gaseous in turn, till geologists have turned in despair from the 
 subject, and become inclined to confine their attention to the outermost crust of the Earth, leaving its centre as a playground for mathematicians.''
 \end{quote}
-We shall not consider the determination of the spherically symmetric velocity structure further, but will instead turn to discussing the broad features that have been learnt about the spherically symmetric velocity structure.
+We shall not consider the determination of the spherically symmetric velocity structure further, but will instead turn to discussing its broad features.
 
 \subsection*{An overview of the Earth's spherically averaged velocity structure}
 
@@ -272,13 +273,13 @@ We shall not consider the determination of the spherically symmetric velocity st
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.62\textwidth]{figures/L6F4.pdf}
-\caption{Travel-time curves for the main body-wave phases within the earth model PREM, for a source at the surface, 
+\caption{Travel time curves for the main body-wave phases within the earth model PREM, for a source at the surface, 
 calculated using the ray equations of this lecture (phases travelling as P-waves in the mantle in red, and as S-waves in black). 
-Only rays turning below a depth of $220\,\mathrm{km}$ are shown. The nomenclature for the different phases can be ignored.}
+Only rays whose turning or reflection point lies below $220\,\mathrm{km}$ depth are shown. The nomenclature for the different phases can be ignored.}
 \label{fig:4}
 \end{figure}
 
-Figure~\ref{fig:5} shows the variation of P-wave and S-wave velocity with depth in the Earth according to the Preliminary Reference Earth Model (PREM) of Dziewonski \& Anderson (1981). This model was obtained by fitting travel 
+Figure~\ref{fig:5} shows the variation of P-wave and S-wave velocity with radius in the Earth according to the Preliminary Reference Earth Model (PREM) of Dziewonski \& Anderson (1981). This model was obtained by fitting travel 
 times of seismic waves, as well as further constraints obtained from observations of the Earth's free oscillations that will be the focus of a later lecture. As a 
 first observation, there is a general tendency for the velocity to increase gradually downwards, though there are also a number of sharp discontinuities within 
 the structure. The P-wave velocity $\alpha$ and S-wave velocity $\beta$ are given by
@@ -287,7 +288,7 @@ the structure. The P-wave velocity $\alpha$ and S-wave velocity $\beta$ are give
 \label{eq:19}
 \end{equation}
 where $\kappa$ is the bulk modulus, $\mu$ the shear modulus, and $\rho$ the density. As we go deeper into the Earth, things are increasingly compressed, and this tends to 
-increase both the elastic moduli and the density, though the combined effect is typically for wave velocities to increase.
+increase both the elastic moduli and the density; the former effect dominates, so that wave speeds typically increase.
 
 Discontinuities in the seismic velocity are identified principally by the occurrence of reflected seismic waves, and their presence must be due either to sharp changes in 
 composition or to a phase change within the same material. Note here that ``sharp'' is always defined relative to the wavelength of the seismic waves used to image 
@@ -295,7 +296,7 @@ the Earth, and so these boundaries may, in reality, be somewhat diffuse. The mos
 thought to represent a change from the rocky mantle to a fluid iron core, and at the inner core boundary (ICB), which is explained by a fluid to solid phase change within 
 the iron core. It is worth emphasising that we do not actually know that the core is made of iron (and likely a few additional minor components). The reasons for thinking 
 this is likely are: (i) iron at the appropriate pressures and temperatures has the right sort of density and wave speeds, (ii) iron is very abundant in the solar system due 
-to its high binding energy, (iii) there exist iron meteorites that are interpreted as fragments from the cores of ``proto-planets'', and (iv) such a composition is consistent 
+to its high nuclear binding energy per nucleon, (iii) there exist iron meteorites that are interpreted as fragments from the cores of ``proto-planets'', and (iv) such a composition is consistent 
 with the generation of the geodynamo in a convecting conductor.
 
 
@@ -331,7 +332,7 @@ viscosity contrast between the upper and lower mantle has important implications
 \begin{enumerate}
     \item[(i)] Know what the hypocentre of an earthquake is, and how the hypocentral location and time can be determined using observations of seismic waves.
     \item[(ii)] Understand how the Hamiltonian ray tracing equations within a spherically symmetric earth model can be reduced to the calculation of 
-    appropriate radial integrals. Within the first problem set, you will work through similar calculations in a horizontally stratified earth model.
+    appropriate radial integrals. In the second problem set you will see how such travel time integrals can be inverted for the velocity structure.
     \item[(iii)] Understand in outline the observations and methods that were used to constrain the Earth's spherically symmetric velocity structure. 
     You should also know the basic properties of this spherically symmetric velocity structure, and the physical interpretation of its major features.
 \end{enumerate}

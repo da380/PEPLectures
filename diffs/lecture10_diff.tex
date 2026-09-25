@@ -1,7 +1,7 @@
 \documentclass[a4paper,12pt]{paper}
 %DIF LATEXDIFF DIFFERENCE FILE
 %DIF DEL lecture10.tex             Wed Nov 19 06:19:12 2025
-%DIF ADD diffs/lecture10_new.tex   Fri Sep 25 15:59:27 2026
+%DIF ADD diffs/lecture10_new.tex   Fri Sep 25 16:34:58 2026
 \usepackage{mycommands}
 
 \title{Lecture 21: Equilibrium figures}
@@ -58,11 +58,11 @@ In the previous lecture we obtained the equations of motion for a self-gravitati
  key to understanding the \textbf{observed shapes of planets}.
 
 \section*{The equilibrium equations}
-In the previous lecture we obtained the following equilibrium equations
-\DIFdelbegin \begin{displaymath}
+\DIFdelbegin \DIFdel{In the previous lecture we obtained the following equilibrium equations }\begin{displaymath}
 \DIFdel{\rho\epsilon_{ijk}\epsilon_{klm}\Omega_{j}\Omega_{l}x_{m}-\frac{\partial T_{ij}^{0}}{\partial x_{j}}-\rho\gamma_{i}^{0}=0,
 }\end{displaymath}%DIFAUXCMD
-\DIFdelend \DIFaddbegin \begin{equation}
+\DIFdelend \DIFaddbegin \DIFadd{Recall the equilibrium equations obtained there,
+}\begin{equation}
 \DIFadd{\rho\epsilon_{ijk}\epsilon_{klm}\Omega_{j}\Omega_{l}x_{m}-\frac{\partial T_{ij}^{0}}{\partial x_{j}}-\rho\gamma_{i}^{0}=0,
 \label{eq:1}
 }\end{equation}\DIFaddend 
@@ -70,7 +70,7 @@ for a self-gravitating and steadily rotating planet\DIFdelbegin \footnote{\DIFde
 lecture applies so naturally to other planets it seems sensible to generalise the discussion somewhat.}}%DIFAUXCMD
 \addtocounter{footnote}{-1}%DIFAUXCMD
 \DIFdel{.}\DIFdelend \DIFaddbegin \DIFadd{.}\footnote{\DIFadd{Though our focus in this course is on the Earth, the material of this 
-lecture applies so naturally to other planets it seems sensible to generalise the discussion somewhat.}} \DIFaddend Here $\rho$ is the 
+lecture applies so naturally to other planets that it seems sensible to generalise the discussion somewhat.}} \DIFaddend Here $\rho$ is the 
 density, $\Omega_{i}$ the angular velocity, $T_{ij}^{0}$ the stress, and $\gamma_{i}^{0}$ the gravitational acceleration. To 
 simplify \DIFdelbegin \DIFdel{notations}\DIFdelend \DIFaddbegin \DIFadd{notation}\DIFaddend , let us write $\sigma_{ij}$ for the equilibrium stress, and $g_{i}$ for the gravitational acceleration. 
 The equilibrium equations then become
@@ -96,15 +96,16 @@ fields exists using an extension of the curl operator that generates divergence-
 \addtocounter{footnote}{-1}%DIFAUXCMD
 \DIFdel{.}\DIFdelend \DIFaddbegin \DIFadd{the stress tensor.}\footnote{\DIFadd{This counting argument is suggestive but not entirely correct. Rather, the relevant 
 point is that there exist non-zero symmetric tensor fields having vanishing divergence. This can be compared to divergence-free vector 
-fields with which you will be very familiar (i.e.\ the divergence of a curl is zero). In fact, a method for generating divergence-free tensor 
-fields exists using an extension of the curl operator that generates divergence-free symmetric tensor fields.}}
+fields with which you will be very familiar (i.e.\ the divergence of a curl is zero). In fact, an extension of the curl operator exists that generates divergence-free symmetric tensor fields.}}
 \DIFaddend 
 
 \subsection*{Hydrostatic equilibrium}
 You have seen in the first part of this course that over thousands of years the interior of the Earth flows 
 like a fluid, this being due to solid-state creep. Considering for simplicity a Newtonian fluid, we know that the 
-stress tensor\footnote{This is the Cauchy stress that occurs within spatial formulations of continuum mechanics. But note that 
-at equilibrium the referential and spatial pictures coincide due to our choice of reference body.} takes the form
+stress tensor \DIFdelbegin \footnote{\DIFdel{This is the Cauchy stress that occurs within spatial formulations of continuum mechanics. But note that 
+at equilibrium the referential and spatial pictures coincide due to our choice of reference body.}} %DIFAUXCMD
+\addtocounter{footnote}{-1}%DIFAUXCMD
+\DIFdelend takes the form
 \DIFdelbegin \begin{displaymath}
 \DIFdel{\sigma_{ij}=-p~\delta_{ij}+\eta\left(\frac{\partial v_{i}}{\partial x_{j}}+\frac{\partial v_{j}}{\partial x_{i}}-\frac{2}{3}\frac{\partial v_{k}}{\partial x_{k}}\delta_{ij}\right)
 }\end{displaymath}%DIFAUXCMD
@@ -112,7 +113,8 @@ at equilibrium the referential and spatial pictures coincide due to our choice o
 \DIFadd{\sigma_{ij}=-p\,\delta_{ij}+\eta\left(\frac{\partial v_{i}}{\partial x_{j}}+\frac{\partial v_{j}}{\partial x_{i}}-\frac{2}{3}\frac{\partial v_{k}}{\partial x_{k}}\delta_{ij}\right),
 \label{eq:3}
 }\end{equation}\DIFaddend 
-where $p$ is the pressure, $\eta$ the viscosity, and $v_{i}$ the velocity. Note that the given expression is valid in a 
+where $p$ is the pressure, $\eta$ the viscosity, and $v_{i}$ the velocity.\DIFaddbegin \footnote{\DIFadd{The stress here is the Cauchy stress that occurs within spatial formulations of continuum mechanics. But note that 
+at equilibrium the referential and spatial pictures coincide due to our choice of reference body.}} \DIFaddend Note that the given expression is valid in a 
 \textbf{compressible fluid}, but it reduces to that for an incompressible one by requiring the velocity \DIFaddbegin \DIFadd{to }\DIFaddend be divergence-free. 
 If the fluid is not flowing, then the stress tensor takes the simple hydrostatic form
 \DIFdelbegin \begin{displaymath}
@@ -124,13 +126,10 @@ If the fluid is not flowing, then the stress tensor takes the simple hydrostatic
 }\end{equation}\DIFaddend 
 and the same is true for non-Newtonian fluids. Such an expression must also be approximately valid if the fluid is flowing 
 sufficiently slowly. To get a sense of this approximation for the Earth, we note that the size of the non-hydrostatic 
-stress associated with mantle convection scales like $\eta V/L$ with \DIFdelbegin \DIFdel{$\eta\sim10^{21}$ Pas }\DIFdelend \DIFaddbegin \DIFadd{$\eta\sim10^{21}\,\mathrm{Pa\,s}$ }\DIFaddend a typical viscosity, \DIFdelbegin \DIFdel{$V\sim10^{-8}ms^{-1}$ }\DIFdelend \DIFaddbegin \DIFadd{$V\sim10^{-8}\,\mathrm{m\,s^{-1}}$ }\DIFaddend a 
+stress associated with mantle convection scales like $\eta V/L$ with \DIFdelbegin \DIFdel{$\eta\sim10^{21}$ Pas }\DIFdelend \DIFaddbegin \DIFadd{$\eta\sim10^{21}\,\mathrm{Pa\,s}$ }\DIFaddend a typical viscosity, \DIFdelbegin \DIFdel{$V\sim10^{-8}ms^{-1}$ }\DIFdelend \DIFaddbegin \DIFadd{$V\sim10^{-9}\,\mathrm{m\,s^{-1}}$ }\DIFaddend a 
 typical speed of a few centimetres per year, and \DIFdelbegin \DIFdel{$L\sim10^{6}$ m }\DIFdelend \DIFaddbegin \DIFadd{$L\sim10^{6}\,\mathrm{m}$ }\DIFaddend the length scale. From this we find that deviatoric stresses are 
-around \DIFdelbegin \DIFdel{$\eta V/L\sim10^{7}$ Pa}\DIFdelend \DIFaddbegin \DIFadd{$\eta V/L\sim10^{7}\,\mathrm{Pa}$}\DIFaddend . Pressures in the mantle are, however, known to be of order \DIFdelbegin \DIFdel{$10^{10}$Pa}\footnote{\DIFdel{Values for the 
-pressure can be calculated once the density profile is known.}}%DIFAUXCMD
-\addtocounter{footnote}{-1}%DIFAUXCMD
-\DIFdel{,}\DIFdelend \DIFaddbegin \DIFadd{$10^{10}\,\mathrm{Pa}$,}\footnote{\DIFadd{Values for the 
-pressure can be calculated once the density profile is known.}} \DIFaddend and hence the stress is quite close to being hydrostatic.
+around \DIFdelbegin \DIFdel{$\eta V/L\sim10^{7}$ Pa}\DIFdelend \DIFaddbegin \DIFadd{$\eta V/L\sim10^{6}\,\mathrm{Pa}$}\DIFaddend . Pressures in the mantle are, however, known to be of order \DIFdelbegin \DIFdel{$10^{10}$Pa}\DIFdelend \DIFaddbegin \DIFadd{$10^{10}\,\mathrm{Pa}$,}\DIFaddend \footnote{Values for the 
+pressure can be calculated once the density profile is known.} \DIFaddbegin \DIFadd{some four orders of magnitude larger}\DIFaddend , and hence the stress is quite close to being hydrostatic.
 
 This motivates us to look for \textbf{hydrostatic} solutions of the equilibrium equations. Putting eq.\DIFdelbegin \DIFdel{(4}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:4}}\DIFaddend ) into eq.\DIFdelbegin \DIFdel{(2}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:2}}\DIFaddend ) we obtain
 \DIFdelbegin \begin{displaymath}
@@ -187,12 +186,10 @@ An immediate consequence of eq.\DIFdelbegin \DIFdel{(9}\DIFdelend \DIFaddbegin \
 \label{eq:10}
 }\end{equation}\DIFaddend 
 and so \DIFdelbegin \DIFdel{note that }\DIFdelend $\rho$ and $\gamma$ also have coincident level surfaces. In conclusion we have seen 
-that for \DIFdelbegin \DIFdel{an }\DIFdelend \DIFaddbegin \DIFadd{a }\DIFaddend planet to be in hydrostatic equilibrium the level surfaces of $p$, $\rho$, and $\gamma$ must all be the same\DIFdelbegin \DIFdel{.
-}\DIFdelend \DIFaddbegin \DIFadd{, 
-as illustrated in Fig.~\ref{fig:1}.
-}
+that for \DIFdelbegin \DIFdel{an }\DIFdelend \DIFaddbegin \DIFadd{a }\DIFaddend planet to be in hydrostatic equilibrium the level surfaces of $p$, $\rho$, and $\gamma$ must all be the same\DIFaddbegin \DIFadd{, 
+as illustrated in Fig.~\ref{fig:1}}\DIFaddend .
 
-\begin{figure}[htbp]
+\DIFaddbegin \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.75\textwidth]{figures/L10F1.pdf}
 \caption{\DIFaddFL{In a planet in hydrostatic equilibrium the level surfaces of the pressure, the density and the gravity potential 
@@ -200,9 +197,8 @@ all coincide. The outer surface, on which the pressure vanishes, is itself an eq
 interior level surface has the same character.}}
 \label{fig:1}
 \end{figure}
-\DIFaddend 
 
-Suppose we arbitrarily specified the shape, density variations, and angular velocity of \DIFdelbegin \DIFdel{an }\DIFdelend \DIFaddbegin \DIFadd{a }\DIFaddend planet. We could then, 
+\DIFaddend Suppose we arbitrarily specified the shape, density variations, and angular velocity of \DIFdelbegin \DIFdel{an }\DIFdelend \DIFaddbegin \DIFadd{a }\DIFaddend planet. We could then, 
 in principle, determine its gravitational potential by solving Poisson's equation, and hence find the gravity potential. 
 There would be no reason, however, that this field would have level surfaces that agree with those for the chosen density. 
 This suggests that in requiring a planet to be in hydrostatic equilibrium we are placing rather strong restrictions on,  and 
@@ -258,7 +254,7 @@ Looking at these quantities on the planet's surface we have approximately
 \DIFadd{\psi\sim\frac{1}{2}\Omega^{2}b^{2},
 \label{eq:13}
 }\end{equation}\DIFaddend 
-where $\Omega$ is the angular frequency and \DIFdelbegin \DIFdel{b }\DIFdelend \DIFaddbegin \DIFadd{$b$ }\DIFaddend the mean radius, while also
+where $\Omega$ is the \DIFdelbegin \DIFdel{angular frequency and b }\DIFdelend \DIFaddbegin \DIFadd{rotation rate and $b$ }\DIFaddend the mean radius, while also
 \DIFdelbegin \begin{displaymath}
 \DIFdel{\phi\sim\frac{4}{3}\pi G\overline{\rho}b^{2}
 }\end{displaymath}%DIFAUXCMD
@@ -321,7 +317,7 @@ Putting the above expansions into the equilibrium equations we find at \DIFdelbe
 \DIFadd{\nabla p_{1}+\rho_{0}\nabla\gamma_{1}+\rho_{1}g_{0}\hat{\mathbf{r}}=\mathbf{0},
 \label{eq:22}
 }\end{equation}\DIFaddend 
-where $\gamma_{1}=\phi_{1}+\psi_{1}$, and we have written $g_{0}=\frac{\ddns \phi_{0}}{\ddns r}$ for convenience. 
+where $\gamma_{1}=\phi_{1}+\psi_{1}$, and we have written \DIFdelbegin \DIFdel{$g_{0}=\frac{\ddns \phi_{0}}{\ddns r}$ for convenience }\DIFdelend \DIFaddbegin \DIFadd{$g_{0}=\ddns\phi_{0}/\ddns r$ for convenience (so that $g_{0}>0$ is the magnitude of the reference gravity, $\mathbf{g}_{0}=-g_{0}\hat{\mathbf{r}}$)}\DIFaddend . 
 The boundary condition on pressure is applied on the perturbed surface, and hence
 \DIFdelbegin \begin{displaymath}
 \DIFdel{p}[\DIFdel{b+s\,h_{1}(\theta,\varphi)+\cdot\cdot\cdot,\theta,\varphi}]\DIFdel{=0.
@@ -391,7 +387,9 @@ This relation tells us that the gradient of $p_{1}+\rho_{0}\gamma_{1}$ is parall
  these terms could be combined into the spherical reference model.}}%DIFAUXCMD
 \addtocounter{footnote}{-1}%DIFAUXCMD
 \DIFdel{,}\DIFdelend \DIFaddbegin \DIFadd{,}\footnote{\DIFadd{If not, 
- these terms could be combined into the spherical reference model.}} \DIFaddend and hence we arrive at
+ the spherically symmetric parts of the perturbations could be absorbed into the spherical reference model. In particular, the 
+ degree-zero part of $\psi_{1}$ is absorbed in this way, and henceforth $\psi_{1}$ denotes only its aspherical part, which is 
+ proportional to $Y_{20}$ as discussed below.}} \DIFaddend and hence we arrive at
 \DIFdelbegin \begin{displaymath}
 \DIFdel{p_{1}=-\rho_{0}\gamma_{1}
 }\end{displaymath}%DIFAUXCMD
@@ -461,7 +459,7 @@ while the appropriate continuity conditions at $r=b$ are
 [\DIFadd{\phi_{1}}]\DIFadd{_{-}^{+}=0, \quad }[\DIFadd{\hat{\mathbf{r}}\cdot\nabla\phi_{1}+4\pi G\rho_{0}h_{1}}]\DIFadd{_{-}^{+}=0,
 \label{eq:37}
 }\end{equation}\DIFaddend 
-whose derivation is left as an exercise in the second problem set. Using eq.\DIFdelbegin \DIFdel{(35}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:35}}\DIFaddend ), we see that Poisson's equation is transformed into
+whose derivation is \DIFdelbegin \DIFdel{left as an exercise in the second problem set}\DIFdelend \DIFaddbegin \DIFadd{set out in the appendix to this lecture}\DIFaddend . Using eq.\DIFdelbegin \DIFdel{(35}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:35}}\DIFaddend ), we see that Poisson's equation is transformed into
 \DIFdelbegin \begin{displaymath}
 \DIFdel{\nabla^{2}\phi_{1}=\begin{cases} 4\pi G\frac{1}{g_{0}}\frac{\ddns \rho_{0}}{\ddns r}(\phi_{1}+\psi_{1}) & r<b \\ 0 & r>b \end{cases}
 }\end{displaymath}%DIFAUXCMD
@@ -479,9 +477,9 @@ along with the continuity conditions
 }\end{equation}\DIFaddend 
 \DIFdelbegin \DIFdel{Eq.(38}\DIFdelend \DIFaddbegin \DIFadd{Eqs.~(\ref{eq:38}}\DIFaddend ) and (\DIFdelbegin \DIFdel{39}\DIFdelend \DIFaddbegin \DIFadd{\ref{eq:39}}\DIFaddend ) constitute a boundary value problem that can be solved for $\phi_{1}$ in terms of $\psi_{1}$. 
 Having done this we can then use eq.\DIFdelbegin \DIFdel{(35}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:35}}\DIFaddend ) to determine the other parameters for the perturbed planet. These equations,
- albeit in a less general form, were first obtained by Clairaut (\DIFdelbegin \DIFdel{1713-1765}\DIFdelend \DIFaddbegin \DIFadd{1713--1765}\DIFaddend ), this work building on Newton's original 
+ albeit in a less general form, were first obtained by Clairaut (\DIFdelbegin \DIFdel{1713-1765), this work }\DIFdelend \DIFaddbegin \DIFadd{1743), }\DIFaddend building on Newton's original 
  discussion of equilibrium figures in the \DIFdelbegin \DIFdel{``Principia''}\DIFdelend \DIFaddbegin \emph{\DIFadd{Principia}} \DIFadd{(Newton 1687)}\DIFaddend . To implement these equations in practice we must know the variation of 
- spherically averaged density with radius, and in later lectures we will see how this was determined for the Earth.
+ spherically averaged density with radius, and in \DIFdelbegin \DIFdel{later }\DIFdelend \DIFaddbegin \DIFadd{the next two }\DIFaddend lectures we will see \DIFdelbegin \DIFdel{how this was determined for the Earth}\DIFdelend \DIFaddbegin \DIFadd{that free oscillation data provide the principal constraint on this profile}\DIFaddend .
 
 
 \DIFdelbegin %DIFDELCMD < \begin{figure}[h]
@@ -504,7 +502,7 @@ It is worth noting these arguments apply to more general potentials, $\psi_{1}$,
 centrifugal force. The theory can, therefore, also be applied to model things like equilibrium tides within gaseous planets.
  Another point to make is that the equations are linear in $\phi_{1}$ and $\psi_{1}$, and hence symmetries of $\psi_{1}$ are 
  directly mirrored in $\phi_{1}$ and the other perturbed quantities. In terms of spherical harmonics, the aspherical 
- part of the centrifugal potential perturbation can be shown to be proportional to $Y_{20}$. It is for this reason that 
+ part of the centrifugal potential\DIFdelbegin \DIFdel{perturbation can be shown to be }\DIFdelend \DIFaddbegin \DIFadd{, $\psi_{1}$, is }\DIFaddend proportional to $Y_{20}$ \DIFaddbegin \DIFadd{when the polar axis is taken along $\bm{\Omega}$}\DIFaddend . It is for this reason that 
  equilibrium figures of slowly rotating planets are found to \DIFaddbegin \DIFadd{be }\DIFaddend oblate spheroids, and characterised in terms of a single 
  radial function, $\epsilon$, known as the ellipticity and defined such that
 \DIFdelbegin \begin{displaymath}
@@ -522,11 +520,13 @@ At the mean surface $r=b$ it can be shown that the ellipticity is such that
 \DIFadd{\epsilon(b)=\frac{\text{equatorial radius}-\text{polar radius}}{\text{mean radius}},
 \label{eq:41}
 }\end{equation}\DIFaddend 
-and for the Earth this value is around $1/300$. \DIFaddbegin \DIFadd{Fig.~\ref{fig:2} shows the ellipticity obtained by solving Clairaut's equation, 
-given below, for the Earth's spherically averaged density. The hydrostatic value at the surface is $1/299.9$, slightly smaller 
+and for the Earth this value is around $1/300$. \DIFaddbegin \DIFadd{Fig.~\ref{fig:2} shows the ellipticity obtained by solving Clairaut's equation 
+for the Earth's spherically averaged density. The hydrostatic value at the surface is $1/299.9$, slightly smaller 
 than the observed flattening of $1/298.3$, and this small discrepancy is a measure of the non-hydrostatic stresses supported 
 by the mantle.
-}\DIFaddend Using properties of spherical harmonics, it can be shown that eq.\DIFdelbegin \DIFdel{(38}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:38}}\DIFaddend ) reduces to
+}
+
+\DIFaddend Using properties of spherical harmonics, it can be shown that eq.\DIFdelbegin \DIFdel{(38}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:38}}\DIFaddend ) reduces to
 \DIFdelbegin \begin{displaymath}
 \DIFdel{\frac{\ddns ^{2}\epsilon}{\ddns r^{2}}+8\pi G\rho_{0}g_{0}^{-1}\left(\frac{\ddns \epsilon}{\ddns r}+\frac{\epsilon}{r}\right)-\frac{6\epsilon}{r^{2}}=0 .
 }\end{displaymath}%DIFAUXCMD
@@ -542,16 +542,19 @@ which is known as Clairaut's equation and is subject to the boundary conditions
 \DIFadd{\left.\frac{\ddns \epsilon}{\ddns r}\right|_{r=0}=0, \quad \left.\frac{\ddns \epsilon}{\ddns r}\right|_{r=b}=\frac{1}{b}\left[\frac{5\Omega^{2}b^{3}}{2GM}-2\epsilon(b)\right],
 \label{eq:43}
 }\end{equation}\DIFaddend 
-with \DIFdelbegin \DIFdel{M }\DIFdelend \DIFaddbegin \DIFadd{$M$ }\DIFaddend the planet's mass. This problem can be solved numerically using a shooting method, whereby the initial conditions 
-at $r=0$ are progressively adjusted so that the required condition at $r=b$ is met. 
+with \DIFdelbegin \DIFdel{M }\DIFdelend \DIFaddbegin \DIFadd{$M$ }\DIFaddend the planet's mass. This problem can be solved numerically using a shooting method, whereby the \DIFdelbegin \DIFdel{initial conditions 
+at }\DIFdelend \DIFaddbegin \DIFadd{equation is 
+integrated outwards from }\DIFaddend $r=0$ \DIFdelbegin \DIFdel{are progressively adjusted }\DIFdelend \DIFaddbegin \DIFadd{and the result rescaled }\DIFaddend so that the \DIFdelbegin \DIFdel{required }\DIFdelend condition at $r=b$ is met\DIFdelbegin \DIFdel{. 
+}\DIFdelend \DIFaddbegin \DIFadd{, the equation being linear. 
+}
 
 
 
-\DIFaddbegin \section*{\DIFadd{Rapidly rotating bodies}}
-\DIFadd{The theory above is restricted to slow rotation, but it is worth describing, without any derivations, what is known 
-about the equilibrium figures of a homogeneous fluid body rotating at an arbitrary rate; this material is descriptive, 
-and you will not be asked to reproduce it. The problem has a long history, beginning with Newton and Maclaurin in the 
-eighteenth century, and the results are summarised in the book by Chandrasekhar (1969). For a homogeneous body the 
+\section*{\DIFadd{Rapidly rotating bodies (non-examinable)}}
+\DIFadd{The theory above is restricted to slow rotation, but it is worth describing, without derivations, what is known 
+about the equilibrium figures of a homogeneous fluid body rotating at an arbitrary rate; you will not be asked to 
+reproduce this material. The problem has a long history, beginning with Newton in the seventeenth century and Maclaurin in the 
+eighteenth, and the results are summarised in the book by Chandrasekhar (1969). For a homogeneous body the 
 natural measure of the rotation rate is the dimensionless ratio $\Omega^{2}/\pi G\rho$, which is the quantity 
 estimated in eq.~(\ref{eq:15}) up to a numerical factor, and it is helpful to describe the figures in terms of the 
 angular momentum of the body rather than its rotation rate, since the angular momentum is what is conserved as a 
@@ -583,8 +586,8 @@ Some members of the two sequences are drawn in Fig.~\ref{fig:3}.
 \centering
 \includegraphics[width=\textwidth]{figures/L10F3.pdf}
 \caption{\DIFaddFL{The Maclaurin and Jacobi sequences of equilibrium figures of a homogeneous rotating fluid, shown as the 
-dimensionless rotation rate $\Omega^{2}/\pi G\rho$ against the dimensionless angular momentum, where $\bar{a}$ is the 
-mean radius. The Jacobi sequence branches from the Maclaurin sequence at the point marked, and the pear-shaped figures 
+dimensionless rotation rate $\Omega^{2}/\pi G\rho$ against the dimensionless angular momentum $L/\sqrt{GM^{3}\bar{a}}$, where $\bar{a}$ is the 
+mean radius. The Jacobi sequence branches from the Maclaurin sequence at the circle, and the pear-shaped figures 
 of Poincar\'{e} branch from the Jacobi sequence at the square. The pear-shaped sequence is known only 
 approximately and is drawn schematically; its figures are unstable. Below are the equatorial (upper) and meridional (lower) 
 sections of some members of the sequences, all with the same volume, followed by sketches of a pear-shaped figure 
@@ -593,8 +596,8 @@ are only schematic.}}
 \label{fig:3}
 \end{figure}
 
-\textbf{\DIFadd{Pear-shaped figures and fission.}} \DIFadd{Poincar\'{e} showed in 1885 that the Jacobi sequence has in turn a point 
-of bifurcation, at an axis ratio $a_{2}/a_{1}\approx0.43$, from which a sequence of }\textbf{\DIFadd{pear-shaped figures}} 
+\textbf{\DIFadd{Pear-shaped figures and fission.}} \DIFadd{Poincar\'{e} (1885) showed that the Jacobi sequence has in turn a point 
+of bifurcation, at an axis ratio $a_{2}/a_{1}\approx0.43$, where $a_{1}\ge a_{2}\ge a_{3}$ are the semi-axes, from which a sequence of }\textbf{\DIFadd{pear-shaped figures}} 
 \DIFadd{branches off. It was widely supposed at the time that this sequence might continue to figures with a narrow waist, 
 and finally to two separate bodies, and on this basis George Darwin developed the }\textbf{\DIFadd{fission hypothesis}}\DIFadd{, in 
 which the Moon was born from a rapidly rotating early Earth and close binary stars from the splitting of a single 
@@ -602,7 +605,7 @@ star. The pear-shaped figures were shown by Liapounov and later by Cartan to be 
 hypothesis fell from favour; the standard view today is that the Moon formed from the debris of a giant impact on 
 the early Earth. That hypothesis has its own difficulties, notably that the Moon and the Earth are almost 
 indistinguishable in their isotopic composition, which requires the impactor to have been remarkably similar to 
-the Earth, and the main objection to fission, that the early Earth would have needed far more angular momentum 
+the Earth. The main objection to fission, that the early Earth would have needed far more angular momentum 
 than the Earth--Moon system now possesses, requires in turn some mechanism to have removed the excess. Neither 
 account is free of ad hoc elements, and fission has recently attracted renewed interest. Whatever the origin of 
 the Moon, the bifurcation diagram remains the classic example of how a symmetry can be broken as a single 
@@ -627,12 +630,14 @@ of the Jacobi figures and of the importance of internal structure in interpretin
 \includegraphics[width=0.85\textwidth]{figures/L10F4.pdf}
 \caption{\DIFaddFL{Equatorial (left) and meridional (right) sections of the dwarf planet Haumea, using the axes measured by Ortiz 
 et al.\ (2017), compared with those of the Jacobi ellipsoid having the same volume and the same ratio of equatorial 
-axes. The two agree to within about one per cent in every axis.}}
+axes. The measured axes are $2322\times1704\times1138\,\mathrm{km}$, and those of the Jacobi ellipsoid 
+$2319\times1702\times1141\,\mathrm{km}$; the two agree to better than one per cent in every axis.}}
 \label{fig:4}
 \end{figure}
+\DIFaddend 
 
 
-\DIFaddend \section*{What you need to know and be able to do}
+\section*{What you need to know and be able to do}
 \DIFdelbegin %DIFDELCMD < \begin{itemize}
 %DIFDELCMD <     %%%
 \DIFdelend \DIFaddbegin \begin{enumerate}
@@ -665,7 +670,7 @@ on a slightly deformed boundary. The calculation is short, but it is easy to get
 }\end{equation*}
 \DIFadd{with $\rho_{0}$ spherically symmetric. Here $s$ is a perturbation parameter, and the dots denote higher-order terms that are to be neglected. Similarly writing the potential in the form $\phi=\phi_{0}+s\phi_{1}+\cdots$, we wish to show that across the reference surface $r=b$ we require continuity of both $\phi_{1}$ and
 }\begin{equation*}
-    \DIFadd{\frac{\partial\phi_{1}}{\partial r}+4\pi G\rho_{0}h_{1}.
+    \DIFadd{\hat{\mathbf{r}}\cdot\nabla\phi_{1}+4\pi G\rho_{0}h_{1}.
 }\end{equation*}
 
 
@@ -689,7 +694,7 @@ on a slightly deformed boundary. The calculation is short, but it is easy to get
 }\begin{equation*}
     [\DIFadd{\hat{\mathbf{r}}\cdot\nabla\phi_{0}+s(\hat{\mathbf{r}}\cdot\nabla)(\hat{\mathbf{r}}\cdot\nabla\phi_{0})h_{1}+s\hat{\mathbf{n}}_{1}\cdot\nabla\phi_{0}+s\hat{\mathbf{r}}\cdot\nabla\phi_{1}+\cdots}]\DIFadd{_{-}^{+}=0,
 }\end{equation*}
-\DIFadd{across $r=b$. The zeroth-order term vanishes immediately. We also note that $\hat{\mathbf{n}}_{1}\cdot\nabla\phi_{0}$ is zero as $\hat{\mathbf{n}}_{1}$ must be orthogonal to $\hat{\mathbf{r}}$ for the perturbed normal to be a unit vector, and this term is proportional to the radial derivative of $\phi_{0}$ which is continuous. The first-order condition therefore becomes
+\DIFadd{across $r=b$. The zeroth-order term vanishes immediately. We also note that $\hat{\mathbf{n}}_{1}\cdot\nabla\phi_{0}=(\hat{\mathbf{n}}_{1}\cdot\hat{\mathbf{r}})\,\ddns\phi_{0}/\ddns r$ vanishes, because $\hat{\mathbf{n}}_{1}$ must be orthogonal to $\hat{\mathbf{r}}$ for the perturbed normal to remain a unit vector. The first-order condition therefore becomes
 }\begin{equation*}
     [\DIFadd{(\hat{\mathbf{r}}\cdot\nabla)(\hat{\mathbf{r}}\cdot\nabla\phi_{0})h_{1}+\hat{\mathbf{r}}\cdot\nabla\phi_{1}}]\DIFadd{_{-}^{+}=0,
 }\end{equation*}
@@ -699,11 +704,11 @@ on a slightly deformed boundary. The calculation is short, but it is easy to get
 }\end{equation*}
 \DIFadd{Using this result, we see that
 }\begin{equation*}
-    \DIFadd{(\hat{\mathbf{r}}\cdot\nabla)(\hat{\mathbf{r}}\cdot\nabla\phi_{0}) = \frac{\partial^{2}\phi_{0}}{\partial r^{2}}=4\pi G\rho_{0}-\frac{2}{r}\frac{\partial\phi_{0}}{\partial r},
+    \DIFadd{(\hat{\mathbf{r}}\cdot\nabla)(\hat{\mathbf{r}}\cdot\nabla\phi_{0}) = \frac{\ddns^{2}\phi_{0}}{\ddns r^{2}}=4\pi G\rho_{0}-\frac{2}{r}\frac{\ddns\phi_{0}}{\ddns r},
 }\end{equation*}
 \DIFadd{which can be substituted into the jump condition to obtain
 }\begin{equation*}
-    \DIFadd{\left[\frac{\partial\phi_{1}}{\partial r}+4\pi G\rho_{0}h_{1}\right]_{-}^{+}=0,
+    \DIFadd{\left[\hat{\mathbf{r}}\cdot\nabla\phi_{1}+4\pi G\rho_{0}h_{1}\right]_{-}^{+}=0,
 }\end{equation*}
 \DIFadd{where again the continuity of the normal derivative of $\phi_{0}$ has been applied.
 }\DIFaddend 

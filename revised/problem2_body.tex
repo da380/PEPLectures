@@ -10,7 +10,7 @@ point lies at radius $r_{t}$, the epicentral angle and travel time are
     \Delta(q)=\int_{r_{t}}^{b}\frac{2\alpha q}{r\sqrt{r^{2}-\alpha^{2}q^{2}}}\dd r, \quad 
     T(q)=\int_{r_{t}}^{b}\frac{2r}{\alpha\sqrt{r^{2}-\alpha^{2}q^{2}}}\dd r,
 \end{equation*}
-where $q=r\sin\theta/\alpha$ is the ray parameter, and $r_{t}$ satisfies $r_{t}/\alpha(r_{t})=q$. This question 
+where $q=r\sin\theta/\alpha$ is the ray parameter, $\theta$ being the angle between the ray and the radial direction, and $r_{t}$ satisfies $r_{t}/\alpha(r_{t})=q$. This question 
 shows how such a travel-time curve can be inverted for the velocity structure, a method due to Herglotz and Wiechert. Throughout, 
 define $\eta(r)=r/\alpha(r)$ and assume that $\eta$ increases monotonically with $r$.
 \begin{enumerate}
@@ -88,7 +88,7 @@ Discuss the relationship between this approach and regularised least squares.
 \end{enumerate}
 
 
-\hardq Consider the deformation of an isotropic elastic body due to an applied surface load, $\sigma$. The relevant linearised equations of motion are
+\hardq Consider the deformation of an isotropic elastic body due to an applied surface load, $\sigma$. The relevant linearised equilibrium equations are
 \begin{gather*}
     -\frac{\partial T_{ij}}{\partial x_{j}}=0, \\
     T_{ij}=\lambda\frac{\partial u_{k}}{\partial x_{k}}\delta_{ij}+\mu\left(\frac{\partial u_{i}}{\partial x_{j}}+\frac{\partial u_{j}}{\partial x_{i}}\right),
@@ -97,13 +97,13 @@ within the reference body $M$, and subject to boundary conditions
 \begin{equation*}
     T_{ij}\hat{n}_{j}=\sigma g_{i}
 \end{equation*}
-on its boundary, $\partial M$. Here $g_{i}$ is the acceleration due to gravity prior to the deformation. Note that self-gravitation is being ignored within these equations.
+on its boundary, $\partial M$.\footnote{For a purely traction-loaded static problem the load must exert no net force or torque and the displacement is determined only up to a rigid-body motion; we ignore this subtlety here.} Here $g_{i}$ is the acceleration due to gravity prior to the deformation. Note that self-gravitation is being ignored within these equations.
 
-Suppose that observations, $\mathbf{u}_{i}^{\mathrm{obs}}$, of the displacement vector have been made at surface locations $\mathbf{x}_i$ for $i=1,\dots,m$. An inverse problem could then be formulated to estimate the Lamé parameters, $\lambda$ and $\mu$, as well as the load, $\sigma$. To this end, we can seek to minimise the misfit
+Suppose that observations, $\mathbf{u}_{r}^{\mathrm{obs}}$, of the displacement vector have been made at surface locations $\mathbf{x}_{r}$ for $r=1,\dots,N$. An inverse problem could then be formulated to estimate the Lamé parameters, $\lambda$ and $\mu$, as well as the load, $\sigma$. To this end, we can seek to minimise the misfit
 \begin{equation*}
-    J=\frac{1}{2}\sum_{i=1}^{m}\frac{1}{\varepsilon_{i}^{2}}\|\mathbf{u}(\mathbf{x}_{i})-\mathbf{u}_{i}^{\mathrm{obs}}\|^{2},
+    J=\frac{1}{2}\sum_{r=1}^{N}\frac{1}{\varepsilon_{r}^{2}}\|\mathbf{u}(\mathbf{x}_{r})-\mathbf{u}_{r}^{\mathrm{obs}}\|^{2},
 \end{equation*}
-where $\varepsilon_{i}$ is the standard deviation for the $i$th observation. Adapt the approach within Lecture~20 to derive sensitivity kernels for $J$ with respect to $\lambda$, $\mu$, and $\sigma$, showing how they can be calculated through one solution of the forward problem and one of an appropriate adjoint problem.
+where $\varepsilon_{r}$ is the standard deviation for the $r$th observation. Adapt the approach within Lecture~20 to derive sensitivity kernels for $J$ with respect to $\lambda$, $\mu$, and $\sigma$, showing how they can be calculated through one solution of the forward problem and one of an appropriate adjoint problem.
 
 
 
@@ -125,11 +125,12 @@ where $\gamma_{i}$ is the referential gravitational acceleration.
 
 \item Using results from Lecture~23 along with residue calculus (which you don't need to know for this course), it can be shown that the time-domain solution of the elastodynamic equations in a non-rotating earth model can be expressed as the following eigenfunction expansion
 \begin{equation*}
-    \mathbf{u}(\mathbf{x},t)=\sum_{km}\left\{\int_{0}^{t}\frac{\sin[\omega_{k}(t-t')]}{\omega_{k}}\int_{M}\overline{S}_{ij}(\mathbf{x}',t')\frac{\partial|km\rangle^{*}}{\partial x'_{j}}(\mathbf{x}')\dd^{3}\mathbf{x}'\dd t'\right\}|km\rangle(\mathbf{x}).
+    \mathbf{u}(\mathbf{x},t)=\sum_{km}\left\{\int_{0}^{t}\frac{\sin[\omega_{k}(t-t')]}{\omega_{k}}\int_{M}\overline{S}_{ij}(\mathbf{x}',t')\frac{\partial|km\rangle_{i}^{*}}{\partial x'_{j}}(\mathbf{x}')\dd^{3}\mathbf{x}'\dd t'\right\}|km\rangle(\mathbf{x}),
 \end{equation*}
+where $|km\rangle_{i}$ denotes the $i$th Cartesian component of the eigenfunction.
 \begin{enumerate}
 \item Suppose that the stress glut is non-zero only within a region of dimension $L$ about a point $\mathbf{x}_{s}$, as it would be for 
-an earthquake on a fault of that size. By expanding $\partial|km\rangle^{*}/\partial x'_{j}$ in a Taylor series about $\mathbf{x}_{s}$, show that 
+an earthquake on a fault of that size. By expanding $\partial|km\rangle_{i}^{*}/\partial x'_{j}$ in a Taylor series about $\mathbf{x}_{s}$, show that 
 the contribution of a mode to the sum can be approximated by replacing the stress glut with the \emph{point source}
 \begin{equation*}
     \overline{S}_{ij}(\mathbf{x},t)=M_{ij}(t)\delta(\mathbf{x}-\mathbf{x}_{s}), \quad M_{ij}(t)=\int_{M}\overline{S}_{ij}(\mathbf{x},t)\dd^{3}\mathbf{x},
@@ -159,11 +160,11 @@ show that the eigenfrequency can be written
 \end{equation*}
 Use this result to discuss qualitatively the stability of a rotating earth model, including, in particular, the role of the Coriolis and centrifugal forces.
 
-\item Consider a non-rotating planet of radius $a$ with uniform density $\rho$, and let $M$ be its mass.
+\item Consider a non-rotating planet of radius $a$ with uniform density $\rho$, and let $M_{\mathrm{p}}$ be its mass.
 \begin{enumerate}
 \item Show that the gravitational potential energy (or binding energy) of the planet is
 \begin{equation*}
-    E_{g}=-\frac{3GM^{2}}{5a}.
+    E_{g}=-\frac{3GM_{\mathrm{p}}^{2}}{5a}.
 \end{equation*}
 \item Assuming the planet to be in hydrostatic equilibrium, show that its pressure is
 \begin{equation*}
@@ -174,7 +175,7 @@ and hence verify that $3\int_{M}p_{0}\dd^{3}\mathbf{x}=-E_{g}$.
 the density remaining uniform. Determine the change in the gravitational potential energy correct to second order in $\epsilon$.
 \item Let the material respond to compression through $p=p_{0}+\kappa s$, where $s$ is the fractional decrease in the volume of a
 material element and $\kappa$ is a constant bulk modulus. Recalling that the work done in compressing a material element of initial
-volume $V_{0}$ is $\int p\,\dd V_{0}s$, show that the change in the internal energy of the planet is
+volume $V_{0}$ is $V_{0}\int p\,\dd s$, show that the change in the internal energy of the planet is
 \begin{equation*}
     \Delta E_{\mathrm{int}}=(3\epsilon-3\epsilon^{2})\int_{M}p_{0}\dd^{3}\mathbf{x}+\frac{9}{2}\kappa V\epsilon^{2}+O(\epsilon^{3}),
 \end{equation*}
@@ -205,13 +206,17 @@ eigenfunctions of the first-order splitting problem, with eigenfrequencies
 \end{equation*}
 so that the multiplet is split into $2l+1$ equally spaced singlets, and verify that the diagonal sum rule holds. Show that this 
 is consistent with the result of question 7.
-\hardp Consider a toroidal multiplet with singlets $|km\rangle=W(r)\mathbf{C}_{lm}(\theta,\varphi)$, normalised so that
+\hardp Consider a toroidal multiplet with singlets of the form
+\begin{equation*}
+    |km\rangle=W(r)\mathbf{C}_{lm}(\theta,\varphi)
+\end{equation*}
+(the radial eigenfunction $W(r)$, not to be confused with the Coriolis operator $W$), normalised so that
 \begin{equation*}
     l(l+1)\int_{0}^{b}\rho W^{2}r^{2}\dd r=1.
 \end{equation*}
 Show that $\beta=1/[l(l+1)]$. You may use 
 \begin{equation*}
-    \mathbf{C}_{lm}=\hat{\mathbf{r}}\times\nabla_{1}Y_{lm}, \quad 
+    \mathbf{C}_{lm}=-\hat{\mathbf{r}}\times\nabla_{1}Y_{lm}, \quad 
     \nabla_{1}Y_{lm}=\hat{\bm{\theta}}\,\frac{\partial Y_{lm}}{\partial\theta}+\frac{\hat{\bm{\varphi}}}{\sin\theta}\frac{\partial Y_{lm}}{\partial\varphi},
 \end{equation*}
 the dependence $Y_{lm}\propto\ee^{\ii m\varphi}$, and the fact that $Y_{lm}$ vanishes at the poles for $m\ne0$. 

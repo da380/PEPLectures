@@ -6,7 +6,6 @@
 \author{David Al-Attar \\ Michaelmas Term, \the\year}
 
 \begin{document}
-\providecommand{\item}{\refstepcounter{enumi}\item[\labelenumi$^{\dagger}$]}
 
 
 \maketitle
@@ -51,11 +50,11 @@ where the first term on the right-hand side is the torque on the sub-body due to
 \begin{equation*}
     \int_{U}\epsilon_{ijk}F_{jl}T_{kl}\dd^{3}\mathbf{x}=0,
 \end{equation*}
-and as $U$ is arbitrary, this implies $\epsilon_{ijk}F_{jl}T_{kl}=0$. This latter condition can only be met if $F_{jl}T_{kl}$ is a symmetric tensor (the sufficiency is clear; for necessity, contract the identity with $\epsilon_{ipq}$ and use $\epsilon_{ipq}\epsilon_{ijk}=\delta_{pj}\delta_{qk}-\delta_{pk}\delta_{qj}$). We conclude that $\mathbf{F}\mathbf{T}^{T}$ is symmetric. If we then define $\mathbf{S}$ through $\mathbf{T}=\mathbf{F}\mathbf{S}$ we see that
+and as $U$ is arbitrary, this implies $\epsilon_{ijk}F_{jl}T_{kl}=0$. This latter condition can only be met if $F_{jl}T_{kl}$ is a symmetric tensor (the sufficiency is clear; for necessity, contract the identity with $\epsilon_{ipq}$ and use $\epsilon_{ipq}\epsilon_{ijk}=\delta_{pj}\delta_{qk}-\delta_{pk}\delta_{qj}$). We conclude that $\mathbf{F}\mathbf{T}^{T}$ is symmetric. If we then define $\mathbf{S}$ through $\mathbf{T}=\mathbf{F}\mathbf{S}$, symmetry of $\mathbf{F}\mathbf{T}^{T}=\mathbf{F}\mathbf{S}^{T}\mathbf{F}^{T}$ gives
 \begin{equation*}
-    \mathbf{F}\mathbf{S}^{T}\mathbf{F}^{T}=(\mathbf{F}\mathbf{S}^{T}\mathbf{F}^{T})^{T}=\mathbf{F}\mathbf{S}\mathbf{F}^{T}
+    \mathbf{F}\mathbf{S}^{T}\mathbf{F}^{T}=(\mathbf{F}\mathbf{S}^{T}\mathbf{F}^{T})^{T}=\mathbf{F}\mathbf{S}\mathbf{F}^{T},
 \end{equation*}
-and hence $\mathbf{S}$ is indeed symmetric.
+and as $\mathbf{F}$ is invertible, $\mathbf{S}^{T}=\mathbf{S}$.
 \end{enumerate}
 \item Differentiating the energy density with respect to time, and using the chain rule for the strain energy function, we obtain
 \begin{equation*}
@@ -77,7 +76,7 @@ Integrating over a sub-body $U$ and applying the divergence theorem, we find
 \begin{equation*}
     \frac{\ddns}{\ddns t}\int_{U}E\dd^{3}\mathbf{x}=\int_{\partial U}T_{ij}\hat{n}_{j}v_{i}\dd S=\int_{\partial U}t_{i}v_{i}\dd S,
 \end{equation*}
-where $t_{i}=T_{ij}\hat{n}_{j}$ is the traction. The right-hand side is the rate of working of the contact forces exerted on $U$ by its surroundings, and so the energy of a sub-body changes only through the work done on its boundary. Equivalently, $-s_{i}\hat{n}_{i}$ is the rate at which energy flows into $U$ per unit reference area, and $\mathbf{s}$ is the flux of elastic energy. Taking $U=M$ and using the traction-free boundary condition $T_{ij}\hat{n}_{j}=0$ on $\partial M$, the right-hand side vanishes, and the total energy $\int_{M}E\dd^{3}\mathbf{x}$ is conserved. Note that the argument relies on $W$ having no explicit time dependence; a time-dependent strain energy function, such as that used to model a seismic source, produces an additional term $\partial W/\partial t$ and energy is no longer conserved.
+where $t_{i}=T_{ij}\hat{n}_{j}$ is the traction. The right-hand side is the rate of working of the contact forces exerted on $U$ by its surroundings, and so the energy of a sub-body changes only through the work done on its boundary. Equivalently, $-s_{i}\hat{n}_{i}$ is the rate at which energy flows into $U$ per unit reference area, and $\mathbf{s}$ is the flux of mechanical (kinetic plus elastic) energy. Taking $U=M$ and using the traction-free boundary condition $T_{ij}\hat{n}_{j}=0$ on $\partial M$, the right-hand side vanishes, and the total energy $\int_{M}E\dd^{3}\mathbf{x}$ is conserved. Note that the argument relies on $W$ having no explicit time dependence; a time-dependent strain energy function, such as that used to model a seismic source, produces an additional term $\partial W/\partial t$ and energy is no longer conserved.
 
 \item We are given the Lagrangian density
 \begin{equation*}
@@ -183,7 +182,7 @@ where $\sigma_{ij}=2\frac{\partial U}{\partial C_{ij}}$ is the (symmetric) equil
 \end{equation*}
 along with the Christoffel equation
 \begin{equation*}
-    \bm{\Gamma}(\hat{\mathbf{p}})\mathbf{a}=c^{2}\mathbf{a}
+    \bm{\Gamma}(\hat{\mathbf{p}})\mathbf{a}=c^{2}\mathbf{a},
 \end{equation*}
 which determines the phase speeds, $c$, and polarisation vectors, $\mathbf{a}$, for plane waves propagating in the direction $\hat{\mathbf{p}}$. For the given elastic tensor we find
 \begin{align*}
@@ -230,7 +229,7 @@ and hence the two quasi S-waves have first-order phase speeds
 \begin{equation*}
     \beta_{1}=\beta+\frac{(A+C-2F-4L)\cos^{2}\theta\sin^{2}\theta+(L-N)}{2\beta\rho}, \quad \beta_{2}=\beta+\frac{(L-N)\cos^{2}\theta}{2\beta\rho},
 \end{equation*}
-with polarisation vectors $\hat{\mathbf{t}}_{1}$ and $\hat{\mathbf{t}}_{2}$ respectively. The first wave is polarised in the plane containing the symmetry axis (and, if the axis is vertical, is termed the quasi SV-wave), the second perpendicular to it (the quasi SH-wave). For propagation along the axis ($\theta=0$) both speeds reduce to $\beta_{1}^{2}=\beta_{2}^{2}=N/\rho+(L-N)/\rho=L/\rho$ to first order; this is the exact result, and the degeneracy is not lifted, as must be the case because the problem is then symmetric under rotations about $\hat{\mathbf{p}}$. For propagation perpendicular to the axis ($\theta=\pi/2$) we find $\beta_{1}^{2}=L/\rho$ and $\beta_{2}^{2}=N/\rho$, which are again the exact values (the polarisations being along the axis and perpendicular to it). In fact the expression for $\beta_{2}$ is exact for all $\theta$, as $\rho c^{2}=N\sin^{2}\theta+L\cos^{2}\theta$ for SH-waves in a transversely isotropic medium, whereas that for $\beta_{1}$ is only correct to first order in the anisotropy.
+with polarisation vectors $\hat{\mathbf{t}}_{1}$ and $\hat{\mathbf{t}}_{2}$ respectively. The first wave is polarised in the plane containing the symmetry axis (and, if the axis is vertical, is termed the quasi SV-wave), the second perpendicular to it (the quasi SH-wave). For propagation along the axis ($\theta=0$) both speeds reduce to $\beta_{1}^{2}=\beta_{2}^{2}=N/\rho+(L-N)/\rho=L/\rho$ to first order; this is the exact result, and the degeneracy is not lifted, as must be the case because the problem is then symmetric under rotations about $\hat{\mathbf{p}}$. For propagation perpendicular to the axis ($\theta=\pi/2$) we find $\beta_{1}^{2}=L/\rho$ and $\beta_{2}^{2}=N/\rho$, which are again the exact values (the polarisations being along the axis and perpendicular to it). In fact the first-order expression for $\beta_{2}^{2}$, namely $\rho\beta_{2}^{2}=N\sin^{2}\theta+L\cos^{2}\theta$, is exact for all $\theta$ (this being the SH-wave speed in a transversely isotropic medium), whereas that for $\beta_{1}$ is only correct to first order in the anisotropy.
 \end{enumerate}
 
 \item We are told to consider the wavefunction
@@ -287,7 +286,7 @@ taken along the classical trajectory.
 \begin{equation*}
     T=\int_{0}^{1}\frac{1}{\alpha(\mathbf{x})}\sqrt{\frac{\ddns x_{i}}{\ddns\gamma}\frac{\ddns x_{i}}{\ddns\gamma}}\dd\gamma,
 \end{equation*}
-where $\gamma$ parameterises the curve over the unit interval. Note that such a fixed-length parameterisation is necessary so that variations of this functional can be easily handled. We need to compute the first variation of this expression. This can be done from first principles (and is a good exercise), but we will jump straight to the usual Euler--Lagrange equations
+where $\gamma$ parameterises the curve over the unit interval. Note that a parameterisation over a fixed interval is necessary so that variations of this functional can be easily handled. We need to compute the first variation of this expression. This can be done from first principles (and is a good exercise), but we will jump straight to the usual Euler--Lagrange equations
 \begin{equation*}
     \frac{\ddns}{\ddns\gamma}\frac{\partial\mathscr{L}}{\partial \mathbf{x}'}-\frac{\partial\mathscr{L}}{\partial \mathbf{x}}=0,
 \end{equation*}
@@ -357,7 +356,7 @@ which is precisely the Euler--Lagrange equation obtained from Fermat's principle
     \begin{equation*}
         v_{j}p_{j}=\frac{1}{\rho}A_{ijkl}a_{i}a_{k}p_{j}p_{l}=a_{i}\Gamma_{ik}(\mathbf{p})a_{k}=1,
     \end{equation*}
-    and hence $\mathbf{v}\cdot\hat{\mathbf{p}}=1/\|\mathbf{p}\|=c$. By the Cauchy--Schwarz inequality $c=\mathbf{v}\cdot\hat{\mathbf{p}}\le\|\mathbf{v}\|$, with equality if and only if $\mathbf{v}$ is parallel to $\hat{\mathbf{p}}$. Physically, the energy of a plane wave travels at the phase speed in the direction normal to the wavefronts, but in an anisotropic body it also has a component along the wavefronts, so that the energy is carried faster than the phase speed and in a different direction. For an isotropic body, substitution of the elastic tensor gives
+    and hence $\mathbf{v}\cdot\hat{\mathbf{p}}=1/\|\mathbf{p}\|=c$. By the Cauchy--Schwarz inequality $c=\mathbf{v}\cdot\hat{\mathbf{p}}\le\|\mathbf{v}\|$, with equality if and only if $\mathbf{v}$ is parallel to $\hat{\mathbf{p}}$. Physically, the component of the energy velocity normal to the wavefronts always equals the phase speed, but in an anisotropic body there is in general also a component along the wavefronts, so that energy is carried faster than the phase speed and in a direction different from $\hat{\mathbf{p}}$. For an isotropic body, substitution of the elastic tensor gives
     \begin{equation*}
         v_{j}=\frac{1}{\rho}\left[\lambda a_{j}(\mathbf{a}\cdot\mathbf{p})+\mu p_{j}+\mu a_{j}(\mathbf{a}\cdot\mathbf{p})\right].
     \end{equation*}
@@ -375,15 +374,15 @@ which is precisely the Euler--Lagrange equation obtained from Fermat's principle
         \frac{\partial\lambda}{\partial p_{j}}=\frac{2}{\rho}A_{ijkl}a_{i}a_{k}p_{l}=2v_{j}.
     \end{equation*}
     Since $H=\frac{1}{2}\lambda$, we have $\mathbf{v}=\partial H/\partial\mathbf{p}$. The slowness surface is the level surface $H(\mathbf{p})=\frac{1}{2}$, and the gradient of $H$ is normal to it, so the energy velocity is normal to the slowness surface. Hamilton's equations give $\ddns\mathbf{x}/\ddns\sigma=\partial H/\partial\mathbf{p}=\mathbf{v}$, and hence rays are the paths along which energy is transported, with the generating parameter being the travel time. Finally, writing $\mathbf{k}=\omega\mathbf{p}$ for the wavevector of a harmonic wave, the dispersion relation is $\omega(\mathbf{k})=\|\mathbf{k}\|c(\hat{\mathbf{k}})$, so that $H(\mathbf{k})=\frac{1}{2}\omega^{2}$ and, because $\partial H/\partial\mathbf{p}$ is homogeneous of degree one, $\partial\omega/\partial\mathbf{k}=\omega^{-1}\partial H/\partial\mathbf{k}=\partial H/\partial\mathbf{p}=\mathbf{v}$. The energy velocity is thus the group velocity.
-    \item In a homogeneous body $H$ does not depend on $\mathbf{x}$, and Hamilton's equations give $\ddns\mathbf{p}/\ddns\sigma=\mathbf{0}$, so that the slowness vector is constant along each ray, while $\ddns\mathbf{x}/\ddns\sigma=\mathbf{v}(\mathbf{p})$ is then also constant. The rays from a point source at the origin are therefore straight lines $\mathbf{x}(\sigma)=\sigma\mathbf{v}(\hat{\mathbf{p}})$, one for each direction $\hat{\mathbf{p}}$ on the unit sphere (and each sheet of the slowness surface), and since the travel time along a ray equals $\sigma$, the wavefront $T=t$ is the surface $\{t\,\mathbf{v}(\hat{\mathbf{p}})\}$. The wave surface is the wavefront at unit time. Its relationship to the slowness surface is that of \textbf{polar reciprocity}: each point $\mathbf{p}$ of the slowness surface maps to the point $\mathbf{v}$ of the wave surface lying along the normal to the slowness surface at $\mathbf{p}$, at the distance $\|\mathbf{v}\|=1/(\|\mathbf{p}\|\cos\psi)$ where $\psi$ is the angle between $\mathbf{v}$ and $\mathbf{p}$, and conversely $\mathbf{p}$ is normal to the wave surface at $\mathbf{v}$. The wavefront is thus the envelope of the plane waves $\mathbf{p}\cdot\mathbf{x}=t$ taken over the slowness surface. Where a sheet of the slowness surface has inflection points (which the innermost sheet never has), the corresponding wave surface folds back on itself to form cusps, and in such directions a point source produces three arrivals of the same wave type; Fig.~\ref{fig:S1F1} shows an example. The far-field Green function of a homogeneous anisotropic body can be obtained by the method of stationary phase, and its singular arrivals lie precisely on the wave surface.
-\end{enumerate}
-
-\begin{figure}[ht]
+\newpage
+\begin{figure}[t]
 \centering
 \includegraphics[width=0.95\textwidth]{figures/S1F1.pdf}
-\caption{Sections through the slowness surface (left) and the wave surface (right) of a transversely isotropic medium, in the plane containing the symmetry axis; the sheets are coloured in order of speed. The quasi-P sheets are the innermost slowness curve and the outermost wave curve. The quasi-SV wave curve has cusps in directions where the corresponding slowness curve has inflection points.}
+\caption{Sections through the slowness surface (left) and the wave surface (right) of a transversely isotropic medium, in the plane containing the symmetry axis. The quasi-P sheets are in blue, forming the innermost slowness curve and the outermost wave curve. The remaining two sheets are coloured in order of speed, the intermediate sheet in red and the slowest in green, so that red is quasi-SV and green quasi-SH except within about $20^{\circ}$ of the plane perpendicular to the symmetry axis, where the two sheets cross and exchange colours. The quasi-SV wave curve has cusps in directions where the corresponding slowness curve has inflection points.}
 \label{fig:S1F1}
 \end{figure}
+    \item In a homogeneous body $H$ does not depend on $\mathbf{x}$, and Hamilton's equations give $\ddns\mathbf{p}/\ddns\sigma=\mathbf{0}$, so that the slowness vector is constant along each ray, while $\ddns\mathbf{x}/\ddns\sigma=\mathbf{v}(\mathbf{p})$ is then also constant. The rays from a point source at the origin are therefore straight lines $\mathbf{x}(\sigma)=\sigma\mathbf{v}(\hat{\mathbf{p}})$, one for each direction $\hat{\mathbf{p}}$ on the unit sphere (and each sheet of the slowness surface), and since the travel time along a ray equals $\sigma$, the wavefront $T=t$ is the surface $\{t\,\mathbf{v}(\hat{\mathbf{p}})\}$. The wave surface is the wavefront at unit time. Its relationship to the slowness surface is that of \textbf{polar reciprocity}: each point $\mathbf{p}$ of the slowness surface maps to the point $\mathbf{v}$ of the wave surface lying in the direction of the outward normal to the slowness surface at $\mathbf{p}$, at the distance $\|\mathbf{v}\|=1/(\|\mathbf{p}\|\cos\psi)$ where $\psi$ is the angle between $\mathbf{v}$ and $\mathbf{p}$, and conversely $\mathbf{p}$ is normal to the wave surface at $\mathbf{v}$. The wavefront is thus the envelope of the plane waves $\mathbf{p}\cdot\mathbf{x}=t$ taken over the slowness surface. Where a sheet of the slowness surface has inflection points (which the innermost sheet never has), the corresponding wave surface folds back on itself to form cusps, and in such directions a point source produces three arrivals of the same wave type; Fig.~\ref{fig:S1F1} shows an example. The far-field Green function of a homogeneous anisotropic body can be obtained by the method of stationary phase, and its singular arrivals lie precisely on the wave surface.
+\end{enumerate}
 \end{enumerate}
 
 \end{document}

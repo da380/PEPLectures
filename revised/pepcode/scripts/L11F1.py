@@ -13,7 +13,7 @@ bp = tr.copy().filter("bandpass", freqmin=0.3e-3, freqmax=1e-3, corners=4, zerop
 fig, axes = plt.subplots(2, 1, figsize=(8.0, 5.2), constrained_layout=True)
 ax = axes[0]
 ax.plot(hours(tr), 1e6 * tr.data, "k", lw=0.3)
-ax.set_xlim(-0.5, 12); ax.set_xlabel("time after the earthquake / hours")
+ax.set_xlim(0, 12); ax.set_xlabel("time after the earthquake / hours")
 ax.text(0.99, 0.94, "first twelve hours, unfiltered", transform=ax.transAxes, ha="right", va="top")
 ax = axes[1]
 d = hours(bp) / 24; sel = d >= 0.25

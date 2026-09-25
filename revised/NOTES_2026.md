@@ -281,3 +281,33 @@
   body file; note at the head of each sheet): Set 1 — Q5(b),(c) and Q9(b),(c); Set 2 — Q1(c), Q4 (whole question), Q9(b).
   Solutions carry no daggers. Set 2 Q1(a) gained a hint about Leibniz's rule (the turning-point limit depends on q).
   Set 2 cross-reference in Q9 now points to question 7 (rotating eigenvalue).
+* FULL REVIEW PASS (2026-09-25, evening): seven read-only reviewers (two lectures each + problem sets) checked text,
+  figures and maths; five fixers then applied all editorial [A] and figure/layout [C] items plus the safe [B]
+  clarifications. Everything rebuilt: master 159 pp, 0 errors, 0 undefined refs; standalone problem/solution docs 0
+  errors/0 overfull. Highlights of what changed: L24 "toroidal modes vanish at the CMB" corrected to vanishing shear
+  traction; overtone/node statement qualified for spheroidal modes; 0S0 density-kernel claim dropped (only 0S2 changes
+  sign); complex-contour sentence reworded; L20 Fig. 1 caption cross-ref fixed, receiver delta made a surface delta,
+  "iff" -> "requires", CC delay sign-convention remark added, model-dimension symbols unified; L21 gravity integrals use
+  y_i, yspec comparison wording made precise (switch 0 = all gravitational effects off); L22 mantle-flow speed 1e-9 m/s
+  and 1e6 Pa; L18/19 many wording fixes, null-space vector renamed m_null, stale problem-set pointer fixed, Bayesian
+  cross-ref fixed; L19 toy-tomography figures regenerated (thinner rays, localised singular vector j=278, central spike
+  block, colourbars); L22/L24 figures regenerated at printable font sizes; references: order, van Heijst, Bozdağ/
+  Dahlen & Tromp/Clairaut/Poincaré/Reid now cited in text. REVERTED one fixer change: the auxiliary strain-energy
+  functions stay U(x,C) and V(x,J) (David's earlier decision), not W-tilde/W-hat.
+  LEFT FOR DAVID (not changed): (1) L18 Oldham/Gutenberg attribution of the P shadow zone; (2) L23 "complete basis for
+  an arbitrary vector field" vs "field satisfying the boundary conditions" (lines ~197 vs ~213) — which wording;
+  (3) L24: perturbation parameter s next to eigenfunction bold s (rename to epsilon?), "co-ordinates" spelling;
+  (4) Lichtenstein 1918 volume; (5) L11F2 (Lecture 23 Fig. 2) mode lines are elastic 1 s-reference frequencies, 0.3–0.5%
+  high (dispersion correction available). Standalone solution1.pdf has a \newpage before the S1F1 figure so figure and
+  part (c) share the last page.
+* Follow-ups after the review (David's decisions): L24 node counting — spheroidal modes "no such simple rule" with a
+  footnote on Woodhouse's minor-vector generalisation (Woodhouse 1988 reference added; Al-Attar & Woodhouse 2008); L24
+  perturbation parameter renamed s -> epsilon (eqs 21–27); NOT renamed elsewhere because epsilon is the ellipticity in L22
+  and the Levi-Civita symbol in L21/L23 — s stays there. L18 Oldham/Gutenberg: Oldham (1906) argued for the core from late
+  arrivals at large distances, Gutenberg (1914) explained the shadow zone and found the CMB depth (Gutenberg 1914 reference
+  added). L23 completeness now stated without the boundary-condition qualification ("complete basis for vector fields";
+  David: H1-completeness needs no reference to boundary conditions, just say complete). Set 2 Q4 footnote kept and the
+  solution gained a paragraph on well-posedness of pure-traction static problems (net force/torque, rigid motions fixed by
+  constraints, kernels unaffected). L23 Fig. 2 mode lines now dispersion-corrected (`fundamental_frequencies_corrected`,
+  `toroidal_q_and_dispersion`: 0T2 Q 249 vs PREM 250.5; 0T10 Q 173 vs 184 — spline-derivative kernel near the crust —
+  corrected frequencies within 0.25%, invisible at plot scale); cached in pepcode/data/modes/fundamentals_corrected_l20.npz.

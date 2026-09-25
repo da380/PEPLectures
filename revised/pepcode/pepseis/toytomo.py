@@ -89,7 +89,7 @@ class ToyTomography:
         im = ax.pcolormesh(e, e, m.T, cmap=cmap, vmin=lo, vmax=v, shading="auto", rasterized=True)
         if rays:
             for s, r in self.rays:
-                ax.plot([s[0], r[0]], [s[1], r[1]], "k", lw=0.25, alpha=0.6)
+                ax.plot([s[0], r[0]], [s[1], r[1]], "k", lw=0.2, alpha=0.3)
         ax.plot(self.src[:, 0], self.src[:, 1], "k*", ms=6); ax.plot(self.rec[:, 0], self.rec[:, 1], "kv", ms=5)
         ax.set_aspect("equal"); ax.set_xticks([]); ax.set_yticks([])
         if title:

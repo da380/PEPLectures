@@ -7,7 +7,8 @@ from pepseis.paths import FIG
 plt = figure_style()
 T = ToyTomography(); lam = T.lambda_for_chi2(); n = T.n
 hits = (T.A != 0).sum(axis=0).reshape(n, n)             # number of rays through each block
-good = np.unravel_index(np.argmax(hits), hits.shape)
+central = hits[6:-6, 6:-6]                               # a well-covered block away from the edges of the box
+good = tuple(np.array(np.unravel_index(np.argmax(central), central.shape)) + 6)
 poor_candidates = np.argwhere((hits >= 3) & (hits <= 4))
 poor = tuple(poor_candidates[np.argmax(np.abs(poor_candidates - np.array(good)).sum(axis=1))])
 print("well-covered block", good, "rays:", hits[good], "; poorly covered block", poor, "rays:", hits[poor])
@@ -15,7 +16,7 @@ fig, axes = plt.subplots(2, 2, figsize=(8.0, 7.6), constrained_layout=True)
 for row, (cell, name) in enumerate([(good, "well-covered block"), (poor, "poorly covered block")]):
     m_in = np.zeros((n, n)); m_in[cell] = 1.0                # unit spike
     m_out = T.solve(lam, d=T.A @ m_in.ravel())                # noise-free synthetic data
-    print(name, ": peak recovered / input = %.2f" % m_out.max())
+    print(name, ": peak recovered / input = %.2f ; at spike = %.2f" % (m_out.max(), m_out[cell]))
     for col, (m, what) in enumerate([(m_in, "input"), (m_out, "recovered")]):
         ax = axes[row, col]
         im = T.draw(ax, m, vmax=1.0, rays=False, title="%s: %s" % (name, what))

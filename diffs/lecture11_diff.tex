@@ -1,7 +1,7 @@
 \documentclass[a4paper,12pt]{paper}
 %DIF LATEXDIFF DIFFERENCE FILE
 %DIF DEL lecture11.tex             Wed Nov 19 07:37:26 2025
-%DIF ADD diffs/lecture11_new.tex   Fri Sep 25 13:55:02 2026
+%DIF ADD diffs/lecture11_new.tex   Fri Sep 25 16:51:40 2026
 \usepackage{mycommands}
 
 
@@ -54,7 +54,7 @@
 \DIFdelend \section*{Outline and \DIFdelbegin \DIFdel{Motivation}\DIFdelend \DIFaddbegin \DIFadd{motivation}\DIFaddend }
 
 Having obtained the equations of motion for a self-gravitating earth model, we begin our study of the Earth's 
-\textbf{free oscillations} or \textbf{normal modes} (the terms are synonymous). The starting point is developing a concise operator 
+\textbf{free oscillations} or \textbf{normal modes} (the terms are synonymous). The starting point is \DIFdelbegin \DIFdel{developing }\DIFdelend \DIFaddbegin \DIFadd{the development of }\DIFaddend a concise operator 
 notation that closely resembles what you will know from quantum mechanics. We analyse the associated \textbf{eigenvalue problem} in a 
 non-rotating earth model. In particular, the forced response of such an earth model is obtained as an \textbf{eigenfunction expansion},
 with the frequency-domain response having \textbf{resonances} at each of the 
@@ -96,7 +96,7 @@ The boundary conditions for the problem are
 on $\partial M$. While these equations express quite simple physics, they do have a complicated form, and hence it will help things greatly to find a simpler notation.
 
 As a first step to doing this, we will express the equations in what is known as the \textbf{weak form}. 
-Letting $w_{i}$ be an arbitrary function we find from eq.\DIFdelbegin \DIFdel{(1) that
+Letting $w_{i}$ be an arbitrary \DIFdelbegin \DIFdel{function }\DIFdelend \DIFaddbegin \DIFadd{vector field }\DIFaddend we find from eq.\DIFdelbegin \DIFdel{(1) that
 }\begin{displaymath}
 \DIFdel{\int_{M}\left[\rho\left(\frac{\partial^{2}u_{i}}{\partial t^{2}}+2\epsilon_{ijk}\Omega_{j}\frac{\partial u_{k}}{\partial t}+\epsilon_{ijk}\epsilon_{klm}\Omega_{j}\Omega_{l}u_{m}\right)-\frac{\partial}{\partial x_{j}}(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}-\overline{S}_{ij})-\rho\gamma_{i}^{1}\right]w_{i}^{*}\dd^{3}\mathbf{x}=0.
 }\end{displaymath}%DIFAUXCMD
@@ -143,7 +143,7 @@ then we can write the acceleration term in the weak form as
 \DIFadd{\langle \mathbf{w}|P|\ddot{\mathbf{u}}\rangle,
 \label{eq:7}
 }\end{equation}\DIFaddend 
-where \DIFdelbegin \DIFdel{time-derivatives }\DIFdelend \DIFaddbegin \DIFadd{time derivatives }\DIFaddend are denoted using dots. Hopefully the notation here should remind you of bra-ket notation. We will 
+where \DIFdelbegin \DIFdel{time-derivatives }\DIFdelend \DIFaddbegin \DIFadd{time derivatives }\DIFaddend are denoted using dots. \DIFdelbegin \DIFdel{Hopefully the notation here should remind you of }\DIFdelend \DIFaddbegin \DIFadd{The notation is intended to recall }\DIFaddend bra-ket notation. We will 
 call $\langle \mathbf{w}|P|\mathbf{u}\rangle$ the \textbf{kinetic energy form}, and note that it may be associated with an operator, $P$, 
 that acts on displacement vectors by $(P\mathbf{u})_{i}=\rho u_{i}$. In a similar manner we define
 \DIFdelbegin \begin{displaymath}
@@ -317,8 +317,8 @@ we conclude that $\omega_{1}^{2*}=\omega_{1}^{2}$, which is to say that the \tex
 \DIFadd{\langle \mathbf{s}_{1}|P|\mathbf{s}_{2}\rangle=0,
 \label{eq:24}
 }\end{equation}\DIFaddend 
-this meaning that eigenfunctions with different \DIFdelbegin \DIFdel{squared-eigenfrequencies }\DIFdelend \DIFaddbegin \DIFadd{squared eigenfrequencies }\DIFaddend are \textbf{orthogonal relative to the inner
- product defined by kinetic energy form}. Orthogonality relative to such a ``\DIFdelbegin \DIFdel{mass weighted}\DIFdelend \DIFaddbegin \DIFadd{mass-weighted}\DIFaddend '' inner product should be
+this meaning that eigenfunctions with different \DIFdelbegin \DIFdel{squared-eigenfrequencies are }\DIFdelend \DIFaddbegin \DIFadd{squared eigenfrequencies are }\DIFaddend \textbf{orthogonal relative to the inner
+ product defined by \DIFaddbegin \DIFadd{the }\DIFaddend kinetic energy form}. Orthogonality relative to such a ``\DIFdelbegin \DIFdel{mass weighted}\DIFdelend \DIFaddbegin \DIFadd{mass-weighted}\DIFaddend '' inner product should be
 familiar from your prior study of linear oscillations of finite-dimensional mechanical systems.
 
 The following additional properties of these eigenfunctions and eigenfrequencies will be stated without proof\DIFdelbegin \footnote{\DIFdel{The validity 
@@ -336,7 +336,7 @@ Their proof, and indeed general validity, within models containing inviscid flui
      \textbf{accumulate only at infinity}. The latter point means that in a \DIFdelbegin \DIFdel{finite-interval }\DIFdelend \DIFaddbegin \DIFadd{finite interval }\DIFaddend there can only be a finite number
       of \DIFdelbegin \DIFdel{squared-eigenfrequencies}\DIFdelend \DIFaddbegin \DIFadd{squared eigenfrequencies}\DIFaddend .
 
-    \item The eigenfunctions form a \textbf{complete orthonormal basis} for vector fields in the earth model. This means that an arbitrary vector 
+    \item The eigenfunctions form a \textbf{complete \DIFdelbegin \DIFdel{orthonormal }\DIFdelend basis} for vector fields in the earth model. This means that an arbitrary vector 
     field can be expressed as a convergent sum of the eigenfunctions, with the necessary expansion coefficients readily determined due to 
     their orthogonality.
 \end{enumerate}
@@ -355,7 +355,7 @@ energy form, this meaning that
 \label{eq:25}
 }\end{equation}\DIFaddend 
 for all possible indices. Using this notation, we can then express the completeness of the eigenfunctions by writing 
-an arbitrary vector field $\mathbf{u}$ that satisfies the necessary boundary conditions in the form
+an arbitrary vector field $\mathbf{u}$ \DIFdelbegin \DIFdel{that satisfies the necessary boundary conditions }\DIFdelend in the form
 \DIFdelbegin \begin{displaymath}
 \DIFdel{\mathbf{u}=\sum_{km}\langle km|P|\mathbf{u}\rangle|km\rangle ,
 }\end{displaymath}%DIFAUXCMD
@@ -363,29 +363,27 @@ an arbitrary vector field $\mathbf{u}$ that satisfies the necessary boundary con
 \DIFadd{\mathbf{u}=\sum_{km}\langle km|P|\mathbf{u}\rangle|km\rangle,
 \label{eq:26}
 }\end{equation}\DIFaddend 
-where $\langle km|P|\mathbf{u}\rangle$ are the expansion coefficients of the $(k,m)$th term.
+where $\langle km|P|\mathbf{u}\rangle$ \DIFdelbegin \DIFdel{are the expansion coefficients }\DIFdelend \DIFaddbegin \DIFadd{is the expansion coefficient }\DIFaddend of the $(k,m)$th term.
 
 \subsection*{Eigenfunction expansions}
 
-\begin{figure}[ht]
-\centering
-\DIFdelbeginFL %DIFDELCMD < \includegraphics[width=\textwidth]{figures/L11F1.png}
+\DIFdelbegin %DIFDELCMD < \begin{figure}[ht]
+%DIFDELCMD < \centering
+%DIFDELCMD < \includegraphics[width=\textwidth]{figures/L11F1.png}
 %DIFDELCMD < %%%
-\DIFdelendFL \DIFaddbeginFL \includegraphics[width=\textwidth]{figures/L11F1.pdf}
-\DIFaddendFL \caption{\DIFdelbeginFL \DIFdelFL{A seven day long vertical component seismogram }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{Vertical-component acceleration recorded at the Black Forest Observatory in
-Germany }\DIFaddendFL following the \DIFdelbeginFL \DIFdelFL{a magnitude 8.2
-}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{2011 Tohoku }\DIFaddendFL earthquake in \DIFdelbeginFL \DIFdelFL{Bolivia in 1994. Note also that }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{Japan (moment magnitude 9.1). The upper panel shows
-}\DIFaddendFL the \DIFdelbeginFL \DIFdelFL{overall }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{first twelve hours of the record, dominated by the surface waves, which circle the Earth
-several times. The lower panel shows the record from six hours to ten days after the earthquake,
-band-pass filtered between 0.3 and 1\,mHz to isolate the lowest-frequency free oscillations. Their
-}\DIFaddendFL amplitude decays in a roughly exponential fashion \DIFaddbeginFL \DIFaddFL{over several days}\DIFaddendFL . This \DIFaddbeginFL \DIFaddFL{decay }\DIFaddendFL is due to
-attenuation within the Earth, but we ignore this effect within our current discussion.}
-\DIFdelbeginFL %DIFDELCMD < \label{fig:fig1}
-%DIFDELCMD < %%%
-\DIFdelendFL \DIFaddbeginFL \label{fig:1}
-\DIFaddendFL \end{figure}
+%DIFDELCMD < \caption{%
+{%DIFAUXCMD
+\DIFdelFL{A seven day long vertical component seismogram following the a magnitude 8.2
+earthquake in Bolivia in 1994. Note also that the overall amplitude decays in a
+roughly exponential fashion. This is due to attenuation within the Earth, but we
+ignore this effect within our current discussion.}}
+%DIFAUXCMD
+%DIFDELCMD < \label{fig:fig1}
+%DIFDELCMD < \end{figure}
+%DIFDELCMD < 
 
-Recall that the equations of motion in weak form are given by
+%DIFDELCMD < %%%
+\DIFdelend Recall that the equations of motion in weak form are given by
 \DIFdelbegin \begin{displaymath}
 \DIFdel{\langle \mathbf{w}|P|\ddot{\mathbf{u}}\rangle+\langle \mathbf{w}|H|\mathbf{u}\rangle=\langle \mathbf{w}|\mathbf{f}\rangle,
 }\end{displaymath}%DIFAUXCMD
@@ -404,7 +402,7 @@ where we use the convention
  \quad \mathbf{u}(\mathbf{x},t)=\frac{1}{2\pi}\int_{-\infty}^{\infty}\tilde{\mathbf{u}}(\mathbf{x},\omega)\ee^{\ii\omega t}\dd\omega,
 \label{eq:28}
 }\end{equation}\DIFaddend 
-noting that the initial conditions that $\mathbf{u}$ and $\dot{\mathbf{u}}$ vanish before time $t=0$ \DIFdelbegin \DIFdel{has }\DIFdelend \DIFaddbegin \DIFadd{have }\DIFaddend been built into the forward transformation. It is 
+noting that the initial conditions that $\mathbf{u}$ and $\dot{\mathbf{u}}$ vanish \DIFdelbegin \DIFdel{before time $t=0$ has }\DIFdelend \DIFaddbegin \DIFadd{for $t\le 0$ have }\DIFaddend been built into the forward transformation. It is 
 readily seen that the Fourier transformed equations of motion take the form
 \DIFdelbegin \begin{displaymath}
 \DIFdel{-\omega^{2}\langle \mathbf{w}|P|\tilde{\mathbf{u}}\rangle+\langle \mathbf{w}|H|\tilde{\mathbf{u}}\rangle=\langle \mathbf{w}|\tilde{\mathbf{f}}\rangle.
@@ -456,41 +454,52 @@ In this manner, we have obtained the \textbf{eigenfunction expansion solution}
 for the frequency-domain problem. Inversion of this solution into the \DIFdelbegin \DIFdel{time-domain }\DIFdelend \DIFaddbegin \DIFadd{time domain }\DIFaddend can be readily done using contour integration. Such 
 techniques are not necessary for this course, but in the \DIFdelbegin \DIFdel{final }\DIFdelend \DIFaddbegin \DIFadd{second }\DIFaddend problem set you will be given and make use of the resulting time-domain solution. 
 
-
-
-
-
 \begin{figure}[ht]
 \centering
 \DIFdelbeginFL %DIFDELCMD < \includegraphics[width=\textwidth]{figures/L11F2.png}
 %DIFDELCMD < %%%
-\DIFdelendFL \DIFaddbeginFL \includegraphics[width=\textwidth]{figures/L11F2.pdf}
-\DIFaddendFL \caption{\DIFdelbeginFL \DIFdelFL{The amplitude }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{Amplitude }\DIFaddendFL spectra \DIFdelbeginFL \DIFdelFL{corresponding to }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{of the record in }\DIFaddendFL Fig.\DIFdelbeginFL \DIFdelFL{1. }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{~\ref{fig:1}. The upper panel is for the
+\DIFdelendFL \DIFaddbeginFL \includegraphics[width=\textwidth]{figures/L11F1.pdf}
+\DIFaddendFL \caption{\DIFaddbeginFL \DIFaddFL{Vertical-component acceleration recorded at the Black Forest Observatory in
+Germany following the 2011 Tohoku earthquake in Japan (moment magnitude 9.1). }\DIFaddendFL The \DIFdelbeginFL \DIFdelFL{amplitude spectra corresponding to Fig}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{upper panel shows
+the first twelve hours of the record, dominated by the surface waves, which circle the Earth
+several times}\DIFaddendFL . \DIFdelbeginFL \DIFdelFL{1. In some cases individual mode
+peaks can be identified}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{The lower panel shows the record from six hours to ten days after the earthquake}\DIFaddendFL ,
+\DIFdelbeginFL \DIFdelFL{but especially at higher-frequencies there is substantial
+overlap of }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{band-pass filtered between 0.3 and 1\,mHz to isolate }\DIFaddendFL the \DIFdelbeginFL \DIFdelFL{peaks }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{lowest-frequency free oscillations. Their
+amplitude decays in a roughly exponential fashion over several days. This decay is }\DIFaddendFL due \DIFdelbeginFL \DIFdelFL{both }\DIFdelendFL to
+attenuation \DIFdelbeginFL \DIFdelFL{and an insufficiently long time series}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{within the Earth, but we ignore this effect within our current discussion}\DIFaddendFL .}
+\DIFdelbeginFL %DIFDELCMD < \label{fig:fig2}
+%DIFDELCMD < %%%
+\DIFdelendFL \DIFaddbeginFL \label{fig:1}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{figures/L11F2.pdf}
+\caption{\DIFaddFL{Amplitude spectra of the record in Fig.~\ref{fig:1}. The upper panel is for the
 full ten days of the vertical component, and the lower panel for the first three days of the
 transverse horizontal component (perpendicular to the great circle from the earthquake), a shorter
 window being used because horizontal records are noisier at low frequencies. The vertical lines
 mark the frequencies of the fundamental spheroidal modes ${}_{0}S_{l}$ (upper panel) and toroidal
 modes ${}_{0}T_{l}$ (lower panel) in the earth model PREM; the largest peak in the upper panel is
-the radial mode ${}_{0}S_{0}$, and most of the unlabelled peaks are overtones. }\DIFaddendFL In some cases
-individual mode peaks can be identified, but \DIFdelbeginFL \DIFdelFL{especially }\DIFdelendFL at \DIFdelbeginFL \DIFdelFL{higher-frequencies }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{higher frequencies }\DIFaddendFL there is substantial overlap of
-the peaks due both to attenuation and an insufficiently long time series. \DIFaddbeginFL \DIFaddFL{The lowest-frequency
+the radial mode ${}_{0}S_{0}$, and most of the unlabelled peaks are overtones. In some cases
+individual mode peaks can be identified, but at higher frequencies there is substantial overlap of
+the peaks due both to attenuation and an insufficiently long time series. The lowest-frequency
 peaks are also visibly split into several closely spaced peaks, an effect of the Earth's rotation
-and asphericity that we return to in the next lecture.}\DIFaddendFL }
-\DIFdelbeginFL %DIFDELCMD < \label{fig:fig2}
-%DIFDELCMD < %%%
-\DIFdelendFL \DIFaddbeginFL \label{fig:2}
+and asphericity that we return to in the next lecture.}}
+\label{fig:2}
 \DIFaddendFL \end{figure}
 
 Looking at eq.\DIFdelbegin \DIFdel{(34}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:34}}\DIFaddend ), it is notable that there are singularities at $\pm\omega_{k}$ for each \DIFdelbegin \DIFdel{k}\DIFdelend \DIFaddbegin \DIFadd{$k$}\DIFaddend . Supposing for the moment
 that the \DIFdelbegin \DIFdel{squared-eigenfrequencies }\DIFdelend \DIFaddbegin \DIFadd{squared eigenfrequencies }\DIFaddend are all positive, these singularities lie along the real line. Physically, we are seeing
 \textbf{resonances} in the frequency-domain response when the system is driven at one of its natural frequencies. From an actual seismic 
-record we could take its Fourier transform, look for associated resonance peaks, and hence measure some of the eigenfrequencies 
+record we could take its Fourier transform, look for associated resonance peaks \DIFaddbegin \DIFadd{(see Fig.~\ref{fig:2})}\DIFaddend , and hence measure some of the eigenfrequencies 
 of the Earth. These frequencies are determined solely by Earth structure, and hence their measurement provides a possible
 means to avoid the \textbf{source-structure trade-off} that is ever present in seismology.
 
 To consider such measurements further, it is important to note that recorded seismograms are not of an infinite length, and so their Fourier 
-transform will not yield eq.\DIFdelbegin \DIFdel{(34}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:34}}\DIFaddend ) exactly. In fact, within a more complete treatment there is also slight attenuation that shifts the singularities 
-into the upper half-plane. To understand what happens with a finite-length time series, we can introduce a windowing function, $h(t)$, that is non-zero only in the 
+transform will not yield eq.\DIFdelbegin \DIFdel{(34}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:34}}\DIFaddend ) exactly. \DIFdelbegin \DIFdel{In fact, within a more complete treatment there is also slight attenuation that shifts the singularities 
+into the upper half-plane. }\DIFdelend To understand what happens with a finite-length time series, we can introduce a windowing function, $h(t)$, that is non-zero only in the 
 range $[0,T]$, and so write the observed \DIFdelbegin \DIFdel{time-series as
 }\begin{displaymath}
 \DIFdel{\mathbf{u}_{obs}(t)=h(t)\mathbf{u}(t)
@@ -511,10 +520,11 @@ where we neglect spatial arguments for simplicity. Taking the Fourier transform 
 with the \DIFdelbegin \DIFdel{right hand }\DIFdelend \DIFaddbegin \DIFadd{right-hand }\DIFaddend side being proportional to the convolution of the two Fourier transforms. The end result is that the singularities of the 
 Fourier-domain solution in eq.\DIFdelbegin \DIFdel{(34}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:34}}\DIFaddend ) are smoothed out within real observations. The extent of the smoothing is controlled primarily by the 
 length of the \DIFdelbegin \DIFdel{time-series}\DIFdelend \DIFaddbegin \DIFadd{time series}\DIFaddend , with the support of $\tilde{h}$ being largely confined to an interval whose width scales like $T^{-1}$. This is, of 
-course, a familiar result; longer \DIFdelbegin \DIFdel{time-series }\DIFdelend \DIFaddbegin \DIFadd{time series }\DIFaddend provide better resolution in the \DIFdelbegin \DIFdel{frequency-domain}\DIFdelend \DIFaddbegin \DIFadd{frequency domain}\DIFaddend . 
+course, a familiar result; longer \DIFdelbegin \DIFdel{time-series }\DIFdelend \DIFaddbegin \DIFadd{time series }\DIFaddend provide better resolution in the \DIFdelbegin \DIFdel{frequency-domain}\DIFdelend \DIFaddbegin \DIFadd{frequency domain. Within a more complete treatment there 
+is also slight attenuation that shifts the singularities into the upper half-plane, and this too smooths the resonance peaks}\DIFaddend . 
 
 It is for this reason that observational work on the Earth's free oscillations is concerned only with the largest earthquakes, the response 
-to which can remain above background noise for many days. Even so, within observed spectra we cannot always identify individual mode peaks, and 
+to which can remain above background noise for many days\DIFaddbegin \DIFadd{, as illustrated in Fig.~\ref{fig:1}}\DIFaddend . Even so, within observed spectra we cannot always identify individual mode peaks, and 
 this is especially true in cases of near degeneracy that we will examine in more detail in the next lecture.
 
 \subsection*{Gravitational stability}
@@ -632,7 +642,7 @@ negative squared eigenfrequencies.
 \DIFdelend \DIFaddbegin \begin{enumerate}
     \DIFaddend \item[(i)] The weak formulation of the equations of motion using \DIFdelbegin \DIFdel{bra-ket like }\DIFdelend \DIFaddbegin \DIFadd{bra-ket-like }\DIFaddend notation, and the properties of the different sesquilinear forms.
     \item[(ii)] How to derive \DIFaddbegin \DIFadd{the }\DIFaddend reality of the \DIFdelbegin \DIFdel{squared-eigenfrequencies }\DIFdelend \DIFaddbegin \DIFadd{squared eigenfrequencies }\DIFaddend and orthogonality of eigenfunctions in distinct eigenspaces. State without proof the remaining important properties of the eigenvalue problem.
-    \item[(iii)] How to obtain a solution of the forced equations of motion in a non-rotating planet as an eigenfunction expansion in the \DIFdelbegin \DIFdel{frequency-domain}\DIFdelend \DIFaddbegin \DIFadd{frequency domain}\DIFaddend . You do not need to know how to recover the time-domain solution, but may be asked to verify that such a solution works.
+    \item[(iii)] How to obtain a solution of the forced equations of motion in a non-rotating \DIFdelbegin \DIFdel{planet }\DIFdelend \DIFaddbegin \DIFadd{earth model }\DIFaddend as an eigenfunction expansion in the \DIFdelbegin \DIFdel{frequency-domain}\DIFdelend \DIFaddbegin \DIFadd{frequency domain}\DIFaddend . You do not need to know how to recover the time-domain solution, but may be asked to verify that such a solution works.
     \item[(iv)] That eigenfrequencies are associated with resonance peaks in the amplitude spectra obtained from seismograms, and why it is necessary to look at data from large earthquakes to obtain adequate resolution.
     \item[(v)] What it means for a non-rotating earth model to be stable in terms of the eigenfrequencies. You should understand the quantitative argument for the non-gravitating case, and the qualitative one when gravity is included.
 \DIFdelbegin %DIFDELCMD < \end{itemize}

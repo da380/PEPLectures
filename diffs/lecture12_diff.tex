@@ -1,7 +1,7 @@
 \documentclass[a4paper,12pt]{paper}
 %DIF LATEXDIFF DIFFERENCE FILE
 %DIF DEL lecture12.tex             Thu Nov 20 02:15:48 2025
-%DIF ADD diffs/lecture12_new.tex   Fri Sep 25 15:38:27 2026
+%DIF ADD diffs/lecture12_new.tex   Fri Sep 25 16:51:41 2026
 \usepackage{mycommands}
 
 \title{Lecture 23: Mode splitting and coupling}
@@ -57,7 +57,7 @@ first consider the eigenvalue problem in a \textbf{spherically symmetric earth m
 with relative ease. An important point is that the eigenspaces in a spherically symmetric model are \textbf{degenerate}, each having 
 dimension $2l+1$ for some integer degree $l\ge0$. This material depends on the properties of \textbf{vector spherical harmonics}, but 
 you are not expected to \DIFaddbegin \DIFadd{know }\DIFaddend the details. We then show using \textbf{first-order perturbation theory} how in the real Earth this degeneracy 
-is \textbf{split by rotation and lateral heterogeneity}. To conclude, an overview is given of radial and \DIFdelbegin \DIFdel{laterally }\DIFdelend \DIFaddbegin \DIFadd{lateral }\DIFaddend variations of density 
+is \textbf{split by rotation and lateral heterogeneity}\DIFaddbegin \DIFadd{, and how the resulting first-order theory is generalised by mode coupling}\DIFaddend . To conclude, an overview is given of radial and \DIFdelbegin \DIFdel{laterally }\DIFdelend \DIFaddbegin \DIFadd{lateral }\DIFaddend variations of density 
 within the Earth, with some current research questions highlighted.
 
 \section*{Vector spherical harmonics}
@@ -137,7 +137,8 @@ The following orthogonality relations can be established\DIFdelbegin \begin{eqna
 \DIFadd{\int_{\mathbb{S}^{2}}\mathbf{B}_{l'm'}^{*}\cdot \mathbf{B}_{lm}\dd S}&\DIFadd{=l(l+1)\delta_{ll'}\delta_{mm'},\label{eq:9}}\\
 \DIFadd{\int_{\mathbb{S}^{2}}\mathbf{C}_{l'm'}^{*}\cdot \mathbf{C}_{lm}\dd S}&\DIFadd{=l(l+1)\delta_{ll'}\delta_{mm'},\label{eq:10}
 }\end{align}\DIFaddend 
-where $\cdot$ denotes the usual real inner product $\mathbf{a}\cdot \mathbf{b}=a_{i}b_{i}$ for vectors. 
+where $\cdot$ denotes the usual real inner product $\mathbf{a}\cdot \mathbf{b}=a_{i}b_{i}$ for vectors\DIFaddbegin \DIFadd{, while all mixed integrals, 
+such as $\int_{\mathbb{S}^{2}}\mathbf{A}_{l'm'}^{*}\cdot\mathbf{C}_{lm}\dd S$, vanish}\DIFaddend . 
 Note that $\mathbf{B}_{lm}$ and $\mathbf{C}_{lm}$ could be scaled such that these functions are orthonormal, but this is not necessary. 
 It can be shown that the vector spherical harmonics are complete for vector fields defined on $\mathbb{S}^{2}$, this meaning 
 that such a $\mathbf{u}$ can be expanded as
@@ -158,7 +159,7 @@ In a non-rotating earth model, we recall that the eigenvalue problem takes the f
 -\omega^{2}\langle \mathbf{w}|P|\mathbf{s}\rangle+\langle \mathbf{w}|H|\mathbf{s}\rangle=0,
 }\end{equation}\DIFaddend 
 where $\omega$ is the eigenfrequency, $\mathbf{s}$ the eigenfunction, and $\mathbf{w}$ is an arbitrary test function.
-When the material parameters $\rho$, and $A_{ijkl}$ are spherically symmetric\DIFdelbegin \footnote{\DIFdel{The most general elastic tensor that is 
+When the material parameters $\rho$ \DIFdelbegin \DIFdel{, }\DIFdelend and $A_{ijkl}$ are spherically symmetric\DIFdelbegin \footnote{\DIFdel{The most general elastic tensor that is 
 consistent with spherical symmetry is }\textbf{\DIFdel{transversely isotropic}}
 %DIFAUXCMD
 \DIFdel{with a radial symmetry axis. There are then }\textbf{\DIFdel{five elastic modulii}}%DIFAUXCMD
@@ -170,7 +171,7 @@ consistent with spherical symmetry is }\textbf{\DIFadd{transversely isotropic}}
 \DIFadd{with a radial symmetry axis. There are then }\textbf{\DIFadd{five elastic moduli}}\DIFadd{, which can be taken to be Love's 
 $A$, $C$, $F$, $L$ and $N$ of Lecture~14, each of which can vary with radius. In an isotropic model these reduce to the 
 bulk and shear moduli $\kappa$ and $\mu$, and for simplicity we assume isotropy in what follows.}} \DIFaddend it can be shown that the \DIFdelbegin \DIFdel{possible eigenfunctions take }\DIFdelend \DIFaddbegin \DIFadd{eigenfunctions are of }\DIFaddend two possible types known as 
-\textbf{toroidal} and \textbf{spheroidal modes}. This can be shown either through a direct but lengthy calculation using 
+\textbf{toroidal} and \textbf{spheroidal modes}. This can be \DIFdelbegin \DIFdel{shown }\DIFdelend \DIFaddbegin \DIFadd{established }\DIFaddend either through a direct but lengthy calculation using 
 spherical harmonics, or using representation theory for the rotation group. For reasons of both time and difficulty, we 
 here just summarise the eventual results.
 
@@ -232,7 +233,7 @@ Using eq.\DIFdelbegin \DIFdel{(8}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:10}}\
 \DIFdelend \DIFaddbegin \begin{equation}\DIFadd{\label{eq:16}
 \langle \mathbf{w}|P|\mathbf{s}\rangle=\zeta^{2}\int_{0}^{b}\rho w^{*}Wr^{2}\dd r,
 }\end{equation}\DIFaddend 
-where we have set $\zeta=\sqrt{l(l+1)}$ and have assumed the earth model is entirely solid. 
+where \DIFaddbegin \DIFadd{$b$ is the radius of the earth model, and }\DIFaddend we have set $\zeta=\sqrt{l(l+1)}$ and \DIFdelbegin \DIFdel{have }\DIFdelend assumed the earth model is entirely solid. 
 In a similar manner, it can be shown that
 \DIFdelbegin \begin{displaymath}
 \DIFdel{\langle \mathbf{w}|H|\mathbf{s}\rangle=\zeta^{2}\int_{0}^{b}\mu(r\frac{\ddns W'^{*}}{\ddns r}-W'^{*})(r\frac{\ddns W}{\ddns r}-W)\dd r+\zeta^{2}(\zeta^{2}-2)\int_{0}^{b}\mu W'^{*}W\dd r.
@@ -278,10 +279,11 @@ fluid outer core, or in the inner core) crossing and interacting with one anothe
 
 
 \DIFadd{Fig.~\ref{fig:6} shows the radial eigenfunctions of a few representative modes. Several general features are worth noting. 
-The overtone number counts the nodes of the radial eigenfunction, so that the fundamental modes have none. As the degree increases 
+For toroidal modes the overtone number counts the nodes of the radial eigenfunction, so that the fundamental modes have none; 
+for spheroidal modes there is no such simple rule.}\footnote{\DIFadd{A generalisation of the node-counting property to spheroidal modes does exist, formulated in terms of the so-called minor vectors of the radial equations (Woodhouse 1988; Al-Attar \& Woodhouse 2008), but it lies far beyond this course.}} \DIFadd{As the degree increases 
 at fixed overtone number the eigenfunctions become confined ever closer to the surface; the fundamental modes of high degree 
-are the standing-wave equivalents of surface waves, a topic that is not covered within this course. Toroidal modes of the mantle vanish at the core--mantle 
-boundary, where the shear stress must vanish, while spheroidal modes penetrate the fluid outer core and the inner core, and hence 
+are the standing-wave equivalents of surface waves, a topic that is not covered within this course. Toroidal modes of the mantle have vanishing shear traction at the core--mantle 
+boundary, so that $r\,\dd W/\dd r-W$ vanishes there, while spheroidal modes penetrate the fluid outer core and the inner core, and hence 
 carry information about the deep Earth. The spheroidal eigenfunctions have two radial components, $U$ for the radial displacement and 
 $V$ for the tangential one; for the radial modes with $l=0$ only $U$ is present. Not all modes are so regular, and 
 Fig.~\ref{fig:8} shows some of the more curious kinds: a mode dominated by a rigid translation of the inner core within the fluid 
@@ -328,15 +330,16 @@ model, while the corresponding eigenfrequencies depend only on $(q,l,n)$. As a u
 Indeed, this is precisely the notation used in the last lecture. When needed, however, we can also write $|qlnm\rangle$ to 
 explicitly characterise an eigenfunction. As a final bit of terminology, for each $(q,l,n)$ we call the eigenspace a \textbf{multiplet},
 while individual elements of its basis, as labelled by $m$, are known as \textbf{singlets}. We might then, for example, talk about a 
-degree two toroidal multiplet which is comprised of five singlets. A common labelling scheme for toroidal multiplets is to 
+degree two toroidal multiplet which \DIFdelbegin \DIFdel{is comprised of }\DIFdelend \DIFaddbegin \DIFadd{comprises }\DIFaddend five singlets. A common labelling scheme for toroidal multiplets is to 
 write ${}_{n}T_{l}$ for the multiplet of degree $l$ and overtone number $n$. Similarly, spheroidal multiplets are written ${}_{n}S_{l}$.
 
 \subsection*{Splitting of a multiplet due to rotation and lateral heterogeneity}
 
 Within a spherically symmetric earth model, the normal modes come in $(2l+1)$-fold degenerate multiplets, with $l$ the degree which is 
 a non-negative integer. Such degeneracy is a direct consequence of the spherical symmetry of the problem, and analogous results are seen in other parts of physics. 
-In particular, you know that the energy eigenspaces for the hydrogen atom are similarly degenerate, though note that here there is additional degeneracy associated 
-with the ``hidden symmetry'' within central force problems due to the \DIFdelbegin \DIFdel{Runge-Lenz }\DIFdelend \DIFaddbegin \DIFadd{Runge--Lenz }\DIFaddend vector. 
+In particular, you know that the energy eigenspaces for the hydrogen atom are similarly degenerate, though note that \DIFdelbegin \DIFdel{here there is additional degeneracy associated 
+with }\DIFdelend \DIFaddbegin \DIFadd{there the degeneracy is larger still, owing to 
+}\DIFaddend the ``hidden symmetry'' \DIFdelbegin \DIFdel{within central force problems due to the Runge-Lenz }\DIFdelend \DIFaddbegin \DIFadd{of the Coulomb problem associated with the Runge--Lenz }\DIFaddend vector. 
 
 If such a spherically symmetric system undergoes an aspherical perturbation we expect that this degeneracy will be broken, with the singlets that
  comprise the multiplet splitting apart. This is precisely what happens in the \textbf{\DIFdelbegin \DIFdel{Zeeman-effect }\DIFdelend \DIFaddbegin \DIFadd{Zeeman effect }\DIFaddend for \DIFdelbegin \DIFdel{a }\DIFdelend \DIFaddbegin \DIFadd{the }\DIFaddend hydrogen atom}, and we will apply very 
@@ -365,30 +368,30 @@ Suppose now that we add a laterally heterogeneous perturbation to the model such
 \DIFdel{\langle \mathbf{w}|P|\mathbf{s}\rangle=\langle \mathbf{w}|P_{0}|\mathbf{s}\rangle+s\langle \mathbf{w}|P_{1}|\mathbf{s}\rangle+\cdot\cdot\cdot,
 }\end{displaymath}%DIFAUXCMD
 \DIFdelend \DIFaddbegin \begin{equation}\DIFadd{\label{eq:21}
-\langle \mathbf{w}|P|\mathbf{s}\rangle=\langle \mathbf{w}|P_{0}|\mathbf{s}\rangle+s\langle \mathbf{w}|P_{1}|\mathbf{s}\rangle+\cdots,
+\langle \mathbf{w}|P|\mathbf{s}\rangle=\langle \mathbf{w}|P_{0}|\mathbf{s}\rangle+\epsilon\langle \mathbf{w}|P_{1}|\mathbf{s}\rangle+\cdots,
 }\end{equation}\DIFaddend 
-where \DIFdelbegin \DIFdel{s }\DIFdelend \DIFaddbegin \DIFadd{$s$ }\DIFaddend is a perturbation parameter. Using a similar notation for the potential energy form, we wish to consider the eigenvalue problem
+where \DIFdelbegin \DIFdel{s }\DIFdelend \DIFaddbegin \DIFadd{$\epsilon$ }\DIFaddend is a perturbation parameter. Using a similar notation for the potential energy form, we wish to consider the eigenvalue problem
 \DIFdelbegin \begin{displaymath}
 \DIFdel{-\omega^{2}[\langle \mathbf{w}|P_{0}|\mathbf{s}\rangle+s\langle \mathbf{w}|P_{1}|\mathbf{s}\rangle+\cdot\cdot\cdot]
 +}[\DIFdel{\langle \mathbf{w}|H_{0}|\mathbf{s}\rangle+s\langle \mathbf{w}|H_{1}|\mathbf{s}\rangle+\cdot\cdot\cdot}]\DIFdel{=0.
 }\end{displaymath}%DIFAUXCMD
 \DIFdelend \DIFaddbegin \begin{equation}\DIFadd{\label{eq:22}
--\omega^{2}[\langle \mathbf{w}|P_{0}|\mathbf{s}\rangle+s\langle \mathbf{w}|P_{1}|\mathbf{s}\rangle+\cdots]
-+}[\DIFadd{\langle \mathbf{w}|H_{0}|\mathbf{s}\rangle+s\langle \mathbf{w}|H_{1}|\mathbf{s}\rangle+\cdots}]\DIFadd{=0.
+-\omega^{2}[\langle \mathbf{w}|P_{0}|\mathbf{s}\rangle+\epsilon\langle \mathbf{w}|P_{1}|\mathbf{s}\rangle+\cdots]
++}[\DIFadd{\langle \mathbf{w}|H_{0}|\mathbf{s}\rangle+\epsilon\langle \mathbf{w}|H_{1}|\mathbf{s}\rangle+\cdots}]\DIFadd{=0.
 }\end{equation}\DIFaddend 
 We assume that the perturbed eigenfrequency can be written
 \DIFdelbegin \begin{displaymath}
 \DIFdel{\omega=\omega_{k}+s\delta\omega+\cdot\cdot\cdot
 }\end{displaymath}%DIFAUXCMD
 \DIFdelend \DIFaddbegin \begin{equation}\DIFadd{\label{eq:23}
-\omega=\omega_{k}+s\delta\omega+\cdots,
+\omega=\omega_{k}+\epsilon\,\delta\omega+\cdots,
 }\end{equation}\DIFaddend 
 while for the eigenfunctions we assume
 \DIFdelbegin \begin{displaymath}
 \DIFdel{\mathbf{s}=\sum_{m=-l}^{l}a_{m}|km\rangle+s~\delta\mathbf{s}+\cdot\cdot\cdot
 }\end{displaymath}%DIFAUXCMD
 \DIFdelend \DIFaddbegin \begin{equation}\DIFadd{\label{eq:24}
-\mathbf{s}=\sum_{m=-l}^{l}a_{m}|km\rangle+s\,\delta\mathbf{s}+\cdots,
+\mathbf{s}=\sum_{m=-l}^{l}a_{m}|km\rangle+\epsilon\,\delta\mathbf{s}+\cdots,
 }\end{equation}\DIFaddend 
 where the $a_{m}$ are coefficients to be determined. Note here that we are allowing for the zeroth-order eigenspace to be degenerate,
  this method having been applied earlier in the course when considering shear wave splitting. 
@@ -427,8 +430,8 @@ The above argument can be readily extended to allow for rotation of the earth mo
 }\end{displaymath}%DIFAUXCMD
 \DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:22}) to 
 }\begin{equation}\DIFadd{\label{eq:27}
--\omega^{2}[\langle \mathbf{w}|P_{0}|\mathbf{s}\rangle+s\langle \mathbf{w}|P_{1}|\mathbf{s}\rangle+\cdots]
-+\ii\omega[s\langle \mathbf{w}|W|\mathbf{s}\rangle] +}[\DIFadd{\langle \mathbf{w}|H_{0}|\mathbf{s}\rangle+s\langle \mathbf{w}|H_{1}|\mathbf{s}\rangle+\cdots}]\DIFadd{=0.
+-\omega^{2}[\langle \mathbf{w}|P_{0}|\mathbf{s}\rangle+\epsilon\langle \mathbf{w}|P_{1}|\mathbf{s}\rangle+\cdots]
++\ii\omega\epsilon\langle \mathbf{w}|W|\mathbf{s}\rangle+}[\DIFadd{\langle \mathbf{w}|H_{0}|\mathbf{s}\rangle+\epsilon\langle \mathbf{w}|H_{1}|\mathbf{s}\rangle+\cdots}]\DIFadd{=0.
 }\end{equation}\DIFaddend 
 A similar expansion to \DIFdelbegin \DIFdel{first-order }\DIFdelend \DIFaddbegin \DIFadd{first order }\DIFaddend then leads to the Hermitian eigenvalue problem
 \DIFdelbegin \begin{displaymath}
@@ -441,14 +444,12 @@ where we see on the \DIFdelbegin \DIFdel{left hand }\DIFdelend \DIFaddbegin \DIF
 also that terms associated with the centrifugal force need to be incorporated into the perturbation to the potential energy form.
 
 \subsection*{The diagonal sum rule and spherically symmetric density variations}
-Within the first-order splitting calculations earlier, we \DIFdelbegin \DIFdel{consider }\DIFdelend \DIFaddbegin \DIFadd{considered }\DIFaddend a Hermitian eigenvalue problem of the form
-\DIFdelbegin \begin{displaymath}
+Within the first-order splitting calculations earlier, we \DIFdelbegin \DIFdel{consider a }\DIFdelend \DIFaddbegin \DIFadd{considered the }\DIFaddend Hermitian eigenvalue problem\DIFdelbegin \DIFdel{of the form
+}\begin{displaymath}
 \DIFdel{\frac{1}{2\omega_{k}}\sum_{m=-l}^{l}[-\omega_{k}^{2}\langle km'|P_{1}|km\rangle+\ii\omega_{k}\langle km'|W|km\rangle+\langle km'|H_{1}|km\rangle]a_{m}=\delta\omega a_{m'}
 }\end{displaymath}%DIFAUXCMD
-\DIFdelend \DIFaddbegin \begin{equation}\DIFadd{\label{eq:29}
-\frac{1}{2\omega_{k}}\sum_{m=-l}^{l}[-\omega_{k}^{2}\langle km'|P_{1}|km\rangle+\ii\omega_{k}\langle km'|W|km\rangle+\langle km'|H_{1}|km\rangle]a_{m}=\delta\omega a_{m'}.
-}\end{equation}\DIFaddend 
-The perturbations to the singlet eigenfrequencies are equal to the eigenvalues of the matrix on the \DIFdelbegin \DIFdel{left hand }\DIFdelend \DIFaddbegin \DIFadd{left-hand }\DIFaddend side. 
+\DIFdelend \DIFaddbegin \DIFadd{, eq.~(\ref{eq:28}). 
+}\DIFaddend The perturbations to the singlet eigenfrequencies are equal to the eigenvalues of the matrix on the \DIFdelbegin \DIFdel{left hand }\DIFdelend \DIFaddbegin \DIFadd{left-hand }\DIFaddend side. 
 Based on so-called \textbf{selection rules} for the matrix elements\DIFdelbegin \footnote{\DIFdel{That are near identical to those arising in the quantum theory
 of angular momentum}}%DIFAUXCMD
 \addtocounter{footnote}{-1}%DIFAUXCMD
@@ -459,9 +460,11 @@ This result is known as the \textbf{diagonal sum rule} and was obtained by \DIFd
 Earth structure using observations of free \DIFdelbegin \DIFdel{oscillation}\DIFdelend \DIFaddbegin \DIFadd{oscillations}\DIFaddend . 
 
 In the previous lecture we saw that eigenfrequencies can be measured
-from the amplitude spectra of sufficiently long seismograms. The first such observations were made following the 1960 Great\footnote{``Great'' is a 
-technical term used for especially large earthquakes\DIFdelbegin \DIFdel{, }\DIFdelend \DIFaddbegin \DIFadd{; }\DIFaddend it does not suggest that the earthquake was a good thing.} Chilean
-earthquake which remains the largest event that has occurred during the instrumental period. By this time there existed good models 
+from the amplitude spectra of sufficiently long seismograms. The first such observations were made following the 1960 Great \DIFdelbegin \footnote{\DIFdel{``Great'' is a 
+technical term used for especially large earthquakes, it does not suggest that the earthquake was a good thing. }} %DIFAUXCMD
+\addtocounter{footnote}{-1}%DIFAUXCMD
+\DIFdel{Chilean earthquake}\DIFdelend \DIFaddbegin \DIFadd{Chilean earthquake,}\footnote{\DIFadd{``Great'' is a 
+technical term used for especially large earthquakes; it does not suggest that the earthquake was a good thing.}} \DIFaddend which remains the largest event that has occurred during the instrumental period. By this time there existed good models 
 of the Earth's spherically symmetric velocity structure obtained from travel time observations. There also existed plausible models 
 of radial density variations that were built using knowledge of the Earth's mass, moments of inertia, and simple thermodynamic models of 
 density variations in a homogeneous \DIFdelbegin \DIFdel{solids }\DIFdelend \DIFaddbegin \DIFadd{solid }\DIFaddend compressed under its own weight. As a consequence, the first spectra observed could be 
@@ -486,9 +489,9 @@ earthquake. Taken from Benioff et al.\DIFaddbeginFL \DIFaddFL{\ }\DIFaddendFL (1
 \DIFdelendFL \DIFaddbeginFL \label{fig:3}
 \end{figure}
 
-\DIFadd{Fig.~\ref{fig:9} shows the modern equivalent, using twenty-day records of the 2011 Tohoku earthquake at three stations. Both ${}_{0}S_{2}$ 
-and ${}_{0}S_{3}$ are resolved into their singlets, five and seven respectively, with the relative amplitudes of the singlets 
-depending on the position of the station and the orientation of the source. The singlets are spread almost symmetrically 
+\DIFadd{Fig.~\ref{fig:9} shows the modern equivalent, using twenty-day records of the 2011 Tohoku earthquake at three stations. Here ${}_{0}S_{2}$ 
+is resolved into four of its five singlets, the central one being weak at all three stations, and ${}_{0}S_{3}$ into most of its 
+seven, with the relative amplitudes of the singlets depending on the position of the station and the orientation of the source. The singlets are spread almost symmetrically 
 about the degenerate frequency of PREM, and their nearly uniform spacing is the signature of the Earth's rotation, which 
 splits a multiplet in much the same manner as a magnetic field splits atomic energy levels in the Zeeman effect.
 }
@@ -503,10 +506,10 @@ offset vertically, and the dashed lines mark the degenerate eigenfrequencies of 
 \DIFaddendFL \end{figure}
 
 
-During these early days of seismology, the main emphasis was on better constraining the Earth's spherically averaged structure. 
-With travel time observations this could be easily done. For many source-receiver pairs the travel time of different seismic phases 
+During these early days of \DIFaddbegin \DIFadd{free oscillation }\DIFaddend seismology, the main emphasis was on better constraining the Earth's spherically averaged structure. 
+With travel time observations this could be easily done. For many \DIFdelbegin \DIFdel{source-receiver }\DIFdelend \DIFaddbegin \DIFadd{source--receiver }\DIFaddend pairs the travel time of different seismic phases 
 could be measured. This information could then be reduced to plots of \DIFdelbegin \DIFdel{travel-time }\DIFdelend \DIFaddbegin \DIFadd{travel time }\DIFaddend against epicentral angle. Due to lateral heterogeneity, 
-along with observational error, there was some scatter in these travel-time curves, but this could be averaged out. Note that the latter 
+along with observational error, there was some scatter in these \DIFdelbegin \DIFdel{travel-time }\DIFdelend \DIFaddbegin \DIFadd{travel time }\DIFaddend curves, but this could be averaged out. Note that the latter 
 step is not rigorously justified, but it was at least easy to do. With free oscillations, however, the situation was quite different. 
 What we observe are split eigenfrequencies of the singlets, but what we really want is the eigenfrequency of the associated multiplet 
 prior to this splitting. Supposing that all the singlet frequencies for a split multiplet have been measured, Gilbert's diagonal sum 
@@ -517,7 +520,7 @@ be seen clearly in any one spectrum, but by combining observations from many dif
 frequencies can be recovered using various signal processing methods.
 
 \DIFaddbegin \DIFadd{How do the degenerate eigenfrequencies constrain the Earth's structure? The answer is through }\textbf{\DIFadd{sensitivity kernels}} 
-\DIFadd{of exactly the kind met in Lectures~19 and~20. Suppose that the density and elastic moduli of a spherically symmetric earth model are 
+\DIFadd{of exactly the kind met in Lecture~20. Suppose that the density and elastic moduli of a spherically symmetric earth model are 
 perturbed by small amounts $\delta\rho$, $\delta\kappa$ and $\delta\mu$. Because the eigenfrequencies are stationary with respect to 
 variations of the eigenfunctions, an argument identical to that used for the first-order splitting above (with the perturbation 
 now spherically symmetric, so that the multiplet is not split) shows that the change in a degenerate eigenfrequency is
@@ -535,9 +538,9 @@ K_{\mu}=\frac{1}{2\omega_{k}}\left[\left(r\frac{\ddns W}{\ddns r}-W\right)^{2}+(
 K_{\rho}=-\frac{\omega_{k}}{2}W^{2}r^{2}.
 }\end{equation}
 \DIFadd{The spheroidal kernels are more complicated, involving both $U$ and $V$ together with the perturbation to the gravitational 
-potential, and we do not write them out. Fig.~\ref{fig:7} shows kernels for a few modes. Several features are important. 
-The density kernels are of both signs: added mass lowers the frequency through the kinetic energy, but also increases 
-the gravitational forces, and for the lowest-frequency spheroidal modes the two effects are comparable. The kernels for the 
+potential, and we do not write them out (see Dahlen \& Tromp 1998). Fig.~\ref{fig:7} shows kernels for a few modes. Several features are important. 
+The density kernel can be of either sign: added mass lowers the frequency through the kinetic energy but also increases 
+the gravitational forces, and for ${}_{0}S_{2}$ the two effects compete, the kernel changing sign within the outer core. The kernels for the 
 moduli are positive, as they must be, stiffer material raising the frequency. And a given mode is sensitive only where its 
 eigenfunction is large, so that the high-degree fundamental modes constrain only the upper mantle, while modes such as 
 ${}_{0}S_{2}$ and the radial modes sample the whole planet. Because the kernels for $\kappa$, $\mu$ and $\rho$ have 
@@ -551,8 +554,8 @@ this is how the radial density structure of the Earth is constrained by seismolo
 \caption{\DIFaddFL{Sensitivity kernels of the toroidal (upper row) and spheroidal (lower row) modes of Fig.~\ref{fig:6}. The 
 kernels are shown in fractional form, so that $\delta\omega_{k}/\omega_{k}=\int_{0}^{b}(\tilde{K}_{\kappa}\,\delta\kappa/\kappa+
 \tilde{K}_{\mu}\,\delta\mu/\mu+\tilde{K}_{\rho}\,\delta\rho/\rho)\dd r$. The toroidal kernels follow from eq.~(\ref{eq:29b}); 
-the spheroidal ones, which include the effects of self-gravitation, were obtained numerically. The density kernels of 
-${}_{0}S_{2}$ and ${}_{0}S_{0}$ show how gravity and inertia compete for the gravest modes.}}
+the spheroidal ones, which include the effects of self-gravitation, were obtained numerically. The density kernel of 
+${}_{0}S_{2}$ changes sign in the outer core, gravity and inertia competing for this gravest mode.}}
 \label{fig:7}
 \end{figure}
 
@@ -561,7 +564,7 @@ spherically averaged structure had been determined by the late 1970s. Taken alon
 existing earth models to be substantially refined, and, in particular, for radial density variations to be found. The resulting 
 density structure is shown in Fig.\DIFdelbegin \DIFdel{4. }\DIFdelend \DIFaddbegin \DIFadd{~\ref{fig:4}. }\DIFaddend These observed densities can be compared with predictions made by mineral physicists subject 
 to assumptions about the Earth's interior composition. For example, it has been shown that the density of the outer core is 
-significantly lighter than expected if it were comprised of an \DIFdelbegin \DIFdel{iron-nickel }\DIFdelend \DIFaddbegin \DIFadd{iron--nickel }\DIFaddend alloy as is suggested \DIFaddbegin \DIFadd{by }\DIFaddend observations of meteorites. 
+significantly \DIFdelbegin \DIFdel{lighter }\DIFdelend \DIFaddbegin \DIFadd{lower }\DIFaddend than expected if it were \DIFdelbegin \DIFdel{comprised of an iron-nickel }\DIFdelend \DIFaddbegin \DIFadd{composed of an iron--nickel }\DIFaddend alloy as is suggested \DIFaddbegin \DIFadd{by }\DIFaddend observations of meteorites. 
 This discrepancy is telling us something about how planets form and \DIFdelbegin \DIFdel{differentiation}\DIFdelend \DIFaddbegin \DIFadd{differentiate}\DIFaddend . As yet the identity of this ``light element''
 in the core is uncertain, with oxygen or silicon being perhaps the most likely candidates. But what is worth emphasising is that 
 such discussions are only possible due to the highly accurate constraints on the interior structure provided by seismology.
@@ -584,8 +587,17 @@ better understand mantle convection. In Fig.\DIFdelbegin \DIFdel{5 }\DIFdelend \
 the Earth, and a broad agreement can be seen. In particular, all models show at the base of the mantle two large regions with low 
 shear wave velocity, one below the Pacific, and the other below Africa. 
 
-On the assumption that these velocity variations reflect 
-temperature variations, then we conclude that these so-called \textbf{Large Low Shear Velocity Provinces (LLSVPs)} are hotter than the 
+\DIFaddbegin \begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{figures/L12F5.png}
+\caption{\DIFaddFL{Depth slices from a range of different S-wave tomographic models, taken from Ritsema et al.\ (2011). 
+In all cases the Pacific and African LLSVPs can be seen at the base of the mantle. The dynamical
+significance of these features remains unclear.}}
+\label{fig:5}
+\end{figure}
+
+\DIFaddend On the assumption that these velocity variations reflect 
+temperature variations, \DIFdelbegin \DIFdel{then }\DIFdelend we conclude that these so-called \textbf{Large Low Shear Velocity Provinces (LLSVPs)} are hotter than the 
 surrounding mantle. If this is true, then we would also expect that these regions are lighter than the ambient mantle, and hence 
 will experience an upwards buoyancy force. When LLSVPs were first identified in the early \DIFdelbegin \DIFdel{90s }\DIFdelend \DIFaddbegin \DIFadd{1990s }\DIFaddend such an interpretation was taken 
 for granted, and they were known as ``super plumes''. A range of subsequent work, however, has brought into question this conclusion. 
@@ -597,8 +609,9 @@ the bulk sound speed
 \DIFdelend \DIFaddbegin \begin{equation}\DIFadd{\label{eq:30}
 v_{\phi}=\sqrt{\frac{\kappa}{\rho}}.
 }\end{equation}\DIFaddend 
-Note that this is not a speed of any elastic wave, but rather a parameter that is useful because it depends only on the bulk and 
-not shear modulus. 
+Note that this is not a speed of any elastic wave, but rather a parameter that is useful because it depends \DIFdelbegin \DIFdel{only }\DIFdelend on the bulk \DIFdelbegin \DIFdel{and 
+not }\DIFdelend \DIFaddbegin \DIFadd{modulus but 
+not the }\DIFaddend shear modulus. 
 
 If the lateral variations are caused by temperature, then we would expect that the shear and bulk sound velocities 
 would \textbf{positively correlate}. To see this, we assume that temperature variations are sufficiently small to allow us to write
@@ -633,29 +646,32 @@ significant compositional variations exist in the lower mantle, then we cannot \
 whether LLSVPs are \DIFdelbegin \DIFdel{be }\DIFdelend light or dense, and hence the role they play in mantle dynamics. To address this latter point what 
 is needed are direct estimates of their density, and it \DIFaddbegin \DIFadd{is }\DIFaddend free oscillations that have the potential to provide this information.
 
-
-\begin{figure}[ht]
-\centering
-\includegraphics[width=\textwidth]{figures/L12F5.png}
-\caption{Depth slices from a range of different S-wave tomographic models\DIFaddbeginFL \DIFaddFL{, taken from Ritsema et al.\ (2011)}\DIFaddendFL . 
-In all cases the Pacific and African LLSVPs can be seen at the base of the mantle. The dynamical
-significance of these features remains unclear.}
-\DIFdelbeginFL %DIFDELCMD < \label{fig:fig5}
+\DIFdelbegin %DIFDELCMD < \begin{figure}[ht]
+%DIFDELCMD < \centering
+%DIFDELCMD < \includegraphics[width=\textwidth]{figures/L12F5.png}
 %DIFDELCMD < %%%
-\DIFdelendFL \DIFaddbeginFL \label{fig:5}
-\DIFaddendFL \end{figure}
+%DIFDELCMD < \caption{%
+{%DIFAUXCMD
+\DIFdelFL{Depth slices from a range of different S-wave tomographic models. In all cases the
+Pacific and African LLSVPs can be seen at the base of the mantle. The dynamical
+significance of these features remains unclear.}}
+%DIFAUXCMD
+%DIFDELCMD < \label{fig:fig5}
+%DIFDELCMD < \end{figure}
+%DIFDELCMD < 
 
-The first study of lateral density variations in the lower mantle using free oscillation data was undertaken in the late \DIFdelbegin \DIFdel{90s }\DIFdelend \DIFaddbegin \DIFadd{1990s }\DIFaddend by 
+%DIFDELCMD < %%%
+\DIFdelend The first study of lateral density variations in the lower mantle using free oscillation data was undertaken in the late \DIFdelbegin \DIFdel{90s }\DIFdelend \DIFaddbegin \DIFadd{1990s }\DIFaddend by 
 Miaki Ishii and Jeroen Tromp\DIFaddbegin \DIFadd{, }\DIFaddend then both at Harvard \DIFdelbegin \DIFdel{and Miaki }\DIFdelend \DIFaddbegin \DIFadd{(Ishii being }\DIFaddend a PhD student \DIFaddbegin \DIFadd{at the time; Ishii \& Tromp 1999)}\DIFaddend . This study was based on a slight elaboration \DIFaddbegin \DIFadd{of }\DIFaddend the first-order splitting theory 
 discussed earlier in the lecture, and the resulting models showed that LLSVPs are denser than the surrounding mantle. This is consistent 
 with the presence of compositional variations, and hence leads to interesting questions about what these variations are, and how they were 
-produced. Do, for example, LLSVPs represent a \DIFdelbegin \DIFdel{"slab graveyard" }\DIFdelend \DIFaddbegin \DIFadd{``slab graveyard'' }\DIFaddend comprised of compositionally distinct material accumulated at the base of 
+produced. Do, for example, LLSVPs represent a \DIFdelbegin \DIFdel{"slab graveyard" comprised }\DIFdelend \DIFaddbegin \DIFadd{``slab graveyard'' composed }\DIFaddend of compositionally distinct material accumulated at the base of 
 the mantle through subduction\DIFdelbegin \DIFdel{. }\DIFdelend \DIFaddbegin \DIFadd{? }\DIFaddend Or are they instead ancient iron-enriched features produced as the Earth differentiated into a mantle 
 and core? Such questions continue to engage a wide range of Earth \DIFdelbegin \DIFdel{Scientists}\DIFdelend \DIFaddbegin \DIFadd{scientists}\DIFaddend .
 
 But the density of LLSVPs is actually not a settled issue. 
 This is because later work has shown that the simple first-order degenerate perturbation theory applied is not sufficiently accurate to 
-model the effect of lateral density variations. Explicit within this theory is the assumption that on the addition of laterally varying structure
+model the effect of lateral density variations. \DIFdelbegin \DIFdel{Explicit }\DIFdelend \DIFaddbegin \DIFadd{Implicit }\DIFaddend within this theory is the assumption that on the addition of laterally varying structure
 distinct multiplets do not interact with each other. This is not true, with the resulting errors being especially significant 
 for nearly degenerate multiplets. A better approach is to use \textbf{normal mode coupling theory}\DIFdelbegin \DIFdel{, this being based on the expansion of 
 the eigenfunctions 
@@ -681,19 +697,19 @@ possible to truncate the basis so as to obtain a finite-dimensional problem that
 terms in the expansion the results can be made as accurate as desired.
 
 \DIFdelbegin \DIFdel{The computational task here is fairly substantial. It has only been }\DIFdelend \DIFaddbegin \DIFadd{In practice the eigenvalue problem itself is rarely solved. What is observed is a spectrum, and this can be computed directly. 
-Consider the equations of motion in the frequency domain for a given source, whose force term $\mathbf{f}(\omega)$ will in general 
+Consider the equations of motion in the frequency domain for a given source, whose force term $\tilde{\mathbf{f}}(\omega)$ will in general 
 depend on frequency, with the displacement expanded in the spherical basis as in eq.~(\ref{eq:34}), 
-$\mathbf{u}(\omega)=\sum_{k'm'}\langle k'm'|P_{0}|\mathbf{u}(\omega)\rangle|k'm'\rangle$. Taking the test function equal to each basis element in turn gives
+$\tilde{\mathbf{u}}(\omega)=\sum_{k'm'}\langle k'm'|P_{0}|\tilde{\mathbf{u}}(\omega)\rangle|k'm'\rangle$. Taking the test function equal to each basis element in turn gives
 }\begin{equation}\DIFadd{\label{eq:36}
 \sum_{k'm'}\left[-\omega^{2}\langle km|P|k'm'\rangle+\ii\omega\langle km|W|k'm'\rangle+\langle km|H|k'm'\rangle\right]
-\langle k'm'|P_{0}|\mathbf{u}(\omega)\rangle=\langle km|\mathbf{f}(\omega)\rangle,
+\langle k'm'|P_{0}|\tilde{\mathbf{u}}(\omega)\rangle=\langle km|\tilde{\mathbf{f}}(\omega)\rangle,
 }\end{equation}
 \DIFadd{which for each frequency is a linear system for the expansion coefficients, the same matrices appearing as in eq.~(\ref{eq:35}). 
 Splitting the kinetic and potential energy forms into their spherically symmetric parts and the perturbations, and recalling that the 
 basis is orthonormal with respect to $P_{0}$ and diagonalises $H_{0}$, this system takes the form
 }\begin{equation}\DIFadd{\label{eq:37}
-(\omega_{k}^{2}-\omega^{2})\langle km|P_{0}|\mathbf{u}(\omega)\rangle+\sum_{k'm'}A_{km,k'm'}(\omega)\langle k'm'|P_{0}|\mathbf{u}(\omega)\rangle
-=\langle km|\mathbf{f}(\omega)\rangle,
+(\omega_{k}^{2}-\omega^{2})\langle km|P_{0}|\tilde{\mathbf{u}}(\omega)\rangle+\sum_{k'm'}A_{km,k'm'}(\omega)\langle k'm'|P_{0}|\tilde{\mathbf{u}}(\omega)\rangle
+=\langle km|\tilde{\mathbf{f}}(\omega)\rangle,
 }\end{equation}
 \DIFadd{where the matrix $A$ collects the matrix elements of $P_{1}$, $W$ and $H_{1}$, all of which are small. For a given frequency 
 $\omega$, the diagonal terms $\omega_{k}^{2}-\omega^{2}$ are large except for the modes whose eigenfrequencies lie close to 
@@ -702,14 +718,14 @@ means that the system can be solved efficiently by modern iterative methods, at 
 per frequency, without ever forming the inverse or diagonalising the full coupling matrix. This is the 
 }\textbf{\DIFadd{direct solution method}} \DIFadd{of Al-Attar et al.\ (2012), and it is now the standard means of computing 
 long-period spectra in laterally heterogeneous earth models. In practice the system is solved not at real frequencies but along 
-a line shifted slightly into the complex plane, which keeps the diagonal terms away from zero and, once the solutions are transformed 
-back to the time domain, amounts to computing a seismogram of finite length. The spectrum is then obtained at each frequency in turn.
+a line shifted slightly into the complex plane. This keeps the diagonal terms away from zero, and corresponds, once the solutions are 
+transformed back to the time domain, to multiplying the seismogram by a decaying exponential, which is harmless over a record of finite length.
 }
 
 \DIFadd{The first-order splitting theory is recovered by keeping only the $2l+1$ singlets of a single multiplet in the expansion, 
 and this so-called }\textbf{\DIFadd{self-coupling}} \DIFadd{approximation is the workhorse of most splitting studies. Within it the effect of lateral heterogeneity 
 on a multiplet is summarised by its }\textbf{\DIFadd{splitting function}}\DIFadd{, a function on the sphere whose spherical harmonic coefficients 
-are, up to known factors, the matrix elements in eq.~(\ref{eq:29}). It can be thought of as a map of the 
+are, up to known factors, the matrix elements in eq.~(\ref{eq:28}). It can be thought of as a map of the 
 local perturbation to the degenerate eigenfrequency, obtained by integrating the lateral heterogeneity against the mode's 
 radial sensitivity kernels. Splitting functions are measured from the spectra of many earthquakes, and then form the data 
 for inversions for lateral structure, including density. Their appeal is that they collapse a great many spectra into a few 
@@ -746,7 +762,7 @@ structure, including density, is thus now feasible, and this is where much of th
     You do not need to learn the definition of vector spherical harmonics, and will not be asked to perform detailed calculations with them.
     \item[(ii)] How to solve the toroidal mode eigenvalue problem in a homogeneous earth model using spherical Bessel functions \DIFdelbegin \DIFdel{see the 
     second problem set}\DIFdelend \DIFaddbegin \DIFadd{(see the 
-    worked examples accompanying this lecture)}\DIFaddend . Note that you might be asked to perform such calculations in the exam, but would be provided with the necessary 
+    worked examples for this lecture, available on the TiS)}\DIFaddend . Note that you might be asked to perform such calculations in the exam, but would be provided with the necessary 
     information about special functions.
     \item[(iii)] How degenerate perturbation theory can be used to understand mode splitting due to rotation and lateral heterogeneity.     
     \item[(iv)] What the diagonal sum rule says (but not the derivation), and how it was applied in determining spherically averaged 
