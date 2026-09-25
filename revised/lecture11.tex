@@ -101,22 +101,22 @@ If we look at the kinetic energy form, then it is clear that
 and we say that the form is \textbf{self-adjoint}. Equivalently we can say that the associated operator, $P$, is self-adjoint. 
 We also note that $\langle \mathbf{u}|P|\mathbf{u}\rangle$ is positive for any non-zero vector field $\mathbf{u}$,
  and hence the kinetic energy form defines an \textbf{inner product}. In contrast, for the Coriolis form, we find that
-\begin{equation}
-\langle \mathbf{w}|W|\mathbf{u}\rangle=\int_{M}2\rho\epsilon_{ijk}w_{i}^{*}\Omega_{j}u_{k}\dd^{3}\mathbf{x} =
- -\left(\int_{M}2\rho\epsilon_{ijk}u_{i}^{*}\Omega_{j}w_{k}\dd^{3}\mathbf{x}\right)^{*} = -\langle \mathbf{u}|W|\mathbf{w}\rangle^{*},
+\begin{multline}
+\langle \mathbf{w}|W|\mathbf{u}\rangle=\int_{M}2\rho\epsilon_{ijk}w_{i}^{*}\Omega_{j}u_{k}\dd^{3}\mathbf{x} \\
+ = -\left(\int_{M}2\rho\epsilon_{ijk}u_{i}^{*}\Omega_{j}w_{k}\dd^{3}\mathbf{x}\right)^{*} = -\langle \mathbf{u}|W|\mathbf{w}\rangle^{*},
 \label{eq:14}
-\end{equation}
+\end{multline}
 this meaning that it is \textbf{anti-self-adjoint}. This implies, in particular, that $\langle \mathbf{u}|W|\mathbf{u}\rangle$ is
  purely imaginary for any $\mathbf{u}$.
 
 For the potential energy form it is readily checked that the term associated with elasticity is self-adjoint due 
 to the hyperelastic symmetry $A_{ijkl}=A_{klij}$. Similarly for the centrifugal term we have
-\begin{equation}
+\begin{multline}
 \int_{M}\rho\epsilon_{ijk}\epsilon_{klm}w_{i}^{*}\Omega_{j}\Omega_{l}u_{m}\dd^{3}\mathbf{x}=
-\left(\int_{M}\rho\epsilon_{ijk}\epsilon_{klm}w_{i}\Omega_{j}\Omega_{l}u_{m}^{*}\dd^{3}\mathbf{x}\right)^{*}
+\left(\int_{M}\rho\epsilon_{ijk}\epsilon_{klm}w_{i}\Omega_{j}\Omega_{l}u_{m}^{*}\dd^{3}\mathbf{x}\right)^{*} \\
  = \left(\int_{M}\rho\epsilon_{ijk}\epsilon_{klm}u_{i}^{*}\Omega_{j}\Omega_{l}w_{m}\dd^{3}\mathbf{x}\right)^{*},
 \label{eq:15}
-\end{equation}
+\end{multline}
 where to obtain the final equality we have just relabelled and permuted the indices appropriately. What takes more work is to show that
 \begin{equation}
 \int_{M}\rho w_{i}^{*}\gamma_{i}^{1}(\mathbf{u})\dd^{3}\mathbf{x}=\int_{M}\rho\gamma_{i}^{1}(\mathbf{w})^{*}u_{i}\dd^{3}\mathbf{x},
@@ -221,11 +221,14 @@ where $\langle km|P|\mathbf{u}\rangle$ are the expansion coefficients of the $(k
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=\textwidth]{figures/L11F1.png}
-\caption{A seven-day-long vertical-component seismogram following the magnitude 8.2
-earthquake in Bolivia in 1994. Note that the overall amplitude decays in a
-roughly exponential fashion. This is due to attenuation within the Earth, but we
-ignore this effect within our current discussion.}
+\includegraphics[width=\textwidth]{figures/L11F1.pdf}
+\caption{Vertical-component acceleration recorded at the Black Forest Observatory in
+Germany following the 2011 Tohoku earthquake in Japan (moment magnitude 9.1). The upper panel shows
+the first twelve hours of the record, dominated by the surface waves, which circle the Earth
+several times. The lower panel shows the record from six hours to ten days after the earthquake,
+band-pass filtered between 0.3 and 1\,mHz to isolate the lowest-frequency free oscillations. Their
+amplitude decays in a roughly exponential fashion over several days. This decay is due to
+attenuation within the Earth, but we ignore this effect within our current discussion.}
 \label{fig:1}
 \end{figure}
 
@@ -281,10 +284,18 @@ techniques are not necessary for this course, but in the second problem set you 
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=\textwidth]{figures/L11F2.png}
-\caption{The amplitude spectra corresponding to Fig.~\ref{fig:1}. In some cases individual mode
-peaks can be identified, but especially at higher frequencies there is substantial
-overlap of the peaks due both to attenuation and an insufficiently long time series.}
+\includegraphics[width=\textwidth]{figures/L11F2.pdf}
+\caption{Amplitude spectra of the record in Fig.~\ref{fig:1}. The upper panel is for the
+full ten days of the vertical component, and the lower panel for the first three days of the
+transverse horizontal component (perpendicular to the great circle from the earthquake), a shorter
+window being used because horizontal records are noisier at low frequencies. The vertical lines
+mark the frequencies of the fundamental spheroidal modes ${}_{0}S_{l}$ (upper panel) and toroidal
+modes ${}_{0}T_{l}$ (lower panel) in the earth model PREM; the largest peak in the upper panel is
+the radial mode ${}_{0}S_{0}$, and most of the unlabelled peaks are overtones. In some cases
+individual mode peaks can be identified, but at higher frequencies there is substantial overlap of
+the peaks due both to attenuation and an insufficiently long time series. The lowest-frequency
+peaks are also visibly split into several closely spaced peaks, an effect of the Earth's rotation
+and asphericity that we return to in the next lecture.}
 \label{fig:2}
 \end{figure}
 
@@ -392,6 +403,9 @@ of the planet has been brought into a smaller volume, and hence the gravitationa
 quantity, and hence it has increased in magnitude.} The net effect on the potential energy depends on the relative magnitude of these terms. 
 If the elastic constants are sufficiently large, then the elastic term will dominate and the planet will be stable with respect to such a perturbation. 
 But if gravity is sufficiently strong then the planet will keep pulling itself inwards until non-linear effects take over.
+A simple version of this argument for a homogeneous planet is worked through in the second problem set. In practice the question
+is settled numerically: for realistic earth models such as PREM, calculations of the kind shown in the next lecture return no
+negative squared eigenfrequencies.
 
 
 \section*{What you need to know and be able to do}

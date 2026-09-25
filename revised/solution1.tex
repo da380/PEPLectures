@@ -6,6 +6,8 @@
 \author{David Al-Attar \\ Michaelmas Term, \the\year}
 
 \begin{document}
+\providecommand{\item}{\refstepcounter{enumi}\item[\labelenumi$^{\dagger}$]}
+
 
 \maketitle
 
@@ -339,56 +341,6 @@ and substituting this into the second of the equations we arrive at
 \end{equation*}
 which is precisely the Euler--Lagrange equation obtained from Fermat's principle. Note that Fermat's principle can be established in a general anisotropic body, but here there is a bit more work involved, and it is actually simpler to obtain the result using a Legendre transformation to pass between the equations of Hamiltonian and Lagrangian mechanics. You do not have to know how to do this!
 
-
-
-\item We are told the ray travels down into the half-space monotonically until the turning depth $z_{t}$. This means that along this segment of the ray, we can use $z$ as a generating parameter, and hence the differential arc length can be written
-\begin{equation*}
-    \dd s=\sqrt{1+\left\|\frac{\ddns\mathbf{x}}{\ddns z}\right\|^{2}}\dd z.
-\end{equation*}
-Using this result, we obtain trivially
-\begin{equation*}
-    T=\int_{0}^{z_{t}}\frac{2}{\alpha}\sqrt{1+\left\|\frac{\ddns\mathbf{x}}{\ddns z}\right\|^{2}}\dd z,
-\end{equation*}
-where the factor of two is due to the upward-going half of the ray. Within the above expression for $T$, the horizontal position vector $\mathbf{x}$ as a function of $z$ is not determined. To do this we can use Fermat's principle, and set the variation of $T$ with respect to $\mathbf{x}$ to be zero. Let $\mathscr{L}(\mathbf{x},\mathbf{x}')$ denote the integrand within the expression for $T$, where $\mathbf{x}'=\ddns\mathbf{x}/\ddns z$. The Euler--Lagrange equations for the problem are
-\begin{equation*}
-    \frac{\partial\mathscr{L}}{\partial x}-\frac{\ddns}{\ddns z}\left(\frac{\partial\mathscr{L}}{\partial x'}\right)=0, \quad \frac{\partial\mathscr{L}}{\partial y}-\frac{\ddns}{\ddns z}\left(\frac{\partial\mathscr{L}}{\partial y'}\right)=0.
-\end{equation*}
-But here we see that the Lagrangian is independent of the horizontal co-ordinates, and so we get the conservation laws
-\begin{equation*}
-    \frac{\partial\mathscr{L}}{\partial x'}=c_{x}, \quad \frac{\partial\mathscr{L}}{\partial y'}=c_{y},
-\end{equation*}
-where $c_{x}$ and $c_{y}$ are constants to be determined. A simple calculation shows that these conservation laws take the specific form
-\begin{equation*}
-    \frac{2}{\alpha}\frac{x'}{\sqrt{1+(x')^{2}+(y')^{2}}}=c_{x},\quad \frac{2}{\alpha}\frac{y'}{\sqrt{1+(x')^{2}+(y')^{2}}}=c_{y}.
-\end{equation*}
-Since the initial direction of the ray lies in the $(x,z)$-plane, it follows that $c_{y}=0$, and hence $y'=0$, meaning that the ray stays within this initial plane. From simple geometry, we then see that
-\begin{equation*}
-    \frac{x'}{\sqrt{1+(x')^{2}+(y')^{2}}}=\sin\theta,
-\end{equation*}
-where $\theta$ is the angle between the vertical and the ray's tangent vector. This suggests we define a new constant $q=c_{x}/2$, and hence arrive at
-\begin{equation*}
-    \frac{\sin\theta}{\alpha}=q,
-\end{equation*}
-which is the familiar form of Snell's law. At the turning depth, we have $\theta=\pi/2$ by definition, and hence
-\begin{equation*}
-    \alpha(z_{t})=q^{-1}.
-\end{equation*}
-Because $\alpha$ increases monotonically, this equation has a unique solution for each initial ray orientation. Along the down-going part of the ray path we have
-\begin{equation*}
-    \frac{\ddns x}{\ddns z}=\tan\theta=\frac{\sin\theta}{\sqrt{1-\sin^{2}\theta}},
-\end{equation*}
-and using Snell's law we can eliminate $\theta$ from the right-hand side to give
-\begin{equation*}
-    \frac{\ddns x}{\ddns z}=\frac{q\alpha}{\sqrt{1-q^{2}\alpha^{2}}},
-\end{equation*}
-and hence we obtain
-\begin{equation*}
-    X=\int_{0}^{z_{t}}\frac{2q\alpha\,\dd z}{\sqrt{1-q^{2}\alpha^{2}}}.
-\end{equation*}
-Using the expression for $x'$ in the original formula for $T$ we then also obtain
-\begin{equation*}
-    T=\int_{0}^{z_{t}}\frac{2}{\alpha}\frac{\dd z}{\sqrt{1-q^{2}\alpha^{2}}}.
-\end{equation*}
 
 
 \item

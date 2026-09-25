@@ -1,7 +1,7 @@
 \documentclass[a4paper,12pt]{paper}
 %DIF LATEXDIFF DIFFERENCE FILE
 %DIF DEL lecture1.tex             Tue Aug 18 14:37:36 2026
-%DIF ADD diffs/lecture1_new.tex   Fri Sep 25 10:17:07 2026
+%DIF ADD diffs/lecture1_new.tex   Fri Sep 25 14:00:05 2026
 
 \usepackage{mycommands}
 %DIF PREAMBLE EXTENSION ADDED BY LATEXDIFF
@@ -91,7 +91,10 @@ Having done this, we then have
 \label{eq:1}
 \end{equation}
 for all $\mathbf{x}$. There are circumstances in which it is useful to select a different reference body, but 
-we will not worry about that within this course. 
+we will not worry about that within this course. \DIFaddbegin \DIFadd{It is, however, worth knowing that this freedom can be put to real use: for example, the equations of motion for an 
+aspherical earth model can be exactly rewritten as those for a spherically symmetric reference body, with the effects of 
+boundary topography and lateral heterogeneity absorbed into modified material parameters. 
+}\DIFaddend 
 
 \section*{Velocity, deformation gradient, and Jacobian}
 If we fix attention on a particle $\mathbf{x}$, then the function $t\mapsto\bphi(\mathbf{x},t)$ describes its 
@@ -325,7 +328,11 @@ Mathematically, this means that we require the first variation of the action
 \DIFadd{\delta\mathcal{S}=\lim_{h\rightarrow0}\frac{1}{h}[\mathcal{S}(\bphi+h\,\delta\bphi)-\mathcal{S}(\bphi)]
 \label{eq:27}
 }\end{equation}\DIFaddend 
-vanish for all smooth variations $\delta\bphi$ satisfying eq.\DIFaddbegin \DIFadd{~}\DIFaddend (\ref{eq:26}). We readily find that this 
+vanish for all smooth variations $\delta\bphi$ satisfying eq.\DIFaddbegin \DIFadd{~}\DIFaddend (\ref{eq:26}). \DIFaddbegin \DIFadd{The first variation depends linearly on 
+$\delta\bphi$, and it is often convenient to make this explicit by writing 
+$\delta\mathcal{S}=\langle D\mathcal{S}(\bphi)|\delta\bphi\rangle$, where $D\mathcal{S}(\bphi)$ is called the 
+}\textbf{\DIFadd{functional derivative}} \DIFadd{of the action at $\bphi$, and the angled brackets denote its linear action on a 
+variation; we shall meet this notation again in later lectures. }\DIFaddend We readily find that this 
 first variation can be written
 \begin{equation}
 \delta\mathcal{S}=\int_{0}^{T}\int_{M}\left\{\frac{\partial\mathcal{L}}{\partial\varphi_{i}}\delta\varphi_{i}+

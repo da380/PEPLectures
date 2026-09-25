@@ -1,7 +1,7 @@
 \documentclass[a4paper,12pt]{paper}
 %DIF LATEXDIFF DIFFERENCE FILE
 %DIF DEL lecture7.tex             Thu Oct 23 08:40:48 2025
-%DIF ADD diffs/lecture7_new.tex   Fri Sep 25 10:17:10 2026
+%DIF ADD diffs/lecture7_new.tex   Fri Sep 25 15:23:53 2026
 
 \usepackage{mycommands}
 
@@ -73,16 +73,29 @@ the \textbf{laterally varying perturbations}. An early example of such a tomogra
 }\DIFdelend \DIFaddbegin \DIFadd{~\ref{fig:1}.
 }\DIFaddend 
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.7\textwidth]{figures/L7F1.png}    
-    \caption{An image of a tomographic model of S-wave velocity variations within the Earth produced by \DIFdelbeginFL \DIFdelFL{John }\DIFdelendFL Woodhouse \DIFdelbeginFL \DIFdelFL{and Adam 
-    }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{\& }\DIFaddendFL Dziewonski \DIFdelbeginFL \DIFdelFL{in 1989. }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{(1989). }\DIFaddendFL The colours show the perturbation in S-wave velocity relative to a spherical reference model, with blue areas being
+\DIFdelbegin %DIFDELCMD < \begin{figure}[ht]
+%DIFDELCMD <     \centering
+%DIFDELCMD <     \includegraphics[width=0.7\textwidth]{figures/L7F1.png}    
+%DIFDELCMD <     %%%
+%DIFDELCMD < \caption{%
+{%DIFAUXCMD
+\DIFdelFL{An image of a tomographic model of S-wave velocity variations within the Earth produced by John Woodhouse and Adam 
+    Dziewonski in 1989. The colours show the perturbation in S-wave velocity relative to a spherical reference model, with blue areas being
+     faster than normal, and red areas slower. Areas of faster velocity are thought to be colder than normal, while those that are
+      slower are hotter, and hence the chosen colour scale. These temperature anomalies have associated changes in density, and
+       so the models tell us something about the buoyancy forces that drive mantle convection.}}
+    %DIFAUXCMD
+\DIFdelendFL \DIFaddbeginFL \begin{center}
+    \includegraphics[width=0.42\textwidth]{figures/L7F1.png}    
+    \captionof{figure}{An image of a tomographic model of S-wave velocity variations within the Earth produced by Woodhouse \& Dziewonski (1989). The colours show the perturbation in S-wave velocity relative to a spherical reference model, with blue areas being
      faster than normal, and red areas slower. Areas of faster velocity are thought to be colder than normal, while those that are
       slower are hotter, and hence the chosen colour scale. These temperature anomalies have associated changes in density, and
        so the models tell us something about the buoyancy forces that drive mantle convection.}
-    \label{fig:1}
-\end{figure}
+    \DIFaddendFL \label{fig:1}
+\DIFdelbeginFL %DIFDELCMD < \end{figure}
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \end{center}
+\DIFaddend 
 
 The basic idea underlying seismic tomography is that if we knew the Earth's internal structure then we could calculate what
 would be observed after an earthquake, and so we can try to work backwards to determine this structure from seismic observations.

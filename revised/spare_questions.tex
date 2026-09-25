@@ -1,0 +1,139 @@
+% Spare questions removed from the 2026 problem sets (kept as possible exam questions)
+
+%% ---- Set 2 (2025 numbering Q5): boundary perturbation of Poisson's equation; the material is now an appendix to Lecture 22
+\begin{enumerate}
+\item Consider a planet at equilibrium occupying the volume $M$ and with density $\rho$. Its gravitational potential, $\phi$, is a solution of Poisson's equation
+\begin{equation*}
+    \nabla^{2}\phi=4\pi G\rho,
+\end{equation*}
+where it is understood that $\rho$ vanishes outside of $M$. Across the surface $\partial M$ we then have continuity conditions on $\phi$ and its normal derivative, and finally require that $\phi$ tend to zero at infinity. Suppose that the planet is only slightly aspherical, with boundary
+\begin{equation*}
+    r=b+sh_{1}(\theta,\varphi)+\cdots,
+\end{equation*}
+in spherical polar co-ordinates, and its density decomposed as
+\begin{equation*}
+    \rho=\rho_{0}+s\rho_{1}+\cdots,
+\end{equation*}
+with $\rho_{0}$ spherically symmetric. Here $s$ is a perturbation parameter, and the dots denote higher-order terms that are to be neglected. Similarly writing the potential in the form $\phi=\phi_{0}+s\phi_{1}+\cdots$, show that across the reference surface $r=b$ we require continuity of both $\phi_{1}$ and
+\begin{equation*}
+    \frac{\partial\phi_{1}}{\partial r}+4\pi G\rho_{0}h_{1}.
+\end{equation*}
+
+\end{enumerate}
+
+%% solution
+\begin{enumerate}
+\item Considering first the continuity of the potential across the boundary, we require
+\begin{equation*}
+    [\phi]_{-}^{+}=0
+\end{equation*}
+across $r=b+sh_{1}(\theta,\varphi)+\cdots$, where $[\cdot]_{-}^{+}$ denotes the jump in a quantity across the relevant boundary in the direction of the outward unit normal. Expanding this to first-order accuracy we obtain
+\begin{equation*}
+    \left[\phi_{0}+s\frac{\ddns\phi_{0}}{\ddns r}h_{1}+s\phi_{1}+\cdots\right]_{-}^{+}=0,
+\end{equation*}
+across the reference boundary $r=b$. Using the continuity of $\phi_{0}$ and its normal derivative across the reference boundary, this reduces to
+\begin{equation*}
+    [\phi_{1}]_{-}^{+}=0,
+\end{equation*}
+for $r=b$. To deal with the continuity of the normal derivative, we first write
+\begin{equation*}
+    \hat{\mathbf{n}}=\hat{\mathbf{r}}+s\hat{\mathbf{n}}_{1}+\cdots,
+\end{equation*}
+for the outward unit normal to the boundary. The term $\hat{\mathbf{n}}_{1}$ can be readily expressed in terms of $h_{1}$, but we will see that this is not required. Similar to above, the continuity of $\hat{\mathbf{n}}\cdot\nabla\phi$ across the aspherical boundary can be expanded to
+\begin{equation*}
+    [\hat{\mathbf{r}}\cdot\nabla\phi_{0}+s(\hat{\mathbf{r}}\cdot\nabla)(\hat{\mathbf{r}}\cdot\nabla\phi_{0})h_{1}+s\hat{\mathbf{n}}_{1}\cdot\nabla\phi_{0}+s\hat{\mathbf{r}}\cdot\nabla\phi_{1}+\cdots]_{-}^{+}=0,
+\end{equation*}
+across $r=b$. The zeroth-order term vanishes immediately. We also note that $\hat{\mathbf{n}}_{1}\cdot\nabla\phi_{0}$ is zero as $\hat{\mathbf{n}}_{1}$ must be orthogonal to $\hat{\mathbf{r}}$ for the perturbed normal to be a unit vector, and this term is proportional to the radial derivative of $\phi_{0}$ which is continuous. The first-order condition therefore becomes
+\begin{equation*}
+    [(\hat{\mathbf{r}}\cdot\nabla)(\hat{\mathbf{r}}\cdot\nabla\phi_{0})h_{1}+\hat{\mathbf{r}}\cdot\nabla\phi_{1}]_{-}^{+}=0,
+\end{equation*}
+at $r=b$. To simplify the first term, we recall that $\phi_{0}$ satisfies the spherically symmetric Poisson equation
+\begin{equation*}
+    \frac{1}{r^{2}}\frac{\ddns}{\ddns r}\left(r^{2}\frac{\ddns\phi_{0}}{\ddns r}\right)=4\pi G\rho_{0}.
+\end{equation*}
+Using this result, we see that
+\begin{equation*}
+    (\hat{\mathbf{r}}\cdot\nabla)(\hat{\mathbf{r}}\cdot\nabla\phi_{0}) = \frac{\partial^{2}\phi_{0}}{\partial r^{2}}=4\pi G\rho_{0}-\frac{2}{r}\frac{\partial\phi_{0}}{\partial r},
+\end{equation*}
+which can be substituted into the jump condition to obtain
+\begin{equation*}
+    \left[\frac{\partial\phi_{1}}{\partial r}+4\pi G\rho_{0}h_{1}\right]_{-}^{+}=0,
+\end{equation*}
+where again the continuity of the normal derivative of $\phi_{0}$ has been applied.
+
+
+
+
+\end{enumerate}
+
+%% ---- Set 1 Q9 (2025 numbering): rays in a depth-varying half-space (David: a possible exam question)
+\begin{enumerate}
+\item Consider an isotropic elastic half-space in which the material parameters vary only with depth $z\ge0$. Suppose that the P-wave speed $\alpha$ increases monotonically with depth, and consider a ray starting at the surface whose initial tangent vector makes an angle $0<\theta_{0}<\pi/2$ with the $z$-axis and lies in the $(x,z)$-plane. Assume that the ray travels monotonically down into the half-space until a depth $z_{t}>0$ at which point it is travelling horizontally, and subsequently it turns upwards, returning to the surface in a symmetric manner. By parametrising this ray in terms of the depth co-ordinate $z$, show that its travel time can be written
+\begin{equation*}
+    T=\int_{0}^{z_{t}}\frac{2}{\alpha}\sqrt{1+\frac{\ddns x_{i}}{\ddns z}\frac{\ddns x_{i}}{\ddns z}}\dd z,
+\end{equation*}
+where $\mathbf{x}$ denotes the horizontal position vector of the ray given as a function of $z$. Apply Fermat's principle to show that the ray remains in its initial plane, and that along the ray path
+\begin{equation*}
+    \frac{\sin\theta}{\alpha}=q,
+\end{equation*}
+where $\theta$ denotes the local angle between the vertical direction and the tangent to the ray, and $q$ is a constant known as the ray parameter. Obtain, in particular, an implicit equation for the turning depth $z_{t}$ in terms of $q$.
+Show that the travel time $T$ and total horizontal distance $X$ of the ray can be obtained through the following integrals
+\begin{equation*}
+    T=\int_{0}^{z_{t}}\frac{2}{\alpha}\frac{\dd z}{\sqrt{1-q^{2}\alpha^{2}}},\quad X=\int_{0}^{z_{t}}\frac{2q\alpha\,\dd z}{\sqrt{1-q^{2}\alpha^{2}}}.
+\end{equation*}
+
+\end{enumerate}
+
+%% solution
+\begin{enumerate}
+\item We are told the ray travels down into the half-space monotonically until the turning depth $z_{t}$. This means that along this segment of the ray, we can use $z$ as a generating parameter, and hence the differential arc length can be written
+\begin{equation*}
+    \dd s=\sqrt{1+\left\|\frac{\ddns\mathbf{x}}{\ddns z}\right\|^{2}}\dd z.
+\end{equation*}
+Using this result, we obtain trivially
+\begin{equation*}
+    T=\int_{0}^{z_{t}}\frac{2}{\alpha}\sqrt{1+\left\|\frac{\ddns\mathbf{x}}{\ddns z}\right\|^{2}}\dd z,
+\end{equation*}
+where the factor of two is due to the upward-going half of the ray. Within the above expression for $T$, the horizontal position vector $\mathbf{x}$ as a function of $z$ is not determined. To do this we can use Fermat's principle, and set the variation of $T$ with respect to $\mathbf{x}$ to be zero. Let $\mathscr{L}(\mathbf{x},\mathbf{x}')$ denote the integrand within the expression for $T$, where $\mathbf{x}'=\ddns\mathbf{x}/\ddns z$. The Euler--Lagrange equations for the problem are
+\begin{equation*}
+    \frac{\partial\mathscr{L}}{\partial x}-\frac{\ddns}{\ddns z}\left(\frac{\partial\mathscr{L}}{\partial x'}\right)=0, \quad \frac{\partial\mathscr{L}}{\partial y}-\frac{\ddns}{\ddns z}\left(\frac{\partial\mathscr{L}}{\partial y'}\right)=0.
+\end{equation*}
+But here we see that the Lagrangian is independent of the horizontal co-ordinates, and so we get the conservation laws
+\begin{equation*}
+    \frac{\partial\mathscr{L}}{\partial x'}=c_{x}, \quad \frac{\partial\mathscr{L}}{\partial y'}=c_{y},
+\end{equation*}
+where $c_{x}$ and $c_{y}$ are constants to be determined. A simple calculation shows that these conservation laws take the specific form
+\begin{equation*}
+    \frac{2}{\alpha}\frac{x'}{\sqrt{1+(x')^{2}+(y')^{2}}}=c_{x},\quad \frac{2}{\alpha}\frac{y'}{\sqrt{1+(x')^{2}+(y')^{2}}}=c_{y}.
+\end{equation*}
+Since the initial direction of the ray lies in the $(x,z)$-plane, it follows that $c_{y}=0$, and hence $y'=0$, meaning that the ray stays within this initial plane. From simple geometry, we then see that
+\begin{equation*}
+    \frac{x'}{\sqrt{1+(x')^{2}+(y')^{2}}}=\sin\theta,
+\end{equation*}
+where $\theta$ is the angle between the vertical and the ray's tangent vector. This suggests we define a new constant $q=c_{x}/2$, and hence arrive at
+\begin{equation*}
+    \frac{\sin\theta}{\alpha}=q,
+\end{equation*}
+which is the familiar form of Snell's law. At the turning depth, we have $\theta=\pi/2$ by definition, and hence
+\begin{equation*}
+    \alpha(z_{t})=q^{-1}.
+\end{equation*}
+Because $\alpha$ increases monotonically, this equation has a unique solution for each initial ray orientation. Along the down-going part of the ray path we have
+\begin{equation*}
+    \frac{\ddns x}{\ddns z}=\tan\theta=\frac{\sin\theta}{\sqrt{1-\sin^{2}\theta}},
+\end{equation*}
+and using Snell's law we can eliminate $\theta$ from the right-hand side to give
+\begin{equation*}
+    \frac{\ddns x}{\ddns z}=\frac{q\alpha}{\sqrt{1-q^{2}\alpha^{2}}},
+\end{equation*}
+and hence we obtain
+\begin{equation*}
+    X=\int_{0}^{z_{t}}\frac{2q\alpha\,\dd z}{\sqrt{1-q^{2}\alpha^{2}}}.
+\end{equation*}
+Using the expression for $x'$ in the original formula for $T$ we then also obtain
+\begin{equation*}
+    T=\int_{0}^{z_{t}}\frac{2}{\alpha}\frac{\dd z}{\sqrt{1-q^{2}\alpha^{2}}}.
+\end{equation*}
+
+
+\end{enumerate}

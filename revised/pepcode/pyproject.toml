@@ -11,6 +11,7 @@ dependencies = [
     "matplotlib>=3.9",
     "pillow>=10.0",
     "pygeoinf>=1.8",
+    "obspy>=1.4",
 ]
 
 [tool.poetry]

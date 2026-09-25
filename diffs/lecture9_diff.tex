@@ -1,7 +1,7 @@
 \documentclass[a4paper,12pt]{paper}
 %DIF LATEXDIFF DIFFERENCE FILE
 %DIF DEL lecture9.tex             Thu Nov 13 02:11:28 2025
-%DIF ADD diffs/lecture9_new.tex   Fri Sep 25 10:43:07 2026
+%DIF ADD diffs/lecture9_new.tex   Fri Sep 25 12:46:06 2026
 
 \usepackage{mycommands}
 
@@ -113,7 +113,22 @@ and differentiating, we \DIFdelbegin \DIFdel{similar find
 \label{eq:5}
 }\end{equation}\DIFaddend 
 
-It will be convenient to define the \textbf{referential gravitational potential} by
+\DIFaddbegin \DIFadd{For the Earth, the equilibrium gravitational acceleration and the pressure that it produces are shown in Fig.~\ref{fig:1}. These 
+were calculated from the radial density profile of the model PREM; where that density comes from is a question we return 
+to in Lecture~24, since it is the free oscillations discussed there that provide the main constraint on it. Note that $g$ 
+is close to $10\,\mathrm{m\,s^{-2}}$ throughout the mantle, reaching its largest value at the core--mantle boundary, and 
+decreases roughly linearly through the core.
+}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/L9F1.pdf}
+\caption{\DIFaddFL{Gravitational acceleration (left) and pressure (right) as functions of radius in the earth model PREM, calculated 
+from its density profile. The dashed lines mark the core--mantle boundary (CMB) and inner core boundary (ICB).}}
+\label{fig:1}
+\end{figure}
+
+\DIFaddend It will be convenient to define the \textbf{referential gravitational potential} by
 \DIFdelbegin \begin{displaymath}
 \DIFdel{\zeta(\mathbf{x},t)=\phi[\bphi(\mathbf{x},t),t],
 }\end{displaymath}%DIFAUXCMD
@@ -605,7 +620,7 @@ characterised by a typical amplitude \DIFdelbegin \DIFdel{$||\mathbf{u}||\sim U$
 \DIFdelend \DIFaddbegin \begin{align}
 \DIFadd{\rho\frac{\partial^{2}u_{i}}{\partial t^{2}}}&\DIFadd{\sim\frac{\overline{\rho}U}{T^{2}}, \label{eq:47} }\\
 \DIFadd{\rho\epsilon_{ijk}\Omega_{j}\frac{\partial u_{k}}{\partial t}}&\DIFadd{\sim\frac{\overline{\rho}\Omega U}{T}, \label{eq:48} }\\
-\DIFadd{\rho\epsilon_{ijk}\epsilon_{klm}\Omega_{j}\Omega_{l}u_{m}}&\DIFadd{\sim2\overline{\rho}\Omega^{2}U, \label{eq:49} }\\
+\DIFadd{\rho\epsilon_{ijk}\epsilon_{klm}\Omega_{j}\Omega_{l}u_{m}}&\DIFadd{\sim\overline{\rho}\Omega^{2}U, \label{eq:49} }\\
 \DIFadd{\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\right)}&\DIFadd{\sim\frac{\overline{\mu}U}{L^{2}}, \label{eq:50}
 }\end{align}\DIFaddend 
 where $\overline{\rho}$ and $\overline{\mu}$ denote typical values of density and elastic \DIFdelbegin \DIFdel{modulii }\DIFdelend \DIFaddbegin \DIFadd{moduli }\DIFaddend within the body, 
@@ -678,7 +693,39 @@ is limited to periods shorter than about one hour, and so rotational effects pla
 role \DIFaddbegin \DIFadd{in }\DIFaddend the problem. There are, however, processes at longer periods, e.g.\DIFaddbegin \DIFadd{\ }\DIFaddend those associated with solid-Earth tides, for which 
 rotation becomes very important.
 
-\section*{What you need to know and be able to do}
+\DIFaddbegin \DIFadd{The conclusions of this scaling analysis can be checked directly by computing synthetic seismograms in a spherically 
+symmetric earth model with and without self-gravitation, as shown in Fig.~\ref{fig:2}, where attenuation has been 
+neglected so that the long-period waves persist over the six hours shown.}\footnote{\DIFadd{The calculations use the 
+program }\texttt{\DIFadd{yspec}}\DIFadd{, which solves the equations of motion of this lecture in a spherically symmetric earth model by direct 
+numerical integration in the frequency domain (Al-Attar \& Woodhouse 2008).}} \DIFadd{Over the full frequency band of the 
+calculation, which extends to $50\,\mathrm{mHz}$, the two seismograms are indistinguishable for the first few hours, and 
+they remain so when band-pass filtered to periods shorter than a few minutes, in keeping with the estimate that 
+gravitational forces are negligible for deformations on length scales much smaller than the radius of the Earth. 
+As the pass band is moved to longer periods, however, differences appear and steadily grow, and in the lowest band, 
+at periods between eight and seventeen minutes, they are substantial: the oscillations are slightly but systematically 
+slower without gravitation, so that the two waveforms drift apart as the long-period surface waves circle the Earth. 
+Even at the shortest periods small differences eventually become visible in the surface waves that have circled the 
+Earth several times, since a fractional change in wave speed of only $10^{-4}$ accumulates into a noticeable phase 
+shift over the hundreds of cycles they have then completed. These are precisely the deformations whose length scale is comparable 
+to that of the planet, and we shall see in Lecture~23 that the periods of the corresponding free oscillations of the Earth are 
+altered by self-gravitation.
+}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/L9F2.pdf}
+\caption{\DIFaddFL{Synthetic vertical-component acceleration seismograms in the earth model PREM for an earthquake of moment magnitude 8 at 
+$20\,\mathrm{km}$ depth, recorded at an epicentral angle of $90^{\circ}$, computed with (black) and without (red) 
+self-gravitation. The top trace shows the full band of the calculation, from $0.3$ to $50\,\mathrm{mHz}$, and those below 
+it the same seismogram band-pass filtered in successively lower frequency bands. Each trace is normalised by its 
+maximum. The 
+calculations neglect attenuation, so that the surface waves continue to circle the Earth undiminished over the six hours 
+shown. The two calculations differ only in the lowest bands, and there the differences grow with time as the 
+long-period surface waves circle the Earth.}}
+\label{fig:2}
+\end{figure}
+
+\DIFaddend \section*{What you need to know and be able to do}
 \DIFdelbegin %DIFDELCMD < \begin{itemize}
 %DIFDELCMD <     %%%
 \DIFdelend \DIFaddbegin \begin{enumerate}

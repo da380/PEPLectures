@@ -1,7 +1,7 @@
 \documentclass[a4paper,12pt]{paper}
 %DIF LATEXDIFF DIFFERENCE FILE
 %DIF DEL lecture8.tex             Fri Nov 14 00:45:20 2025
-%DIF ADD diffs/lecture8_new.tex   Fri Sep 25 10:41:37 2026
+%DIF ADD diffs/lecture8_new.tex   Fri Sep 25 13:57:12 2026
 
 \usepackage{mycommands}
 \usepackage{amsmath} % Ensure amsmath is loaded for align environment
@@ -73,14 +73,13 @@ data from around \DIFdelbegin \DIFdel{$10^{2}-10^{3}$ earthquakes }\DIFdelend \D
 simulation is required for each \DIFdelbegin \DIFdel{one}\DIFdelend \DIFaddbegin \DIFadd{earthquake}\DIFaddend . This means that the time for solving the necessary forward \DIFdelbegin \DIFdel{problem }\DIFdelend \DIFaddbegin \DIFadd{problems }\DIFaddend is of 
 order hours or more. 
 
-\DIFaddbegin \begin{figure}[htbp]
-    \centering    
-    \includegraphics[width=\textwidth]{figures/L8F1.pdf}    
-    \caption{\DIFaddFL{The 2160 earthquakes used to construct the global waveform tomographic model GLAD-M35 (see Fig.~\ref{fig:3}): 
+\DIFaddbegin \begin{center}
+        \includegraphics[width=0.66\textwidth]{figures/L8F1.pdf}    
+    \captionof{figure}{The 2160 earthquakes used to construct the global waveform tomographic model GLAD-M35 (see Fig.~\ref{fig:3}): 
     (a) locations, each event being drawn as a visual representation of its moment tensor, coloured by depth; (b) the distribution of magnitudes; (c) the distribution of 
-    hypocentre depths; (d) the number of events by year. From Cui et al.\ (2024).}}
+    hypocentre depths; (d) the number of events by year. From Cui et al.\ (2024).}
     \label{fig:1}
-\end{figure}
+\end{center}
 
 \DIFaddend \section*{Waveform measurements}
 
@@ -484,40 +483,73 @@ from which we can read off the various sensitivity kernels
 \DIFdel{K_{\overline{S}_{ij}}}&\DIFdel{= \frac{\partial u_{i}'}{\partial x_{j}}.
 }\end{align*}%DIFAUXCMD
 \DIFdelend \DIFaddbegin \begin{align}
-\DIFadd{K_{\rho}}&\DIFadd{=\int_{0}^{T}\frac{\partial u_{i}}{\partial t}\frac{\partial u_{i}'}{\partial t}\dd t, \label{eq:31} }\\
-\DIFadd{K_{A_{ijkl}}}&\DIFadd{=-\int_{0}^{T}\frac{\partial u_{i}'}{\partial x_{j}}\frac{\partial u_{k}}{\partial x_{l}}\dd t, \label{eq:32} }\\
-\DIFadd{K_{\overline{S}_{ij}}}&\DIFadd{= \frac{\partial u_{i}'}{\partial x_{j}}.
+\DIFadd{K_{\rho}(\mathbf{x})}&\DIFadd{=\int_{0}^{T}\frac{\partial u_{i}}{\partial t}(\mathbf{x},t)\frac{\partial u_{i}'}{\partial t}(\mathbf{x},t)\dd t, \label{eq:31} }\\
+\DIFadd{K_{A_{ijkl}}(\mathbf{x})}&\DIFadd{=-\int_{0}^{T}\frac{\partial u_{i}'}{\partial x_{j}}(\mathbf{x},t)\frac{\partial u_{k}}{\partial x_{l}}(\mathbf{x},t)\dd t, \label{eq:32} }\\
+\DIFadd{K_{\overline{S}_{ij}}(\mathbf{x},t)}&\DIFadd{= \frac{\partial u_{i}'}{\partial x_{j}}(\mathbf{x},t).
 \label{eq:33}
 }\end{align}\DIFaddend 
+\DIFaddbegin \DIFadd{Note that the kernel for the stress glut depends on time as well as position, the stress glut itself being a function of both.
+}
 
-The approach we have described is known as the \textbf{adjoint method}, and in this context $u_{i}'$ is 
-known as the \textbf{adjoint wavefield} and $h_{i}'$ the \textbf{adjoint traction}\DIFdelbegin \footnote{\DIFdel{In detail, it 
+\DIFadd{The problem for $\mathbf{u}'$ differs from the forward problem in being subject to terminal rather than initial conditions, 
+so that it must be solved backwards in time from $t=T$. This is easily dealt with. Let us define the time-reversed field
+}\begin{equation}
+\DIFadd{u_{i}^{\dagger}(\mathbf{x},t)=u_{i}'(\mathbf{x},T-t).
+\label{eq:33a}
+}\end{equation}
+\DIFadd{Because eq.~(\ref{eq:26}) involves only second time derivatives, $\mathbf{u}^{\dagger}$ satisfies exactly the same wave equation, 
+along with the boundary condition
+}\begin{equation}
+\DIFadd{\left(A_{ijkl}\frac{\partial u_{k}^{\dagger}}{\partial x_{l}}\right)\hat{n}_{j}=h_{i}^{\dagger}, \quad 
+h_{i}^{\dagger}(\mathbf{x},t)=h_{i}'(\mathbf{x},T-t),
+\label{eq:33b}
+}\end{equation}
+\DIFadd{and the terminal conditions in eq.~(\ref{eq:28}) become the initial conditions 
+$u_{i}^{\dagger}(\mathbf{x},0)=\partial_{t}u_{i}^{\dagger}(\mathbf{x},0)=0$. The problem for $\mathbf{u}^{\dagger}$ is therefore an 
+initial value problem of precisely the same form as the forward problem, driven at the receiver by the time-reversed residual 
+$h_{i}^{\dagger}$, and it can be solved with the same numerical code. In terms of $\mathbf{u}^{\dagger}$ the sensitivity kernels read
+}\begin{align}
+\DIFadd{K_{\rho}(\mathbf{x})}&\DIFadd{=-\int_{0}^{T}\frac{\partial u_{i}}{\partial t}(\mathbf{x},t)\frac{\partial u_{i}^{\dagger}}{\partial t}(\mathbf{x},T-t)\dd t, \label{eq:33c} }\\
+\DIFadd{K_{A_{ijkl}}(\mathbf{x})}&\DIFadd{=-\int_{0}^{T}\frac{\partial u_{i}^{\dagger}}{\partial x_{j}}(\mathbf{x},T-t)\frac{\partial u_{k}}{\partial x_{l}}(\mathbf{x},t)\dd t, \label{eq:33d} }\\
+\DIFadd{K_{\overline{S}_{ij}}(\mathbf{x},t)}&\DIFadd{= \frac{\partial u_{i}^{\dagger}}{\partial x_{j}}(\mathbf{x},T-t),
+\label{eq:33e}
+}\end{align}
+\DIFadd{where the sign change in $K_{\rho}$ comes from the time derivative of the reversed field. These expressions make the 
+structure of the kernels clear: the forward field at time $t$ is paired with the field that has spread out from the receiver 
+for a time $T-t$, which is just the time remaining for anything happening at $(\mathbf{x},t)$ to be felt within the observation window. 
+The time reversal is nothing more than a convenient way of converting a terminal value problem into an initial value one, and 
+plays no fundamental role in the theory.
+}\DIFaddend 
+
+The approach we have described is known as the \textbf{adjoint method}, and in this context 
+\DIFdelbegin \DIFdel{$u_{i}'$ }\DIFdelend \DIFaddbegin \DIFadd{$\mathbf{u}^{\dagger}$ }\DIFaddend is known as the \textbf{adjoint wavefield} and \DIFdelbegin \DIFdel{$h_{i}'$ }\DIFdelend \DIFaddbegin \DIFadd{$h_{i}^{\dagger}$ }\DIFaddend the \textbf{adjoint traction} 
+\DIFdelbegin \footnote{\DIFdel{In detail, it 
 is conventional to define the adjoint wavefield by time-reversing $u_{i}'$ such that the terminal conditions 
 obtained are transformed into initial conditions. But this step is only done for 
 convenience and is not necessary.}}%DIFAUXCMD
 \addtocounter{footnote}{-1}%DIFAUXCMD
-\DIFdel{.}\DIFdelend \DIFaddbegin \DIFadd{.}\footnote{\DIFadd{In detail, it 
-is conventional to define the adjoint wavefield by time-reversing $u_{i}'$ such that the terminal conditions 
-obtained are transformed into initial conditions. But this step is only done for 
-convenience and is not necessary.}} \DIFaddend The steps needed to calculate the gradient of the 
-misfit can be summarised as follows:
+\DIFdel{.}\DIFdelend \DIFaddbegin \DIFadd{or }\textbf{\DIFadd{adjoint source}}\DIFadd{.}\footnote{\DIFadd{Some authors reserve these names for the un-reversed field $\mathbf{u}'$ and 
+traction $h_{i}'$. Nothing depends on this choice so long as the time arguments in the kernels are kept track of.}} 
+\DIFaddend The steps needed to calculate the gradient of the misfit can be summarised as follows:
 \begin{enumerate}
     \item Solve the forward equations for $\mathbf{u}$;
-    \item From this solution determine \DIFdelbegin \DIFdel{J }\DIFdelend \DIFaddbegin \DIFadd{$J$ }\DIFaddend and the associated adjoint traction $h_{i}'$;
-    \item Solve the adjoint equations for $\mathbf{u}'$;
-    \item Construct the sensitivity kernels by combining $\mathbf{u}$ and $\mathbf{u}'$ appropriately.
+    \item From this solution determine \DIFdelbegin \DIFdel{J }\DIFdelend \DIFaddbegin \DIFadd{$J$ }\DIFaddend and the associated adjoint traction \DIFdelbegin \DIFdel{$h_{i}'$}\DIFdelend \DIFaddbegin \DIFadd{$h_{i}^{\dagger}$}\DIFaddend ;
+    \item Solve the adjoint equations for \DIFdelbegin \DIFdel{$\mathbf{u}'$}\DIFdelend \DIFaddbegin \DIFadd{$\mathbf{u}^{\dagger}$ as an initial value problem}\DIFaddend ;
+    \item Construct the sensitivity kernels by combining $\mathbf{u}$ and \DIFdelbegin \DIFdel{$\mathbf{u}'$ }\DIFdelend \DIFaddbegin \DIFadd{$\mathbf{u}^{\dagger}$ }\DIFaddend appropriately.
 \end{enumerate}
 The adjoint problem is identical in form to the original, and hence the cost of this method is just 
 \textbf{two numerical solutions of the elastic wave equation}. In fact, within practical applications it 
 is usual to perform three solutions, this being done so \DIFaddbegin \DIFadd{that }\DIFaddend the forward field $\mathbf{u}$ need not be stored at 
-all times when assembling the sensitivity kernels. Even so, the saving relative to the finite-difference 
+all times when assembling the sensitivity kernels\DIFaddbegin \DIFadd{: because the kernels pair $\mathbf{u}$ at time $t$ with 
+$\mathbf{u}^{\dagger}$ at time $T-t$, the forward field is instead reconstructed backwards in time alongside the 
+adjoint calculation}\DIFaddend . Even so, the saving relative to the finite-difference 
 approach is by a factor of $\frac{3}{m+1}$ where $m$ is the number of model parameters. Given that $m$ in practice 
 is of order \DIFdelbegin \DIFdel{$10^{4}-10^{6}$ }\DIFdelend \DIFaddbegin \DIFadd{$10^{4}$--$10^{6}$, }\DIFaddend this is an enormous improvement and justifies a few pages of algebra! 
 It is the adjoint method that allows waveform inversion to be a practical tool within seismology and also 
 in a range of other fields. Indeed, it is this method that underlies numerical weather prediction.
 
 It is worth commenting that though we have obtained the adjoint equations for a specific choice of misfit, the form of $J$
- only enters into the problem through the adjoint traction $h_{i}'$. This means that the theory can be readily applied to 
+ only enters into the problem through the adjoint traction $h_{i}'$ \DIFaddbegin \DIFadd{(or, equivalently, its time reverse $h_{i}^{\dagger}$)}\DIFaddend . This means that the theory can be readily applied to 
  other measures of misfit without having to go through the lengthy derivation each time.
 
 
@@ -641,11 +673,15 @@ obtained using Fermat's principle, with \DIFdelbegin \DIFdel{c }\DIFdelend \DIFa
 %DIFDELCMD <     %%%
 \DIFdelendFL \DIFaddbeginFL \DIFaddFL{Figs.~\ref{fig:3} and \ref{fig:4} show how such a kernel is built up in a two-dimensional numerical experiment using the 
 adjoint method exactly as derived above. An explosive point source generates a P-wave that is recorded at a receiver, the 
-delay time of the arrival is defined through cross-correlation, and the corresponding adjoint source is the windowed 
-velocity of the synthetic seismogram applied at the receiver. Because the adjoint field must satisfy terminal rather than 
-initial conditions, it spreads out from the receiver as time runs backwards from $T$, and the kernel for the P-wave speed, $K_{\alpha}=-2\rho\alpha\int_{0}^{T}(\nabla\cdot\mathbf{u})
-(\nabla\cdot\mathbf{u}')\dd t$, accumulates wherever the two fields overlap. At any instant the overlap of the forward 
-and adjoint wavefronts is confined to a pair of points, and as these points sweep from source to receiver they trace out the 
+delay time of the arrival is defined through cross-correlation, and the corresponding adjoint source is the time-reversed 
+windowed velocity of the synthetic seismogram applied at the receiver. The adjoint field $\mathbf{u}^{\dagger}$ spreads out 
+from the receiver as an ordinary initial value problem, and the kernel for the P-wave speed, 
+}\begin{equation*}
+\DIFaddFL{K_{\alpha}(\mathbf{x})=-2\rho\alpha\int_{0}^{T}\nabla\cdot\mathbf{u}(\mathbf{x},t)\,
+\nabla\cdot\mathbf{u}^{\dagger}(\mathbf{x},T-t)\dd t,
+}\end{equation*}
+\DIFaddFL{accumulates wherever the forward field at time $t$ overlaps the adjoint field at time $T-t$. At any instant this overlap 
+of the two wavefronts is confined to a pair of points, and as these points sweep from source to receiver they trace out the 
 region of sensitivity, which is an ellipse with the source and receiver at its foci.}\footnote{\DIFaddFL{The kernel was checked by 
 perturbing the wave speed within a small region and measuring the resulting change in the cross-correlation delay time 
 directly; the kernel predicts this change to within about ten per cent for a perturbation of two per cent.}}
@@ -655,15 +691,18 @@ directly; the kernel predicts this change to within about ten per cent for a per
     \DIFdelbeginFL %DIFDELCMD < \includegraphics[width=0.7\textwidth]{figures/L8F3.png}        
 %DIFDELCMD <     %%%
 \DIFdelendFL \DIFaddbeginFL \includegraphics[width=\textwidth]{figures/L8F3.pdf}
+    \captionsetup{justification=raggedright}
     \DIFaddendFL \caption{\DIFdelbeginFL \DIFdelFL{Cross sections through the functional derivative }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{Construction }\DIFaddendFL of a cross-correlation \DIFdelbeginFL \DIFdelFL{delay time for a P-wave 
     phase with respect to $\alpha$ as calculated }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{delay-time kernel }\DIFaddendFL by the adjoint method \DIFaddbeginFL \DIFaddFL{in a two-dimensional homogeneous 
     body}\DIFaddendFL . \DIFdelbeginFL \DIFdelFL{Here we see that }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{The star marks an explosive source and }\DIFaddendFL the \DIFdelbeginFL \DIFdelFL{delay time 
-    }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{triangle a receiver. Each row shows one instant: the divergence }\DIFaddendFL of the 
-    \DIFdelbeginFL \DIFdelFL{same phase can be measured }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{forward field (left), the divergence of the adjoint field, which is driven }\DIFaddendFL at \DIFdelbeginFL \DIFdelFL{different frequencies by filtering }\DIFdelendFL the \DIFdelbeginFL \DIFdelFL{data }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{receiver }\DIFaddendFL and \DIFdelbeginFL \DIFdelFL{synthetic waveforms. 
-    The dominant sensitivity lies within the first Fresnel zone}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{satisfies terminal 
-    conditions}\DIFaddendFL , \DIFdelbeginFL \DIFdelFL{but }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{so that }\DIFaddendFL it \DIFdelbeginFL \DIFdelFL{curiously vanishes along }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{spreads outwards as time runs backwards (centre), and }\DIFaddendFL the \DIFdelbeginFL \DIFdelFL{ray path. 
-    Figure taken from Liu \& Tromp }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{kernel $K_{\alpha}$ accumulated up to that instant }\DIFaddendFL (\DIFdelbeginFL \DIFdelFL{2008}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{right}\DIFaddendFL ). \DIFaddbeginFL \DIFaddFL{The kernel grows only where the two 
-    fields overlap.}\DIFaddendFL }
+    }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{triangle a receiver. The kernel is 
+    \mbox{$K_{\alpha}(\mathbf{x})=-2\rho\alpha\int_{0}^{T}\nabla\cdot\mathbf{u}(\mathbf{x},t)\,\nabla\cdot\mathbf{u}^{\dagger}(\mathbf{x},T-t)\dd t$}, 
+    and each row shows one instant $t$: the divergence }\DIFaddendFL of the 
+    \DIFdelbeginFL \DIFdelFL{same phase can be measured at different frequencies by filtering }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{forward field $\mathbf{u}(\mathbf{x},t)$; }\DIFaddendFL the \DIFdelbeginFL \DIFdelFL{data }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{divergence of the adjoint field $\mathbf{u}^{\dagger}(\mathbf{x},T-t)$, 
+    which has spread out from the receiver for a time $T-t$; the integrand, that is the instantaneous contribution to the 
+    kernel; }\DIFaddendFL and \DIFdelbeginFL \DIFdelFL{synthetic waveforms}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{the kernel accumulated over times up to $t$}\DIFaddendFL . The \DIFdelbeginFL \DIFdelFL{dominant sensitivity lies within }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{integrand, and hence }\DIFaddendFL the \DIFdelbeginFL \DIFdelFL{first Fresnel zone}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{kernel}\DIFaddendFL , \DIFdelbeginFL \DIFdelFL{but it curiously vanishes along }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{is non-zero only where }\DIFaddendFL the \DIFdelbeginFL \DIFdelFL{ray path. 
+    Figure taken from Liu \& Tromp (2008)}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{two 
+    fields overlap}\DIFaddendFL .}
     \label{fig:3}
 \end{figure}
 

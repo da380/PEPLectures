@@ -6,10 +6,70 @@
 \author{David Al-Attar \\ Michaelmas Term, \the\year}
 
 \begin{document}
+\providecommand{\item}{\refstepcounter{enumi}\item[\labelenumi$^{\dagger}$]}
+
 
 \maketitle
 
 \begin{enumerate}
+\item
+\begin{enumerate}
+\item Combining the two integrals,
+\begin{equation*}
+    \tau(q)=T-q\Delta=\int_{r_{t}}^{b}\frac{2(r^{2}-\alpha^{2}q^{2})}{\alpha r\sqrt{r^{2}-\alpha^{2}q^{2}}}\dd r
+    =\int_{r_{t}}^{b}\frac{2\sqrt{r^{2}-\alpha^{2}q^{2}}}{\alpha r}\dd r=2\int_{r_{t}}^{b}\sqrt{\eta^{2}-q^{2}}\,\frac{\dd r}{r},
+\end{equation*}
+using $\sqrt{r^{2}-\alpha^{2}q^{2}}/\alpha=\sqrt{\eta^{2}-q^{2}}$. Differentiating with respect to $q$, the lower limit $r_{t}$ depends on $q$, 
+but the integrand vanishes there, and so only the explicit dependence contributes:
+\begin{equation*}
+    \frac{\dd\tau}{\dd q}=-2\int_{r_{t}}^{b}\frac{q}{\sqrt{\eta^{2}-q^{2}}}\frac{\dd r}{r}=-\int_{r_{t}}^{b}\frac{2\alpha q}{r\sqrt{r^{2}-\alpha^{2}q^{2}}}\dd r=-\Delta.
+\end{equation*}
+Since $T=\tau+q\Delta$, we have $\dd T/\dd q=\dd\tau/\dd q+\Delta+q\,\dd\Delta/\dd q=q\,\dd\Delta/\dd q$, and hence $\dd T/\dd\Delta=q$. The slope 
+of the travel-time curve at a given epicentral angle is therefore the ray parameter of the arrival, which is also, by the 
+definition $q=r\sin\theta/\alpha$, the horizontal slowness of the wave at the receiver.
+\item With $\eta$ as the variable of integration, $\dd r/r=(\dd\ln r/\dd\eta)\dd\eta$, the turning point $r_{t}$ corresponds to $\eta=q$, and 
+the surface to $\eta=\eta_{b}$, so that
+\begin{equation*}
+    \Delta(q)=\int_{r_{t}}^{b}\frac{2q}{r\sqrt{\eta^{2}-q^{2}}}\dd r=2\int_{q}^{\eta_{b}}\frac{q}{\sqrt{\eta^{2}-q^{2}}}\frac{\dd\ln r}{\dd\eta}\dd\eta,
+\end{equation*}
+where the monotonicity of $\eta$ is needed for the change of variables to be well-defined.
+\item Multiplying by $(q^{2}-\eta_{1}^{2})^{-1/2}$ and integrating,
+\begin{equation*}
+    \int_{\eta_{1}}^{\eta_{b}}\frac{\Delta(q)}{\sqrt{q^{2}-\eta_{1}^{2}}}\dd q=2\int_{\eta_{1}}^{\eta_{b}}\dd q\int_{q}^{\eta_{b}}\dd\eta\,
+    \frac{q}{\sqrt{(\eta^{2}-q^{2})(q^{2}-\eta_{1}^{2})}}\frac{\dd\ln r}{\dd\eta}.
+\end{equation*}
+The region of integration is $\eta_{1}\le q\le\eta\le\eta_{b}$, so exchanging the order gives
+\begin{equation*}
+    2\int_{\eta_{1}}^{\eta_{b}}\dd\eta\,\frac{\dd\ln r}{\dd\eta}\int_{\eta_{1}}^{\eta}\frac{q\,\dd q}{\sqrt{(\eta^{2}-q^{2})(q^{2}-\eta_{1}^{2})}}
+    =2\cdot\frac{\pi}{2}\int_{\eta_{1}}^{\eta_{b}}\frac{\dd\ln r}{\dd\eta}\dd\eta=\pi\ln\frac{b}{r_{1}},
+\end{equation*}
+as required. To convert to an integral over the travel-time curve, note that the derivative of $\cosh^{-1}(q/\eta_{1})$ with respect to $q$ 
+is $(q^{2}-\eta_{1}^{2})^{-1/2}$, so that integrating by parts
+\begin{equation*}
+    \int_{\eta_{1}}^{\eta_{b}}\frac{\Delta(q)}{\sqrt{q^{2}-\eta_{1}^{2}}}\dd q=\left[\Delta(q)\cosh^{-1}\frac{q}{\eta_{1}}\right]_{\eta_{1}}^{\eta_{b}}
+    -\int_{\eta_{1}}^{\eta_{b}}\cosh^{-1}\!\left(\frac{q}{\eta_{1}}\right)\frac{\dd\Delta}{\dd q}\dd q.
+\end{equation*}
+The boundary term vanishes at both ends, since $\cosh^{-1}(1)=0$ and $\Delta(\eta_{b})=0$ (the ray of parameter $\eta_{b}$ grazes the surface). 
+As $q$ increases from $\eta_{1}$ to $\eta_{b}$, $\Delta$ decreases from $\Delta_{1}$ to $0$, so reversing the direction of integration gives
+\begin{equation*}
+    \ln\frac{b}{r_{1}}=\frac{1}{\pi}\int_{0}^{\Delta_{1}}\cosh^{-1}\!\left[\frac{q(\Delta)}{\eta_{1}}\right]\dd\Delta.
+\end{equation*}
+\item From the observed travel-time curve we obtain $q(\Delta)=\dd T/\dd\Delta$ by differentiation. Choosing any epicentral angle $\Delta_{1}$, 
+the ray arriving there has parameter $\eta_{1}=q(\Delta_{1})$, and the integral gives the radius $r_{1}$ at which it turned. But at the turning 
+point $\eta(r_{1})=\eta_{1}$, and hence $\alpha(r_{1})=r_{1}/\eta_{1}$. Repeating for increasing $\Delta_{1}$ builds up $\alpha(r)$ from the surface 
+downwards; note that the integral for a given depth requires the travel-time curve only out to $\Delta_{1}$, i.e.\ only the rays turning above 
+that depth. If the velocity decreases with depth so rapidly that $\eta$ increases with depth, then rays entering that region are bent 
+downwards rather than turning, and no ray turns within the \emph{low-velocity zone}. There is then a range of $\eta$ with no corresponding 
+turning radius, the change of variables in (b) fails, and the velocity within the zone cannot be recovered from the travel-time curve at all; 
+the zone produces a gap in the curve (a shadow zone) followed by a jump in $\Delta$, and the depths inferred below it are in error unless the 
+zone is accounted for separately. At a discontinuity across which the velocity increases with depth, $\eta$ jumps downwards and there 
+is a range of ray parameters for which the rays are totally reflected at the interface. Rays turning just beneath it emerge at larger epicentral 
+angles than those turning just above, so the travel-time curve folds back on itself to form a \emph{triplication}: over a range of $\Delta$ 
+three arrivals are seen, and $q(\Delta)$ is multi-valued. The inversion remains valid provided the branches are correctly identified, 
+since $\Delta(q)$ itself remains single-valued.
+
+\end{enumerate}
+
 \item From Lecture~19, we know that the least squares solution for the given problem is
 \begin{equation*}
     \mathbf{m}=(\mathbf{A}^{T}\mathbf{C}^{-1}\mathbf{A}+\lambda \mathbf{B})^{-1}\mathbf{A}^{T}\mathbf{C}^{-1}\mathbf{d},
@@ -145,47 +205,28 @@ which implies
 \end{equation*}
 as required.
 
- \item Considering first the continuity of the potential across the boundary, we require
+ \item
+\begin{enumerate}
+\item Expanding about the source point,
 \begin{equation*}
-    [\phi]_{-}^{+}=0
+    \frac{\partial|km\rangle^{*}}{\partial x'_{j}}(\mathbf{x}')=\frac{\partial|km\rangle^{*}}{\partial x_{j}}(\mathbf{x}_{s})
+    +(x'_{l}-x_{s,l})\frac{\partial^{2}|km\rangle^{*}}{\partial x_{j}\partial x_{l}}(\mathbf{x}_{s})+\cdots,
 \end{equation*}
-across $r=b+sh_{1}(\theta,\varphi)+\cdots$, where $[\cdot]_{-}^{+}$ denotes the jump in a quantity across the relevant boundary in the direction of the outward unit normal. Expanding this to first-order accuracy we obtain
-\begin{equation*}
-    \left[\phi_{0}+s\frac{\ddns\phi_{0}}{\ddns r}h_{1}+s\phi_{1}+\cdots\right]_{-}^{+}=0,
-\end{equation*}
-across the reference boundary $r=b$. Using the continuity of $\phi_{0}$ and its normal derivative across the reference boundary, this reduces to
-\begin{equation*}
-    [\phi_{1}]_{-}^{+}=0,
-\end{equation*}
-for $r=b$. To deal with the continuity of the normal derivative, we first write
-\begin{equation*}
-    \hat{\mathbf{n}}=\hat{\mathbf{r}}+s\hat{\mathbf{n}}_{1}+\cdots,
-\end{equation*}
-for the outward unit normal to the boundary. The term $\hat{\mathbf{n}}_{1}$ can be readily expressed in terms of $h_{1}$, but we will see that this is not required. Similar to above, the continuity of $\hat{\mathbf{n}}\cdot\nabla\phi$ across the aspherical boundary can be expanded to
-\begin{equation*}
-    [\hat{\mathbf{r}}\cdot\nabla\phi_{0}+s(\hat{\mathbf{r}}\cdot\nabla)(\hat{\mathbf{r}}\cdot\nabla\phi_{0})h_{1}+s\hat{\mathbf{n}}_{1}\cdot\nabla\phi_{0}+s\hat{\mathbf{r}}\cdot\nabla\phi_{1}+\cdots]_{-}^{+}=0,
-\end{equation*}
-across $r=b$. The zeroth-order term vanishes immediately. We also note that $\hat{\mathbf{n}}_{1}\cdot\nabla\phi_{0}$ is zero as $\hat{\mathbf{n}}_{1}$ must be orthogonal to $\hat{\mathbf{r}}$ for the perturbed normal to be a unit vector, and this term is proportional to the radial derivative of $\phi_{0}$ which is continuous. The first-order condition therefore becomes
-\begin{equation*}
-    [(\hat{\mathbf{r}}\cdot\nabla)(\hat{\mathbf{r}}\cdot\nabla\phi_{0})h_{1}+\hat{\mathbf{r}}\cdot\nabla\phi_{1}]_{-}^{+}=0,
-\end{equation*}
-at $r=b$. To simplify the first term, we recall that $\phi_{0}$ satisfies the spherically symmetric Poisson equation
-\begin{equation*}
-    \frac{1}{r^{2}}\frac{\ddns}{\ddns r}\left(r^{2}\frac{\ddns\phi_{0}}{\ddns r}\right)=4\pi G\rho_{0}.
-\end{equation*}
-Using this result, we see that
-\begin{equation*}
-    (\hat{\mathbf{r}}\cdot\nabla)(\hat{\mathbf{r}}\cdot\nabla\phi_{0}) = \frac{\partial^{2}\phi_{0}}{\partial r^{2}}=4\pi G\rho_{0}-\frac{2}{r}\frac{\partial\phi_{0}}{\partial r},
-\end{equation*}
-which can be substituted into the jump condition to obtain
-\begin{equation*}
-    \left[\frac{\partial\phi_{1}}{\partial r}+4\pi G\rho_{0}h_{1}\right]_{-}^{+}=0,
-\end{equation*}
-where again the continuity of the normal derivative of $\phi_{0}$ has been applied.
-
-
-
-
+and so the spatial integral in the mode sum becomes
+\begin{multline*}
+    \int_{M}\overline{S}_{ij}(\mathbf{x}',t')\frac{\partial|km\rangle^{*}}{\partial x'_{j}}(\mathbf{x}')\dd^{3}\mathbf{x}'
+    =M_{ij}(t')\frac{\partial|km\rangle^{*}}{\partial x_{j}}(\mathbf{x}_{s}) \\
+    +\frac{\partial^{2}|km\rangle^{*}}{\partial x_{j}\partial x_{l}}(\mathbf{x}_{s})
+    \int_{M}(x'_{l}-x_{s,l})\overline{S}_{ij}(\mathbf{x}',t')\dd^{3}\mathbf{x}'+\cdots.
+\end{multline*}
+The first term is exactly what is obtained from the point source with moment tensor $M_{ij}(t)$, and the second is smaller than it by a 
+factor of order $L/\lambda_{k}$, where $\lambda_{k}$ is the length over which the strain of the eigenfunction changes appreciably. 
+The eigenfunction of a mode with frequency $\omega_{k}$ oscillates in space with a wavelength of order $\lambda_{k}\sim2\pi v/\omega_{k}$, with $v$ 
+a typical wave speed, so the point-source approximation requires $L\ll v/f_{k}$ where $f_{k}=\omega_{k}/2\pi$. Since the seismogram is a sum 
+over modes, the approximation is good at frequencies for which $f\ll v/L$, and fails at higher frequencies whatever the size of the 
+fault; it is therefore a statement about the frequency band retained. For $L=100\,\mathrm{km}$ and $v=5\,\mathrm{km\,s^{-1}}$, 
+$v/L=50\,\mathrm{mHz}$, so the approximation is reasonable below perhaps $10\,\mathrm{mHz}$ (periods above about $100\,\mathrm{s}$, 
+wavelengths above $500\,\mathrm{km}$) and certainly for the free oscillations discussed in the lectures.
 \item We are told
 \begin{equation*}
     \mathbf{u}(\mathbf{x},t) = \sum_{km}\left\{\int_{0}^{t}\frac{\sin[\omega_{k}(t-t')]}{\omega_{k}}\int_{M}\overline{S}_{ij}(\mathbf{x}',t')\frac{\partial|km\rangle^{*}}{\partial x'_{j}}(\mathbf{x}')\dd^{3}\mathbf{x}'\dd t'\right\}|km\rangle(\mathbf{x}),
@@ -203,6 +244,8 @@ and hence the eigenfunction expansion reduces to
     \mathbf{u}(\mathbf{x},t)=\sum_{km}\frac{1-\cos[\omega_{k}(t-t_{s})]}{\omega_{k}^{2}}M_{ij}\frac{\partial|km\rangle^{*}}{\partial x_{j}}(\mathbf{x}_{s})|km\rangle(\mathbf{x}),
 \end{equation*}
 for $t\ge t_{s}$ and zero before this. This final expression depends on ten source parameters, assuming that Earth structure is known. The dependence on the moment tensor is linear, but that on the source location and source time is non-linear. There are several possible methods for solving the inverse problem. The most obvious is to define some sort of least-squares misfit between observed and predicted seismograms, and then optimise to find the best-fitting source parameters. To do this gradient-based methods could be applied, and here the derivatives with respect to the source parameters could be calculated directly with relative ease. Note that in this problem there are likely to be more data than model parameters, and hence it is likely to be overdetermined. As a result, regularisation would not be needed. Because the problem is non-linear, it is not certain that the optimal solution obtained would be a global minimum. Due to the size of the inverse problem and the low cost of implementing mode summation (in a spherically symmetric earth model at least) the application of Bayesian methods via something like MCMC would be feasible, and this could address the possible issue of local minima, while also providing a quantification of uncertainty.
+
+\end{enumerate}
 
 \item Within the eigenvalue problem we take the test function equal to $\mathbf{s}$ and so obtain
 \begin{equation*}
@@ -225,6 +268,121 @@ and using the identity $\epsilon_{ijk}\epsilon_{klm}=\delta_{il}\delta_{jm}-\del
     \int_{M}\rho\epsilon_{ijk}\epsilon_{klm}s_{i}^{*}\Omega_{j}\Omega_{l}s_{m}\dd^{3}\mathbf{x}=\int_{M}\rho[|\mathbf{s}\cdot\bm{\Omega}|^{2}-\|\mathbf{s}\|^{2}\|\bm{\Omega}\|^{2}]\dd^{3}\mathbf{x}.
 \end{equation*}
 Applying the Cauchy--Schwarz inequality we note that this term is always non-positive, and hence centrifugal forces are destabilising.
+
+\item
+\begin{enumerate}
+\item Build up the planet by bringing in successive spherical shells from infinity. When the radius is $r$, the mass already
+assembled is $m(r)=\tfrac{4}{3}\pi\rho r^{3}$, and adding a shell of mass $\dd m=4\pi\rho r^{2}\dd r$ releases energy $Gm\,\dd m/r$. Thus
+\begin{equation*}
+    E_{g}=-\int_{0}^{a}\frac{Gm(r)}{r}4\pi\rho r^{2}\dd r=-\frac{16\pi^{2}}{3}G\rho^{2}\int_{0}^{a}r^{4}\dd r=-\frac{16\pi^{2}}{15}G\rho^{2}a^{5}
+    =-\frac{3GM^{2}}{5a},
+\end{equation*}
+where $M=\tfrac{4}{3}\pi\rho a^{3}$.
+\item Within a uniform sphere the gravitational acceleration is $g(r)=\tfrac{4}{3}\pi G\rho r$ directed inwards, and the
+hydrostatic equation $\dd p_{0}/\dd r=-\rho g$ with $p_{0}(a)=0$ integrates to the given expression. Then
+\begin{equation*}
+    3\int_{M}p_{0}\dd^{3}\mathbf{x}=8\pi^{2}G\rho^{2}\int_{0}^{a}(a^{2}-r^{2})r^{2}\dd r=8\pi^{2}G\rho^{2}\left(\frac{a^{5}}{3}-\frac{a^{5}}{5}\right)
+    =\frac{16\pi^{2}}{15}G\rho^{2}a^{5}=-E_{g}.
+\end{equation*}
+This is a form of the virial theorem for a body in hydrostatic equilibrium.
+\item The mass is unchanged while the radius becomes $a(1-\epsilon)$, so
+\begin{equation*}
+    \Delta E_{g}=-\frac{3GM^{2}}{5a}\left[\frac{1}{1-\epsilon}-1\right]=-\frac{3GM^{2}}{5a}(\epsilon+\epsilon^{2})+O(\epsilon^{3}).
+\end{equation*}
+As expected, contraction releases gravitational energy.
+\item Under the uniform compression every material element has its linear dimensions scaled by $1-\epsilon$, so its
+fractional decrease in volume is $s=1-(1-\epsilon)^{3}=3\epsilon-3\epsilon^{2}+O(\epsilon^{3})$. The work done on an element of
+initial volume $V_{0}$ is
+\begin{equation*}
+    \int_{0}^{s}(p_{0}+\kappa s')V_{0}\dd s'=V_{0}\left(p_{0}s+\frac{1}{2}\kappa s^{2}\right)
+    =V_{0}\left[(3\epsilon-3\epsilon^{2})p_{0}+\frac{9}{2}\kappa\epsilon^{2}\right]+O(\epsilon^{3}),
+\end{equation*}
+and summing over the planet gives the stated result. Note that because the compression is uniform there is no shear strain, and
+so the shear modulus plays no role.
+\item Adding the two contributions, the first-order terms are
+\begin{equation*}
+    3\epsilon\int_{M}p_{0}\dd^{3}\mathbf{x}-\frac{3GM^{2}}{5a}\epsilon=\epsilon\left[3\int_{M}p_{0}\dd^{3}\mathbf{x}+E_{g}\right]=0,
+\end{equation*}
+by part (b). This had to be so because the initial state is an equilibrium, and hence a stationary point of the total energy. Using
+$\int_{M}p_{0}\dd^{3}\mathbf{x}=-E_{g}/3=GM^{2}/5a$, the second-order terms are
+\begin{equation*}
+    \Delta E=\epsilon^{2}\left[\frac{9}{2}\kappa V-3\int_{M}p_{0}\dd^{3}\mathbf{x}-\frac{3GM^{2}}{5a}\right]
+    =\epsilon^{2}\left[\frac{9}{2}\kappa V-\frac{6GM^{2}}{5a}\right]=\frac{9}{2}V\epsilon^{2}\left[\kappa-\frac{4}{3}\bar{p}_{0}\right],
+\end{equation*}
+where $\bar{p}_{0}=\frac{1}{V}\int_{M}p_{0}\dd^{3}\mathbf{x}=GM^{2}/5aV$. Stability with respect to uniform compression therefore
+requires $\kappa>\tfrac{4}{3}\bar{p}_{0}$; the second-order gravitational term
+alone would be balanced by an elastic energy twice as small, and it is the release of energy stored in the hydrostatic pressure
+that accounts for the rest. Using $M=\tfrac{4}{3}\pi\rho a^{3}$ and $V=\tfrac{4}{3}\pi a^{3}$ we find $\bar{p}_{0}=\tfrac{4\pi}{15}G\rho^{2}a^{2}$,
+and hence $\kappa>\tfrac{16\pi}{45}G\rho^{2}a^{2}$. The surface gravity is $g=\tfrac{4}{3}\pi G\rho a$, so this can be written as
+\begin{equation*}
+    \frac{\kappa}{\rho}>\frac{4}{15}ga,
+\end{equation*}
+or, in words, the sound speed must exceed $\sqrt{4ga/15}$, a fixed fraction of the orbital speed $\sqrt{ga}$ at the surface.
+For the given numbers $\tfrac{16\pi}{45}G\rho^{2}a^{2}\approx 92\,\mathrm{GPa}$, or equivalently a sound speed of about $4.1\,\mathrm{km\,s^{-1}}$.
+Within PREM the bulk modulus in the mantle (and still more so in the core) lies comfortably above this value, so we should
+expect the Earth to be stable to a global compression, though the margin is far smaller than one might have guessed. If the
+material instead obeyed an adiabatic law $p\propto\rho^{\gamma}$, then $\kappa=\gamma p_{0}$, and the same
+argument gives the classical condition $\gamma>4/3$ for the stability of a self-gravitating gas sphere. The
+calculation is only indicative: uniform compression is not an eigenfunction of the problem, and the true condition for stability
+requires the potential energy form of Lecture~23 to be positive for all admissible displacements.
+\end{enumerate}
+
+\item
+\begin{enumerate}
+\item With $P_{1}=H_{1}=0$, the first-order splitting problem of Lecture~24 reduces to
+\begin{equation*}
+    \frac{1}{2\omega_{k}}\sum_{m=-l}^{l}\ii\omega_{k}\langle km'|W|km\rangle a_{m}=\delta\omega\,a_{m'},
+\end{equation*}
+and substituting the given matrix elements,
+\begin{equation*}
+    \frac{\ii}{2}(-2\ii m'\Omega\beta)a_{m'}=m'\Omega\beta\,a_{m'}=\delta\omega\,a_{m'}.
+\end{equation*}
+The matrix is diagonal, so its eigenvectors are the singlets themselves, $a_{m}=\delta_{mm_{0}}$, with eigenvalues $\delta\omega=m_{0}\Omega\beta$. 
+Hence $\omega_{m}=\omega_{k}+m\Omega\beta$ for $-l\le m\le l$: the multiplet is split into $2l+1$ singlets with uniform spacing $\Omega\beta$, 
+symmetric about the degenerate frequency. Their sum, $\sum_{m}m\Omega\beta=0$, vanishes as the diagonal sum rule requires. In question 7 we found, 
+for a normalised eigenfunction, $\omega=\tfrac{1}{2}\ii\langle\mathbf{s}|W|\mathbf{s}\rangle\pm\sqrt{\langle\mathbf{s}|H|\mathbf{s}\rangle-\tfrac{1}{4}\langle\mathbf{s}|W|\mathbf{s}\rangle^{2}}$. 
+Taking $\mathbf{s}=|km\rangle$, so that $\langle\mathbf{s}|H|\mathbf{s}\rangle=\omega_{k}^{2}$ and $\langle\mathbf{s}|W|\mathbf{s}\rangle=-2\ii m\Omega\beta$, this gives
+\begin{equation*}
+    \omega=m\Omega\beta+\sqrt{\omega_{k}^{2}+m^{2}\Omega^{2}\beta^{2}}=\omega_{k}+m\Omega\beta+O(\Omega^{2}),
+\end{equation*}
+in agreement with the first-order result.
+\item We need $\langle km|W|km\rangle=\int_{M}2\rho\,\mathbf{s}^{*}\cdot(\bm{\Omega}\times\mathbf{s})\dd^{3}\mathbf{x}$ with $\mathbf{s}=W\mathbf{C}_{lm}$. 
+Writing $Y$ for $Y_{lm}$, and using $\hat{\mathbf{r}}\times\hat{\bm{\theta}}=\hat{\bm{\varphi}}$ and $\hat{\mathbf{r}}\times\hat{\bm{\varphi}}=-\hat{\bm{\theta}}$,
+\begin{equation*}
+    \mathbf{C}_{lm}=\hat{\mathbf{r}}\times\nabla_{1}Y=\partial_{\theta}Y\,\hat{\bm{\varphi}}-\frac{\ii m}{\sin\theta}Y\,\hat{\bm{\theta}}.
+\end{equation*}
+With $\hat{\mathbf{z}}=\cos\theta\,\hat{\mathbf{r}}-\sin\theta\,\hat{\bm{\theta}}$ we have 
+$\hat{\mathbf{z}}\times\hat{\bm{\theta}}=\cos\theta\,\hat{\bm{\varphi}}$ and $\hat{\mathbf{z}}\times\hat{\bm{\varphi}}=-\cos\theta\,\hat{\bm{\theta}}-\sin\theta\,\hat{\mathbf{r}}$, so that
+\begin{equation*}
+    \hat{\mathbf{z}}\times\mathbf{C}_{lm}=-\partial_{\theta}Y(\cos\theta\,\hat{\bm{\theta}}+\sin\theta\,\hat{\mathbf{r}})-\frac{\ii m\cos\theta}{\sin\theta}Y\,\hat{\bm{\varphi}},
+\end{equation*}
+and therefore
+\begin{equation*}
+    \mathbf{C}_{lm}^{*}\cdot(\hat{\mathbf{z}}\times\mathbf{C}_{lm})=-\frac{\ii m\cos\theta}{\sin\theta}\left(Y\,\partial_{\theta}Y^{*}+Y^{*}\partial_{\theta}Y\right)
+    =-\frac{\ii m\cos\theta}{\sin\theta}\,\partial_{\theta}|Y|^{2}.
+\end{equation*}
+Integrating over the unit sphere,
+\begin{multline*}
+    \int_{\mathbb{S}^{2}}\mathbf{C}_{lm}^{*}\cdot(\hat{\mathbf{z}}\times\mathbf{C}_{lm})\dd S=-\ii m\int_{0}^{2\pi}\!\!\int_{0}^{\pi}\cos\theta\,\partial_{\theta}|Y|^{2}\dd\theta\dd\varphi \\
+    =-\ii m\left\{2\pi\Big[\cos\theta|Y|^{2}\Big]_{0}^{\pi}+\int_{\mathbb{S}^{2}}|Y|^{2}\dd S\right\}=-\ii m,
+\end{multline*}
+the boundary term vanishing because $Y$ vanishes at the poles for $m\ne0$, and the remaining integral being unity by orthonormality. Hence
+\begin{equation*}
+    \langle km|W|km\rangle=2\Omega\int_{0}^{b}\rho W^{2}r^{2}\dd r\int_{\mathbb{S}^{2}}\mathbf{C}_{lm}^{*}\cdot(\hat{\mathbf{z}}\times\mathbf{C}_{lm})\dd S
+    =-2\ii m\Omega\int_{0}^{b}\rho W^{2}r^{2}\dd r=-\frac{2\ii m\Omega}{l(l+1)},
+\end{equation*}
+using the stated normalisation, and so $\beta=1/[l(l+1)]$. (The off-diagonal elements $m'\ne m$ vanish because the integrand is then 
+proportional to $\ee^{\ii(m-m')\varphi}$, which integrates to zero.) A check on the spheroidal formula quoted in the question is that the 
+same manipulations applied to $\mathbf{s}=U\,Y\hat{\mathbf{r}}+V\nabla_{1}Y$ give the angular integral $-\ii m(2UV+V^{2})$.
+\item With $\Omega=2\pi/86164\,\mathrm{s}=7.29\times10^{-5}\,\mathrm{s^{-1}}$, the rotation frequency is $\Omega/2\pi=11.6\,\mu\mathrm{Hz}$, and 
+the spacing between adjacent singlets is $\beta\Omega/2\pi$: $1.9\,\mu\mathrm{Hz}$ for ${}_{0}T_{2}$ ($\beta=1/6$), $4.6\,\mu\mathrm{Hz}$ for ${}_{0}S_{2}$ 
+and $2.2\,\mu\mathrm{Hz}$ for ${}_{0}S_{3}$. The observed spectra show ${}_{0}S_{2}$ singlets separated by about $4.6$--$4.8\,\mu\mathrm{Hz}$ 
+and ${}_{0}S_{3}$ singlets by about $2.2\,\mu\mathrm{Hz}$, so that the splitting of these gravest modes is almost entirely due to rotation. 
+The spacing is not exactly uniform because the neglected effects, the Earth's ellipticity (and the centrifugal potential) and its 
+lateral heterogeneity, also split the multiplet; to first order these contribute terms even in $m$ and so shift the inner and outer 
+pairs of singlets differently, and second-order effects of rotation do the same. The peaks are also broadened by attenuation 
+and by the finite length of the record, which limits the precision with which their positions can be read off.
+\end{enumerate}
 
 \end{enumerate}
 

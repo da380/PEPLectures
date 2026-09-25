@@ -6,6 +6,7 @@
 % Build: pdflatex lectures; pdflatex lectures; pdflatex lectures
 \documentclass[a4paper,12pt]{paper}
 \usepackage{mycommands}
+\captionsetup{hypcap=false}% \captionof figures cannot carry hyperref anchors
 \usepackage[section]{placeins}   % keep floats within their (starred) sections
 \renewcommand{\topfraction}{0.9}\renewcommand{\bottomfraction}{0.8}
 \renewcommand{\textfraction}{0.07}\renewcommand{\floatpagefraction}{0.75}
@@ -42,6 +43,25 @@
   \addcontentsline{toc}{section}{Lecture #1: #2}%
   \input{#3}%
 }
+% a problem set: same title treatment, its own label prefix, figures numbered within the set
+\newcommand{\problemset}[2]{%
+  \renewcommand{\lecprefix}{P#1}%
+  \title{Problem Set #1}%
+  \author{}%
+  \maketitle
+  \let\maketitle\lec@maketitle
+  \let\@maketitle\lec@@maketitle
+  \setcounter{equation}{0}\setcounter{figure}{0}\setcounter{footnote}{0}%
+  \phantomsection
+  \addcontentsline{toc}{section}{Problem Set #1}%
+  \input{#2}%
+}
+% compact title block for each lecture (the class's version leaves an empty author line and large skips)
+\def\@maketitle{%
+  \cleardoublepage\null
+  {\raggedright{\t@font\@title\par}}%
+  \par\vskip 1em
+}
 \makeatother
 
 \begin{document}
@@ -63,6 +83,14 @@
 \end{titlepage}
 \hypersetup{pageanchor=true}
 
+\clearpage
+\section*{Preface}
+These notes cover the seismology part of the course, Lectures 13 to 24, and they will also be available on the 
+Teaching Information System (TiS). The material is close to that of previous years, but the notes have been revised 
+throughout and a number of figures added. Errors will surely remain: if you find one, however small, please email me 
+at \texttt{da380@cam.ac.uk} and the version on the TiS will be updated. The two problem sets for this part of the course 
+are included at the end of these notes, and their solutions are available on the TiS.
+
 \tableofcontents
 
 \lecture{13}{Finite elasticity}{lecture1}
@@ -78,6 +106,9 @@
 \lecture{23}{Free oscillations}{lecture11}
 \lecture{24}{Mode splitting and coupling}{lecture12}
 
+\problemset{1}{problem1_body}
+\problemset{2}{problem2_body}
+
 \clearpage
 \phantomsection
 \addcontentsline{toc}{section}{References}
@@ -86,6 +117,10 @@
 \setlength{\parindent}{0pt}\setlength{\parskip}{4pt plus 1pt}
 \newcommand{\refitem}[1]{\par\hangindent=1.5em\hangafter=1 #1}
 \refitem{Abramson, E.~H., Brown, J.~M., Slutsky, L.~J. \& Zaug, J. (1997). The elastic constants of San Carlos olivine to 17~GPa. \emph{Journal of Geophysical Research} \textbf{102}, 12253--12263.}
+\refitem{Adourian, S., Dursun, M.~S., Lau, H.~C.~P. \& Al-Attar, D. (2024). Adjoint sensitivity kernels for free oscillation spectra. \emph{Geophysical Journal International} \textbf{238}, 257--271.}
+\refitem{Akbarashrafi, F., Al-Attar, D., Deuss, A., Trampert, J. \& Valentine, A.~P. (2018). Exact free oscillation spectra, splitting functions and the resolvability of Earth's density structure. \emph{Geophysical Journal International} \textbf{213}, 58--76.}
+\refitem{Al-Attar, D., Woodhouse, J.~H. \& Deuss, A. (2012). Calculation of normal mode spectra in laterally heterogeneous earth models using an iterative direct solution method. \emph{Geophysical Journal International} \textbf{189}, 1038--1046.}
+\refitem{Al-Attar, D. \& Woodhouse, J.~H. (2008). Calculation of seismic displacement fields in self-gravitating earth models: applications of minors vectors and symplectic structure. \emph{Geophysical Journal International} \textbf{175}, 1176--1208.}
 \refitem{Backus, G. \& Gilbert, F. (1961). The rotational splitting of the free oscillations of the Earth. \emph{Proceedings of the National Academy of Sciences} \textbf{47}, 362--371.}
 \refitem{Benioff, H., Press, F. \& Smith, S. (1961). Excitation of the free oscillations of the Earth by earthquakes. \emph{Journal of Geophysical Research} \textbf{66}, 605--619.}
 \refitem{Bozda\u{g}, E., Peter, D., Lefebvre, M., Komatitsch, D., Tromp, J., Hill, J., Podhorszki, N. \& Pugmire, D. (2016). Global adjoint tomography: first-generation model. \emph{Geophysical Journal International} \textbf{207}, 1739--1766.}
@@ -101,12 +136,17 @@
 \refitem{Ishii, M. \& Tromp, J. (1999). Normal-mode and free-air gravity constraints on lateral variations in velocity and density of Earth's mantle. \emph{Science} \textbf{285}, 1231--1236.}
 \refitem{Koelemeijer, P., Ritsema, J., Deuss, A. \& van Heijst, H.-J. (2016). SP12RTS: a degree-12 model of shear- and compressional-wave velocity for Earth's mantle. \emph{Geophysical Journal International} \textbf{204}, 1024--1039.}
 \refitem{Lau, H.~C.~P., Mitrovica, J.~X., Davis, J.~L., Tromp, J., Yang, H.-Y. \& Al-Attar, D. (2017). Tidal tomography constrains Earth's deep-mantle buoyancy. \emph{Nature} \textbf{551}, 321--326.}
+\refitem{Lichtenstein, L. (1918). \"{U}ber einige Eigenschaften der Gleichgewichtsfiguren rotierender Fl\"{u}ssigkeiten, deren Teilchen einander nach dem Newtonschen Gesetze anziehen. \emph{Sitzungsberichte der Preussischen Akademie der Wissenschaften}, 1120--1135.}
+\refitem{Lichtenstein, L. (1933). \emph{Gleichgewichtsfiguren rotierender Fl\"{u}ssigkeiten}. Springer.}
 \refitem{Liu, Q. \& Tromp, J. (2008). Finite-frequency sensitivity kernels for global seismic wave propagation based upon adjoint methods. \emph{Geophysical Journal International} \textbf{174}, 265--286.}
 \refitem{Lu, C., Grand, S.~P., Lai, H. \& Garnero, E.~J. (2019). TX2019slab: a new P and S tomography model incorporating subducting slabs. \emph{Journal of Geophysical Research: Solid Earth} \textbf{124}, 11549--11567.}
 \refitem{Maitra, M. \& Al-Attar, D. (2024). On the elastodynamics of rotating planets. \emph{Geophysical Journal International} \textbf{238}, 1291--1332.}
 \refitem{Newton, I. (1687). \emph{Philosophi\ae{} Naturalis Principia Mathematica}. London.}
 \refitem{Oldham, R.~D. (1906). The constitution of the interior of the Earth, as revealed by earthquakes. \emph{Quarterly Journal of the Geological Society} \textbf{62}, 456--475.}
+\refitem{Ortiz, J.~L. et al. (2017). The size, shape, density and ring of the dwarf planet Haumea from a stellar occultation. \emph{Nature} \textbf{550}, 219--223.}
+\refitem{Poincar\'{e}, H. (1885). Sur l'\'{e}quilibre d'une masse fluide anim\'{e}e d'un mouvement de rotation. \emph{Acta Mathematica} \textbf{7}, 259--380.}
 \refitem{Reid, H.~F. (1910). The mechanics of the earthquake. In \emph{The California Earthquake of April 18, 1906: Report of the State Earthquake Investigation Commission}, Vol.~II. Carnegie Institution of Washington.}
+\refitem{Ritsema, J., Deuss, A., van Heijst, H.~J. \& Woodhouse, J.~H. (2011). S40RTS: a degree-40 shear-velocity model for the mantle from new Rayleigh wave dispersion, teleseismic traveltime and normal-mode splitting function measurements. \emph{Geophysical Journal International} \textbf{184}, 1223--1236.}
 \refitem{Simmons, N.~A., Forte, A.~M., Boschi, L. \& Grand, S.~P. (2010). GyPSuM: a joint tomographic model of mantle density and seismic wave speeds. \emph{Journal of Geophysical Research} \textbf{115}, B12310.}
 \refitem{Stuart, A.~M. (2010). Inverse problems: a Bayesian perspective. \emph{Acta Numerica} \textbf{19}, 451--559.}
 \refitem{Tape, C., Liu, Q., Maggi, A. \& Tromp, J. (2010). Seismic tomography of the southern California crust based on spectral-element and adjoint methods. \emph{Geophysical Journal International} \textbf{180}, 433--462.}

@@ -91,6 +91,11 @@ class KernelExperiment:
         """Restrict a field on the padded grid to the plotting region."""
         return f[np.ix_(self.plot_x, self.plot_z)]
 
+    def integrand(self, i):
+        """Instantaneous contribution to K_alpha at forward snapshot i:
+        -2 rho alpha div u(x, t_i) div u^dagger(x, T - t_i)."""
+        return -2.0 * self.rho * self.alpha * self.snap_div[i] * self.snap_div_adj[i]
+
     def kernel(self, upto=None):
         """K_alpha accumulated over forward snapshots up to index `upto` (all if None)."""
         K = np.zeros((len(self.x), len(self.z)))

@@ -34,7 +34,9 @@ Having done this, we then have
 \label{eq:1}
 \end{equation}
 for all $\mathbf{x}$. There are circumstances in which it is useful to select a different reference body, but 
-we will not worry about that within this course. 
+we will not worry about that within this course. It is, however, worth knowing that this freedom can be put to real use: for example, the equations of motion for an 
+aspherical earth model can be exactly rewritten as those for a spherically symmetric reference body, with the effects of 
+boundary topography and lateral heterogeneity absorbed into modified material parameters. 
 
 \section*{Velocity, deformation gradient, and Jacobian}
 If we fix attention on a particle $\mathbf{x}$, then the function $t\mapsto\bphi(\mathbf{x},t)$ describes its 
@@ -254,7 +256,11 @@ Mathematically, this means that we require the first variation of the action
 \delta\mathcal{S}=\lim_{h\rightarrow0}\frac{1}{h}[\mathcal{S}(\bphi+h\,\delta\bphi)-\mathcal{S}(\bphi)]
 \label{eq:27}
 \end{equation}
-vanish for all smooth variations $\delta\bphi$ satisfying eq.~(\ref{eq:26}). We readily find that this 
+vanish for all smooth variations $\delta\bphi$ satisfying eq.~(\ref{eq:26}). The first variation depends linearly on 
+$\delta\bphi$, and it is often convenient to make this explicit by writing 
+$\delta\mathcal{S}=\langle D\mathcal{S}(\bphi)|\delta\bphi\rangle$, where $D\mathcal{S}(\bphi)$ is called the 
+\textbf{functional derivative} of the action at $\bphi$, and the angled brackets denote its linear action on a 
+variation; we shall meet this notation again in later lectures. We readily find that this 
 first variation can be written
 \begin{equation}
 \delta\mathcal{S}=\int_{0}^{T}\int_{M}\left\{\frac{\partial\mathcal{L}}{\partial\varphi_{i}}\delta\varphi_{i}+
