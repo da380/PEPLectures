@@ -1,0 +1,22 @@
+[project]
+name = "pepseis"
+version = "0.1.0"
+description = "Code behind the figures and problem sets of the PEP seismology lectures (Part III Physics, Cambridge)"
+authors = [{ name = "David Al-Attar" }]
+readme = "README.md"
+requires-python = ">=3.12,<3.14"
+dependencies = [
+    "numpy>=2.0",
+    "scipy>=1.13",
+    "matplotlib>=3.9",
+    "pillow>=10.0",
+    "pygeoinf>=1.8",
+    "obspy>=1.4",
+]
+
+[tool.poetry]
+packages = [{ include = "pepseis" }]
+
+[build-system]
+requires = ["poetry-core>=2.0.0"]
+build-backend = "poetry.core.masonry.api"

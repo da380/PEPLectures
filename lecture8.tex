@@ -1,20 +1,7 @@
-\documentclass[a4paper,12pt]{paper}
-
-\usepackage{mycommands}
-\usepackage{amsmath} % Ensure amsmath is loaded for align environment
-
-\title{Lecture 19: Waveform tomography}
-\author{David Al-Attar \\ Michaelmas Term, \the\year}
-
-
-\begin{document}
-
-\maketitle
-
 \section*{Outline and motivation}
 
 In the previous lecture we discussed delay time tomography, this being the first and simplest tomographic method developed. 
-While this approach is still used, it has been superseded by \textbf{waveform tomography}. Delay time tomography is based on the 
+While this approach is still widely used, it is increasingly being superseded by \textbf{waveform tomography}. Delay time tomography is based on the 
 measurement of a small number of delay times from each seismogram, with these data modelled using linearised ray theory. 
 By contrast, waveform tomography uses more of the data contained in the seismograms, fully accounts for the complexities 
 of elastic wave propagation in the Earth, and does not linearise the inverse problem. This lecture will outline the ideas 
@@ -22,38 +9,50 @@ behind waveform tomography, focusing on the solution of the inverse problem usin
 
 \section*{Numerical wavefield simulations}
 
-Waveform tomography depends  on the ability to solve the full elastic wave equation numerically within 
+Waveform tomography depends on the ability to solve the full elastic wave equation numerically within 
 realistic earth models. This has been possible routinely on a global scale for around 20 years, with this process 
 facilitated by both algorithmic and hardware advances. These lectures are not about numerical methods. But it will 
 be seen that within this subject computational costs must be carefully considered. As a number to bear in mind, the 
 simulation of elastic wave propagation on a global scale within a realistic 3D earth model takes of order ten minutes
 running on a modest GPU cluster. Within a tomographic study, it would be typical to use 
-data from around $10^{2}-10^{3}$ earthquakes, and a separate numerical simulation is required for each one.
-This means that the time for solving the necessary forward problem is of order hours or more. 
+data from around $10^{3}$ earthquakes recorded at thousands of stations (see Fig.~\ref{fig:1}), and a separate numerical 
+simulation is required for each earthquake. This means that the time for solving the necessary forward problems is of 
+order hours or more. 
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.66\textwidth]{figures/L8F1.pdf}
+    \caption{The 2160 earthquakes used to construct the global waveform tomographic model GLAD-M35 (see Fig.~\ref{fig:6}):
+    (a) locations, each event being drawn as a visual representation of its moment tensor, coloured by depth; (b) the distribution of magnitudes; (c) the distribution of
+    hypocentre depths; (d) the number of events by year. From Cui et al.\ (2024).}
+    \label{fig:1}
+\end{figure}
 
 \section*{Waveform measurements}
 
-Let $\mathbf{u}^{obs}(t)$ denote the displacement vector recorded by a seismograph at the surface location,
- $\mathbf{x}_{r}$ following an earthquake. In reality, seismographs do not record the displacement vector directly,
+Let $\mathbf{u}^{\mathrm{obs}}(t)$ denote the displacement vector recorded by a seismograph at the surface location,
+ $\mathbf{x}_{r}$, following an earthquake. In reality, seismographs do not record the displacement vector directly,
   with the signal instead being modified due to the mechanical and electronic properties of the instrument along with 
   additional processing done by the seismologist. For simplicity, however, we neglect such effects, but they can be 
-  incorporated at the cost of only more complicated notation.
+  incorporated at the cost only of more complicated notation.
 
-\begin{figure}[ht]
+\begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.7\textwidth]{figures/L8F1.png}    
-    \caption{An example of observed and synthetic three-component seismograms from a waveform tomographic study of 
-    Southern California. Data is shown in black, and synthetics in red. On the left the comparison is made prior 
-    to inversion, with the synthetics calculated in a laterally homogeneous model. The right hand side then shows the
-     data fit following inversion involving 16 iterative model updates. Taken from Tape et al. (2010).}
-    \label{fig:1}
+    \includegraphics[width=0.7\textwidth]{figures/L8F2.png}    
+    \caption{An example of observed and synthetic three-component seismograms from a waveform tomographic study of
+    Southern California. Data are shown in black, and synthetics in red; the rows show the vertical (Z), radial (R) and
+    transverse (T) components, and time is in seconds. On the left (1D) the comparison is made prior
+    to inversion, with the synthetics calculated in the initial, laterally homogeneous, model. The right-hand side (m16) then shows the
+     data fit following inversion involving 16 iterative model updates. Taken from Tape et al.\ (2010).}
+    \label{fig:2}
 \end{figure}
 
 Suppose that we have models for both the Earth and earthquake, and so can numerically solve the elastic wave equation to 
 obtain a synthetic seismogram $\mathbf{u}(\mathbf{x}_{r},t)$ at this location. To quantify the misfit between the observed and
- synthetic seismograms we can define the least squares misfit
+ synthetic seismograms we can define the least-squares misfit
 \begin{equation}
-J=\frac{1}{2}\int_{0}^{T}||\mathbf{u}(\mathbf{x}_{r},t)-\mathbf{u}^{obs}(t)||^{2}dt,
+J=\frac{1}{2}\int_{0}^{T}\|\mathbf{u}(\mathbf{x}_{r},t)-\mathbf{u}^{\mathrm{obs}}(t)\|^{2}\dd t,
+\label{eq:1}
 \end{equation}
 with $[0,T]$ being the time interval over which measurements have been made. Recorded seismograms are, of course, discretely 
 sampled, and so really we should write a sum and not an 
@@ -61,16 +60,17 @@ integral over time. But in practice sampling rates are sufficiently high that th
 
  The value of $J$ depends on the synthetic seismogram, $\mathbf{u}$, and hence ultimately on the underlying 
  parameters for the earth model and the earthquake. We could, therefore, try to minimise $J$ in the 
- hope that the model parameters are then closer their true values. In practice, of course, we would 
+ hope that the model parameters are then closer to their true values. In practice, of course, we would 
  not actually use $J$ as defined above, but sum such terms over many different locations and earthquakes,
-and regularisation terms might also be added. In fact, least-squares misfit between seismograms is rarely 
+and regularisation terms might also be added. Fig.~\ref{fig:2} shows the sort of improvement in the fit between observed 
+and synthetic seismograms that can be achieved by such an inversion. In fact, the least-squares misfit between seismograms is rarely 
 used in practice, with other more complicated measures of misfit being preferred. Nevertheless, 
-this simple functional is sufficient to motivate and illustrate wave form inversion.
+this simple functional is sufficient to motivate and illustrate waveform inversion.
 
 \section*{Functional derivatives and sensitivity kernels}
 The waveform misfit, $J$, defined above depends on the synthetic wavefield, $\mathbf{u}$, and hence we can write it
  as $J(\mathbf{u})$. But the value of $\mathbf{u}$ is determined through solution of the equations of motion from the 
- underlying model parameters. To simplify notations, let us write $\mathbf{m}$ for these model parameters. Here $\mathbf{m}$ could 
+ underlying model parameters. To simplify notation, let us write $\mathbf{m}$ for these model parameters. Here $\mathbf{m}$ could 
  be all of $\rho$, $A_{ijkl}$ and $\overline{S}_{ij}$, but in practice it is often some subset of these parameters. For example, 
  within a tomographic problem it might be assumed that the source parameters are known. 
  
@@ -82,100 +82,109 @@ The waveform misfit, $J$, defined above depends on the synthetic wavefield, $\ma
 Within waveform tomography, the goal is to find model parameters that explain the observed data, and this is done by 
 minimising $\mathbf{m}\mapsto J(\mathbf{m})$. For a small model perturbation, $\delta \mathbf{m}$, we can write to first-order accuracy
 \begin{equation}
-J(\mathbf{m}+\delta \mathbf{m})=J(\mathbf{m})+\langle DJ(\mathbf{m})|\delta \mathbf{m}\rangle+O(||\delta \mathbf{m}||^{2}),
+J(\mathbf{m}+\delta \mathbf{m})=J(\mathbf{m})+\langle DJ(\mathbf{m})|\delta \mathbf{m}\rangle+O(\|\delta \mathbf{m}\|^{2}),
+\label{eq:2}
 \end{equation}
-where $DJ(\mathbf{m})$ denotes the functional derivative of J with respect to $\mathbf{m}$ and $\langle \cdot | \cdot \rangle$ is an 
-appropriate inner product. As an example, supposing that the shear velocity, $\beta$, is the only model parameter we can concretely write
+where $DJ(\mathbf{m})$ denotes the functional derivative of $J$ with respect to $\mathbf{m}$ and $\langle \cdot | \cdot \rangle$ is an 
+appropriate inner product. As an example, supposing that the shear wave speed, $\beta$, is the only model parameter, we can concretely write
 \begin{equation}
-\langle DJ(\mathbf{m})|\delta \mathbf{m}\rangle=\int_{M}K_{\beta}\delta\beta\dd^{3}\mathbf{x}
+\langle DJ(\mathbf{m})|\delta \mathbf{m}\rangle=\int_{M}K_{\beta}\,\delta\beta\dd^{3}\mathbf{x},
+\label{eq:3}
 \end{equation}
 where the function $K_{\beta}$ is known as a \textbf{sensitivity kernel} for $J$ with respect to $\beta$; 
 note that in this context the terms functional derivative, gradient, and sensitivity kernel are used interchangeably.
 We discuss later how these functional derivatives can be obtained practically, but for the moment we just assume that this can be done.
 
-\section*{Gradient based optimisation}
+\section*{Gradient-based optimisation}
 If $\overline{\mathbf{m}}$ is a minimum of $J$, then for any sufficiently small $\delta \mathbf{m}$ we should have
 \begin{equation}
 J(\overline{\mathbf{m}}+\delta \mathbf{m})\ge J(\overline{\mathbf{m}}),
+\label{eq:4}
 \end{equation}
-which is true if and only if
+which requires that
 \begin{equation}
 DJ(\overline{\mathbf{m}})=\mathbf{0}.
+\label{eq:5}
 \end{equation}
 This condition is, of course, familiar from calculus in finite-dimensional spaces. 
 
-There are a number of approaches to solve this optimisation problem. One is a systematic "grid search" of the model space. 
-Doing this would require the model space to be discretised using a finite-dimensional basis as in Lecture 18. The issue with 
-this method is the computational cost. Suppose, for example, that the discretised model space had n-dimensions, and that along 
-each dimension experience had shown that m points needed to be tested. The number of forward calculations required would then be
-$m^{n}$. In realistic problems, n is of order thousands or millions, while we have already noted the high cost of solving the 
+There are a number of approaches to solve this optimisation problem. One is a systematic ``grid search'' of the model space. 
+Doing this would require the model space to be discretised using a finite-dimensional basis as in Lecture~19. The issue with 
+this method is the computational cost. Suppose, for example, that the discretised model space had $m$ dimensions, and that along
+each dimension experience had shown that $N$ points needed to be tested. The number of forward calculations required would then be
+$N^{m}$. In realistic problems, $m$ is of order thousands or millions, while we have already noted the high cost of solving the 
 forward problem. The result is that grid search methods are not viable. 
 
-Random sampling methods such as Markov Chain Monte Carlo (MCMC) simulations perform better within high-dimensional spaces 
-(the number of forward calculations scales with something like $n^{2}$), but the costs are still far too high to be used 
+Random sampling methods such as Markov chain Monte Carlo (MCMC) simulations perform better within high-dimensional spaces 
+(the number of forward calculations scales with something like $m^{2}$), but the costs are still far too high to be used 
 practically in waveform tomography. 
 
-As a result, tomographers must rely on local optimisation methods that seek a point such that eq. (5) holds. 
+As a result, tomographers must rely on local optimisation methods that seek a point such that eq.~(\ref{eq:5}) holds. 
 An obvious downside to this approach is that the model obtained may only be a \textbf{local and not a global minimum of 
-the misfit}. But  this is typically all that is currently possible, and there do exist  approximate but useful methods available 
-for uncertainty quantification\footnote{About which there is not sufficient time to discuss.}.
+the misfit}. But this is typically all that is currently possible, and there do exist approximate but useful methods available 
+for uncertainty quantification.\footnote{There is not sufficient time to discuss these here.}
 
 Suppose we start from an initial model $\mathbf{m}_{0}$. At this point we can calculate the value of the misfit,
  $J(\mathbf{m}_{0})$, along with its gradient, $DJ(\mathbf{m}_{0})$. The gradient points in the direction along which 
  the misfit most rapidly increases, and the negative gradient gives the direction of most rapid decrease. This suggests
   that we can look for a new model of the form
 \begin{equation}
-\mathbf{m}_{1}=\mathbf{m}_{0}-\lambda~DJ(\mathbf{m}_{0})
+\mathbf{m}_{1}=\mathbf{m}_{0}-\lambda\,DJ(\mathbf{m}_{0}),
+\label{eq:6}
 \end{equation}
-where $\lambda>0$ is some step-length to be determined. To find a suitable value for $\lambda$, we need only consider 
+where $\lambda>0$ is some step length to be determined. To find a suitable value for $\lambda$, we need only consider 
 a one-dimensional minimisation problem for the function
 \begin{equation}
-f(\lambda)=J[\mathbf{m}_{0}-\lambda~DJ(\mathbf{m}_{0})],
+f(\lambda)=J[\mathbf{m}_{0}-\lambda\,DJ(\mathbf{m}_{0})],
+\label{eq:7}
 \end{equation}
 which can be solved quite easily. Having now arrived at a new model, $\mathbf{m}_{1}$, with a lower 
-misfit we can simply repeat the whole process until the gradient vanishes and a local minimum has been 
-found\footnote{In practice, the process might be stopped when the misfit has decreased sufficiently much from a
- statistical perspective.}. The above method is the simplest example of gradient-based optimisation known as
-\textbf{the method of steepest descent}. More sophisticated algorithms for choosing the descent direction 
-tend to be used in practice which have superior convergence properties. In all cases, however, this direction 
+misfit, we can simply repeat the whole process until the gradient vanishes and a local minimum has been 
+found.\footnote{In practice, the process might be stopped when the misfit has decreased sufficiently from a
+ statistical perspective.} The above method is the simplest example of gradient-based optimisation, and is known as
+\textbf{the method of steepest descent}. More sophisticated algorithms for choosing the descent direction, 
+which have superior convergence properties, tend to be used in practice. In all cases, however, this direction 
 is built from linear combinations of the current and past gradients of the misfit.
 
 \section*{How not to calculate the gradient of $J$}
-Gradient based optimisation depends on being able to both solve the forward problem, and to 
+Gradient-based optimisation depends on being able both to solve the forward problem and to 
 calculate the gradient of the misfit. As noted, the first task can be done using numerical wavefield simulations 
 at a high but manageable cost. Schematically, such a code provides a means for performing the 
 mapping $\mathbf{m}\mapsto J(\mathbf{m})$. With this at hand, one way to get the required gradient is to make use of 
 the \textbf{finite-difference approximation}
 \begin{equation}
 \langle DJ(\mathbf{m})|\delta \mathbf{m}\rangle\approx J(\mathbf{m}+\delta \mathbf{m})-J(\mathbf{m}).
+\label{eq:8}
 \end{equation}
 Using this formula, we can get the derivative of the misfit along any direction at the cost of two forward calculations.
 Suppose we introduce an $m$-dimensional
 parameterisation for the model space. Using $m+1$ forward calculations we could then approximate the gradient relative to this
 basis. The advantage of this approach is that it requires no additional theory or coding once a numerical wave propagation 
-code has been developed. The problem is, as noted before, the number of model parameters, $m$, is typically large and so the
-overall cost is too high to compute a single gradient in this manner, let alone the many different gradients needed in 
+code has been developed. The problem is, as noted before, that the number of model parameters, $m$, is typically large, and so the
+overall cost is too high to compute a single gradient in this manner, let alone the many different gradients needed in the 
 iterative solution of the optimisation problem.
 
 \section*{How you should calculate the gradient of $J$}
 Our aim is to calculate the gradient of $J(\mathbf{m})$. This is equivalent to finding the gradient 
 of $J(\mathbf{u})$ subject to the constraint that $\mathbf{u}$ is related to $\mathbf{m}$ through solution 
-of the forward problem. To proceed, we make use of the method of \textbf{Lagrange multipliers} which many 
+of the forward problem. To proceed, we make use of the method of \textbf{Lagrange multipliers}, which many 
 of you will have seen previously, though not necessarily applied to fields. Within this course it is necessary 
-to know how to apply this method, but not to explain why it works. For those interested a non-examinable 
-outline is provided in the appendix to this lecture.  We begin by defining a \textbf{Lagrangian} for the problem which takes the following form
+to know how to apply this method, but not to explain why it works. For those interested, a non-examinable 
+outline is provided in the appendix to this lecture. We begin by defining a \textbf{Lagrangian} for the problem, which takes the following form
 \begin{align}
 L(\mathbf{u},\mathbf{u}',\mathbf{w}',\mathbf{m}) = J(\mathbf{u}) &- \int_{0}^{T}\int_{M}\left[\rho\frac{\partial^{2}u_{i}}{\partial t^{2}}-\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}-\overline{S}_{ij}\right)\right]u_{i}'\dd^{3}\mathbf{x}\dd t \nonumber \\
 &- \int_{0}^{T}\int_{\partial M}\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}-\overline{S}_{ij}\right)\hat{n}_{j}w_{i}'\dd S\dd t.
+\label{eq:9}
 \end{align}
-Here we see first on the right hand side the unconstrained misfit, $J(\mathbf{u})$. The second term is associated with 
+Here we see first on the right-hand side the unconstrained misfit, $J(\mathbf{u})$. The second term is associated with 
 the constraint that $\mathbf{u}$ should satisfy the equations of motion and includes a 
 Lagrange multiplier field $\mathbf{u}'$. The final term does the same for the boundary conditions, and 
-features a second Lagrangian multiplier field $\mathbf{w}'$. 
+features a second Lagrange multiplier field $\mathbf{w}'$. 
 
 The \textbf{Lagrange multiplier theorem} tells us that the equality
 \begin{equation}
-DJ(\mathbf{m})=D_{\mathbf{m}}L(\mathbf{u},\mathbf{u}',\mathbf{w}',\mathbf{m}),
+DJ(\mathbf{m})=D_{\mathbf{m}}L(\mathbf{u},\mathbf{u}',\mathbf{w}',\mathbf{m})
+\label{eq:10}
 \end{equation}
 holds so long as the following conditions are met
 \begin{align}
@@ -185,319 +194,546 @@ D_{\mathbf{w}'}L(\mathbf{u},\mathbf{u}',\mathbf{w}',\mathbf{m})&=0.
 \label{eq:13}
 \end{align}
 Here subscripts are used for partial functional derivatives in an obvious manner. To understand this result, 
-we begin with eq. \eqref{eq:12}. The dependence of the Lagrangian on the field $\mathbf{u}'$ is very simple, 
+we begin with eq.~(\ref{eq:12}). The dependence of the Lagrangian on the field $\mathbf{u}'$ is very simple, 
 and so we readily find that
 \begin{equation}
 \langle D_{\mathbf{u}'}L(\mathbf{u},\mathbf{u}',\mathbf{w}',\mathbf{m})|\delta \mathbf{u}'\rangle = -\int_{0}^{T}\int_{M}\left[\rho\frac{\partial^{2}u_{i}}{\partial t^{2}}-\frac{\partial}{\partial x_{j}}\left(A_{ijkl}
-\frac{\partial u_{k}}{\partial x_{l}}-\overline{S}_{ij}\right)\right]\delta u'_{i}\dd^{3}\mathbf{x}dt.
+\frac{\partial u_{k}}{\partial x_{l}}-\overline{S}_{ij}\right)\right]\delta u'_{i}\dd^{3}\mathbf{x}\dd t.
+\label{eq:14}
 \end{equation}
 We need this expression to vanish for all possible choices of $\delta \mathbf{u}'$, and hence we 
 conclude that $\mathbf{u}$ must satisfy the expected equations of motion
 \begin{equation}
 \rho\frac{\partial^{2}u_{i}}{\partial t^{2}}-\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}-\overline{S}_{ij}\right)=0.
+\label{eq:15}
 \end{equation}
-Similarly, the final condition in eq. \eqref{eq:13} gives the boundary conditions for $\mathbf{u}$. 
+Similarly, the final condition in eq.~(\ref{eq:13}) gives the boundary conditions for $\mathbf{u}$. 
 
-Turning now to the first condition in eq. \eqref{eq:11}, we find that for any $\delta \mathbf{u}$
+Turning now to the first condition in eq.~(\ref{eq:11}), we find that for any $\delta \mathbf{u}$
 \begin{align}
 \langle D_{\mathbf{u}}L(\mathbf{u},\mathbf{u}',\mathbf{w}',\mathbf{m})|\delta \mathbf{u}\rangle = \langle DJ(\mathbf{u})|\delta \mathbf{u}\rangle &- \int_{0}^{T}\int_{M}\left[\rho\frac{\partial^{2}\delta u_{i}}{\partial t^{2}}-\frac{\partial}{\partial x_{j}}
-\left(A_{ijkl}\frac{\partial\delta u_{k}}{\partial x_{l}}\right)\right]u_{i}'\dd^{3}\mathbf{x}dt \nonumber \\
+\left(A_{ijkl}\frac{\partial\delta u_{k}}{\partial x_{l}}\right)\right]u_{i}'\dd^{3}\mathbf{x}\dd t \nonumber \\
 &- \int_{0}^{T}\int_{\partial M}\left(A_{ijkl}\frac{\partial\delta u_{k}}{\partial x_{l}}\right)\hat{n}_{j}w_{i}'\dd S\dd t,
+\label{eq:16}
 \end{align}
 must vanish. This is a more complicated expression, and understanding its consequences will take some effort. 
 But we know that $\mathbf{u}$ is fixed uniquely by the previous constraints, and hence the above expression 
-must somehow determine the Lagrange multiplier fields. As a first step, we can use eq. (1) to explicitly write 
-the first term on the right hand side as
+must somehow determine the Lagrange multiplier fields. As a first step, we can use eq.~(\ref{eq:1}) to explicitly write 
+the first term on the right-hand side as
 \begin{equation}
-\langle DJ(\mathbf{u})|\delta \mathbf{u}\rangle=\int_{0}^{T}[u_{i}(\mathbf{x}_{r},t)-u_{i}^{obs}(t)]\delta u_{i}(\mathbf{x}_{r},t)dt.
+\langle DJ(\mathbf{u})|\delta \mathbf{u}\rangle=\int_{0}^{T}[u_{i}(\mathbf{x}_{r},t)-u_{i}^{\mathrm{obs}}(t)]\delta u_{i}(\mathbf{x}_{r},t)\dd t.
+\label{eq:17}
 \end{equation}
-Making use of the Dirac delta function, this can be conveniently written
+Making use of a Dirac delta function on the surface $\partial M$, this can be conveniently written
 \begin{equation}
 \langle DJ(\mathbf{u})|\delta \mathbf{u}\rangle=\int_{0}^{T}\int_{\partial M}h_{i}'\delta u_{i}\dd S\dd t,
+\label{eq:18}
 \end{equation}
 where we have set
 \begin{equation}
-h_{i}'(\mathbf{x},t)=[u_{i}(\mathbf{x}_{r},t)-u_{i}^{obs}(t)]\delta(\mathbf{x}-\mathbf{x}_{r}).
+h_{i}'(\mathbf{x},t)=[u_{i}(\mathbf{x}_{r},t)-u_{i}^{\mathrm{obs}}(t)]\delta(\mathbf{x}-\mathbf{x}_{r}).
+\label{eq:19}
 \end{equation}
 With this done, we can write the required condition as
 \begin{align}
 \int_{0}^{T}\int_{\partial M}h_{i}'\delta u_{i}\dd S\dd t &- \int_{0}^{T}\int_{M}\left[\rho\frac{\partial^{2}\delta u_{i}}{\partial t^{2}}-\frac{\partial}{\partial x_{j}}
 \left(A_{ijkl}\frac{\partial\delta u_{k}}{\partial x_{l}}\right)\right]u_{i}'\dd^{3}\mathbf{x}\dd t \nonumber \\
 &- \int_{0}^{T}\int_{\partial M}\left(A_{ijkl}\frac{\partial\delta u_{k}}{\partial x_{l}}\right)\hat{n}_{j}w_{i}'\dd S\dd t=0,
+\label{eq:20}
 \end{align}
 for all $\delta \mathbf{u}$. 
 
 To proceed, we need to successively integrate by parts to shift derivatives from the perturbed 
-displacement field to the Lagrange multipliers. Starting with the time-derivatives, we have
+displacement field to the Lagrange multipliers. Starting with the time derivatives, we have
 \begin{equation}
-\int_{0}^{T}\frac{\partial^{2}\delta u_{i}}{\partial t^{2}}u_{i}'dt = -\int_{0}^{T}\frac{\partial\delta u_{i}}{\partial t}\frac{\partial u_{i}'}{\partial t}dt+\left[\frac{\partial\delta u_{i}}{\partial t}u_{i}'\right]_{t=T},
+\int_{0}^{T}\frac{\partial^{2}\delta u_{i}}{\partial t^{2}}u_{i}'\dd t = -\int_{0}^{T}\frac{\partial\delta u_{i}}{\partial t}\frac{\partial u_{i}'}{\partial t}\dd t+\left[\frac{\partial\delta u_{i}}{\partial t}u_{i}'\right]_{t=T},
+\label{eq:21}
 \end{equation}
 where we have used the vanishing initial conditions on $u_{i}$ (and hence $\delta u_{i}$) to eliminate one 
 of the boundary terms. Integrating by parts once more gives
 \begin{equation}
-\int_{0}^{T}\frac{\partial^{2}\delta u_{i}}{\partial t^{2}}u_{i}'dt = \int_{0}^{T}\delta u_{i}\frac{\partial^{2}u_{i}'}{\partial t^{2}}dt+\left[\frac{\partial\delta u_{i}}{\partial t}u_{i}'\right]_{t=T}-\left[\delta u_{i}\frac{\partial u_{i}'}{\partial t}\right]_{t=T}.
+\int_{0}^{T}\frac{\partial^{2}\delta u_{i}}{\partial t^{2}}u_{i}'\dd t = \int_{0}^{T}\delta u_{i}\frac{\partial^{2}u_{i}'}{\partial t^{2}}\dd t+\left[\frac{\partial\delta u_{i}}{\partial t}u_{i}'\right]_{t=T}-\left[\delta u_{i}\frac{\partial u_{i}'}{\partial t}\right]_{t=T}.
+\label{eq:22}
 \end{equation}
 Looking now at the spatial derivatives, we first obtain
 \begin{align}
 \int_{M}\frac{\partial}{\partial x_{j}}&\left(A_{ijkl}\frac{\partial\delta u_{k}}{\partial x_{l}}\right)u_{i}'\dd^{3}\mathbf{x} - \int_{\partial M}\left(A_{ijkl}\frac{\partial\delta u_{k}}{\partial x_{l}}\right)\hat{n}_{j}w_{i}'\dd S \nonumber \\
 &= -\int_{M}A_{ijkl}\frac{\partial\delta u_{k}}{\partial x_{l}}\frac{\partial u_{i}'}{\partial x_{j}}\dd^{3}\mathbf{x} - \int_{\partial M}\left(A_{ijkl}\frac{\partial\delta u_{k}}{\partial x_{l}}\right)\hat{n}_{j}(w_{i}'-u_{i}')\dd S.
+\label{eq:23}
 \end{align}
-Making use of the hyperelastic symmetry, $A_{ijkl}=A_{klij}$ we can then integrate by parts once more to arrive at
+Making use of the hyperelastic symmetry, $A_{ijkl}=A_{klij}$, we can then integrate by parts once more to arrive at
 \begin{align}
 \int_{M}\frac{\partial}{\partial x_{j}}&\left(A_{ijkl}\frac{\partial\delta u_{k}}{\partial x_{l}}\right)u_{i}'\dd^{3}\mathbf{x} - \int_{\partial M}\left(A_{ijkl}\frac{\partial\delta u_{k}}{\partial x_{l}}\right)\hat{n}_{j}w_{i}'\dd S \nonumber \\
 &= \int_{M}\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}'}{\partial x_{l}}\right)\delta u_{i}\dd^{3}\mathbf{x} - \int_{\partial M}\left(A_{ijkl}\frac{\partial\delta u_{k}}{\partial x_{l}}\right)\hat{n}_{j}(w_{i}'-u_{i}')\dd S \nonumber \\
 & \qquad -\int_{\partial M}\left(A_{ijkl}\frac{\partial u_{k}'}{\partial x_{l}}\right)\hat{n}_{j}\delta u_{i}\dd S.
+\label{eq:24}
 \end{align}
 
 
 
-Putting these results together, we have shown that eq. (20) is equivalent to
+Putting these results together, we have shown that eq.~(\ref{eq:20}) is equivalent to
 \begin{align}
 -&\int_{0}^{T}\int_{M}\left[\rho\frac{\partial^{2}u_{i}'}{\partial t^{2}}-\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}'}{\partial x_{l}}\right)\right]\delta u_{i}\dd^{3}\mathbf{x}\dd t \nonumber \\
 -&\int_{0}^{T}\int_{\partial M}\left(A_{ijkl}\frac{\partial\delta u_{k}}{\partial x_{l}}\right)\hat{n}_{j}(w_{i}'-u_{i}')\dd S\dd t \nonumber \\
 +&\int_{0}^{T}\int_{\partial M}\left[h_{i}'-\left(A_{ijkl}\frac{\partial u_{k}'}{\partial x_{l}}\right)\hat{n}_{j}\right]\delta u_{i}\dd S\dd t \nonumber \\
 -&\int_{M}\rho\left\{\left[\frac{\partial\delta u_{i}}{\partial t}u_{i}'\right]_{t=T}-\left[\delta u_{i}\frac{\partial u_{i}'}{\partial t}\right]_{t=T}\right\}\dd^{3}\mathbf{x}=0,
+\label{eq:25}
 \end{align}
 for all $\delta \mathbf{u}$. From the first term in this equation, we conclude that the Lagrange 
 multiplier field $\mathbf{u}'$ must satisfy the elastic wave equation
 \begin{equation}
 \rho\frac{\partial^{2}u_{i}'}{\partial t^{2}}-\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}'}{\partial x_{l}}\right)=0.
+\label{eq:26}
 \end{equation}
-In dealing with the boundary terms, we need the fact that for an arbitrary function its boundary value and that of 
-its normal derivative can be chosen separately. As a result, the second term implies that $w'$ is the restriction 
-of $u'$ to $\partial M$, the third term implies
+In dealing with the boundary terms, we need the fact that, for an arbitrary function, its boundary value and that of 
+its normal derivative can be chosen separately. As a result, the second term implies that $\mathbf{w}'$ is the restriction 
+of $\mathbf{u}'$ to $\partial M$, the third term implies
 \begin{equation}
 \left(A_{ijkl}\frac{\partial u_{k}'}{\partial x_{l}}\right)\hat{n}_{j}=h_{i}',
+\label{eq:27}
 \end{equation}
 and finally we have the terminal conditions
 \begin{equation}
 u_{i}'(\mathbf{x},T)=\frac{\partial u_{i}'}{\partial t}(\mathbf{x},T)=0.
+\label{eq:28}
 \end{equation}
-It has taken some effort, but we have now shown that eq.(11) requires the Lagrange multiplier field, $\mathbf{u}'$, 
-to satisfy an elastic wave equation, with this problem driven by a traction applied at the observation point and 
-being equal to the difference between the predicted and observed seismograms. It has also shown that the second 
+It has taken some effort, but we have now shown that eq.~(\ref{eq:11}) requires the Lagrange multiplier field, $\mathbf{u}'$, 
+to satisfy an elastic wave equation, with this problem driven by a traction applied at the observation point that is 
+equal to the difference between the predicted and observed seismograms. We have also shown that the second 
 Lagrange multiplier field, $\mathbf{w}'$, is just the restriction of $\mathbf{u}'$ to the boundary, and 
 hence no additional work is necessary for its calculation.
 
-We can now use eq. (10) to obtain sensitivity kernels with respect to the different model parameters. For arbitrary 
+We can now use eq.~(\ref{eq:10}) to obtain sensitivity kernels with respect to the different model parameters. For arbitrary 
 variations in these parameters we have
 \begin{align}
 \langle DJ(\mathbf{m})|\delta \mathbf{m}\rangle = -&\int_{0}^{T}\int_{M}\left[\delta\rho\frac{\partial^{2}u_{i}}{\partial t^{2}}-\frac{\partial}{\partial x_{j}}\left(\delta A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}-\delta\overline{S}_{ij}\right)\right]u_{i}'\dd^{3}\mathbf{x}\dd t \nonumber \\
 -&\int_{0}^{T}\int_{\partial M}\left(\delta A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}-\delta\overline{S}_{ij}\right)\hat{n}_{j}u_{i}'\dd S\dd t.
+\label{eq:29}
 \end{align}
-Integrating by parts once, this expression can be simplified
+Integrating by parts once, this expression can be simplified to
 \begin{equation}
 \langle DJ(\mathbf{m})|\delta \mathbf{m}\rangle=\int_{0}^{T}\int_{M}\left[\delta\rho\frac{\partial u_{i}}{\partial t}\frac{\partial u_{i}'}{\partial t}-\delta A_{ijkl}\frac{\partial u_{i}'}{\partial x_{j}}\frac{\partial u_{k}}{\partial x_{l}}+\delta\overline{S}_{ij}\frac{\partial u_{i}'}{\partial x_{j}}\right]\dd^{3}\mathbf{x}\dd t,
+\label{eq:30}
 \end{equation}
 from which we can read off the various sensitivity kernels
 \begin{align}
-K_{\rho}&=\int_{0}^{T}\frac{\partial u_{i}}{\partial t}\frac{\partial u_{i}'}{\partial t}dt, \\
-K_{A_{ijkl}}&=-\int_{0}^{T}\frac{\partial u_{i}'}{\partial x_{j}}\frac{\partial u_{k}}{\partial x_{l}}dt, \\
-K_{\overline{S}_{ij}}&= \frac{\partial u_{i}'}{\partial x_{j}}.
+K_{\rho}(\mathbf{x})&=\int_{0}^{T}\frac{\partial u_{i}}{\partial t}(\mathbf{x},t)\frac{\partial u_{i}'}{\partial t}(\mathbf{x},t)\dd t, \label{eq:31} \\
+K_{A_{ijkl}}(\mathbf{x})&=-\int_{0}^{T}\frac{\partial u_{i}'}{\partial x_{j}}(\mathbf{x},t)\frac{\partial u_{k}}{\partial x_{l}}(\mathbf{x},t)\dd t, \label{eq:32} \\
+K_{\overline{S}_{ij}}(\mathbf{x},t)&= \frac{\partial u_{i}'}{\partial x_{j}}(\mathbf{x},t).
+\label{eq:33}
 \end{align}
+Note that the kernel for the stress glut depends on time as well as position, the stress glut itself being a function of both.
 
-The approach we have described is known as the \textbf{adjoint method}, and in this context $u_{i}'$ is 
-known as the \textbf{adjoint wavefield} and $h_{i}'$ the \textbf{adjoint traction}\footnote{In detail, it 
-is conventional to define the adjoint wavefield by time-reversing $u_{i}'$ such that the terminal conditions 
-obtained are transformed into initial conditions. But this step is only done for 
-convenience and is not necessary.}. The steps needed to calculate the gradient of the 
-misfit can be summarised as follows:
+The problem for $\mathbf{u}'$ differs from the forward problem in being subject to terminal rather than initial conditions, 
+so that it must be solved backwards in time from $t=T$. This is easily dealt with. Let us define the time-reversed field
+\begin{equation}
+u_{i}^{\dagger}(\mathbf{x},t)=u_{i}'(\mathbf{x},T-t).
+\label{eq:33a}
+\end{equation}
+Because eq.~(\ref{eq:26}) involves only second time derivatives, $\mathbf{u}^{\dagger}$ satisfies exactly the same wave equation, 
+along with the boundary condition
+\begin{equation}
+\left(A_{ijkl}\frac{\partial u_{k}^{\dagger}}{\partial x_{l}}\right)\hat{n}_{j}=h_{i}^{\dagger}, \quad 
+h_{i}^{\dagger}(\mathbf{x},t)=h_{i}'(\mathbf{x},T-t),
+\label{eq:33b}
+\end{equation}
+and the terminal conditions in eq.~(\ref{eq:28}) become the initial conditions
+\begin{equation*}
+u_{i}^{\dagger}(\mathbf{x},0)=\frac{\partial u_{i}^{\dagger}}{\partial t}(\mathbf{x},0)=0.
+\end{equation*}
+The problem for $\mathbf{u}^{\dagger}$ is therefore an  
+initial value problem of precisely the same form as the forward problem, driven at the receiver by the time-reversed residual 
+$h_{i}^{\dagger}$, and it can be solved with the same numerical code. In terms of $\mathbf{u}^{\dagger}$ the sensitivity kernels read
+\begin{align}
+K_{\rho}(\mathbf{x})&=-\int_{0}^{T}\frac{\partial u_{i}}{\partial t}(\mathbf{x},t)\frac{\partial u_{i}^{\dagger}}{\partial t}(\mathbf{x},T-t)\dd t, \label{eq:33c} \\
+K_{A_{ijkl}}(\mathbf{x})&=-\int_{0}^{T}\frac{\partial u_{i}^{\dagger}}{\partial x_{j}}(\mathbf{x},T-t)\frac{\partial u_{k}}{\partial x_{l}}(\mathbf{x},t)\dd t, \label{eq:33d} \\
+K_{\overline{S}_{ij}}(\mathbf{x},t)&= \frac{\partial u_{i}^{\dagger}}{\partial x_{j}}(\mathbf{x},T-t),
+\label{eq:33e}
+\end{align}
+where the sign change in $K_{\rho}$ comes from the time derivative of the reversed field. These expressions make the 
+structure of the kernels clear: the forward field at time $t$ is paired with the adjoint field after it has evolved for a time $T-t$, 
+which is just the time remaining for anything happening at $(\mathbf{x},t)$ to be felt within the observation window. 
+The time reversal is nothing more than a convenient way of converting a terminal value problem into an initial value one, and 
+plays no fundamental role in the theory.
+
+The approach we have described is known as the \textbf{adjoint method}, and in this context 
+$\mathbf{u}^{\dagger}$ is known as the \textbf{adjoint wavefield} and $h_{i}^{\dagger}$ the \textbf{adjoint traction} 
+or \textbf{adjoint source}.\footnote{Some authors reserve these names for the un-reversed field $\mathbf{u}'$ and 
+traction $h_{i}'$. Nothing depends on this choice so long as the time arguments in the kernels are kept track of.} 
+The steps needed to calculate the gradient of the misfit can be summarised as follows:
 \begin{enumerate}
     \item Solve the forward equations for $\mathbf{u}$;
-    \item From this solution determine J and the associated adjoint traction $h_{i}'$;
-    \item Solve the adjoint equations for $\mathbf{u}'$;
-    \item Construct the sensitivity kernels by combining $\mathbf{u}$ and $\mathbf{u}'$ appropriately.
+    \item From this solution determine $J$ and the associated adjoint traction $h_{i}^{\dagger}$;
+    \item Solve the adjoint equations for $\mathbf{u}^{\dagger}$ as an initial value problem;
+    \item Construct the sensitivity kernels by combining $\mathbf{u}$ and $\mathbf{u}^{\dagger}$ appropriately.
 \end{enumerate}
 The adjoint problem is identical in form to the original, and hence the cost of this method is just 
 \textbf{two numerical solutions of the elastic wave equation}. In fact, within practical applications it 
-is usual to perform three solutions, this being done so the forward field $\mathbf{u}$ need not be stored at 
-all times when assembling the sensitivity kernels. Even so, the saving relative to the finite-difference 
+is usual to perform three solutions, this being done so that the forward field $\mathbf{u}$ need not be stored at 
+all times when assembling the sensitivity kernels: because the kernels pair $\mathbf{u}$ at time $t$ with 
+$\mathbf{u}^{\dagger}$ at time $T-t$, the forward field is instead reconstructed backwards in time alongside the 
+adjoint calculation. Even so, the saving relative to the finite-difference 
 approach is by a factor of $\frac{3}{m+1}$ where $m$ is the number of model parameters. Given that $m$ in practice 
-is of order $10^{4}-10^{6}$ this is an enormous improvement and justifies a few pages of algebra! 
+is of order $10^{4}$--$10^{6}$, this is an enormous improvement and justifies a few pages of algebra! 
 It is the adjoint method that allows waveform inversion to be a practical tool within seismology and also 
-in a range of other fields. Indeed, it is this method that underlies numerical weather prediction. 
+in a range of other fields. Indeed, it is this method that underlies data assimilation in numerical weather prediction.
 
-It is worth  commenting that though we have obtained the adjoint equations for a specific choice of misfit, the form of $J$
- only enters into the problem through the adjoint traction $h_{i}'$. This means that the theory can be readily applied to 
+It is worth commenting that though we have obtained the adjoint equations for a specific choice of misfit, the form of $J$
+ only enters into the problem through the adjoint traction $h_{i}'$ (or, equivalently, its time reverse $h_{i}^{\dagger}$). This means that the theory can be readily applied to 
  other measures of misfit without having to go through the lengthy derivation each time.
 
-\begin{figure}[ht]
-    \centering    
-    \includegraphics[width=0.7\textwidth]{figures/L8F2.png}    
-    \caption{Images from the first global waveform tomographic model produced by Bozdag et al. (2016). On the left is shown the starting model S362ANI which was obtained using ray theoretic methods, and on the right can be seen the waveform model following 15 iterations. While the difference in the models might not seem huge, they are still significant. There is considerably more detail within the waveform model, including structures associated with a range of hot spots including that under Yellowstone. Moreover, as methods continue to improve the difference between ray theoretic and waveform tomographic models will only grow further.}
-    \label{fig:2}
-\end{figure}
 
-\section*{Banana Doughnut kernels}
-Let $\mathbf{u}^{obs}(t)$ again denote the displacement vector recorded by a seismograph at the surface location, 
-$\mathbf{x}_{s}$, following an earthquake. Suppose we define
+\section*{Banana doughnut kernels}
+Nothing in the adjoint method is specific to the least-squares misfit, or indeed to misfits at all. It provides the 
+derivative with respect to the model of any differentiable functional of the wavefield at the cost of one additional 
+wavefield simulation, and so it is as useful for asking how a given measurement depends on Earth structure, which is 
+to say for \textbf{sensitivity analysis}, as it is for the estimation of the model or the state of a system from data. 
+As a first application, before returning to inversions, we use it to find the sensitivity of the most basic seismological 
+measurement of all, a travel time, and compare the result with the ray-theoretic prediction of Lecture~19.
+
+Let $\mathbf{u}^{\mathrm{obs}}(t)$ again denote the displacement vector recorded by a seismograph at the surface location, 
+$\mathbf{x}_{r}$, following an earthquake. Suppose we define
 \begin{equation}
-s^{obs}(t)=w(t)\hat{\nu}_{i}u_{i}^{obs}(t).
+s^{\mathrm{obs}}(t)=w(t)\hat{\nu}_{i}u_{i}^{\mathrm{obs}}(t),
+\label{eq:34}
 \end{equation}
-with $\hat{\boldsymbol{\nu}}$ a unit vector that selects a component of the displacement of interest, 
-and $w(t)$ a windowing function that zeros everything out except for a particular seismic phase of interest. Exactly 
+with $\hat{\bm{\nu}}$ a unit vector that selects a component of the displacement of interest, 
+and $w(t)$ a windowing function that zeroes everything out except for a particular seismic phase of interest. Exactly 
 the same thing can be done with a synthetic seismogram
 \begin{equation}
-s(\mathbf{x}_{s},t)=w(t)\hat{\nu}_{i}u_{i}(\mathbf{x}_{s},t),
+s(\mathbf{x}_{r},t)=w(t)\hat{\nu}_{i}u_{i}(\mathbf{x}_{r},t),
+\label{eq:35}
 \end{equation}
 with $\mathbf{u}$ calculated in some reference model. Consider 
 the \textbf{cross-correlation} of these two time series as defined by
 \begin{equation}
-C(\tau)=\int_{-\infty}^{\infty}s^{obs}(t-\tau)s(\mathbf{x}_{s},t)dt.
+C(\tau)=\int_{-\infty}^{\infty}s^{\mathrm{obs}}(t-\tau)s(\mathbf{x}_{r},t)\dd t.
+\label{eq:36}
 \end{equation}
-This quantity will be largest when $s^{obs}$ and s are maximally aligned, and hence the associated value 
+This quantity will be largest when $s^{\mathrm{obs}}$ and $s$ are maximally aligned, and hence the associated value 
 of $\tau$ gives a measurement of the delay time between the observed and synthetic waveforms. Indeed, this 
-is typically what is done in practice to automate delay time measurements. The condition for $\overline{\tau}$ 
+is typically what is done in practice to automate delay time measurements. Note that with the definition in eq.~(\ref{eq:36})
+an observed phase that arrives later than the synthetic gives a negative value of $\overline{\tau}$, the opposite sign to the delay
+time of Lecture~19; nothing below depends on this choice, since it is only the perturbation $\delta\overline{\tau}$ that enters
+the sensitivity kernels. The condition for $\overline{\tau}$
 to maximise the cross-correlation of the waveforms is given by
 \begin{equation}
-\frac{dC}{d\tau}(\overline{\tau})=0
+\frac{\ddns C}{\ddns\tau}(\overline{\tau})=0,
+\label{eq:37}
 \end{equation}
 and this acts to define $\overline{\tau}$ implicitly as a function of the synthetic wavefield $\mathbf{u}$, and
  hence of the underlying model parameters. 
  
- The adjoint method can be applied to determine the functional derivatives of $\overline{\tau}$ and 
- here we need only determine the appropriate adjoint source (details left to the interested reader). The result is that we can write
+ The adjoint method can be applied to determine the functional derivatives of $\overline{\tau}$, and 
+ as remarked above we need only determine the appropriate adjoint source. To do this we perturb the synthetic waveform, 
+ $s\to s+\delta s$, within eq.~(\ref{eq:37}), noting that $\overline{\tau}$ changes in response. Differentiating 
+ eq.~(\ref{eq:36}) gives
 \begin{equation}
-\delta\overline{\tau}=\int_{M}(K_{\alpha}\delta\alpha+K_{\beta}\delta\beta)\dd^{3}\mathbf{x}
+\frac{\ddns C}{\ddns\tau}(\tau)=-\int_{-\infty}^{\infty}\dot{s}^{\mathrm{obs}}(t-\tau)s(\mathbf{x}_{r},t)\dd t,
+\label{eq:38}
+\end{equation}
+and so, to first order, the perturbed form of eq.~(\ref{eq:37}) reads
+\begin{equation}
+-\int_{-\infty}^{\infty}\dot{s}^{\mathrm{obs}}(t-\overline{\tau})\,\delta s(\mathbf{x}_{r},t)\dd t
++\delta\overline{\tau}\int_{-\infty}^{\infty}\ddot{s}^{\mathrm{obs}}(t-\overline{\tau})s(\mathbf{x}_{r},t)\dd t=0.
+\label{eq:39}
+\end{equation}
+If the observed and synthetic waveforms differ only by the time shift, so that $s^{\mathrm{obs}}(t-\overline{\tau})=s(\mathbf{x}_{r},t)$, 
+which is a reasonable approximation when the reference model is close to the truth, then
+$\dot{s}^{\mathrm{obs}}(t-\overline{\tau})=\dot{s}(\mathbf{x}_{r},t)$ in the first term, while an integration by parts (the
+window removing any boundary terms) gives $\int\ddot{s}s\dd t=-\int\dot{s}^{2}\dd t$ in the second, and hence
+\begin{equation}
+\delta\overline{\tau}=-\frac{1}{N}\int_{-\infty}^{\infty}\dot{s}(\mathbf{x}_{r},t)\,\delta s(\mathbf{x}_{r},t)\dd t,
+\quad N=\int_{-\infty}^{\infty}\dot{s}(\mathbf{x}_{r},t)^{2}\dd t.
+\label{eq:40}
+\end{equation}
+Recalling that $\delta s=w(t)\hat{\nu}_{i}\delta u_{i}(\mathbf{x}_{r},t)$, and comparing with eqs.~(\ref{eq:18}) and (\ref{eq:19}), 
+we can read off the adjoint traction
+\begin{equation}
+h_{i}'(\mathbf{x},t)=-\frac{1}{N}w(t)\dot{s}(\mathbf{x}_{r},t)\hat{\nu}_{i}\delta(\mathbf{x}-\mathbf{x}_{r}),
+\label{eq:41}
+\end{equation}
+which is the windowed velocity of the synthetic seismogram applied at the receiver, and the sensitivity kernels then follow 
+from eqs.~(\ref{eq:31})--(\ref{eq:33}) exactly as before. Note that the observed seismogram has dropped out entirely: 
+the kernel depends only on the synthetic wavefield, and hence only on the reference model. In this manner we can write
+\begin{equation}
+\delta\overline{\tau}=\int_{M}(K_{\alpha}\,\delta\alpha+K_{\beta}\,\delta\beta)\dd^{3}\mathbf{x},
+\label{eq:42}
 \end{equation}
 for the first-order perturbation in this cross-correlation delay time with respect to the P- and S-wave speeds, 
-holding other model parameters fixed. This expression can be compared to the ray theoretic result
+holding other model parameters fixed. This expression can be compared to the ray-theoretic result
 \begin{equation}
-\delta T=-\int_{\text{ray}}\frac{\delta c}{c^{2}}ds,
+\delta T=-\int_{\mathrm{ray}}\frac{\delta c}{c^{2}}\dd s,
+\label{eq:43}
 \end{equation}
-obtained using Fermat's principle, with c the appropriate phase speed. 
+obtained using Fermat's principle, with $c$ the appropriate phase speed. 
 
-\begin{figure}[ht]
+
+Figs.~\ref{fig:3} and \ref{fig:4} show how such a kernel is built up in a two-dimensional numerical experiment using the 
+adjoint method exactly as derived above. An explosive point source generates a P-wave that is recorded at a receiver, the 
+delay time of the arrival is defined through cross-correlation, and the corresponding adjoint source is the time-reversed 
+windowed velocity of the synthetic seismogram applied at the receiver. The adjoint field $\mathbf{u}^{\dagger}$ spreads out 
+from the receiver as an ordinary initial value problem, and the kernel for the P-wave speed, which follows from
+eq.~(\ref{eq:33d}) since $\delta A_{ijkl}=2\rho\alpha\,\delta\alpha\,\delta_{ij}\delta_{kl}$ when $\rho$ and $\beta$
+are held fixed,
+\begin{equation*}
+K_{\alpha}(\mathbf{x})=-2\rho\alpha\int_{0}^{T}\nabla\cdot\mathbf{u}(\mathbf{x},t)\,
+\nabla\cdot\mathbf{u}^{\dagger}(\mathbf{x},T-t)\dd t,
+\end{equation*}
+accumulates wherever the forward field at time $t$ overlaps the adjoint field at time $T-t$. At any instant this overlap 
+of the two wavefronts is confined to a pair of points, and as these points sweep from source to receiver they trace out the 
+region of sensitivity, which is an ellipse with the source and receiver at its foci.\footnote{The kernel was checked by 
+perturbing the wave speed within a small region and measuring the resulting change in the cross-correlation delay time 
+directly; the kernel predicts this change to within about ten per cent for a perturbation of two per cent.}
+
+\begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.7\textwidth]{figures/L8F3.png}        
-    \caption{Cross sections through the functional derivative of a cross-correlation delay time for a P-wave 
-    phase with respect to $\alpha$ as calculated by the adjoint method. Here we see that the delay time 
-    of the same phase can be measured at different frequencies by filtering the data and synthetic waveforms. 
-    The dominant sensitivity lies within the first Fresnel zone, but it curiously vanishes along the ray path. 
-    Figure taken from Liu \& Tromp (2008).}
+    \includegraphics[width=\textwidth]{figures/L8F3.pdf}
+    \caption{Construction of a cross-correlation delay-time kernel by the adjoint method in a two-dimensional homogeneous 
+    body. The star marks an explosive source and the triangle a receiver. The kernel is 
+    \mbox{$K_{\alpha}(\mathbf{x})=-2\rho\alpha\int_{0}^{T}\nabla\cdot\mathbf{u}(\mathbf{x},t)\,\nabla\cdot\mathbf{u}^{\dagger}(\mathbf{x},T-t)\dd t$}, 
+    and each row shows one instant $t$ (times are in nondimensional units, with $T\approx2$): the divergence of the
+    forward field $\mathbf{u}(\mathbf{x},t)$; the divergence of the adjoint field $\mathbf{u}^{\dagger}(\mathbf{x},T-t)$
+    after it has evolved for a time $T-t$ from the receiver; the integrand, that is the instantaneous contribution to the 
+    kernel; and the kernel accumulated over times up to $t$. The integrand, and hence the kernel, is non-zero only where the two 
+    fields overlap.}
     \label{fig:3}
 \end{figure}
 
-The form of these  sensitivity kernels deserves  some comment. First, within ray theory all sensitivity lies along 
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/L8F4.pdf}
+    \caption{The finished two-dimensional kernel of Fig.~\ref{fig:3} (left; the colour scale is clipped near the source 
+    and receiver, where the kernel is singular) and a cross-section through it at the mid-point of the ray (right), where $z$ is the coordinate across the ray, in units of the 
+    box height. The kernel  
+    is negative throughout the first Fresnel zone, since an increase in wave speed there advances the arrival, and 
+    changes sign in the surrounding zones. Unlike the three-dimensional kernels of Fig.~\ref{fig:5}, it does not vanish on 
+    the ray itself, though it is somewhat smaller there than on either side.}
+    \label{fig:4}
+\end{figure}
+
+The form of these sensitivity kernels deserves some comment, and Fig.~\ref{fig:5} shows examples calculated for the Earth.  First, within ray theory all sensitivity lies along 
 the reference ray path. Within the adjoint theory, however, there is a broad region of sensitivity around the ray 
-path. This region can be shown to be the first Fresnel zone for the wave under consideration, i.e. the region in 
+path. This region can be shown to be the first Fresnel zone for the wave under consideration, i.e.\ the region in 
 which a scattered wave arrives in phase with the main arrival. This is not too surprising, as ray theory neglects 
-diffraction effects. What is perhaps more curious is that the true kernels  vanish along the reference 
-ray path. When this was first observed from numerical calculations this result seemed counter-intuitive to some 
+diffraction effects. What is perhaps more curious is that the true kernels vanish along the reference 
+ray path. When this was first observed from numerical calculations, this result seemed counter-intuitive to some 
 people: ray theory says that all the sensitivity is along the ray path, but the exact theory says none of it is! 
 
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/L8F5.png}        
+    \caption{Cross-sections through the functional derivative of a cross-correlation delay time for a P-wave
+    phase with respect to $\alpha$ as calculated by the adjoint method. The delay time
+    of the same phase can be measured at different frequencies by filtering the data and synthetic waveforms:
+    panels (a)--(c) show the kernel for three different period bands, each on its own colour scale, and (d) the
+    filtered synthetic seismograms at an epicentral distance of $60^{\circ}$, with the box marking the window
+    around the P arrival used for the measurement.
+    The dominant sensitivity lies within the first Fresnel zone, but it curiously vanishes along the ray path.
+    Figure taken from Liu \& Tromp (2008).}
+    \label{fig:5}
+\end{figure}
 Subsequent work showed that there is no contradiction. The exact kernels vanish along the ray path because a 
-scatterer on the ray path is associated with no phase delay relative to the reference wave. Moreover, it 
+scatterer on the ray path is associated with no phase delay relative to the reference wave. This argument is specific to three dimensions, 
+and the two-dimensional kernel of Fig.~\ref{fig:4} has no such hole. The reason lies in the different character of wave 
+propagation in even and odd numbers of dimensions, but this is a subtle matter that we will not go into. Moreover, it 
 can be shown that as the dominant frequency of the wave increases, the width of the Fresnel zone shrinks, and in 
 the limit as the frequency goes to infinity the two kernels agree in the sense of generalised functions,
 this meaning that their action on a smooth model perturbation produces the same delay time. 
 
 The final point to mention 
-is that you might think that the kernels in Fig.3 look a little like a banana cut lengthwise, while in cross 
+is that you might think that the kernels in Fig.~\ref{fig:5} look a little like a banana cut lengthwise, while in cross 
 section they are hollow and can be said to resemble a doughnut. The first person to work on this theory, 
-Tony Dahlen (1942-2007) from Princeton, certainly thought so, and as a result he jokingly named  
+Tony Dahlen (1942--2007) from Princeton, certainly thought so, and as a result he jokingly named 
 them \textbf{banana doughnut kernels}, and this remains the usual term used.
 
+\section*{Global waveform tomographic models}
+An example of a global tomographic model obtained by the methods of this lecture is shown in Fig.~\ref{fig:6}.
+
+\begin{figure}[htbp]
+    \centering    
+    \includegraphics[width=0.66\textwidth]{figures/L8F6.pdf}    
+    \caption{The global waveform tomographic model GLAD-M35 of Cui et al.\ (2024), the third generation of models produced 
+    at Princeton using the adjoint method (the first, GLAD-M15, is described by Bozda\u{g} et al.\ 2016), at depths of (from the top) 140, 600, 1300, 1700, 2100, 2500 and $2800\,\mathrm{km}$. The columns show the  
+    perturbations in shear wave speed, bulk sound speed and compressional wave speed relative to a spherically symmetric 
+    reference model. The inversion used waveforms from 2160 earthquakes recorded at 11\,575 stations and 35 iterations of 
+    gradient-based optimisation in total. From Cui et al.\ (2024).}
+    \label{fig:6}
+\end{figure}
+
+Such a model is the result of gradient-based 
+optimisation, and as remarked earlier the question of its uncertainty is a difficult one. It can, however, be addressed 
+approximately: the second derivative of the misfit at the minimum (the Hessian) plays the role of the inverse posterior 
+covariance in the Bayesian picture of Lecture~19, and although it is far too large to form, its action on a vector can 
+be computed with a few further forward and adjoint simulations, which is enough to estimate its largest eigenvalues and hence 
+the directions in model space that the data constrain best. Fig.~\ref{fig:7} shows the resulting uncertainty estimates for the 
+model of Fig.~\ref{fig:6}.
+
+\begin{figure}[htbp]
+    \centering    
+    \includegraphics[width=0.66\textwidth]{figures/L8F7.pdf}    
+    \caption{Uncertainty in the shear wave speed of GLAD-M35 at the depths of Fig.~\ref{fig:6}: the prior standard deviation 
+    assumed before inversion (left), the reduction in uncertainty implied by the data through a low-rank approximation of 
+    the Hessian (centre), and the resulting posterior standard deviation (right). The uncertainty is reduced most where 
+    the data coverage is best. From Cui et al.\ (2024).}
+    \label{fig:7}
+\end{figure}
+
+Another way to judge a tomographic model is to compare it with models obtained by other groups using different data and methods. 
+Fig.~\ref{fig:8} makes such a comparison at the base of the mantle for six models that provide both P- and S-wave speeds. 
+Three of the models are the product of waveform tomography as described in this lecture, with the full non-linear inverse 
+problem solved iteratively: GLAD-M35 itself, together with LOWE and its successor REVEAL, which come from a different group and 
+were built with different choices of misfit, data and optimisation scheme, and with very different numbers of iterations 
+(35 for GLAD-M35, 72 for LOWE and 305 for REVEAL). The other three are linearised inversions of the kind described in 
+Lecture~19, in which the forward problem is linearised about a spherically symmetric reference model and solved by 
+regularised least squares. GyPSuM and TX2019 are based on ray-theoretic body-wave travel times, the former combined with 
+geodynamic constraints such as the gravity field and plate motions, and the latter with prior information on the positions 
+of subducted slabs. SP12RTS combines travel times with surface-wave phase speeds and normal-mode observations of the kind 
+discussed in Lectures~23 and~24. The models agree on the largest features, such as the two 
+regions of low shear wave speed beneath Africa and the Pacific, but differ considerably in their detail and, notably, in 
+the size and sign of the perturbations to the bulk sound speed, on which more will be said in Lecture~24. Such disagreements 
+between models built from comparable data are a reminder that the uncertainties in tomographic models are larger than 
+any single study would suggest. The same point is made by the vertical cross-sections of Fig.~\ref{fig:9}, which pass 
+beneath a number of volcanic hot spots: the models differ markedly in whether they show continuous low-velocity 
+conduits, or plumes, rising through the mantle beneath them.
+
+\begin{figure}[htbp]
+    \centering    
+    \includegraphics[width=\textwidth]{figures/L8F8.pdf}        
+    \caption{Six global models that provide both P- and S-wave speeds, at a depth of $2800\,\mathrm{km}$. From the top: GLAD-M35 
+    (Cui et al.\ 2024), GyPSuM (Simmons et al.\ 2010), LOWE (van Herwaarden et al.\ 2020), SP12RTS (Koelemeijer et al.\ 2016), 
+    TX2019 (Lu et al.\ 2019) and REVEAL (Thrastarson et al.\ 2024). The columns show the perturbations in shear wave speed, bulk 
+    sound speed and compressional wave speed. From Cui et al.\ (2024).}
+    \label{fig:8}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering    
+    \includegraphics[width=0.85\textwidth]{figures/L8F9.pdf}    
+    \caption{Vertical cross-sections through the mantle showing the perturbation to the P-wave speed in four of the models of 
+    Fig.~\ref{fig:8}: GLAD-M35, GyPSuM, TX2019 and REVEAL. The small maps show the location of each section, which in every 
+    case passes beneath one or more hot spots. From Cui et al.\ (2024).}
+    \label{fig:9}
+\end{figure}
+
 \section*{What you need to know and be able to do}
-\begin{itemize}
+\begin{enumerate}
     \item[(i)] That waveform tomography depends on the ability to efficiently solve the elastic wave equation in realistic earth models.
-    \item[(ii)] How least-squares waveform misfits can be defined, and what is meant by their gradients. You might also be given other waveform misfits and asked to determine the corresponding adjoint traction.
-    \item[(iii)] Know how gradient based optimisation works, why it is useful, and what its limitations are.
-    \item[(iv)] How the adjoint method can be used to calculate gradients, and what its advantages are. The derivation in this lecture is too lengthy for you to reproduce in full. But you may be asked perform parts of the calculations with suitable guidance or to apply the method to simpler systems.
-\end{itemize}
+    \item[(ii)] How least-squares waveform misfits can be defined, and what is meant by their gradients.
+    \item[(iii)] How gradient-based optimisation works, why it is useful, and what its limitations are.
+    \item[(iv)] How the adjoint method can be used to calculate gradients, and what its advantages are. The derivation in this lecture is too lengthy for you to reproduce in full. But you may be asked to perform parts of the calculations with suitable guidance or to apply the method to simpler systems.
+\end{enumerate}
 
 \appendix
-\section*{The Lagrange multiplier theorem - NON-EXAMINABLE}
+\section*{The Lagrange multiplier theorem (non-examinable)}
 A sketch proof of the Lagrange multiplier theorem is provided for those interested. Let $\mathbf{u}\mapsto J(\mathbf{u})$ be a functional of the state vector, $\mathbf{u}$. Suppose that $\mathbf{u}$ is determined through solution of the following equation
 \begin{equation}
-\mathbf{a}(\mathbf{u},\mathbf{m})=\mathbf{0}.
+\mathbf{a}(\mathbf{u},\mathbf{m})=\mathbf{0},
+\label{eq:44}
 \end{equation}
-with $\mathbf{m}$ the model vector. Here $a$ is some potentially non-linear vector-valued function representing abstractly the partial differential equation satisfied by $\mathbf{u}$ and in which $\mathbf{m}$ act as parameters. We assume that for each $\mathbf{m}$ there is a unique solution to this equation, and hence it serves to define a mapping $\mathbf{m}\mapsto\hat{\mathbf{u}}(\mathbf{m})$ such that
+with $\mathbf{m}$ the model vector. Here $\mathbf{a}$ is some potentially non-linear vector-valued function representing abstractly the partial differential equation satisfied by $\mathbf{u}$ and in which $\mathbf{m}$ acts as a parameter. We assume that for each $\mathbf{m}$ there is a unique solution to this equation, and hence it serves to define a mapping $\mathbf{m}\mapsto\hat{\mathbf{u}}(\mathbf{m})$ such that
 \begin{equation}
 \mathbf{a}[\hat{\mathbf{u}}(\mathbf{m}),\mathbf{m}]=\mathbf{0}.
+\label{eq:45}
 \end{equation}
 Using this mapping, we can define a new functional
 \begin{equation}
 \hat{J}(\mathbf{m})=J[\hat{\mathbf{u}}(\mathbf{m})].
+\label{eq:46}
 \end{equation}
-Within the main notes we do not distinguish notationally between $J(\mathbf{u})$ and $\hat{J}(\mathbf{m})$ but here it is useful to be more explicit. Our aim is to calculate the functional derivative, $D\hat{J}(\mathbf{m})$, this being the linear term within the first-order Taylor expansion
+Within the main notes we do not distinguish notationally between $J(\mathbf{u})$ and $\hat{J}(\mathbf{m})$, but here it is useful to be more explicit. Our aim is to calculate the functional derivative, $D\hat{J}(\mathbf{m})$, this being the linear term within the first-order Taylor expansion
 \begin{equation}
-\hat{J}(\mathbf{m}+\delta \mathbf{m})=\hat{J}(\mathbf{m})+\langle D\hat{J}(\mathbf{m})|\delta \mathbf{m}\rangle+O(||\delta \mathbf{m}||^{2}).
+\hat{J}(\mathbf{m}+\delta \mathbf{m})=\hat{J}(\mathbf{m})+\langle D\hat{J}(\mathbf{m})|\delta \mathbf{m}\rangle+O(\|\delta \mathbf{m}\|^{2}).
+\label{eq:47}
 \end{equation}
-We will obtain this functional derivative first using a "brute-force" method via the chain rule, and then show that the Lagrange multiplier theorem leads to the same result. The advantage of the latter is the relative ease of its application in practice.
+We will obtain this functional derivative first using a ``brute-force'' method via the chain rule, and then show that the Lagrange multiplier theorem leads to the same result. The advantage of the latter is the relative ease of its application in practice.
 
-Using eq. (42), we can perturb $\mathbf{m}$ and expand to first-order to obtain
+Using eq.~(\ref{eq:46}), we can perturb $\mathbf{m}$ and expand to first order to obtain
 \begin{equation}
 \hat{J}(\mathbf{m}+\delta \mathbf{m})=J[\hat{\mathbf{u}}(\mathbf{m}+\delta \mathbf{m})]=
-J[\hat{\mathbf{u}}(\mathbf{m})+\delta \mathbf{u}+\cdot\cdot\cdot]=\hat{J}(\mathbf{m})+
-\langle DJ(\mathbf{u})|\delta \mathbf{u}\rangle+\cdot\cdot\cdot
+J[\hat{\mathbf{u}}(\mathbf{m})+\delta \mathbf{u}+\cdots]=\hat{J}(\mathbf{m})+
+\langle DJ(\mathbf{u})|\delta \mathbf{u}\rangle+\cdots,
+\label{eq:48}
 \end{equation}
-where $\delta \mathbf{u}$ denotes the first-order perturbation to $\mathbf{u}$ due to the given change in $\mathbf{m}$. To determine the concrete form of $\delta \mathbf{u}$, we perturb eq. (41) to obtain
+where $\delta \mathbf{u}$ denotes the first-order perturbation to $\mathbf{u}$ due to the given change in $\mathbf{m}$. To determine the concrete form of $\delta \mathbf{u}$, we perturb eq.~(\ref{eq:45}) to obtain
 \begin{equation}
-\mathbf{a}(\mathbf{u}+\delta \mathbf{u}+\cdot\cdot\cdot,\mathbf{m}+\delta \mathbf{m}+\cdot\cdot\cdot)=\mathbf{0}
+\mathbf{a}(\mathbf{u}+\delta \mathbf{u}+\cdots,\mathbf{m}+\delta \mathbf{m}+\cdots)=\mathbf{0},
+\label{eq:49}
 \end{equation}
-where it is understood that $\mathbf{u}=\hat{\mathbf{u}}(\mathbf{m})$. Expanding this out to first-order we find
+where it is understood that $\mathbf{u}=\hat{\mathbf{u}}(\mathbf{m})$. Expanding this out to first order we find
 \begin{equation}
-D_{\mathbf{u}}\mathbf{a}(\mathbf{u},\mathbf{m})\delta \mathbf{u}+D_{\mathbf{m}}\mathbf{a}(\mathbf{u},\mathbf{m})\delta \mathbf{m}=\mathbf{0}
+D_{\mathbf{u}}\mathbf{a}(\mathbf{u},\mathbf{m})\delta \mathbf{u}+D_{\mathbf{m}}\mathbf{a}(\mathbf{u},\mathbf{m})\delta \mathbf{m}=\mathbf{0}.
+\label{eq:50}
 \end{equation}
-Here we see the partial derivatives of $a$ with respect to $\mathbf{u}$ and $\mathbf{m}$, and note that these are linear operators that act on the perturbations to $\mathbf{u}$ and $\mathbf{m}$ to return an appropriate vector. If this notation is confusing, think of $\mathbf{u}$ as an n-dimensional vector and $\mathbf{m}$ as an m-dimensional one. Then the values of $\mathbf{a}(\mathbf{u},\mathbf{m})$ are also n-dimensional vectors, and the linear operators $D_{\mathbf{u}}\mathbf{a}(\mathbf{u},\mathbf{m})$ and $D_{\mathbf{m}}\mathbf{a}(\mathbf{u},\mathbf{m})$ are matrices having dimensions $n\times n$ and $n\times m$, respectively. Assuming that the linear operator, $D_{\mathbf{u}}\mathbf{a}(\mathbf{u},\mathbf{m})$ is invertible, we can solve the above equation to obtain
+Here we see the partial derivatives of $\mathbf{a}$ with respect to $\mathbf{u}$ and $\mathbf{m}$, and note that these are linear operators that act on the perturbations to $\mathbf{u}$ and $\mathbf{m}$ to return an appropriate vector. If this notation is confusing, think of $\mathbf{u}$ as an $n$-dimensional vector and $\mathbf{m}$ as an $m$-dimensional one. Then the values of $\mathbf{a}(\mathbf{u},\mathbf{m})$ are also $n$-dimensional vectors, and the linear operators $D_{\mathbf{u}}\mathbf{a}(\mathbf{u},\mathbf{m})$ and $D_{\mathbf{m}}\mathbf{a}(\mathbf{u},\mathbf{m})$ are matrices having dimensions $n\times n$ and $n\times m$, respectively. Assuming that the linear operator, $D_{\mathbf{u}}\mathbf{a}(\mathbf{u},\mathbf{m})$, is invertible, we can solve the above equation to obtain
 \begin{equation}
 \delta \mathbf{u}=-[D_{\mathbf{u}}\mathbf{a}(\mathbf{u},\mathbf{m})]^{-1}D_{\mathbf{m}}\mathbf{a}(\mathbf{u},\mathbf{m})\delta \mathbf{m}.
+\label{eq:51}
 \end{equation}
-The assumption that this matrix is invertible is not actually an assumption at all. It can be shown via the implicit function theorem that this is a necessary (and locally sufficient) condition for eq. (41) to admit unique solutions. Substituting this expression for $\delta \mathbf{u}$ into eq.(44) we find
+The assumption that this matrix is invertible is not actually an assumption at all. It can be shown via the implicit function theorem that this is a necessary (and locally sufficient) condition for eq.~(\ref{eq:45}) to admit unique solutions. Substituting this expression for $\delta \mathbf{u}$ into eq.~(\ref{eq:48}) we find
 \begin{equation}
 \hat{J}(\mathbf{m}+\delta \mathbf{m})=\hat{J}(\mathbf{m})-\langle DJ(\mathbf{u})|
-[D_{\mathbf{u}}\mathbf{a}(\mathbf{u},\mathbf{m})]^{-1}D_{\mathbf{m}}\mathbf{a}(\mathbf{u},\mathbf{m})\delta \mathbf{m}\rangle+\cdot\cdot\cdot
+[D_{\mathbf{u}}\mathbf{a}(\mathbf{u},\mathbf{m})]^{-1}D_{\mathbf{m}}\mathbf{a}(\mathbf{u},\mathbf{m})\delta \mathbf{m}\rangle+\cdots.
+\label{eq:52}
 \end{equation}
 Recalling the definition of the adjoint of a linear operator, we can transform the inner product term to obtain
 \begin{equation}
 \hat{J}(\mathbf{m}+\delta \mathbf{m})=\hat{J}(\mathbf{m})-\langle[D_{\mathbf{m}}
 \mathbf{a}(\mathbf{u},\mathbf{m})]^{\dagger}[D_{\mathbf{u}}\mathbf{a}(\mathbf{u},\mathbf{m})]^{-\dagger}DJ
-(\mathbf{u})|\delta \mathbf{m}\rangle+\cdot\cdot\cdot,
+(\mathbf{u})|\delta \mathbf{m}\rangle+\cdots,
+\label{eq:53}
 \end{equation}
 where $(\cdot)^{-\dagger}$ is a shorthand for the inverse of the adjoint. By inspection, we have arrived at the desired result
 \begin{equation}
 D\hat{J}(\mathbf{m})=-[D_{\mathbf{m}}\mathbf{a}(\mathbf{u},\mathbf{m})]^{\dagger}
 [D_{\mathbf{u}}\mathbf{a}(\mathbf{u},\mathbf{m})]^{-\dagger}DJ(\mathbf{u}).
+\label{eq:54}
 \end{equation}
 We now apply the Lagrange multiplier theorem and show that it leads to an identical result. The starting point is defining the appropriate Lagrangian
 \begin{equation}
-L(\mathbf{u},\mathbf{u}',\mathbf{m})=J(\mathbf{u})+\langle \mathbf{a}(\mathbf{u},\mathbf{m})|\mathbf{u}'\rangle
+L(\mathbf{u},\mathbf{u}',\mathbf{m})=J(\mathbf{u})+\langle \mathbf{a}(\mathbf{u},\mathbf{m})|\mathbf{u}'\rangle,
+\label{eq:55}
 \end{equation}
-with $\mathbf{u}'$ the Lagrange multiplier field used to impose eq. (41). Our claim is that
+with $\mathbf{u}'$ the Lagrange multiplier field used to impose eq.~(\ref{eq:45}). Our claim is that
 \begin{equation}
 D\hat{J}(\mathbf{m})=D_{\mathbf{m}}L(\mathbf{u},\mathbf{u}',\mathbf{m}),
+\label{eq:56}
 \end{equation}
 so long as the following conditions hold
 \begin{equation}
 D_{\mathbf{u}}L(\mathbf{u},\mathbf{u}',\mathbf{m})=0, \quad D_{\mathbf{u}'}L(\mathbf{u},\mathbf{u}',\mathbf{m})=0.
+\label{eq:57}
 \end{equation}
-As in the main lecture, we readily see that the second condition implies eq. (41), and hence we have
+As in the main lecture, we readily see that the second condition implies eq.~(\ref{eq:45}), and hence we have
  $\mathbf{u}=\hat{\mathbf{u}}(\mathbf{m})$. To examine the first condition, we note that
 \begin{equation}
 \langle D_{\mathbf{u}}L(\mathbf{u},\mathbf{u}',\mathbf{m})|\delta \mathbf{u}\rangle=\langle 
-    DJ(\mathbf{u})|\delta \mathbf{u}\rangle+\langle D_{\mathbf{u}}\mathbf{a}(\mathbf{u},\mathbf{m})\delta \mathbf{u}|\mathbf{u}'\rangle=0
+    DJ(\mathbf{u})|\delta \mathbf{u}\rangle+\langle D_{\mathbf{u}}\mathbf{a}(\mathbf{u},\mathbf{m})\delta \mathbf{u}|\mathbf{u}'\rangle=0,
+\label{eq:58}
 \end{equation}
 for any $\delta \mathbf{u}$. Again using the adjoint of a linear operator, this is equivalent to
 \begin{equation}
-\langle DJ(\mathbf{u})+[D_{\mathbf{u}}\mathbf{a}(\mathbf{u},\mathbf{m})]^{\dagger}\mathbf{u}'|\delta \mathbf{u}\rangle=0
+\langle DJ(\mathbf{u})+[D_{\mathbf{u}}\mathbf{a}(\mathbf{u},\mathbf{m})]^{\dagger}\mathbf{u}'|\delta \mathbf{u}\rangle=0,
+\label{eq:59}
 \end{equation}
-and as $\delta \mathbf{u}$ is arbitrary, we see that the first condition in eq. (53) implies
+and as $\delta \mathbf{u}$ is arbitrary, we see that the first condition in eq.~(\ref{eq:57}) implies
 \begin{equation}
 DJ(\mathbf{u})+[D_{\mathbf{u}}\mathbf{a}(\mathbf{u},\mathbf{m})]^{\dagger}\mathbf{u}'=\mathbf{0}.
+\label{eq:60}
 \end{equation}
 This is a linear equation for the Lagrange multiplier $\mathbf{u}'$, and it has solution
 \begin{equation}
 \mathbf{u}'=-[D_{\mathbf{u}}\mathbf{a}(\mathbf{u},\mathbf{m})]^{-\dagger}DJ(\mathbf{u}).
+\label{eq:61}
 \end{equation}
-This result can be substituted into eq. (52), but first we note that
+This result can be substituted into eq.~(\ref{eq:56}), but first we note that
 \begin{equation}
-\langle D_{\mathbf{m}}L(\mathbf{u},\mathbf{u}',\mathbf{m})|\delta \mathbf{m}\rangle=\langle D_{\mathbf{m}}\mathbf{a}(\mathbf{u},\mathbf{m})\delta \mathbf{m}|\mathbf{u}'\rangle=\langle\delta \mathbf{m}|[D_{\mathbf{m}}\mathbf{a}(\mathbf{u},\mathbf{m})]^{\dagger}\mathbf{u}'\rangle
+\langle D_{\mathbf{m}}L(\mathbf{u},\mathbf{u}',\mathbf{m})|\delta \mathbf{m}\rangle=\langle D_{\mathbf{m}}\mathbf{a}(\mathbf{u},\mathbf{m})\delta \mathbf{m}|\mathbf{u}'\rangle=\langle\delta \mathbf{m}|[D_{\mathbf{m}}\mathbf{a}(\mathbf{u},\mathbf{m})]^{\dagger}\mathbf{u}'\rangle,
+\label{eq:62}
 \end{equation}
 for any $\delta \mathbf{m}$, and hence
 \begin{equation}
 D_{\mathbf{m}}L(\mathbf{u},\mathbf{u}',\mathbf{m})=[D_{\mathbf{m}}\mathbf{a}(\mathbf{u},\mathbf{m})]^{\dagger}\mathbf{u}'=-[D_{\mathbf{m}}\mathbf{a}(\mathbf{u},\mathbf{m})]^{\dagger}[D_{\mathbf{u}}\mathbf{a}(\mathbf{u},\mathbf{m})]^{-\dagger}DJ(\mathbf{u}).
+\label{eq:63}
 \end{equation}
-The final result is precisely what was obtained using the direct method, and hence we have established the validity of the Lagrange multiplier theorem. It is worth noting that eq. (56) for the Lagrange multiplier, $\mathbf{u}'$, involves the adjoint of the linearised forward operator. It is this fact that gives the adjoint method its name.
-
-\end{document}
+The final result is precisely what was obtained using the direct method, and hence we have established the validity of the Lagrange multiplier theorem. It is worth noting that eq.~(\ref{eq:60}) for the Lagrange multiplier, $\mathbf{u}'$, involves the adjoint of the linearised forward operator. It is this fact that gives the adjoint method its name.

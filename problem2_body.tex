@@ -1,0 +1,231 @@
+\providecommand{\hardq}{\refstepcounter{enumi}\item[\labelenumi$^{\dagger}$]}
+\providecommand{\hardp}{\refstepcounter{enumii}\item[\labelenumii$^{\dagger}$]}
+\noindent Questions, or parts of questions, marked with a dagger ($\dagger$) are more challenging than the rest. They can be attempted, or their solutions simply read through; everything unmarked should be attempted.
+
+\begin{enumerate}
+
+\item In Lecture~18 it was shown that, for a P-wave ray in a spherically symmetric earth model of radius $b$ whose turning 
+point lies at radius $r_{t}$, the epicentral angle and travel time are
+\begin{equation*}
+    \Delta(q)=\int_{r_{t}}^{b}\frac{2\alpha q}{r\sqrt{r^{2}-\alpha^{2}q^{2}}}\dd r, \quad 
+    T(q)=\int_{r_{t}}^{b}\frac{2r}{\alpha\sqrt{r^{2}-\alpha^{2}q^{2}}}\dd r,
+\end{equation*}
+where $q=r\sin\theta/\alpha$ is the ray parameter, $\theta$ being the angle between the ray and the radial direction, and $r_{t}$ satisfies $r_{t}/\alpha(r_{t})=q$. This question 
+shows how such a travel-time curve can be inverted for the velocity structure, a method due to Herglotz and Wiechert. Throughout, 
+define $\eta(r)=r/\alpha(r)$ and assume that $\eta$ increases monotonically with $r$.
+\begin{enumerate}
+\item Show that $\tau(q)=T(q)-q\Delta(q)$ can be written
+\begin{equation*}
+    \tau(q)=2\int_{r_{t}}^{b}\sqrt{\eta^{2}-q^{2}}\,\frac{\dd r}{r},
+\end{equation*}
+and hence that $\dd\tau/\dd q=-\Delta$. [Remember that the lower limit $r_{t}$ depends on $q$, so that Leibniz's rule for differentiating an integral with respect to a parameter is needed; consider the value of the integrand at the turning point.] Deduce that $\dd T/\dd\Delta=q$ along the travel-time curve, so that the ray parameter of 
+an arrival can be measured from the local slope of the observed curve.
+\item Using $\eta$ as the integration variable, show that
+\begin{equation*}
+    \Delta(q)=2\int_{q}^{\eta_{b}}\frac{q}{\sqrt{\eta^{2}-q^{2}}}\frac{\dd\ln r}{\dd\eta}\dd\eta,
+\end{equation*}
+where $\eta_{b}=\eta(b)$.
+\hardp Let $\eta_{1}$ be the ray parameter of the ray turning at some radius $r_{1}$. Multiply the result of (b) by 
+$(q^{2}-\eta_{1}^{2})^{-1/2}$, integrate over $q$ from $\eta_{1}$ to $\eta_{b}$, and exchange the order of integration to show that
+\begin{equation*}
+    \ln\frac{b}{r_{1}}=\frac{1}{\pi}\int_{\eta_{1}}^{\eta_{b}}\frac{\Delta(q)}{\sqrt{q^{2}-\eta_{1}^{2}}}\dd q.
+\end{equation*}
+You may use the identity
+\begin{equation*}
+    \int_{\eta_{1}}^{\eta}\frac{q\,\dd q}{\sqrt{(\eta^{2}-q^{2})(q^{2}-\eta_{1}^{2})}}=\frac{\pi}{2}.
+\end{equation*}
+By integrating by parts, show that this can equally be written in terms of the observed travel-time curve as
+\begin{equation*}
+    \ln\frac{b}{r_{1}}=\frac{1}{\pi}\int_{0}^{\Delta_{1}}\cosh^{-1}\!\left[\frac{q(\Delta)}{\eta_{1}}\right]\dd\Delta,
+\end{equation*}
+where $\Delta_{1}=\Delta(\eta_{1})$ and $q(\Delta)=\dd T/\dd\Delta$.
+\item Explain how these results allow $\alpha(r)$ to be determined from a travel-time curve, working downwards from the surface. 
+What goes wrong if there is a region in which the velocity decreases with depth so rapidly that $\eta$ is no longer monotonic? 
+And what is seen in the travel-time curve at a discontinuity across which the velocity increases with depth?
+\end{enumerate}
+
+\item Consider the regularised least squares solution to a linear(ised) inverse problem obtained by minimising the function
+\begin{equation*}
+    J(\mathbf{m})=\frac{1}{2}(\mathbf{A}\mathbf{m}-\mathbf{d})^{T}\mathbf{C}^{-1}(\mathbf{A}\mathbf{m}-\mathbf{d})+\frac{\lambda}{2}\mathbf{m}^{T}\mathbf{B}\mathbf{m}.
+\end{equation*}
+Suppose that the data take the form $\mathbf{d}=\mathbf{A}\mathbf{m}_{\mathrm{in}}$ with $\mathbf{m}_{\mathrm{in}}$ a specified input model. Show that the resulting least squares solution, $\mathbf{m}_{\mathrm{out}}$, takes the form
+\begin{equation*}
+    \mathbf{m}_{\mathrm{out}}=\mathbf{R}\mathbf{m}_{\mathrm{in}},
+\end{equation*}
+where $\mathbf{R}$ is a matrix to be determined. Discuss the significance of this so-called resolution matrix, explaining why, in particular, it would be desirable for its value to be close to the identity matrix.
+
+\item
+
+Consider a linear inverse problem of the standard form
+\begin{equation*}
+    \mathbf{d} = \mathbf{A}\mathbf{m}+\mathbf{e},
+\end{equation*}
+with $\mathbf{d}$ an $n$-dimensional data vector, $\mathbf{m}$ an $m$-dimensional model vector, $\mathbf{A}$ an $n\times m$ matrix, and $\mathbf{e}$ an $n$-dimensional vector of random errors. We assume $m > n$, which
+is to say that there are more unknown model parameters than available data.
+We further suppose that the data have been processed such that the components of the random errors are uncorrelated and have unit standard deviations (this corresponds to the data covariance, $\mathbf{C}$, being the $n\times n$ identity matrix).
+
+
+
+\begin{enumerate}
+
+    \item A model $\mathbf{m}$ is said to be compatible with the data if
+\begin{equation*}
+    \|\mathbf{A}\mathbf{m}-\mathbf{d}\|^{2} \le \chi^{2}_{c},
+\end{equation*}
+where $\chi^{2}_{c}$ is a critical value for the so-called chi-squared statistic. What type of geometric region of the model space is defined by this inequality?
+
+\item Supposing that $\|\mathbf{d}\|^{2} > \chi^{2}_{c}$, the region of the model space defined by the inequality in (a) does not contain the origin. In such
+cases, the closest point within this region to the origin must lie on the boundary set defined by
+\begin{equation*}
+    \|\mathbf{A}\mathbf{m}-\mathbf{d}\|^{2} = \chi^{2}_{c}.
+\end{equation*}
+Using the method of Lagrange multipliers, we can determine this \emph{minimum norm solution} by considering the Lagrangian
+\begin{equation*}
+    \mathcal{L}(\mathbf{m},\mu)=\|\mathbf{m}\|^{2}+\mu(\|\mathbf{A}\mathbf{m}-\mathbf{d}\|^{2}-\chi^{2}_{c}),
+\end{equation*}
+where $\mu$ is a Lagrange multiplier. Derive the equations for $\mathbf{m}$ and $\mu$ that must hold at the minimum norm solution.
+Discuss the relationship between this approach and regularised least squares.
+\end{enumerate}
+
+
+\hardq Consider the deformation of an isotropic elastic body due to an applied surface load, $\sigma$. The relevant linearised equilibrium equations are
+\begin{gather*}
+    -\frac{\partial T_{ij}}{\partial x_{j}}=0, \\
+    T_{ij}=\lambda\frac{\partial u_{k}}{\partial x_{k}}\delta_{ij}+\mu\left(\frac{\partial u_{i}}{\partial x_{j}}+\frac{\partial u_{j}}{\partial x_{i}}\right),
+\end{gather*}
+within the reference body $M$, and subject to boundary conditions
+\begin{equation*}
+    T_{ij}\hat{n}_{j}=\sigma g_{i}
+\end{equation*}
+on its boundary, $\partial M$.\footnote{For a purely traction-loaded static problem the load must exert no net force or torque and the displacement is determined only up to a rigid-body motion; we ignore this subtlety here.} Here $g_{i}$ is the acceleration due to gravity prior to the deformation. Note that self-gravitation is being ignored within these equations.
+
+Suppose that observations, $\mathbf{u}_{r}^{\mathrm{obs}}$, of the displacement vector have been made at surface locations $\mathbf{x}_{r}$ for $r=1,\dots,N$. An inverse problem could then be formulated to estimate the Lamé parameters, $\lambda$ and $\mu$, as well as the load, $\sigma$. To this end, we can seek to minimise the misfit
+\begin{equation*}
+    J=\frac{1}{2}\sum_{r=1}^{N}\frac{1}{\varepsilon_{r}^{2}}\|\mathbf{u}(\mathbf{x}_{r})-\mathbf{u}_{r}^{\mathrm{obs}}\|^{2},
+\end{equation*}
+where $\varepsilon_{r}$ is the standard deviation for the $r$th observation. Adapt the approach within Lecture~20 to derive sensitivity kernels for $J$ with respect to $\lambda$, $\mu$, and $\sigma$, showing how they can be calculated through one solution of the forward problem and one of an appropriate adjoint problem.
+
+
+
+
+
+\item Recall that the Lagrangian for a self-gravitating elastic body is given by
+\begin{equation*}
+    \mathcal{L}(\mathbf{x},t,\bphi,\mathbf{v},\mathbf{F})=\frac{1}{2}\rho(\mathbf{x})\|\mathbf{v}\|^{2}-W(\mathbf{x},t,\mathbf{F})-\frac{1}{2}\rho(\mathbf{x})\zeta(\mathbf{x},t),
+\end{equation*}
+where $\zeta$ is the referential gravitational potential
+\begin{equation*}
+    \zeta(\mathbf{x},t)=-G\int_{M}\frac{\rho(\mathbf{x}')}{\{[\varphi_{i}(\mathbf{x},t)-\varphi_{i}(\mathbf{x}',t)][\varphi_{i}(\mathbf{x},t)-\varphi_{i}(\mathbf{x}',t)]\}^{\frac{1}{2}}}\dd^{3}\mathbf{x}'.
+\end{equation*}
+By calculating the appropriate functional derivative, show that
+\begin{equation*}
+    \frac{\delta\mathcal{L}}{\delta\varphi_{i}}=\rho\gamma_{i},
+\end{equation*}
+where $\gamma_{i}$ is the referential gravitational acceleration.
+
+\item Using results from Lecture~23 along with residue calculus (which you don't need to know for this course), it can be shown that the time-domain solution of the elastodynamic equations in a non-rotating earth model can be expressed as the following eigenfunction expansion
+\begin{equation*}
+    \mathbf{u}(\mathbf{x},t)=\sum_{km}\left\{\int_{0}^{t}\frac{\sin[\omega_{k}(t-t')]}{\omega_{k}}\int_{M}\overline{S}_{ij}(\mathbf{x}',t')\frac{\partial|km\rangle_{i}^{*}}{\partial x'_{j}}(\mathbf{x}')\dd^{3}\mathbf{x}'\dd t'\right\}|km\rangle(\mathbf{x}),
+\end{equation*}
+where $|km\rangle_{i}$ denotes the $i$th Cartesian component of the eigenfunction.
+\begin{enumerate}
+\item Suppose that the stress glut is non-zero only within a region of dimension $L$ about a point $\mathbf{x}_{s}$, as it would be for 
+an earthquake on a fault of that size. By expanding $\partial|km\rangle_{i}^{*}/\partial x'_{j}$ in a Taylor series about $\mathbf{x}_{s}$, show that 
+the contribution of a mode to the sum can be approximated by replacing the stress glut with the \emph{point source}
+\begin{equation*}
+    \overline{S}_{ij}(\mathbf{x},t)=M_{ij}(t)\delta(\mathbf{x}-\mathbf{x}_{s}), \quad M_{ij}(t)=\int_{M}\overline{S}_{ij}(\mathbf{x},t)\dd^{3}\mathbf{x},
+\end{equation*}
+provided that $L$ is small compared with the length scale over which the strain of the eigenfunction varies. Estimate this 
+length scale in terms of the eigenfrequency and a wave speed, and hence explain why the point-source approximation is a statement 
+about the frequencies retained in the seismograms. For a fault of length $100\,\mathrm{km}$ and a shear wave speed of 
+$5\,\mathrm{km\,s^{-1}}$, below roughly what frequency is the approximation reasonable?
+\item Simplify the eigenfunction expansion in the case of a point source with a step-function time dependence, 
+\begin{equation*}
+    \overline{S}_{ij}(\mathbf{x},t)=M_{ij}\delta(\mathbf{x}-\mathbf{x}_{s})H(t-t_{s}),
+\end{equation*}
+with $M_{ij}$ known as the moment tensor, $\mathbf{x}_{s}$ the source location, and $t_{s}$ the source time. Describe briefly and qualitatively how an inverse problem might be formulated to estimate the ten source parameters $(M_{ij},\mathbf{x}_{s},t_{s})$ from recorded seismograms.
+\end{enumerate}
+
+\item Consider the eigenvalue problem for a rotating earth model
+\begin{equation*}
+    -\omega^{2}\langle \mathbf{w}|P|\mathbf{s}\rangle+\ii\omega\langle \mathbf{w}|W|\mathbf{s}\rangle+\langle \mathbf{w}|H|\mathbf{s}\rangle=0,
+\end{equation*}
+where $\mathbf{s}$ is the eigenfunction, $\omega$ the eigenfrequency, and $\mathbf{w}$ an arbitrary test function. Assuming the eigenfunction normalisation condition
+\begin{equation*}
+    \langle \mathbf{s}|P|\mathbf{s}\rangle=1,
+\end{equation*}
+show that the eigenfrequency can be written
+\begin{equation*}
+    \omega=\frac{1}{2}\ii\langle \mathbf{s}|W|\mathbf{s}\rangle\pm\sqrt{\langle \mathbf{s}|H|\mathbf{s}\rangle-\frac{1}{4}\langle \mathbf{s}|W|\mathbf{s}\rangle^{2}}.
+\end{equation*}
+Use this result to discuss qualitatively the stability of a rotating earth model, including, in particular, the role of the Coriolis and centrifugal forces.
+
+\item Consider a non-rotating planet of radius $a$ with uniform density $\rho$, and let $M_{\mathrm{p}}$ be its mass.
+\begin{enumerate}
+\item Show that the gravitational potential energy (or binding energy) of the planet is
+\begin{equation*}
+    E_{g}=-\frac{3GM_{\mathrm{p}}^{2}}{5a}.
+\end{equation*}
+\item Assuming the planet to be in hydrostatic equilibrium, show that its pressure is
+\begin{equation*}
+    p_{0}(r)=\frac{2\pi}{3}G\rho^{2}(a^{2}-r^{2}),
+\end{equation*}
+and hence verify that $3\int_{M}p_{0}\dd^{3}\mathbf{x}=-E_{g}$.
+\item Suppose that the planet is compressed uniformly, so that its radius becomes $a(1-\epsilon)$ with $\epsilon$ small and positive,
+the density remaining uniform. Determine the change in the gravitational potential energy correct to second order in $\epsilon$.
+\item Let the material respond to compression through $p=p_{0}+\kappa s$, where $s$ is the fractional decrease in the volume of a
+material element and $\kappa$ is a constant bulk modulus. Recalling that the work done in compressing a material element of initial
+volume $V_{0}$ is $V_{0}\int p\,\dd s$, show that the change in the internal energy of the planet is
+\begin{equation*}
+    \Delta E_{\mathrm{int}}=(3\epsilon-3\epsilon^{2})\int_{M}p_{0}\dd^{3}\mathbf{x}+\frac{9}{2}\kappa V\epsilon^{2}+O(\epsilon^{3}),
+\end{equation*}
+where $V$ is the volume of the planet.
+\item Show that the total change in energy vanishes at first order in $\epsilon$, and explain why this had to be so. Show that
+the second-order change is positive, and hence the planet stable with respect to this perturbation, if and only if
+\begin{equation*}
+    \kappa>\frac{4}{3}\bar{p}_{0}=\frac{16\pi}{45}G\rho^{2}a^{2},
+\end{equation*}
+where $\bar{p}_{0}$ is the mean pressure. Express this condition in terms of the sound speed $\sqrt{\kappa/\rho}$ and the surface
+gravity $g$, and evaluate it for $\rho=5500\,\mathrm{kg\,m^{-3}}$ and $a=6371\,\mathrm{km}$. Comment on the result in
+relation to the bulk moduli within the earth model PREM, which range from roughly $130\,\mathrm{GPa}$ in the upper mantle to
+$650\,\mathrm{GPa}$ at the base of the mantle.
+\end{enumerate}
+
+\item This question concerns the splitting of a multiplet by the Earth's rotation, using the first-order theory of Lecture~24. Ignore 
+the centrifugal force and the Earth's ellipticity, so that within the multiplet the only perturbation is the Coriolis form $W$, and take 
+the rotation vector to be $\bm{\Omega}=\Omega\hat{\mathbf{z}}$.
+\begin{enumerate}
+\item It can be shown that the Coriolis matrix elements within a multiplet of degree $l$ are diagonal in the order $m$, taking the form
+\begin{equation*}
+    \langle km'|W|km\rangle=-2\ii m\Omega\beta\,\delta_{mm'},
+\end{equation*}
+where $\beta$ is a real number depending on the radial eigenfunctions of the multiplet. Show that the singlets $|km\rangle$ are then 
+eigenfunctions of the first-order splitting problem, with eigenfrequencies
+\begin{equation*}
+    \omega_{m}=\omega_{k}+m\Omega\beta, \quad -l\le m\le l,
+\end{equation*}
+so that the multiplet is split into $2l+1$ equally spaced singlets, and verify that the diagonal sum rule holds. Show that this 
+is consistent with the result of question 7.
+\hardp Consider a toroidal multiplet with singlets of the form
+\begin{equation*}
+    |km\rangle=W(r)\mathbf{C}_{lm}(\theta,\varphi)
+\end{equation*}
+(the radial eigenfunction $W(r)$, not to be confused with the Coriolis operator $W$), normalised so that
+\begin{equation*}
+    l(l+1)\int_{0}^{b}\rho W^{2}r^{2}\dd r=1.
+\end{equation*}
+Show that $\beta=1/[l(l+1)]$. You may use 
+\begin{equation*}
+    \mathbf{C}_{lm}=-\hat{\mathbf{r}}\times\nabla_{1}Y_{lm}, \quad 
+    \nabla_{1}Y_{lm}=\hat{\bm{\theta}}\,\frac{\partial Y_{lm}}{\partial\theta}+\frac{\hat{\bm{\varphi}}}{\sin\theta}\frac{\partial Y_{lm}}{\partial\varphi},
+\end{equation*}
+the dependence $Y_{lm}\propto\ee^{\ii m\varphi}$, and the fact that $Y_{lm}$ vanishes at the poles for $m\ne0$. 
+[For a spheroidal multiplet a similar calculation gives 
+$\beta=\int_{0}^{b}\rho(2UV+V^{2})r^{2}\dd r$ with the normalisation $\int_{0}^{b}\rho[U^{2}+l(l+1)V^{2}]r^{2}\dd r=1$, 
+which for ${}_{0}S_{2}$ in PREM gives $\beta\approx0.40$ and for ${}_{0}S_{3}$ gives $\beta\approx0.19$.]
+\item The Earth rotates once per sidereal day, $86164\,\mathrm{s}$. Estimate the spacing between adjacent singlets of 
+${}_{0}T_{2}$, ${}_{0}S_{2}$ and ${}_{0}S_{3}$, and compare with the observed spectra in Fig.~6 of Lecture~24. Why might the observed 
+singlets not be exactly equally spaced?
+\end{enumerate}
+
+\end{enumerate}
