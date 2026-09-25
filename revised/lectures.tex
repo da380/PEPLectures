@@ -1,0 +1,119 @@
+% Master document: all twelve seismology lectures in one PDF with a contents page.
+% Each lectureN.tex holds only the body of a lecture (from the first \section* to the
+% summary list); the titles live here and this is the only document built. Labels are
+% prefixed per lecture so that eq:1 in different lectures do not clash, and the
+% equation, figure and footnote counters restart with each lecture.
+% Build: pdflatex lectures; pdflatex lectures; pdflatex lectures
+\documentclass[a4paper,12pt]{paper}
+\usepackage{mycommands}
+\usepackage[section]{placeins}   % keep floats within their (starred) sections
+\renewcommand{\topfraction}{0.9}\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\textfraction}{0.07}\renewcommand{\floatpagefraction}{0.75}
+\setcounter{topnumber}{3}\setcounter{totalnumber}{4}
+\usepackage[hidelinks,bookmarksnumbered=false,pdftitle={Physics of the Earth as a Planet: Seismology (Lectures 13--24)},pdfauthor={David Al-Attar}]{hyperref}
+
+\makeatletter
+% --- per-lecture label prefix -------------------------------------------------
+\newcommand{\lecprefix}{L0}
+\AtBeginDocument{%
+  \let\lec@orig@label\label
+  \let\lec@orig@ref\ref
+  \renewcommand{\label}[1]{\lec@orig@label{\lecprefix:#1}}%
+  \renewcommand{\ref}[1]{\lec@orig@ref{\lecprefix:#1}}%
+  \let\ltx@label\label % amsmath uses \ltx@label inside align etc.
+  % the paper class disables \maketitle after its first use; keep copies to restore
+  \let\lec@maketitle\maketitle
+  \let\lec@@maketitle\@maketitle
+  % unique hyperref anchors although the counters restart in each lecture
+  \renewcommand{\theHequation}{\lecprefix.\arabic{equation}}%
+  \renewcommand{\theHfigure}{\lecprefix.\arabic{figure}}%
+}
+% \lecture{<number>}{<title>}{<file>}
+\newcommand{\lecture}[3]{%
+  \clearpage
+  \renewcommand{\lecprefix}{L#1}%
+  \title{Lecture #1: #2}%
+  \author{}% name and date appear on the overall title page only
+  \maketitle
+  \let\maketitle\lec@maketitle
+  \let\@maketitle\lec@@maketitle
+  \setcounter{equation}{0}\setcounter{figure}{0}\setcounter{footnote}{0}%
+  \phantomsection
+  \addcontentsline{toc}{section}{Lecture #1: #2}%
+  \input{#3}%
+}
+\makeatother
+
+\begin{document}
+
+\hypersetup{pageanchor=false}% title page and contents are both page 1
+\begin{titlepage}
+  \centering
+  \vspace*{4cm}
+  {\Huge\bfseries Physics of the Earth as a Planet\par}
+  \vspace{1cm}
+  {\LARGE Lectures 13--24: Seismology\par}
+  \vspace{2cm}
+  {\Large David Al-Attar\par}
+  \vspace{0.5ex}
+  {\Large Michaelmas Term, \the\year\par}
+  \vfill
+  {\large Department of Earth Sciences, University of Cambridge\par}
+  \vspace{2cm}
+\end{titlepage}
+\hypersetup{pageanchor=true}
+
+\tableofcontents
+
+\lecture{13}{Finite elasticity}{lecture1}
+\lecture{14}{Constitutive theory}{lecture2}
+\lecture{15}{Seismic sources}{lecture3}
+\lecture{16}{Plane wave propagation}{lecture4}
+\lecture{17}{Ray theory}{lecture5}
+\lecture{18}{Spherical Earth structure}{lecture6}
+\lecture{19}{Delay time tomography}{lecture7}
+\lecture{20}{Waveform tomography}{lecture8}
+\lecture{21}{Self-gravitation and rotation}{lecture9}
+\lecture{22}{Equilibrium figures}{lecture10}
+\lecture{23}{Free oscillations}{lecture11}
+\lecture{24}{Mode splitting and coupling}{lecture12}
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{References}
+\section*{References}
+\begingroup
+\setlength{\parindent}{0pt}\setlength{\parskip}{4pt plus 1pt}
+\newcommand{\refitem}[1]{\par\hangindent=1.5em\hangafter=1 #1}
+\refitem{Abramson, E.~H., Brown, J.~M., Slutsky, L.~J. \& Zaug, J. (1997). The elastic constants of San Carlos olivine to 17~GPa. \emph{Journal of Geophysical Research} \textbf{102}, 12253--12263.}
+\refitem{Backus, G. \& Gilbert, F. (1961). The rotational splitting of the free oscillations of the Earth. \emph{Proceedings of the National Academy of Sciences} \textbf{47}, 362--371.}
+\refitem{Benioff, H., Press, F. \& Smith, S. (1961). Excitation of the free oscillations of the Earth by earthquakes. \emph{Journal of Geophysical Research} \textbf{66}, 605--619.}
+\refitem{Bozda\u{g}, E., Peter, D., Lefebvre, M., Komatitsch, D., Tromp, J., Hill, J., Podhorszki, N. \& Pugmire, D. (2016). Global adjoint tomography: first-generation model. \emph{Geophysical Journal International} \textbf{207}, 1739--1766.}
+\refitem{Chandrasekhar, S. (1969). \emph{Ellipsoidal Figures of Equilibrium}. Yale University Press.}
+\refitem{Clairaut, A.~C. (1743). \emph{Th\'{e}orie de la figure de la Terre}. Paris.}
+\refitem{Cui, C., Lei, W., Liu, Q., Peter, D., Bozda\u{g}, E., Tromp, J., Hill, J., Podhorszki, N. \& Pugmire, D. (2024). GLAD-M35: a joint P and S global tomographic model with uncertainty quantification. \emph{Geophysical Journal International} \textbf{239}, 478--502.}
+\refitem{Dahlen, F.~A. \& Tromp, J. (1998). \emph{Theoretical Global Seismology}. Princeton University Press.}
+\refitem{Deuss, A., Woodhouse, J.~H., Paulssen, H. \& Trampert, J. (2000). The observation of inner core shear waves. \emph{Geophysical Journal International} \textbf{142}, 67--73.}
+\refitem{Dziewonski, A.~M. \& Anderson, D.~L. (1981). Preliminary reference Earth model. \emph{Physics of the Earth and Planetary Interiors} \textbf{25}, 297--356.}
+\refitem{Dziewonski, A.~M. \& Gilbert, F. (1971). Solidity of the inner core of the Earth inferred from normal mode observations. \emph{Nature} \textbf{234}, 465--466.}
+\refitem{Gilbert, F. (1971). The diagonal sum rule and averaged eigenfrequencies. \emph{Geophysical Journal of the Royal Astronomical Society} \textbf{23}, 119--123.}
+\refitem{H\"{o}rmander, L. (1971). Fourier integral operators. I. \emph{Acta Mathematica} \textbf{127}, 79--183.}
+\refitem{Ishii, M. \& Tromp, J. (1999). Normal-mode and free-air gravity constraints on lateral variations in velocity and density of Earth's mantle. \emph{Science} \textbf{285}, 1231--1236.}
+\refitem{Koelemeijer, P., Ritsema, J., Deuss, A. \& van Heijst, H.-J. (2016). SP12RTS: a degree-12 model of shear- and compressional-wave velocity for Earth's mantle. \emph{Geophysical Journal International} \textbf{204}, 1024--1039.}
+\refitem{Lau, H.~C.~P., Mitrovica, J.~X., Davis, J.~L., Tromp, J., Yang, H.-Y. \& Al-Attar, D. (2017). Tidal tomography constrains Earth's deep-mantle buoyancy. \emph{Nature} \textbf{551}, 321--326.}
+\refitem{Liu, Q. \& Tromp, J. (2008). Finite-frequency sensitivity kernels for global seismic wave propagation based upon adjoint methods. \emph{Geophysical Journal International} \textbf{174}, 265--286.}
+\refitem{Lu, C., Grand, S.~P., Lai, H. \& Garnero, E.~J. (2019). TX2019slab: a new P and S tomography model incorporating subducting slabs. \emph{Journal of Geophysical Research: Solid Earth} \textbf{124}, 11549--11567.}
+\refitem{Maitra, M. \& Al-Attar, D. (2024). On the elastodynamics of rotating planets. \emph{Geophysical Journal International} \textbf{238}, 1291--1332.}
+\refitem{Newton, I. (1687). \emph{Philosophi\ae{} Naturalis Principia Mathematica}. London.}
+\refitem{Oldham, R.~D. (1906). The constitution of the interior of the Earth, as revealed by earthquakes. \emph{Quarterly Journal of the Geological Society} \textbf{62}, 456--475.}
+\refitem{Reid, H.~F. (1910). The mechanics of the earthquake. In \emph{The California Earthquake of April 18, 1906: Report of the State Earthquake Investigation Commission}, Vol.~II. Carnegie Institution of Washington.}
+\refitem{Simmons, N.~A., Forte, A.~M., Boschi, L. \& Grand, S.~P. (2010). GyPSuM: a joint tomographic model of mantle density and seismic wave speeds. \emph{Journal of Geophysical Research} \textbf{115}, B12310.}
+\refitem{Stuart, A.~M. (2010). Inverse problems: a Bayesian perspective. \emph{Acta Numerica} \textbf{19}, 451--559.}
+\refitem{Tape, C., Liu, Q., Maggi, A. \& Tromp, J. (2010). Seismic tomography of the southern California crust based on spectral-element and adjoint methods. \emph{Geophysical Journal International} \textbf{180}, 433--462.}
+\refitem{Thrastarson, S., van Herwaarden, D.-P., Noe, S., Josef Schiller, C. \& Fichtner, A. (2024). REVEAL: a global full-waveform inversion model. \emph{Bulletin of the Seismological Society of America} \textbf{114}, 1392--1406.}
+\refitem{Truesdell, C. \& Noll, W. (1965). \emph{The Non-Linear Field Theories of Mechanics}. Springer.}
+\refitem{van Herwaarden, D.-P., Boehm, C., Afanasiev, M., Thrastarson, S., Krischer, L., Trampert, J. \& Fichtner, A. (2020). Accelerated full-waveform inversion using dynamic mini-batches. \emph{Geophysical Journal International} \textbf{221}, 1427--1438.}
+\refitem{Woodhouse, J.~H. \& Dziewonski, A.~M. (1989). Seismic modelling of the Earth's large-scale three-dimensional structure. \emph{Philosophical Transactions of the Royal Society A} \textbf{328}, 291--308.}
+\endgroup
+
+\end{document}

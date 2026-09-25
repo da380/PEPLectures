@@ -1,0 +1,514 @@
+\documentclass[a4paper,12pt]{paper}
+
+\usepackage{mycommands}
+
+% Worked-example layout: boxed problem statement followed by a solution.
+\newcounter{example}
+\renewenvironment{example}[1]{%  % the paper class already defines "example"
+  \refstepcounter{example}%
+  \begin{mdframed}[linewidth=1pt,innertopmargin=6pt,innerbottommargin=6pt]%
+  \noindent\textbf{Example \theexample: #1.}\ }{%
+  \end{mdframed}}
+\newenvironment{solution}{\par\noindent\textbf{Solution.}\ }{\par\medskip}
+
+\title{Worked examples for Lecture 18: Delay time tomography}
+\author{David Al-Attar \\ Michaelmas Term, \the\year}
+
+\begin{document}
+
+\maketitle
+
+\noindent These examples accompany Lecture~18. They are intended as practice in the concrete
+calculations that underlie the lecture, and are less demanding than the questions on the
+problem sets. Numerical results were checked with the scripts in the \texttt{python}
+directory.
+
+\medskip
+
+\noindent Throughout we use a two-block toy model. The reference P-wave velocity is a constant
+$\alpha$, and the model consists of two adjacent blocks, each of length $\ell$, in which the
+velocity is perturbed by constants $\delta\alpha_{1}$ and $\delta\alpha_{2}$. Rays are straight
+lines that pass along the blocks, and so the basis functions of the lecture are the indicator
+functions $\varphi_{j}$ of the blocks. The elements of the matrix $\mathbf{A}$ are then
+\begin{equation}
+    A_{ij} = -\int_{\mathrm{ray}_{i}} \frac{\varphi_{j}}{\alpha^{2}} \dd s = -\frac{\ell_{ij}}{\alpha^{2}},
+    \label{eq:1}
+\end{equation}
+where $\ell_{ij}$ is the length of the $i$th ray within the $j$th block. The factor $-1/\alpha^{2}$ is
+common to every element, and it is tidier to take as model parameters the perturbations to the
+slowness $1/\alpha$ in each block,
+\begin{equation}
+    \delta u_{j} = \delta\!\left(\frac{1}{\alpha}\right)_{j} = -\frac{\delta\alpha_{j}}{\alpha^{2}},
+    \label{eq:2}
+\end{equation}
+so that $\mathbf{m}=(\delta u_{1},\delta u_{2})^{T}$ and $A_{ij}=\ell_{ij}$ is simply a path length.
+The two descriptions differ only by a rescaling of the columns of $\mathbf{A}$, and the velocity
+perturbations can be read off at the end from $\delta\alpha_{j}/\alpha = -\alpha\,\delta u_{j}$.
+For numerical values we take $\ell = 100\,\mathrm{km}$ and $\alpha = 8\,\mathrm{km\,s^{-1}}$, so
+that the unperturbed travel time along one block is $12.5\,\mathrm{s}$.
+
+\begin{example}{Toy tomography with two blocks}
+Consider the following three sets of straight rays through the two-block model.
+\begin{enumerate}
+    \item[(a)] A single ray that passes along both blocks, with delay time $d_{1}$.
+    \item[(b)] The ray of (a) together with a second ray that passes along block 1 only, with delay
+    time $d_{2}$.
+    \item[(c)] The rays of (b) together with a third ray that passes along block 2 only, with delay
+    time $d_{3}$.
+\end{enumerate}
+In each case write down $\mathbf{A}$ and the equation $\mathbf{d}=\mathbf{A}\mathbf{m}+\mathbf{e}$. Find
+the null space of $\mathbf{A}$ in case (a), and solve the problem exactly in case (b). In case (c) the
+data $d_{1}=1.2\,\mathrm{s}$, $d_{2}=0.5\,\mathrm{s}$ and $d_{3}=0.4\,\mathrm{s}$ are inconsistent;
+find the least squares solution, the predicted data and the residuals, taking the errors to have
+equal variances.
+\end{example}
+
+\begin{solution}
+In case (a) there is one datum and two unknowns, and by eq.~(\ref{eq:1}) with slowness parameters
+\begin{equation}
+    \mathbf{A} = \begin{pmatrix} \ell & \ell \end{pmatrix},\quad
+    d_{1} = \ell\,\delta u_{1} + \ell\,\delta u_{2} + e_{1}.
+    \label{eq:3}
+\end{equation}
+The null space consists of the vectors $\mathbf{m}_{0}$ with $\mathbf{A}\mathbf{m}_{0}=\mathbf{0}$, i.e.\
+$\delta u_{1}+\delta u_{2}=0$, and so is the line spanned by $(1,-1)^{T}$. The single ray measures
+the sum of the two slowness perturbations and says nothing whatever about their difference: adding
+any multiple of $(1,-1)^{T}$ to a solution leaves the datum unchanged, and the problem has no unique
+solution even for error-free data. Note that $\mathbf{A}^{T}\mathbf{A} = \ell^{2}\begin{pmatrix} 1 & 1
+\\ 1 & 1\end{pmatrix}$ has eigenvectors $(1,1)^{T}$ and $(1,-1)^{T}$ with eigenvalues $2\ell^{2}$
+and $0$; the zero eigenvalue is the null space again.
+
+In case (b) the second ray has length $\ell$ in block 1 and zero in block 2, so
+\begin{equation}
+    \mathbf{A} = \begin{pmatrix} \ell & \ell \\ \ell & 0 \end{pmatrix},\quad
+    \det\mathbf{A} = -\ell^{2} \neq 0,\quad
+    \mathbf{A}^{-1} = \frac{1}{\ell}\begin{pmatrix} 0 & 1 \\ 1 & -1 \end{pmatrix}.
+    \label{eq:4}
+\end{equation}
+The null space is now trivial and, neglecting errors, the unique solution is
+\begin{equation}
+    \delta u_{1} = \frac{d_{2}}{\ell},\quad \delta u_{2} = \frac{d_{1}-d_{2}}{\ell}.
+    \label{eq:5}
+\end{equation}
+With $d_{1}=1.2\,\mathrm{s}$ and $d_{2}=0.5\,\mathrm{s}$ this gives $\delta u_{1} =
+5\times10^{-3}\,\mathrm{s\,km^{-1}}$ and $\delta u_{2}=7\times10^{-3}\,\mathrm{s\,km^{-1}}$, or
+$\delta\alpha_{1}/\alpha = -4.0\,\%$ and $\delta\alpha_{2}/\alpha = -5.6\,\%$: both blocks are slow,
+as they must be for positive delays. Because $\mathbf{A}$ is square and invertible the data are fit
+exactly whatever their errors, and the errors pass straight into the model,
+$\delta\mathbf{m}=\mathbf{A}^{-1}\mathbf{e}$. For uncorrelated errors of variance $\sigma_{d}^{2}$ the
+model covariance is
+\begin{equation}
+    \sigma_{d}^{2}\,\mathbf{A}^{-1}\mathbf{A}^{-T} = \frac{\sigma_{d}^{2}}{\ell^{2}}
+    \begin{pmatrix} 1 & -1 \\ -1 & 2 \end{pmatrix},
+    \label{eq:6}
+\end{equation}
+so block 2, which is seen only through the difference $d_{1}-d_{2}$, has twice the variance of block 1,
+and the two estimates are anticorrelated.
+
+In case (c) we have three data and two unknowns,
+\begin{equation}
+    \mathbf{A} = \begin{pmatrix} \ell & \ell \\ \ell & 0 \\ 0 & \ell \end{pmatrix},\quad
+    \mathbf{d} = \begin{pmatrix} d_{1} \\ d_{2} \\ d_{3} \end{pmatrix}.
+    \label{eq:7}
+\end{equation}
+Exact solutions exist only if $d_{1}=d_{2}+d_{3}$, and for the given data $d_{2}+d_{3}=0.9\,\mathrm{s}
+\neq d_{1}$. With equal variances the covariance matrix is $\mathbf{C}=\sigma_{d}^{2}\mathbf{I}$, the
+factor $\sigma_{d}^{-2}$ cancels from the least squares equations of the lecture, and we must solve
+$\mathbf{A}^{T}\mathbf{A}\,\mathbf{m} = \mathbf{A}^{T}\mathbf{d}$. Here
+\begin{equation}
+    \mathbf{A}^{T}\mathbf{A} = \ell^{2}\begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix},\quad
+    (\mathbf{A}^{T}\mathbf{A})^{-1} = \frac{1}{3\ell^{2}}\begin{pmatrix} 2 & -1 \\ -1 & 2 \end{pmatrix},\quad
+    \mathbf{A}^{T}\mathbf{d} = \ell\begin{pmatrix} d_{1}+d_{2} \\ d_{1}+d_{3} \end{pmatrix},
+    \label{eq:8}
+\end{equation}
+and hence
+\begin{equation}
+    \mathbf{m} = \frac{1}{3\ell}\begin{pmatrix} d_{1}+2d_{2}-d_{3} \\ d_{1}-d_{2}+2d_{3} \end{pmatrix}
+    = \begin{pmatrix} 6\times10^{-3} \\ 5\times10^{-3} \end{pmatrix}\mathrm{s\,km^{-1}},
+    \label{eq:9}
+\end{equation}
+which corresponds to $\delta\alpha_{1}/\alpha=-4.8\,\%$ and $\delta\alpha_{2}/\alpha=-4.0\,\%$. The
+predicted data are $\mathbf{A}\mathbf{m} = (1.1, 0.6, 0.5)^{T}\,\mathrm{s}$, and the residuals are
+\begin{equation}
+    \mathbf{A}\mathbf{m}-\mathbf{d} = -\frac{d_{1}-d_{2}-d_{3}}{3}\begin{pmatrix} 1 \\ -1 \\ -1 \end{pmatrix}
+    = \begin{pmatrix} -0.1 \\ 0.1 \\ 0.1 \end{pmatrix}\mathrm{s}.
+    \label{eq:10}
+\end{equation}
+The residual vector is orthogonal to both columns of $\mathbf{A}$, as it must be at a least squares
+minimum, and is proportional to $(1,-1,-1)^{T}$: the only combination of the data that the model
+cannot reproduce is the inconsistency $d_{1}-d_{2}-d_{3}$, and least squares distributes it equally
+between the three measurements. The example shows the three regimes met in practice: an
+underdetermined problem with a null space, an exactly determined one in which noise is amplified,
+and an overdetermined one whose data can be fit only in the least squares sense.
+\end{solution}
+
+\begin{example}{Regularised least squares in the toy problem}
+Return to case (a) of Example~1, with a single datum $d$, and measure delay times in units of their
+standard deviation so that $\mathbf{C}=\mathbf{I}$. Taking $\mathbf{B}=\mathbf{I}$, compute the
+regularised least squares solution
+\begin{equation}
+    \mathbf{m}(\lambda) = (\mathbf{A}^{T}\mathbf{A}+\lambda\mathbf{I})^{-1}\mathbf{A}^{T}d
+    \label{eq:11}
+\end{equation}
+explicitly, and discuss its limits as $\lambda\to0$ and $\lambda\to\infty$. Find the data misfit
+$\|\mathbf{A}\mathbf{m}-d\|$ and the model norm $\|\mathbf{m}\|$ as functions of $\lambda$, and
+hence the trade-off curve between them. Evaluate the results for $d=1.2\,\mathrm{s}$ and
+$\lambda/\ell^{2}=0$, $0.5$, $2$ and $8$.
+\end{example}
+
+\begin{solution}
+With $\mathbf{A}=(\ell\;\;\ell)$ we have
+\begin{equation}
+    \mathbf{A}^{T}\mathbf{A}+\lambda\mathbf{I} = \begin{pmatrix} \ell^{2}+\lambda & \ell^{2} \\
+    \ell^{2} & \ell^{2}+\lambda \end{pmatrix},\quad
+    \det(\mathbf{A}^{T}\mathbf{A}+\lambda\mathbf{I}) = (\ell^{2}+\lambda)^{2}-\ell^{4} = \lambda(2\ell^{2}+\lambda),
+    \label{eq:12}
+\end{equation}
+which is positive for every $\lambda>0$, in agreement with the general argument in the lecture that
+the regularised normal matrix is positive definite. Inverting the two-by-two matrix,
+\begin{equation}
+    (\mathbf{A}^{T}\mathbf{A}+\lambda\mathbf{I})^{-1} = \frac{1}{\lambda(2\ell^{2}+\lambda)}
+    \begin{pmatrix} \ell^{2}+\lambda & -\ell^{2} \\ -\ell^{2} & \ell^{2}+\lambda \end{pmatrix},
+    \label{eq:13}
+\end{equation}
+and since $\mathbf{A}^{T}d = \ell d\,(1,1)^{T}$ we find
+\begin{equation}
+    \mathbf{m}(\lambda) = \frac{\ell d}{\lambda(2\ell^{2}+\lambda)}
+    \begin{pmatrix} \lambda \\ \lambda \end{pmatrix}
+    = \frac{\ell d}{2\ell^{2}+\lambda}\begin{pmatrix} 1 \\ 1 \end{pmatrix}.
+    \label{eq:14}
+\end{equation}
+The same result follows more quickly from the eigenvectors noted in Example~1. The matrix
+$\mathbf{A}^{T}\mathbf{A}+\lambda\mathbf{I}$ has eigenvalue $2\ell^{2}+\lambda$ on $(1,1)^{T}$ and
+$\lambda$ on $(1,-1)^{T}$; the right-hand side $\mathbf{A}^{T}d$ lies entirely along $(1,1)^{T}$, and
+so is simply divided by $2\ell^{2}+\lambda$. In particular the regularised solution never acquires a
+component along the null-space direction $(1,-1)^{T}$: with $\mathbf{B}=\mathbf{I}$ and
+$\mathbf{m}_{0}=\mathbf{0}$, damping selects the solution that puts nothing into the null space.
+
+As $\lambda\to0$, $\mathbf{m}\to(d/2\ell)(1,1)^{T}$. This fits the datum exactly, since
+$\ell(d/2\ell + d/2\ell) = d$, and among all exact solutions $(d/2\ell)(1,1)^{T}+a(1,-1)^{T}$ it has the
+smallest norm, $\|\mathbf{m}\|^{2} = d^{2}/2\ell^{2} + 2a^{2}$ being minimised at $a=0$. Thus the small
+damping limit is the minimum-norm solution, which attributes the delay equally to the two blocks. As
+$\lambda\to\infty$, $\mathbf{m}\to\mathbf{0}$: the regularisation term dominates and the model is
+pulled entirely to the reference model, whatever the data say.
+
+For the misfit and norm we have $\mathbf{A}\mathbf{m} = 2\ell^{2}d/(2\ell^{2}+\lambda)$, and so
+\begin{equation}
+    \|\mathbf{A}\mathbf{m}-d\| = \frac{\lambda\,d}{2\ell^{2}+\lambda},\quad
+    \|\mathbf{m}\| = \frac{\sqrt{2}\,\ell\,d}{2\ell^{2}+\lambda}.
+    \label{eq:15}
+\end{equation}
+The misfit rises monotonically from $0$ to $d$ as $\lambda$ increases, while the norm falls
+monotonically from $d/\sqrt{2}\ell$ to $0$. Eliminating $\lambda$ between the two expressions,
+\begin{equation}
+    \|\mathbf{A}\mathbf{m}-d\| = d - \sqrt{2}\,\ell\,\|\mathbf{m}\|,
+    \label{eq:16}
+\end{equation}
+so the trade-off curve in the (norm, misfit) plane is a straight line joining the minimum-norm
+solution $(d/\sqrt{2}\ell,0)$ to the reference model $(0,d)$. For $d=1.2\,\mathrm{s}$ and
+$\ell=100\,\mathrm{km}$ the numbers are as follows.
+\begin{center}
+\begin{tabular}{cccc}
+    $\lambda/\ell^{2}$ & $\delta u_{1}=\delta u_{2}$ ($\mathrm{s\,km^{-1}}$) &
+    $\|\mathbf{A}\mathbf{m}-d\|$ (s) & $\|\mathbf{m}\|$ ($\mathrm{s\,km^{-1}}$) \\[2pt]
+    \hline\\[-8pt]
+    $0$   & $6.0\times10^{-3}$ & $0$    & $8.49\times10^{-3}$ \\
+    $0.5$ & $4.8\times10^{-3}$ & $0.24$ & $6.79\times10^{-3}$ \\
+    $2$   & $3.0\times10^{-3}$ & $0.60$ & $4.24\times10^{-3}$ \\
+    $8$   & $1.2\times10^{-3}$ & $0.96$ & $1.70\times10^{-3}$ \\
+\end{tabular}
+\end{center}
+The value $\lambda=2\ell^{2}$, equal to the single non-zero eigenvalue of $\mathbf{A}^{T}\mathbf{A}$,
+halves the amplitude of the solution and misfits the datum by half its value. The trade-off curve
+here is a straight line because $\mathbf{A}$ has rank one; the characteristic bend, or ``corner'', of
+trade-off curves in real problems arises only when the singular values of $\mathbf{A}$ span a range,
+different components of the model then being switched off at different values of $\lambda$.
+\end{solution}
+
+\begin{example}{Fermat's principle checked exactly}
+A medium of uniform P-wave velocity $\alpha$ contains a slab $0<x<h$ in which the velocity is
+$\alpha(1+\epsilon)$. A source at $(-a,-b)$ and a receiver at $(h+a,b)$ lie on opposite sides of
+the slab, so that the unperturbed ray is a straight line crossing the slab obliquely at the angle
+$\theta$ to its normal, where $\tan\theta = 2b/(2a+h)$. Show from Snell's law that the exact travel
+time is given by
+\begin{align}
+    T(\epsilon) &= \frac{2a}{\alpha\cos\theta_{1}} + \frac{h}{\alpha(1+\epsilon)\cos\theta_{2}}, \nonumber \\
+    \sin\theta_{2} &= (1+\epsilon)\sin\theta_{1},\quad 2a\tan\theta_{1} + h\tan\theta_{2} = 2b.
+    \label{eq:17}
+\end{align}
+Show that the linearised delay time of the lecture is $\delta T = -\epsilon\ell_{\mathrm{in}}/\alpha$,
+with $\ell_{\mathrm{in}}=h/\cos\theta$ the length of the unperturbed ray inside the slab, that the
+first-order term of $T(\epsilon)$ agrees with this, and that the contribution of ray bending to the
+delay time is $O(\epsilon^{2})$ and negative. Confirm this numerically for $\alpha=8\,\mathrm{km\,s^{-1}}$,
+$h=100\,\mathrm{km}$, $a=200\,\mathrm{km}$, $b=250\,\mathrm{km}$ and
+$\epsilon = 0.01$, $0.03$ and $0.1$.
+\end{example}
+
+\begin{solution}
+Within each homogeneous region the perturbed ray is straight, and at the two plane interfaces it
+refracts according to Snell's law, the horizontal slowness $p=\sin\theta_{1}/\alpha
+= \sin\theta_{2}/\alpha(1+\epsilon)$ being conserved. Let $\theta_{1}$ be the angle to the slab normal
+of the two outer segments and $\theta_{2}$ that of the segment inside the slab. The outer segments
+each have length $a/\cos\theta_{1}$ and the inner segment $h/\cos\theta_{2}$, which gives the travel
+time in eq.~(\ref{eq:17}); the transverse distances covered, $a\tan\theta_{1}$ twice and
+$h\tan\theta_{2}$ once, must sum to $2b$, which is the final condition. For given $\epsilon$ these two
+conditions determine $\theta_{1}$ through a single transcendental equation, which is readily solved
+numerically. At $\epsilon=0$ we have $\theta_{1}=\theta_{2}=\theta$ and the ray is the straight line
+with $T_{0} = (2a+h)/\alpha\cos\theta$.
+
+The velocity perturbation is $\delta v = \epsilon\alpha$ inside the slab and zero outside, and the
+linearised delay time of the lecture is the integral along the \emph{unperturbed} ray,
+\begin{equation}
+    \delta T = -\int_{\mathrm{ray}}\frac{\delta v}{v^{2}}\dd s = -\frac{\epsilon\alpha}{\alpha^{2}}\,\ell_{\mathrm{in}}
+    = -\frac{\epsilon\,\ell_{\mathrm{in}}}{\alpha},\quad \ell_{\mathrm{in}} = \frac{h}{\cos\theta}.
+    \label{eq:18}
+\end{equation}
+
+To compare with the exact result it is clearest to make the Fermat argument explicit. Any
+three-segment path is fixed by its entry point $(0,y_{1})$ and exit point $(h,y_{2})$, and has travel
+time
+\begin{align}
+    T(\epsilon;\mathbf{y}) &= T_{\mathrm{out}}(\mathbf{y}) + \frac{T_{\mathrm{in}}(\mathbf{y})}{1+\epsilon}, \nonumber \\
+    T_{\mathrm{out}} &= \frac{\sqrt{a^{2}+(y_{1}+b)^{2}}+\sqrt{a^{2}+(b-y_{2})^{2}}}{\alpha},\quad
+    T_{\mathrm{in}} = \frac{\sqrt{h^{2}+(y_{2}-y_{1})^{2}}}{\alpha},
+    \label{eq:19}
+\end{align}
+with $\mathbf{y}=(y_{1},y_{2})^{T}$. Snell's law is precisely the condition
+$\nabla_{\mathbf{y}}T(\epsilon;\mathbf{y})=\mathbf{0}$, and the true ray, $\mathbf{y}(\epsilon)$, is the
+minimiser of $T(\epsilon;\cdot)$; in particular the unperturbed ray $\mathbf{y}_{0}$ satisfies
+$\nabla T_{\mathrm{out}}(\mathbf{y}_{0}) = -\nabla T_{\mathrm{in}}(\mathbf{y}_{0}) \equiv -\mathbf{g}$.
+Writing $\mathbf{y}(\epsilon) = \mathbf{y}_{0}+\delta\mathbf{y}$ and expanding,
+\begin{equation}
+    T(\epsilon) = T(\epsilon;\mathbf{y}_{0}) + \nabla_{\mathbf{y}}T(\epsilon;\mathbf{y}_{0})\cdot\delta\mathbf{y}
+    + \frac{1}{2}\delta\mathbf{y}^{T}\mathbf{H}\,\delta\mathbf{y} + \cdots,
+    \label{eq:20}
+\end{equation}
+where $\mathbf{H}$ is the Hessian of $T_{0}(\mathbf{y}) = T(0;\mathbf{y})$ at $\mathbf{y}_{0}$. The first
+term is the travel time through the perturbed slab along the unperturbed path,
+\begin{equation}
+    T(\epsilon;\mathbf{y}_{0}) = T_{0} + \left(\frac{1}{1+\epsilon}-1\right)\frac{\ell_{\mathrm{in}}}{\alpha}
+    = T_{0} - \frac{\epsilon\,\ell_{\mathrm{in}}}{\alpha} + \frac{\epsilon^{2}\ell_{\mathrm{in}}}{\alpha} - \cdots,
+    \label{eq:21}
+\end{equation}
+whose first-order part is exactly eq.~(\ref{eq:18}). In the second term of eq.~(\ref{eq:20}) the
+gradient is $\nabla_{\mathbf{y}}T(\epsilon;\mathbf{y}_{0}) = -\epsilon\mathbf{g}/(1+\epsilon)$, which
+vanishes at $\epsilon=0$ by Fermat's principle, while $\delta\mathbf{y}=O(\epsilon)$ because
+the ray moves continuously with the model. The ray-bending contribution to the travel time is
+therefore $O(\epsilon^{2})$: the first-order delay time is obtained by integrating along the old
+ray, as claimed in the lecture. We can go one step further. Stationarity of the travel time at
+$\mathbf{y}_{0}+\delta\mathbf{y}$ gives $\mathbf{H}\,\delta\mathbf{y} = \epsilon\mathbf{g}+O(\epsilon^{2})$, and
+substituting into eq.~(\ref{eq:20}),
+\begin{equation}
+    T(\epsilon) - T(\epsilon;\mathbf{y}_{0}) = -\epsilon^{2}\mathbf{g}^{T}\mathbf{H}^{-1}\mathbf{g}
+    + \frac{1}{2}\epsilon^{2}\mathbf{g}^{T}\mathbf{H}^{-1}\mathbf{g} + O(\epsilon^{3})
+    = -\frac{1}{2}\epsilon^{2}\,\mathbf{g}^{T}\mathbf{H}^{-1}\mathbf{g} + O(\epsilon^{3}),
+    \label{eq:22}
+\end{equation}
+which is negative because $\mathbf{H}$ is positive definite at a minimum. Bending always shortens
+the travel time relative to the frozen path, whatever the sign of $\epsilon$, since the true ray is
+the fastest path in the perturbed medium. For the present geometry the quantities are elementary. A
+straight segment of length $L$ making angle $\theta$ with the $x$-axis has travel time
+$\sqrt{\Delta x^{2}+\Delta y^{2}}/\alpha$ whose second derivative with respect to an end-point
+ordinate is $\cos^{2}\theta/\alpha L$, and so at $\mathbf{y}_{0}$
+\begin{equation}
+    \mathbf{H} = \frac{\cos^{3}\theta}{\alpha}\begin{pmatrix} 1/a+1/h & -1/h \\ -1/h & 1/a+1/h \end{pmatrix},\quad
+    \mathbf{g} = \nabla T_{\mathrm{in}} = \frac{\sin\theta}{\alpha}\begin{pmatrix} -1 \\ 1 \end{pmatrix}.
+    \label{eq:23}
+\end{equation}
+The vector $\mathbf{g}$ is an eigenvector of $\mathbf{H}$ with eigenvalue $(\cos^{3}\theta/\alpha)(1/a+2/h)$,
+and hence
+\begin{equation}
+    -\frac{1}{2}\mathbf{g}^{T}\mathbf{H}^{-1}\mathbf{g} = -\frac{\sin^{2}\theta\,ah}{\alpha\cos^{3}\theta\,(h+2a)}
+    = -\frac{\ell_{\mathrm{in}}}{\alpha}\,\frac{a\tan^{2}\theta}{h+2a}.
+    \label{eq:24}
+\end{equation}
+Collecting eqs.~(\ref{eq:21}), (\ref{eq:22}) and (\ref{eq:24}), the exact delay time is
+\begin{equation}
+    T(\epsilon)-T_{0} = -\frac{\epsilon\,\ell_{\mathrm{in}}}{\alpha}
+    + \frac{\epsilon^{2}\ell_{\mathrm{in}}}{\alpha}\left(1 - \frac{a\tan^{2}\theta}{h+2a}\right) + O(\epsilon^{3}).
+    \label{eq:25}
+\end{equation}
+The two second-order pieces have distinct origins: the first is the non-linearity of the slowness
+$1/v$ in $\epsilon$ and would be absent had we perturbed the slowness rather than the velocity; the
+second is ray bending, and vanishes at normal incidence where the ray is not bent at all.
+
+For the numerical values given, $\tan\theta = 500/500$, so $\theta = 45^{\circ}$,
+$\ell_{\mathrm{in}}=h\sqrt{2}=141.4\,\mathrm{km}$, $T_{0}=500\sqrt{2}/8 = 88.39\,\mathrm{s}$ and
+$\ell_{\mathrm{in}}/\alpha = 17.68\,\mathrm{s}$. The bending coefficient in eq.~(\ref{eq:24}) is
+$-17.68\times0.4 = -7.07\,\mathrm{s}$, and the total second-order coefficient in eq.~(\ref{eq:25}) is
+$17.68\times0.6=10.61\,\mathrm{s}$. Solving eq.~(\ref{eq:17}) numerically we obtain the following.
+\begin{center}
+\begin{tabular}{ccccc}
+    $\epsilon$ & $-\epsilon\ell_{\mathrm{in}}/\alpha$ (s) & $T(\epsilon)-T_{0}$ (s) &
+    error (ms) & bending part (ms) \\[2pt]
+    \hline\\[-8pt]
+    $0.01$ & $-0.17678$ & $-0.17573$ & $1.05$  & $-0.70$ \\
+    $0.03$ & $-0.53033$ & $-0.52114$ & $9.19$  & $-6.25$ \\
+    $0.1$  & $-1.76777$ & $-1.67393$ & $93.8$  & $-66.9$ \\
+\end{tabular}
+\end{center}
+Here ``error'' is the difference between the exact and the linearised delay times, and ``bending
+part'' is $T(\epsilon)-T(\epsilon;\mathbf{y}_{0})$, the part of that difference due to the movement of
+the ray. Increasing $\epsilon$ by a factor of three multiplies the error by $8.8$ and by a factor of
+ten multiplies it by $90$, close to the factors of $9$ and $100$ expected for a quadratic, and the
+second-order formula $10.61\,\epsilon^{2}\,\mathrm{s}$ predicts $1.06$, $9.5$ and $106\,\mathrm{ms}$,
+the discrepancies being the $O(\epsilon^{3})$ terms. Even for a $10\,\%$ velocity anomaly, far larger
+than anything in the mantle, the linearised delay time is in error by only $6\,\%$, and the
+ray-bending part of that error is smaller in magnitude than, and opposite in sign to, the part due to
+the non-linearity of the slowness in $\epsilon$. This is why the linear relation
+$\mathbf{d}=\mathbf{A}\mathbf{m}$ is adequate for global tomography.
+\end{solution}
+
+\begin{example}{Resolution and the Bayesian view}
+Return once more to case (a) of Example~1, $\mathbf{A}=(\ell\;\;\ell)$, and suppose the datum has
+variance $\sigma_{d}^{2}$ and that the prior on the model is Gaussian with mean $\mathbf{m}_{0}=\mathbf{0}$
+and covariance $\mathbf{C}_{m}=\sigma_{m}^{2}\mathbf{I}$. Compute the posterior mean $\mathbf{m}_{p}$ and
+covariance $\mathbf{C}_{p}$ explicitly. Show that the posterior variance is reduced only along the
+direction $(1,1)^{T}$ and is unchanged along the null-space direction $(1,-1)^{T}$, and relate
+the result to the regularised solution of Example~2. Evaluate everything for
+$d=1.2\,\mathrm{s}$, $\sigma_{d}=0.1\,\mathrm{s}$ and $\sigma_{m}=2\times10^{-3}\,\mathrm{s\,km^{-1}}$.
+\end{example}
+
+\begin{solution}
+Let $\mathbf{P}_{\parallel}$ and $\mathbf{P}_{\perp}$ be the orthogonal projectors onto the unit
+vectors $(1,1)^{T}/\sqrt{2}$ and $(1,-1)^{T}/\sqrt{2}$,
+\begin{equation}
+    \mathbf{P}_{\parallel} = \frac{1}{2}\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix},\quad
+    \mathbf{P}_{\perp} = \frac{1}{2}\begin{pmatrix} 1 & -1 \\ -1 & 1 \end{pmatrix},\quad
+    \mathbf{P}_{\parallel}+\mathbf{P}_{\perp} = \mathbf{I}.
+    \label{eq:26}
+\end{equation}
+From Example~1, $\mathbf{A}^{T}\mathbf{A} = 2\ell^{2}\mathbf{P}_{\parallel}$, and so the inverse posterior
+covariance of the lecture is
+\begin{equation}
+    \mathbf{C}_{p}^{-1} = \frac{\mathbf{A}^{T}\mathbf{A}}{\sigma_{d}^{2}} + \frac{\mathbf{I}}{\sigma_{m}^{2}}
+    = \left(\frac{2\ell^{2}}{\sigma_{d}^{2}}+\frac{1}{\sigma_{m}^{2}}\right)\mathbf{P}_{\parallel}
+    + \frac{1}{\sigma_{m}^{2}}\mathbf{P}_{\perp}.
+    \label{eq:27}
+\end{equation}
+A matrix of the form $\mu_{\parallel}\mathbf{P}_{\parallel}+\mu_{\perp}\mathbf{P}_{\perp}$ is inverted by
+inverting its two eigenvalues, and hence
+\begin{equation}
+    \mathbf{C}_{p} = c\,\mathbf{P}_{\parallel} + \sigma_{m}^{2}\mathbf{P}_{\perp},\quad
+    c = \frac{\sigma_{m}^{2}\sigma_{d}^{2}}{\sigma_{d}^{2}+2\ell^{2}\sigma_{m}^{2}} < \sigma_{m}^{2}.
+    \label{eq:28}
+\end{equation}
+The posterior variance of the component of $\mathbf{m}$ along $(1,1)^{T}/\sqrt{2}$ is $c$, which is
+smaller than the prior variance $\sigma_{m}^{2}$ by the factor $\sigma_{d}^{2}/(\sigma_{d}^{2}+2\ell^{2}\sigma_{m}^{2})$,
+while that along $(1,-1)^{T}/\sqrt{2}$ is $\sigma_{m}^{2}$, exactly as before the datum was collected.
+The data reduce our uncertainty only in the directions they are sensitive to; in the null space the
+posterior is the prior, and any apparent knowledge of the difference between the blocks in the
+final model comes entirely from the prior. Written out,
+\begin{equation}
+    \mathbf{C}_{p} = \frac{1}{2}\begin{pmatrix} \sigma_{m}^{2}+c & c-\sigma_{m}^{2} \\
+    c-\sigma_{m}^{2} & \sigma_{m}^{2}+c \end{pmatrix},
+    \label{eq:29}
+\end{equation}
+so the two blocks are negatively correlated a posteriori, with correlation coefficient
+$(c-\sigma_{m}^{2})/(c+\sigma_{m}^{2})$: the datum fixes the sum of the perturbations, and so if one
+block is faster than the posterior mean the other is probably slower. In the limit of a perfect
+datum, $\sigma_{d}\to0$, we have $c\to0$, $\mathbf{C}_{p}\to\sigma_{m}^{2}\mathbf{P}_{\perp}$, and the
+correlation tends to $-1$.
+
+The posterior mean is $\mathbf{m}_{p} = \mathbf{C}_{p}\mathbf{A}^{T}d/\sigma_{d}^{2}$ since $\mathbf{m}_{0}=\mathbf{0}$,
+and as $\mathbf{A}^{T}d = \ell d\,(1,1)^{T}$ lies along $(1,1)^{T}$,
+\begin{equation}
+    \mathbf{m}_{p} = \frac{c\,\ell d}{\sigma_{d}^{2}}\begin{pmatrix} 1 \\ 1 \end{pmatrix}
+    = \frac{\ell d}{2\ell^{2}+\sigma_{d}^{2}/\sigma_{m}^{2}}\begin{pmatrix} 1 \\ 1 \end{pmatrix}.
+    \label{eq:30}
+\end{equation}
+Comparing with eq.~(\ref{eq:14}), this is the regularised least squares solution of Example~2 with
+\begin{equation}
+    \lambda = \frac{\sigma_{d}^{2}}{\sigma_{m}^{2}},
+    \label{eq:31}
+\end{equation}
+which is the lecture's identification $\lambda\mathbf{B}=\mathbf{C}_{m}^{-1}$ once the data variance,
+set to unity in Example~2, is restored: with $\mathbf{C}=\sigma_{d}^{2}\mathbf{I}$ the regularised
+normal matrix is $\mathbf{A}^{T}\mathbf{A}/\sigma_{d}^{2}+\lambda\mathbf{B}$, and
+$\lambda\mathbf{B}=\mathbf{I}/\sigma_{m}^{2}$ gives $\mathbf{A}^{T}\mathbf{A}+(\sigma_{d}^{2}/\sigma_{m}^{2})\mathbf{I}$.
+The damping parameter is thus the ratio of how noisy we think the data are to how large we think the
+model is: noisier data or a tighter prior both mean heavier damping.
+
+It is also instructive to ask how the posterior mean is related to the true model. If the datum
+was generated as $d = \mathbf{A}\mathbf{m}_{\mathrm{true}}+e$, then
+\begin{equation}
+    \mathbf{m}_{p} = \mathbf{R}\,\mathbf{m}_{\mathrm{true}} + \frac{\mathbf{C}_{p}\mathbf{A}^{T}e}{\sigma_{d}^{2}},\quad
+    \mathbf{R} = \frac{\mathbf{C}_{p}\mathbf{A}^{T}\mathbf{A}}{\sigma_{d}^{2}}
+    = \frac{2\ell^{2}c}{\sigma_{d}^{2}}\mathbf{P}_{\parallel}
+    = \frac{2\ell^{2}\sigma_{m}^{2}}{\sigma_{d}^{2}+2\ell^{2}\sigma_{m}^{2}}\mathbf{P}_{\parallel},
+    \label{eq:32}
+\end{equation}
+where $\mathbf{R}$ is called the resolution matrix. The recovered model is a filtered version of the
+truth: the mean of the two blocks is recovered with amplitude slightly less than one, and the
+difference between them is not recovered at all.
+
+For the given numbers, $2\ell^{2}\sigma_{m}^{2} = 0.08\,\mathrm{s^{2}}$ and $\sigma_{d}^{2}=0.01\,\mathrm{s^{2}}$,
+so $c=\sigma_{m}^{2}/9$: the posterior standard deviation along $(1,1)^{T}/\sqrt{2}$ is
+$\sigma_{m}/3 = 0.67\times10^{-3}\,\mathrm{s\,km^{-1}}$, and along $(1,-1)^{T}/\sqrt{2}$ it remains
+$2\times10^{-3}\,\mathrm{s\,km^{-1}}$. Explicitly,
+\begin{equation}
+    \mathbf{C}_{p} = \begin{pmatrix} 2.22 & -1.78 \\ -1.78 & 2.22 \end{pmatrix}\times10^{-6}\,\mathrm{s^{2}\,km^{-2}},
+    \label{eq:33}
+\end{equation}
+with marginal standard deviations $1.49\times10^{-3}\,\mathrm{s\,km^{-1}}$ for each block, a
+correlation coefficient of $-0.8$, and $\mathbf{R} = (8/9)\mathbf{P}_{\parallel}$. The damping parameter
+is $\lambda = \sigma_{d}^{2}/\sigma_{m}^{2} = 2500\,\mathrm{km^{2}}$, i.e.\ $\lambda/\ell^{2}=0.25$, and
+the posterior mean is $\mathbf{m}_{p} = (5.33, 5.33)\times10^{-3}\,\mathrm{s\,km^{-1}}$, corresponding to
+$\delta\alpha/\alpha=-4.3\,\%$ in each block. Note that each block's marginal uncertainty is reduced
+only modestly, from $2.0$ to $1.5\times10^{-3}\,\mathrm{s\,km^{-1}}$, even though their sum is known
+three times better than a priori: marginal error bars on individual parameters can badly
+misrepresent what has been learned when the posterior is strongly correlated.
+\end{solution}
+
+\begin{example}{Sensitivity along the ray}
+A ray passes through a homogeneous medium of velocity $v$. The velocity is perturbed by a small
+constant $\delta$ inside a sphere of radius $R$ whose centre lies on the ray. Evaluate the
+linearised delay time, and comment on how it depends on $R$. What happens when the centre of the
+sphere is displaced a distance $b$ perpendicular to the ray? Compare with the finite-frequency
+sensitivity kernels of Lecture~19.
+\end{example}
+
+\begin{solution}
+The linearised delay time is the integral along the unperturbed ray,
+\begin{equation}
+    \delta T = -\int_{\mathrm{ray}}\frac{\delta v}{v^{2}}\dd s.
+    \label{eq:34}
+\end{equation}
+The ray is a straight line through the centre of the sphere, so it intersects the sphere along a
+diameter, of length $2R$, on which $\delta v=\delta$, and vanishes elsewhere. Hence
+\begin{equation}
+    \delta T = -\frac{2R\,\delta}{v^{2}},
+    \label{eq:35}
+\end{equation}
+a fast anomaly ($\delta>0$) advancing the arrival and a slow one delaying it, as it should. For
+$v=8\,\mathrm{km\,s^{-1}}$, $R=50\,\mathrm{km}$ and a $1\,\%$ slow anomaly, $\delta=-0.08\,\mathrm{km\,s^{-1}}$,
+we obtain $\delta T = 0.125\,\mathrm{s}$, a typical size for a teleseismic P-wave delay.
+
+The delay time is proportional to $R$, the length of the ray inside the anomaly, and not to the
+volume $\tfrac{4}{3}\pi R^{3}$ of the anomaly: halving $R$ halves $\delta T$ but reduces the volume
+eightfold. This is the concrete meaning of the statement in the lecture that the functional
+derivative $DT(v)$ is a generalised function concentrated on the ray. If $DT(v)$ were an ordinary
+bounded function $K(\mathbf{x})$, then $\langle DT(v)|\delta v\rangle = \delta\int_{\mathrm{sphere}}K\dd^{3}\mathbf{x}$
+would be $O(R^{3})$ as $R\to0$, not $O(R)$. In the language of the block parameterisation, the
+sphere is a single basis function and $-2R/v^{2}$ is the corresponding element of $\mathbf{A}$.
+
+If the centre is displaced a distance $b$ from the ray, the ray cuts the sphere along a chord of
+length $2\sqrt{R^{2}-b^{2}}$ for $b<R$, and misses it entirely for $b>R$, so
+\begin{equation}
+    \delta T = \begin{cases} -\dfrac{2\sqrt{R^{2}-b^{2}}\,\delta}{v^{2}}, & b<R, \\[8pt] 0, & b\geq R. \end{cases}
+    \label{eq:36}
+\end{equation}
+For the numbers above and $b=30\,\mathrm{km}$ the delay is $0.100\,\mathrm{s}$, and for
+$b=80\,\mathrm{km}$ it is exactly zero. Ray theory therefore predicts that an anomaly is invisible to
+a ray that does not pass through it, however close it comes, and that the delay is largest when the
+ray passes through the centre. The finite-frequency kernels of Lecture~19 differ on both counts. They
+are non-zero throughout the first Fresnel zone, so an anomaly just off the ray still produces a
+delay, and they vanish on the ray itself, because a scatterer on the ray produces no phase delay
+relative to the direct wave. The two descriptions agree only when the anomaly is large compared with
+the width of the Fresnel zone, in which case the integral of the finite-frequency kernel over the
+anomaly reduces to the chord length and eq.~(\ref{eq:36}) is recovered. For a $50\,\mathrm{km}$
+anomaly and a $1\,\mathrm{Hz}$ teleseismic P-wave, whose Fresnel zone in the mantle is a few hundred
+kilometres wide, ray theory is already a rough guide.
+\end{solution}
+
+\end{document}

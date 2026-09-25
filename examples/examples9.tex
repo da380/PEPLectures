@@ -1,0 +1,417 @@
+\documentclass[a4paper,12pt]{paper}
+
+\usepackage{mycommands}
+
+% Worked-example layout: boxed problem statement followed by a solution.
+\newcounter{example}
+\renewenvironment{example}[1]{%
+  \refstepcounter{example}%
+  \begin{mdframed}[linewidth=1pt,innertopmargin=6pt,innerbottommargin=6pt]%
+  \noindent\textbf{Example \theexample: #1.}\ }{%
+  \end{mdframed}}
+\newenvironment{solution}{\par\noindent\textbf{Solution.}\ }{\par\medskip}
+
+\title{Worked examples for Lecture 20: Self-gravitation and rotation}
+\author{David Al-Attar \\ Michaelmas Term, \the\year}
+
+\begin{document}
+
+\maketitle
+
+\noindent These examples accompany Lecture~20. They are intended as practice in the concrete
+calculations that underlie the lecture, and are less demanding than the questions on the
+problem sets. Numerical results were checked with the scripts in the \texttt{python}
+directory. Throughout we take $G=6.674\times10^{-11}\,\mathrm{m^{3}\,kg^{-1}\,s^{-2}}$, and for the
+Earth a mass $M=5.97\times10^{24}\,\mathrm{kg}$, a mean radius $b=6371\,\mathrm{km}$ and a
+rotation rate $\Omega=7.29\times10^{-5}\,\mathrm{s^{-1}}$.
+
+\begin{example}{The homogeneous sphere}
+A sphere of radius $b$ has uniform density $\rho$ and total mass $M=\frac{4}{3}\pi\rho b^{3}$.
+Solve Poisson's equation to find the gravitational potential $\phi$ and acceleration $\mathbf{g}$
+inside and outside the sphere. Compute the gravitational binding energy $\mathcal{V}_{g}$ in two
+ways, using both expressions obtained in the lecture, and show that
+$\mathcal{V}_{g}=-\frac{3}{5}GM^{2}/b$. Evaluate the result for the Earth and compare it with the
+energy released by the largest earthquakes.
+\end{example}
+
+\begin{solution}
+We take the reference body to be the sphere itself, so that the motion is the identity, the spatial
+and referential densities coincide, and $\zeta=\phi$, $\bm{\gamma}=\mathbf{g}$. By symmetry $\phi$
+depends only on $r=\|\mathbf{x}\|$, and Poisson's equation $\nabla^{2}\phi=4\pi G\varrho$ reads
+\begin{equation}
+\frac{1}{r^{2}}\frac{\ddns}{\ddns r}\left(r^{2}\frac{\ddns\phi}{\ddns r}\right)=
+\begin{cases}
+4\pi G\rho, & r<b,\\
+0, & r>b.
+\end{cases}
+\label{eq:1}
+\end{equation}
+Integrating twice, the solution that is regular at the origin and tends to zero at infinity is
+\begin{equation}
+\phi(r)=
+\begin{cases}
+\frac{2}{3}\pi G\rho\,r^{2}+A, & r<b,\\
+-\frac{C}{r}, & r>b,
+\end{cases}
+\label{eq:2}
+\end{equation}
+with $A$ and $C$ constants. Since there are no surface masses, the lecture's continuity conditions
+require both $\phi$ and $g_{r}=-\frac{\ddns\phi}{\ddns r}$ to be continuous at $r=b$. Continuity of
+the radial derivative gives $\frac{4}{3}\pi G\rho b=C/b^{2}$, hence $C=\frac{4}{3}\pi G\rho b^{3}=GM$,
+while continuity of $\phi$ then gives $A=-GM/b-\frac{2}{3}\pi G\rho b^{2}=-GM/b-GM/(2b)$, where we have
+used $\rho=3M/(4\pi b^{3})$. Collecting terms,
+\begin{equation}
+\phi(r)=
+\begin{cases}
+-\dfrac{GM}{2b^{3}}\left(3b^{2}-r^{2}\right), & r\le b,\\[8pt]
+-\dfrac{GM}{r}, & r\ge b,
+\end{cases}
+\qquad
+g_{r}(r)=
+\begin{cases}
+-\dfrac{GM}{b^{3}}\,r=-\dfrac{4}{3}\pi G\rho\,r, & r\le b,\\[8pt]
+-\dfrac{GM}{r^{2}}, & r\ge b.
+\end{cases}
+\label{eq:3}
+\end{equation}
+The exterior field is that of a point mass $M$ at the origin, while inside the sphere the
+acceleration grows linearly with radius, as only the mass interior to $r$ contributes. The potential
+at the centre is $-\frac{3}{2}GM/b$, one and a half times its surface value.
+
+For the binding energy we first use the volume form $\mathcal{V}_{g}=\frac{1}{2}\int_{M_{t}}\varrho\phi\dd^{3}\mathbf{y}$
+from the lecture, where the integral extends only over the body. With $\dd^{3}\mathbf{y}=4\pi r^{2}\dd r$,
+\begin{equation}
+\begin{split}
+\mathcal{V}_{g}&=\frac{1}{2}\rho\int_{0}^{b}\left[-\frac{GM}{2b^{3}}\left(3b^{2}-r^{2}\right)\right]4\pi r^{2}\dd r\\
+&=-\frac{\pi\rho GM}{b^{3}}\left(b^{5}-\frac{b^{5}}{5}\right)=-\frac{4\pi\rho GMb^{2}}{5}=-\frac{3}{5}\frac{GM^{2}}{b},
+\end{split}
+\label{eq:4}
+\end{equation}
+where the last step again uses $\rho=3M/(4\pi b^{3})$. Next we use the field-energy form
+$\mathcal{V}_{g}=-\frac{1}{8\pi G}\int_{\mathbb{R}^{3}}\|\nabla\phi\|^{2}\dd^{3}\mathbf{y}$, for which
+the integral extends over all space. Here $\|\nabla\phi\|^{2}=g_{r}^{2}$, and
+\begin{equation}
+\begin{split}
+\int_{\mathbb{R}^{3}}\|\nabla\phi\|^{2}\dd^{3}\mathbf{y}
+&=4\pi\left(\frac{G^{2}M^{2}}{b^{6}}\int_{0}^{b}r^{4}\dd r+G^{2}M^{2}\int_{b}^{\infty}\frac{\dd r}{r^{2}}\right)\\
+&=4\pi G^{2}M^{2}\left(\frac{1}{5b}+\frac{1}{b}\right)=\frac{24\pi}{5}\frac{G^{2}M^{2}}{b},
+\end{split}
+\label{eq:5}
+\end{equation}
+so that
+\begin{equation}
+\mathcal{V}_{g}=-\frac{1}{8\pi G}\cdot\frac{24\pi}{5}\frac{G^{2}M^{2}}{b}=-\frac{3}{5}\frac{GM^{2}}{b},
+\label{eq:6}
+\end{equation}
+in agreement with eq.~(\ref{eq:4}). It is worth noticing how differently the two formulae distribute
+the same total: in eq.~(\ref{eq:5}) five sixths of the field energy resides \emph{outside} the sphere,
+whereas eq.~(\ref{eq:4}) has no exterior contribution at all. The two expressions differ by a
+divergence, and only their integrals agree.
+
+For the Earth, with the values quoted in the preamble, $GM^{2}/b=3.73\times10^{32}\,\mathrm{J}$ and hence
+\begin{equation}
+\mathcal{V}_{g}=-\frac{3}{5}\frac{GM^{2}}{b}\approx-2.24\times10^{32}\,\mathrm{J}.
+\label{eq:7}
+\end{equation}
+For comparison, the same data give a mean density $3M/(4\pi b^{3})\approx5510\,\mathrm{kg\,m^{-3}}$ and a
+surface gravity $GM/b^{2}\approx9.82\,\mathrm{m\,s^{-2}}$. The energy radiated by the largest recorded
+earthquakes, such as the 1960 Chile event, is of order $10^{18}$--$10^{19}\,\mathrm{J}$, so the
+gravitational binding energy exceeds the energy of the largest earthquake by a factor of
+$10^{13}$--$10^{14}$. Because the real Earth's mass is concentrated towards its centre, the true
+binding energy is somewhat larger in magnitude than the homogeneous estimate. The comparison makes
+plain why gravity cannot be ignored in the long-period dynamics: even a minute fractional change in
+the gravitational energy is enormous on the scale of seismic energies.
+\end{solution}
+
+\begin{example}{Referential gravity under a rigid motion}
+Let $\bphi$ be a motion of the body, and let $\tilde{\bphi}=\mathbf{a}+\mathbf{Q}\bphi$ be the motion
+obtained by composing it with a rigid translation $\mathbf{a}$ and rotation $\mathbf{Q}$ (so that
+$Q_{ki}Q_{kj}=\delta_{ij}$). Show directly from the integral expressions of the lecture that the
+referential gravitational potential is unchanged, $\tilde{\zeta}=\zeta$, while the referential
+gravitational acceleration transforms as $\tilde{\gamma}_{i}=Q_{ij}\gamma_{j}$. Comment on the
+significance of these results for the Lagrangian and for the equations of motion in a rotating frame.
+\end{example}
+
+\begin{solution}
+The referential potential is given in the lecture by
+\begin{equation}
+\zeta(\mathbf{x},t)=-G\int_{M}\frac{\rho(\mathbf{x}')}{\|\bphi(\mathbf{x},t)-\bphi(\mathbf{x}',t)\|}\dd^{3}\mathbf{x}',
+\label{eq:8}
+\end{equation}
+and depends on the motion only through the separation $\bphi(\mathbf{x},t)-\bphi(\mathbf{x}',t)$
+of pairs of material points. Under the rigid motion this separation becomes
+\begin{equation}
+\tilde{\bphi}(\mathbf{x},t)-\tilde{\bphi}(\mathbf{x}',t)
+=\mathbf{a}+\mathbf{Q}\bphi(\mathbf{x},t)-\mathbf{a}-\mathbf{Q}\bphi(\mathbf{x}',t)
+=\mathbf{Q}\left[\bphi(\mathbf{x},t)-\bphi(\mathbf{x}',t)\right],
+\label{eq:9}
+\end{equation}
+so the translation cancels identically. Writing $\mathbf{d}=\bphi(\mathbf{x},t)-\bphi(\mathbf{x}',t)$,
+orthogonality of $\mathbf{Q}$ gives
+\begin{equation}
+\|\mathbf{Q}\mathbf{d}\|^{2}=Q_{ki}d_{i}Q_{kj}d_{j}=\delta_{ij}d_{i}d_{j}=\|\mathbf{d}\|^{2},
+\label{eq:10}
+\end{equation}
+and hence every denominator in eq.~(\ref{eq:8}) is unchanged. The referential density $\rho(\mathbf{x}')$
+is a property of the reference body and does not depend on the motion at all. It follows at once that
+$\tilde{\zeta}(\mathbf{x},t)=\zeta(\mathbf{x},t)$.
+
+The referential acceleration is
+\begin{equation}
+\gamma_{i}(\mathbf{x},t)=-G\int_{M}\frac{\rho(\mathbf{x}')d_{i}}{\|\mathbf{d}\|^{3}}\dd^{3}\mathbf{x}',
+\label{eq:11}
+\end{equation}
+with $\mathbf{d}$ as above. Under the rigid motion $d_{i}\rightarrow Q_{ij}d_{j}$ in the numerator
+while, by eq.~(\ref{eq:10}), the denominator is unchanged. Since $\mathbf{Q}$ does not depend on
+$\mathbf{x}'$ it can be taken outside the integral, and so
+\begin{equation}
+\tilde{\gamma}_{i}(\mathbf{x},t)=-G\int_{M}\frac{\rho(\mathbf{x}')Q_{ij}d_{j}}{\|\mathbf{d}\|^{3}}\dd^{3}\mathbf{x}'
+=Q_{ij}\gamma_{j}(\mathbf{x},t),
+\label{eq:12}
+\end{equation}
+as required.
+
+The same conclusions can be reached from the spatial description. If the spatial density of the
+original motion is $\varrho(\mathbf{y},t)$, that of the rigidly moved body is
+$\tilde{\varrho}(\mathbf{y},t)=\varrho[\mathbf{Q}^{\mathrm{T}}(\mathbf{y}-\mathbf{a}),t]$, and because
+the Laplacian is invariant under rigid motions the solution of Poisson's equation is simply carried
+along, $\tilde{\phi}(\mathbf{y},t)=\phi[\mathbf{Q}^{\mathrm{T}}(\mathbf{y}-\mathbf{a}),t]$.
+Evaluating at $\mathbf{y}=\tilde{\bphi}(\mathbf{x},t)$ gives
+$\tilde{\zeta}(\mathbf{x},t)=\phi[\bphi(\mathbf{x},t),t]=\zeta(\mathbf{x},t)$, while the chain rule
+applied to $\tilde{g}_{i}=-\partial\tilde{\phi}/\partial y_{i}$ produces the factor $Q_{ij}$.
+
+Two consequences are worth drawing out. First, the gravitational binding energy
+$\mathcal{V}_{g}=\frac{1}{2}\int_{M}\rho\zeta\dd^{3}\mathbf{x}$ is unchanged by a rigid motion.
+The Lagrangian of the lecture is therefore frame indifferent in the same sense as the elastic strain
+energy, which is essential if the equations of motion are to be physically meaningful. Second,
+taking $\mathbf{a}=\bm{\Phi}(t)$ and $\mathbf{Q}=\mathbf{R}(t)$ to be the translation and rotation
+introduced in the lecture for the co-rotating frame, eq.~(\ref{eq:12}) is precisely the identity
+$\gamma_{i}=R_{ij}\overline{\gamma}_{j}$ used there, with $\overline{\bm{\gamma}}$ computed from the
+relative motion $\overline{\bphi}$. Gravity, unlike the inertial terms, is oblivious to the rotation
+of the frame; it is only the acceleration that acquires Coriolis and centrifugal contributions.
+\end{solution}
+
+\begin{example}{A steadily rotating frame}
+Let $\mathbf{R}(t)$ be the rotation through angle $\Omega t$ about the $\hat{\mathbf{e}}_{3}$ axis.
+Compute the matrix $R_{kj}\frac{\ddns R_{kl}}{\ddns t}$, verify that it is anti-symmetric, and use the
+lecture's relation $R_{kj}\frac{\ddns R_{kl}}{\ddns t}=\epsilon_{jml}\Omega_{m}$ to identify the angular
+velocity vector $\bm{\Omega}$. Write out the Coriolis and centrifugal accelerations in components.
+Show that the centrifugal acceleration $\epsilon_{ijk}\epsilon_{klm}\Omega_{j}\Omega_{l}x_{m}$ is
+the gradient of $\psi=-\frac{1}{2}\Omega^{2}(x_{1}^{2}+x_{2}^{2})$, and check this against the
+general expression $\psi=\frac{1}{2}(\Omega_{i}\Omega_{j}-\Omega_{k}\Omega_{k}\delta_{ij})x_{i}x_{j}$
+valid for an arbitrary rotation vector. Evaluate the centrifugal acceleration at the Earth's equator.
+\end{example}
+
+\begin{solution}
+Writing $c=\cos\Omega t$ and $s=\sin\Omega t$, the rotation matrix and its time derivative are
+\begin{equation}
+\mathbf{R}(t)=\begin{pmatrix}c&-s&0\\ s&c&0\\ 0&0&1\end{pmatrix},\qquad
+\frac{\ddns\mathbf{R}}{\ddns t}=\Omega\begin{pmatrix}-s&-c&0\\ c&-s&0\\ 0&0&0\end{pmatrix}.
+\label{eq:13}
+\end{equation}
+The quantity $R_{kj}\frac{\ddns R_{kl}}{\ddns t}$ is the $(j,l)$ element of
+$\mathbf{R}^{\mathrm{T}}\frac{\ddns\mathbf{R}}{\ddns t}$, and multiplying out,
+\begin{equation}
+\begin{split}
+\mathbf{R}^{\mathrm{T}}\frac{\ddns\mathbf{R}}{\ddns t}
+&=\Omega\begin{pmatrix}c&s&0\\ -s&c&0\\ 0&0&1\end{pmatrix}
+\begin{pmatrix}-s&-c&0\\ c&-s&0\\ 0&0&0\end{pmatrix}\\
+&=\Omega\begin{pmatrix}-cs+sc&-c^{2}-s^{2}&0\\ s^{2}+c^{2}&sc-cs&0\\ 0&0&0\end{pmatrix}
+=\begin{pmatrix}0&-\Omega&0\\ \Omega&0&0\\ 0&0&0\end{pmatrix},
+\end{split}
+\label{eq:14}
+\end{equation}
+which is manifestly anti-symmetric and, notably, independent of time. To identify $\bm{\Omega}$ we
+compare with $\epsilon_{jml}\Omega_{m}$. Taking $(j,l)=(1,2)$ gives
+$\epsilon_{1m2}\Omega_{m}=\epsilon_{132}\Omega_{3}=-\Omega_{3}$, which must equal $-\Omega$, while
+$(j,l)=(2,3)$ gives $\epsilon_{2m3}\Omega_{m}=\Omega_{1}=0$ and $(j,l)=(3,1)$ gives $\Omega_{2}=0$.
+Hence $\bm{\Omega}=\Omega\hat{\mathbf{e}}_{3}$, as expected for a rotation about the third axis. More
+generally, contracting the lecture's relation with $\epsilon_{jnl}$ and using
+$\epsilon_{jml}\epsilon_{jnl}=2\delta_{mn}$ gives the explicit formula
+\begin{equation}
+\Omega_{n}=\frac{1}{2}\epsilon_{jnl}R_{kj}\frac{\ddns R_{kl}}{\ddns t},
+\label{eq:15}
+\end{equation}
+which recovers the angular velocity from any rotation history $\mathbf{R}(t)$.
+
+With $\bm{\Omega}=\Omega\hat{\mathbf{e}}_{3}$ the Coriolis acceleration $2\epsilon_{ijk}\Omega_{j}\overline{v}_{k}$
+is $2\bm{\Omega}\times\overline{\mathbf{v}}$, with components
+\begin{equation}
+2\epsilon_{ijk}\Omega_{j}\overline{v}_{k}=2\Omega\left(-\overline{v}_{2},\,\overline{v}_{1},\,0\right),
+\label{eq:16}
+\end{equation}
+so it is perpendicular to both the rotation axis and the relative velocity, and vanishes for motion
+parallel to the axis. For the centrifugal term we use the identity
+$\epsilon_{ijk}\epsilon_{klm}=\delta_{il}\delta_{jm}-\delta_{im}\delta_{jl}$ to write
+\begin{equation}
+\epsilon_{ijk}\epsilon_{klm}\Omega_{j}\Omega_{l}x_{m}=\Omega_{i}\Omega_{j}x_{j}-\Omega_{j}\Omega_{j}x_{i}
+=\left[\bm{\Omega}\times(\bm{\Omega}\times\mathbf{x})\right]_{i},
+\label{eq:17}
+\end{equation}
+and for $\bm{\Omega}=\Omega\hat{\mathbf{e}}_{3}$ this is
+\begin{equation}
+\epsilon_{ijk}\epsilon_{klm}\Omega_{j}\Omega_{l}x_{m}=\Omega^{2}\left(0,0,x_{3}\right)-\Omega^{2}\left(x_{1},x_{2},x_{3}\right)
+=-\Omega^{2}\left(x_{1},\,x_{2},\,0\right),
+\label{eq:18}
+\end{equation}
+which points towards the rotation axis with magnitude $\Omega^{2}$ times the distance from it.
+
+Now let $\psi=-\frac{1}{2}\Omega^{2}(x_{1}^{2}+x_{2}^{2})$. Its gradient is
+$\nabla\psi=-\Omega^{2}(x_{1},x_{2},0)$, which by eq.~(\ref{eq:18}) is exactly the centrifugal
+acceleration. Thus the term appearing on the left-hand side of the lecture's equations of motion is
+$\rho\,\partial\psi/\partial x_{i}$, and when it is carried to the right-hand side it becomes the
+centrifugal body force $-\rho\,\partial\psi/\partial x_{i}$ per unit volume, directed away from the axis;
+$\psi$ is the \textbf{centrifugal potential}. To check the general formula, differentiate
+$\psi=\frac{1}{2}(\Omega_{i}\Omega_{j}-\Omega_{k}\Omega_{k}\delta_{ij})x_{i}x_{j}$, noting that the
+coefficient matrix is symmetric, to find
+\begin{equation}
+\frac{\partial\psi}{\partial x_{i}}=\left(\Omega_{i}\Omega_{j}-\Omega_{k}\Omega_{k}\delta_{ij}\right)x_{j}
+=\Omega_{i}\Omega_{j}x_{j}-\Omega_{k}\Omega_{k}x_{i},
+\label{eq:19}
+\end{equation}
+which is eq.~(\ref{eq:17}). Substituting $\bm{\Omega}=\Omega\hat{\mathbf{e}}_{3}$ into the general
+formula gives
+\begin{equation}
+\psi=\frac{1}{2}\left[\Omega^{2}x_{3}^{2}-\Omega^{2}(x_{1}^{2}+x_{2}^{2}+x_{3}^{2})\right]
+=-\frac{1}{2}\Omega^{2}(x_{1}^{2}+x_{2}^{2}),
+\label{eq:20}
+\end{equation}
+in agreement with the special case. Note that
+$\nabla^{2}\psi=-2\Omega^{2}\neq0$, so unlike the gravitational potential in free space the centrifugal
+potential is not harmonic.
+
+At the equator the distance from the axis is $b$, and the centrifugal acceleration has magnitude
+\begin{equation}
+\Omega^{2}b=(7.29\times10^{-5})^{2}\times6.371\times10^{6}\,\mathrm{m\,s^{-2}}\approx3.39\times10^{-2}\,\mathrm{m\,s^{-2}},
+\label{eq:21}
+\end{equation}
+which is $\Omega^{2}b^{3}/GM\approx3.4\times10^{-3}$, or about one part in $290$, of the surface gravity found
+in Example~1. This small ratio is what permits the Earth's equilibrium figure to be treated as a
+slightly flattened sphere in the following lecture, where the centrifugal and gravitational potentials
+are combined into a single geopotential.
+\end{solution}
+
+\begin{example}{Scaling analysis with numbers}
+Using the order-of-magnitude estimates of the lecture, with $\overline{\rho}=5000\,\mathrm{kg\,m^{-3}}$
+and $\overline{v}=8000\,\mathrm{m\,s^{-1}}$ as typical density and wave speed, evaluate the ratio of
+gravitational to elastic forces, the ratio $\Omega T$ of Coriolis to inertial terms, and the ratio of
+centrifugal to inertial terms, for (a) a $1\,\mathrm{Hz}$ body wave with $L\sim10\,\mathrm{km}$; (b) a
+$100\,\mathrm{s}$ surface wave with $L\sim400\,\mathrm{km}$; and (c) the gravest spheroidal mode
+$_{0}S_{2}$, with period $54\,\mathrm{min}$ and $L\sim b$. Tabulate the results and state where gravity
+and rotation matter.
+\end{example}
+
+\begin{solution}
+From the lecture, the ratios of the various terms in the linearised equations of motion to the
+elastic and inertial terms are
+\begin{equation}
+\frac{\text{gravitational}}{\text{elastic}}=\frac{4\pi G\overline{\rho}L^{2}}{\overline{v}^{2}},\quad
+\frac{\text{Coriolis}}{\text{inertial}}=\Omega T,\quad
+\frac{\text{centrifugal}}{\text{inertial}}=\frac{2\overline{\rho}\Omega^{2}U}{\overline{\rho}U/T^{2}}=2(\Omega T)^{2},
+\label{eq:22}
+\end{equation}
+where the final ratio follows from the lecture's estimate $2\overline{\rho}\Omega^{2}U$ for the
+centrifugal term; the factor of two is an upper bound, attained when $\mathbf{u}$ is perpendicular to
+$\bm{\Omega}$, and is of no consequence in an order-of-magnitude argument. It is convenient to note the
+combination
+\begin{equation}
+4\pi G\overline{\rho}=4\pi\times6.674\times10^{-11}\times5000\,\mathrm{s^{-2}}=4.19\times10^{-6}\,\mathrm{s^{-2}},
+\label{eq:23}
+\end{equation}
+so that the gravitational ratio is $(L/L_{g})^{2}$ with
+$L_{g}=\overline{v}/\sqrt{4\pi G\overline{\rho}}\approx3900\,\mathrm{km}$, while the rotational ratios
+involve $T$ compared with $\Omega^{-1}\approx1.37\times10^{4}\,\mathrm{s}\approx3.8\,\mathrm{h}$.
+Substituting the three sets of values gives the following table.
+\begin{center}
+\small
+\begin{tabular}{lccccc}
+\hline
+Case & $T$ (s) & $L$ (km) & grav./elastic & $\Omega T$ & $2(\Omega T)^{2}$ \\
+\hline
+(a) body wave & $1$ & $10$ & $6.55\times10^{-6}$ & $7.29\times10^{-5}$ & $1.06\times10^{-8}$ \\
+(b) surface wave & $100$ & $400$ & $1.05\times10^{-2}$ & $7.29\times10^{-3}$ & $1.06\times10^{-4}$ \\
+(c) $_{0}S_{2}$ & $3240$ & $6371$ & $2.66$ & $0.236$ & $0.112$ \\
+\hline
+\end{tabular}
+\end{center}
+For the body wave every correction is utterly negligible: gravity enters at the level of a few parts
+per million and rotation at the level of one part in $10^{4}$ or below, so the elastodynamics of the
+earlier lectures is exact for all practical purposes. For the $100\,\mathrm{s}$ surface wave the
+gravitational correction has grown to about one per cent, as expected from the $L^{2}$ scaling,
+and although still small it is comparable to the fractional variations in wave speed that surface-wave
+tomography seeks to resolve, so gravity is routinely included in surface-wave calculations at these
+periods. Rotation, by contrast, remains below one per cent. For $_{0}S_{2}$ the gravitational ratio is
+of order unity -- this is the lecture's estimate of about $3$ -- and gravity is as important as
+elasticity; indeed, the restoring force for this mode is largely gravitational. The Coriolis ratio
+$\Omega T\approx0.24$ is no longer small, and it is responsible for the observable splitting of the
+gravest modes into multiplets. The centrifugal ratio $2(\Omega T)^{2}\approx0.1$ is smaller but not
+negligible at this period.
+
+The table illustrates the general conclusion of the lecture. Gravity matters for deformations whose
+length scale approaches $L_{g}$ of a few thousand kilometres, which for seismic waves means periods of
+several hundred seconds and longer, while rotation matters for time scales that approach
+$\Omega^{-1}$, i.e.\ for the longest-period normal modes, and is dominant only for phenomena such as
+tides with periods comparable to a day.
+\end{solution}
+
+\begin{example}{Linearised gravitational acceleration for rigid displacements}
+The lecture gives the first-order perturbation to the referential gravitational acceleration as
+\begin{equation}
+\gamma_{i}^{1}=-G\int_{M}\rho'\left(\frac{\delta_{ij}}{\|\mathbf{x}-\mathbf{x}'\|^{3}}-
+\frac{3(x_{i}-x_{i}')(x_{j}-x_{j}')}{\|\mathbf{x}-\mathbf{x}'\|^{5}}\right)(u_{j}-u_{j}')\dd^{3}\mathbf{x}'.
+\label{eq:24}
+\end{equation}
+Show that a rigid translation $\mathbf{u}=\mathbf{u}_{0}$ gives $\bm{\gamma}^{1}=\mathbf{0}$, and
+that an infinitesimal rigid rotation $\mathbf{u}=\bm{\theta}\times\mathbf{x}$, with $\bm{\theta}$ a
+constant vector, gives $\bm{\gamma}^{1}=\bm{\theta}\times\bm{\gamma}^{0}$, where $\bm{\gamma}^{0}$
+is the equilibrium referential acceleration. Explain why both results are to be expected.
+\end{example}
+
+\begin{solution}
+For the translation, $u_{j}-u_{j}'=u_{0j}-u_{0j}=0$ for every pair of points, so the integrand in
+eq.~(\ref{eq:24}) vanishes identically and $\bm{\gamma}^{1}=\mathbf{0}$. Nothing needs to be assumed
+about the density or the shape of the body. Physically, $\gamma_{i}(\mathbf{x},t)=g_{i}[\bphi(\mathbf{x},t),t]$
+is the acceleration felt by the material particle labelled $\mathbf{x}$. Translating the whole body
+translates its gravitational field along with it, and each particle continues to feel exactly the
+field it felt before; only in the spatial description, at fixed $\mathbf{y}$, does the field change.
+This is the linearised form of the translational invariance established in Example~2.
+
+For the rotation write $\mathbf{r}=\mathbf{x}-\mathbf{x}'$ and $r=\|\mathbf{r}\|$. Then
+\begin{equation}
+u_{j}-u_{j}'=\epsilon_{jkl}\theta_{k}(x_{l}-x_{l}')=\epsilon_{jkl}\theta_{k}r_{l}=(\bm{\theta}\times\mathbf{r})_{j},
+\label{eq:25}
+\end{equation}
+which is perpendicular to $\mathbf{r}$. Contracting with the kernel in eq.~(\ref{eq:24}),
+\begin{equation}
+\left(\frac{\delta_{ij}}{r^{3}}-\frac{3r_{i}r_{j}}{r^{5}}\right)(\bm{\theta}\times\mathbf{r})_{j}
+=\frac{(\bm{\theta}\times\mathbf{r})_{i}}{r^{3}}-\frac{3r_{i}\,\mathbf{r}\cdot(\bm{\theta}\times\mathbf{r})}{r^{5}}
+=\frac{(\bm{\theta}\times\mathbf{r})_{i}}{r^{3}},
+\label{eq:26}
+\end{equation}
+because $\mathbf{r}\cdot(\bm{\theta}\times\mathbf{r})=0$. The second, traceless part of the kernel
+therefore contributes nothing, and
+\begin{equation}
+\gamma_{i}^{1}=-G\int_{M}\rho'\frac{\epsilon_{ikl}\theta_{k}r_{l}}{r^{3}}\dd^{3}\mathbf{x}'
+=\epsilon_{ikl}\theta_{k}\left(-G\int_{M}\rho'\frac{x_{l}-x_{l}'}{\|\mathbf{x}-\mathbf{x}'\|^{3}}\dd^{3}\mathbf{x}'\right)
+=\epsilon_{ikl}\theta_{k}\gamma_{l}^{0},
+\label{eq:27}
+\end{equation}
+where the bracketed integral is the equilibrium referential acceleration obtained by setting
+$\bphi(\mathbf{x})=\mathbf{x}$ in the lecture's integral formula. That is, $\bm{\gamma}^{1}=\bm{\theta}\times\bm{\gamma}^{0}$.
+
+This too is what Example~2 predicts. A finite rotation $\mathbf{Q}$ transforms the referential
+acceleration as $\bm{\gamma}\rightarrow\mathbf{Q}\bm{\gamma}$, and for an infinitesimal rotation
+$Q_{ij}=\delta_{ij}+s\,\epsilon_{ikj}\theta_{k}+O(s^{2})$, corresponding to the motion
+$\varphi_{i}=x_{i}+s\,\epsilon_{ikj}\theta_{k}x_{j}+O(s^{2})$, so that
+$\gamma_{i}=\gamma_{i}^{0}+s\,\epsilon_{ikj}\theta_{k}\gamma_{j}^{0}+O(s^{2})$; the first-order term is exactly
+eq.~(\ref{eq:27}). The gravitational field is rigidly rotated with the body, and each particle feels
+the rotated field. In the non-rotating case, Example~2 shows that a rigid motion of an equilibrium
+configuration is again an equilibrium configuration, so rigid translations and rotations must be
+zero-frequency solutions of the linearised equations of motion; the two calculations here are the
+gravitational part of that statement, and the remaining terms must conspire in the same way. When the
+frame rotates the argument no longer applies as it stands, because the centrifugal term
+$\epsilon_{ijk}\epsilon_{klm}\Omega_{j}\Omega_{l}u_{m}$ does not vanish for a rigid translation
+transverse to the axis, and the rigid-body modes of a rotating planet require separate treatment.
+\end{solution}
+
+\end{document}

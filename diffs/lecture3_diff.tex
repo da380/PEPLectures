@@ -1,0 +1,487 @@
+\documentclass [a4paper,12pt]{paper}
+%DIF LATEXDIFF DIFFERENCE FILE
+%DIF DEL lecture3.tex             Wed Oct 29 04:34:40 2025
+%DIF ADD diffs/lecture3_new.tex   Fri Sep 25 09:46:48 2026
+
+\usepackage{mycommands}
+
+\title{Lecture 14: Seismic sources}
+\author{David Al-Attar \\ Michaelmas Term, \the\year}
+%DIF PREAMBLE EXTENSION ADDED BY LATEXDIFF
+%DIF UNDERLINE PREAMBLE %DIF PREAMBLE
+\RequirePackage[normalem]{ulem} %DIF PREAMBLE
+\RequirePackage{color}\definecolor{RED}{rgb}{1,0,0}\definecolor{BLUE}{rgb}{0,0,1} %DIF PREAMBLE
+\providecommand{\DIFadd}[1]{{\protect\color{blue}\uwave{#1}}} %DIF PREAMBLE
+\providecommand{\DIFdel}[1]{{\protect\color{red}\sout{#1}}}                      %DIF PREAMBLE
+%DIF SAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddbegin}{} %DIF PREAMBLE
+\providecommand{\DIFaddend}{} %DIF PREAMBLE
+\providecommand{\DIFdelbegin}{} %DIF PREAMBLE
+\providecommand{\DIFdelend}{} %DIF PREAMBLE
+\providecommand{\DIFmodbegin}{} %DIF PREAMBLE
+\providecommand{\DIFmodend}{} %DIF PREAMBLE
+%DIF FLOATSAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddFL}[1]{\DIFadd{#1}} %DIF PREAMBLE
+\providecommand{\DIFdelFL}[1]{\DIFdel{#1}} %DIF PREAMBLE
+\providecommand{\DIFaddbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFaddendFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelendFL}{} %DIF PREAMBLE
+%DIF COLORLISTINGS PREAMBLE %DIF PREAMBLE
+\RequirePackage{listings} %DIF PREAMBLE
+\RequirePackage{color} %DIF PREAMBLE
+\lstdefinelanguage{DIFcode}{ %DIF PREAMBLE
+%DIF DIFCODE_UNDERLINE %DIF PREAMBLE
+  moredelim=[il][\color{red}\sout]{\%DIF\ <\ }, %DIF PREAMBLE
+  moredelim=[il][\color{blue}\uwave]{\%DIF\ >\ } %DIF PREAMBLE
+} %DIF PREAMBLE
+\lstdefinestyle{DIFverbatimstyle}{ %DIF PREAMBLE
+	language=DIFcode, %DIF PREAMBLE
+	basicstyle=\ttfamily, %DIF PREAMBLE
+	columns=fullflexible, %DIF PREAMBLE
+	keepspaces=true %DIF PREAMBLE
+} %DIF PREAMBLE
+\lstnewenvironment{DIFverbatim}{\lstset{style=DIFverbatimstyle}}{} %DIF PREAMBLE
+\lstnewenvironment{DIFverbatim*}{\lstset{style=DIFverbatimstyle,showspaces=true}}{} %DIF PREAMBLE
+%DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
+
+\begin{document}
+
+\maketitle
+\DIFdelbegin %DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdelend \section*{Outline and motivation}
+
+We now turn our attention to the generation of seismic waves during an \textbf{earthquake}. In doing so, we see 
+immediately that our equations of motion imply that earthquakes cannot happen. \DIFdelbegin \DIFdel{To rectify things, 
+we will not produce }\DIFdelend \DIFaddbegin \DIFadd{We will not attempt to rectify this by 
+producing }\DIFaddend a complete \textbf{dynamical theory} for earthquakes\DIFaddbegin \DIFadd{, }\DIFaddend as no such theory yet exists. Instead, we 
+\DIFdelbegin \DIFdel{just seek to }\DIFdelend \DIFaddbegin \DIFadd{simply }\DIFaddend modify our equations in a \textbf{phenomenological} manner to account for a specified displacement 
+across a \textbf{fault}. Because this displacement is regarded as a parameter and not as a dynamic variable, 
+this approach is known as the \textbf{kinematic source approximation}. The resulting theory has been found to work very 
+well in practice, and it allows us to set up an \textbf{inverse problem} to determine the displacement across the 
+fault from recorded seismic waves. In the final part of the lecture we begin to think more about inverse 
+problems, this being a topic we will return to throughout these lectures.
+
+\section*{The elastic rebound theory for earthquakes}
+
+\begin{figure}[ht]
+    \centering     
+     \DIFdelbeginFL %DIFDELCMD < \includegraphics[width=0.7\textwidth]{figures/L3F1.png} 
+%DIFDELCMD <     %%%
+\DIFdelendFL \DIFaddbeginFL \includegraphics[width=0.7\textwidth]{figures/L3F1.pdf} 
+    \DIFaddendFL \caption{A schematic diagram of a fault. You do not need to learn the associated terminology.}
+    \label{fig:1}
+\end{figure}
+
+The majority of natural earthquakes occur due to motion across \textbf{faults} within the Earth \DIFaddbegin \DIFadd{(see Fig.~\ref{fig:1})}\DIFaddend , with this motion resulting from the
+slow \DIFdelbegin \DIFdel{build up}\DIFdelend \DIFaddbegin \DIFadd{build-up}\DIFaddend , and then rapid release, of energy accumulated during long-term tectonic deformation. This long-term
+deformation is associated with processes such as mantle convection and plate tectonics. Indeed, most earthquakes occur at or 
+near plate boundaries, and the type of motion across the fault is determined broadly by the plate tectonic setting. 
+The exceptions to this picture are (i) earthquakes associated with motion of fluids within volcanic systems and (ii) deep earthquakes 
+occurring within subducted slabs whose cause remains uncertain\DIFdelbegin \footnote{\DIFdel{At these depths it is thought that 
+rocks will be too hot to undergo brittle failure, and so the process must seemingly be different than for shallow earthquakes. 
+In terms of the seismic waves generated, however, there is little to distinguish deep earthquakes from shallower 
+ones caused by brittle failure.}}%DIFAUXCMD
+\addtocounter{footnote}{-1}%DIFAUXCMD
+\DIFdel{.}\DIFdelend \DIFaddbegin \DIFadd{.}\footnote{\DIFadd{At these depths it is thought that 
+rocks will be too hot to undergo brittle failure, and so the process must seemingly be different from that for shallow earthquakes. 
+In terms of the seismic waves generated, however, there is little to distinguish deep earthquakes from shallower 
+ones caused by brittle failure.}} \DIFaddend There are also man-made earthquakes, including nuclear weapon tests, \DIFdelbegin \DIFdel{and }\DIFdelend explosions generated 
+as part of oil prospecting, and small\footnote{But sometimes still quite damaging.} earthquakes associated with fracking or extraction of natural gas.
+
+The idea that earthquakes are produced by rapid motion across a fault was formulated by Harry Fielding Reid (\DIFdelbegin \DIFdel{1859-1944}\DIFdelend \DIFaddbegin \DIFadd{1859--1944}\DIFaddend ) following
+a large earthquake in San Francisco in 1906. Based on 
+observations around San Francisco, Reid arrived at his \textbf{elastic rebound theory} as summarised in \DIFdelbegin \DIFdel{fig.2}\DIFdelend \DIFaddbegin \DIFadd{Fig.~\ref{fig:2}}\DIFaddend . Prior 
+to the earthquake, deformation is gradually built up on either 
+side of the locked fault due to tectonic processes, and this stores energy within the system. At some point, the tractions across 
+the fault become sufficiently large to overcome 
+frictional resistance, rupture occurs rapidly, and seismic waves radiate away some of the stored energy.
+
+While this \DIFdelbegin \DIFdel{"theory" }\DIFdelend \DIFaddbegin \DIFadd{``theory'' }\DIFaddend is light on details, it is surely correct in a broad sense, 
+and subsequent work has tried to make things more precise. Key questions include: (i) the nature of frictional resistance on 
+the fault, (ii) the conditions under which rupture will occur,
+and (iii) the factors that determine when rupture stops. Why, for example, are some earthquakes on the same fault small and others big? 
+Such work also informs ideas about earthquake predictability, though the consensus in the field is that earthquakes are 
+a so-called \textbf{critical \DIFdelbegin \DIFdel{phenomena}\DIFdelend \DIFaddbegin \DIFadd{phenomenon}\DIFaddend }, with the size of a particular earthquake being so sensitive to initial 
+conditions that meaningful predictions are impossible. 
+The physics of earthquakes is a large and difficult 
+subject, about which much remains to be learned. In this course, however, we will approximate the full physics by regarding 
+the motion on the fault as simply a parameter within the theory, and calculate the seismic waves generated. Within 
+this \textbf{kinematic source approximation}, any interaction between the radiated waves and rupture propagation 
+is neglected, but it is thought that this is a good approximation in most circumstances.
+
+\begin{figure}[ht]
+    \centering    
+     \DIFdelbeginFL %DIFDELCMD < \includegraphics[width=0.7\textwidth]{figures/L3F2.png} 
+%DIFDELCMD <     %%%
+\DIFdelendFL \DIFaddbeginFL \includegraphics[width=0.7\textwidth]{figures/L3F2.pdf} 
+    \DIFaddendFL \caption{A graphical representation of Reid's elastic rebound theory.}
+    \label{fig:2}
+\end{figure}
+
+\section*{Introduction of the stress glut}
+
+Our aim is to incorporate motion on a fault into the equations of motion for an elastic body. To do this, we will 
+actually take a more general, and yet ultimately simpler, approach. Returning to the material of Lecture\DIFdelbegin \DIFdel{12}\DIFdelend \DIFaddbegin \DIFadd{~13}\DIFaddend , we introduced the Lagrangian density
+\DIFdelbegin \begin{displaymath}
+\DIFdel{\mathcal{L}(\mathbf{x}, t, \boldsymbol{\varphi}, \mathbf{v}, \mathbf{F}) = \frac{1}{2}\rho(\mathbf{x})||\mathbf{v}||^2 - W(\mathbf{x}, \mathbf{F}),
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}\DIFadd{\label{eq:1}
+\mathcal{L}(\mathbf{x}, t, \bphi, \mathbf{v}, \mathbf{F}) = \frac{1}{2}\rho(\mathbf{x})\|\mathbf{v}\|^2 - W(\mathbf{x}, \mathbf{F}),
+}\end{equation}\DIFaddend 
+for the finite motion of a hyperelastic body, while the associated action is
+\DIFdelbegin \begin{displaymath}
+\DIFdel{\mathcal{S}(\boldsymbol{\varphi}) = \int_{0}^{T}\int_{M}\mathcal{L}[\mathbf{x}, t, \boldsymbol{\varphi}(\mathbf{x}, t), \mathbf{v}(\mathbf{x}, t), \mathbf{F}(\mathbf{x}, t)]\dd^{3}\mathbf{x}\dd t,
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}\DIFadd{\label{eq:2}
+\mathcal{S}(\bphi) = \int_{0}^{T}\int_{M}\mathcal{L}[\mathbf{x}, t, \bphi(\mathbf{x}, t), \mathbf{v}(\mathbf{x}, t), \mathbf{F}(\mathbf{x}, t)]\dd^{3}\mathbf{x}\dd t,
+}\end{equation}\DIFaddend 
+where $[0, T]$ is the \DIFdelbegin \DIFdel{time-interval }\DIFdelend \DIFaddbegin \DIFadd{time interval }\DIFaddend of interest. From the resulting equations of motion it \DIFdelbegin \DIFdel{is readily shown }\DIFdelend \DIFaddbegin \DIFadd{can be shown (and you will do so in the first problem set) }\DIFaddend that the 
+\textbf{total energy} of the elastic body is conserved\DIFdelbegin \begin{displaymath}
+\DIFdel{\frac{\ddns}{\ddns t}\int_{M}E(\mathbf{x}, t)\dd^{3}\mathbf{x} = 0,
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \DIFadd{,
+}\begin{equation}\DIFadd{\label{eq:3}
+\frac{\ddns}{\ddns t}\int_{M}E(\mathbf{x}, t)\dd^{3}\mathbf{x} = 0,
+}\end{equation}\DIFaddend 
+where the \textbf{energy density} is defined in the expected manner\DIFdelbegin \begin{displaymath}
+\DIFdel{E(\mathbf{x}, t) = \frac{1}{2}\rho(\mathbf{x})||\mathbf{v}(\mathbf{x}, t)||^2 + W}[\DIFdel{\mathbf{x}, \mathbf{F}(\mathbf{x}, t)}]\DIFdel{.
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \DIFadd{,
+}\begin{equation}\DIFadd{\label{eq:4}
+E(\mathbf{x}, t) = \frac{1}{2}\rho(\mathbf{x})\|\mathbf{v}(\mathbf{x}, t)\|^2 + W}[\DIFadd{\mathbf{x}, \mathbf{F}(\mathbf{x}, t)}]\DIFadd{.
+}\end{equation}\DIFaddend 
+If the body is initially in a stable equilibrium configuration, then any spontaneous non-trivial\footnote{Meaning, not a rigid-body motion, 
+but one that causes a change in shape and/or volume.} deformation will, by definition, raise the potential energy\DIFdelbegin \begin{displaymath}
+\DIFdel{\mathcal{V}(t) = \int_{M}W}[\DIFdel{\mathbf{x}, \mathbf{F}(\mathbf{x}, t)}]\DIFdel{\dd^{3}\mathbf{x}.
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \DIFadd{,
+}\begin{equation}\DIFadd{\label{eq:5}
+\mathcal{V}(t) = \int_{M}W}[\DIFadd{\mathbf{x}, \mathbf{F}(\mathbf{x}, t)}]\DIFadd{\dd^{3}\mathbf{x}.
+}\end{equation}\DIFaddend 
+Because the kinetic energy is non-negative, this must lead to the overall energy of the body being increased. Eq.\DIFdelbegin \DIFdel{(3}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:3}}\DIFaddend ) implies that such an 
+increase in the total energy cannot occur, and so if a body is initially at rest, then it will remain so for all
+later times. 
+
+It is clear that our theory needs to be modified in some way to account for earthquakes. The potential energy is the obvious place to look 
+as this is the part whose form was essentially guessed at. We recall that the principle of material frame indifference requires that 
+the potential energy $\mathcal{V}(t)$ of the body be:
+\begin{enumerate}
+    \item invariant under time-translations;
+    \item invariant under superimposed rigid body translations;
+    \item invariant under superimposed rigid body rotations.
+\end{enumerate}
+A kinematic description of a seismic source necessarily breaks the first of these invariance properties, as the onset of motion on 
+the fault gives a \textbf{distinguished point in time}. We shall still retain the final two invariance properties of the potential 
+energy. Indeed, they are necessary for the seismic source to represent an internal process that does not alter the net linear \DIFdelbegin \DIFdel{nor 
+}\DIFdelend \DIFaddbegin \DIFadd{or 
+}\DIFaddend angular momentum of the Earth. Having dropped the time-translation invariance, we can generalise the Lagrangian density to become
+\DIFdelbegin \begin{displaymath}
+\DIFdel{\mathcal{L}(\mathbf{x}, t, \boldsymbol{\varphi}, \mathbf{v}, \mathbf{F}) = \frac{1}{2}\rho(\mathbf{x})||\mathbf{v}||^2 - W(\mathbf{x}, t, \mathbf{F}),
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}\DIFadd{\label{eq:6}
+\mathcal{L}(\mathbf{x}, t, \bphi, \mathbf{v}, \mathbf{F}) = \frac{1}{2}\rho(\mathbf{x})\|\mathbf{v}\|^2 - W(\mathbf{x}, t, \mathbf{F}),
+}\end{equation}\DIFaddend 
+where we note that $W(\mathbf{x}, t, \mathbf{F}) = W(\mathbf{x}, t, \mathbf{Q}\mathbf{F})$ for all rotation matrices $\mathbf{Q}$. It is 
+clear that the resulting \DIFdelbegin \DIFdel{Euler-Lagrange equations remains unchanged}\begin{displaymath}
+\DIFdel{\rho\frac{\partial v_{i}}{\partial t} - \frac{\partial T_{ij}}{\partial x_{j}} = 0
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \DIFadd{Euler--Lagrange equations remain unchanged,
+}\begin{equation}\DIFadd{\label{eq:7}
+\rho\frac{\partial v_{i}}{\partial t} - \frac{\partial T_{ij}}{\partial x_{j}} = 0,
+}\end{equation}\DIFaddend 
+and similarly for the boundary conditions
+\DIFdelbegin \begin{displaymath}
+\DIFdel{T_{ij}\hat{n}_{j} = 0
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}\DIFadd{\label{eq:8}
+T_{ij}\hat{n}_{j} = 0
+}\end{equation}\DIFaddend 
+on $\partial M$. However, the first \DIFdelbegin \DIFdel{Piola-Kirchhoff }\DIFdelend \DIFaddbegin \DIFadd{Piola--Kirchhoff }\DIFaddend stress tensor now depends on the time-dependent strain energy function through the 
+generalised constitutive relation
+\DIFdelbegin \begin{displaymath}
+\DIFdel{T_{ij}(\mathbf{x}, t) = \frac{\partial W}{\partial F_{ij}}[\mathbf{x}, t, \mathbf{F}(\mathbf{x}, t)].
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}\DIFadd{\label{eq:9}
+T_{ij}(\mathbf{x}, t) = \frac{\partial W}{\partial F_{ij}}[\mathbf{x}, t, \mathbf{F}(\mathbf{x}, t)].
+}\end{equation}\DIFaddend 
+Within Lecture\DIFdelbegin \DIFdel{13}\DIFdelend \DIFaddbegin \DIFadd{~14}\DIFaddend , we saw that the invariance of the potential energy under superimposed rigid body rotations requires that the strain 
+energy function depends on the deformation gradient only through the right 
+\DIFdelbegin \DIFdel{Cauchy-Green }\DIFdelend \DIFaddbegin \DIFadd{Cauchy--Green }\DIFaddend deformation tensor. Using this result, we shall assume that the time-dependent strain energy function can be decomposed 
+into a sum of two terms\DIFdelbegin \begin{displaymath}
+\DIFdel{W(\mathbf{x}, t, \mathbf{F}) = U(\mathbf{x}, \mathbf{C}) - \frac{1}{2}\overline{S}_{ij}(\mathbf{x}, t)C_{ij}
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \DIFadd{,
+}\begin{equation}\DIFadd{\label{eq:10}
+W(\mathbf{x}, t, \mathbf{F}) = U(\mathbf{x}, \mathbf{C}) - \frac{1}{2}\overline{S}_{ij}(\mathbf{x}, t)C_{ij},
+}\end{equation}\DIFaddend 
+where $\overline{S}_{ij}$ is a given time-dependent symmetric second-order tensor field. Here $U$ describes the assumed constitutive 
+properties of the material, which do not change with time, while $\overline{S}_{ij}$ represents the effects of the seismic source. 
+Though this is not the most general possible modification to the strain energy,
+more general forms do not change the linearised equations of motion. Using eq.\DIFdelbegin \DIFdel{(9}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:9}}\DIFaddend ), we see that eq.\DIFdelbegin \DIFdel{(10) implies
+}\begin{displaymath}
+\DIFdel{T_{ij}(\mathbf{x}, t) = F_{ik}(\mathbf{x}, t)\left\{2\frac{\partial U}{\partial C_{kj}}[\mathbf{x}, \mathbf{C}(\mathbf{x}, t)] - 
+\overline{S}_{kj}(\mathbf{x}, t)\right\}.
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:10}) implies
+}\begin{equation}\DIFadd{\label{eq:11}
+T_{ij}(\mathbf{x}, t) = F_{ik}(\mathbf{x}, t)\left\{2\frac{\partial U}{\partial C_{kj}}[\mathbf{x}, \mathbf{C}(\mathbf{x}, t)] - 
+\overline{S}_{kj}(\mathbf{x}, t)\right\},
+}\end{equation}\DIFaddend 
+and \DIFaddbegin \DIFadd{we }\DIFaddend can use this relation to introduce the \textbf{stress glut}, $\overline{T}_{ij}$, through the identity
+\DIFdelbegin \begin{displaymath}
+\DIFdel{\overline{T}_{ij}(\mathbf{x}, t) = F_{ik}(\mathbf{x}, t)\overline{S}_{kj}(\mathbf{x}, t) = 2F_{ik}(\mathbf{x}, t)
+\frac{\partial U}{\partial C_{kj}}[\mathbf{x}, \mathbf{C}(\mathbf{x}, t)] - T_{ij}(\mathbf{x}, t).
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}\DIFadd{\label{eq:12}
+\overline{T}_{ij}(\mathbf{x}, t) = F_{ik}(\mathbf{x}, t)\overline{S}_{kj}(\mathbf{x}, t) = 2F_{ik}(\mathbf{x}, t)
+\frac{\partial U}{\partial C_{kj}}[\mathbf{x}, \mathbf{C}(\mathbf{x}, t)] - T_{ij}(\mathbf{x}, t).
+}\end{equation}\DIFaddend 
+Physically, the stress glut represents the difference between the stress predicted by the elastic constitutive relation 
+and its true value. It can, therefore, be interpreted as arising 
+from a \textbf{failure of elasticity to correctly determine stresses within the body}. This point of view is consistent with 
+elastic rebound theory, with material near to a fault undoubtedly failing to be elastic.
+
+\section*{Linearised equations of motion incorporating a stress glut}
+
+We consider a simple hyperelastic body that is initially at rest in a stable equilibrium configuration. At some 
+later time, a non-zero stress glut is initiated, and we wish to model the subsequent linearised motion of the body. As 
+with Lecture\DIFdelbegin \DIFdel{13}\DIFdelend \DIFaddbegin \DIFadd{~14}\DIFaddend , we assume that the motion can be written
+\DIFdelbegin \begin{displaymath}
+\DIFdel{\varphi_{i}(\mathbf{x}, t) = x_{i} + s u_{i}(\mathbf{x}, t) + O(s^2),
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}\DIFadd{\label{eq:13}
+\varphi_{i}(\mathbf{x}, t) = x_{i} + s u_{i}(\mathbf{x}, t) + O(s^2),
+}\end{equation}\DIFaddend 
+where we note that the reference body has been chosen such that the equilibrium configuration is the identity mapping. 
+Without loss of generality, the initial conditions on the displacement vector can be applied at time $t=0$, and so we have
+\DIFdelbegin \begin{displaymath}
+\DIFdel{u_{i}(\mathbf{x}, 0) = 0, \quad \frac{\partial u_{i}}{\partial t}(\mathbf{x}, 0) = 0.
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}\DIFadd{\label{eq:14}
+u_{i}(\mathbf{x}, 0) = 0,\quad \frac{\partial u_{i}}{\partial t}(\mathbf{x}, 0) = 0.
+}\end{equation}\DIFaddend 
+Motivated by eq.\DIFdelbegin \DIFdel{(10}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:10}}\DIFaddend ), we write the strain energy function for the body in the form
+\DIFdelbegin \begin{displaymath}
+\DIFdel{W(\mathbf{x}, t, \mathbf{F}) = U(\mathbf{x}, \mathbf{C}) - s\frac{1}{2}\overline{S}_{ij}(\mathbf{x}, t)C_{ij},
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}\DIFadd{\label{eq:15}
+W(\mathbf{x}, t, \mathbf{F}) = U(\mathbf{x}, \mathbf{C}) - s\frac{1}{2}\overline{S}_{ij}(\mathbf{x}, t)C_{ij},
+}\end{equation}\DIFaddend 
+where we note that the time-dependent term has no zeroth-order part. Following the method in Lecture\DIFdelbegin \DIFdel{13}\DIFdelend \DIFaddbegin \DIFadd{~14}\DIFaddend , it is a simple 
+matter to obtain the corresponding linearised equations of motion\DIFdelbegin \begin{displaymath}
+\DIFdel{\rho\frac{\partial^2 u_{i}}{\partial t^2} - \frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\right) = -\frac{\partial\overline{S}_{ij}}{\partial x_{j}},
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \DIFadd{. In doing so, the elastic tensor $A_{ijkl}$ is obtained as the second 
+derivative with respect to $\mathbf{F}$, evaluated at $\mathbf{F}=\mathbf{I}$, of the time-independent part $U(\mathbf{x},\mathbf{C})$ of 
+the strain energy function alone; the term involving the stress glut is already of first order in $s$, and contributes only to 
+the force terms. This is the sense in which the definition of the elastic tensor given in Lecture~14 is to be understood 
+whenever a seismic source is present. We find
+}\begin{equation}\DIFadd{\label{eq:16}
+\rho\frac{\partial^2 u_{i}}{\partial t^2} - \frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\right) = -\frac{\partial\overline{S}_{ij}}{\partial x_{j}},
+}\end{equation}\DIFaddend 
+and boundary conditions 
+\DIFdelbegin \begin{displaymath}
+\DIFdel{A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\hat{n}_{j} = \overline{S}_{ij}\hat{n}_{j}
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}\DIFadd{\label{eq:17}
+A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\hat{n}_{j} = \overline{S}_{ij}\hat{n}_{j}
+}\end{equation}\DIFaddend 
+on $\partial M$. In this manner, we see that the seismic source enters into the linearised equations of motion as an 
+\textbf{effective body force and an effective surface traction}, with 
+each determined from the stress glut. Note that within this linearised theory the tensors $\overline{S}_{ij}$ and 
+$\overline{T}_{ij}$ agree to first order, with \textbf{either being called the stress glut}.
+In particular, within the linearised equations of motion, the \textbf{stress glut is necessarily symmetric}.
+
+\section*{The stress glut for an idealised fault}
+
+
+\begin{figure}[ht]
+    \centering    
+     \includegraphics[width=0.7\textwidth]{figures/L3F3.png} 
+    \caption{A fault in cross section, where the offset of the strata on either side can be clearly
+seen. It is also apparent that the fault is not a single surface along which the
+motion is discontinuous, but rather a zone of \DIFdelbeginFL \DIFdelFL{finite-width }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{finite width }\DIFaddendFL which has undergone
+severe localised deformation.}
+    \label{fig:3}
+\end{figure}
+
+We wish to determine the appropriate stress glut for an \textbf{idealised fault}. On a real fault, there will be large 
+non-elastic deformation within some \textbf{finite fault zone}\DIFaddbegin \DIFadd{, as can be seen in Fig.~\ref{fig:3}}\DIFaddend . We shall, 
+however, neglect such complexities, and suppose that the elastic constitutive relation fails only on the fault 
+surface across which the displacement is discontinuous. Such an approximation 
+is appropriate so long as we consider waves having wavelength substantially larger \DIFdelbegin \DIFdel{that }\DIFdelend \DIFaddbegin \DIFadd{than }\DIFaddend the width of the fault zone, 
+and this is true for most seismological applications (e.g.\DIFaddbegin \DIFadd{\ }\DIFaddend seismic wavelengths of kilometres and fault \DIFdelbegin \DIFdel{zones }\DIFdelend \DIFaddbegin \DIFadd{zone }\DIFaddend widths of metres).
+
+We assume that the \textbf{fault plane}, $\Sigma$, passes through the origin, and lies within the $(x_1, x_2)$-plane. The discontinuity 
+in the displacement vector on the fault plane is assumed to be only in its tangential component so that there is no separation or 
+interpenetration of material, and hence \DIFdelbegin \DIFdel{it }\DIFdelend \DIFaddbegin \DIFadd{the displacement vector }\DIFaddend can be decomposed in the form
+\DIFdelbegin \begin{displaymath}
+\DIFdel{u_{i}(x_1, x_2, x_3, t) = u_{i}^{0}(x_1, x_2, x_3, t) + w_{i}(x_1, x_2, t)H(x_3),
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}\DIFadd{\label{eq:18}
+u_{i}(x_1, x_2, x_3, t) = u_{i}^{0}(x_1, x_2, x_3, t) + w_{i}(x_1, x_2, t)H(x_3),
+}\end{equation}\DIFaddend 
+where $u_i^0$ is continuous, $w_i$ is tangential on $\Sigma$ (i.e.\DIFaddbegin \DIFadd{\ }\DIFaddend $w_3=0$), and $H(\cdot)$ denotes the Heaviside step 
+function. We call $\mathbf{w}$ the \textbf{displacement discontinuity vector}. 
+We wish to determine the linearised first \DIFdelbegin \DIFdel{Piola-Kirchhoff }\DIFdelend \DIFaddbegin \DIFadd{Piola--Kirchhoff }\DIFaddend stress tensor associated with this displacement vector 
+field using the assumed hyperelastic constitutive relation. To do this, 
+we must first differentiate the displacement vector to obtain
+\DIFdelbegin \begin{displaymath}
+\DIFdel{\frac{\partial u_{i}}{\partial x_{j}} = \frac{\partial u_{i}^{0}}{\partial x_{j}} + \frac{\partial w_{i}}{\partial x_{j}}H(x_3) + w_{i}\delta_{j3}\delta(x_3),
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}\DIFadd{\label{eq:19}
+\frac{\partial u_{i}}{\partial x_{j}} = \frac{\partial u_{i}^{0}}{\partial x_{j}} + \frac{\partial w_{i}}{\partial x_{j}}H(x_3) + w_{i}\delta_{j3}\delta(x_3),
+}\end{equation}\DIFaddend 
+where we have used the well-known identity $H'(x) = \delta(x)$. It follows that the linearised stress tensor predicted by the constitutive relation takes the form
+\DIFdelbegin \begin{displaymath}
+\DIFdel{A_{ijkl}\frac{\partial u_{k}^{0}}{\partial x_{l}} + A_{ijkl}\frac{\partial w_{k}}{\partial x_{l}}H(x_3) + A_{ijk3}w_{k}\delta(x_3).
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}\DIFadd{\label{eq:20}
+A_{ijkl}\frac{\partial u_{k}^{0}}{\partial x_{l}} + A_{ijkl}\frac{\partial w_{k}}{\partial x_{l}}H(x_3) + A_{ijk3}w_{k}\delta(x_3).
+}\end{equation}\DIFaddend 
+The first term here is everywhere continuous, the second has a jump discontinuity \DIFaddbegin \DIFadd{across }\DIFaddend the fault plane, while the third is non-zero only 
+on the fault plane but is singular there. 
+That the stress might be discontinuous across the fault plane is physically acceptable, with this property approximating rapid but 
+continuous variations in stress across the \DIFdelbegin \DIFdel{finite-width }\DIFdelend \DIFaddbegin \DIFadd{finite width }\DIFaddend of a fault zone. It is, 
+therefore, only the final singular term within eq.\DIFdelbegin \DIFdel{(20}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:20}}\DIFaddend ) that is non-physical and needs to be removed by inclusion of a stress 
+glut. Specialising eq.\DIFdelbegin \DIFdel{(12}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:12}}\DIFaddend ) to the linearised case, we see that a suitable choice is given by
+\DIFdelbegin \begin{displaymath}
+\DIFdel{\overline{S}_{ij} = A_{ijk3}w_{k}\delta(x_3).
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}\DIFadd{\label{eq:21}
+\overline{S}_{ij} = A_{ijk3}w_{k}\delta(x_3).
+}\end{equation}\DIFaddend 
+It is worth emphasising that this result is really \textbf{more of a definition than something we have derived}. Indeed, an ideal 
+fault is just a mathematical abstraction, providing a useful model for 
+something far more complicated. These ideas extend immediately to a general fault whose surface, $\Sigma$, need not be planar. 
+The appropriate stress glut is
+\DIFdelbegin \begin{displaymath}
+\DIFdel{\overline{S}_{ij} = A_{ijkl}w_{k}n_{l}\delta_{\Sigma},
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}\DIFadd{\label{eq:22}
+\overline{S}_{ij} = A_{ijkl}w_{k}\hat{n}_{l}\delta_{\Sigma},
+}\end{equation}\DIFaddend 
+where the displacement discontinuity vector is everywhere tangent to $\Sigma$, $\hat{\mathbf{n}}$ is the unit normal vector 
+to the surface, and $\delta_{\Sigma}$ is the Dirac surface distribution for $\Sigma$ which is defined through the relation
+\DIFdelbegin \begin{displaymath}
+\DIFdel{\int_{M}f\,\delta_{\Sigma}\dd^{3}\mathbf{x} = \int_{\Sigma}f\,dS,
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}\DIFadd{\label{eq:23}
+\int_{M}f\,\delta_{\Sigma}\dd^{3}\mathbf{x} = \int_{\Sigma}f\dd S,
+}\end{equation}\DIFaddend 
+for any smooth $f$.
+
+\section*{Formulating an inverse problem}
+We have now assembled suitable equations of motion to describe seismic wave generation and propagation 
+within the Earth. For convenience, we recall that the linearised equations of motion are
+\DIFdelbegin \begin{displaymath}
+\DIFdel{\rho\frac{\partial^2 u_{i}}{\partial t^2} - \frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\right) = -\frac{\partial\overline{S}_{ij}}{\partial x_{j}},
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}\DIFadd{\label{eq:24}
+\rho\frac{\partial^2 u_{i}}{\partial t^2} - \frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\right) = -\frac{\partial\overline{S}_{ij}}{\partial x_{j}},
+}\end{equation}\DIFaddend 
+along with boundary conditions
+\DIFdelbegin \begin{displaymath}
+\DIFdel{A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\hat{n}_{j} = \overline{S}_{ij}\hat{n}_{j}
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}\DIFadd{\label{eq:25}
+A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\hat{n}_{j} = \overline{S}_{ij}\hat{n}_{j},
+}\end{equation}\DIFaddend 
+while the stress glut for an ideal fault takes the form
+\DIFdelbegin \begin{displaymath}
+\DIFdel{\overline{S}_{ij} = A_{ijkl}w_{k}n_{l}\delta_{\Sigma}.
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}\DIFadd{\label{eq:26}
+\overline{S}_{ij} = A_{ijkl}w_{k}\hat{n}_{l}\delta_{\Sigma}.
+}\end{equation}\DIFaddend 
+Within these equations we can identify a number of \textbf{model parameters}:
+\begin{enumerate}
+    \item The referential density, $\rho$.
+    \item The elastic tensor, $A_{ijkl}$.
+    \item The displacement discontinuity vector, $w_i$.
+    \item Geometric parameters describing the shape of the earth model\DIFaddbegin \DIFadd{, }\DIFaddend including any internal discontinuities\DIFdelbegin \DIFdel{and for the fault plane}\DIFdelend \DIFaddbegin \DIFadd{, and the geometry of the fault surface}\DIFaddend .
+\end{enumerate}
+Given all this information it is possible, with sufficient effort, to solve the equations\DIFaddbegin \DIFadd{, }\DIFaddend though this generally requires use of a computer. 
+
+Suppose we have made seismic observations following an earthquake. Let $\mathbf{x}_i$ for \DIFdelbegin \DIFdel{$i=1, ..., n$ }\DIFdelend \DIFaddbegin \DIFadd{$i=1,\dots,n$ }\DIFaddend denote the surface locations
+of the seismometers, with each instrument providing recordings over some time interval, $I = [t_1, t_2]$. As noted above, given 
+suitable model parameters we can simulate seismic wave propagation to produce \textbf{synthetic seismograms} at each seismometer location. 
+This is an example of solving a \textbf{forward problem}, which is to say performing a mapping from model parameters to observable quantities. 
+To each forward problem there is an associated \textbf{inverse problem} in which we try to work backwards from the observations to the 
+underlying model parameters.
+
+Both the forward and inverse problems are concerned with transforming one kind of information into another. There is, however, a 
+fundamental difference between these two problems, and this is best expressed through the concept of being well- or ill-posed. For a 
+problem to be \textbf{well-posed}
+the following three things must hold:
+\begin{enumerate}
+    \item For any given set of inputs, there exists an output.
+    \item There is a unique output for each given input.
+    \item The output depends continuously on the input.
+\end{enumerate}
+Note that these conditions only make sense sequentially; if the first does not hold, then the second does not make sense, etc. A 
+problem that is not well-posed is said to be \textbf{ill-posed}. 
+
+These definitions can be illustrated by considering a simple example.
+Suppose for distinct points $x_i$, \DIFdelbegin \DIFdel{$i=1, ..., n$ }\DIFdelend \DIFaddbegin \DIFadd{$i=1,\dots,n$ }\DIFaddend on the real line we are given corresponding function values $\{y_i\}_{i=1}^n$. 
+We can then ask if there is a polynomial, $p(x)$\DIFaddbegin \DIFadd{, }\DIFaddend of degree $m$ such that
+\DIFdelbegin \begin{displaymath}
+\DIFdel{p(x_i) = y_i.
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}\DIFadd{\label{eq:27}
+p(x_i) = y_i.
+}\end{equation}\DIFaddend 
+Here the inputs to the problem are the values $\{y_i\}_{i=1}^n$, and the desired outputs are the $m+1$ coefficients of 
+the polynomial. Considering first the existence question, it should be clear that if $m+1 \ge n$, then a suitable polynomial can always be 
+found. If $m+1 < n$, then, in general, there is no such polynomial. But a solution is possible for certain inputs (e.g.\DIFaddbegin \DIFadd{\ }\DIFaddend the $y_i$ 
+all lie on a line, and \DIFdelbegin \DIFdel{$m>1$}\DIFdelend \DIFaddbegin \DIFadd{$m\ge 1$}\DIFaddend ). Assuming existence has been established, we can turn to uniqueness. Here, again, we can 
+readily see that the polynomial is unique if and only if \DIFdelbegin \DIFdel{$m+1 = n$}\DIFdelend \DIFaddbegin \DIFadd{$m+1 \le n$}\DIFaddend , while if $m+1 > n$ there are \DIFdelbegin \DIFdel{an infinite number of }\DIFdelend \DIFaddbegin \DIFadd{infinitely many }\DIFaddend possible answers. 
+Finally, assuming that uniqueness has been established, it is possible to show that the coefficients of the polynomial 
+depend continuously on the data, and hence a stable solution can be obtained.
+
+A few additional comments can be made. First, reflecting the fact that all real measurements have uncertainties, we might choose 
+to modify the problem to
+\DIFdelbegin \begin{displaymath}
+\DIFdel{p(x_i) = y_i + z_i,
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}\DIFadd{\label{eq:28}
+p(x_i) = y_i + z_i,
+}\end{equation}\DIFaddend 
+where $z_i$ are \textbf{unknown random errors} drawn from a known distribution. In addressing the existence question we must then 
+broaden what it means for a solution to be found, with \DIFaddbegin \DIFadd{the }\DIFaddend fit to the data \DIFdelbegin \DIFdel{need not }\DIFdelend \DIFaddbegin \DIFadd{no longer required to }\DIFaddend be exact, but \DIFaddbegin \DIFadd{only adequate }\DIFaddend in a statistical sense.
+As a result, our statements on existence in terms of $n$ and $m$ might need to be modified. Next, we can see that one potential 
+cause of non-uniqueness is if the problem is \textbf{underdetermined}: we have fewer knowns than unknowns. For 
+geophysical inverse problems this is almost always the case. As you might already imagine, uncertainty quantification within 
+underdetermined problems is challenging, and this remains a major research topic.
+
+Any plausible physical theory should be well-posed. If this were not the case, then it would not be possible to test it experimentally. 
+For example, suppose that a physical theory satisfied the first two conditions above, 
+but not the third. We could formulate an experiment to test our theory by comparing its predictions against observations made from 
+known inputs. But the issue is that we can never know our inputs with complete precision. 
+The lack of continuity within the theory means that tiny errors within these inputs can map onto 
+arbitrarily large differences in the output, and this renders comparison between predictions and observations meaningless.
+
+It can be shown that the seismological forward problem defined above is well-posed so long as the model parameters are subject to 
+reasonable physical constraints (e.g.\DIFaddbegin \DIFadd{\ }\DIFaddend density should always be positive). By contrast, \textbf{the inverse problem is 
+almost always ill-posed}. As noted above, the main reason is a lack of information. Real data sets are necessarily finite-dimensional,
+but the model parameters are functions, and hence live in infinite-dimensional spaces. Later in this course 
+we will see a number of practical methods for dealing with ill-posed inverse problems. None are perfect, and 
+all must be applied with care. But these techniques do seem to have produced useful and reliable information about the Earth.
+
+\section*{What you need to know and be able to do}
+\DIFdelbegin %DIFDELCMD < \begin{itemize}
+%DIFDELCMD <     %%%
+\DIFdelend \DIFaddbegin \begin{enumerate}
+    \DIFaddend \item[(i)] Know that most natural earthquakes are generated by rapid movement across faults within the Earth.
+    \item[(ii)] Summarise Reid's elastic rebound theory for \DIFdelbegin \DIFdel{Earthquakes}\DIFdelend \DIFaddbegin \DIFadd{earthquakes}\DIFaddend .
+    \item[(iii)] Explain how a seismic source can be introduced into elasticity using a stress glut, and outline the derivation of the stress glut for an idealised fault.
+    \item[(iv)] Understand what is meant by an inverse problem along with the associated terminology and the definition of well- and ill-posed problems.
+\DIFdelbegin %DIFDELCMD < \end{itemize}
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \end{enumerate}
+\DIFaddend 
+
+\end{document}

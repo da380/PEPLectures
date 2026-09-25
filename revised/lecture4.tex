@@ -1,0 +1,360 @@
+\section*{Outline and motivation}
+
+In this lecture, we step back from realistic applications that depend on numerical calculations to consider the 
+propagation of \textbf{plane elastic waves} within a whole space with constant material parameters.
+We show that under reasonable restrictions on the elastic tensor, up to \textbf{three} different types of plane 
+wave can propagate in each direction. The existence of multiple wave types is a fundamental property of
+elasticity, and accounts for much of the complexity of the observed seismic wavefield. In the case of isotropic 
+materials a simple closed-form solution of the problem can be found, and in this manner we 
+arrive at \textbf{P- and S-waves}. We then apply perturbation theory to understand how these solutions are modified by 
+the slight anisotropy present in some regions of the Earth.
+
+\section*{Derivation of the Christoffel equation}
+
+In a previous lecture we obtained the linearised equations of motion
+\begin{equation}
+\rho\frac{\partial^{2}u_{i}}{\partial t^{2}}-\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\right)=0,
+\label{eq:1}
+\end{equation}
+where $\rho$ is the referential density, and $A_{ijkl}$ the elastic tensor. We recall that the elastic tensor possesses the symmetry $A_{ijkl}=A_{klij}$, and will start to see the significance of this property as we proceed today. 
+In the first part of this lecture we will assume that the reference body is equal to $\mathbb{R}^{3}$, and that the material parameters are independent of position. We say that a body is \textbf{homogeneous} if its material parameters 
+are independent of position, and otherwise it is said to be \textbf{heterogeneous}.
+
+Note that though the terms ``homogeneous'' and ``isotropic'' are sometimes confused, they mean completely different things. The first refers to the 
+\textbf{invariance of properties with spatial position}, while the latter is an \textbf{invariance of the
+ properties with respect to orientation at a fixed point}. 
+A homogeneous medium could be anisotropic, while a heterogeneous one can be isotropic.
+
+We begin by looking for plane wave solutions of eq.~(\ref{eq:1}) taking the form
+\begin{equation}
+u_{i}(\mathbf{x},t)=f(t-p_{j}x_{j})a_{i},
+\label{eq:2}
+\end{equation}
+where $\mathbf{p}$ is the \textbf{slowness vector}, $\mathbf{a}$ is the \textbf{polarisation vector}, and $f$ is an arbitrary function. 
+The fact that the shape of the plane wave does 
+not change during propagation shows that, if such waves exist, they are non-dispersive. The above displacement vector is seen to be 
+constant on the wavefronts
+\begin{equation}
+t-p_{j}x_{j}=\text{constant},
+\label{eq:3}
+\end{equation}
+and these move through space in the direction of $\mathbf{p}$ at the phase speed
+\begin{equation}
+c=\frac{1}{\|\mathbf{p}\|}.
+\label{eq:4}
+\end{equation}
+Here we see that the slowness vector is used to specify both the \textbf{speed and direction of propagation of the plane wavefronts}, 
+while the polarisation vector gives the \textbf{orientation of the associated particle motion}.
+ 
+To see if such plane wave solutions are possible, we simply substitute the displacement vector in eq.~(\ref{eq:2}) into the equations 
+ of motion. First, we find readily that
+\begin{equation}
+\frac{\partial^{2}u_{i}}{\partial t^{2}}=f''(t-p_{j}x_{j})a_{i},
+\label{eq:5}
+\end{equation}
+where $f''$ denotes the second derivative of $f$ with respect to its argument. To calculate the remaining terms in the equations 
+of motion, we first note that
+\begin{equation}
+\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\right)=A_{ijkl}\frac{\partial^{2}u_{k}}{\partial x_{j}\partial x_{l}},
+\label{eq:6}
+\end{equation}
+because the elastic tensor is constant. From the definition of $\mathbf{u}$ above, we can use the chain rule to show that
+\begin{equation}
+\frac{\partial u_{k}}{\partial x_{l}}=-f'(t-p_{m}x_{m})a_{k}p_{l},
+\label{eq:7}
+\end{equation}
+and hence that
+\begin{equation}
+\frac{\partial^{2}u_{k}}{\partial x_{j}\partial x_{l}}=f''(t-p_{m}x_{m})a_{k}p_{j}p_{l}.
+\label{eq:8}
+\end{equation}
+Combining these calculations, we arrive at
+\begin{equation}
+\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\right)=f''(t-p_{m}x_{m})A_{ijkl}p_{j}p_{l}a_{k}.
+\label{eq:9}
+\end{equation}
+Cancelling the common factor of $f''$, it follows that the equations of motion will be satisfied if and only if
+\begin{equation}
+(\rho\delta_{ik}-A_{ijkl}p_{j}p_{l})a_{k}=0.
+\label{eq:10}
+\end{equation}
+To simplify this result, it will be useful to define the \textbf{Christoffel matrix}, $\bm{\Gamma}(\mathbf{p})$, 
+for a given slowness vector $\mathbf{p}$ to have components
+\begin{equation}
+\Gamma_{ik}(\mathbf{p})=\frac{1}{\rho}A_{ijkl}p_{j}p_{l}.
+\label{eq:11}
+\end{equation}
+Using this definition, eq.~(\ref{eq:10}) can be written using matrix-vector notation as
+\begin{equation}
+[\bm{\Gamma}(\mathbf{p})-\mathbf{I}]\mathbf{a}=\mathbf{0},
+\label{eq:12}
+\end{equation}
+which is known as the \textbf{Christoffel equation}. This equation acts as a restriction on the possible values 
+of the slowness and polarisation vectors for which plane elastic wave propagation is possible.
+As a first observation, we note that this is a homogeneous system of linear equations for $\mathbf{a}$.
+It always has the trivial solution $\mathbf{a}=\mathbf{0}$, while non-trivial solutions will only exist if
+\begin{equation}
+\det[\bm{\Gamma}(\mathbf{p})-\mathbf{I}]=0.
+\label{eq:13}
+\end{equation}
+This is an algebraic condition on the slowness vector alone, and the totality of its solutions defines what is known as the \textbf{slowness surface}.
+
+\section*{Reduction to a symmetric eigenvalue problem}
+
+To obtain solutions of the Christoffel equation it is useful to first note two properties of the Christoffel matrix. The first is that
+\begin{equation}
+\bm{\Gamma}(\gamma \mathbf{p})=\gamma^{2}\bm{\Gamma}(\mathbf{p}),
+\label{eq:14}
+\end{equation}
+for any real $\gamma$ and $\mathbf{p}$.\footnote{Mathematically, we can say that the Christoffel matrix is a \textbf{homogeneous function} of order two, 
+this being the third different way the word ``homogeneous'' is used in this lecture!} We know that the slowness vector sets both the direction and speed of the plane wave. It is, therefore, useful to write it in the form
+\begin{equation}
+\mathbf{p}=\frac{1}{c}\hat{\mathbf{p}}, 
+\label{eq:15}
+\end{equation}
+where $c$ is the phase speed, and $\hat{\mathbf{p}}$ a unit vector. Having done this, eq.~(\ref{eq:14}) allows us to rewrite the Christoffel equation as
+\begin{equation}
+\bm{\Gamma}(\hat{\mathbf{p}})\mathbf{a}=c^{2}\mathbf{a}.
+\label{eq:16}
+\end{equation}
+If we focus on plane waves in a fixed direction, then we have arrived at an \textbf{eigenvalue problem} with $c^{2}$ the eigenvalue, 
+and $\mathbf{a}$ the eigenvector. Next, for any $\mathbf{p}$, the Christoffel matrix is symmetric. Indeed, by definition we have
+\begin{equation}
+\Gamma_{ki}(\mathbf{p})=\frac{1}{\rho}A_{kjil}p_{j}p_{l}=\frac{1}{\rho}A_{ilkj}p_{j}p_{l}=\frac{1}{\rho}A_{ijkl}p_{j}p_{l}=\Gamma_{ik}(\mathbf{p}),
+\label{eq:17}
+\end{equation}
+where in the second equality we have used the hyperelastic symmetry, while the third has simply relabelled the dummy indices. 
+This result is very useful, because we can now see that eq.~(\ref{eq:16}) is an eigenvalue problem for a symmetric matrix.
+
+\subsection*{Qualitative solution of the eigenvalue problem}
+
+With these facts at hand we can describe in qualitative terms the plane wave solutions possible in a fixed propagation direction. Eq.~(\ref{eq:16}) is a symmetric eigenvalue problem in $\mathbb{R}^{3}$, 
+and so has three eigenvalues $c_{1}^{2}$, $c_{2}^{2}$, $c_{3}^{2}$, with corresponding eigenvectors $\mathbf{a}_{1}$, $\mathbf{a}_{2}$, $\mathbf{a}_{3}$. Assuming that the squared phase speeds 
+are positive, this gives six possible phase speeds $\pm c_1, \pm c_{2}, \pm c_{3}$, with the pairs corresponding to waves propagating either forwards or backwards along $\hat{\mathbf{p}}$. Moreover, 
+eigenvectors belonging to distinct eigenvalues are necessarily orthogonal. What does this mean physically? In a given propagation direction, $\hat{\mathbf{p}}$, there are up to three different plane wave solutions possible (or six if we include those propagating backwards). 
+The phase speed of each wave is set by the corresponding eigenvalue of the Christoffel matrix, and its polarisation vector is determined by the associated eigenvector. Finally, the polarisation vectors for plane waves with different phase speeds are necessarily orthogonal.
+
+Note that the Christoffel matrix might have \textbf{degenerate eigenvalues}, meaning that an eigenvalue has more than one linearly independent eigenvector. If this occurs, then these eigenvectors need not be orthogonal, but we 
+can always pick an orthogonal basis that spans the eigenspace. We will see below that such degeneracies occur in the case of isotropic materials, and hence this situation cannot be discounted.
+
+The above discussion has implicitly assumed that the eigenvalues of the Christoffel matrix are all non-negative, and hence lead to well-defined phase speeds. This requirement places a physical constraint on the components of the elastic tensor. 
+We will not look into this issue in any detail, but note that it is met in all real materials. Moreover, in a solid the three phase speeds are always positive, while in a fluid there is one positive phase speed and two that vanish.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{figures/L4F1.pdf}
+\caption{Plane sections through the slowness surfaces of two anisotropic materials, calculated numerically from the Christoffel equation. On the left is a transversely isotropic medium, with the section containing the symmetry axis (which is vertical); on the right is a single crystal of olivine, an orthorhombic mineral that makes up much of the upper mantle, using the elastic constants of Abramson et al.\ (1997). The three sheets of the slowness surface are shown in different colours, and there are directions along which two of the sheets touch.}
+\label{fig:1}
+\end{figure}
+
+\subsection*{Determination of the slowness surface}
+
+Having now determined the form of solutions of the Christoffel equation in a fixed propagation direction, all we need do is vary $\hat{\mathbf{p}}$ over the unit sphere to obtain a complete description 
+of the possible plane waves in the body. For each direction we get (allowing for possible degeneracies) three possible phase speeds, and hence three values of $\mathbf{p}$. Let us write $c_{1}(\hat{\mathbf{p}})$,
+ $c_{2}(\hat{\mathbf{p}})$, $c_{3}(\hat{\mathbf{p}})$ for the three non-negative phase speeds along $\hat{\mathbf{p}}$ and order them such that
+\begin{equation}
+c_{1}(\hat{\mathbf{p}})\le c_{2}(\hat{\mathbf{p}})\le c_{3}(\hat{\mathbf{p}}),
+\label{eq:18}
+\end{equation}
+where we have to use $\le$ to allow for possible degeneracies. The corresponding values of the slowness vector are
+\begin{equation}
+\mathbf{p}=\frac{1}{c_{1}(\hat{\mathbf{p}})}\hat{\mathbf{p}}, \quad \mathbf{p}=\frac{1}{c_{2}(\hat{\mathbf{p}})}\hat{\mathbf{p}}, \quad \mathbf{p}=\frac{1}{c_{3}(\hat{\mathbf{p}})}\hat{\mathbf{p}}.
+\label{eq:19}
+\end{equation}
+As $\hat{\mathbf{p}}$ varies over the unit sphere, these slowness vectors build up the slowness surface. This surface is obviously closed, and is symmetric under reflection about the origin. If there are 
+no degeneracies and all phase speeds are positive, then it comprises three distinct \textbf{sheets}. If degeneracies occur along certain propagation directions, then two or more sheets will touch. 
+We note also that the defining relation in eq.~(\ref{eq:13}) can now be written
+\begin{equation}
+[\|\mathbf{p}\|^{2}c_{1}(\hat{\mathbf{p}})^{2}-1][\|\mathbf{p}\|^{2}c_{2}(\hat{\mathbf{p}})^{2}-1][\|\mathbf{p}\|^{2}c_{3}(\hat{\mathbf{p}})^{2}-1]=0,
+\label{eq:20}
+\end{equation}
+with each factor defining a sheet of the slowness surface.
+
+For a general elastic tensor the determination of the slowness surface requires solution of the symmetric eigenvalue problem in each possible propagation direction. Such calculations are, of course, very easy to do numerically. 
+In Fig.~\ref{fig:1} we illustrate these properties of the slowness surface by plotting slices through a number of examples that have been calculated numerically. We note, in particular, that the innermost sheet of the slowness surface is always 
+convex in these examples. This is, in fact, a general property, and a proof might be sought if someone is particularly interested.\footnote{As a hint, note that eq.~(\ref{eq:13}) is a sextic polynomial in $\mathbf{p}$, and hence along a fixed line in $\mathbb{R}^{3}$ there can be no more than six roots.}
+
+\section*{The Christoffel equation in an isotropic material}
+
+In the case of an isotropic material a simple closed-form solution of the Christoffel equation can be obtained, and in this manner we arrive at \textbf{P-waves} and \textbf{S-waves} that you have likely seen before.
+ We recall from the last lecture that in an isotropic material the elastic tensor takes the form
+\begin{equation}
+A_{ijkl}=\lambda\delta_{ij}\delta_{kl}+\mu(\delta_{ik}\delta_{jl}+\delta_{il}\delta_{jk}),
+\label{eq:21}
+\end{equation}
+with $\lambda$ and $\mu$ the Lamé parameters. A simple calculation then yields
+\begin{equation}
+\Gamma_{ik}(\hat{\mathbf{p}})=\frac{\lambda+\mu}{\rho}\hat{p}_{i}\hat{p}_{k}+\frac{\mu}{\rho}\delta_{ik}.
+\label{eq:22}
+\end{equation}
+At this stage we could write out $\Gamma_{ik}(\hat{\mathbf{p}})$ explicitly as a matrix and calculate its eigenvalues and eigenvectors in the usual manner. 
+There is, however, a quicker way to proceed which is worth learning. First we rewrite the expression as
+\begin{equation}
+\Gamma_{ik}(\hat{\mathbf{p}})=\frac{\lambda+2\mu}{\rho}\hat{p}_{i}\hat{p}_{k}+\frac{\mu}{\rho}(\delta_{ik}-\hat{p}_{i}\hat{p}_{k}).
+\label{eq:23}
+\end{equation}
+We can now identify two terms with a geometric significance. $\hat{p}_{i}\hat{p}_{k}$ are the components of the matrix that projects a vector parallel to $\hat{\mathbf{p}}$, while $\delta_{ik}-\hat{p}_{i}\hat{p}_{k}$ are those of the matrix that projects orthogonally
+ to $\hat{\mathbf{p}}$. It follows that if we take the polarisation vector equal to the propagation direction we obtain
+\begin{equation}
+\bm{\Gamma}(\hat{\mathbf{p}})\hat{\mathbf{p}}=\frac{\lambda+2\mu}{\rho}\hat{\mathbf{p}}.
+\label{eq:24}
+\end{equation}
+This shows that $\mathbf{a}\propto \hat{\mathbf{p}}$ is an eigenvector of the Christoffel matrix with phase speed
+\begin{equation}
+\alpha=\sqrt{\frac{\lambda+2\mu}{\rho}}.
+\label{eq:25}
+\end{equation}
+Next, if we let the polarisation vector be orthogonal to $\hat{\mathbf{p}}$ (i.e.\ $\mathbf{a}\perp \hat{\mathbf{p}}$) we find
+\begin{equation}
+\bm{\Gamma}(\hat{\mathbf{p}})\mathbf{a}=\frac{\mu}{\rho}\mathbf{a}, 
+\label{eq:26}
+\end{equation}
+and hence have found two further linearly independent eigenvectors with a common eigenvalue whose associated phase speed is
+\begin{equation}
+\beta=\sqrt{\frac{\mu}{\rho}}.
+\label{eq:27}
+\end{equation}
+
+Physically, we have now shown that there are two types of plane waves possible in an isotropic whole space. The first 
+are P-waves, which have phase speed $\alpha$
+independent of $\hat{\mathbf{p}}$, and whose polarisation vector lies parallel
+to the propagation direction. The next are S-waves, which have phase speed $\beta$, again independent of $\hat{\mathbf{p}}$, and 
+whose polarisation vectors lie in the plane orthogonal to the propagation direction. It can be shown
+ that in any real isotropic solid
+\begin{equation}
+\mu>0,\quad \kappa=\lambda+\tfrac{2}{3}\mu>0,
+\label{eq:28}
+\end{equation}
+and hence we always have $\alpha>\beta>0$. The slowness surface, therefore, has two spherical sheets, with the inner one corresponding to 
+P-waves, while the outer one, for S-waves, is two-fold degenerate. Note finally that in the case of
+an elastic fluid the above solution still applies, but as $\mu=0$, there are no S-waves that can propagate.
+
+\section*{Perturbation theory for slightly anisotropic materials}
+
+We noted in the last lecture that seismic waves generally see the Earth as being close to isotropic. It is, therefore, of interest to 
+ask how the plane wave solutions just obtained in the isotropic case are modified by the presence of
+ slight anisotropy. We recall that in considering propagation in direction $\hat{\mathbf{p}}$ we have to solve the symmetric eigenvalue problem
+\begin{equation}
+\bm{\Gamma}(\hat{\mathbf{p}})\mathbf{a}=c^{2}\mathbf{a}.
+\label{eq:29}
+\end{equation}
+Let us suppose that the elastic tensor takes the following form
+\begin{equation}
+A_{ijkl}=\lambda\delta_{ij}\delta_{kl}+\mu(\delta_{ik}\delta_{jl}+\delta_{il}\delta_{jk})+s\,\delta A_{ijkl}.
+\label{eq:30}
+\end{equation}
+Here $s$ is a perturbation parameter, with $s=0$ corresponding to the isotropic case, and $\delta A_{ijkl}$ an anisotropic perturbation. 
+The corresponding Christoffel matrix can then be written
+\begin{equation}
+\Gamma_{ik}(\hat{\mathbf{p}})=\frac{\lambda+\mu}{\rho}\hat{p}_{i}\hat{p}_{k}+\frac{\mu}{\rho}\delta_{ik}+s\,\delta\Gamma_{ik}(\hat{\mathbf{p}}),
+\label{eq:31}
+\end{equation}
+where the zeroth-order part is that for an isotropic material given in eq.~(\ref{eq:22}), while the first-order term is given by
+\begin{equation}
+\delta\Gamma_{ik}(\hat{\mathbf{p}})=\frac{1}{\rho}\delta A_{ijkl}\hat{p}_{j}\hat{p}_{l}.
+\label{eq:32}
+\end{equation}
+The eigenvalue problem to be solved can, therefore, be written
+\begin{equation}
+[\bm{\Gamma}(\hat{\mathbf{p}})+s\,\delta\bm{\Gamma}(\hat{\mathbf{p}})]\mathbf{a}=c^{2}\mathbf{a},
+\label{eq:33}
+\end{equation}
+where $\bm{\Gamma}(\hat{\mathbf{p}})$ is understood to be the isotropic part of the Christoffel matrix. 
+
+While a numerical solution of the problem is always possible, significant insight 
+can be gained through an application of \textbf{first-order eigenvalue perturbation theory}. Some of you will have seen these 
+ideas before (for example, in quantum mechanics), but we will derive the necessary results from first principles. 
+In the isotropic case we know that the possible solutions correspond to P- and S-waves, with the latter being two-fold degenerate. 
+For P-waves we can apply \textbf{non-degenerate perturbation theory}. This assumes that the phase speed takes the form
+\begin{equation}
+c=\alpha+s\,\delta\alpha+\cdots,
+\label{eq:34}
+\end{equation}
+while the polarisation vector can be written
+\begin{equation}
+\mathbf{a}=\hat{\mathbf{p}}+s\,\delta \mathbf{a}+\cdots.
+\label{eq:35}
+\end{equation}
+Putting these expansions into the eigenvalue problem and isolating the first-order terms in $s$, we find that
+\begin{equation}
+\bm{\Gamma}(\hat{\mathbf{p}})\delta \mathbf{a}+\delta\bm{\Gamma}(\hat{\mathbf{p}})\hat{\mathbf{p}}=\alpha^{2}\delta 
+\mathbf{a}+2\alpha\,\delta\alpha\,\hat{\mathbf{p}}.
+\label{eq:36}
+\end{equation}
+This equation involves both $\delta\alpha$ and $\delta \mathbf{a}$, but we can eliminate the latter by taking the inner product 
+with $\hat{\mathbf{p}}$ and noting that
+\begin{equation}
+\hat{\mathbf{p}}\cdot[\bm{\Gamma}(\hat{\mathbf{p}})\delta \mathbf{a}]=[\bm{\Gamma}(\hat{\mathbf{p}})\hat{\mathbf{p}}]\cdot\delta
+ \mathbf{a}=\alpha^{2}\hat{\mathbf{p}}\cdot\delta \mathbf{a}, 
+\label{eq:37}
+\end{equation}
+where we have used the symmetry of the Christoffel matrix along with the zeroth-order eigenvalue problem. In this manner we 
+arrive at the simple expression
+\begin{equation}
+\delta\alpha=\frac{1}{2\alpha}\hat{\mathbf{p}}\cdot\delta\bm{\Gamma}(\hat{\mathbf{p}})\hat{\mathbf{p}}, 
+\label{eq:38}
+\end{equation}
+for the first-order change to the phase speed. The first-order perturbation to the polarisation vector could then also be determined, 
+but we will not work through the details. What is physically important is that in a slightly anisotropic material 
+we have shown that there will be a plane wave that has phase speed close to that of a P-wave, and whose polarisation vector is 
+almost aligned with the propagation direction. The phase speed, however, now generally depends on the propagation direction as determined 
+by eq.~(\ref{eq:38}). Such a plane wave is known as a \textbf{quasi P-wave}.
+
+The S-wave case can be handled similarly, but is complicated by the unperturbed eigenspace being degenerate. Let $\hat{\mathbf{t}}_{1}$ 
+and $\hat{\mathbf{t}}_{2}$ be two unit vectors orthogonal to the propagation direction. In the absence of anisotropy we know that 
+the polarisation vector can be any vector orthogonal to $\hat{\mathbf{p}}$. It therefore seems reasonable to look for solutions of the form
+\begin{align}
+c&=\beta+s\,\delta\beta+\cdots, \label{eq:39}\\
+\mathbf{a}&=a_{1}\hat{\mathbf{t}}_{1}+a_{2}\hat{\mathbf{t}}_{2}+s\,\delta \mathbf{a}+\cdots, \label{eq:40}
+\end{align}
+where $a_{1}$ and $a_{2}$ are zeroth-order terms to be determined. Putting these expansions into the eigenvalue problem, the 
+first-order term is given by
+\begin{equation}
+\bm{\Gamma}(\hat{\mathbf{p}})\delta \mathbf{a}+\delta\bm{\Gamma}(\hat{\mathbf{p}})(a_{1}\hat{\mathbf{t}}_{1}+
+a_{2}\hat{\mathbf{t}}_{2})=\beta^{2}\delta \mathbf{a}+2\beta\,\delta\beta\,(a_{1}\hat{\mathbf{t}}_{1}+a_{2}\hat{\mathbf{t}}_{2}).
+\label{eq:41}
+\end{equation}
+In a similar manner we can eliminate $\delta \mathbf{a}$ by taking the inner product with either $\hat{\mathbf{t}}_{1}$ or 
+$\hat{\mathbf{t}}_{2}$, and doing this leads to the following pair of equations
+\begin{align}
+\hat{\mathbf{t}}_{1}\cdot\delta\bm{\Gamma}(\hat{\mathbf{p}})(a_{1}\hat{\mathbf{t}}_{1}+a_{2}\hat{\mathbf{t}}_{2})&=2\beta\,\delta\beta\, a_{1}, \label{eq:42}\\
+\hat{\mathbf{t}}_{2}\cdot\delta\bm{\Gamma}(\hat{\mathbf{p}})(a_{1}\hat{\mathbf{t}}_{1}+a_{2}\hat{\mathbf{t}}_{2})&=2\beta\,\delta\beta\, a_{2}. \label{eq:43}
+\end{align}
+Written in matrix form, we have obtained
+\begin{equation}
+\begin{pmatrix} \hat{\mathbf{t}}_{1}\cdot\delta\bm{\Gamma}(\hat{\mathbf{p}})\hat{\mathbf{t}}_{1} & \hat{\mathbf{t}}_{1}
+    \cdot\delta\bm{\Gamma}(\hat{\mathbf{p}})\hat{\mathbf{t}}_{2} \\ \hat{\mathbf{t}}_{2}\cdot\delta\bm{\Gamma}(\hat{\mathbf{p}})\hat{\mathbf{t}}_{1} & 
+    \hat{\mathbf{t}}_{2}\cdot\delta\bm{\Gamma}(\hat{\mathbf{p}})\hat{\mathbf{t}}_{2} \end{pmatrix} \begin{pmatrix} a_{1}
+         \\ a_{2} \end{pmatrix} = 2\beta\,\delta\beta \begin{pmatrix} a_{1} \\ a_{2} \end{pmatrix}.
+\label{eq:44}
+\end{equation}
+This is a $2\times2$ symmetric eigenvalue problem whose solution determines both the zeroth-order polarisation vectors 
+and the first-order changes in phase speed. 
+
+It would not be difficult to solve the above eigenvalue problem in closed form, but the qualitative behaviour is more important. 
+In the unperturbed case, S-waves are associated with a two-fold degenerate sheet of the slowness surface. For an 
+anisotropic perturbation, the above eigenvalue problem will almost always have two distinct eigenvalues, and hence 
+the S-wave degeneracy will be split. 
+There will then be two distinct plane waves whose phase speeds depend on the propagation direction. They will, moreover, 
+have orthogonal polarisation vectors lying almost orthogonal to the propagation direction; note that the first-order term $\delta 
+\mathbf{a}$ will in general have a component 
+along $\hat{\mathbf{p}}$. These plane waves are known as \textbf{quasi S-waves}, and the process we have described is 
+known as \textbf{shear wave splitting}. 
+
+This phenomenon occurs for waves in the Earth, and the observation of shear wave 
+splitting provides an important constraint on anisotropy. 
+The reason this is interesting is as follows. Most of the Earth appears to seismic waves to be isotropic. This is 
+because anisotropic grains are generally oriented randomly, and hence the structure seen by seismic waves averages 
+out to be isotropic. In some parts of the mantle, however, 
+the seismic waves do see a slight anisotropy because there is a large-scale statistical alignment of grains due to 
+convective flow. Thus, by making observations of shear wave splitting it has been possible to make inferences about 
+the orientation of flow within parts of the mantle.
+
+
+\section*{What you need to know and be able to do}
+\begin{enumerate}
+    \item[(i)] How to derive the Christoffel equation from the linearised equations of motion.
+    \item[(ii)] Reduction of the problem to a symmetric eigenvalue problem, and a qualitative description of its solution.
+    \item[(iii)] How to solve the Christoffel equation for an isotropic solid, and to deduce the properties of plane P- and S-waves.
+    \item[(iv)] How to apply first-order perturbation theory to study the effect of slight anisotropy on plane waves.
+\end{enumerate}

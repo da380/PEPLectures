@@ -1,0 +1,481 @@
+\documentclass [a4paper,12pt]{paper}
+%DIF LATEXDIFF DIFFERENCE FILE
+%DIF DEL lecture6.tex             Thu Nov  6 05:05:14 2025
+%DIF ADD diffs/lecture6_new.tex   Fri Sep 25 10:17:09 2026
+
+\usepackage{mycommands}
+
+
+\title{Lecture 17: The spherical Earth}
+\author{David Al-Attar \\ Michaelmas Term, \the\year}
+%DIF PREAMBLE EXTENSION ADDED BY LATEXDIFF
+%DIF UNDERLINE PREAMBLE %DIF PREAMBLE
+\RequirePackage[normalem]{ulem} %DIF PREAMBLE
+\RequirePackage{color}\definecolor{RED}{rgb}{1,0,0}\definecolor{BLUE}{rgb}{0,0,1} %DIF PREAMBLE
+\providecommand{\DIFadd}[1]{{\protect\color{blue}\uwave{#1}}} %DIF PREAMBLE
+\providecommand{\DIFdel}[1]{{\protect\color{red}\sout{#1}}}                      %DIF PREAMBLE
+%DIF SAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddbegin}{} %DIF PREAMBLE
+\providecommand{\DIFaddend}{} %DIF PREAMBLE
+\providecommand{\DIFdelbegin}{} %DIF PREAMBLE
+\providecommand{\DIFdelend}{} %DIF PREAMBLE
+\providecommand{\DIFmodbegin}{} %DIF PREAMBLE
+\providecommand{\DIFmodend}{} %DIF PREAMBLE
+%DIF FLOATSAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddFL}[1]{\DIFadd{#1}} %DIF PREAMBLE
+\providecommand{\DIFdelFL}[1]{\DIFdel{#1}} %DIF PREAMBLE
+\providecommand{\DIFaddbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFaddendFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelendFL}{} %DIF PREAMBLE
+%DIF COLORLISTINGS PREAMBLE %DIF PREAMBLE
+\RequirePackage{listings} %DIF PREAMBLE
+\RequirePackage{color} %DIF PREAMBLE
+\lstdefinelanguage{DIFcode}{ %DIF PREAMBLE
+%DIF DIFCODE_UNDERLINE %DIF PREAMBLE
+  moredelim=[il][\color{red}\sout]{\%DIF\ <\ }, %DIF PREAMBLE
+  moredelim=[il][\color{blue}\uwave]{\%DIF\ >\ } %DIF PREAMBLE
+} %DIF PREAMBLE
+\lstdefinestyle{DIFverbatimstyle}{ %DIF PREAMBLE
+	language=DIFcode, %DIF PREAMBLE
+	basicstyle=\ttfamily, %DIF PREAMBLE
+	columns=fullflexible, %DIF PREAMBLE
+	keepspaces=true %DIF PREAMBLE
+} %DIF PREAMBLE
+\lstnewenvironment{DIFverbatim}{\lstset{style=DIFverbatimstyle}}{} %DIF PREAMBLE
+\lstnewenvironment{DIFverbatim*}{\lstset{style=DIFverbatimstyle,showspaces=true}}{} %DIF PREAMBLE
+%DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
+
+\begin{document}
+
+\maketitle
+\DIFdelbegin %DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdelend \section*{Outline and motivation}
+
+In this lecture we apply ray theory to explain how quantitative properties of earthquakes and the Earth's internal structure
+ can be determined from observations of seismic waves.
+ Most of the methods and results we describe are more than seventy years old, 
+ and are not representative of current research in seismology. They are, nonetheless, still of great value, 
+ and later developments in the field have been built on these foundations. Indeed, it is really quite remarkable 
+ that most of the knowledge about the Earth and earthquakes contained 
+ within this lecture was determined at a time before digital seismometers and electronic computers.
+
+\section*{Hypocentre location using high-frequency waves}
+
+
+\begin{figure}[ht]
+\centering
+\DIFdelbeginFL %DIFDELCMD < \includegraphics[width=0.8\textwidth]{figures/L6F1.png}
+%DIFDELCMD < %%%
+\DIFdelendFL \DIFaddbeginFL \includegraphics[width=0.75\textwidth]{figures/L6F1.pdf}
+\DIFaddendFL \caption{A diagram showing an idealised planar fault. The hypocentre is the point on
+the fault where rupture initiates, while the epicentre is simply the projection of
+this point onto the Earth\DIFdelbeginFL \DIFdelFL{’}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{'}\DIFaddendFL s surface. It is the hypocentre location that can be
+estimated by looking at the arrival times of high-frequency seismic waves recorded
+on seismometers.}
+\DIFdelbeginFL %DIFDELCMD < \label{fig:fig1}
+%DIFDELCMD < %%%
+\DIFdelendFL \DIFaddbeginFL \label{fig:1}
+\DIFaddendFL \end{figure}
+
+Natural earthquakes occur due to rupture on faults within the Earth, and the point on the fault at which this rupture 
+initiates is known as the earthquake's \textbf{hypocentre}. Fracture 
+mechanics tells us that the speed of rupture propagation on the fault must be less than the fastest elastic wave speed 
+of the medium (e.g.\DIFaddbegin \DIFadd{\ }\DIFaddend the P-wave speed in isotropic bodies), 
+and it follows that the \textbf{first waves to be recorded at distant seismometers are generated at the hypocentre}. Using the 
+recorded \textbf{arrival times} of the first seismic waves at a large 
+number of seismometers, it is possible to estimate the hypocentre location.
+
+We shall focus on the case of an earthquake recorded at a large number of seismometers around the globe, and assume that the 
+Earth's elastic properties are isotropic, which is a 
+reasonable \DIFdelbegin \DIFdel{first-approximation}\DIFdelend \DIFaddbegin \DIFadd{first approximation}\DIFaddend . On a global scale, seismic waves can be recorded at frequencies up to about \DIFdelbegin \DIFdel{2Hz}\DIFdelend \DIFaddbegin \DIFadd{$2\,\mathrm{Hz}$}\DIFaddend . The reason for 
+this upper frequency limit is two-fold: (i) earthquakes 
+generate energy at a whole range of frequencies, but the spectrum tends to be biased towards lower frequencies, and (ii) attenuation 
+mechanisms for seismic waves (which we have not 
+discussed) act more strongly at higher frequencies, and so higher frequency components of the wavefield are removed more quickly as 
+they propagate through the Earth. At the highest 
+observed frequencies, the first arriving waves on seismograms are usually quite sharp, and so their arrival times
+ can be measured to the accuracy of a few fractions of a second.
+
+Given an accurate model of the Earth's seismic velocity structure, and having guessed the hypocentre location $\mathbf{x}_{h}$ and 
+hypocentre time $t_{h}$ for the earthquake, then it is 
+possible to calculate the arrival times we would expect at each of the seismometers using ray theory. The use of ray theory 
+is justified here so long as velocity variations 
+within the Earth are smooth over the \DIFdelbegin \DIFdel{length-scale }\DIFdelend \DIFaddbegin \DIFadd{length scale }\DIFaddend of the observed seismic waves. At frequencies of about \DIFdelbegin \DIFdel{2Hz}\DIFdelend \DIFaddbegin \DIFadd{$2\,\mathrm{Hz}$}\DIFaddend , this is probably a 
+reasonable approximation, but the real reason 
+ray theory is used for these calculations is that it is computationally efficient. Indeed, calculation of the travel time 
+from the source to receiver only requires the integration 
+of the ordinary differential equations described in Lecture\DIFaddbegin \DIFadd{~}\DIFaddend 17. Let us write $t_{i}$ for the measured arrival time of the first 
+seismic wave at the \DIFdelbegin \DIFdel{ith seismometer}\DIFdelend \DIFaddbegin \DIFadd{$i$th seismometer, }\DIFaddend which has 
+position $\mathbf{x}_{i}$. We can then relate this observation to the true source location by
+\DIFdelbegin \begin{displaymath}
+\DIFdel{t_{i}=t_{h}+T(\mathbf{x}_{i},\mathbf{x}_{h})+e_{i}
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}
+\DIFadd{t_{i}=t_{h}+T(\mathbf{x}_{i},\mathbf{x}_{h})+e_{i},
+\label{eq:1}
+}\end{equation}\DIFaddend 
+where $T(\mathbf{x}_{i},\mathbf{x}_{h})$ is the ray theoretic travel time of the fastest ray from $\mathbf{x}_{h}$ to $\mathbf{x}_{i}$, 
+and $e_{i}$ denotes a random measurement error which we assume to have zero mean 
+and known variance $\sigma_{i}^{2}$. To estimate the four unknown parameters $(\mathbf{x}_{h},t_{h})$, we minimise the following 
+\textbf{least-squares misfit}
+\DIFdelbegin \begin{displaymath}
+\DIFdel{J(\mathbf{x}_h, t_h) = \sum_{i=1}^{N_s} \frac{[t_h + T(\mathbf{x}_i, \mathbf{x}_h) - t_i]^2}{\sigma_i^2}
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}
+\DIFadd{J(\mathbf{x}_h, t_h) = \sum_{i=1}^{N_s} \frac{[t_h + T(\mathbf{x}_i, \mathbf{x}_h) - t_i]^2}{\sigma_i^2},
+\label{eq:2}
+}\end{equation}\DIFaddend 
+where $N_{s}$ is the total number of seismometers from which we have measurements. The dependence of the calculated travel 
+times on the hypocentre location $\mathbf{x}_{h}$ is non-linear, but 
+we can apply iterative optimisation methods to find the best-fitting solution given an initial guess. To do this, we 
+need to differentiate the misfit $J$ with respect to the model 
+parameters $(\mathbf{x}_{h},t_{h})$, but we will not enter into the details.
+
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/L6F2.png}
+\caption{A vertical component seismogram recorded in Finland following an earthquake in
+California. The P-wave arrival can be seen very clearly, while later arriving phases
+are significantly harder to identify.}
+\DIFdelbeginFL %DIFDELCMD < \label{fig:fig2}
+%DIFDELCMD < %%%
+\DIFdelendFL \DIFaddbeginFL \label{fig:2}
+\DIFaddendFL \end{figure}
+
+The accuracy to which earthquake hypocentres can be located depends on a number of things. Clearly errors in the measured arrival
+ times lead to uncertainties in the solution, 
+but this can be assessed using standard error-propagation techniques. Next, the limited frequency content of observed seismic waves sets a
+ fundamental limit on the accuracy of 
+location estimates. If we record waves at \DIFaddbegin \DIFadd{a }\DIFaddend maximum frequency of \DIFdelbegin \DIFdel{2 Hz}\DIFdelend \DIFaddbegin \DIFadd{$2\,\mathrm{Hz}$}\DIFaddend , then using a typical P-wave velocity of about \DIFdelbegin \DIFdel{$5 \, \text{km s}^{-1}$ 
+}\DIFdelend \DIFaddbegin \DIFadd{$5\,\mathrm{km\,s^{-1}}$ 
+}\DIFaddend for shallow parts of the Earth, we 
+see that the shortest wavelengths present in the data are about \DIFdelbegin \DIFdel{2.5 km}\DIFdelend \DIFaddbegin \DIFadd{$2.5\,\mathrm{km}$}\DIFaddend . Such waves cannot distinguish sources separated by more than about 
+one half or one quarter of their 
+minimum wavelength\DIFdelbegin \footnote{\DIFdel{The precise fraction isn't well-defined nor is it important.}}%DIFAUXCMD
+\addtocounter{footnote}{-1}%DIFAUXCMD
+\DIFdel{.}\DIFdelend \DIFaddbegin \DIFadd{.}\footnote{\DIFadd{The precise fraction isn't well-defined, nor is it important.}} \DIFaddend The accuracy is also dependent on the 
+\DIFdelbegin \DIFdel{relative 
+}\DIFdelend locations of the seismometers \DIFaddbegin \DIFadd{relative }\DIFaddend to 
+the source. Ideally we would like a fairly even spatial distribution in \DIFdelbegin \DIFdel{term }\DIFdelend \DIFaddbegin \DIFadd{terms }\DIFaddend of both azimuth and distance from the hypocentre. If, however, 
+there are strong biases in the 
+spatial distribution of the seismometers, then large uncertainties in some of the recovered parameters can be introduced. Finally, any 
+uncertainty in the assumed Earth 
+structure will clearly map onto errors in the hypocentre location. In the above discussion we have only considered the arrival times 
+of the first waves seen on the seismograms. 
+It is, however, often possible to identify and measure the arrival times of other seismic phases, and these additional 
+measurements can be used within the above procedure 
+to produce better results.
+
+\section*{The spherically averaged velocity structure of the Earth}
+
+In the remainder of this lecture we consider how the Earth's spherically averaged velocity has been determined.
+ The basic idea is very simple. After an earthquake, seismic waves propagate through the Earth's interior and are 
+ recorded at various locations around the globe. The observed 
+seismograms depend on (i) the earthquake source, and (ii) the material that the waves have travelled through. And so, in principle, 
+it is possible to work backwards from 
+such observations to make inferences about both the earthquake source and the structure of the Earth's interior.
+
+Studies of \DIFdelbegin \DIFdel{earthquake and }\DIFdelend \DIFaddbegin \DIFadd{earthquakes and of }\DIFaddend Earth structure are fundamentally linked, and we cannot learn about one without considering the other.
+ For example, to locate an earthquake accurately 
+we must know the Earth's velocity structure, and yet these earthquake locations are required if we wish to determine the velocity 
+structure! To proceed it is necessary to 
+either consider these problems simultaneously, or to proceed in an iterative manner with one part of the problem being 
+considered solved (i.e.\DIFaddbegin \DIFadd{\ }\DIFaddend that earthquake locations 
+are known) while the other parameters are refined.
+
+\subsection*{Ray theory in spherically symmetric earth models}
+
+To learn about the Earth's velocity structure from travel times, we will use ray theory as discussed in the last lecture.
+  For simplicity we restrict attention 
+to isotropic earth models, in which case we need to consider either P-waves or S-waves, along with a whole
+range of converted phases that can arise at internal or external boundaries. For definiteness, we will focus on P-waves, 
+but the ideas generalise easily.
+
+The eikonal equation for P-waves in such a model is given by
+\DIFdelbegin \begin{displaymath}
+\DIFdel{H(\mathbf{x},\mathbf{p})=\frac{1}{2},
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}
+\DIFadd{H(\mathbf{x},\mathbf{p})=\frac{1}{2},
+\label{eq:3}
+}\end{equation}\DIFaddend 
+where $\mathbf{x}$ is a position vector on a ray, $\mathbf{p}$ is the local slowness vector, and the P-wave Hamiltonian is given by
+\DIFdelbegin \begin{displaymath}
+\DIFdel{H(\mathbf{x},\mathbf{p})=\frac{1}{2}\alpha(\mathbf{x})^{2}||\mathbf{p}||^{2},
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}
+\DIFadd{H(\mathbf{x},\mathbf{p})=\frac{1}{2}\alpha(\mathbf{x})^{2}\|\mathbf{p}\|^{2},
+\label{eq:4}
+}\end{equation}\DIFaddend 
+with $\alpha(\mathbf{x})$ the P-wave speed at a point $\mathbf{x}$. The geometry of the ray paths is determined by solving Hamilton's canonical equations
+\DIFdelbegin \begin{displaymath}
+\DIFdel{\frac{\ddns \mathbf{x}}{\ddns \sigma}=\frac{\partial H}{\partial \mathbf{p}}, \quad \frac{\ddns \mathbf{p}}{\ddns \sigma}=-\frac{\partial H}{\partial \mathbf{x}},
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}
+\DIFadd{\frac{\ddns \mathbf{x}}{\ddns \sigma}=\frac{\partial H}{\partial \mathbf{p}},\quad \frac{\ddns \mathbf{p}}{\ddns \sigma}=-\frac{\partial H}{\partial \mathbf{x}},
+\label{eq:5}
+}\end{equation}\DIFaddend 
+and the travel time $T$ along a ray is simply given by $T[\mathbf{x}(\sigma)]=\sigma$. Because the earth model under 
+consideration is spherically symmetric, the P-wave speed, 
+$\alpha$, only depends on the radial distance \DIFdelbegin \DIFdel{$r=||\mathbf{x}||$ }\DIFdelend \DIFaddbegin \DIFadd{$r=\|\mathbf{x}\|$ }\DIFaddend from the centre of the model. Using this fact, we will show that 
+this problem can be solved using quadratures. 
+This situation is analogous to that for a single particle in a potential, and to other \textbf{integrable systems}
+ which \DIFdelbegin \DIFdel{having }\DIFdelend \DIFaddbegin \DIFadd{have }\DIFaddend sufficiently many conserved quantities.
+
+
+\begin{figure}[ht]
+\centering
+\DIFdelbeginFL %DIFDELCMD < \includegraphics[width=0.8\textwidth]{figures/L6F3.png}
+%DIFDELCMD < %%%
+\DIFdelendFL \DIFaddbeginFL \includegraphics[width=0.8\textwidth]{figures/L6F3.pdf}
+\DIFaddendFL \caption{\DIFdelbeginFL \DIFdelFL{A diagram showing some of the many possible }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{P-wave }\DIFaddendFL ray paths within the \DIFdelbeginFL \DIFdelFL{Earth}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{earth model PREM for a source at the surface, calculated using the ray equations 
+of this lecture}\DIFaddendFL . \DIFdelbeginFL \DIFdelFL{Note
+in particular }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{Rays }\DIFaddendFL that \DIFaddbeginFL \DIFaddFL{turn within }\DIFaddendFL the \DIFaddbeginFL \DIFaddFL{mantle (blue) emerge at epicentral angles up to about $98^{\circ}$, while 
+those that enter the core (red, and green for rays passing through the inner core) emerge beyond about $145^{\circ}$. 
+The }\DIFaddendFL sudden reduction in P-wave velocity \DIFdelbeginFL \DIFdelFL{when }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{on }\DIFaddendFL entering the fluid outer core \DIFaddbeginFL \DIFaddFL{thus }\DIFaddendFL leads to the so-called \DIFdelbeginFL \DIFdelFL{“}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{``}\DIFaddendFL P-wave shadow zone\DIFdelbeginFL \DIFdelFL{”}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{''}\DIFaddendFL , 
+while no S-waves are able to propagate within \DIFdelbeginFL \DIFdelFL{this region}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{the outer core at all}\DIFaddendFL .}
+\DIFdelbeginFL %DIFDELCMD < \label{fig:fig3}
+%DIFDELCMD < %%%
+\DIFdelendFL \DIFaddbeginFL \label{fig:3}
+\DIFaddendFL \end{figure}
+
+Making use of the P-wave Hamiltonian, we find that the ray equations in eq.\DIFdelbegin \DIFdel{(5}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:5}}\DIFaddend ) in a spherically symmetric earth model take the specific form
+\DIFdelbegin \begin{displaymath}
+\DIFdel{\frac{\ddns \mathbf{x}}{\ddns \sigma}=\alpha\hat{\mathbf{p}}, \quad \frac{\ddns \mathbf{p}}{\ddns \sigma}=-\frac{1}{\alpha}\frac{\ddns \alpha}{\ddns r}\hat{\mathbf{x}},
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}
+\DIFadd{\frac{\ddns \mathbf{x}}{\ddns \sigma}=\alpha\hat{\mathbf{p}},\quad \frac{\ddns \mathbf{p}}{\ddns \sigma}=-\frac{1}{\alpha}\frac{\ddns \alpha}{\ddns r}\hat{\mathbf{x}},
+\label{eq:6}
+}\end{equation}\DIFaddend 
+where we have used the eikonal equations to simplify the form of the \DIFdelbegin \DIFdel{right hand }\DIFdelend \DIFaddbegin \DIFadd{right-hand }\DIFaddend sides, and where \DIFdelbegin \DIFdel{"hats" }\DIFdelend \DIFaddbegin \DIFadd{``hats'' }\DIFaddend are used to denote unit vectors. If we define $\mathbf{q}=\mathbf{x}\times \mathbf{p}$, then a simple calculation shows that
+\DIFdelbegin \begin{displaymath}
+\DIFdel{\frac{\ddns }{\ddns \sigma}(\mathbf{x}\times \mathbf{p})=\frac{\ddns \mathbf{x}}{\ddns \sigma}\times \mathbf{p}+\mathbf{x}\times\frac{\ddns \mathbf{p}}{\ddns \sigma} = 
+\alpha\hat{\mathbf{p}}\times \mathbf{p}-\frac{1}{\alpha}\frac{\ddns \alpha}{\ddns r}\mathbf{x}\times\hat{\mathbf{x}}=\mathbf{0} .
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}
+\DIFadd{\frac{\ddns }{\ddns \sigma}(\mathbf{x}\times \mathbf{p})=\frac{\ddns \mathbf{x}}{\ddns \sigma}\times \mathbf{p}+\mathbf{x}\times\frac{\ddns \mathbf{p}}{\ddns \sigma} = 
+\alpha\hat{\mathbf{p}}\times \mathbf{p}-\frac{1}{\alpha}\frac{\ddns \alpha}{\ddns r}\mathbf{x}\times\hat{\mathbf{x}}=\mathbf{0}.
+\label{eq:7}
+}\end{equation}\DIFaddend 
+It follows that $\mathbf{q}$ is constant along solutions to these equations, and we mention in passing that this is precisely the conserved quantity associated with the spherical symmetry through 
+\DIFdelbegin \DIFdel{Nöether}\DIFdelend \DIFaddbegin \DIFadd{Noether}\DIFaddend 's theorem. Noting from eq.\DIFdelbegin \DIFdel{(6}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:6}}\DIFaddend ) that $\ddns \mathbf{x}/\ddns \sigma$ is always parallel to $\mathbf{p}$, it follows that rays always remain within the plane spanned by the initial values of $\mathbf{x}$ and $\mathbf{p}$. 
+Furthermore, \DIFdelbegin \DIFdel{$q=||\mathbf{q}||$ }\DIFdelend \DIFaddbegin \DIFadd{$q=\|\mathbf{q}\|$ }\DIFaddend is constant along a ray, and \DIFdelbegin \DIFdel{that }\DIFdelend this can be written
+\DIFdelbegin \begin{displaymath}
+\DIFdel{q=\frac{r \sin \theta}{\alpha}
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}
+\DIFadd{q=\frac{r \sin \theta}{\alpha},
+\label{eq:8}
+}\end{equation}\DIFaddend 
+where $\theta$ is the angle between $\mathbf{x}$ and $\mathbf{p}$ measured positively clockwise. Because $\mathbf{x}$ and $\mathbf{p}$ remain within their initial plane, we can write
+\DIFdelbegin \begin{displaymath}
+\DIFdel{\hat{\mathbf{p}}=\cos[\theta(\mathbf{x})]\hat{\mathbf{x}}+\sin[\theta(\mathbf{x})]\hat{\bm{\Delta}}(\mathbf{x}),
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}
+\DIFadd{\hat{\mathbf{p}}=\cos[\theta(\mathbf{x})]\hat{\mathbf{x}}+\sin[\theta(\mathbf{x})]\hat{\bm{\Delta}}(\mathbf{x}),
+\label{eq:9}
+}\end{equation}\DIFaddend 
+where the epicentral angle $\Delta$ is that subtended between $\mathbf{x}$ and its initial value, and $\hat{\bm{\Delta}}(\mathbf{x})$ the unit vector in the direction of increasing $\Delta$ about the point $\mathbf{x}$.
+Making use of eq.\DIFdelbegin \DIFdel{(8}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:8}}\DIFaddend ), we can then write
+\DIFdelbegin \begin{displaymath}
+\DIFdel{\sin \theta=\frac{\alpha q}{r}, \quad \cos \theta=\pm\sqrt{1-\frac{\alpha^{2}q^{2}}{r^{2}}},
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}
+\DIFadd{\sin \theta=\frac{\alpha q}{r},\quad \cos \theta=\pm\sqrt{1-\frac{\alpha^{2}q^{2}}{r^{2}}},
+\label{eq:10}
+}\end{equation}\DIFaddend 
+where the sign of the second term is determined by whether the ray is \DIFdelbegin \DIFdel{up going (+) or down going (-}\DIFdelend \DIFaddbegin \DIFadd{up-going ($+$) or down-going ($-$}\DIFaddend ). For definiteness, we consider an initially \DIFdelbegin \DIFdel{down going }\DIFdelend \DIFaddbegin \DIFadd{down-going }\DIFaddend ray, and using the first of the equations in eq.\DIFdelbegin \DIFdel{(6}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:6}}\DIFaddend ) we find
+\DIFdelbegin \begin{displaymath}
+\DIFdel{\frac{\ddns \mathbf{x}}{\ddns \sigma}=-\alpha\sqrt{1-\frac{\alpha^{2}q^{2}}{r^{2}}}\hat{\mathbf{x}}+\frac{\alpha^{2}q}{r}\hat{\bm{\Delta}} .
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}
+\DIFadd{\frac{\ddns \mathbf{x}}{\ddns \sigma}=-\alpha\sqrt{1-\frac{\alpha^{2}q^{2}}{r^{2}}}\hat{\mathbf{x}}+\frac{\alpha^{2}q}{r}\hat{\bm{\Delta}}.
+\label{eq:11}
+}\end{equation}\DIFaddend 
+In this manner, we have eliminated the local slowness vector from the problem, and are left with \DIFaddbegin \DIFadd{a }\DIFaddend single equation for the position vector along the ray. To proceed, we calculate
+\DIFdelbegin \begin{displaymath}
+\DIFdel{\frac{\ddns }{\ddns \sigma}r}[\DIFdel{\mathbf{x}(\sigma)}]\DIFdel{=\frac{\partial r}{\partial x_{i}}\frac{\ddns x_{i}}{d\sigma}=-\alpha\sqrt{1-\frac{\alpha^{2}q^{2}}{r^{2}}},
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}
+\DIFadd{\frac{\ddns }{\ddns \sigma}r}[\DIFadd{\mathbf{x}(\sigma)}]\DIFadd{=\frac{\partial r}{\partial x_{i}}\frac{\ddns x_{i}}{\ddns\sigma}=-\alpha\sqrt{1-\frac{\alpha^{2}q^{2}}{r^{2}}},
+\label{eq:12}
+}\end{equation}\DIFaddend 
+where we have used the familiar relation $\frac{\partial r}{\partial x_{i}}=\hat{x}_{i}$. In the same way, we find
+\DIFdelbegin \begin{displaymath}
+\DIFdel{\frac{\ddns }{\ddns \sigma}\Delta[\mathbf{x}(\sigma)]=\frac{\partial\Delta}{\partial x_{i}}\frac{\ddns x_{i}}{\ddns \sigma}=\frac{\alpha^{2}q}{r^{2}},
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}
+\DIFadd{\frac{\ddns }{\ddns \sigma}\Delta[\mathbf{x}(\sigma)]=\frac{\partial\Delta}{\partial x_{i}}\frac{\ddns x_{i}}{\ddns \sigma}=\frac{\alpha^{2}q}{r^{2}},
+\label{eq:13}
+}\end{equation}\DIFaddend 
+where we have used the identity $\frac{\partial\Delta}{\partial x_{i}}=\frac{1}{r}\hat{\Delta}_{i}$ which is readily established. Combining \DIFdelbegin \DIFdel{eq.(12}\DIFdelend \DIFaddbegin \DIFadd{eqs.~(\ref{eq:12}}\DIFaddend ) and (\DIFdelbegin \DIFdel{13}\DIFdelend \DIFaddbegin \DIFadd{\ref{eq:13}}\DIFaddend ), we have now shown that along a ray we can write
+\DIFdelbegin \begin{displaymath}
+\DIFdel{\frac{\ddns \Delta}{\ddns r}=\frac{\ddns \Delta}{\ddns\sigma}\left(\frac{\ddns r}{\ddns \sigma}\right)^{-1}=\frac{-\alpha q}{r\sqrt{r^{2}-\alpha^{2}q^{2}}}.
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}
+\DIFadd{\frac{\ddns \Delta}{\ddns r}=\frac{\ddns \Delta}{\ddns\sigma}\left(\frac{\ddns r}{\ddns \sigma}\right)^{-1}=\frac{-\alpha q}{r\sqrt{r^{2}-\alpha^{2}q^{2}}}.
+\label{eq:14}
+}\end{equation}\DIFaddend 
+Similarly, using the fact that $\ddns T/\ddns \sigma=1$ along a ray, we find
+\DIFdelbegin \begin{displaymath}
+\DIFdel{\frac{\ddns T}{\ddns r}=\frac{\ddns T}{\ddns \sigma}\left(\frac{\ddns r}{\ddns \sigma}\right)^{-1}=\frac{-r}{\alpha\sqrt{r^{2}-\alpha^{2}q^{2}}}.
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}
+\DIFadd{\frac{\ddns T}{\ddns r}=\frac{\ddns T}{\ddns \sigma}\left(\frac{\ddns r}{\ddns \sigma}\right)^{-1}=\frac{-r}{\alpha\sqrt{r^{2}-\alpha^{2}q^{2}}}.
+\label{eq:15}
+}\end{equation}\DIFaddend 
+It is important to note that these equations are only valid in portions of the ray in which the epicentral angle $\Delta$ \DIFdelbegin \DIFdel{or }\DIFdelend \DIFaddbegin \DIFadd{and }\DIFaddend the travel time $T$ are single-valued functions of \DIFaddbegin \DIFadd{the }\DIFaddend radius $r$.
+
+Let us now suppose that the P-wave speed, $\alpha$, increases monotonically with depth into the earth model. Consider a ray starting at the surface \DIFdelbegin \DIFdel{$r=a$ }\DIFdelend \DIFaddbegin \DIFadd{$r=b$ }\DIFaddend that is initially 
+travelling into the earth in a non-vertical direction (i.e.\DIFaddbegin \DIFadd{\ }\DIFaddend $\pi/2<\theta<\pi$ initially). The fact that $q=\frac{r \sin \theta}{\alpha}$ is conserved implies that this 
+ray will travel monotonically downwards into the earth with $\Delta$ monotonically increasing until it reaches a \textbf{turning point} $r_{t}$ such that
+\DIFdelbegin \begin{displaymath}
+\DIFdel{q=\frac{r_{t}}{\alpha(r_{t})}
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}
+\DIFadd{q=\frac{r_{t}}{\alpha(r_{t})}.
+\label{eq:16}
+}\end{equation}\DIFaddend 
+Beyond this turning point, the ray moves up towards the surface, with \DIFdelbegin \DIFdel{r }\DIFdelend \DIFaddbegin \DIFadd{$r$ }\DIFaddend monotonically increasing, and $\Delta$ continuing to monotonically increase. Furthermore, the \DIFdelbegin \DIFdel{up and down 
+going }\DIFdelend \DIFaddbegin \DIFadd{up- and down-going 
+}\DIFaddend legs of the \DIFdelbegin \DIFdel{rays }\DIFdelend \DIFaddbegin \DIFadd{ray's }\DIFaddend path are symmetric about the radial line passing through the turning point. Using eq.\DIFdelbegin \DIFdel{(14)}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:14}), }\DIFaddend which is valid throughout the \DIFdelbegin \DIFdel{down going }\DIFdelend \DIFaddbegin \DIFadd{down-going }\DIFaddend leg, we obtain
+\DIFdelbegin \begin{displaymath}
+\DIFdel{\Delta=\int_{r_{t}}^{a}\frac{2\alpha(r)q}{r\sqrt{r^{2}-\alpha(r)^{2}q^{2}}}\dd r;
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}
+\DIFadd{\Delta=\int_{r_{t}}^{b}\frac{2\alpha(r)q}{r\sqrt{r^{2}-\alpha(r)^{2}q^{2}}}\dd r,
+\label{eq:17}
+}\end{equation}\DIFaddend 
+for the total epicentral angle subtended by the ray as it travels from the surface to the turning point and then up to the surface again. Using eq.\DIFdelbegin \DIFdel{(15)}\DIFdelend \DIFaddbegin \DIFadd{~(\ref{eq:15}), }\DIFaddend we similarly write the travel time along this ray path as
+\DIFdelbegin \begin{displaymath}
+\DIFdel{T=\int_{r_{t}}^{a}\frac{2r}{\alpha(r)\sqrt{r^{2}-\alpha(r)^{2}q^{2}}}\dd r.
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}
+\DIFadd{T=\int_{r_{t}}^{b}\frac{2r}{\alpha(r)\sqrt{r^{2}-\alpha(r)^{2}q^{2}}}\dd r.
+\label{eq:18}
+}\end{equation}\DIFaddend 
+In this manner, we see that the travel time along a ray path in such a spherical model can be obtained through a simple integral over the velocity structure (the integrands are 
+singular at the turning points, but these are integrable singularities). The extension of these results to models having more complicated velocity structures is 
+straightforward in principle, but takes a little effort.
+
+\subsection*{Travel time inversions for spherical velocity structure}
+As we have just seen, ray theory can be used to efficiently determine the travel times of various \textbf{seismic phases} 
+within a spherically symmetric earth model. At a given epicentral 
+angle, there will generally be many distinct seismic phases that arrive at different times and correspond to different ray 
+paths as well as non-geometric phases such as surface 
+waves, head waves, and diffracted waves that are not predicted by ray theory. The use of the word ``phase'' here refers to a distinct 
+waveform on a seismogram, and should not 
+be confused with other uses of ``phase'' within these lectures or elsewhere.
+
+Assuming that we know an earthquake's location and origin time, it is possible to measure the travel times of various seismic phases to different seismometers. By repeating 
+this process for many \DIFdelbegin \DIFdel{many events, global averaged travel time }\DIFdelend \DIFaddbegin \DIFadd{events, globally averaged travel-time }\DIFaddend curves have been constructed. Given a radial velocity structure, we know how to calculate travel times for 
+the different phases, and we aim to find an earth model that is consistent with our observations. This is another example of an inverse problem in which we must work 
+backwards from observations to learn about a set of model parameters.
+
+We will have more to say about inverse problems later in the course, but historically speaking, 
+the determination of the Earth's spherically symmetric velocity structure largely pre-dates the introduction of inverse theory, and early studies used \DIFdelbegin \DIFdel{more-or-less }\DIFdelend \DIFaddbegin \DIFadd{more or less }\DIFaddend ad 
+hoc methods. In this field, the most important figures are Richard Oldham (\DIFdelbegin \DIFdel{1858-1936}\DIFdelend \DIFaddbegin \DIFadd{1858--1936}\DIFaddend ), Beno Gutenberg (\DIFdelbegin \DIFdel{1889-1960}\DIFdelend \DIFaddbegin \DIFadd{1889--1960}\DIFaddend ), Harold Jeffreys (\DIFdelbegin \DIFdel{1891-1989}\DIFdelend \DIFaddbegin \DIFadd{1891--1989}\DIFaddend ), and 
+Inge Lehmann (\DIFdelbegin \DIFdel{1888-1993}\DIFdelend \DIFaddbegin \DIFadd{1888--1993}\DIFaddend ). In particular, it was Oldham who first identified the Earth's core by noting the absence of P-wave arrivals within a certain range of 
+epicentral angles\DIFaddbegin \DIFadd{, this being the shadow zone illustrated in Fig.~\ref{fig:3}}\DIFaddend . Jeffreys first convincingly argued that the core of the Earth must be at least partially fluid, though here the relevant observations were 
+of solid-Earth tides, and not seismic waves. Finally, Lehmann later realised that there exists a solid inner core through careful study of waves travelling 
+through the Earth's central region. There is a famous quote from Oldham's \DIFaddbegin \DIFadd{(}\DIFaddend 1906\DIFaddbegin \DIFadd{) }\DIFaddend paper on the Earth's core that is worth repeating:
+\begin{quote}
+``Of all regions of the Earth none invites speculation more than that which lies beneath our feet, and in none is speculation more dangerous; yet, apart from 
+speculation, it is little that we can say regarding the constitution of the interior of the earth. Many theories of the earth have been propounded at different 
+times: the central substance of the earth has been supposed to be fiery, fluid, solid, and gaseous in turn, till geologists have turned in despair from the 
+subject, and become inclined to confine their attention to the outermost crust of the Earth, leaving its centre as a playground for mathematicians.''
+\end{quote}
+We shall not consider the determination of the spherically symmetric velocity structure further, but will instead turn to discussing the broad features that have been learnt about the spherically symmetric velocity structure.
+
+\subsection*{An overview of the Earth's spherically averaged velocity structure}
+
+
+\begin{figure}[ht]
+\centering
+\DIFdelbeginFL %DIFDELCMD < \includegraphics[width=0.8\textwidth]{figures/L6F4.png}
+%DIFDELCMD < %%%
+\DIFdelendFL \DIFaddbeginFL \includegraphics[width=0.62\textwidth]{figures/L6F4.pdf}
+\DIFaddendFL \caption{\DIFdelbeginFL \DIFdelFL{Travel time }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{Travel-time }\DIFaddendFL curves \DIFdelbeginFL \DIFdelFL{determined }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{for the main body-wave phases within the earth model PREM, }\DIFaddendFL for a \DIFdelbeginFL \DIFdelFL{large number }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{source at the surface, 
+calculated using the ray equations }\DIFaddendFL of \DIFdelbeginFL \DIFdelFL{seismic }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{this lecture (}\DIFaddendFL phases \DIFdelbeginFL \DIFdelFL{within }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{travelling as P-waves in }\DIFaddendFL the \DIFdelbeginFL \DIFdelFL{Earth}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{mantle in red, and as S-waves in black). 
+Only rays turning below a depth of $220\,\mathrm{km}$ are shown}\DIFaddendFL . The nomenclature for the different phases can be ignored.}
+\DIFdelbeginFL %DIFDELCMD < \label{fig:fig4}
+%DIFDELCMD < %%%
+\DIFdelendFL \DIFaddbeginFL \label{fig:4}
+\DIFaddendFL \end{figure}
+
+\DIFdelbegin \DIFdel{The model PREM by Dziewonski \& Anderson (1981) }\DIFdelend \DIFaddbegin \DIFadd{Figure~\ref{fig:5} }\DIFaddend shows the variation of P-wave and S-wave velocity with depth in the \DIFdelbegin \DIFdel{earth}\DIFdelend \DIFaddbegin \DIFadd{Earth according to the Preliminary Reference Earth Model (PREM) of Dziewonski \& Anderson (1981)}\DIFaddend . This model was obtained by fitting travel 
+times of seismic waves, as well as further constraints obtained from observations of the Earth's free oscillations that will be the focus of a later lecture. As a 
+first observation, there is a general tendency for the velocity to increase gradually downwards, though there are also a number of sharp discontinuities within 
+the structure. The P-wave velocity $\alpha$ and S-wave velocity $\beta$ are given by
+\DIFdelbegin \begin{displaymath}
+\DIFdel{\alpha=\sqrt{\frac{\kappa+\frac{4}{3}\mu}{\rho}}, \quad \beta=\sqrt{\frac{\mu}{\rho}},
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}
+\DIFadd{\alpha=\sqrt{\frac{\kappa+\frac{4}{3}\mu}{\rho}},\quad \beta=\sqrt{\frac{\mu}{\rho}},
+\label{eq:19}
+}\end{equation}\DIFaddend 
+where $\kappa$ is the bulk modulus, $\mu$ the shear modulus, and $\rho$ the density. As we go deeper into the Earth, things are increasingly compressed, and this tends to 
+increase both the elastic \DIFdelbegin \DIFdel{modulii }\DIFdelend \DIFaddbegin \DIFadd{moduli }\DIFaddend and the density, though the combined effect is typically for wave velocities to increase.
+
+Discontinuities in the seismic velocity are identified principally by the occurrence of reflected seismic waves, and their presence must be due \DIFaddbegin \DIFadd{either }\DIFaddend to sharp changes in 
+\DIFdelbegin \DIFdel{either 
+the composition or through }\DIFdelend \DIFaddbegin \DIFadd{composition or to }\DIFaddend a phase change within the same material. Note here that ``sharp'' is always defined relative to the wavelength of the seismic waves used to image 
+the Earth, and so these boundaries may, in reality, be somewhat diffuse. The most notable discontinuities within the Earth are at the \DIFdelbegin \DIFdel{core mantle }\DIFdelend \DIFaddbegin \DIFadd{core--mantle }\DIFaddend boundary (CMB)\DIFaddbegin \DIFadd{, }\DIFaddend which is 
+thought to represent a change from the rocky mantle to a fluid iron core, and at the inner core boundary (ICB)\DIFaddbegin \DIFadd{, }\DIFaddend which is explained by a fluid to solid phase change within 
+the iron core. It is worth emphasising that we do not actually know that the core is made of iron (and likely a few additional minor components). The reasons for thinking 
+this is likely are: (i) iron at the appropriate pressures and temperatures has the right sort of density and wave speeds, (ii) iron is very abundant in the solar system due 
+to its high binding energy, (iii) there exist iron meteorites that are interpreted as fragments from the cores of ``proto-planets'', and (iv) such a composition is consistent 
+with the generation of the geodynamo in a convecting conductor.
+
+
+\begin{figure}[ht]
+\centering
+\DIFdelbeginFL %DIFDELCMD < \includegraphics[width=0.8\textwidth]{figures/L6F5.png}
+%DIFDELCMD < %%%
+\DIFdelendFL \DIFaddbeginFL \includegraphics[width=0.7\textwidth]{figures/L6F5.pdf}
+\DIFaddendFL \caption{Variation of P-wave velocity (black curve) and S-wave velocity (red curve) with
+radius in the model PREM of Dziewonski \& Anderson (1981). Here we can see that
+both wave speeds generally increase with depth, but this increase is interrupted by
+a number of sharp velocity discontinuities. Such discontinuities are associated with
+compositional or phase changes within the Earth. The most notable boundaries
+within the Earth are between the \DIFdelbeginFL \DIFdelFL{the }\DIFdelendFL rocky mantle and the fluid iron outer core
+where the S-wave velocity becomes equal to zero, and at the inner core boundary
+where the iron of the core undergoes a fluid to solid phase transformation.}
+\DIFdelbeginFL %DIFDELCMD < \label{fig:fig5}
+%DIFDELCMD < %%%
+\DIFdelendFL \DIFaddbeginFL \label{fig:5}
+\DIFaddendFL \end{figure}
+
+That the outer core is a fluid is strongly suggested by (i) observations of solid-Earth tides, (ii) the absence of S-waves propagating through this region ($\mu=0$ in a fluid), 
+and (iii) \DIFdelbegin \DIFdel{is also }\DIFdelend \DIFaddbegin \DIFadd{the fact that a fluid core is }\DIFaddend required for the generation of the geodynamo. The likely solidity of the inner core has been deduced by a number of arguments. Firstly, it does not seem plausible 
+that there could be a sharp jump in velocity within a purely fluid region. There is also compelling evidence derived from the observed free oscillation periods (Dziewonski \& 
+Gilbert \DIFdelbegin \DIFdel{1975). And lastly}\DIFdelend \DIFaddbegin \DIFadd{1971). Lastly}\DIFaddend , some studies \DIFdelbegin \DIFdel{that have identify }\DIFdelend \DIFaddbegin \DIFadd{have identified }\DIFaddend inner core S-waves produced by conversion from a P-wave at the ICB (e.g.\DIFaddbegin \DIFadd{\ }\DIFaddend Deuss et al.\DIFaddbegin \DIFadd{\ }\DIFaddend 2000). Such core phases have 
+very small amplitudes\DIFaddbegin \DIFadd{, }\DIFaddend and the robustness of such observations \DIFdelbegin \DIFdel{are }\DIFdelend \DIFaddbegin \DIFadd{is }\DIFaddend still debated.
+
+As well as the velocity discontinuities at the CMB and ICB, there are a number of other discontinuities within the shallower Earth. Those within the crust and \DIFdelbegin \DIFdel{upper most }\DIFdelend \DIFaddbegin \DIFadd{uppermost }\DIFaddend mantle 
+are almost certainly due to compositional changes. There are then additional discontinuities at around \DIFdelbegin \DIFdel{410 km and 670 km }\DIFdelend \DIFaddbegin \DIFadd{$410\,\mathrm{km}$ and $670\,\mathrm{km}$ }\DIFaddend that are not readily explained in terms of composition. 
+Instead these discontinuities are thought to represent solid-state phase transformations within the minerals making up the Earth's mantle that result from radial changes in both 
+pressure and temperature. The occurrence of such phase transformations within this part of the mantle is consistent with both laboratory experiments and quantum mechanical calculations. 
+The region between the \DIFdelbegin \DIFdel{410 km and 670 km }\DIFdelend \DIFaddbegin \DIFadd{$410\,\mathrm{km}$ and $670\,\mathrm{km}$ }\DIFaddend discontinuities is known as the transition zone, and can be regarded as separating the upper and lower parts of the mantle. Other 
+properties such as viscosity are believed to also be discontinuous across these phase boundaries, with the lower mantle seeming to be significantly more viscous. The 
+viscosity contrast between the upper and lower mantle has important implications for mantle convection, and may lead to some \DIFdelbegin \DIFdel{"decoupling" }\DIFdelend \DIFaddbegin \DIFadd{``decoupling'' }\DIFaddend of the two regions.
+
+\section*{What you need to know and be able to do}
+\DIFdelbegin %DIFDELCMD < \begin{itemize}
+%DIFDELCMD <     %%%
+\DIFdelend \DIFaddbegin \begin{enumerate}
+    \DIFaddend \item[(i)] Know what the hypocentre of an earthquake is, and how the hypocentral location and time can be determined using observations of seismic waves.
+    \item[(ii)] Understand how the Hamiltonian ray tracing equations within a spherically symmetric earth model can be reduced to the calculation of 
+    appropriate radial integrals. Within the \DIFdelbegin \DIFdel{second }\DIFdelend \DIFaddbegin \DIFadd{first }\DIFaddend problem set, you will work through similar calculations in a horizontally stratified earth model.
+    \item[(iii)] Understand in outline the observations and methods that were used to constrain the Earth's spherically symmetric velocity structure. 
+    You should also know the basic properties of this spherically symmetric velocity structure, and the physical interpretation of its major features.
+\DIFdelbegin %DIFDELCMD < \end{itemize}
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \end{enumerate}
+\DIFaddend 
+
+\end{document}

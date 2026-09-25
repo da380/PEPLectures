@@ -1,0 +1,627 @@
+\documentclass[a4paper,12pt]{paper}
+
+\usepackage{mycommands}
+
+% Worked-example layout: boxed problem statement followed by a solution.
+\newcounter{example}
+\renewenvironment{example}[1]{%  % paper.cls already defines an example environment
+  \refstepcounter{example}%
+  \begin{mdframed}[linewidth=1pt,innertopmargin=6pt,innerbottommargin=6pt]%
+  \noindent\textbf{Example \theexample: #1.}\ }{%
+  \end{mdframed}}
+\newenvironment{solution}{\par\noindent\textbf{Solution.}\ }{\par\medskip}
+
+\title{Worked examples for Lecture 14: Seismic sources}
+\author{David Al-Attar \\ Michaelmas Term, \the\year}
+
+\begin{document}
+
+\maketitle
+
+\noindent These examples accompany Lecture~14. They are intended as practice in the concrete
+calculations that underlie the lecture, and are less demanding than the questions on the
+problem sets. Numerical results were checked with the scripts in the \texttt{python}
+directory.
+
+\begin{example}{The stress glut of a fault in an isotropic body, and the moment tensor}
+An idealised fault lies in the $(x_{1},x_{2})$-plane of an isotropic body with Lam\'{e}
+parameters $\lambda$ and $\mu$, and the displacement discontinuity vector $\mathbf{w}$ is
+tangential to the fault, so that $w_{3}=0$.
+\begin{enumerate}
+    \item[(a)] Starting from the stress glut $\overline{S}_{ij}=A_{ijk3}w_{k}\delta(x_{3})$
+    obtained in the lecture, show that
+    \begin{equation*}
+    \overline{S}_{ij}=\mu\left(w_{i}\delta_{j3}+w_{j}\delta_{i3}\right)\delta(x_{3}),
+    \end{equation*}
+    and comment on the absence of $\lambda$.
+    \item[(b)] The \textbf{moment tensor} of a source is defined as the volume integral of
+    the stress glut,
+    \begin{equation*}
+    M_{ij}(t)=\int_{M}\overline{S}_{ij}(\mathbf{x},t)\dd^{3}\mathbf{x}.
+    \end{equation*}
+    Suppose that for $t>0$ the slip $\mathbf{w}=D\,\hat{\mathbf{e}}_{1}$ is uniform over a
+    patch $\Sigma$ of the fault having area $\mathcal{A}$, that $\mu$ is constant on $\Sigma$,
+    and that $\Sigma$ is small compared with the wavelengths of interest. Explain why the
+    stress glut can then be replaced by $M_{ij}\delta(\mathbf{x})$, determine $M_{ij}$, and
+    find its eigenvalues and eigenvectors. Express $\mathbf{M}$ in terms of its eigenvectors.
+\end{enumerate}
+\end{example}
+
+\begin{solution}
+(a) For an isotropic material the elastic tensor takes the form
+\begin{equation}
+A_{ijkl}=\lambda\delta_{ij}\delta_{kl}+\mu\left(\delta_{ik}\delta_{jl}+\delta_{il}\delta_{jk}\right),
+\label{eq:1}
+\end{equation}
+and so, setting $l=3$ and contracting with $w_{k}$,
+\begin{equation}
+A_{ijk3}w_{k}=\lambda\delta_{ij}\delta_{k3}w_{k}+\mu\left(\delta_{ik}\delta_{j3}+\delta_{i3}\delta_{jk}\right)w_{k}
+=\lambda w_{3}\,\delta_{ij}+\mu\left(w_{i}\delta_{j3}+w_{j}\delta_{i3}\right).
+\label{eq:2}
+\end{equation}
+The first term is proportional to $w_{3}$, which vanishes because the displacement
+discontinuity is tangential to the fault, and hence
+\begin{equation}
+\overline{S}_{ij}=\mu\left(w_{i}\delta_{j3}+w_{j}\delta_{i3}\right)\delta(x_{3}).
+\label{eq:3}
+\end{equation}
+Written out, the only non-zero components are
+\begin{equation}
+\overline{S}_{13}=\overline{S}_{31}=\mu w_{1}\delta(x_{3}),\quad
+\overline{S}_{23}=\overline{S}_{32}=\mu w_{2}\delta(x_{3}),
+\label{eq:4}
+\end{equation}
+so that the stress glut is symmetric, as it must be within the linearised theory, and also
+traceless, $\overline{S}_{ii}=2\mu w_{3}\delta(x_{3})=0$. The same calculation for a general
+fault surface with unit normal $\hat{\mathbf{n}}$ gives
+$\overline{S}_{ij}=\mu(w_{i}\hat{n}_{j}+w_{j}\hat{n}_{i})\delta_{\Sigma}$ whenever
+$\mathbf{w}\cdot\hat{\mathbf{n}}=0$. The Lam\'{e} parameter $\lambda$ enters only through the
+term $\lambda w_{3}\delta_{ij}$, which is to say only if the fault opens or the two sides
+interpenetrate. For a shear dislocation the source is therefore completely insensitive to
+$\lambda$; the radiated waves depend on $\lambda$ only through their propagation, not
+through their generation.
+
+(b) The stress glut enters the linearised equations of motion through
+$-\partial\overline{S}_{ij}/\partial x_{j}$, and it acts on the displacement field only
+through integrals against smooth functions. For any smooth $\phi$, using the defining
+property of $\delta(x_{3})$ to reduce the volume integral to one over the fault,
+\begin{equation}
+\int_{M}\overline{S}_{ij}\,\phi\dd^{3}\mathbf{x}
+=\int_{\Sigma}\mu\left(w_{i}\delta_{j3}+w_{j}\delta_{i3}\right)\phi\dd S
+\approx\phi(\mathbf{0})\int_{\Sigma}\mu\left(w_{i}\delta_{j3}+w_{j}\delta_{i3}\right)\dd S
+=\phi(\mathbf{0})M_{ij},
+\label{eq:5}
+\end{equation}
+provided that $\phi$ varies little over $\Sigma$, which is the case for wavefields whose
+wavelengths are large compared with the patch. Since
+$\int_{M}M_{ij}\delta(\mathbf{x})\phi\dd^{3}\mathbf{x}=M_{ij}\phi(\mathbf{0})$, the
+replacement $\overline{S}_{ij}\to M_{ij}\delta(\mathbf{x})$ preserves precisely this
+zeroth moment of the glut, and this is the \textbf{point-source approximation}. Evaluating
+the integral for uniform slip $\mathbf{w}=D\,\hat{\mathbf{e}}_{1}$ and constant $\mu$ gives,
+for $t>0$,
+\begin{equation}
+M_{ij}=\mu\mathcal{A}D\left(\delta_{i1}\delta_{j3}+\delta_{i3}\delta_{j1}\right),
+\quad\text{i.e.}\quad
+\mathbf{M}=M_{0}\begin{pmatrix}0&0&1\\0&0&0\\1&0&0\end{pmatrix},\quad M_{0}=\mu\mathcal{A}D,
+\label{eq:6}
+\end{equation}
+where $M_{0}$ is the \textbf{scalar seismic moment}, with units of $\mathrm{N\,m}$. A
+moment tensor of this form is called a \textbf{double couple}, for reasons made clear in
+the next example.
+
+To find the eigenvalues we expand $\det(\mathbf{M}-\sigma\mathbf{I})$ along its second
+row, which contains the single non-zero entry $-\sigma$, to obtain
+\begin{equation}
+\det(\mathbf{M}-\sigma\mathbf{I})=-\sigma\left(\sigma^{2}-M_{0}^{2}\right),
+\label{eq:7}
+\end{equation}
+so the eigenvalues are $M_{0}$, $0$ and $-M_{0}$. The corresponding unit eigenvectors are
+found by inspection, since $\mathbf{M}$ simply exchanges the first and third components of
+a vector (scaled by $M_{0}$) and annihilates the second,
+\begin{equation}
+\hat{\mathbf{t}}=\frac{1}{\sqrt{2}}\left(\hat{\mathbf{e}}_{1}+\hat{\mathbf{e}}_{3}\right),\quad
+\hat{\mathbf{b}}=\hat{\mathbf{e}}_{2},\quad
+\hat{\mathbf{p}}=\frac{1}{\sqrt{2}}\left(\hat{\mathbf{e}}_{1}-\hat{\mathbf{e}}_{3}\right),
+\label{eq:8}
+\end{equation}
+with $\mathbf{M}\hat{\mathbf{t}}=M_{0}\hat{\mathbf{t}}$, $\mathbf{M}\hat{\mathbf{b}}=\mathbf{0}$
+and $\mathbf{M}\hat{\mathbf{p}}=-M_{0}\hat{\mathbf{p}}$. The vector $\hat{\mathbf{t}}$ lies at
+$45^{\circ}$ to the fault plane in the direction of slip and is known as the
+\textbf{tension} or T-axis; $\hat{\mathbf{p}}$, also at $45^{\circ}$ to the fault, is the
+\textbf{pressure} or P-axis; and $\hat{\mathbf{b}}$, which lies in the fault plane
+perpendicular to the slip, is the \textbf{null} or B-axis. Because $\mathbf{M}$ is
+symmetric, it has the spectral decomposition
+\begin{equation}
+\mathbf{M}=M_{0}\left(\hat{\mathbf{t}}\hat{\mathbf{t}}^{T}-\hat{\mathbf{p}}\hat{\mathbf{p}}^{T}\right),
+\label{eq:9}
+\end{equation}
+which can be checked directly since
+$\hat{\mathbf{t}}\hat{\mathbf{t}}^{T}-\hat{\mathbf{p}}\hat{\mathbf{p}}^{T}
+=\hat{\mathbf{e}}_{1}\hat{\mathbf{e}}_{3}^{T}+\hat{\mathbf{e}}_{3}\hat{\mathbf{e}}_{1}^{T}$.
+Eq.~(\ref{eq:9}) says that a double couple is equivalent to a pair of equal and opposite
+linear dipoles, a tensile one along $\hat{\mathbf{t}}$ and a compressive one along
+$\hat{\mathbf{p}}$, at $45^{\circ}$ to the fault.
+
+Two features of the result are worth noting. First, the trace of $\mathbf{M}$, which is
+the sum of its eigenvalues, vanishes; a double couple involves no change in volume.
+Second, $\mathbf{M}$ in eq.~(\ref{eq:6}) is unchanged if $\hat{\mathbf{e}}_{1}$ and
+$\hat{\mathbf{e}}_{3}$ are interchanged, i.e.\ if the slip direction and the fault normal
+swap roles. Slip $D\,\hat{\mathbf{e}}_{3}$ on a fault with normal $\hat{\mathbf{e}}_{1}$
+produces an identical moment tensor. This second plane is known as the
+\textbf{auxiliary plane}, and the moment tensor alone cannot distinguish it from the
+true fault plane; both planes contain the null axis and bisect the P- and T-axes.
+\end{solution}
+
+\begin{example}{The equivalent body force for a point source}
+A point source in the interior of a body has stress glut
+$\overline{S}_{ij}(\mathbf{x},t)=M_{ij}(t)\delta(\mathbf{x})$, where the moment tensor
+$M_{ij}$ is symmetric.
+\begin{enumerate}
+    \item[(a)] Show that the linearised equations of motion and boundary conditions are
+    those of the same body subject to a body force
+    $f_{i}=-M_{ij}\,\partial\delta(\mathbf{x})/\partial x_{j}$ and no applied surface
+    traction.
+    \item[(b)] Show that this force exerts no net force and no net torque on the body,
+    \begin{equation*}
+    \int_{M}f_{i}\dd^{3}\mathbf{x}=0,\quad
+    \int_{M}\epsilon_{ijk}x_{j}f_{k}\dd^{3}\mathbf{x}=0,
+    \end{equation*}
+    and identify which property of $M_{ij}$ is responsible for each.
+    \item[(c)] For the double couple of Example~1, interpret $\mathbf{f}$ as the limit of
+    two force couples, and verify that their torques cancel.
+\end{enumerate}
+\end{example}
+
+\begin{solution}
+(a) The linearised equations of motion obtained in the lecture are
+\begin{equation}
+\rho\frac{\partial^{2}u_{i}}{\partial t^{2}}
+-\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\right)
+=-\frac{\partial\overline{S}_{ij}}{\partial x_{j}},
+\label{eq:10}
+\end{equation}
+together with the boundary condition
+$A_{ijkl}(\partial u_{k}/\partial x_{l})\hat{n}_{j}=\overline{S}_{ij}\hat{n}_{j}$ on
+$\partial M$. Substituting $\overline{S}_{ij}=M_{ij}(t)\delta(\mathbf{x})$, and noting that
+$M_{ij}$ does not depend on position, the right hand side of eq.~(\ref{eq:10}) becomes
+\begin{equation}
+f_{i}(\mathbf{x},t)=-M_{ij}(t)\frac{\partial\delta}{\partial x_{j}}(\mathbf{x}),
+\label{eq:11}
+\end{equation}
+while $\delta(\mathbf{x})$ vanishes identically on $\partial M$ because the source lies in
+the interior, so the boundary condition reduces to the traction-free condition
+$A_{ijkl}(\partial u_{k}/\partial x_{l})\hat{n}_{j}=0$. The problem is therefore identical
+to that for the same elastic body driven by the body force $\mathbf{f}$, which is why the
+lecture refers to the right hand side of eq.~(\ref{eq:10}) as an effective body force.
+The derivative of the delta function is understood in the sense of distributions: for any
+smooth $\phi$,
+\begin{equation}
+\int_{M}\phi\,\frac{\partial\delta}{\partial x_{j}}\dd^{3}\mathbf{x}
+=-\int_{M}\frac{\partial\phi}{\partial x_{j}}\,\delta\dd^{3}\mathbf{x}
+=-\frac{\partial\phi}{\partial x_{j}}(\mathbf{0}),
+\label{eq:12}
+\end{equation}
+where the surface term arising from integration by parts vanishes because $\delta$ is
+supported only at the origin.
+
+(b) Applying eq.~(\ref{eq:12}) with $\phi=1$ gives the net force
+\begin{equation}
+\int_{M}f_{i}\dd^{3}\mathbf{x}
+=-M_{ij}\int_{M}\frac{\partial\delta}{\partial x_{j}}\dd^{3}\mathbf{x}
+=M_{ij}\frac{\partial(1)}{\partial x_{j}}=0,
+\label{eq:13}
+\end{equation}
+and this holds for any $M_{ij}$, symmetric or not; it is a consequence of the source
+entering only as a divergence. For the torque about the origin we apply
+eq.~(\ref{eq:12}) with $\phi=x_{j}$,
+\begin{equation}
+\int_{M}\epsilon_{ijk}x_{j}f_{k}\dd^{3}\mathbf{x}
+=-\epsilon_{ijk}M_{kl}\int_{M}x_{j}\frac{\partial\delta}{\partial x_{l}}\dd^{3}\mathbf{x}
+=\epsilon_{ijk}M_{kl}\,\frac{\partial x_{j}}{\partial x_{l}}\bigg|_{\mathbf{x}=\mathbf{0}}
+=\epsilon_{ijk}M_{kl}\delta_{jl}
+=\epsilon_{ijk}M_{kj}.
+\label{eq:14}
+\end{equation}
+This is a contraction of the symmetric tensor $M_{kj}$ with the alternating symbol, which
+is antisymmetric in $j$ and $k$, and so it vanishes. Since the net force is zero, the
+torque about any other point is the same, and hence also zero. Conversely, if
+$M_{ij}$ had an antisymmetric part, eq.~(\ref{eq:14}) shows that the source would exert a
+net torque equal to minus twice the axial vector of that part. The symmetry of the stress
+glut, which in the lecture was a consequence of the invariance of the strain energy under
+superimposed rigid rotations, is thus exactly the condition that the source does not alter
+the angular momentum of the body, while the divergence form guarantees that it does not
+alter the linear momentum. An earthquake is an internal process, and cannot do either.
+
+(c) For the double couple $M_{13}=M_{31}=M_{0}$ of Example~1, eq.~(\ref{eq:11}) gives
+\begin{equation}
+f_{1}=-M_{0}\frac{\partial\delta}{\partial x_{3}},\quad f_{2}=0,\quad
+f_{3}=-M_{0}\frac{\partial\delta}{\partial x_{1}}.
+\label{eq:15}
+\end{equation}
+A derivative of the delta function is the limit of a difference of two shifted delta
+functions,
+\begin{equation}
+\frac{\partial\delta}{\partial x_{3}}(\mathbf{x})
+=\lim_{h\to0}\frac{1}{h}\left[\delta\!\left(\mathbf{x}+\tfrac{h}{2}\hat{\mathbf{e}}_{3}\right)
+-\delta\!\left(\mathbf{x}-\tfrac{h}{2}\hat{\mathbf{e}}_{3}\right)\right],
+\label{eq:16}
+\end{equation}
+as follows by integrating both sides against a smooth $\phi$ and Taylor expanding. Hence
+\begin{equation}
+f_{1}=\lim_{h\to0}\frac{M_{0}}{h}\left[\delta\!\left(\mathbf{x}-\tfrac{h}{2}\hat{\mathbf{e}}_{3}\right)
+-\delta\!\left(\mathbf{x}+\tfrac{h}{2}\hat{\mathbf{e}}_{3}\right)\right],
+\label{eq:17}
+\end{equation}
+which is a point force of magnitude $F=M_{0}/h$ directed along $+\hat{\mathbf{e}}_{1}$ at
+$\mathbf{x}=+\tfrac{h}{2}\hat{\mathbf{e}}_{3}$, together with an equal and opposite force
+at $\mathbf{x}=-\tfrac{h}{2}\hat{\mathbf{e}}_{3}$. This is a \textbf{force couple} with
+arm $h$ and moment $Fh=M_{0}$, which remains finite as $h\to0$; the forces act along the
+slip direction and are separated along the fault normal. The side $x_{3}>0$ is pushed in
+the $+\hat{\mathbf{e}}_{1}$ direction and the side $x_{3}<0$ in the $-\hat{\mathbf{e}}_{1}$
+direction, consistent with the displacement jumping by $+D\,\hat{\mathbf{e}}_{1}$ on
+crossing the fault from $x_{3}<0$ to $x_{3}>0$. Its torque is
+\begin{equation}
+\tfrac{h}{2}\hat{\mathbf{e}}_{3}\times F\hat{\mathbf{e}}_{1}
++\left(-\tfrac{h}{2}\hat{\mathbf{e}}_{3}\right)\times\left(-F\hat{\mathbf{e}}_{1}\right)
+=Fh\,\hat{\mathbf{e}}_{3}\times\hat{\mathbf{e}}_{1}=M_{0}\hat{\mathbf{e}}_{2}.
+\label{eq:18}
+\end{equation}
+In exactly the same way $f_{3}$ is a couple of forces $\pm F\hat{\mathbf{e}}_{3}$ at
+$\pm\tfrac{h}{2}\hat{\mathbf{e}}_{1}$, with forces along the fault normal separated along
+the slip direction, and torque
+\begin{equation}
+Fh\,\hat{\mathbf{e}}_{1}\times\hat{\mathbf{e}}_{3}=-M_{0}\hat{\mathbf{e}}_{2}.
+\label{eq:19}
+\end{equation}
+The two torques cancel, as they must by part (b). The first couple is the one we might
+have written down intuitively from the picture of slip on the fault; the second, which
+corresponds to slip on the auxiliary plane, is forced upon us by the requirement that the
+source exerts no net torque, and it is the pair together that constitutes the
+\textbf{double couple}. A single couple would set the body spinning.
+\end{solution}
+
+\begin{example}{An explosive source generates only P-waves}
+An explosion at the origin of a homogeneous isotropic whole space, with Lam\'{e}
+parameters $\lambda$ and $\mu$ and density $\rho$, is modelled by the isotropic stress glut
+\begin{equation*}
+\overline{S}_{ij}(\mathbf{x},t)=M_{0}\,\delta_{ij}\,\delta(\mathbf{x})H(t).
+\end{equation*}
+Find the equivalent body force, write down the resulting equation of motion for
+$\mathbf{u}$, and by taking its curl show that the displacement field is irrotational for
+all time. Deduce that only P-waves are generated.
+\end{example}
+
+\begin{solution}
+The equivalent body force is
+\begin{equation}
+f_{i}=-\frac{\partial}{\partial x_{j}}\left[M_{0}\delta_{ij}\delta(\mathbf{x})H(t)\right]
+=-M_{0}H(t)\frac{\partial\delta}{\partial x_{i}}(\mathbf{x}),
+\quad\text{i.e.}\quad
+\mathbf{f}=-M_{0}H(t)\nabla\delta(\mathbf{x}),
+\label{eq:20}
+\end{equation}
+which is the gradient of a scalar. For a homogeneous isotropic body we substitute
+eq.~(\ref{eq:1}) into the elastic operator and use the constancy of $\lambda$ and $\mu$,
+\begin{equation}
+\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\right)
+=\lambda\frac{\partial^{2}u_{k}}{\partial x_{i}\partial x_{k}}
++\mu\frac{\partial^{2}u_{i}}{\partial x_{j}\partial x_{j}}
++\mu\frac{\partial^{2}u_{j}}{\partial x_{j}\partial x_{i}}
+=(\lambda+\mu)\frac{\partial}{\partial x_{i}}\left(\nabla\cdot\mathbf{u}\right)+\mu\nabla^{2}u_{i},
+\label{eq:21}
+\end{equation}
+so that the equation of motion is the one given in Lecture~13 for a homogeneous isotropic
+body, now with a body force,
+\begin{equation}
+\rho\frac{\partial^{2}\mathbf{u}}{\partial t^{2}}
+-(\lambda+\mu)\nabla(\nabla\cdot\mathbf{u})-\mu\nabla^{2}\mathbf{u}
+=-M_{0}H(t)\nabla\delta(\mathbf{x}),
+\label{eq:22}
+\end{equation}
+to be solved with $\mathbf{u}=\partial\mathbf{u}/\partial t=\mathbf{0}$ at $t=0$. Now take
+the curl of eq.~(\ref{eq:22}) and write $\bm{\omega}=\nabla\times\mathbf{u}$. The curl of
+a gradient vanishes, which disposes of both the $(\lambda+\mu)$ term and the body force,
+while the curl commutes with $\nabla^{2}$ and with $\partial^{2}/\partial t^{2}$ because the
+coefficients are constant. We are left with
+\begin{equation}
+\rho\frac{\partial^{2}\bm{\omega}}{\partial t^{2}}-\mu\nabla^{2}\bm{\omega}=\mathbf{0},
+\quad
+\bm{\omega}(\mathbf{x},0)=\mathbf{0},\quad
+\frac{\partial\bm{\omega}}{\partial t}(\mathbf{x},0)=\mathbf{0},
+\label{eq:23}
+\end{equation}
+the initial conditions following by taking the curl of those for $\mathbf{u}$, which hold
+at every point of the body. Each Cartesian component of $\bm{\omega}$ thus satisfies the
+homogeneous scalar wave equation with speed $\beta=\sqrt{\mu/\rho}$ and vanishing initial
+data, and the only such solution is zero. To see this, consider the energy
+\begin{equation}
+\mathcal{E}(t)=\frac{1}{2}\int\left(\rho\left\|\frac{\partial\bm{\omega}}{\partial t}\right\|^{2}
++\mu\frac{\partial\omega_{i}}{\partial x_{j}}\frac{\partial\omega_{i}}{\partial x_{j}}\right)\dd^{3}\mathbf{x},
+\label{eq:24}
+\end{equation}
+whose time derivative, after an integration by parts, is
+$\int\dot{\omega}_{i}\left(\rho\ddot{\omega}_{i}-\mu\nabla^{2}\omega_{i}\right)\dd^{3}\mathbf{x}=0$;
+the surface term at infinity vanishes since, at any finite time, the disturbance has only
+travelled a finite distance from the source. Thus $\mathcal{E}(t)=\mathcal{E}(0)=0$, and
+as $\mathcal{E}$ is a sum of non-negative terms both $\partial\bm{\omega}/\partial t$ and
+the gradient of $\bm{\omega}$ vanish; $\bm{\omega}$ is therefore constant in space and time,
+and equal to its initial value $\mathbf{0}$. The displacement is \textbf{irrotational} at
+all times.
+
+In a whole space an irrotational field can be written as a gradient,
+$\mathbf{u}=\nabla\phi$. Substituting into eq.~(\ref{eq:22}), and using
+$\nabla^{2}\nabla\phi=\nabla\nabla^{2}\phi$ and $\nabla\cdot\nabla\phi=\nabla^{2}\phi$,
+every term becomes a gradient,
+\begin{equation}
+\nabla\left[\rho\frac{\partial^{2}\phi}{\partial t^{2}}-(\lambda+2\mu)\nabla^{2}\phi
++M_{0}H(t)\delta(\mathbf{x})\right]=\mathbf{0}.
+\label{eq:25}
+\end{equation}
+The bracket is therefore a function of $t$ alone, which can be absorbed into $\phi$
+without changing $\mathbf{u}$, and so
+\begin{equation}
+\rho\frac{\partial^{2}\phi}{\partial t^{2}}-(\lambda+2\mu)\nabla^{2}\phi=-M_{0}H(t)\delta(\mathbf{x}).
+\label{eq:26}
+\end{equation}
+This is the scalar wave equation with wave speed $\alpha=\sqrt{(\lambda+2\mu)/\rho}$, the
+P-wave speed of Lecture~15: the explosion radiates a spherically symmetric P-wave and
+nothing else. The isotropic moment tensor $M_{0}\delta_{ij}$ is invariant under all
+rotations, so there is no fault plane and no preferred direction in the radiation. This
+should be contrasted with the double couple of Example~1, whose moment tensor is
+traceless. In practice explosions do produce S-waves, because the Earth is neither
+homogeneous nor unbounded and P-waves are partly converted to S-waves at the free surface
+and at internal discontinuities, but these are secondary. The size of the isotropic part
+of the moment tensor, essentially zero for an earthquake, is one of the discriminants used
+to distinguish nuclear tests from earthquakes.
+\end{solution}
+
+\begin{example}{Finite rupture and the moment rate function}
+A rectangular fault occupies the region $0\le x_{1}\le L$, $0\le x_{2}\le W_{\mathrm{f}}$ of
+the plane $x_{3}=0$ in a body with constant shear modulus $\mu$. Rupture begins at
+$x_{1}=0$ at time $t=0$ and propagates in the $x_{1}$-direction at constant speed
+$v_{\mathrm{r}}$, with the slip at each point taking place instantaneously as the rupture
+front passes,
+\begin{equation*}
+w_{1}(x_{1},x_{2},t)=D\,H\!\left(t-\frac{x_{1}}{v_{\mathrm{r}}}\right),\quad w_{2}=w_{3}=0.
+\end{equation*}
+Find the time-dependent scalar moment $M_{0}(t)$ and the \textbf{moment rate}
+$\dot{M}_{0}(t)$, and show that the latter is a boxcar of duration $L/v_{\mathrm{r}}$.
+Estimate the rupture duration and the total moment for $L=100\,\mathrm{km}$,
+$v_{\mathrm{r}}=3\,\mathrm{km\,s^{-1}}$, $W_{\mathrm{f}}=20\,\mathrm{km}$, $D=2\,\mathrm{m}$
+and $\mu=3\times10^{10}\,\mathrm{Pa}$.
+\end{example}
+
+\begin{solution}
+From eq.~(\ref{eq:4}) the stress glut has the single independent component
+$\overline{S}_{13}=\overline{S}_{31}=\mu w_{1}\delta(x_{3})$, and so by the definition of
+the moment tensor in Example~1 the only non-zero components are
+\begin{equation}
+M_{13}(t)=M_{31}(t)=\mu\int_{\Sigma}w_{1}\dd S\equiv M_{0}(t),
+\label{eq:27}
+\end{equation}
+which defines the time-dependent scalar moment. The moment tensor has the double-couple
+form of Example~1 at every instant, with the whole time dependence carried by
+$M_{0}(t)$. Substituting the assumed slip, and performing the trivial integral over
+$x_{2}$,
+\begin{equation}
+M_{0}(t)=\mu W_{\mathrm{f}}D\int_{0}^{L}H\!\left(t-\frac{x_{1}}{v_{\mathrm{r}}}\right)\dd x_{1}.
+\label{eq:28}
+\end{equation}
+The step function equals one where $x_{1}<v_{\mathrm{r}}t$ and zero elsewhere, so the
+integral is the length of the ruptured portion of the fault at time $t$, namely
+\begin{equation}
+M_{0}(t)=\begin{cases}
+0, & t<0,\\
+\mu W_{\mathrm{f}}D\,v_{\mathrm{r}}t, & 0\le t\le T_{\mathrm{r}},\\
+\mu W_{\mathrm{f}}L D, & t>T_{\mathrm{r}},
+\end{cases}
+\quad T_{\mathrm{r}}=\frac{L}{v_{\mathrm{r}}}.
+\label{eq:29}
+\end{equation}
+The moment grows linearly while the rupture front crosses the fault and then stays at its
+final value $\mu\mathcal{A}D$, with $\mathcal{A}=LW_{\mathrm{f}}$, in agreement with
+Example~1. Differentiating under the integral sign, and using $H'=\delta$,
+\begin{equation}
+\dot{M}_{0}(t)=\mu W_{\mathrm{f}}\int_{0}^{L}\frac{\partial w_{1}}{\partial t}\dd x_{1}
+=\mu W_{\mathrm{f}}D\int_{0}^{L}\delta\!\left(t-\frac{x_{1}}{v_{\mathrm{r}}}\right)\dd x_{1}
+=\mu W_{\mathrm{f}}D\,v_{\mathrm{r}}\int_{0}^{T_{\mathrm{r}}}\delta(t-\tau)\dd\tau,
+\label{eq:30}
+\end{equation}
+where we substituted $\tau=x_{1}/v_{\mathrm{r}}$. The final integral is one if
+$0<t<T_{\mathrm{r}}$ and zero otherwise, and so
+\begin{equation}
+\dot{M}_{0}(t)=\mu W_{\mathrm{f}}D\,v_{\mathrm{r}}\left[H(t)-H(t-T_{\mathrm{r}})\right],
+\label{eq:31}
+\end{equation}
+a boxcar of height $\mu W_{\mathrm{f}}D\,v_{\mathrm{r}}$ and duration $T_{\mathrm{r}}$, in
+agreement with the derivative of eq.~(\ref{eq:29}). Its area is
+$\mu W_{\mathrm{f}}D\,v_{\mathrm{r}}T_{\mathrm{r}}=\mu\mathcal{A}D$, the total moment, as it
+must be.
+
+For the given values the rupture duration is
+\begin{equation}
+T_{\mathrm{r}}=\frac{100\,\mathrm{km}}{3\,\mathrm{km\,s^{-1}}}\approx33\,\mathrm{s},
+\label{eq:32}
+\end{equation}
+and the total moment is
+\begin{equation}
+M_{0}=\mu\mathcal{A}D=\left(3\times10^{10}\,\mathrm{Pa}\right)
+\left(10^{5}\,\mathrm{m}\right)\left(2\times10^{4}\,\mathrm{m}\right)\left(2\,\mathrm{m}\right)
+=1.2\times10^{20}\,\mathrm{N\,m},
+\label{eq:33}
+\end{equation}
+with a moment rate of $3.6\times10^{18}\,\mathrm{N\,m\,s^{-1}}$ during the rupture. For
+orientation, the moment magnitude is defined by
+$M_{\mathrm{w}}=\tfrac{2}{3}\left[\log_{10}(M_{0}/\mathrm{N\,m})-9.1\right]$, which here
+gives $M_{\mathrm{w}}\approx7.3$, a large earthquake and a plausible size for a rupture of
+these dimensions. The moment rate function, often called the source time function, is
+what a distant seismometer effectively records: the far-field displacement radiated by a
+point source is proportional to $\dot{M}_{0}$, so the pulse from this event would be
+roughly $33\,\mathrm{s}$ long. Two refinements are easily incorporated. If the slip at each
+point rises over a finite rise time $\tau_{\mathrm{r}}$ rather than instantaneously,
+$\dot{M}_{0}$ becomes the convolution of the boxcar with a second boxcar of width
+$\tau_{\mathrm{r}}$, i.e.\ a trapezoid of total duration $T_{\mathrm{r}}+\tau_{\mathrm{r}}$.
+And for an observer in the direction of rupture propagation the pulse is compressed, as
+successive parts of the fault radiate from progressively closer points, an effect known
+as directivity. Note finally that the point-source approximation of Example~1 requires
+wavelengths large compared with $L$, which for this event means periods well in excess of
+$T_{\mathrm{r}}$.
+\end{solution}
+
+\newpage
+\begin{example}{Well- and ill-posedness of polynomial interpolation}
+Given distinct points $x_{1},\dots,x_{n}$ and values $y_{1},\dots,y_{n}$, we seek a
+polynomial $p(x)=\sum_{k=0}^{m}c_{k}x^{k}$ with $p(x_{i})=y_{i}$. Write the problem as a
+linear system $\mathbf{V}\mathbf{c}=\mathbf{y}$ for the coefficient vector $\mathbf{c}$,
+and then:
+\begin{enumerate}
+    \item[(a)] for $n=3$ and $m=2$, show explicitly that a solution exists, is unique, and
+    depends continuously on $\mathbf{y}$;
+    \item[(b)] for $n=3$ and $m=1$, derive the condition that the data must satisfy for a
+    solution to exist;
+    \item[(c)] for $n=2$ and $m=2$, exhibit the one-parameter family of solutions;
+    \item[(d)] for equally spaced points on $[0,1]$ with $m=n-1$, compute the condition
+    number of $\mathbf{V}$ for $n=5$, $10$, $15$ and $20$, and comment on what continuous
+    dependence is worth in practice.
+\end{enumerate}
+\end{example}
+
+\begin{solution}
+The interpolation conditions are linear in the unknown coefficients,
+\begin{equation}
+\sum_{k=0}^{m}x_{i}^{k}c_{k}=y_{i},\quad i=1,\dots,n,
+\quad\text{i.e.}\quad
+\mathbf{V}\mathbf{c}=\mathbf{y},\quad V_{ik}=x_{i}^{k},
+\label{eq:34}
+\end{equation}
+where $\mathbf{V}$ is the $n\times(m+1)$ \textbf{Vandermonde matrix}. In the language of
+the lecture the inputs are $\mathbf{y}$ and the outputs are $\mathbf{c}$. A solution exists
+if and only if $\mathbf{y}$ lies in the column space of $\mathbf{V}$, it is unique if and
+only if the null space of $\mathbf{V}$ is trivial, and, whenever the solution is unique,
+it depends continuously on $\mathbf{y}$ because it is then given by a linear map between
+finite-dimensional spaces, and every such map is continuous.
+
+(a) With $n=3$ and $m=2$ the matrix is square, and subtracting the first row from the
+other two,
+\begin{equation}
+\det\mathbf{V}=\det\begin{pmatrix}1&x_{1}&x_{1}^{2}\\1&x_{2}&x_{2}^{2}\\1&x_{3}&x_{3}^{2}\end{pmatrix}
+=\det\begin{pmatrix}x_{2}-x_{1}&x_{2}^{2}-x_{1}^{2}\\x_{3}-x_{1}&x_{3}^{2}-x_{1}^{2}\end{pmatrix}
+=(x_{2}-x_{1})(x_{3}-x_{1})(x_{3}-x_{2}),
+\label{eq:35}
+\end{equation}
+where the last step factors $x_{j}^{2}-x_{1}^{2}=(x_{j}-x_{1})(x_{j}+x_{1})$ from each row.
+This is non-zero for distinct points, so $\mathbf{V}$ is invertible and the problem has
+the unique solution $\mathbf{c}=\mathbf{V}^{-1}\mathbf{y}$ for every $\mathbf{y}$. The
+solution can also be written down directly in Lagrange form,
+\begin{equation}
+p(x)=\sum_{i=1}^{3}y_{i}\,\ell_{i}(x),\quad
+\ell_{i}(x)=\prod_{j\neq i}\frac{x-x_{j}}{x_{i}-x_{j}},
+\label{eq:36}
+\end{equation}
+since $\ell_{i}(x_{j})=\delta_{ij}$; this establishes existence, and uniqueness follows
+because the difference of two solutions is a quadratic with three distinct roots, hence
+identically zero. Continuous dependence is quantified by
+\begin{equation}
+\|\delta\mathbf{c}\|\le\|\mathbf{V}^{-1}\|\,\|\delta\mathbf{y}\|,
+\quad
+\frac{\|\delta\mathbf{c}\|}{\|\mathbf{c}\|}\le\mathrm{cond}(\mathbf{V})\frac{\|\delta\mathbf{y}\|}{\|\mathbf{y}\|},
+\quad
+\mathrm{cond}(\mathbf{V})=\|\mathbf{V}\|\,\|\mathbf{V}^{-1}\|,
+\label{eq:37}
+\end{equation}
+where $\|\cdot\|$ is the matrix norm induced by the Euclidean vector norm and
+$\mathrm{cond}(\mathbf{V})$ is the \textbf{condition number}, which for this norm is the
+ratio of the largest to the smallest singular value of $\mathbf{V}$. The second inequality
+follows from the first together with $\|\mathbf{y}\|\le\|\mathbf{V}\|\,\|\mathbf{c}\|$.
+The problem is well-posed.
+
+(b) With $n=3$ and $m=1$ we have three equations $c_{0}+c_{1}x_{i}=y_{i}$ for two
+unknowns. The two columns of $\mathbf{V}$, namely $(1,1,1)^{T}$ and $(x_{1},x_{2},x_{3})^{T}$,
+are linearly independent, so the column space is a plane in $\mathbb{R}^{3}$ and
+$\mathbf{y}$ must lie in it. The plane is the orthogonal complement of any non-zero vector
+$\mathbf{a}$ with $\mathbf{a}^{T}\mathbf{V}=\mathbf{0}$, and
+\begin{equation}
+\mathbf{a}=\left(x_{2}-x_{3},\;x_{3}-x_{1},\;x_{1}-x_{2}\right)^{T}
+\label{eq:38}
+\end{equation}
+does the job, since its components sum to zero and
+$(x_{2}-x_{3})x_{1}+(x_{3}-x_{1})x_{2}+(x_{1}-x_{2})x_{3}=0$. Existence therefore requires
+\begin{equation}
+(x_{2}-x_{3})y_{1}+(x_{3}-x_{1})y_{2}+(x_{1}-x_{2})y_{3}=0,
+\label{eq:39}
+\end{equation}
+and this condition is also sufficient. Rearranging, it reads
+$(y_{3}-y_{1})(x_{2}-x_{1})=(y_{2}-y_{1})(x_{3}-x_{1})$, which states that the slope from
+the first point to the third equals the slope from the first to the second: the three
+points $(x_{i},y_{i})$ must be collinear. Equivalently, the determinant of the matrix with
+rows $(1,x_{i},y_{i})$ vanishes. For equally spaced points $x_{i}=x_{1}+(i-1)h$ the
+condition is $y_{1}-2y_{2}+y_{3}=0$, the vanishing of the second difference. When it holds,
+the solution is $c_{1}=(y_{2}-y_{1})/(x_{2}-x_{1})$ and $c_{0}=y_{1}-c_{1}x_{1}$. Data
+chosen at random satisfy eq.~(\ref{eq:39}) with probability zero, so for noisy
+measurements the problem as posed has no solution, and one is led, as noted in the lecture,
+to relax what is meant by a solution, for instance to the $\mathbf{c}$ that minimises
+$\|\mathbf{V}\mathbf{c}-\mathbf{y}\|$.
+
+(c) With $n=2$ and $m=2$ there are two equations for three unknowns. A vector $\mathbf{c}$
+lies in the null space if and only if the corresponding quadratic vanishes at $x_{1}$ and
+$x_{2}$, that is, if and only if $p(x)=\alpha(x-x_{1})(x-x_{2})$ for some $\alpha$, so the
+null space is spanned by
+\begin{equation}
+\mathbf{c}_{0}=\left(x_{1}x_{2},\;-(x_{1}+x_{2}),\;1\right)^{T},
+\label{eq:40}
+\end{equation}
+as may be checked directly: $x_{1}x_{2}-(x_{1}+x_{2})x_{i}+x_{i}^{2}=(x_{i}-x_{1})(x_{i}-x_{2})=0$.
+A particular solution is the straight line through the two points, and the general
+solution is
+\begin{equation}
+p(x)=y_{1}+\frac{y_{2}-y_{1}}{x_{2}-x_{1}}(x-x_{1})+\alpha(x-x_{1})(x-x_{2}),
+\label{eq:41}
+\end{equation}
+or in terms of coefficients, with $s=(y_{2}-y_{1})/(x_{2}-x_{1})$,
+\begin{equation}
+c_{2}=\alpha,\quad c_{1}=s-\alpha(x_{1}+x_{2}),\quad c_{0}=y_{1}-sx_{1}+\alpha x_{1}x_{2},
+\label{eq:42}
+\end{equation}
+for arbitrary $\alpha$. Every quadratic through the two data points fits them equally
+well, and the data provide no information whatever about $\alpha$. This is the
+underdetermined case of the lecture, and it is the situation in which almost all
+geophysical inverse problems find themselves. To select one member of the family we must
+add information not contained in the data, for example by choosing the $\alpha$ that
+minimises $\|\mathbf{c}\|$, and later lectures will have much to say about how such
+choices are made and justified.
+
+(d) For $m=n-1$ the matrix is square and, by the argument of part (a) generalised to $n$
+points, invertible, so the problem is well-posed for every $n$. Taking equally spaced
+points $x_{i}=(i-1)/(n-1)$ on $[0,1]$ and computing the condition number in the Euclidean
+norm numerically,\footnote{For $n=20$ the condition number is comparable with the
+reciprocal of double-precision machine epsilon, and a floating-point computation of it
+is itself uncertain at the level of a few per cent; a routine such as
+\texttt{numpy.linalg.cond} returns $1.2\times10^{16}$. The value quoted was obtained by
+inverting $\mathbf{V}$ in exact rational arithmetic before taking norms.} we find
+\begin{equation}
+\begin{array}{c|cccc}
+n & 5 & 10 & 15 & 20\\ \hline
+\mathrm{cond}(\mathbf{V}) & 6.9\times10^{2} & 1.5\times10^{7} & 4.0\times10^{11} & 1.1\times10^{16}
+\end{array}\,.
+\label{eq:43}
+\end{equation}
+The growth is exponential in $n$. By eq.~(\ref{eq:37}) the condition number bounds the
+factor by which relative errors in the data can be amplified in the coefficients, and the
+bound is attained for suitably chosen perturbations. For $n=10$, data accurate to one part
+in $10^{7}$ can produce coefficients with errors of order one hundred per cent; for $n=20$,
+data accurate to sixteen significant figures, i.e.\ to the full precision of double
+arithmetic, can produce coefficients with no correct digits at all. The problem is
+well-posed in the strict sense of the lecture, since the solution does depend continuously
+on the data, but the constant in that continuity is so large that the solution is
+practically useless. Once measurement errors and finite precision are admitted, the
+distinction between an ill-posed problem and a badly conditioned one all but disappears,
+and both call for the same kind of remedy. It is worth adding that the ill-conditioning
+here lies in the choice of unknowns: the monomials $x^{k}$ on $[0,1]$ become nearly
+parallel as $k$ grows, so the columns of $\mathbf{V}$ are nearly linearly dependent. The
+values of the interpolating polynomial are far better determined than its monomial
+coefficients, and a wiser parameterisation, for instance in terms of Chebyshev
+polynomials, greatly reduces the condition number. Choosing the model parameters well is
+often the first step in taming an inverse problem.
+\end{solution}
+
+\end{document}

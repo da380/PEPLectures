@@ -1,0 +1,472 @@
+\documentclass[a4paper,12pt]{paper}
+
+\usepackage{mycommands}
+
+% Worked-example layout: boxed problem statement followed by a solution.
+\newcounter{example}
+\renewenvironment{example}[1]{%  % the paper class already defines "example"
+  \refstepcounter{example}%
+  \begin{mdframed}[linewidth=1pt,innertopmargin=6pt,innerbottommargin=6pt]%
+  \noindent\textbf{Example \theexample: #1.}\ }{%
+  \end{mdframed}}
+\newenvironment{solution}{\par\noindent\textbf{Solution.}\ }{\par\medskip}
+
+\title{Worked examples for Lecture 21: Equilibrium figures}
+\author{David Al-Attar \\ Michaelmas Term, \the\year}
+
+\begin{document}
+
+\maketitle
+
+\noindent These examples accompany Lecture~21. They are intended as practice in the concrete
+calculations that underlie the lecture, and are less demanding than the questions on the
+problem sets. Numerical results were checked with the scripts in the \texttt{python}
+directory. Throughout, $G=6.674\times10^{-11}\,\mathrm{m^{3}\,kg^{-1}\,s^{-2}}$, the mean radius
+of the Earth is $b=6371\,\mathrm{km}$, its mass is $M=5.972\times10^{24}\,\mathrm{kg}$, its
+mean density is $\overline{\rho}=5515\,\mathrm{kg\,m^{-3}}$, and its angular velocity is
+$\Omega=7.292\times10^{-5}\,\mathrm{s^{-1}}$. Values quoted for the Preliminary Reference Earth
+Model (PREM) are from Dziewonski \& Anderson (1981).
+
+\begin{example}{Pressure inside a homogeneous non-rotating planet}
+A non-rotating planet of radius $b$ has uniform density $\rho$. Show that the hydrostatic
+pressure is
+\begin{equation*}
+p(r)=\frac{2}{3}\pi G\rho^{2}(b^{2}-r^{2}),
+\end{equation*}
+and express the central pressure in terms of the mass $M$ and the surface gravity $g(b)$.
+Evaluate the central pressure for a planet with the mean radius and mean density of the Earth,
+compare with the value $3.64\times10^{11}\,\mathrm{Pa}$ at the centre of PREM, and explain the
+discrepancy.
+\end{example}
+
+\begin{solution}
+For a spherically symmetric non-rotating planet the hydrostatic equilibrium equation reduces to
+\begin{equation}
+\frac{\ddns p}{\ddns r}+\rho\,g_{0}=0,\quad g_{0}(r)=\frac{\ddns\phi_{0}}{\ddns r}=\frac{GM(r)}{r^{2}},
+\label{eq:1}
+\end{equation}
+where $M(r)$ is the mass within radius $r$, and $g_{0}>0$ is the magnitude of the gravitational
+acceleration. The expression for $g_{0}$ follows from Gauss's law applied to Poisson's equation, or
+equivalently from Newton's shell theorem. For uniform density $M(r)=\frac{4}{3}\pi\rho r^{3}$, and so
+\begin{equation}
+g_{0}(r)=\frac{4}{3}\pi G\rho\,r,
+\label{eq:2}
+\end{equation}
+which increases linearly from the centre to the surface. Integrating eq.~(\ref{eq:1}) inwards from
+the surface, where $p(b)=0$,
+\begin{equation}
+p(r)=\int_{r}^{b}\rho\,g_{0}(r')\,\dd r'=\frac{4}{3}\pi G\rho^{2}\int_{r}^{b}r'\,\dd r'=\frac{2}{3}\pi G\rho^{2}(b^{2}-r^{2}),
+\label{eq:3}
+\end{equation}
+as required. The pressure is a parabola in $r$, and its central value is
+\begin{equation}
+p(0)=\frac{2}{3}\pi G\rho^{2}b^{2}.
+\label{eq:4}
+\end{equation}
+Substituting $\rho=3M/(4\pi b^{3})$ we can write this as
+\begin{equation}
+p(0)=\frac{3GM^{2}}{8\pi b^{4}}=\frac{3\,g(b)^{2}}{8\pi G},
+\label{eq:5}
+\end{equation}
+where $g(b)=GM/b^{2}$ is the surface gravity. The second form is worth remembering: it says that
+the central pressure of a homogeneous planet is fixed by its surface gravity alone, and does not
+otherwise depend on its size.
+
+For the Earth's mean density and radius, eq.~(\ref{eq:4}) gives
+\begin{equation}
+p(0)=\frac{2}{3}\pi\times6.674\times10^{-11}\times(5515)^{2}\times(6.371\times10^{6})^{2}\,\mathrm{Pa}
+=1.73\times10^{11}\,\mathrm{Pa},
+\label{eq:6}
+\end{equation}
+which is less than half the PREM value of $3.64\times10^{11}\,\mathrm{Pa}$. The discrepancy arises
+because the Earth's mass is concentrated towards its centre: the density in the core is roughly
+twice that in the mantle, and within each region density increases with depth through
+self-compression. Two effects then act in the same direction. First, concentrating mass towards
+the centre increases $M(r)/r^{2}$ at depth, so that $g_{0}$ within the Earth is everywhere larger
+than the linear profile of eq.~(\ref{eq:2}); in PREM, $g_{0}$ is roughly constant at about
+$10\,\mathrm{m\,s^{-2}}$ through the whole mantle, and only falls towards zero within the core.
+Second, the weight per unit volume $\rho g_{0}$ at depth is further increased by the larger
+density there. Both effects steepen the pressure gradient at depth, and hence raise the central
+pressure. The homogeneous model gets the mass and surface gravity right, but the pressure
+within a planet depends on how that mass is distributed with radius, and a homogeneous model
+places too much of it near the surface. The next example quantifies this with the simplest
+model that has a dense core.
+\end{solution}
+
+\begin{example}{Two-layer planet}
+A non-rotating planet consists of a core of uniform density $\rho_{\mathrm{c}}$ and radius
+$c$, surrounded by a mantle of uniform density $\rho_{\mathrm{m}}$ extending to the surface
+$r=b$. Obtain the gravitational acceleration $g_{0}(r)$ and the hydrostatic pressure $p(r)$ in
+both layers. Taking $\rho_{\mathrm{c}}=11\times10^{3}\,\mathrm{kg\,m^{-3}}$,
+$\rho_{\mathrm{m}}=4.5\times10^{3}\,\mathrm{kg\,m^{-3}}$, $c=3480\,\mathrm{km}$, and
+$b=6371\,\mathrm{km}$, compute the mass, the moment of inertia factor $I/(Mb^{2})$, the pressure
+at the core--mantle boundary (CMB), and the central pressure. Compare with the Earth's values
+$I/(Mb^{2})=0.3307$, and with PREM's $p(\mathrm{CMB})=1.36\times10^{11}\,\mathrm{Pa}$ and
+$p(0)=3.64\times10^{11}\,\mathrm{Pa}$.
+\end{example}
+
+\begin{solution}
+The mass within radius $r$ is
+\begin{equation}
+M(r)=\begin{cases}\frac{4}{3}\pi\rho_{\mathrm{c}}r^{3} & 0\le r\le c,\\[4pt]
+\frac{4}{3}\pi\left[\rho_{\mathrm{c}}c^{3}+\rho_{\mathrm{m}}(r^{3}-c^{3})\right] & c\le r\le b,\end{cases}
+\label{eq:7}
+\end{equation}
+and so, with $g_{0}=GM(r)/r^{2}$ as in Example~1,
+\begin{equation}
+g_{0}(r)=\begin{cases}\frac{4}{3}\pi G\rho_{\mathrm{c}}\,r & 0\le r\le c,\\[4pt]
+\frac{4}{3}\pi G\left[\rho_{\mathrm{m}}\,r+(\rho_{\mathrm{c}}-\rho_{\mathrm{m}})\dfrac{c^{3}}{r^{2}}\right] & c\le r\le b.\end{cases}
+\label{eq:8}
+\end{equation}
+In the mantle, $g_{0}$ is the sum of the linearly increasing field of a homogeneous planet of density
+$\rho_{\mathrm{m}}$ and the inverse-square field of the excess core mass
+$\frac{4}{3}\pi(\rho_{\mathrm{c}}-\rho_{\mathrm{m}})c^{3}$. These two terms vary in opposite senses with $r$,
+which is why $g_{0}$ is so nearly uniform through the Earth's mantle. Note that $g_{0}$ is
+continuous at $r=c$, as it must be since $M(r)$ is continuous.
+
+The pressure follows from $\ddns p/\ddns r=-\rho g_{0}$ with $p(b)=0$. In the mantle,
+\begin{equation}
+p(r)=\rho_{\mathrm{m}}\int_{r}^{b}g_{0}(r')\,\dd r'
+=\frac{2}{3}\pi G\rho_{\mathrm{m}}^{2}(b^{2}-r^{2})+\frac{4}{3}\pi G\rho_{\mathrm{m}}(\rho_{\mathrm{c}}-\rho_{\mathrm{m}})\,c^{3}\left(\frac{1}{r}-\frac{1}{b}\right),
+\quad c\le r\le b.
+\label{eq:9}
+\end{equation}
+The first term is the pressure in a homogeneous planet of density $\rho_{\mathrm{m}}$, while the
+second is the additional pressure needed to support the mantle against the attraction of the excess
+core mass. Setting $r=c$ gives the pressure at the CMB,
+\begin{equation}
+p(c)=\frac{2}{3}\pi G\rho_{\mathrm{m}}^{2}(b^{2}-c^{2})+\frac{4}{3}\pi G\rho_{\mathrm{m}}(\rho_{\mathrm{c}}-\rho_{\mathrm{m}})\,c^{2}\left(1-\frac{c}{b}\right).
+\label{eq:10}
+\end{equation}
+Within the core the density is uniform and $g_{0}$ is linear in $r$, so the calculation of
+Example~1 applies with the constant of integration fixed by continuity of $p$ at the CMB,
+\begin{equation}
+p(r)=p(c)+\frac{2}{3}\pi G\rho_{\mathrm{c}}^{2}(c^{2}-r^{2}),\quad 0\le r\le c.
+\label{eq:11}
+\end{equation}
+The pressure is continuous at $r=c$, but its gradient $-\rho g_{0}$ jumps by the factor
+$\rho_{\mathrm{c}}/\rho_{\mathrm{m}}$, since $g_{0}$ is continuous while $\rho$ is not.
+
+We now put in the numbers. From eq.~(\ref{eq:7}) with $r=b$, the mass is
+\begin{equation}
+M=\frac{4}{3}\pi\left[\rho_{\mathrm{c}}c^{3}+\rho_{\mathrm{m}}(b^{3}-c^{3})\right]=6.02\times10^{24}\,\mathrm{kg},
+\label{eq:12}
+\end{equation}
+within one per cent of the Earth's mass. The moment of inertia about any axis through the centre of
+a spherically symmetric body is $I=\frac{8}{3}\pi\int_{0}^{b}\rho\,r^{4}\,\dd r$, and hence
+\begin{equation}
+I=\frac{8}{15}\pi\left[\rho_{\mathrm{c}}c^{5}+\rho_{\mathrm{m}}(b^{5}-c^{5})\right]=8.47\times10^{37}\,\mathrm{kg\,m^{2}},
+\quad\frac{I}{Mb^{2}}=0.347.
+\label{eq:13}
+\end{equation}
+For a homogeneous sphere $I/(Mb^{2})=0.4$, and the observed value of $0.3307$ for the Earth is
+one of the classical indications that its density increases with depth. The two-layer model
+accounts for most of the reduction, but not all of it, because within each layer the real
+density increases with depth under compression, which the model neglects. The gravitational
+acceleration from eq.~(\ref{eq:8}) is $g_{0}(b)=9.90\,\mathrm{m\,s^{-2}}$ at the surface and
+$g_{0}(c)=10.70\,\mathrm{m\,s^{-2}}$ at the CMB, the values in PREM being $9.82$ and
+$10.68\,\mathrm{m\,s^{-2}}$. For the pressure, the two terms in eq.~(\ref{eq:10}) evaluate to
+$8.06\times10^{10}\,\mathrm{Pa}$ and $4.49\times10^{10}\,\mathrm{Pa}$, giving
+\begin{equation}
+p(c)=1.26\times10^{11}\,\mathrm{Pa},
+\label{eq:14}
+\end{equation}
+and the core then adds $\frac{2}{3}\pi G\rho_{\mathrm{c}}^{2}c^{2}=2.05\times10^{11}\,\mathrm{Pa}$,
+so that from eq.~(\ref{eq:11})
+\begin{equation}
+p(0)=3.30\times10^{11}\,\mathrm{Pa}.
+\label{eq:15}
+\end{equation}
+These are within $8$ and $9$ per cent of the PREM values of $1.36\times10^{11}\,\mathrm{Pa}$ and
+$3.64\times10^{11}\,\mathrm{Pa}$, and almost twice the central pressure of the homogeneous model
+of Example~1. The model errs on the low side for the same reason that $I/(Mb^{2})$ errs on the
+high side: neglecting self-compression places too little mass at depth. A model with only two free
+densities nevertheless reproduces the mass, moment of inertia, and pressures of the Earth to within
+about ten per cent, which illustrates how strongly the gross structure of a planet is controlled by
+the existence of a dense core.
+\end{solution}
+
+\begin{example}{Centrifugal potential and $Y_{20}$}
+For $\bm{\Omega}=\Omega\hat{\mathbf{e}}_{3}$ show that the centrifugal potential
+$\psi=\frac{1}{2}(\Omega_{i}\Omega_{j}-\Omega_{k}\Omega_{k}\delta_{ij})x_{i}x_{j}$ defined in the
+lecture can be written
+\begin{equation*}
+\psi=-\frac{1}{3}\Omega^{2}r^{2}+\frac{1}{3}\Omega^{2}r^{2}P_{2}(\cos\theta),
+\end{equation*}
+with $\theta$ the colatitude and $P_{2}$ the Legendre polynomial of degree two, and hence that its
+aspherical part is proportional to $r^{2}Y_{20}$. Explain why the spherical part can be absorbed
+into the reference model, and deduce that all first-order perturbations of a slowly rotating
+hydrostatic planet have $Y_{20}$ angular dependence. Using the lecture's definition of the
+ellipticity, show that the surface of the planet is
+$r(\theta)=b\left[1-\frac{2}{3}\epsilon(b)P_{2}(\cos\theta)\right]$ and verify that
+$\epsilon(b)$ is the difference between the equatorial and polar radii divided by the mean radius.
+\end{example}
+
+\begin{solution}
+With $\Omega_{i}=\Omega\,\delta_{i3}$ the definition gives
+\begin{equation}
+\psi=\frac{1}{2}\left(\Omega^{2}x_{3}^{2}-\Omega^{2}x_{k}x_{k}\right)=-\frac{1}{2}\Omega^{2}\left(x_{1}^{2}+x_{2}^{2}\right)
+=-\frac{1}{2}\Omega^{2}r^{2}\sin^{2}\theta,
+\label{eq:16}
+\end{equation}
+which is minus one half of the square of the distance from the rotation axis times $\Omega^{2}$.
+Its gradient is $-\Omega^{2}(x_{1},x_{2},0)$, the outward centrifugal acceleration
+$-\bm{\Omega}\times(\bm{\Omega}\times\mathbf{x})$, as it should be. Recalling that
+$P_{2}(\cos\theta)=\frac{1}{2}(3\cos^{2}\theta-1)$, we have
+\begin{equation}
+\sin^{2}\theta=1-\cos^{2}\theta=1-\frac{1}{3}\left[2P_{2}(\cos\theta)+1\right]=\frac{2}{3}\left[1-P_{2}(\cos\theta)\right],
+\label{eq:17}
+\end{equation}
+and substituting into eq.~(\ref{eq:16}) gives
+\begin{equation}
+\psi=-\frac{1}{3}\Omega^{2}r^{2}+\frac{1}{3}\Omega^{2}r^{2}P_{2}(\cos\theta),
+\label{eq:18}
+\end{equation}
+as required. The zonal spherical harmonic of degree two is
+$Y_{20}=\sqrt{5/(4\pi)}\,P_{2}(\cos\theta)$, with the normalisation
+$\int|Y_{20}|^{2}\,\dd S=1$ over the unit sphere, and so the aspherical part of $\psi$ is
+\begin{equation}
+\psi^{\mathrm{asph}}=\sqrt{\frac{4\pi}{5}}\,\frac{1}{3}\Omega^{2}r^{2}\,Y_{20}.
+\label{eq:19}
+\end{equation}
+As a check, eq.~(\ref{eq:16}) gives $\nabla^{2}\psi=-2\Omega^{2}$, and since $\nabla^{2}r^{2}=6$ the
+spherical part of eq.~(\ref{eq:18}) supplies the whole of this, while $r^{2}Y_{20}$ is a solid
+harmonic and hence contributes nothing.
+
+The spherical part $-\frac{1}{3}\Omega^{2}r^{2}$ depends on $r$ alone. Adding it to the
+gravitational potential of the reference model simply changes the zeroth-order equilibrium equation
+to $\ddns p_{0}/\ddns r+\rho_{0}(g_{0}-\frac{2}{3}\Omega^{2}r)=0$, that is, the spherical model feels a
+slightly reduced effective gravity. The relative change, $\frac{2}{3}\Omega^{2}r/g_{0}$, is at most
+$\frac{2}{3}\Omega^{2}b^{3}/(GM)\approx2\times10^{-3}$ for the Earth, so this is a first-order correction
+to a spherically symmetric model. It changes the reference values of $p_{0}$ and $g_{0}$ by a fraction
+of order the small parameter, but does not alter the spherical symmetry of the reference state, and
+it is this spherical symmetry alone that the first-order theory relies upon. We may therefore
+regard the spherical part as already included in $\rho_{0}$, $p_{0}$, and $\phi_{0}$, and take
+$\psi_{1}=\psi^{\mathrm{asph}}$. This is precisely the freedom used in the lecture when the
+perturbations were assumed to average to zero over spherical surfaces.
+
+Now consider the first-order problem. The boundary value problem for $\phi_{1}$ is linear in
+$\phi_{1}$ and $\psi_{1}$, its coefficients $4\pi G\rho_{0}'/g_{0}$ and $4\pi G\rho_{0}/g_{0}$ depend on
+$r$ alone, and the Laplacian commutes with rotations. Substituting the separated form
+$\phi_{1}=f(r)Y_{20}$, the angular dependence factors out of every term, leaving an ordinary
+differential equation in $r$ for $f$ whose forcing is proportional to $r^{2}$. Any other spherical
+harmonic component of $\phi_{1}$ would satisfy the same problem with no forcing, and must vanish
+for the perturbation to be unique.\footnote{The one exception is the degree-one part, which
+corresponds to a rigid translation of the whole planet and is removed by keeping the centre of
+mass at the origin.} Hence $\phi_{1}$, and therefore
+$\gamma_{1}=\phi_{1}+\psi_{1}$, is proportional to $Y_{20}$. The remaining first-order fields are given
+in terms of $\gamma_{1}$ by the algebraic relations $p_{1}=-\rho_{0}\gamma_{1}$, $h_{1}=-\gamma_{1}/g_{0}$,
+and $\rho_{1}=(\rho_{0}'/g_{0})\gamma_{1}$, with coefficients depending on $r$ alone, and so all have the
+same $Y_{20}$ dependence. Since $Y_{20}$ is independent of longitude and even in $\cos\theta$, the
+perturbed planet is axisymmetric and symmetric about its equatorial plane.
+
+Finally, the lecture defines the ellipticity by
+$\gamma_{1}=\sqrt{4\pi/5}\,\frac{2}{3}rg_{0}\,\epsilon\,Y_{20}=\frac{2}{3}rg_{0}\,\epsilon\,P_{2}(\cos\theta)$,
+and therefore the surface displacement is
+\begin{equation}
+h_{1}=-\frac{\gamma_{1}}{g_{0}}\bigg|_{r=b}=-\frac{2}{3}b\,\epsilon(b)P_{2}(\cos\theta),
+\quad r(\theta)=b\left[1-\frac{2}{3}\epsilon(b)P_{2}(\cos\theta)\right].
+\label{eq:20}
+\end{equation}
+At the equator $P_{2}(0)=-\frac{1}{2}$ and at the poles $P_{2}(\pm1)=1$, so the equatorial and polar
+radii are
+\begin{equation}
+r_{\mathrm{eq}}=b\left[1+\frac{1}{3}\epsilon(b)\right],\quad r_{\mathrm{pol}}=b\left[1-\frac{2}{3}\epsilon(b)\right],
+\label{eq:21}
+\end{equation}
+and their difference is $r_{\mathrm{eq}}-r_{\mathrm{pol}}=b\,\epsilon(b)$. For $\epsilon>0$ the planet is
+oblate, with the equatorial bulge twice as far from the mean sphere as the polar depression, as
+required by the vanishing of the spherical average of $P_{2}$. That average also shows that $b$ is the
+mean radius of the perturbed surface, and that its volume is unchanged to first order. Hence
+$\epsilon(b)=(r_{\mathrm{eq}}-r_{\mathrm{pol}})/b$, which is the geometrical interpretation quoted in
+the lecture; for the Earth $r_{\mathrm{eq}}-r_{\mathrm{pol}}\approx21.4\,\mathrm{km}$ and
+$\epsilon(b)\approx1/298$. The lesson is that the entire aspherical structure of a slowly rotating
+hydrostatic planet is described by one radial function, because the forcing has a single angular
+component and the problem is linear.
+\end{solution}
+
+\begin{example}{Clairaut's equation for a homogeneous planet}
+Show that for a planet of uniform density $\rho_{0}$ one has $8\pi G\rho_{0}/g_{0}=6/r$, so that
+Clairaut's equation reduces to $\epsilon''+6\epsilon'/r=0$, whose regular solution is
+$\epsilon=$ const. Apply the surface boundary condition to obtain Newton's result
+\begin{equation*}
+\epsilon=\frac{5}{4}\frac{\Omega^{2}b^{3}}{GM}=\frac{5}{4}m,
+\end{equation*}
+where $m=\Omega^{2}b^{3}/(GM)$. Evaluate $1/\epsilon$ for a homogeneous Earth, compare with the
+observed value of $298$, and explain the sign of the discrepancy.
+\end{example}
+
+\begin{solution}
+For constant $\rho_{0}$ we found in Example~1 that $g_{0}=\frac{4}{3}\pi G\rho_{0}r$, and so
+\begin{equation}
+\frac{8\pi G\rho_{0}}{g_{0}}=\frac{8\pi G\rho_{0}}{\frac{4}{3}\pi G\rho_{0}r}=\frac{6}{r}.
+\label{eq:22}
+\end{equation}
+More generally, $g_{0}=\frac{4}{3}\pi G\overline{\rho}(r)\,r$ with $\overline{\rho}(r)$ the mean density
+inside radius $r$, and the coefficient in Clairaut's equation is $6\rho_{0}(r)/[r\overline{\rho}(r)]$;
+it is the ratio of the local density to the mean density within $r$ that controls the solution.
+Substituting eq.~(\ref{eq:22}) into Clairaut's equation,
+\begin{equation}
+\frac{\ddns^{2}\epsilon}{\ddns r^{2}}+\frac{6}{r}\left(\frac{\ddns\epsilon}{\ddns r}+\frac{\epsilon}{r}\right)-\frac{6\epsilon}{r^{2}}
+=\frac{\ddns^{2}\epsilon}{\ddns r^{2}}+\frac{6}{r}\frac{\ddns\epsilon}{\ddns r}=0,
+\label{eq:23}
+\end{equation}
+the terms in $\epsilon/r^{2}$ cancelling exactly. This is an equation of Euler type, and trying
+$\epsilon=r^{n}$ gives $n(n-1)+6n=n(n+5)=0$, so the general solution is
+\begin{equation}
+\epsilon=A+Br^{-5}.
+\label{eq:24}
+\end{equation}
+The second solution is singular at the centre and violates the condition
+$\epsilon'(0)=0$, so we must take $B=0$: within a homogeneous planet the ellipticity is the same
+on every level surface, and all the level surfaces are similar spheroids.
+
+The constant $A$ is fixed by the surface condition. With $\epsilon'(b)=0$ the boundary condition
+from the lecture,
+\begin{equation}
+\frac{\ddns\epsilon}{\ddns r}\bigg|_{r=b}=\frac{1}{b}\left[\frac{5\Omega^{2}b^{3}}{2GM}-2\epsilon(b)\right],
+\label{eq:25}
+\end{equation}
+becomes $2\epsilon=5\Omega^{2}b^{3}/(2GM)$, and so
+\begin{equation}
+\epsilon=\frac{5}{4}\frac{\Omega^{2}b^{3}}{GM}=\frac{5}{4}m,\quad m=\frac{\Omega^{2}b^{3}}{GM}=\frac{\Omega^{2}b}{g(b)}=\frac{3\Omega^{2}}{4\pi G\rho_{0}},
+\label{eq:26}
+\end{equation}
+which is Newton's result. The parameter $m$ is the ratio of the centrifugal to the gravitational
+acceleration at the equator; the last form shows it to be, up to a numerical factor, the ratio of
+centrifugal to gravitational potentials used in the lecture to define slow rotation. For the
+Earth, $m=(7.292\times10^{-5})^{2}(6.371\times10^{6})^{3}/(3.986\times10^{14})=3.45\times10^{-3}$,
+so that
+\begin{equation}
+\epsilon=\frac{5}{4}m=4.31\times10^{-3},\quad\frac{1}{\epsilon}=232,
+\label{eq:27}
+\end{equation}
+compared with the observed $1/\epsilon=298$. The homogeneous planet is thus too flattened by
+about $30$ per cent.\footnote{Newton obtained $1/230$ in the ``Principia'' using a slightly different
+value of $m$. The French geodetic expeditions to Lapland and Peru in the 1730s confirmed that the
+Earth is oblate, against the prolate Earth favoured by the Cassinis, but accurate values of the
+flattening came only later from geodesy and from the analysis of the Moon's motion. Clairaut's
+theory of 1743 explained why the Earth is less flattened than a homogeneous planet.}
+
+To understand the sign of the discrepancy it helps to see where the factor $5/4$ comes from.
+Write $\gamma_{1}=\frac{2}{3}rg_{0}\,\epsilon\,P_{2}(\cos\theta)$ as in Example~3. Displacing the surface of
+a homogeneous planet by $h_{1}=-\frac{2}{3}b\,\epsilon\,P_{2}$ is equivalent, to first order, to placing
+a surface mass density $\sigma=\rho_{0}h_{1}$ on the sphere $r=b$. The interior potential of a surface
+density $\sigma_{2}P_{2}(\cos\theta)$ on a sphere of radius $b$ is
+$-\frac{4}{5}\pi Gb\,\sigma_{2}\,(r/b)^{2}P_{2}(\cos\theta)$, a standard consequence of the Legendre
+expansion of $1/\|\mathbf{x}-\mathbf{x}'\|$, and so
+\begin{equation}
+\phi_{1}=\frac{8}{15}\pi G\rho_{0}\,\epsilon\,r^{2}P_{2}(\cos\theta),\quad r<b.
+\label{eq:28}
+\end{equation}
+This is positive at the poles and negative at the equator: the extra mass in the equatorial bulge
+deepens the potential well there. Adding the aspherical centrifugal potential of eq.~(\ref{eq:18})
+and equating to $\gamma_{1}=\frac{2}{3}rg_{0}\,\epsilon\,P_{2}=\frac{8}{9}\pi G\rho_{0}\,\epsilon\,r^{2}P_{2}$
+gives
+\begin{equation}
+\frac{8}{9}\pi G\rho_{0}\,\epsilon=\frac{8}{15}\pi G\rho_{0}\,\epsilon+\frac{1}{3}\Omega^{2}
+\quad\Longrightarrow\quad
+\epsilon=\frac{15\,\Omega^{2}}{16\pi G\rho_{0}}=\frac{5}{4}m,
+\label{eq:29}
+\end{equation}
+in agreement with eq.~(\ref{eq:26}), and providing an independent check on the signs in
+Clairaut's equation and its surface condition. The proportionality to $r^{2}$ of every term is
+the reason $\epsilon$ is constant. Had we ignored the self-gravity of the bulge, dropping the
+first term on the right of eq.~(\ref{eq:29}), we would have found
+$\epsilon=3\Omega^{2}/(8\pi G\rho_{0})=\frac{1}{2}m$, the value for a massless fluid envelope
+surrounding a point mass, for which $1/\epsilon=580$ for the Earth. The self-attraction of the
+equatorial bulge therefore amplifies the flattening of a homogeneous planet by a factor of
+$5/2$.
+
+The real Earth lies between these two limits. In a centrally condensed planet the equatorial
+bulge contains a smaller fraction of the total mass, its self-attraction is weaker, and the
+flattening is correspondingly smaller than $\frac{5}{4}m$, though larger than $\frac{1}{2}m$. The
+observed $1/\epsilon=298>232$ is therefore a further indication, independent of the moment of
+inertia, that the Earth's density increases with depth. Solving Clairaut's equation by shooting for
+the two-layer model of Example~2 gives $1/\epsilon(b)=285$ at the surface and $1/\epsilon=374$ at
+the CMB, so that $\epsilon$ increases outwards from the centre. The same trend is seen in the
+lower panel of the figure in Lecture~21, where $1/\epsilon$ is about $300$ at the surface and
+increases inwards, and it is a general property of solutions of Clairaut's equation for a
+density that does not increase outwards. The level surfaces deep within a planet are less
+flattened than its outer surface because they feel the centrifugal potential, which grows as
+$r^{2}$, less strongly relative to the gravitational attraction of the mass within them.
+\end{solution}
+
+\begin{example}{Hydrostatic level surfaces}
+In the lecture it was shown that in a hydrostatic planet the level surfaces of $p$, $\rho$, and
+$\gamma$ coincide. Verify this directly for the first-order solution of the slowly rotating
+problem, $p_{1}=-\rho_{0}\gamma_{1}$ and $\rho_{1}=(\rho_{0}'/g_{0})\gamma_{1}$, by showing that the level
+surfaces of all three fields through the reference radius $r$ are displaced radially by the same
+amount $-\gamma_{1}/g_{0}$. Show also that the radial component of the first-order equilibrium
+equation, $\nabla p_{1}+\rho_{0}\nabla\gamma_{1}+\rho_{1}g_{0}\hat{\mathbf{r}}=\mathbf{0}$, is then
+satisfied identically, and interpret the function $\epsilon(r)$ in the light of this result.
+\end{example}
+
+\begin{solution}
+Consider a field $F=F_{0}(r)+s\,F_{1}(r,\theta,\varphi)+\cdots$ whose zeroth-order part depends on $r$
+alone. The level surface of $F$ that passes through radius $r$ in the reference model is, to first
+order, $r+s\,\delta r_{F}(\theta,\varphi)$, where
+\begin{equation}
+F_{0}(r+s\,\delta r_{F})+s\,F_{1}(r,\theta,\varphi)=F_{0}(r)
+\quad\Longrightarrow\quad
+\delta r_{F}=-\frac{F_{1}}{F_{0}'},
+\label{eq:30}
+\end{equation}
+provided $F_{0}'\neq0$. This is the same expansion that produced the boundary condition
+$p_{1}+p_{0}'h_{1}=0$ on the perturbed surface in the lecture, the outer surface being the level
+surface $p=0$. Applying eq.~(\ref{eq:30}) in turn to the three fields, and using the zeroth-order
+hydrostatic equation $p_{0}'=-\rho_{0}g_{0}$ together with $\gamma_{0}'=\phi_{0}'=g_{0}$, we find
+\begin{align}
+\delta r_{p}&=-\frac{p_{1}}{p_{0}'}=-\frac{-\rho_{0}\gamma_{1}}{-\rho_{0}g_{0}}=-\frac{\gamma_{1}}{g_{0}},\label{eq:31}\\
+\delta r_{\rho}&=-\frac{\rho_{1}}{\rho_{0}'}=-\frac{1}{\rho_{0}'}\frac{\rho_{0}'}{g_{0}}\gamma_{1}=-\frac{\gamma_{1}}{g_{0}},\label{eq:32}\\
+\delta r_{\gamma}&=-\frac{\gamma_{1}}{\gamma_{0}'}=-\frac{\gamma_{1}}{g_{0}}.\label{eq:33}
+\end{align}
+The three displacements are identical, and equal to the surface displacement $h_{1}$ of the lecture
+evaluated at radius $r$. Thus at every depth the perturbed level surfaces of pressure, density, and
+gravity potential coincide, as the exact theory requires. Where $\rho_{0}'=0$ the density has no
+level surfaces to speak of, but there $\rho_{1}=0$ as well, and there is nothing to check.
+
+The relations for $p_{1}$ and $\rho_{1}$ can be read in the same way. Writing
+$h(r,\theta,\varphi)=-\gamma_{1}/g_{0}$ for the displacement of the level surface through $r$, we have
+\begin{equation}
+p_{1}=-\rho_{0}\gamma_{1}=-p_{0}'h,\quad \rho_{1}=\frac{\rho_{0}'}{g_{0}}\gamma_{1}=-\rho_{0}'h,
+\label{eq:34}
+\end{equation}
+which are exactly the changes at a fixed point produced by displacing the spherical profiles
+$p_{0}(r)$ and $\rho_{0}(r)$ radially outwards through $h$. The first-order solution is, in other
+words, nothing more than the reference model with each of its level surfaces carried onto the
+corresponding level surface of the perturbed gravity potential.
+
+Now take the radial component of the first-order equilibrium equation. Substituting
+$p_{1}=-\rho_{0}\gamma_{1}$,
+\begin{equation}
+\frac{\partial p_{1}}{\partial r}+\rho_{0}\frac{\partial\gamma_{1}}{\partial r}+\rho_{1}g_{0}
+=-\rho_{0}'\gamma_{1}-\rho_{0}\frac{\partial\gamma_{1}}{\partial r}+\rho_{0}\frac{\partial\gamma_{1}}{\partial r}+\rho_{1}g_{0}
+=g_{0}\left(\rho_{1}-\frac{\rho_{0}'}{g_{0}}\gamma_{1}\right),
+\label{eq:35}
+\end{equation}
+which vanishes by the expression for $\rho_{1}$. The tangential components are satisfied because
+$p_{1}+\rho_{0}\gamma_{1}=0$ identically. Note that the argument can be run in the other direction:
+once the tangential components have given $p_{1}=-\rho_{0}\gamma_{1}$, the radial component yields
+$\rho_{1}=(\rho_{0}'/g_{0})\gamma_{1}$ directly, without taking the curl of the equation as was done in
+the lecture. The two routes must agree, because the curl of the equilibrium equation is a
+consequence of the equation itself.
+
+Finally, with $\gamma_{1}=\frac{2}{3}rg_{0}\,\epsilon(r)P_{2}(\cos\theta)$ the common displacement is
+\begin{equation}
+h=-\frac{\gamma_{1}}{g_{0}}=-\frac{2}{3}r\,\epsilon(r)P_{2}(\cos\theta),
+\label{eq:36}
+\end{equation}
+which is eq.~(\ref{eq:20}) of Example~3 with $b$ replaced by $r$. Every level surface of the
+perturbed planet is therefore an oblate spheroid of mean radius $r$ whose equatorial and polar
+radii differ by $r\,\epsilon(r)$, and $\epsilon(r)$ is the ellipticity of the level surface of mean radius
+$r$. The lecture's geometrical interpretation of $\epsilon(b)$ is the special case of the outer
+surface, and the same interpretation applies to the CMB and to any other internal boundary,
+each of which must be a level surface in a hydrostatic planet. This is why the profile of
+$1/\epsilon$ plotted in the lecture, and computed for the two-layer model in Example~4, can be
+read directly as the flattening of the Earth's internal structure: a two-layer Earth in
+hydrostatic equilibrium would have a CMB with equatorial and polar radii differing by
+$c/374\approx9\,\mathrm{km}$.
+\end{solution}
+
+\end{document}
