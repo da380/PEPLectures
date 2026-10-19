@@ -20,6 +20,8 @@ Code behind the figures and problem sets of the PEP seismology lectures.
   `S1F1.py` for the problem-set solutions. Figures are written as PDF to `../figures`.
 * `scripts/run_yspec.py` - runs David's yspec code for the synthetic seismograms of Lecture 21 (outputs cached
   in `data/yspec/`); `scripts/check_kernel.py` - validation of the 2D kernel against direct perturbation.
+* `scripts/slides_seismicity.py` - global seismicity map for the slides, written as PNG to `../figures/slides`
+  (USGS catalogue and NASA Blue Marble cached in `data/seismicity/`).
 * `data/modes/` - cached mode computations (high-degree spheroidal catalogue extension, dispersion-corrected
   fundamental-mode frequencies).
 

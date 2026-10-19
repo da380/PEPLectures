@@ -15,6 +15,8 @@
 * `figures/` holds only files the documents reference: generated PDFs, TikZ output, and borrowed PNGs
   (Loma Prieta record, Benioff 1961 spectrum, GLAD-M35 crops, tomographic-model comparisons, Woodhouse &
   Dziewonski 1989). TikZ sources in `figsrc/` (compile with pdflatex, copy the PDF to `figures/`).
+  `figures/slides/` holds borrowed images used only in the slides (`slides/`); sources and credits in its
+  `SOURCES.md`.
 * `pepcode/` is a poetry package (`pepseis`) with every figure script (`scripts/L<n>F<m>.py`, `S1F1.py`,
   `make_figures.py`); see `pepcode/README.md`. Figure file names follow the *file* number (`L12F7` = lecture12.tex),
   not the printed figure number.
