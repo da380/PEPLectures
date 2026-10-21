@@ -1,0 +1,359 @@
+\documentclass[14pt]{beamer}
+\usepackage{pepslides}
+\title{Spherical Earth structure}
+\lecturenumber{18}
+\hypersetup{pdftitle={Lecture 18: Spherical Earth structure}}
+
+% Ray from hypocentre to seismometer and the epicentral angle (used on two slides).
+\newcommand{\raygeometry}{%
+\begin{tikzpicture}[x=1.05cm,y=1.05cm,line width=0.9pt]
+\coordinate (O) at (0,0);
+\coordinate (E) at (128:5); \coordinate (S) at (52:5); \coordinate (F) at (128:4.3);
+\draw (142:5) arc (142:38:5);
+\draw[dashed] (O) -- (E); \draw[dashed] (O) -- (S);
+\draw[line width=0.6pt] (52:0.7) arc (52:128:0.7);
+\node at (90:1.15) {$\Delta$};
+\draw[postaction={decorate},decoration={markings,mark=at position 0.55 with {\arrow{Stealth[length=3mm]}}}]
+  (F) to[bend right=16] (S);
+\fill (F) circle (0.08);
+\node[anchor=west] at ([shift={(0.12,0.12)}]F) {Hypocentre};
+\draw[line width=0.6pt] (E) -- ++(0,1.1) node[above] {Epicentre};
+\draw[line width=0.6pt] (S) -- ++(0,1.1) node[above] {Seismometer};
+\node[below,align=center] at (0,-0.15) {Centre of\\the Earth};
+\end{tikzpicture}}
+
+\begin{document}
+
+\titleslide
+
+\begin{frame}[t]
+\heading{From last time\ldots}
+Ray Hamiltonian defined by:
+\begin{eqn}
+H_{k}(\mathbf{x},\mathbf{p})=\frac{1}{2}\|\mathbf{p}\|^{2}c_{k}(\mathbf{x},\hat{\mathbf{p}})^{2}.
+\end{eqn}
+Eikonal equation:
+\begin{eqn}
+H_{k}[\mathbf{x},\mathbf{p}(\mathbf{x})]=\frac{1}{2}, \quad \mathbf{p}(\mathbf{x})=(\nabla T)(\mathbf{x}).
+\end{eqn}
+Solved through integration of Hamilton's equations:
+\begin{eqn}
+\frac{\ddns x_{i}}{\ddns\sigma}=\frac{\partial H_{k}}{\partial p_{i}}, \quad \frac{\ddns p_{i}}{\ddns\sigma}=-\frac{\partial H_{k}}{\partial x_{i}}.
+\end{eqn}
+\end{frame}
+
+\sectionslide{Earthquake location}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.42\paperheight]{L6F1.pdf}
+
+\raggedright
+The \textbf{hypocentre} is where the rupture initiates. The epicentre is the point on the surface directly above it.
+
+It is the origin of the \textbf{first waves} recorded on seismometers.
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.58\paperheight]{L6F2.png}
+
+\raggedright
+The \textbf{arrival time} is the actual time (e.g.\ noon on Wednesday) at which a seismic phase arrives at a seismometer.
+Measured from \textbf{high-frequency} recordings to allow for precise measurements.
+\end{frame}
+
+\begin{frame}
+Arrival time at the $i$th seismometer for a given phase takes the form:
+\begin{eqn}
+t_{i}=t_{h}+T(\mathbf{x}_{i},\mathbf{x}_{h})+e_{i}.
+\end{eqn}
+Travel time can be calculated efficiently using ray theory. But to do this, we need to know the Earth's velocity structure.
+
+Forward problem depends on just four model parameters:
+\begin{itemize}
+\item Three components of the hypocentre position, $\mathbf{x}_{h}$
+\item The hypocentral time, $t_{h}$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+Misfit between data and proposed model parameters can be quantified:
+\begin{eqn}
+J(\mathbf{x}_h, t_h) = \sum_{i=1}^{N_s} \frac{[t_h + T(\mathbf{x}_i, \mathbf{x}_h) - t_i]^2}{\varsigma_i^2},
+\end{eqn}
+where $\varsigma_{i}^{2}$ is the variance of the measurement error $e_{i}$.
+
+Optimise $J$ with respect to the four model parameters to find a solution. This can be done iteratively using
+gradient-based methods or through a brute-force grid search.
+
+Uncertainties can be estimated by considering a range of model parameters that fit the data sufficiently well.
+
+Accuracy ultimately limited by the \textbf{dominant wavelength} of observed waves.
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.62\paperheight]{pavlis2000_pamir_map.jpg}\hspace{2em}%
+\includegraphics[height=0.55\paperheight]{pavlis2000_pamir_sections.jpg}
+
+\raggedright
+Application of hypocentral locations to test competing tectonic models for the formation of the Pamir--Hindu Kush mountains.
+\credit{Pavlis \& Das (2000)}
+\end{frame}
+
+\sectionslide{Rays in spherical earth models}
+
+\begin{frame}
+We focus on an isotropic model, and look at P-waves for definiteness.
+
+Eikonal equation takes the form:
+\begin{eqn}
+\begin{gathered}
+H(\mathbf{x},\mathbf{p})=\frac{1}{2},\\[\eqgap]
+H(\mathbf{x},\mathbf{p})=\frac{1}{2}\alpha(\mathbf{x})^{2}\|\mathbf{p}\|^{2}.
+\end{gathered}
+\end{eqn}
+We assume further that the P-wave velocity \textbf{varies only with radius}.
+\end{frame}
+
+\begin{frame}
+General form of Hamilton's equations:
+\begin{eqn}
+\frac{\ddns \mathbf{x}}{\ddns \sigma}=\frac{\partial H}{\partial \mathbf{p}},\quad \frac{\ddns \mathbf{p}}{\ddns \sigma}=-\frac{\partial H}{\partial \mathbf{x}},
+\end{eqn}
+with the travel time along a ray given by $T[\mathbf{x}(\sigma)]=\sigma$.
+
+For the spherically symmetric P-wave problem, they become:
+\begin{eqn}
+\frac{\ddns \mathbf{x}}{\ddns \sigma}=\alpha\hat{\mathbf{p}},\quad \frac{\ddns \mathbf{p}}{\ddns \sigma}=-\frac{1}{\alpha}\frac{\ddns \alpha}{\ddns r}\hat{\mathbf{x}}.
+\end{eqn}
+Here hats denote unit vectors.
+\end{frame}
+
+\begin{frame}
+We define the vector:
+\begin{eqn}
+\mathbf{q}=\mathbf{x}\times \mathbf{p}.
+\end{eqn}
+Using Hamilton's equations, we find that:
+\begin{eqn}
+\frac{\ddns }{\ddns \sigma}(\mathbf{x}\times \mathbf{p})=\frac{\ddns \mathbf{x}}{\ddns \sigma}\times \mathbf{p}+\mathbf{x}\times\frac{\ddns \mathbf{p}}{\ddns \sigma} =
+\alpha\hat{\mathbf{p}}\times \mathbf{p}-\frac{1}{\alpha}\frac{\ddns \alpha}{\ddns r}\mathbf{x}\times\hat{\mathbf{x}}=\mathbf{0}.
+\end{eqn}
+The form of this conserved quantity follows from the rotational symmetry via Noether's theorem (but you don't have to know this!)
+\end{frame}
+
+\begin{frame}
+Conservation of $\mathbf{q}$ implies that the ray stays in the plane spanned by the initial values of $\mathbf{x}$ and $\mathbf{p}$.
+
+Dynamics \textbf{reduced to a plane} -- cf.\ the two-body problem.
+
+Magnitude of the conserved quantity is:
+\begin{eqn}
+q=\frac{r \sin \theta}{\alpha},
+\end{eqn}
+where $\theta$ is the angle between $\mathbf{x}$ and $\mathbf{p}$.
+
+This is \textbf{Snell's law} expressed in spherical geometry.
+\end{frame}
+
+\begin{frame}
+Along the ray, we can write:
+\begin{eqn}
+\hat{\mathbf{p}}=\cos[\theta(\mathbf{x})]\hat{\mathbf{x}}+\sin[\theta(\mathbf{x})]\hat{\bm{\Delta}}(\mathbf{x}),
+\end{eqn}
+where $\Delta$ is the epicentral angle.
+
+\vspace{0.5em}
+\centering
+\raygeometry
+\end{frame}
+
+\begin{frame}
+From the conserved quantity, we can write:
+\begin{eqn}
+\sin \theta=\frac{\alpha q}{r},\quad \cos \theta=\pm\sqrt{1-\frac{\alpha^{2}q^{2}}{r^{2}}},
+\end{eqn}
+showing that the ray's direction is fixed by its radius. Plus or minus sign in the cosine term corresponds to up- or down-going rays.
+
+Using these results in Hamilton's equations, we arrive at (for a down-going ray):
+\begin{eqn}
+\frac{\ddns \mathbf{x}}{\ddns \sigma}=-\alpha\sqrt{1-\frac{\alpha^{2}q^{2}}{r^{2}}}\hat{\mathbf{x}}+\frac{\alpha^{2}q}{r}\hat{\bm{\Delta}}.
+\end{eqn}
+The slowness vector has now been eliminated from the problem.
+\end{frame}
+
+\begin{frame}
+Using the reduced ODE, we find that:
+\begin{eqn}
+\begin{gathered}
+\frac{\ddns }{\ddns \sigma}r[\mathbf{x}(\sigma)]=\frac{\partial r}{\partial x_{i}}\frac{\ddns x_{i}}{\ddns\sigma}=-\alpha\sqrt{1-\frac{\alpha^{2}q^{2}}{r^{2}}},\\[\eqgap]
+\frac{\ddns }{\ddns \sigma}\Delta[\mathbf{x}(\sigma)]=\frac{\partial\Delta}{\partial x_{i}}\frac{\ddns x_{i}}{\ddns \sigma}=\frac{\alpha^{2}q}{r^{2}}.
+\end{gathered}
+\end{eqn}
+And hence, we have:
+\begin{eqn}
+\frac{\ddns \Delta}{\ddns r}=\frac{\ddns \Delta}{\ddns\sigma}\left(\frac{\ddns r}{\ddns \sigma}\right)^{-1}=\frac{-\alpha q}{r\sqrt{r^{2}-\alpha^{2}q^{2}}}.
+\end{eqn}
+\end{frame}
+
+\begin{frame}
+In a similar manner, using $\ddns T/\ddns\sigma=1$, we find:
+\begin{eqn}
+\frac{\ddns T}{\ddns r}=\frac{\ddns T}{\ddns \sigma}\left(\frac{\ddns r}{\ddns \sigma}\right)^{-1}=\frac{-r}{\alpha\sqrt{r^{2}-\alpha^{2}q^{2}}}.
+\end{eqn}
+Valid only where $\Delta$ and $T$ are single-valued functions of $r$.
+
+\vspace{0.5em}
+\centering
+\raygeometry
+\end{frame}
+
+\begin{frame}
+Assuming velocity decreases monotonically with radius, the ray reaches a \textbf{turning point} where it is travelling horizontally:
+\begin{eqn}
+q=\frac{r_{t}}{\alpha(r_{t})}.
+\end{eqn}
+Afterwards, it returns to the surface, $r=b$, along a symmetric path.
+
+Angle and travel time expressed through the integrals:
+\begin{eqn}
+\Delta=\int_{r_{t}}^{b}\frac{2\alpha(r)q}{r\sqrt{r^{2}-\alpha(r)^{2}q^{2}}}\dd r,\quad
+T=\int_{r_{t}}^{b}\frac{2r}{\alpha(r)\sqrt{r^{2}-\alpha(r)^{2}q^{2}}}\dd r.
+\end{eqn}
+These expressions could be evaluated in the 1920s and 1930s using \textbf{mechanical calculating machines}.
+\end{frame}
+
+\sectionslide{Spherical velocity structure}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.68\paperheight]{iris_global_stack.jpg}\hspace{2em}%
+\includegraphics[height=0.68\paperheight]{L6F4.pdf}
+
+Global travel time observations (left), and travel times calculated by ray tracing in PREM (right).
+\credit{IRIS}
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[width=0.9\textwidth]{rays_pkkkkp.pdf}
+
+Ray theoretical predictions for the phase PKKKKP.
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.62\paperheight]{seismology_pioneers.jpg}
+
+Oldham (1906): existence of the core. Gutenberg (1914): depth of the core--mantle boundary.
+
+Jeffreys: a fluid core, from solid-Earth tides. Lehmann: a solid inner core.
+\end{frame}
+
+\begin{frame}
+\begin{columns}[c]
+\column{0.68\textwidth}
+\centering
+\includegraphics[height=0.62\paperheight]{L6F5.pdf}
+
+\textbf{P}reliminary \textbf{R}eference \textbf{E}arth \textbf{M}odel (PREM) of Dziewonski \& Anderson (1981)
+\column{0.3\textwidth}
+\centering
+\includegraphics[height=0.26\paperheight]{dziewonski_photo.jpg}
+
+Adam Dziewonski (1936--2016)
+
+\includegraphics[height=0.26\paperheight]{anderson_photo.jpg}
+
+Don Anderson (1933--2014)
+\end{columns}
+\end{frame}
+
+\begin{frame}
+The P-wave and S-wave speeds are given by:
+\begin{eqn}
+\alpha=\sqrt{\frac{\kappa+\frac{4}{3}\mu}{\rho}},\quad \beta=\sqrt{\frac{\mu}{\rho}}.
+\end{eqn}
+With depth, compression increases both the elastic moduli and the density. The former effect dominates, and so wave speeds typically increase.
+
+Sharp \textbf{discontinuities} are identified principally from reflected waves, and are due to changes in composition or phase.
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.7\paperheight]{jb_prem.pdf}
+
+\raggedright
+The model of Jeffreys and Bullen from 1940 (dashed) against PREM from 1981 (solid).
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.66\paperheight]{L6F3.pdf}\hspace{2em}%
+\includegraphics[height=0.66\paperheight]{L6F4.pdf}
+
+Existence of the Earth's core: the drop in P-wave speed at the core--mantle boundary leaves a P-wave \textbf{shadow zone}.
+\end{frame}
+
+\begin{frame}
+The most notable discontinuities are:
+\begin{itemize}
+\item The \textbf{core--mantle boundary} (CMB): rocky mantle to fluid iron outer core
+\item The \textbf{inner core boundary} (ICB): fluid to solid phase change within the iron core
+\end{itemize}
+Fluid outer core: no S-waves ($\mu=0$), solid-Earth tides, and the geodynamo.
+
+Solid inner core: free oscillation periods, and (more debated) inner core S-waves.
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[width=0.9\textwidth]{rays_pcp_pcs.pdf}
+
+Constraints on boundary locations come largely from reflected phases.
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.54\paperheight]{L6F5.pdf}\hspace{2em}%
+\includegraphics[height=0.54\paperheight]{l18_mantle_mineralogy.jpg}
+
+\raggedright
+Jumps in velocity at around $410\,\mathrm{km}$ and $670\,\mathrm{km}$ depth are believed to represent \textbf{solid-state phase changes}
+in silicate minerals -- you don't need to know any details!
+
+The region between them is the \textbf{transition zone}, separating the upper and lower mantle.
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[width=0.9\textwidth]{rays_pdiff_sdiff.pdf}
+
+There are also core-diffracted phases that are not predicted by ray theory.
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.72\paperheight]{hosseini2015_pdiff.jpg}
+
+Observations and synthetics for core-diffracted P-waves (normalised amplitudes).
+\credit{Hosseini \& Sigloch (2015)}
+\end{frame}
+
+\begin{frame}[t]
+\heading{What you need to know and be able to do}
+\begin{enumerate}
+\item[(i)] Know what the hypocentre of an earthquake is, and how the hypocentral location and time can be determined
+using observations of seismic waves.
+\item[(ii)] Understand how the Hamiltonian ray tracing equations within a spherically symmetric earth model can be
+reduced to the calculation of appropriate radial integrals. In the second problem set you will see how such travel
+time integrals can be inverted for the velocity structure.
+\item[(iii)] Understand in outline the observations and methods that were used to constrain the Earth's spherically
+symmetric velocity structure. You should also know the basic properties of this spherically symmetric velocity
+structure, and the physical interpretation of its major features.
+\end{enumerate}
+\end{frame}
+
+\end{document}

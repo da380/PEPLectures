@@ -1,0 +1,567 @@
+\documentclass[14pt]{beamer}
+\usepackage{pepslides}
+\title{Waveform tomography}
+\lecturenumber{20}
+\hypersetup{pdftitle={Lecture 20: Waveform tomography}}
+
+
+\begin{document}
+
+\titleslide
+
+\begin{frame}[t]
+\heading{From last time\ldots}
+Using Fermat's principle, we find that:
+\begin{eqn}
+\delta T=-\int_{\mathrm{ray}}\frac{\delta v}{v^{2}}\dd s.
+\end{eqn}
+Expand the velocity in a finite-dimensional basis:
+\begin{eqn}
+\delta\alpha(\mathbf{x})=\sum_{j=1}^{m}\delta\alpha_{j}\varphi_{j}(\mathbf{x}).
+\end{eqn}
+Formulation as a regularised least squares problem:
+\begin{eqn}
+J(\mathbf{m})=\frac{1}{2}(\mathbf{A}\mathbf{m}-\mathbf{d})^{T}\mathbf{C}^{-1}(\mathbf{A}\mathbf{m}-\mathbf{d})+\frac{\lambda}{2}\mathbf{m}^{T}\mathbf{B}\mathbf{m}.
+\end{eqn}
+\end{frame}
+
+\begin{frame}
+\centering
+\animation[width=0.85\textwidth]{healing_t1.pdf}{healing.webm}
+
+Wavefront healing as a plane wave passes a small heterogeneity.
+
+Scattering regime: {\eqsize$\dfrac{L}{\lambda}\approx1$}\hspace{4em}
+Geometric optics regime: {\eqsize$\dfrac{L}{\lambda}\gg1$}
+\end{frame}
+
+\begin{frame}
+\centering
+\animation[width=0.85\textwidth]{healing_t2.pdf}{healing.webm}
+
+\phantom{Wavefront healing as a plane wave passes a small heterogeneity.}
+
+Scattering regime: {\eqsize$\dfrac{L}{\lambda}\approx1$}\hspace{4em}
+Geometric optics regime: {\eqsize$\dfrac{L}{\lambda}\gg1$}
+\end{frame}
+
+\begin{frame}
+\centering
+\animation[width=0.85\textwidth]{healing_t3.pdf}{healing.webm}
+
+\phantom{Wavefront healing as a plane wave passes a small heterogeneity.}
+
+Scattering regime: {\eqsize$\dfrac{L}{\lambda}\approx1$}\hspace{4em}
+Geometric optics regime: {\eqsize$\dfrac{L}{\lambda}\gg1$}
+\end{frame}
+
+\begin{frame}
+Typical periods for global seismology: 1--40\,s.
+
+Corresponding wavelengths: 10--400\,km.
+
+\centering
+\includegraphics[height=0.55\paperheight]{farnetani1997_plumes.png}
+\credit{Farnetani (1997)}
+\end{frame}
+
+\sectionslide{Waveform inversion}
+
+\begin{frame}
+Equations of motion:
+\begin{eqn}
+\begin{gathered}
+\rho\frac{\partial^{2}u_{i}}{\partial t^{2}}-\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}-\overline{S}_{ij}\right)=0,\\[\eqgap]
+\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}-\overline{S}_{ij}\right)\hat{n}_{j}=0.
+\end{gathered}
+\end{eqn}
+These can be solved numerically in realistic laterally heterogeneous earth models using
+techniques like the \textbf{finite element method}.
+
+These are demanding calculations, run on HPC systems using parallel computing over
+hundreds or thousands of cores. GPU computing is now common.
+
+Each simulation takes \textbf{tens of minutes to hours} depending on resources.
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.7\paperheight]{L8F1.pdf}
+
+\raggedright
+A typical data set: around $10^{3}$ earthquakes recorded at thousands of stations, each earthquake
+requiring its own simulation.
+\credit{Cui \emph{et al.} (2024)}
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[width=0.8\textwidth]{L8F2.png}
+\begin{eqn}
+J=\frac{1}{2}\int_{0}^{T}\|\mathbf{u}(\mathbf{x}_{r},t)-\mathbf{u}^{\mathrm{obs}}(t)\|^{2}\dd t.
+\end{eqn}
+\credit{Tape \emph{et al.} (2010)}
+\end{frame}
+
+\begin{frame}
+Misfit is an implicit function of the parameters in the elastic wave equation:
+\begin{enumerate}
+\item \textbf{Density} -- piecewise smooth function
+\item \textbf{Elastic tensor} -- piecewise smooth tensor field (21 independent components)
+\item \textbf{Stress glut} -- space and time dependent tensor field
+\item \textbf{Geometry} of the model (e.g.\ topography on internal boundaries)
+\end{enumerate}
+Relation can be condensed to:
+\begin{eqn}
+\mathbf{m}\mapsto J(\mathbf{m}).
+\end{eqn}
+The aim is to \textbf{minimise} this functional.
+
+Strictly defined on an \textbf{infinite-dimensional space}. In practice reduced to a finite but
+high-dimensional space linked to the numerical discretisation of the equations of motion.
+
+\textbf{Millions or billions of degrees of freedom would be typical.}
+\end{frame}
+
+\begin{frame}
+\begin{columns}[c]
+\begin{column}{0.5\textwidth}
+\includegraphics[width=\linewidth]{gradient_descent_contours.png}
+\end{column}
+\begin{column}{0.44\textwidth}
+Iterative reduction of the misfit using the local gradient to take steps downhill.
+
+For large-scale optimisation problems, this is often the only viable approach.
+
+Bayesian sampling methods are not typically an option, though this is an active research topic.
+
+To proceed, we need a way of evaluating the gradients.
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+Functional derivative defined through a first-order Taylor expansion:
+\begin{eqn}
+J(\mathbf{m}+\delta\mathbf{m})=J(\mathbf{m})+\langle DJ(\mathbf{m})|\delta\mathbf{m}\rangle+O(\|\delta\mathbf{m}\|^{2}).
+\end{eqn}
+The terms \textbf{gradient} and \textbf{sensitivity kernel} are equivalent and widely used.
+
+Focusing on S-wave velocity variations alone, we can write to first order:
+\begin{eqn}
+\langle DJ(\mathbf{m})|\delta\mathbf{m}\rangle=\int_{M}K_{\beta}\,\delta\beta\dd^{3}\mathbf{x}.
+\end{eqn}
+Methods for calculation will be discussed later.
+\end{frame}
+
+\begin{frame}
+Condition for a (local) minimum, and the condition that follows from it:
+\begin{eqn}
+\begin{gathered}
+J(\overline{\mathbf{m}}+\delta\mathbf{m})\ge J(\overline{\mathbf{m}}),\\[\eqgap]
+DJ(\overline{\mathbf{m}})=\mathbf{0}.
+\end{gathered}
+\end{eqn}
+Starting at an initial point, we consider the update:
+\begin{eqn}
+\mathbf{m}_{1}=\mathbf{m}_{0}-\lambda\,DJ(\mathbf{m}_{0}).
+\end{eqn}
+Step length determined by approximately solving a 1D minimisation problem:
+\begin{eqn}
+f(\lambda)=J[\mathbf{m}_{0}-\lambda\,DJ(\mathbf{m}_{0})].
+\end{eqn}
+Process is repeated until convergence or the misfit is sufficiently small. This is the \textbf{method of steepest descent}.
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.55\paperheight]{local_minima_surface.png}
+
+\raggedright
+Gradient-based methods produce only \textbf{local minima}.
+
+Uncertainty quantification possible to a limited extent, but adds significantly to the cost.
+\end{frame}
+
+\sectionslide{Calculating the gradients}
+
+\begin{frame}
+\textbf{Finite-difference approximation:}
+\begin{eqn}
+\langle DJ(\mathbf{m})|\delta\mathbf{m}\rangle\approx J(\mathbf{m}+\delta\mathbf{m})-J(\mathbf{m}).
+\end{eqn}
+Approximation of the gradient relative to an $m$-dimensional \textbf{model parameterisation} requires
+$m+1$ \textbf{forward calculations}.
+
+One gradient calculation using this method for a realistic problem would take of order
+hundreds of years on a massive HPC system!
+
+The \textbf{adjoint method} provides the exact gradient at a cost of \textbf{two forward simulations}.
+\end{frame}
+
+\begin{frame}
+We want to minimise:
+\begin{eqn}
+J=\frac{1}{2}\int_{0}^{T}\|\mathbf{u}(\mathbf{x}_{r},t)-\mathbf{u}^{\mathrm{obs}}(t)\|^{2}\dd t,
+\end{eqn}
+subject to the constraints:
+\begin{eqn}
+\begin{gathered}
+\rho\frac{\partial^{2}u_{i}}{\partial t^{2}}-\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}-\overline{S}_{ij}\right)=0,\\[\eqgap]
+\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}-\overline{S}_{ij}\right)\hat{n}_{j}=0.
+\end{gathered}
+\end{eqn}
+This can be done using the \textbf{method of Lagrange multipliers}.
+\end{frame}
+
+\begin{frame}
+We start by defining the \textbf{Lagrangian}:
+\begin{eqnsmall}
+\begin{aligned}
+L(\mathbf{u},\mathbf{u}',\mathbf{w}',\mathbf{m}) = J(\mathbf{u}) &- \int_{0}^{T}\int_{M}\left[\rho\frac{\partial^{2}u_{i}}{\partial t^{2}}-\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}-\overline{S}_{ij}\right)\right]u_{i}'\dd^{3}\mathbf{x}\dd t\\[\eqgap]
+&- \int_{0}^{T}\int_{\partial M}\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}-\overline{S}_{ij}\right)\hat{n}_{j}w_{i}'\dd S\dd t.
+\end{aligned}
+\end{eqnsmall}
+Each constraint is associated with a \textbf{Lagrange multiplier field}.
+
+Zero initial conditions on displacement and velocity are being imposed directly.
+
+Within the Lagrangian, all fields are regarded as being independent.
+\end{frame}
+
+\begin{frame}
+The \textbf{Lagrange multiplier theorem} states that the following equality holds:
+\begin{eqn}
+DJ(\mathbf{m})=D_{\mathbf{m}}L(\mathbf{u},\mathbf{u}',\mathbf{w}',\mathbf{m}),
+\end{eqn}
+so long as the following conditions are met:
+\begin{eqn}
+\begin{aligned}
+D_{\mathbf{u}}L(\mathbf{u},\mathbf{u}',\mathbf{w}',\mathbf{m})&=0,\\
+D_{\mathbf{u}'}L(\mathbf{u},\mathbf{u}',\mathbf{w}',\mathbf{m})&=0,\\
+D_{\mathbf{w}'}L(\mathbf{u},\mathbf{u}',\mathbf{w}',\mathbf{m})&=0.
+\end{aligned}
+\end{eqn}
+Subscripts used for partial functional derivatives.
+
+You only need to know how to apply this method, \textbf{not to prove} that it works -- details are
+provided in an appendix to the handout for anyone interested.
+\end{frame}
+
+\begin{frame}
+Recall that the Lagrangian is:
+\begin{eqnsmall}
+\begin{aligned}
+L(\mathbf{u},\mathbf{u}',\mathbf{w}',\mathbf{m}) = J(\mathbf{u}) &- \int_{0}^{T}\int_{M}\left[\rho\frac{\partial^{2}u_{i}}{\partial t^{2}}-\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}-\overline{S}_{ij}\right)\right]u_{i}'\dd^{3}\mathbf{x}\dd t\\[\eqgap]
+&- \int_{0}^{T}\int_{\partial M}\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}-\overline{S}_{ij}\right)\hat{n}_{j}w_{i}'\dd S\dd t.
+\end{aligned}
+\end{eqnsmall}
+Stationarity with respect to $\mathbf{u}'$ gives the equations of motion.
+
+Stationarity with respect to $\mathbf{w}'$ gives the boundary conditions.
+
+This is how the \textbf{forward problem} emerges within the method.
+\end{frame}
+
+\begin{frame}
+Varying with respect to $\mathbf{u}$ gives:
+\begin{eqnsmall}
+\begin{aligned}
+\langle D_{\mathbf{u}}L(\mathbf{u},\mathbf{u}',\mathbf{w}',\mathbf{m})|\delta\mathbf{u}\rangle &= \langle DJ(\mathbf{u})|\delta\mathbf{u}\rangle\\
+&\quad - \int_{0}^{T}\int_{M}\left[\rho\frac{\partial^{2}\delta u_{i}}{\partial t^{2}}-\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial\delta u_{k}}{\partial x_{l}}\right)\right]u_{i}'\dd^{3}\mathbf{x}\dd t\\
+&\quad - \int_{0}^{T}\int_{\partial M}\left(A_{ijkl}\frac{\partial\delta u_{k}}{\partial x_{l}}\right)\hat{n}_{j}w_{i}'\dd S\dd t.
+\end{aligned}
+\end{eqnsmall}
+From the chosen form for $J$ we can write:
+\begin{eqn}
+\begin{gathered}
+\langle DJ(\mathbf{u})|\delta\mathbf{u}\rangle=\int_{0}^{T}\int_{\partial M}h_{i}'\delta u_{i}\dd S\dd t,\\[\eqgap]
+h_{i}'(\mathbf{x},t)=[u_{i}(\mathbf{x}_{r},t)-u_{i}^{\mathrm{obs}}(t)]\delta(\mathbf{x}-\mathbf{x}_{r}).
+\end{gathered}
+\end{eqn}
+\end{frame}
+
+\begin{frame}
+We need the following condition to hold:
+\begin{eqnsmall}
+\begin{aligned}
+\int_{0}^{T}\int_{\partial M}h_{i}'\delta u_{i}\dd S\dd t &- \int_{0}^{T}\int_{M}\left[\rho\frac{\partial^{2}\delta u_{i}}{\partial t^{2}}-\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial\delta u_{k}}{\partial x_{l}}\right)\right]u_{i}'\dd^{3}\mathbf{x}\dd t\\[\eqgap]
+&- \int_{0}^{T}\int_{\partial M}\left(A_{ijkl}\frac{\partial\delta u_{k}}{\partial x_{l}}\right)\hat{n}_{j}w_{i}'\dd S\dd t=0,
+\end{aligned}
+\end{eqnsmall}
+for all variations of the displacement vector.
+
+To see the consequence, we need to pass all the derivatives to the other terms using
+integration by parts in time and the divergence theorem spatially.
+
+Full details are in the handout.
+\end{frame}
+
+\begin{frame}
+The result of the long calculation is that:
+\begin{eqnsmall}
+\begin{aligned}
+-&\int_{0}^{T}\int_{M}\left[\rho\frac{\partial^{2}u_{i}'}{\partial t^{2}}-\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}'}{\partial x_{l}}\right)\right]\delta u_{i}\dd^{3}\mathbf{x}\dd t\\
+-&\int_{0}^{T}\int_{\partial M}\left(A_{ijkl}\frac{\partial\delta u_{k}}{\partial x_{l}}\right)\hat{n}_{j}(w_{i}'-u_{i}')\dd S\dd t\\
++&\int_{0}^{T}\int_{\partial M}\left[h_{i}'-\left(A_{ijkl}\frac{\partial u_{k}'}{\partial x_{l}}\right)\hat{n}_{j}\right]\delta u_{i}\dd S\dd t\\
+-&\int_{M}\rho\left\{\left[\frac{\partial\delta u_{i}}{\partial t}u_{i}'\right]_{t=T}-\left[\delta u_{i}\frac{\partial u_{i}'}{\partial t}\right]_{t=T}\right\}\dd^{3}\mathbf{x}=0.
+\end{aligned}
+\end{eqnsmall}
+From this we can read off the necessary adjoint equations.
+\end{frame}
+
+\begin{frame}
+We have shown that the Lagrange multipliers must satisfy the equations:
+\begin{eqn}
+\begin{gathered}
+\rho\frac{\partial^{2}u_{i}'}{\partial t^{2}}-\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}'}{\partial x_{l}}\right)=0,\\[\eqgap]
+\left(A_{ijkl}\frac{\partial u_{k}'}{\partial x_{l}}\right)\hat{n}_{j}=h_{i}', \qquad
+u_{i}'(\mathbf{x},T)=\frac{\partial u_{i}'}{\partial t}(\mathbf{x},T)=0,
+\end{gathered}
+\end{eqn}
+along with the equality $\mathbf{w}'=\mathbf{u}'$ on the boundary.
+
+This is a \textbf{terminal-value problem} for $\mathbf{u}'$ driven by the boundary traction $h_{i}'$:
+\begin{eqn}
+h_{i}'(\mathbf{x},t)=[u_{i}(\mathbf{x}_{r},t)-u_{i}^{\mathrm{obs}}(t)]\delta(\mathbf{x}-\mathbf{x}_{r}).
+\end{eqn}
+\end{frame}
+
+\begin{frame}
+The terminal-value problem must be solved backwards in time from $t=T$. Instead, define the time-reversed field:
+\begin{eqn}
+u_{i}^{\dagger}(\mathbf{x},t)=u_{i}'(\mathbf{x},T-t).
+\end{eqn}
+This satisfies the same wave equation, with boundary traction and initial conditions:
+\begin{eqn}
+\begin{gathered}
+\left(A_{ijkl}\frac{\partial u_{k}^{\dagger}}{\partial x_{l}}\right)\hat{n}_{j}=h_{i}^{\dagger}, \quad
+h_{i}^{\dagger}(\mathbf{x},t)=h_{i}'(\mathbf{x},T-t),\\[\eqgap]
+u_{i}^{\dagger}(\mathbf{x},0)=\frac{\partial u_{i}^{\dagger}}{\partial t}(\mathbf{x},0)=0.
+\end{gathered}
+\end{eqn}
+An \textbf{initial-value problem} of the same form as the forward problem, solved with the same numerical code.
+
+Time reversal is just a device for converting a terminal-value problem into an initial-value one.
+\end{frame}
+
+\begin{frame}
+Using the multiplier theorem and integrating by parts, we find that:
+\begin{eqnsmall}
+\langle DJ(\mathbf{m})|\delta\mathbf{m}\rangle=\int_{0}^{T}\int_{M}\left[\delta\rho\frac{\partial u_{i}}{\partial t}\frac{\partial u_{i}'}{\partial t}-\delta A_{ijkl}\frac{\partial u_{i}'}{\partial x_{j}}\frac{\partial u_{k}}{\partial x_{l}}+\delta\overline{S}_{ij}\frac{\partial u_{i}'}{\partial x_{j}}\right]\dd^{3}\mathbf{x}\dd t.
+\end{eqnsmall}
+We can then read off the \textbf{sensitivity kernels}:
+\begin{eqn}
+\begin{aligned}
+K_{\rho}(\mathbf{x})&=\int_{0}^{T}\frac{\partial u_{i}}{\partial t}(\mathbf{x},t)\frac{\partial u_{i}'}{\partial t}(\mathbf{x},t)\dd t,\\[\eqgap]
+K_{A_{ijkl}}(\mathbf{x})&=-\int_{0}^{T}\frac{\partial u_{i}'}{\partial x_{j}}(\mathbf{x},t)\frac{\partial u_{k}}{\partial x_{l}}(\mathbf{x},t)\dd t,\\[\eqgap]
+K_{\overline{S}_{ij}}(\mathbf{x},t)&=\frac{\partial u_{i}'}{\partial x_{j}}(\mathbf{x},t).
+\end{aligned}
+\end{eqn}
+\end{frame}
+
+\begin{frame}
+In terms of the time-reversed field, the kernels read:
+\begin{eqn}
+\begin{aligned}
+K_{\rho}(\mathbf{x})&=-\int_{0}^{T}\frac{\partial u_{i}}{\partial t}(\mathbf{x},t)\frac{\partial u_{i}^{\dagger}}{\partial t}(\mathbf{x},T-t)\dd t,\\[\eqgap]
+K_{A_{ijkl}}(\mathbf{x})&=-\int_{0}^{T}\frac{\partial u_{i}^{\dagger}}{\partial x_{j}}(\mathbf{x},T-t)\frac{\partial u_{k}}{\partial x_{l}}(\mathbf{x},t)\dd t,\\[\eqgap]
+K_{\overline{S}_{ij}}(\mathbf{x},t)&=\frac{\partial u_{i}^{\dagger}}{\partial x_{j}}(\mathbf{x},T-t).
+\end{aligned}
+\end{eqn}
+The forward field at time $t$ is paired with the adjoint field after it has evolved for a time $T-t$.
+
+Here $\mathbf{u}^{\dagger}$ is the \textbf{adjoint wavefield} and $h_{i}^{\dagger}$ the \textbf{adjoint traction} (or \textbf{adjoint source}).
+\end{frame}
+
+\begin{frame}
+For each gradient calculation we must:
+\begin{enumerate}
+\item Solve the forward problem for $\mathbf{u}$
+\item From this solution, compute $J$ and form the adjoint traction $h_{i}^{\dagger}$
+\item Solve the adjoint problem for $\mathbf{u}^{\dagger}$ as an initial-value problem
+\item Combine the forward and adjoint fields to form the sensitivity kernels
+\end{enumerate}
+Such a calculation has the cost of two forward calculations (three in practice, so that the
+forward field need not be stored).
+
+The adjoint equations are identical in form to the forward ones, and so the same numerical code can be used.
+
+Choice of misfit enters into the problem only through the form of the adjoint traction.
+
+\textbf{Calculations that would take hundreds of years are reduced to minutes or hours.}
+\end{frame}
+
+\begin{frame}
+In practice, delay times are measured using \textbf{cross-correlations} of windowed waveforms:
+\begin{eqn}
+\begin{gathered}
+s^{\mathrm{obs}}(t)=w(t)\hat{\nu}_{i}u_{i}^{\mathrm{obs}}(t), \qquad s(\mathbf{x}_{r},t)=w(t)\hat{\nu}_{i}u_{i}(\mathbf{x}_{r},t),\\[\eqgap]
+C(\tau)=\int_{-\infty}^{\infty}s^{\mathrm{obs}}(t-\tau)s(\mathbf{x}_{r},t)\dd t.
+\end{gathered}
+\end{eqn}
+The time shift $\overline{\tau}$ that maximises the cross-correlation is taken as the delay time.
+
+A late observed arrival gives $\overline{\tau}<0$, the opposite sign to the delay time of Lecture~19.
+Only the perturbation $\delta\overline{\tau}$ enters the kernels, so nothing depends on this choice.
+\end{frame}
+
+\begin{frame}
+This defines a functional of the synthetic waveform, and hence we can derive the
+associated sensitivity kernels using the adjoint method.
+
+Perturbing the condition $\ddns C/\ddns\tau(\overline{\tau})=0$, with the waveforms differing only by the time shift:
+\begin{eqn}
+\delta\overline{\tau}=-\frac{1}{N}\int_{-\infty}^{\infty}\dot{s}(\mathbf{x}_{r},t)\,\delta s(\mathbf{x}_{r},t)\dd t,
+\quad N=\int_{-\infty}^{\infty}\dot{s}(\mathbf{x}_{r},t)^{2}\dd t.
+\end{eqn}
+From this we read off the adjoint traction:
+\begin{eqn}
+h_{i}'(\mathbf{x},t)=-\frac{1}{N}w(t)\dot{s}(\mathbf{x}_{r},t)\hat{\nu}_{i}\delta(\mathbf{x}-\mathbf{x}_{r}).
+\end{eqn}
+The observed seismogram has dropped out: the kernel depends only on the reference model.
+\end{frame}
+
+\begin{frame}
+For the cross-correlation delay time, we obtain to first order:
+\begin{eqn}
+\delta\overline{\tau}=\int_{M}(K_{\alpha}\,\delta\alpha+K_{\beta}\,\delta\beta)\dd^{3}\mathbf{x}.
+\end{eqn}
+This can be compared with the ray-theoretic result from Fermat's principle:
+\begin{eqn}
+\delta T=-\int_{\mathrm{ray}}\frac{\delta c}{c^{2}}\dd s.
+\end{eqn}
+Within ray theory all the sensitivity lies on the ray path. What does the adjoint method give?
+\end{frame}
+
+\begin{frame}
+Building a P-wave kernel by the adjoint method in two dimensions:
+\begin{eqn}
+K_{\alpha}(\mathbf{x})=-2\rho\alpha\int_{0}^{T}\nabla\cdot\mathbf{u}(\mathbf{x},t)\,
+\nabla\cdot\mathbf{u}^{\dagger}(\mathbf{x},T-t)\dd t.
+\end{eqn}
+\centering
+\animation[width=0.92\textwidth]{L8F3.pdf}{L8F3.webm}
+
+\raggedright
+Sensitivity accumulates only where the forward field at time $t$ overlaps the adjoint field at time $T-t$.
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[width=\textwidth]{L8F4.pdf}
+
+\raggedright
+The kernel is negative throughout the \textbf{first Fresnel zone}, since an increase in wave speed there
+advances the arrival, and changes sign in the surrounding zones.
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[width=\textwidth]{taylor_test.pdf}
+
+\raggedright
+A \textbf{Taylor test}: a fixed perturbation $\delta\alpha$ is scaled by $s$, and the change in the delay time found by
+rerunning the forward problem is compared with the prediction from the kernel. They agree to first order in $s$, the
+difference shrinking like $s^{2}$.
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.68\paperheight]{bdkernels_p.pdf}
+
+\raggedright
+In three dimensions the sensitivity lies within the first Fresnel zone, which narrows at shorter periods, but
+curiously vanishes on the ray path itself. P-wave traveltime at $60^{\circ}$ in PREM, measured in the window shaded.
+\credit{Calculated with YSpec}
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[width=0.95\textwidth]{bdkernels_s.pdf}
+
+\raggedright
+Named \textbf{banana doughnut kernels} by Tony Dahlen (1942--2007). S-wave traveltime at $60^{\circ}$ in PREM.
+\credit{Calculated with YSpec}
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[width=0.95\textwidth]{bdkernels_ss.pdf}
+
+\raggedright
+The kernel of SS, reflected at the surface midway between the source and the receiver, is far from a single banana.
+\credit{Calculated with YSpec}
+\end{frame}
+
+\begin{frame}
+\begin{columns}[c]
+\begin{column}{0.48\textwidth}
+\centering
+\includegraphics[height=0.9\paperheight]{L8F6.pdf}
+\end{column}
+\begin{column}{0.46\textwidth}
+GLAD-M35: shear wave speed, bulk sound speed and compressional wave speed at depths from 140 to 2800\,km.
+
+Waveforms from 2160 earthquakes at 11\,575 stations, and 35 iterations of gradient-based optimisation.
+\end{column}
+\end{columns}
+\credit{Cui \emph{et al.} (2024)}
+\end{frame}
+
+\begin{frame}
+\begin{columns}[c]
+\begin{column}{0.48\textwidth}
+\centering
+\includegraphics[height=0.9\paperheight]{L8F7.pdf}
+\end{column}
+\begin{column}{0.46\textwidth}
+Uncertainty can be estimated approximately: the Hessian of the misfit plays the role of the inverse posterior covariance.
+
+Its action on a vector costs a few further forward and adjoint simulations.
+
+Uncertainty is reduced most where the data coverage is best.
+\end{column}
+\end{columns}
+\credit{Cui \emph{et al.} (2024)}
+\end{frame}
+
+\begin{frame}
+\begin{columns}[c]
+\begin{column}{0.56\textwidth}
+\centering
+\includegraphics[height=0.9\paperheight]{L8F8.pdf}
+\end{column}
+\begin{column}{0.4\textwidth}
+Six global models at 2800\,km depth, three of them from waveform tomography.
+
+They agree on the largest features, but differ considerably in detail, notably in the bulk sound speed.
+\end{column}
+\end{columns}
+\credit{Cui \emph{et al.} (2024)}
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.7\paperheight]{L8F9.pdf}
+
+\raggedright
+Cross-sections beneath hot spots: the models differ markedly in whether they show continuous
+low-velocity conduits, or plumes, rising through the mantle.
+\credit{Cui \emph{et al.} (2024)}
+\end{frame}
+
+\begin{frame}[t]
+\heading{What you need to know and be able to do}
+\begin{enumerate}
+\item[(i)] That waveform tomography depends on the ability to efficiently solve the elastic wave equation in realistic
+earth models.
+\item[(ii)] How least-squares waveform misfits can be defined, and what is meant by their gradients.
+\item[(iii)] How gradient-based optimisation works, why it is useful, and what its limitations are.
+\item[(iv)] How the adjoint method can be used to calculate gradients, and what its advantages are. The derivation in
+this lecture is too lengthy for you to reproduce in full. But you may be asked to perform parts of the calculations
+with suitable guidance or to apply the method to simpler systems.
+\end{enumerate}
+\end{frame}
+
+\end{document}

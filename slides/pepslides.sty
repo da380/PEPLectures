@@ -1,0 +1,109 @@
+\ProvidesPackage{pepslides}[2026/10/21 Plain slides for the PEP seismology lectures]
+% Used with \documentclass[14pt]{beamer}. Beamer only supplies the page mechanics:
+% there are no frame titles, headers, footers, navigation symbols or coloured boxes.
+
+% Page of 280 x 157.5 mm, the size of the Impress slides, so point sizes carry over
+% (14 pt body text, as before).
+\geometry{papersize={280mm,157.5mm}}
+\setbeamersize{text margin left=21mm,text margin right=18mm}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{headline}{}
+\setbeamertemplate{footline}{}
+\setbeamertemplate{frametitle}{}
+\setbeamercolor{normal text}{fg=black,bg=white}
+\setbeamercolor{structure}{fg=black}
+\setbeamertemplate{itemize item}{\textbullet}
+\setbeamertemplate{itemize subitem}{\textendash}
+\setbeamertemplate{enumerate item}{\insertenumlabel)}
+
+% Fonts: Arimo (the design of Liberation Sans/Arial) for text, Palatino for maths as in the notes.
+\usefonttheme{professionalfonts}
+\usepackage{mathpazo}
+\usepackage{arimo}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{amsmath,amssymb,bm}
+\usepackage{graphicx,booktabs}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,decorations.markings}
+\graphicspath{{../figures/}{../figures/slides/}}
+
+\setlength{\parskip}{0.9em}
+
+% Displayed equations: centred, set larger than the text.
+%   \begin{eqn} ... \end{eqn}   (gathered/aligned inside for several lines, rows split by \\[\eqgap])
+% A display too wide for the page gives an Overfull warning rather than breaking at = or +.
+%   \eqscale{19}                  smaller displays for the rest of the current slide
+%   \begin{eqnsmall} ... \end{eqnsmall}   one display at 19 pt
+\newcommand{\eqsize}{\fontsize{23}{28}\selectfont}
+\newcommand{\eqscale}[1]{\renewcommand{\eqsize}{\fontsize{#1}{#1}\selectfont}}
+\newcommand{\eqgap}{0.7em}
+\newenvironment{eqn}
+  {\par\addvspace{0.3em}\begingroup\centering\eqsize\relpenalty=10000 \binoppenalty=10000 $\displaystyle}
+  {$\par\endgroup\addvspace{0.3em}}
+\newenvironment{eqnsmall}{\eqscale{19}\begin{eqn}}{\end{eqn}}
+
+% Long arrow between two equations on one line, as on the Impress slides.
+\newcommand{\arrowto}{\quad\xrightarrow{\hspace{5em}}\quad}
+
+% Animations: \animation[includegraphics options]{still}{movie file in ../figures/anim}.  In the live build
+% (build.sh makes slidesNN-live.pdf for each deck that has one) the still carries a play mark and is a link that
+% opens the movie in the system's player; in the ordinary build, for uploading, it is just the still.  The link
+% is a relative URI through slides/anim (a symlink to ../figures/anim), which Evince opens with the default
+% application; it refuses "launch" links to anything but PDFs.
+\newcommand{\animation}[3][]{%
+  \ifdefined\peplive
+    \hyper@linkurl{\begin{tikzpicture}[baseline=(img.south)]
+      \node[inner sep=0pt,anchor=south] (img) at (0,0) {\includegraphics[#1]{#2}};
+      \fill[black!55] ([xshift=4mm,yshift=3mm]img.south west) -- ++(0,6mm) -- ++(5.2mm,-3mm) -- cycle;
+    \end{tikzpicture}}{anim/#3}%
+  \else\includegraphics[#1]{#2}\fi}
+
+% Image credit in the bottom-left corner: \credit{Tromp \emph{et al.} (2010)} anywhere in a frame.
+\makeatletter
+\let\pep@credit\@empty
+\newcommand{\credit}[1]{\gdef\pep@credit{#1}}
+\setbeamertemplate{background}{%
+  \ifx\pep@credit\@empty\else
+    \begin{tikzpicture}
+      \useasboundingbox (0,0) rectangle (\paperwidth,\paperheight);
+      \node[anchor=south west,inner sep=0pt] at (9mm,5mm) {\normalsize\pep@credit};
+    \end{tikzpicture}%
+    \global\let\pep@credit\@empty
+  \fi}
+
+% Beamer columns are minipages, which reset \parskip to zero: keep the slide's paragraph spacing.
+\def\@minipagerestore{\setlength{\parskip}{0.9em}}
+
+% Lists: more space between items than beamer's default.
+\def\@listI{\leftmargin\leftmargini\topsep 0.4em\parsep\z@\itemsep 0.6em}
+\let\@listi\@listI
+
+% Title slide (lecture number and title only) and section slides.
+\newcommand{\lecturenumber}[1]{\gdef\pep@lecture{#1}}
+\newcommand{\titlesize}{\fontsize{30}{36}\selectfont}
+\setbeamertemplate{title page}{%
+  \centering
+  {\fontsize{18}{22}\selectfont Lecture \pep@lecture\par}
+  \vspace{1.5em}
+  {\titlesize\inserttitle\par}}
+\newcommand{\titleslide}{\begin{frame}\titlepage\end{frame}}
+\newcommand{\sectionslide}[1]{\section{#1}\begin{frame}\centering{\titlesize #1\par}\end{frame}}
+% Heading at the top of an otherwise untitled slide (recaps): \begin{frame}[t]\heading{From last time\ldots}
+\newcommand{\heading}[1]{\vspace*{4mm}{\centering\titlesize #1\par}\vspace{1em}}
+\makeatother
+
+% Notation, copied from ../mycommands.sty (which cannot be loaded with beamer).
+\newcommand{\dd}{\,\mathrm{d}}
+\newcommand{\ddns}{\mathrm{d}}
+\newcommand{\ee}{\mathrm{e}}
+\newcommand{\ii}{\mathrm{i}}
+\newcommand{\tr}{\mathrm{tr}}
+\newcommand{\bphi}{\bm{\varphi}}
+\newcommand{\bxi}{\bm{\xi}}
+\newcommand{\uv}{\mathbf{\hat{n}}}
+\newcommand{\runvec}{\mathbf{\hat{r}}}
+\newcommand{\real}{\mathrm{Re}}
+\newcommand{\imag}{\mathrm{Im}}
+\newcommand{\bra}[1]{\left\langle \,{#1} \,\right|}
+\newcommand{\ket}[1]{\left|\,{#1}\,\right\rangle }

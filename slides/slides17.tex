@@ -1,0 +1,375 @@
+\documentclass[14pt]{beamer}
+\usepackage{pepslides}
+\title{Ray theory}
+\lecturenumber{17}
+\hypersetup{pdftitle={Lecture 17: Ray theory}}
+
+\begin{document}
+
+\titleslide
+
+\begin{frame}[t]
+\heading{From last time\ldots}
+Plane wave ansatz:
+\begin{eqn}
+u_{i}(\mathbf{x},t)=f(t-p_{j}x_{j})a_{i}.
+\end{eqn}
+Christoffel equation for plane waves:
+\begin{eqn}
+\begin{gathered}
+{}[\bm{\Gamma}(\mathbf{p})-\mathbf{I}]\mathbf{a}=\mathbf{0},\\[\eqgap]
+\Gamma_{ik}(\mathbf{p})=\frac{1}{\rho}A_{ijkl}p_{j}p_{l}.
+\end{gathered}
+\end{eqn}
+Definition of the slowness surface:
+\begin{eqn}
+\det[\bm{\Gamma}(\mathbf{p})-\mathbf{I}]=0.
+\end{eqn}
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.55\paperheight]{newton_prism_engraving.jpg}
+\begin{eqn}
+\begin{gathered}
+\nabla\times\mathbf{E}+\frac{\partial\mathbf{B}}{\partial t}=\mathbf{0},\quad\nabla\cdot\mathbf{B}=0,\\[\eqgap]
+\nabla\times\mathbf{H}-\frac{\partial\mathbf{D}}{\partial t}=\mathbf{J},\quad\nabla\cdot\mathbf{D}=\rho.
+\end{gathered}
+\end{eqn}
+\end{frame}
+
+\begin{frame}
+\begin{columns}[b]
+\column{0.48\textwidth}
+\centering
+Quantum mechanics
+\column{0.48\textwidth}
+\centering
+Classical mechanics
+\end{columns}
+\begin{columns}[c]
+\column{0.48\textwidth}
+\begin{eqn}
+\ii\hbar\frac{\partial\Psi}{\partial t}=H\Psi
+\end{eqn}
+\column{0.48\textwidth}
+\begin{eqn}
+\begin{gathered}
+\frac{\ddns\mathbf{q}}{\ddns t}=\frac{\partial H}{\partial\mathbf{p}},\\[\eqgap]
+\frac{\ddns\mathbf{p}}{\ddns t}=-\frac{\partial H}{\partial\mathbf{q}}
+\end{gathered}
+\end{eqn}
+\end{columns}
+\end{frame}
+
+\sectionslide{Length scales of heterogeneity}
+
+\begin{frame}
+\centering
+\animation[height=0.6\paperheight]{L5F1.pdf}{L5F1.webm}
+
+\raggedright
+Scattering regime, with $\lambda$ the dominant wavelength and $L$ the length scale of the heterogeneity:
+\begin{eqn}
+\frac{L}{\lambda}\approx1.
+\end{eqn}
+\end{frame}
+
+\begin{frame}
+\centering
+\animation[height=0.6\paperheight]{L5F2.pdf}{L5F2.webm}
+
+\raggedright
+Geometric optics regime:
+\begin{eqn}
+\frac{L}{\lambda}\gg1.
+\end{eqn}
+\end{frame}
+
+\sectionslide{Ray series ansatz}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.55\paperheight]{L5F2_t00.pdf}
+
+\raggedright
+Start with a plane wave within the homogeneous left half-space:
+\begin{eqn}
+u_{i}(\mathbf{x},t)=f(t-p_{j}^{0}x_{j})a_{i}^{0}.
+\end{eqn}
+Can we extend this solution into the heterogeneous right half-space?
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.55\paperheight]{L5F2_t09.pdf}
+
+\raggedright
+As an initial guess, we look for a solution of the form:
+\begin{eqn}
+u_{i}(\mathbf{x},t)=f[t-T(\mathbf{x})]a_{i}(\mathbf{x}).
+\end{eqn}
+\end{frame}
+
+\begin{frame}
+Assumed solution takes the form:
+\begin{eqn}
+u_{i}(\mathbf{x},t)=f[t-T(\mathbf{x})]a_{i}(\mathbf{x}).
+\end{eqn}
+Introduction of the \textbf{travel time} function allows for curved wavefronts:
+\begin{eqn}
+T(\mathbf{x})=\text{constant}.
+\end{eqn}
+The \textbf{local slowness vector} is orthogonal to the wavefronts:
+\begin{eqn}
+p_{i}=\frac{\partial T}{\partial x_{i}}.
+\end{eqn}
+Polarisation vector allowed to vary with position -- accounts for \textbf{focusing effects} and for variations in
+anisotropic properties with position.
+\end{frame}
+
+\begin{frame}
+Harmonic decomposition solution:
+\begin{eqn}
+u_{i}(\mathbf{x},t)=\frac{1}{2\pi}\int_{\mathbb{R}}\tilde{f}(\omega)\ee^{\ii\omega[t-T(\mathbf{x})]}a_{i}(\mathbf{x})\dd\omega.
+\end{eqn}
+This is a convolution of $f$ with the singular solution:
+\begin{eqn}
+u_{i}(\mathbf{x},t)=\delta[t-T(\mathbf{x})]a_{i}(\mathbf{x}).
+\end{eqn}
+Experience has shown that we should generalise the singular part to:
+\begin{eqn}
+u_{i}(\mathbf{x},t)=\frac{1}{2\pi}\int_{\mathbb{R}}\sum_{n=0}^{\infty}\frac{a_{i}^{n}(\mathbf{x})}{(\ii\omega)^{n}}\ee^{\ii\omega[t-T(\mathbf{x})]}\dd\omega.
+\end{eqn}
+First term ($n=0$) in the \textbf{elastodynamic ray series} is the singular one, while successive ones become smoother
+and smoother.
+\end{frame}
+
+\sectionslide{The eikonal equation}
+
+\begin{frame}
+Linearised equations with no force term:
+\begin{eqn}
+\rho\frac{\partial^{2}u_{i}}{\partial t^{2}}-\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\right)=0.
+\end{eqn}
+Transforming to the frequency domain:
+\begin{eqn}
+-\omega^{2}\rho u_{i}-\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\right)=0.
+\end{eqn}
+Ray series in the frequency domain:
+\begin{eqn}
+u_{i}(\mathbf{x},\omega)=\sum_{n=0}^{\infty}\frac{a_{i}^{n}(\mathbf{x})}{(\ii\omega)^{n}}\ee^{-\ii\omega T(\mathbf{x})}.
+\end{eqn}
+We can now substitute in our ansatz and see what happens!
+\end{frame}
+
+\begin{frame}
+Example step from the calculation:
+\begin{eqn}
+\frac{\partial u_{k}}{\partial x_{l}}=\sum_{n=0}^{\infty}\frac{1}{(\ii\omega)^{n}}\left(\frac{\partial a_{k}^{n}}{\partial x_{l}}
+-\ii\omega p_{l}a_{k}^{n}\right)\ee^{-\ii\omega T}.
+\end{eqn}
+A factor of frequency is added each time we differentiate the phase term.
+\end{frame}
+
+\begin{frame}
+Equations of motion imply:
+\begin{eqn}
+\begin{aligned}
+&\sum_{n=0}^{\infty}\frac{1}{(\ii\omega)^{n}}\Bigg[\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial a_{k}^{n}}{\partial x_{l}}\right)
+-\ii\omega\frac{\partial}{\partial x_{j}}(A_{ijkl}p_{l}a_{k}^{n})\\[\eqgap]
+&\qquad-\ii\omega A_{ijkl}p_{j}\frac{\partial a_{k}^{n}}{\partial x_{l}}+(\ii\omega)^{2}A_{ijkl}p_{j}p_{l}a_{k}^{n}
+-(\ii\omega)^{2}\rho a_{i}^{n}\Bigg]\ee^{-\ii\omega T}=0.
+\end{aligned}
+\end{eqn}
+Common phase term cancels.
+
+These equations must hold for \textbf{all frequencies} -- this implies that the \textbf{coefficients of each power of
+frequency must separately vanish}.
+
+Compare with power series solution of ODEs.
+\end{frame}
+
+\begin{frame}
+\eqscale{20}
+From the highest-order coefficient, we have:
+\begin{eqn}
+[A_{ijkl}p_{j}p_{l}-\rho\delta_{ik}]a_{k}^{0}=0.
+\end{eqn}
+At the next order:
+\begin{eqn}
+[A_{ijkl}p_{j}p_{l}-\rho\delta_{ik}]a_{k}^{1}=\frac{\partial}{\partial x_{j}}(A_{ijkl}p_{l}a_{k}^{0})+A_{ijkl}p_{j}\frac{\partial a_{k}^{0}}{\partial x_{l}}.
+\end{eqn}
+For the general term with $n\ge2$:
+\begin{eqn}
+\begin{aligned}
+{}[A_{ijkl}p_{j}p_{l}-\rho\delta_{ik}]a_{k}^{n}={}&\frac{\partial}{\partial x_{j}}(A_{ijkl}p_{l}a_{k}^{n-1})+A_{ijkl}p_{j}\frac{\partial a_{k}^{n-1}}{\partial x_{l}}\\
+&-\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial a_{k}^{n-2}}{\partial x_{l}}\right).
+\end{aligned}
+\end{eqn}
+First equation determines $\mathbf{p}$, while later ones successively determine the polarisation vectors at each order.
+
+Where have we made an approximation?
+\end{frame}
+
+\begin{frame}
+In this course we will consider only the equation derived from the \textbf{highest-order} term in the expansion.
+
+If that is all that we require, we can systematically drop all but the highest-order terms within the previous derivation:
+\begin{eqn}
+\frac{\partial u_{k}}{\partial x_{l}}=\sum_{n=0}^{\infty}\frac{1}{(\ii\omega)^{n}}\left(\frac{\partial a_{k}^{n}}{\partial x_{l}}
+-\ii\omega p_{l}a_{k}^{n}\right)\ee^{-\ii\omega T}\approx-\ii\omega p_{l}a_{k}^{0}\ee^{-\ii\omega T}.
+\end{eqn}
+This saves a lot of time!
+
+You can practise these steps in the first problem set.
+\end{frame}
+
+\begin{frame}
+From the highest-order coefficient, we have:
+\begin{eqn}
+[A_{ijkl}p_{j}p_{l}-\rho\delta_{ik}]a_{k}^{0}=0.
+\end{eqn}
+This motivates the definition of a \textbf{local Christoffel matrix}:
+\begin{eqn}
+\Gamma_{ik}(\mathbf{x},\mathbf{p})=\frac{1}{\rho(\mathbf{x})}A_{ijkl}(\mathbf{x})p_{j}p_{l}.
+\end{eqn}
+And so we can write the above condition as:
+\begin{eqn}
+\{\bm{\Gamma}[\mathbf{x},\mathbf{p}(\mathbf{x})]-\mathbf{I}\}\mathbf{a}^{0}(\mathbf{x})=\mathbf{0}.
+\end{eqn}
+Locally, things look identical to plane waves!
+\end{frame}
+
+\begin{frame}
+The equation
+\begin{eqn}
+\{\bm{\Gamma}[\mathbf{x},\mathbf{p}(\mathbf{x})]-\mathbf{I}\}\mathbf{a}^{0}(\mathbf{x})=\mathbf{0}
+\end{eqn}
+has non-trivial solutions for the zeroth-order polarisation vector if and only if:
+\begin{eqn}
+\det\{\bm{\Gamma}[\mathbf{x},\mathbf{p}(\mathbf{x})]-\mathbf{I}\}=0.
+\end{eqn}
+This is a non-linear first-order PDE for the travel time called the \textbf{eikonal equation}.
+
+If the local slowness surfaces are everywhere non-degenerate:
+\begin{eqn}
+\|\mathbf{p}(\mathbf{x})\|^{2}c_{k}[\mathbf{x},\hat{\mathbf{p}}(\mathbf{x})]^{2}-1=0.
+\end{eqn}
+\end{frame}
+
+\sectionslide{The method of characteristics}
+
+\begin{frame}
+Recall the eikonal equation is:
+\begin{eqn}
+\|\mathbf{p}(\mathbf{x})\|^{2}c_{k}[\mathbf{x},\hat{\mathbf{p}}(\mathbf{x})]^{2}-1=0.
+\end{eqn}
+If we define the \textbf{ray Hamiltonian} for the $k$th sheet of the slowness surface:
+\begin{eqn}
+H_{k}(\mathbf{x},\mathbf{p})=\frac{1}{2}\|\mathbf{p}\|^{2}c_{k}(\mathbf{x},\hat{\mathbf{p}})^{2},
+\end{eqn}
+we can write the eikonal equation in the form:
+\begin{eqn}
+H_{k}[\mathbf{x},\mathbf{p}(\mathbf{x})]=\frac{1}{2}, \quad \mathbf{p}(\mathbf{x})=(\nabla T)(\mathbf{x}).
+\end{eqn}
+\end{frame}
+
+\begin{frame}
+\begin{columns}[c]
+\column{0.5\textwidth}
+\centering
+\begin{tikzpicture}[line width=0.9pt,>={Stealth[length=3mm]},x=1.05cm,y=1.05cm]
+\draw[->] (-0.3,0) -- (9.6,0) node[right] {$\mathbf{x}$};
+\draw[->] (0,-0.3) -- (0,6.3) node[above] {$\mathbf{p}$};
+\coordinate (P) at (2.8,3.0);
+\draw[densely dotted] (2.8,0) -- (P);
+\draw[dashed] (0,3.0) -- (P);
+\node[below] at (2.8,-0.05) {$\mathbf{x}^{0}$};
+\node[left] at (-0.05,3.0) {$\mathbf{p}^{0}$};
+\draw (P) .. controls (4.6,3.1) and (5.4,4.3) .. (6.8,4.15) .. controls (7.8,4.05) and (8.4,4.25) .. (9.3,4.6);
+\fill (P) circle (0.09);
+\node[anchor=south west] (init) at (3.6,5.2) {initial data};
+\draw[->,line width=0.6pt] (init.south west) ++(0.2,0) -- ([shift={(0.12,0.12)}]P);
+\node[align=left,anchor=north west] (lev) at (5.4,2.6) {solution, within\\$H_{k}(\mathbf{x},\mathbf{p})=\tfrac{1}{2}$};
+\draw[->,line width=0.6pt] (lev.north) ++(0.3,0) -- (6.3,4.05);
+\end{tikzpicture}
+\column{0.46\textwidth}
+Solution of the eikonal equation is a 3D surface lying within a level set of the ray Hamiltonian in a 6D
+phase space.
+
+Initial data specifies a 2D surface within this level set.
+
+The problem is how to extend this 2D surface into the appropriate 3D surface.
+
+This is where Hamilton's equations enter into the method.
+\end{columns}
+\end{frame}
+
+\begin{frame}
+Initial data extended through integration of Hamilton's equations, with $\sigma$ a \textbf{generating parameter}:
+\begin{eqn}
+\begin{gathered}
+\frac{\ddns x_{i}}{\ddns\sigma}=\frac{\partial H_{k}}{\partial p_{i}}, \quad \frac{\ddns p_{i}}{\ddns\sigma}=-\frac{\partial H_{k}}{\partial x_{i}},\\[\eqgap]
+x_{i}(0)=x_{i}^{0}, \quad p_{i}(0)=p_{i}^{0}.
+\end{gathered}
+\end{eqn}
+This works because the Hamiltonian is constant along the integral curves:
+\begin{eqn}
+\begin{aligned}
+\frac{\ddns}{\ddns\sigma}H_{k}[\mathbf{x}(\sigma), \mathbf{p}(\sigma)]&=\frac{\partial H_{k}}{\partial x_{i}}\frac{\ddns x_{i}}{\ddns\sigma}+\frac{\partial H_{k}}{\partial p_{i}}\frac{\ddns p_{i}}{\ddns\sigma}\\[\eqgap]
+&=-\frac{\ddns p_{i}}{\ddns\sigma}\frac{\ddns x_{i}}{\ddns\sigma}+\frac{\ddns x_{i}}{\ddns\sigma}\frac{\ddns p_{i}}{\ddns\sigma}=0.
+\end{aligned}
+\end{eqn}
+There are a few subtler points to the method that are being ignored.
+\end{frame}
+
+\begin{frame}
+\textbf{Rays} are the projection of integral curves into the position domain.
+
+Rate of change of the travel time along a ray:
+\begin{eqn}
+\frac{\ddns}{\ddns\sigma}T[\mathbf{x}(\sigma)]=\frac{\partial T}{\partial x_{i}}\frac{\ddns x_{i}}{\ddns \sigma}=p_{i}\frac{\partial H_{k}}{\partial p_{i}}.
+\end{eqn}
+Right-hand side simplified using Euler's theorem for homogeneous functions (proof in the handout, non-examinable):
+\begin{eqn}
+p_{i}\frac{\partial H_{k}}{\partial p_{i}}=2H_{k}\arrowto\frac{\ddns }{\ddns \sigma}T[\mathbf{x}(\sigma)]=1.
+\end{eqn}
+\textbf{The generating parameter along the ray is equal to the travel time.}
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.6\paperheight]{L5F3.pdf}
+
+\raggedright
+If rays for two different integral curves cross, then the travel time need not be well defined. The envelope of the
+ray family is known as a \textbf{caustic}. The \textbf{ray theoretic amplitude is infinite} there, while the true
+amplitude is large but finite.
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[width=0.9\textwidth]{L5F4.pdf}
+
+\raggedright
+Within heterogeneous materials, caustics occur frequently -- cf.\ Penrose--Hawking singularity theorems in general
+relativity.
+\end{frame}
+
+\begin{frame}[t]
+\heading{What you need to know and be able to do}
+\begin{enumerate}
+\item[(i)] The form of the ray-series expansion, and understand its underlying physical motivation.
+\item[(ii)] How to obtain the eikonal equation and transport equations by substituting the ray expansion into the
+equations of motion. The full derivation given in the lecture is too involved to be set in an exam, but you may be
+asked to apply these methods within simpler situations.
+\item[(iii)] Understand how the eikonal equation can be interpreted geometrically within a six-dimensional phase
+space, and be able to explain how solutions can be obtained through integration of Hamilton's equations.
+\item[(iv)] Be able to solve the Hamiltonian ray equations in simple cases, and also to deduce some of their
+properties. Practice in this will be given in the next lecture and within the first problem set.
+\item[(v)] What a caustic is, and why ray theory breaks down there.
+\end{enumerate}
+\end{frame}
+
+\end{document}

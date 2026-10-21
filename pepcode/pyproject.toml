@@ -12,6 +12,8 @@ dependencies = [
     "pillow>=10.0",
     "pygeoinf>=1.8",
     "obspy>=1.4",
+    "yspec-seismo (>=0.1.0)",
+    "imageio-ffmpeg (>=0.5)",
 ]
 
 [tool.poetry]

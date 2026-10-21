@@ -70,8 +70,10 @@ class KernelExperiment:
     def adjoint(self):
         """Run the adjoint problem in reversed time; store snapshots of div u' on the same
         time levels as the forward snapshots (matched by t = T - tau)."""
-        w = self.window(); sdot = np.gradient(self.s_rec, self.dt)
-        N = np.sum(w * sdot ** 2) * self.dt
+        # the lecture's eqs (40)-(41): s = w u is the windowed seismogram that is cross-correlated, sdot its time
+        # derivative, N = int sdot^2 dt, and the adjoint source is -w sdot / N
+        w = self.window(); sdot = np.gradient(w * self.s_rec, self.dt)
+        N = np.sum(sdot ** 2) * self.dt
         hsrc = -w * sdot / N                      # adjoint source time function h'(t) (x-component)
         self.hsrc = hsrc
         s = self._solver(); n = self.nt; m = len(self.snap_t)

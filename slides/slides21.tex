@@ -1,0 +1,354 @@
+\documentclass[14pt]{beamer}
+\usepackage{pepslides}
+\title{Self-gravitation and rotation}
+\lecturenumber{21}
+\hypersetup{pdftitle={Lecture 21: Self-gravitation and rotation}}
+
+\begin{document}
+
+\titleslide
+
+\begin{frame}[t]
+\heading{From earlier lectures}
+\centering
+\begin{minipage}[b]{0.5\textwidth}
+\centering
+\includegraphics[width=\textwidth]{L6F5.pdf}\\[0.5em]
+Preliminary Reference Earth Model (PREM)\\ of Dziewonski \& Anderson (1981)
+\end{minipage}\hfill
+\begin{minipage}[b]{0.42\textwidth}
+\centering
+\includegraphics[height=0.6\paperheight]{L8F6.pdf}\\[0.5em]
+GLAD-M35 of Cui \emph{et al.} (2024) -- \\ a global waveform inverse model
+\end{minipage}
+\end{frame}
+
+\sectionslide{Newtonian gravity}
+
+\begin{frame}
+Gravitational potential satisfies \textbf{Poisson's equation}:
+\begin{eqn}
+\nabla^{2}\phi=4\pi G\varrho.
+\end{eqn}
+Associated gravitational acceleration:
+\begin{eqn}
+g_{i}=-\frac{\partial\phi}{\partial x_{i}}.
+\end{eqn}
+Equation subject to continuity conditions:
+\begin{eqn}
+[\phi]_{-}^{+}=0,\quad [g_{i}\hat{n}_{i}]_{-}^{+}=0,
+\end{eqn}
+across any jumps in density, while the potential also tends to zero at infinity.
+\end{frame}
+
+\begin{frame}
+Solution to the problem can be expressed as a familiar integral:
+\begin{eqn}
+\phi(\mathbf{y},t)=-G\int_{M_{t}}\frac{\varrho(\mathbf{y}',t)}{[(y_{i}-y_{i}')(y_{i}-y_{i}')]^{\frac{1}{2}}}\dd^{3}\mathbf{y}',
+\end{eqn}
+and differentiating, the gravitational acceleration can be similarly written:
+\begin{eqn}
+g_{i}(\mathbf{y},t)=-G\int_{M_{t}}\frac{\varrho(\mathbf{y}',t)(y_{i}-y_{i}')}{[(y_{j}-y_{j}')(y_{j}-y_{j}')]^{\frac{3}{2}}}\dd^{3}\mathbf{y}'.
+\end{eqn}
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.62\paperheight]{L9F1.pdf}
+
+\raggedright
+Gravitational acceleration and pressure in PREM, calculated from its density profile.
+
+The gravitational acceleration is close to $10\,\mathrm{m\,s^{-2}}$ throughout the mantle, and largest at the core--mantle boundary.
+\end{frame}
+
+\begin{frame}
+Using the motion of the body, we can define a \textbf{referential gravitational potential}:
+\begin{eqn}
+\zeta(\mathbf{x},t)=\phi[\bphi(\mathbf{x},t),t].
+\end{eqn}
+Using conservation of mass, we can transform the integral solution to obtain:
+\begin{eqn}
+\zeta(\mathbf{x},t)=-G\int_{M}\frac{\rho(\mathbf{x}')}{\{[\varphi_{i}(\mathbf{x},t)-\varphi_{i}(\mathbf{x}',t)]
+[\varphi_{i}(\mathbf{x},t)-\varphi_{i}(\mathbf{x}',t)]\}^{\frac{1}{2}}}\dd^{3}\mathbf{x}'.
+\end{eqn}
+Similarly for the \textbf{referential gravitational acceleration}:
+\begin{eqn}
+\gamma_{i}(\mathbf{x},t)=-G\int_{M}\frac{\rho(\mathbf{x}')[\varphi_{i}(\mathbf{x},t)-\varphi_{i}(\mathbf{x}',t)]}
+{\{[\varphi_{j}(\mathbf{x},t)-\varphi_{j}(\mathbf{x}',t)][\varphi_{j}(\mathbf{x},t)-\varphi_{j}(\mathbf{x}',t)]\}^{\frac{3}{2}}}\dd^{3}\mathbf{x}'.
+\end{eqn}
+\end{frame}
+
+\begin{frame}
+The \textbf{gravitational binding energy} is the potential energy of a body associated with gravitational forces.
+
+It can be calculated by assuming the body is assembled bit-by-bit, summing up the work
+required to move each particle in from infinity relative to the current field.
+
+Calculation identical to that in Part IB Electrodynamics for the energy of an electrostatic field:
+\begin{eqn}
+\mathcal{V}_{g}(t)=\frac{1}{2}\int_{M_{t}}\varrho(\mathbf{y},t)\phi(\mathbf{y},t)\dd^{3}\mathbf{y}.
+\end{eqn}
+Full details in the notes, but you won't be asked to recall the calculation.
+
+Can express referentially:
+\begin{eqn}
+\mathcal{V}_{g}(t)=\frac{1}{2}\int_{M}\rho(\mathbf{x})\zeta(\mathbf{x},t)\dd^{3}\mathbf{x}.
+\end{eqn}
+\end{frame}
+
+\sectionslide{Equations of motion}
+
+\begin{frame}
+Potential energy is now the sum of elastic and gravitational contributions.
+
+Modified Lagrangian density:
+\begin{eqn}
+\mathcal{L}(\mathbf{x},t,\bphi,\mathbf{v},\mathbf{F})=\frac{1}{2}\rho(\mathbf{x})\|\mathbf{v}\|^{2}
+-W(\mathbf{x},t,\mathbf{F})-\frac{1}{2}\rho(\mathbf{x})\zeta(\mathbf{x},t).
+\end{eqn}
+Statement of Hamilton's principle is unchanged.
+
+Derivation of the Euler--Lagrange equations is harder because we have a \textbf{non-local} term in
+the Lagrangian -- this reflects the \textbf{action-at-a-distance} property of Newtonian gravity.
+\end{frame}
+
+\begin{frame}
+Functional derivatives are still defined through the linear term in a Taylor expansion.
+
+The result can be expressed in the form
+\begin{eqn}
+\langle D\mathcal{S}(\bphi)|\delta\bphi\rangle=\int_{0}^{T}\int_{M}
+\left(\frac{\delta\mathcal{L}}{\delta\varphi_{i}}\delta\varphi_{i}+\frac{\delta\mathcal{L}}{\delta v_{i}}
+\delta v_{i}+\frac{\delta\mathcal{L}}{\delta F_{ij}}\delta F_{ij}\right)\dd^{3}\mathbf{x}\dd t.
+\end{eqn}
+The ``derivative'' terms here are, by definition, just the quantities multiplying the first-order
+perturbations to the fields.
+
+In the case of local Lagrangians, these are just normal partial derivatives.
+
+It is only the variation with respect to the motion that needs additional work.
+\end{frame}
+
+\begin{frame}
+Following the standard integrations by parts, we obtain:
+\begin{eqn}
+\begin{gathered}
+\frac{\delta\mathcal{L}}{\delta\varphi_{i}}-\frac{\partial}{\partial t}\left(\frac{\delta\mathcal{L}}
+{\delta v_{i}}\right)-\frac{\partial}{\partial x_{j}}\left(\frac{\delta\mathcal{L}}{\delta F_{ij}}\right)=0,\\[\eqgap]
+\frac{\delta\mathcal{L}}{\delta F_{ij}}\hat{n}_{j}=0.
+\end{gathered}
+\end{eqn}
+As previously, we have:
+\begin{eqn}
+\frac{\delta\mathcal{L}}{\delta v_{i}}=\rho v_{i},\quad \frac{\delta\mathcal{L}}{\delta F_{ij}}=-\frac{\partial W}{\partial F_{ij}}.
+\end{eqn}
+In the second problem set you will show that:
+\begin{eqn}
+\frac{\delta\mathcal{L}}{\delta\varphi_{i}}=\rho\gamma_{i}.
+\end{eqn}
+\end{frame}
+
+\begin{frame}
+The equations of motion can be written in the form:
+\begin{eqn}
+\rho\frac{\partial v_{i}}{\partial t}-\frac{\partial T_{ij}}{\partial x_{j}}-\rho\gamma_{i}=0.
+\end{eqn}
+As expected, we have just added a gravitational body force to the balance of linear
+momentum.
+
+This force is expressed in terms of the motion through an integral over the whole body.
+
+These are now \textbf{integro-differential equations}.
+\end{frame}
+
+\begin{frame}
+\begin{columns}[c]
+\begin{column}{0.4\textwidth}
+\centering
+\includegraphics[width=\textwidth]{dehant2015_rotation.jpg}
+\end{column}
+\begin{column}{0.56\textwidth}
+We have described the motion relative to an inertial frame defined by the ``fixed stars''.
+
+For applications to the Earth, it is more natural to use a rotating frame.
+
+The Earth's rotation is not steady, varying due to both external and internal processes.
+
+Within seismology, it is common to use a steady and approximately co-rotating reference frame.
+
+This will introduce the usual fictitious forces into the equations of motion.
+\end{column}
+\end{columns}
+\credit{Dehant \& Mathews (2015)}
+\end{frame}
+
+\begin{frame}
+The motion relative to inertial space can be written:
+\begin{eqn}
+\varphi_{i}(\mathbf{x},t)=\Phi_{i}(t)+R_{ij}(t)\overline{\varphi}_{j}(\mathbf{x},t).
+\end{eqn}
+The translation vector represents motion of the origin of the reference frame.
+
+The rotation matrix represents rotation of the reference frame.
+
+On the right-hand side we see the \textbf{relative motion} as seen from the non-inertial frame.
+
+Because of material frame indifference, the choice of frame has no effect on the potential
+energy associated with the motion.
+\end{frame}
+
+\begin{frame}
+Differentiating the motion in time, we find:
+\begin{eqn}
+v_{i}=\frac{\ddns \Phi_{i}}{\ddns t}+R_{ij}\left(\frac{\partial\overline{\varphi}_{j}}{\partial t}+R_{kj}\frac{\ddns R_{kl}}{\ddns t}\overline{\varphi}_{l}\right).
+\end{eqn}
+Introduction of the angular velocity as seen from the non-inertial frame:
+\begin{eqn}
+R_{kj}\frac{\ddns R_{kl}}{\ddns t}=\epsilon_{jml}\Omega_{m}.
+\end{eqn}
+The velocity can then be expressed in the form:
+\begin{eqn}
+v_{i}=\frac{\ddns \Phi_{i}}{\ddns t}+R_{ij}(\overline{v}_{j}+\epsilon_{jkl}\Omega_{k}\overline{\varphi}_{l}).
+\end{eqn}
+\end{frame}
+
+\begin{frame}
+Differentiating again, we can write the acceleration:
+\begin{eqn}
+\begin{aligned}
+\frac{\partial v_{i}}{\partial t}=\frac{\ddns ^{2}\Phi_{i}}{\ddns t^{2}}+R_{ij}\biggl(&\frac{\partial\overline{v}_{j}}{\partial t}+2\epsilon_{jkl}\Omega_{k}\overline{v}_{l}\\
+&+\epsilon_{jkl}\frac{\ddns \Omega_{k}}{\ddns t}\overline{\varphi}_{l}+\epsilon_{jkl}\epsilon_{lmn}\Omega_{k}\Omega_{m}\overline{\varphi}_{n}\biggr).
+\end{aligned}
+\end{eqn}
+At this point, we define an approximately co-rotating frame by setting:
+\begin{eqn}
+\frac{\ddns \bm{\Phi}}{\ddns t}=\mathbf{0},\quad \frac{\ddns \bm{\Omega}}{\ddns t}=\mathbf{0}.
+\end{eqn}
+This approach can be generalised to allow for interactions between different planets
+(e.g.\ the Earth--Moon system).
+\end{frame}
+
+\begin{frame}
+Differentiating the motion spatially, we find:
+\begin{eqn}
+F_{ij}=R_{ik}\overline{F}_{kj}.
+\end{eqn}
+From the definition of the first Piola--Kirchhoff stress and frame indifference, we find:
+\begin{eqn}
+T_{ij}=R_{ik}\overline{T}_{kj}.
+\end{eqn}
+Similarly, for the referential gravitational acceleration:
+\begin{eqn}
+\gamma_{i}=R_{ij}\overline{\gamma}_{j}.
+\end{eqn}
+\end{frame}
+
+\begin{frame}
+Putting things together and cancelling common rotation factors:
+\begin{eqn}
+\rho\left(\frac{\partial\overline{v}_{i}}{\partial t}+2\epsilon_{ijk}\Omega_{j}\overline{v}_{k}+\epsilon_{ijk}
+\epsilon_{klm}\Omega_{j}\Omega_{l}\overline{\varphi}_{m}\right)-\frac{\partial\overline{T}_{ij}}{\partial x_{j}}-\rho\overline{\gamma}_{i}=0.
+\end{eqn}
+All terms are defined relative to the rotating reference frame.
+
+Identical to the inertial case except for the addition of \textbf{Coriolis and centrifugal forces}.
+
+\textbf{From here on we will always work in the rotating frame and drop the overbars.}
+\end{frame}
+
+\begin{frame}
+Same procedure as ever for linearisation on application of a small stress glut.
+
+At zeroth order we have the equilibrium equations:
+\begin{eqn}
+\rho\epsilon_{ijk}\epsilon_{klm}\Omega_{j}\Omega_{l}x_{m}-\frac{\partial T_{ij}^{0}}{\partial x_{j}}-\rho\gamma_{i}^{0}=0.
+\end{eqn}
+\textbf{Stress-free equilibrium solutions are not now possible.}
+\end{frame}
+
+\begin{frame}
+At first order we have the linearised equations for the displacement vector:
+\begin{eqn}
+\begin{aligned}
+&\rho\left(\frac{\partial^{2}u_{i}}{\partial t^{2}}+2\epsilon_{ijk}\Omega_{j}\frac{\partial u_{k}}{\partial t}+
+\epsilon_{ijk}\epsilon_{klm}\Omega_{j}\Omega_{l}u_{m}\right)\\
+&\qquad-\frac{\partial}{\partial x_{j}}\left(A_{ijkl}
+\frac{\partial u_{k}}{\partial x_{l}}\right)-\rho\gamma_{i}^{1}=-\frac{\partial\overline{S}_{ij}}{\partial x_{j}}.
+\end{aligned}
+\end{eqn}
+The perturbation to the referential gravitational acceleration is given as an integral of the
+displacement vector -- see the handout for the full expression.
+\end{frame}
+
+\sectionslide{Scaling analysis}
+
+\begin{frame}
+Derivatives can be readily estimated in terms of typical time and length scales:
+\begin{eqn}
+\begin{aligned}
+\rho\frac{\partial^{2}u_{i}}{\partial t^{2}}&\sim\frac{\overline{\rho}U}{T^{2}},\\[0.4em]
+\rho\epsilon_{ijk}\Omega_{j}\frac{\partial u_{k}}{\partial t}&\sim\frac{\overline{\rho}\Omega U}{T},\\[0.4em]
+\rho\epsilon_{ijk}\epsilon_{klm}\Omega_{j}\Omega_{l}u_{m}&\sim\overline{\rho}\Omega^{2}U,\\[0.4em]
+\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\right)&\sim\frac{\overline{\mu}U}{L^{2}}.
+\end{aligned}
+\end{eqn}
+Estimating the magnitude of the gravitational acceleration is a bit more work due to its
+integral definition (see handout):
+\begin{eqn}
+\rho\gamma_{i}^{1}\sim4\pi G\overline{\rho}^{2}U.
+\end{eqn}
+\end{frame}
+
+\begin{frame}
+The ratios of the terms, with $L$ a wavelength and $T$ a period:
+\begin{eqn}
+\frac{\textrm{gravitational forces}}{\textrm{elastic forces}}=\frac{4\pi G\overline{\rho}L^{2}}{\overline{v}^{2}},\qquad
+\frac{\textrm{Coriolis term}}{\textrm{inertial term}}=\Omega T.
+\end{eqn}
+\begin{center}
+\begin{tabular}{llcc}
+\toprule
+period & & gravity/elasticity & Coriolis/inertia\\
+\midrule
+1 s & short-period body waves & $5\times10^{-6}$ & $7\times10^{-5}$\\
+20 s & long-period body waves & $2\times10^{-3}$ & $1\times10^{-3}$\\
+100 s & surface waves & $0.05$ & $0.007$\\
+1 hour & longest free oscillations & $3$ & $0.3$\\
+12 hours & tides & $3$ & $3$\\
+\bottomrule
+\end{tabular}
+\end{center}
+{\small With $L=\overline{v}T$, but no larger than the radius of the Earth, $\overline{v}\approx8\,\mathrm{km\,s^{-1}}$ and
+$\overline{\rho}\approx5.5\,\mathrm{g\,cm^{-3}}$.\par}
+
+\textbf{At the longest wavelengths gravity is just as important as elasticity within the
+equations of motion -- this fact means that we can learn about density directly.}
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.74\paperheight]{L9F2.pdf}
+
+\raggedright
+Synthetic seismograms in PREM with gravitation (black) and with all gravitational effects switched off (red),
+in successively lower frequency bands.
+\end{frame}
+
+\begin{frame}[t]
+\heading{What you need to know and be able to do}
+\begin{enumerate}
+\item[(i)] Understand the relevant parts of Newtonian gravity, including the manner in which the gravitational
+potential and acceleration can be transformed into quantities defined on the reference body.
+\item[(ii)] Know physically what the gravitational binding energy of a planet represents, and how it can be
+determined.
+\item[(iii)] Know how the gravitational binding energy is incorporated into the Lagrangian, and how the equations of
+motion can be obtained. The full derivation is too long to be examined, but you may be asked to reproduce parts of it
+given appropriate information and guidance.
+\item[(iv)] Perform scaling arguments to determine the relative size of terms within an equation, and to determine
+whether some of them might be negligible. This is a technique required throughout this course, and you should ensure
+you are happy with it.
+\end{enumerate}
+\end{frame}
+
+\end{document}
