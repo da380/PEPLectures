@@ -17,6 +17,19 @@
   Dziewonski 1989). TikZ sources in `figsrc/` (compile with pdflatex, copy the PDF to `figures/`).
   `figures/slides/` holds borrowed images used only in the slides (`slides/`); sources and credits in its
   `SOURCES.md`.
+* Slides (from 2026 in LaTeX): `slides/slidesNN.tex`, one per lecture, named by the *printed* lecture number
+  (13–24), all using `slides/pepslides.sty`; `slides/build.sh [NN ...]` builds them (pdflatex twice). Beamer is
+  only the page engine: 280 x 157.5 mm pages (the size of the old Impress slides), 14 pt Arimo text, Palatino
+  maths, no frame titles, headers, footers or navigation. Displays in `\begin{eqn}`, credits with `\credit{}`,
+  `\titleslide`, `\sectionslide{}`, `\heading{}` for recap slides. The maths is copied from the notes; the
+  notation macros are duplicated in `pepslides.sty` because `mycommands.sty` cannot be loaded with beamer.
+  `old_slides/` holds last year's Impress PDFs (numbered 12–23) that the decks were converted from.
+  Each deck ends with the notes' "What you need to know and be able to do" list. Decks with animations
+  (`\animation[opts]{still}{movie}`: Lectures 16, 17, 20) are also built as `slidesNN-live.pdf`, whose stills open
+  WebM movies in `figures/anim/` when clicked, through the symlink `slides/anim` (plain relative links, which Evince
+  hands to the default player; it refuses launch links to anything but PDFs); the plain
+  `slidesNN.pdf` is the one to upload. The movies are made by the figure scripts with `--webm`
+  (`pepseis.fd2d_psv.movie`, encoder from `imageio-ffmpeg`; VP9, as this machine has no H.264 decoder).
 * `pepcode/` is a poetry package (`pepseis`) with every figure script (`scripts/L<n>F<m>.py`, `S1F1.py`,
   `make_figures.py`); see `pepcode/README.md`. Figure file names follow the *file* number (`L12F7` = lecture12.tex),
   not the printed figure number.

@@ -1,0 +1,275 @@
+\documentclass[14pt]{beamer}
+\usepackage{pepslides}
+\title{Constitutive theory}
+\lecturenumber{14}
+\hypersetup{pdftitle={Lecture 14: Constitutive theory}}
+
+\begin{document}
+
+\titleslide
+
+\begin{frame}[t]
+\heading{From last time\ldots}
+Using the concrete form for the Lagrangian density, the equations of motion are:
+\begin{eqn}
+\rho\frac{\partial v_{i}}{\partial t}-\frac{\partial T_{ij}}{\partial x_{j}}=0,
+\end{eqn}
+along with the traction-free boundary conditions:
+\begin{eqn}
+T_{ij}\hat{n}_{j}=0,
+\end{eqn}
+where we have defined the \textbf{first Piola--Kirchhoff stress} by:
+\begin{eqn}
+T_{ij}(\mathbf{x},t)=\frac{\partial W}{\partial F_{ij}}[\mathbf{x},\mathbf{F}(\mathbf{x},t)].
+\end{eqn}
+\end{frame}
+
+\sectionslide{Material frame indifference}
+
+\begin{frame}
+For a simple hyperelastic material, the general form for the potential energy is:
+\begin{eqn}
+\mathcal{V}(t)=\int_{M}W[\mathbf{x},t,\bphi(\mathbf{x},t),\mathbf{F}(\mathbf{x},t)]\dd^{3}\mathbf{x}.
+\end{eqn}
+Using invariance under time-translation and superimposed rigid body motions, we showed that:
+\begin{eqn}
+W[\mathbf{x},\mathbf{F}(\mathbf{x},t)]=W[\mathbf{x},\mathbf{Q}(t)\mathbf{F}(\mathbf{x},t)].
+\end{eqn}
+How do we determine suitable classes of functions for the potential energy density?
+\end{frame}
+
+\begin{frame}
+The \textbf{polar decomposition theorem} shows that
+\begin{eqn}
+\mathbf{F}=\mathbf{R}\mathbf{U}=\mathbf{V}\mathbf{R},
+\end{eqn}
+with $\mathbf{R}$ a rotation matrix, and $\mathbf{U}$ and $\mathbf{V}$ symmetric and positive-definite.
+
+{\centering\includegraphics[height=0.56\paperheight]{L2F1.pdf}\par}
+
+Proof in the handout, but \textbf{non-examinable}.
+\end{frame}
+
+\begin{frame}
+Using the decomposition along with material frame indifference, we obtain:
+\begin{eqn}
+W(\mathbf{x},\mathbf{F})=W(\mathbf{x},\mathbf{R}\mathbf{U})=W(\mathbf{x},\mathbf{U}).
+\end{eqn}
+The potential energy density depends only on the stretching part of the deformation gradient.
+
+Due to this result, we can always write:
+\begin{eqn}
+W(\mathbf{x},\mathbf{F})=U(\mathbf{x},\mathbf{C}),
+\end{eqn}
+where we have introduced the \textbf{right Cauchy--Green deformation tensor}:
+\begin{eqn}
+\mathbf{C}=\mathbf{F}^{T}\mathbf{F}.
+\end{eqn}
+This is a local measure of change of shape/volume, and from it we define the \textbf{finite strain tensor}:
+\begin{eqn}
+\mathbf{E}=\frac{1}{2}(\mathbf{C}-\mathbf{I}).
+\end{eqn}
+From here on, we call the potential energy density the \textbf{strain energy function} for the material.
+\end{frame}
+
+\begin{frame}
+From the definition of the first Piola--Kirchhoff stress tensor, we have:
+\begin{eqn}
+T_{ij}=\frac{\partial W}{\partial F_{ij}}=\frac{\partial U}{\partial C_{kl}}\frac{\partial C_{kl}}{\partial F_{ij}}.
+\end{eqn}
+This implies that:
+\begin{eqn}
+T_{ij}=F_{ik}S_{kj},
+\end{eqn}
+where we have defined the \textbf{second Piola--Kirchhoff stress tensor}:
+\begin{eqn}
+S_{ij}=2\frac{\partial U}{\partial C_{ij}}.
+\end{eqn}
+This is a \textbf{symmetric tensor}, with this symmetry being equivalent to the \textbf{conservation of angular momentum} --
+a fact you will work through in the first problem set.
+\end{frame}
+
+\sectionslide{Equilibrium and linearisation}
+
+\begin{frame}
+At equilibrium, the motion is time-independent. The equations of motion reduce to:
+\begin{eqn}
+\begin{gathered}
+\frac{\partial T_{ij}^{0}}{\partial x_{j}}=0,\\[\eqgap]
+T_{ij}^{0}\hat{n}_{j}=0.
+\end{gathered}
+\end{eqn}
+We can choose the reference body to be the equilibrium configuration so that the \textbf{motion is the identity mapping}.
+
+A solution of the problem is then given by a \textbf{stress-free equilibrium}.
+
+We will assume such an equilibrium state for the first part of this course. But in the Earth, due to gravitation and
+rotation, the equilibrium state is not stress-free.
+\end{frame}
+
+\begin{frame}
+We consider the disturbance of a body about a stress-free equilibrium state:
+\begin{eqn}
+\begin{aligned}
+\varphi_{i}(\mathbf{x},0)&=x_{i}+su_{i}^{0}(\mathbf{x}),\\[\eqgap]
+v_{i}(\mathbf{x},0)&=sv_{i}^{0}(\mathbf{x}).
+\end{aligned}
+\end{eqn}
+Here $s$ is a dimensionless perturbation parameter. We expand the motion in a Taylor series:
+\begin{eqn}
+\varphi_{i}(\mathbf{x},t)=x_{i}+su_{i}(\mathbf{x},t)+O(s^{2}),
+\end{eqn}
+where $\mathbf{u}$ is known as the \textbf{displacement vector}.
+
+All we have to do is put this into the equations of motion, expand to first order in $s$ and see what happens!
+\end{frame}
+
+\begin{frame}
+In linearising the stress tensor, we find:
+\begin{eqn}
+T_{ij}(\mathbf{x},t)=s\frac{\partial^{2}W}{\partial F_{ij}\partial F_{kl}}(\mathbf{x},\mathbf{I})\frac{\partial u_{k}}{\partial x_{l}}+O(s^{2}).
+\end{eqn}
+Motivated by this we introduce the \textbf{elastic tensor}:
+\begin{eqn}
+A_{ijkl}(\mathbf{x})=\frac{\partial^{2}W}{\partial F_{ij}\partial F_{kl}}(\mathbf{x},\mathbf{I}).
+\end{eqn}
+Due to the equality of mixed partial derivatives, we note the \textbf{hyperelastic symmetry}:
+\begin{eqn}
+A_{ijkl}=A_{klij}.
+\end{eqn}
+\end{frame}
+
+\begin{frame}
+Due to the stress-free equilibrium assumption, you will show that:
+\begin{eqn}
+A_{ijkl}=A_{jikl}=A_{ijlk}.
+\end{eqn}
+Along with the hyperelastic symmetry, this means there are \textbf{21 independent elastic moduli}.
+
+The linearised stress depends only on the symmetrised displacement gradient:
+\begin{eqn}
+A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}=A_{ijkl}\frac{1}{2}\left(\frac{\partial u_{k}}{\partial x_{l}}+\frac{\partial u_{l}}{\partial x_{k}}\right).
+\end{eqn}
+Here we see the \textbf{linearised strain tensor}, which is the first-order term in the expansion of the finite strain.
+\end{frame}
+
+\begin{frame}
+The final linearised equations of motion are:
+\begin{eqn}
+\rho\frac{\partial^{2}u_{i}}{\partial t^{2}}-\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\right)=0,
+\end{eqn}
+along with boundary conditions:
+\begin{eqn}
+\hat{n}_{j}A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}=0.
+\end{eqn}
+Note that the boundary conditions are applied on the reference boundary without need for further approximation.
+
+We will see later that this is an example of a \textbf{wave equation}.
+\end{frame}
+
+\sectionslide{Material symmetries}
+
+\begin{frame}
+In general, the following relation, with $\mathbf{Q}$ a rotation matrix, does not hold:
+\begin{eqn}
+W(\mathbf{x},\mathbf{F}\mathbf{Q})=W(\mathbf{x},\mathbf{F}).
+\end{eqn}
+If it does, we say that $\mathbf{Q}$ is in the \textbf{material symmetry group} of $W$ at the point $\mathbf{x}$.
+
+Material symmetries reflect the invariance of the strain energy with respect to the \textbf{orientation of stretching}.
+
+On a crystal scale, they reflect lattice structures.
+\end{frame}
+
+\begin{frame}
+If the material symmetry group is \textbf{all rotation matrices}, the material is \textbf{isotropic} at that point.
+
+Recalling frame indifference, this is equivalent to:
+\begin{eqn}
+U(\mathbf{C})=U(\mathbf{Q}^{T}\mathbf{C}\mathbf{Q}).
+\end{eqn}
+But if $\mathbf{Q}$ is an arbitrary rotation matrix, we can select it so that the argument on the right-hand side is diagonalised.
+
+Thus, in an isotropic material the strain energy depends on $\mathbf{C}$ through its eigenvalues.
+
+From this, and some tedious algebra, we can show that:
+\begin{eqn}
+A_{ijkl}=\lambda\delta_{ij}\delta_{kl}+\mu(\delta_{ik}\delta_{jl}+\delta_{il}\delta_{jk}).
+\end{eqn}
+An isotropic material has only \textbf{two elastic moduli}, the \textbf{Lamé parameters} $\lambda$ and $\mu$!
+\end{frame}
+
+\begin{frame}
+In an isotropic material with spatially homogeneous properties, the linearised equations about a stress-free
+equilibrium state reduce to the form:
+\begin{eqn}
+\rho\frac{\partial^{2}\mathbf{u}}{\partial t^{2}}-(\lambda+\mu)\nabla(\nabla\cdot\mathbf{u})-\mu\nabla^{2}\mathbf{u}=\mathbf{0}.
+\end{eqn}
+This equation is seen in Part IB Classical Dynamics. We have now derived it from first principles, and in
+this manner we can also see that it is \textbf{not suitable} for understanding seismic waves in the Earth.
+\end{frame}
+
+\begin{frame}
+A material that is not isotropic is said to be \textbf{anisotropic}.
+
+A special case are \textbf{transversely isotropic} materials, whose symmetry group comprises rotations about a fixed
+axis $\hat{\bm{\nu}}$. In this case, it can be shown that the elastic tensor takes the form:
+\begin{eqn}
+\begin{aligned}
+A_{ijkl}={}&(A-2N)\delta_{ij}\delta_{kl}+N(\delta_{ik}\delta_{jl}+\delta_{il}\delta_{jk})\\[\eqgap]
+&+(F-A+2N)(\delta_{ij}\hat{\nu}_{k}\hat{\nu}_{l}+\hat{\nu}_{i}\hat{\nu}_{j}\delta_{kl})\\[\eqgap]
+&+(L-N)(\hat{\nu}_{i}\hat{\nu}_{k}\delta_{jl}+\hat{\nu}_{j}\hat{\nu}_{k}\delta_{il}+\hat{\nu}_{j}\hat{\nu}_{l}\delta_{ik}+\hat{\nu}_{i}\hat{\nu}_{l}\delta_{jk})\\[\eqgap]
+&+(A+C-2F-4L)\hat{\nu}_{i}\hat{\nu}_{j}\hat{\nu}_{k}\hat{\nu}_{l}.
+\end{aligned}
+\end{eqn}
+\end{frame}
+
+\begin{frame}
+Here there are \textbf{five elastic moduli}, $A$, $C$, $F$, $L$ and $N$, in the notation introduced by Love.
+
+With the symmetry axis along $\hat{\mathbf{x}}_{3}$, they are the components:
+\begin{eqn}
+A=A_{1111},\quad C=A_{3333},\quad F=A_{1133},\quad L=A_{1313},\quad N=A_{1212}.
+\end{eqn}
+In the isotropic case, $A=C=\lambda+2\mu$, $F=\lambda$ and $L=N=\mu$.
+
+You do not need to learn the expression for this elastic tensor. And you will always be provided with the necessary form of an elastic
+tensor within any exam question.
+\end{frame}
+
+\begin{frame}
+An elastic material is a \textbf{solid} if the symmetry group is a sub-group of rotations.
+
+It is a \textbf{fluid} if it comprises all volume-preserving linear transformations, so that:
+\begin{eqn}
+W(\mathbf{x},\mathbf{F})=V(\mathbf{x},J).
+\end{eqn}
+Physically, a solid's potential energy is affected by changes of shape and volume relative to a reference state,
+while a fluid cares only about changes in volume.
+
+The elastic tensor then reduces to:
+\begin{eqn}
+A_{ijkl}=\kappa\delta_{ij}\delta_{kl},
+\end{eqn}
+where $\kappa$ is the \textbf{bulk modulus} of the fluid.
+
+Within the linearised theory, an elastic fluid is just an elastic solid with \textbf{vanishing shear modulus}.
+\end{frame}
+
+\begin{frame}[t]
+\heading{What you need to know and be able to do}
+\begin{enumerate}
+\item[(i)] The statement of the polar decomposition theorem, and how this can be used to restrict the allowable form
+of the strain energy function. The proof of the polar decomposition theorem is non-examinable.
+\item[(ii)] What a stress-free equilibrium configuration is, and how to derive the linearised equations of motion for
+small disturbances about such a configuration. In this course, you will become very familiar with these linearised
+equations of motion, and it will be necessary to memorise their form (in the non-gravitating case discussed in this
+lecture) for the exam.
+\item[(iii)] The definition of the material symmetry group, and its physical interpretation.
+\item[(iv)] The meaning of the terms elastic solid, elastic fluid, isotropic, anisotropic, and transversely isotropic.
+You do not need to remember the form of the elastic tensor in any particular case, but you should memorise the
+hyperelastic symmetry $A_{ijkl} = A_{klij}$ due to its great physical importance.
+\end{enumerate}
+\end{frame}
+
+\end{document}

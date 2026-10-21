@@ -1,0 +1,390 @@
+\documentclass[14pt]{beamer}
+\usepackage{pepslides}
+\title{Equilibrium figures}
+\lecturenumber{22}
+\hypersetup{pdftitle={Lecture 22: Equilibrium figures}}
+
+\begin{document}
+
+\titleslide
+
+\begin{frame}[t]
+\heading{From last time\ldots}
+Lagrangian in a self-gravitating planet:
+\begin{eqn}
+\mathcal{L}(\mathbf{x},t,\bphi,\mathbf{v},\mathbf{F})=\frac{1}{2}\rho(\mathbf{x})\|\mathbf{v}\|^{2}
+-W(\mathbf{x},t,\mathbf{F})-\frac{1}{2}\rho(\mathbf{x})\zeta(\mathbf{x},t).
+\end{eqn}
+Decomposition of the motion relative to an approximately rotating frame:
+\begin{eqn}
+\varphi_{i}(\mathbf{x},t)=\Phi_{i}(t)+R_{ij}(t)\overline{\varphi}_{j}(\mathbf{x},t).
+\end{eqn}
+Equilibrium equations:
+\begin{eqn}
+\rho\epsilon_{ijk}\epsilon_{klm}\Omega_{j}\Omega_{l}x_{m}-\frac{\partial T_{ij}^{0}}{\partial x_{j}}-\rho\gamma_{i}^{0}=0.
+\end{eqn}
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.72\paperheight]{chandrasekhar1969_newton_cassini.png}
+\credit{Chandrasekhar (1969)}
+\end{frame}
+
+\sectionslide{Solutions of the equilibrium equations}
+
+\begin{frame}
+Notation from last lecture:
+\begin{eqn}
+\rho\epsilon_{ijk}\epsilon_{klm}\Omega_{j}\Omega_{l}x_{m}-\frac{\partial T_{ij}^{0}}{\partial x_{j}}-\rho\gamma_{i}^{0}=0.
+\end{eqn}
+To simplify things we now write:
+\begin{eqn}
+\rho\epsilon_{ijk}\epsilon_{klm}\Omega_{j}\Omega_{l}x_{m}-\frac{\partial\sigma_{ij}}{\partial x_{j}}-\rho g_{i}=0.
+\end{eqn}
+At equilibrium, referential and spatial quantities coincide.
+
+The stress tensor is symmetric and so has six independent components.
+
+The force balance holds in general materials, not just elastic ones.
+\end{frame}
+
+\begin{frame}
+Suppose the planet's shape, density and angular velocity are known.
+
+We then have \textbf{three} equations for the \textbf{six} components of stress:
+\begin{eqn}
+\rho\epsilon_{ijk}\epsilon_{klm}\Omega_{j}\Omega_{l}x_{m}-\frac{\partial\sigma_{ij}}{\partial x_{j}}-\rho g_{i}=0.
+\end{eqn}
+This is an underdetermined system and so we \textbf{cannot expect unique solutions}.
+
+More formally, there exist \textbf{non-trivial divergence-free symmetric second-order tensor fields} that satisfy
+the correct boundary conditions.
+
+Compare with the existence of divergence-free vector fields.
+\end{frame}
+
+\sectionslide{Hydrostatic equilibrium}
+
+\begin{frame}
+The (Cauchy) stress in a compressible Newtonian fluid:
+\begin{eqn}
+\sigma_{ij}=-p\,\delta_{ij}+\eta\left(\frac{\partial v_{i}}{\partial x_{j}}+\frac{\partial v_{j}}{\partial x_{i}}-\frac{2}{3}\frac{\partial v_{k}}{\partial x_{k}}\delta_{ij}\right).
+\end{eqn}
+At equilibrium, the stress is \textbf{hydrostatic}:
+\begin{eqn}
+\sigma_{ij}=-p\,\delta_{ij}.
+\end{eqn}
+The same result holds in more general viscous fluids.
+
+Scaling estimate for deviatoric stress associated with convection:
+\begin{eqn}
+\eta V/L\sim10^{6}\,\mathrm{Pa}.
+\end{eqn}
+Pressures in the Earth's interior are of order $10^{10}\,\mathrm{Pa}$ -- deviation from hydrostatic state in
+Earth-like planets represents only a \textbf{small perturbation}.
+\end{frame}
+
+\begin{frame}
+Given the hydrostatic approximation, we have:
+\begin{eqn}
+\rho\epsilon_{ijk}\epsilon_{klm}\Omega_{j}\Omega_{l}x_{m}+\frac{\partial p}{\partial x_{i}}-\rho g_{i}=0.
+\end{eqn}
+This is now an \textbf{overdetermined} set of equations -- three equations for one unknown.
+
+Helpful to switch to a vector-calculus notation:
+\begin{eqn}
+\nabla p+\rho\nabla\gamma=\mathbf{0},\qquad\gamma=\phi+\psi.
+\end{eqn}
+Here we have introduced the \textbf{gravity potential}, this being the \textbf{sum of the gravitational
+and centrifugal potentials}.
+\end{frame}
+
+\begin{frame}
+Hydrostatic equilibrium equation:
+\begin{eqn}
+\nabla p+\rho\nabla\gamma=\mathbf{0}.
+\end{eqn}
+Gradients of pressure and gravity potential are parallel, and so a level surface of one field is a level surface
+of the other.
+
+Ignoring the atmosphere, the pressure vanishes at the planet's surface, and hence this must be a level surface
+of the gravity potential.
+
+Taking the curl of the equation, we find:
+\begin{eqn}
+\nabla\rho\times\nabla\gamma=\mathbf{0}.
+\end{eqn}
+This shows that level surfaces of density are also coincident with the other two fields.
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.6\paperheight]{L10F1.pdf}
+
+\raggedright
+In hydrostatic equilibrium the level surfaces of $p$, $\rho$ and $\gamma$ all coincide, and the surface is
+an equipotential of gravity.
+\end{frame}
+
+\begin{frame}
+\begin{columns}[c]
+\begin{column}{0.5\textwidth}
+\centering
+\includegraphics[width=\textwidth]{myhill2025_phobos_potential.png}
+\end{column}
+\begin{column}{0.45\textwidth}
+Equatorial slice through the gravitational potential for Phobos calculated assuming a constant interior density.
+
+The potential is not constant on the moon's surface, and hence this cannot be a hydrostatic equilibrium state.
+
+In general, the hydrostatic equilibrium condition imposes very strong conditions on a planet's shape, density,
+and rotation.
+\end{column}
+\end{columns}
+\credit{Myhill \emph{et al.} (2025)}
+\end{frame}
+
+\begin{frame}
+In the non-rotating case, suppose the planet is spherically symmetric.
+
+Equilibrium equation reduces to:
+\begin{eqn}
+\nabla p+\rho\frac{\ddns\phi}{\ddns r}\hat{\mathbf{r}}=\mathbf{0}.
+\end{eqn}
+There is just one non-trivial equation here, and so we can find an equilibrium solution:
+\begin{eqn}
+\frac{\ddns p}{\ddns r}+\rho\frac{\ddns\phi}{\ddns r}=0,\qquad p(b)=0.
+\end{eqn}
+It can be shown that this is the \textbf{only} solution in the non-rotating case.
+\end{frame}
+
+\begin{frame}
+By definition, a planet is \textbf{slowly rotating} if its centrifugal potential is small relative to its
+gravitational potential:
+\begin{eqn}
+\frac{\textrm{centrifugal potential}}{\textrm{gravitational potential}}\sim\frac{3\Omega^{2}}{8\pi G\overline{\rho}}.
+\end{eqn}
+For the Earth, we find:
+\begin{eqn}
+\frac{\textrm{centrifugal potential}}{\textrm{gravitational potential}}\sim2\times10^{-3}.
+\end{eqn}
+In such cases, we can apply first-order perturbation theory.
+
+Higher-order theories exist and are sometimes necessary.
+\end{frame}
+
+\begin{frame}
+Expand about the non-rotating solution, with $s$ a perturbation parameter:
+\begin{eqn}
+\begin{aligned}
+\rho&=\rho_{0}+s\rho_{1}+\cdots,\\
+p&=p_{0}+s\,p_{1}+\cdots,\\
+\phi&=\phi_{0}+s\,\phi_{1}+\cdots,\\
+\psi&=s\,\psi_{1}.
+\end{aligned}
+\end{eqn}
+Similarly, the free-surface radius is expanded as:
+\begin{eqn}
+r(\theta,\varphi)=b+s\,h_{1}(\theta,\varphi)+\cdots.
+\end{eqn}
+Topography on internal boundaries is expanded similarly, but we neglect this detail for simplicity in what follows.
+\end{frame}
+
+\begin{frame}
+First-order perturbation of the equilibrium equation:
+\begin{eqn}
+\nabla p_{1}+\rho_{0}\nabla\gamma_{1}+\rho_{1}g_{0}\hat{\mathbf{r}}=\mathbf{0},
+\end{eqn}
+with $\gamma_{1}=\phi_{1}+\psi_{1}$ and $g_{0}=\ddns\phi_{0}/\ddns r$.
+
+Exact boundary condition on the perturbed planetary surface:
+\begin{eqn}
+p[b+s\,h_{1}(\theta,\varphi)+\cdots,\theta,\varphi]=0.
+\end{eqn}
+Expanded to first order, and using $\ddns p_{0}/\ddns r=-\rho_{0}g_{0}$, this reduces to:
+\begin{eqn}
+\begin{gathered}
+p_{1}+\frac{\ddns p_{0}}{\ddns r}h_{1}=0,\\[\eqgap]
+p_{1}-\rho_{0}g_{0}h_{1}=0.
+\end{gathered}
+\end{eqn}
+\end{frame}
+
+\begin{frame}
+First-order perturbation of the equilibrium equation:
+\begin{eqn}
+\nabla p_{1}+\rho_{0}\nabla\gamma_{1}+\rho_{1}g_{0}\hat{\mathbf{r}}=\mathbf{0}.
+\end{eqn}
+Take the cross product with the radial unit vector:
+\begin{eqn}
+\begin{gathered}
+\hat{\mathbf{r}}\times\nabla p_{1}+\hat{\mathbf{r}}\times\rho_{0}\nabla\gamma_{1}=\mathbf{0},\\[\eqgap]
+\hat{\mathbf{r}}\times\nabla(p_{1}+\rho_{0}\gamma_{1})=\mathbf{0}.
+\end{gathered}
+\end{eqn}
+Taking the perturbations to average to zero over spherical surfaces, we conclude that:
+\begin{eqn}
+p_{1}=-\rho_{0}\gamma_{1}.
+\end{eqn}
+\end{frame}
+
+\begin{frame}
+First-order perturbation of the equilibrium equation:
+\begin{eqn}
+\nabla p_{1}+\rho_{0}\nabla\gamma_{1}+\rho_{1}g_{0}\hat{\mathbf{r}}=\mathbf{0}.
+\end{eqn}
+Taking the curl of this equation, we arrive at:
+\begin{eqn}
+\hat{\mathbf{r}}\times\nabla\left(\frac{\ddns\rho_{0}}{\ddns r}\gamma_{1}-g_{0}\rho_{1}\right)=\mathbf{0}.
+\end{eqn}
+And hence, we see that:
+\begin{eqn}
+\rho_{1}=\frac{1}{g_{0}}\frac{\ddns\rho_{0}}{\ddns r}\gamma_{1}.
+\end{eqn}
+\end{frame}
+
+\begin{frame}
+We have now shown that the following identities hold for the first-order perturbations:
+\begin{eqn}
+p_{1}=-\rho_{0}\gamma_{1},\quad h_{1}=-\frac{\gamma_{1}}{g_{0}},\quad\rho_{1}=\frac{1}{g_{0}}\frac{\ddns\rho_{0}}{\ddns r}\gamma_{1}.
+\end{eqn}
+All other terms can be expressed through the gravity potential perturbation.
+\end{frame}
+
+\begin{frame}
+Linearisation of Poisson's equation is trivial:
+\begin{eqn}
+\nabla^{2}\phi_{1}=\begin{cases} 4\pi G\rho_{1} & r<b, \\ 0 & r>b. \end{cases}
+\end{eqn}
+Linearisation of the continuity conditions requires more work:
+\begin{eqn}
+[\phi_{1}]_{-}^{+}=0,\quad[\hat{\mathbf{r}}\cdot\nabla\phi_{1}+4\pi G\rho_{0}h_{1}]_{-}^{+}=0.
+\end{eqn}
+Derivation given in an appendix to the notes (non-examinable).
+\end{frame}
+
+\begin{frame}
+Expressing other perturbations in terms of the gravity potential:
+\begin{eqn}
+\nabla^{2}\phi_{1}=\begin{cases} 4\pi G\dfrac{1}{g_{0}}\dfrac{\ddns\rho_{0}}{\ddns r}(\phi_{1}+\psi_{1}) & r<b, \\ 0 & r>b, \end{cases}
+\end{eqn}
+along with the continuity conditions:
+\begin{eqn}
+[\phi_{1}]_{-}^{+}=0,\quad\left[\hat{\mathbf{r}}\cdot\nabla\phi_{1}-4\pi G\rho_{0}\frac{(\phi_{1}+\psi_{1})}{g_{0}}\right]_{-}^{+}=0.
+\end{eqn}
+Linear boundary value problem for the perturbed gravitational potential, with the centrifugal potential providing
+the ``force terms''.
+
+Theory applies also to equilibrium tides in gaseous planets.
+\end{frame}
+
+\begin{frame}
+The centrifugal potential is proportional to $Y_{20}$, and separation of variables shows that:
+\begin{eqn}
+\phi_{1}+\psi_{1}=\sqrt{\frac{4\pi}{5}}\frac{2}{3}rg_{0}\epsilon\,Y_{20},
+\end{eqn}
+which serves to define the \textbf{ellipticity}, $\epsilon(r)$. Figures of slowly rotating planets are oblate spheroids.
+
+At the planet's mean surface (and at internal ones too) we have:
+\begin{eqn}
+\epsilon(b)=\frac{\textrm{equatorial radius}-\textrm{polar radius}}{\textrm{mean radius}}.
+\end{eqn}
+Surface ellipticity of the Earth is around 1/300.
+\end{frame}
+
+\begin{frame}
+The ellipticity satisfies \textbf{Clairaut's equation} (Clairaut 1743):
+\begin{eqn}
+\frac{\ddns^{2}\epsilon}{\ddns r^{2}}+8\pi G\rho_{0}g_{0}^{-1}\left(\frac{\ddns\epsilon}{\ddns r}+\frac{\epsilon}{r}\right)-\frac{6\epsilon}{r^{2}}=0,
+\end{eqn}
+subject to the boundary conditions:
+\begin{eqn}
+\left.\frac{\ddns\epsilon}{\ddns r}\right|_{r=0}=0,\quad\left.\frac{\ddns\epsilon}{\ddns r}\right|_{r=b}=\frac{1}{b}\left[\frac{5\Omega^{2}b^{3}}{2GM}-2\epsilon(b)\right].
+\end{eqn}
+Solved numerically by integrating outwards from $r=0$ and rescaling to meet the condition at $r=b$.
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.55\paperheight]{L10F2.pdf}
+
+\raggedright
+Left: radial density profile obtained from analysis of the Earth's free oscillations -- final two lectures.
+
+Right: the corresponding ellipticity (or flattening), plotted here as a reciprocal.
+
+Hydrostatic surface value 1/299.9, observed 1/298.3: the difference reflects non-hydrostatic stresses in the mantle.
+\end{frame}
+
+\begin{frame}[t]
+\heading{What is a planet?}
+\begin{columns}[b]
+\begin{column}{0.45\textwidth}
+\centering
+\includegraphics[height=0.5\paperheight]{nasa_newhorizons_pluto.png}
+
+A planet
+\end{column}
+\begin{column}{0.45\textwidth}
+\centering
+\includegraphics[width=0.9\textwidth]{nasa_hirise_phobos.png}
+
+Not a planet
+\end{column}
+\end{columns}
+\credit{NASA}
+\end{frame}
+
+\sectionslide{Rapidly rotating bodies (non-examinable)}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.66\paperheight]{L10F3.pdf}
+
+\raggedright
+Homogeneous fluid at any rotation rate: \textbf{Maclaurin spheroids} (1742) and \textbf{Jacobi ellipsoids} (1834).
+
+The Jacobi sequence \textbf{bifurcates} from the Maclaurin sequence; pear-shaped figures branch in turn from the Jacobi sequence.
+\end{frame}
+
+\begin{frame}
+\centering
+\begin{tabular}{cc}
+\raisebox{-0.5\height}{\includegraphics[height=0.42\paperheight]{haumea_render.jpg}} &
+\raisebox{-0.5\height}{\includegraphics[height=0.48\paperheight]{L10F4.pdf}}
+\end{tabular}
+
+\raggedright
+Equilibrium figures \textbf{do not have to be axisymmetric}.
+
+Haumea is a dwarf planet with a rotation period of 3.9 hours and a triaxial figure, its axes within 1\,\% of a
+Jacobi ellipsoid (Ortiz \emph{et al.} 2017).
+
+It rotates too fast to be a homogeneous fluid, and so must have a denser core.
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.7\paperheight]{darwin_fission_illustration.png}
+
+\raggedright
+\textbf{Fission hypothesis} for the Moon's formation, due to George Darwin. Long dismissed in favour of a giant
+impact, but it does have a real physical basis, and it has recently attracted renewed interest.
+\end{frame}
+
+\begin{frame}[t]
+\heading{What you need to know and be able to do}
+\begin{enumerate}
+\item[(i)] Know the form of the equilibrium equations, and that they hold in a general planet and not just an elastic
+one.
+\item[(ii)] That the equilibrium equations are underdetermined, and why.
+\item[(iii)] What a hydrostatic equilibrium state is, and be able to derive the constraints imposed on the level
+surfaces of $p$, $\rho$, and $\gamma$.
+\item[(iv)] Derive the hydrostatic equilibrium state in a non-rotating planet.
+\item[(v)] Know in outline how solutions can be obtained within a slowly rotating planet. Here you will not need to
+reproduce the full derivation, but may be asked to perform related calculations with appropriate guidance.
+\end{enumerate}
+\end{frame}
+
+\end{document}

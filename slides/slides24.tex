@@ -1,0 +1,477 @@
+\documentclass[14pt]{beamer}
+\usepackage{pepslides}
+\title{Mode splitting and coupling}
+\lecturenumber{24}
+\hypersetup{pdftitle={Lecture 24: Mode splitting and coupling}}
+
+\begin{document}
+
+\titleslide
+
+\begin{frame}[t]
+\heading{From last time\ldots}
+Weak form of the equations of motion:
+\begin{eqn}
+\langle \mathbf{w}|P|\ddot{\mathbf{u}}\rangle+\langle \mathbf{w}|W|\dot{\mathbf{u}}\rangle+\langle \mathbf{w}|H|\mathbf{u}\rangle=\langle \mathbf{w}|\mathbf{f}\rangle.
+\end{eqn}
+Eigenvalue problem in the non-rotating case:
+\begin{eqn}
+-\omega^{2}\langle \mathbf{w}|P|\mathbf{s}\rangle+\langle \mathbf{w}|H|\mathbf{s}\rangle=0.
+\end{eqn}
+Eigenfunction expansion solution in the frequency domain:
+\begin{eqn}
+\tilde{\mathbf{u}}=\sum_{km}\frac{\langle km|\tilde{\mathbf{f}}\rangle}{\omega_{k}^{2}-\omega^{2}}|km\rangle.
+\end{eqn}
+\end{frame}
+
+\sectionslide{Spherically symmetric earth models}
+
+\begin{frame}
+Gradient in spherical polar co-ordinates:
+\begin{eqn}
+\nabla=\hat{\mathbf{r}}\frac{\partial}{\partial r}+\frac{1}{r}\hat{\bm{\theta}}\frac{\partial}{\partial\theta}+\frac{1}{r\sin\theta}\hat{\bm{\varphi}}\frac{\partial}{\partial\varphi}.
+\end{eqn}
+Used to define the \textbf{tangential gradient operator} on the unit sphere:
+\begin{eqn}
+\nabla=\hat{\mathbf{r}}\frac{\partial}{\partial r}+\frac{1}{r}\nabla_{1}.
+\end{eqn}
+Associated operators are related to those for angular momentum:
+\begin{eqn}
+\hat{\mathbf{r}}\times\nabla_{1}\propto\hat{\mathbf{L}}, \quad \nabla_{1}^{2}\propto\hat{L}^{2}.
+\end{eqn}
+\end{frame}
+
+\begin{frame}
+Spherical harmonics are simultaneous eigenfunctions of commuting operators:
+\begin{eqn}
+\nabla_{1}^{2}Y_{lm}=-l(l+1)Y_{lm}, \quad \frac{1}{\ii}\frac{\partial Y_{lm}}{\partial\varphi}=mY_{lm}.
+\end{eqn}
+The \textbf{degree}, $l$, is a non-negative integer.
+
+For degree $l$, the \textbf{order}, $m$, is an integer between $-l$ and $l$.
+
+Orthonormality condition:
+\begin{eqn}
+\int_{\mathbb{S}^{2}}Y_{lm}^{*}Y_{l'm'}\dd S=\delta_{ll'}\delta_{mm'}.
+\end{eqn}
+\textbf{Complete basis} for scalar functions on the unit sphere.
+\end{frame}
+
+\begin{frame}
+To work with vector fields, we define the \textbf{vector spherical harmonics}:
+\begin{eqn}
+\mathbf{A}_{lm}=Y_{lm}\hat{\mathbf{r}}, \quad \mathbf{B}_{lm}=\nabla_{1}Y_{lm}, \quad \mathbf{C}_{lm}=-\hat{\mathbf{r}}\times\nabla_{1}Y_{lm}.
+\end{eqn}
+Orthogonality relations:
+\begin{eqn}
+\begin{aligned}
+\int_{\mathbb{S}^{2}}\mathbf{A}_{l'm'}^{*}\cdot \mathbf{A}_{lm}\dd S&=\delta_{ll'}\delta_{mm'},\\[0.3em]
+\int_{\mathbb{S}^{2}}\mathbf{B}_{l'm'}^{*}\cdot \mathbf{B}_{lm}\dd S&=l(l+1)\delta_{ll'}\delta_{mm'},\\[0.3em]
+\int_{\mathbb{S}^{2}}\mathbf{C}_{l'm'}^{*}\cdot \mathbf{C}_{lm}\dd S&=l(l+1)\delta_{ll'}\delta_{mm'}.
+\end{aligned}
+\end{eqn}
+Complete basis for vector fields:
+\begin{eqn}
+\mathbf{u}=\sum_{lm}(U_{lm}\mathbf{A}_{lm}+V_{lm}\mathbf{B}_{lm}+W_{lm}\mathbf{C}_{lm}).
+\end{eqn}
+\end{frame}
+
+\begin{frame}
+Eigenvalue problem in the non-rotating case:
+\begin{eqn}
+-\omega^{2}\langle \mathbf{w}|P|\mathbf{s}\rangle+\langle \mathbf{w}|H|\mathbf{s}\rangle=0.
+\end{eqn}
+If the model is spherically symmetric we can use \textbf{separation of variables}.
+
+Angular dependence expressed in terms of vector spherical harmonics.
+
+For each degree and order, we get a \textbf{radial ODE eigenvalue problem}.
+
+Huge amount of algebra and the need to work in detail with vector and tensor spherical harmonic expansions.
+
+\textbf{We will just summarise the main results}, assuming the model is isotropic.
+\end{frame}
+
+\begin{frame}
+Two classes of eigenfunctions emerge from the separation of variables.
+
+\textbf{Toroidal modes} have eigenfunctions of the form:
+\begin{eqn}
+\mathbf{s}(r,\theta,\varphi)=W(r)\mathbf{C}_{lm}(\theta,\varphi).
+\end{eqn}
+Radial part, $W$, depends on degree but not order -- results in $(2l+1)$-dimensional eigenspaces, this being
+characteristic of rotationally invariant systems.
+
+Eigenfunctions vanish in fluid regions (analogous to S-waves).
+
+Displacements tangential to spherical surfaces, gravity not involved in their dynamics.
+\end{frame}
+
+\begin{frame}
+\textbf{Spheroidal modes} have the form:
+\begin{eqn}
+\mathbf{s}(r,\theta,\varphi)=U(r)\mathbf{A}_{lm}(\theta,\varphi)+V(r)\mathbf{B}_{lm}(\theta,\varphi).
+\end{eqn}
+Radial functions again independent of order -- \textbf{$\boldsymbol{(2l+1)}$-dimensional eigenspaces}.
+
+Eigenfunctions can be non-zero in both solid and fluid regions.
+
+Radial and tangential components to the displacement, self-gravity contributes to their dynamics.
+\end{frame}
+
+\begin{frame}
+Spheroidal and toroidal modes are orthogonal due to properties of vector spherical harmonics.
+
+For toroidal modes of degree $l$ and order $m$, we can take test functions:
+\begin{eqn}
+\mathbf{w}(r,\theta,\varphi)=w(r)\mathbf{C}_{lm}(\theta,\varphi).
+\end{eqn}
+It is then easy to show that:
+\begin{eqn}
+\langle \mathbf{w}|P|\mathbf{s}\rangle=\zeta^{2}\int_{0}^{b}\rho w^{*}Wr^{2}\dd r, \qquad \zeta=\sqrt{l(l+1)}.
+\end{eqn}
+Potential energy form similarly reduced to a radial integral, but calculation harder.
+\end{frame}
+
+\begin{frame}
+Weak form of the toroidal eigenvalue problem:
+\begin{eqn}
+\begin{aligned}
+&-\omega^{2}\int_{0}^{b}\rho w^{*}Wr^{2}\dd r+\int_{0}^{b}\mu\left(r\frac{\ddns w^{*}}{\ddns r}-w^{*}\right)\left(r\frac{\ddns W}{\ddns r}-W\right)\dd r\\[\eqgap]
+&+(\zeta^{2}-2)\int_{0}^{b}\mu w^{*}W\dd r=0.
+\end{aligned}
+\end{eqn}
+Equivalent to a second-order ODE eigenvalue problem (of Sturm--Liouville type).
+
+Closed-form solution in a homogeneous planet using spherical Bessel functions.
+
+More generally, numerical methods needed.
+
+For each $l$, we get an infinite set of \textbf{overtones} labelled by an integer, $n=0,1,2,\dots$
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.72\paperheight]{L12F1.pdf}
+
+\raggedright
+Toroidal mode eigenfrequencies in PREM. For each degree there is a set of overtones, the lowest being the
+fundamental branch $n=0$.
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.72\paperheight]{L12F2.pdf}
+
+\raggedright
+Spheroidal mode eigenfrequencies in PREM, including the radial modes with $l=0$.
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.74\paperheight]{L12F6.pdf}
+
+\raggedright
+Radial eigenfunctions of toroidal (top) and spheroidal (bottom) modes in PREM.
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.6\paperheight]{L12F8.pdf}
+
+\raggedright
+Some less typical spheroidal modes: the \textbf{Slichter mode}, in which the inner core translates within the fluid outer
+core; \textbf{Stoneley modes} trapped on the core--mantle and inner-core boundaries; and a mode confined to the inner core.
+\end{frame}
+
+\begin{frame}
+Each eigenspace labelled by \textbf{three integers}:
+\begin{enumerate}
+\item \textbf{Mode type}, $q$, with $1$ = spheroidal, $2$ = toroidal
+\item \textbf{Degree}, $l$, a non-negative integer
+\item \textbf{Overtone number}, $n$, this being a non-negative integer
+\end{enumerate}
+We call each such eigenspace a \textbf{multiplet}, written ${}_{n}S_{l}$ or ${}_{n}T_{l}$.
+
+Within each multiplet of degree $l$ there are then $2l+1$ eigenfunctions labelled by their order, $m$, lying between $-l$ and $l$.
+
+Each eigenfunction is known as a \textbf{singlet}. To denote singlets, we use the notations:
+\begin{eqn}
+|qlnm\rangle, \quad |km\rangle.
+\end{eqn}
+\end{frame}
+
+\sectionslide{First-order splitting theory}
+
+\begin{frame}
+Suppose we have solved the spherical reference problem:
+\begin{eqn}
+-\omega_{k}^{2}\langle \mathbf{w}|P_{0}|km\rangle+\langle \mathbf{w}|H_{0}|km\rangle=0.
+\end{eqn}
+We consider lateral heterogeneity as a first-order perturbation:
+\begin{eqn}
+\begin{aligned}
+-\omega^{2}&[\langle \mathbf{w}|P_{0}|\mathbf{s}\rangle+\epsilon\langle \mathbf{w}|P_{1}|\mathbf{s}\rangle+\cdots]\\
+&+[\langle \mathbf{w}|H_{0}|\mathbf{s}\rangle+\epsilon\langle \mathbf{w}|H_{1}|\mathbf{s}\rangle+\cdots]=0.
+\end{aligned}
+\end{eqn}
+Following degenerate perturbation theory, we look for solutions of the form:
+\begin{eqn}
+\omega=\omega_{k}+\epsilon\,\delta\omega+\cdots, \qquad
+\mathbf{s}=\sum_{m=-l}^{l}a_{m}|km\rangle+\epsilon\,\delta\mathbf{s}+\cdots.
+\end{eqn}
+\end{frame}
+
+\begin{frame}
+Following the standard argument, the calculation is reduced to solution of a $(2l+1)$-dimensional Hermitian eigenvalue problem:
+\begin{eqn}
+\frac{1}{2\omega_{k}}\sum_{m=-l}^{l}[-\omega_{k}^{2}\langle km'|P_{1}|km\rangle+\langle km'|H_{1}|km\rangle]a_{m}=\delta\omega a_{m'}.
+\end{eqn}
+This gives $2l+1$ values for the perturbed eigenfrequencies along with a zeroth-order eigenfunction for each.
+
+Generically, the degeneracy will be removed, with the multiplet \textbf{splitting} into $2l+1$ distinct eigenfrequencies.
+
+This is just like the \textbf{Zeeman effect} for the hydrogen atom.
+\end{frame}
+
+\begin{frame}
+Rotational effects can be incorporated to first-order accuracy in the same way:
+\begin{eqn}
+\begin{aligned}
+\frac{1}{2\omega_{k}}\sum_{m=-l}^{l}&\bigl[-\omega_{k}^{2}\langle km'|P_{1}|km\rangle+\ii\omega_{k}\langle km'|W|km\rangle\\
+&\phantom{\bigl[}+\langle km'|H_{1}|km\rangle\bigr]a_{m}=\delta\omega a_{m'}.
+\end{aligned}
+\end{eqn}
+Various \textbf{selection rules} can be derived to determine the manner in which heterogeneity and rotation cause splitting.
+
+Extensions to \textbf{quasi-degenerate perturbation theory} are possible to account for coupling between two or more
+nearly degenerate multiplets.
+\end{frame}
+
+\sectionslide{Spherically symmetric density}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.72\paperheight]{L12F3.png}
+
+\raggedright
+First observations of free oscillation spectra, following the largest earthquake ever recorded (Chile, 1960).
+\credit{Benioff, Press \& Smith (1961)}
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.8\paperheight]{feynman_lectures_vol1_ch51.jpg}
+\credit{\emph{The Feynman Lectures on Physics}, Volume 1, Lecture 51: Waves in Solids}
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.66\paperheight]{L12F9.pdf}
+
+\raggedright
+Splitting of ${}_{0}S_{2}$ and ${}_{0}S_{3}$ in twenty-day records of the 2011 Tohoku earthquake. The nearly uniform
+spacing of the singlets is the signature of the Earth's rotation.
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.7\paperheight]{iris_travel_time_stack_iasp91.jpg}
+
+\raggedright
+Travel times for the same epicentral angle can be averaged to try to remove the effect of laterally varying
+structure prior to inversions.
+\end{frame}
+
+\begin{frame}
+Eigenvalue problem associated with degenerate perturbation theory:
+\begin{eqn}
+\begin{aligned}
+\frac{1}{2\omega_{k}}\sum_{m=-l}^{l}&\bigl[-\omega_{k}^{2}\langle km'|P_{1}|km\rangle+\ii\omega_{k}\langle km'|W|km\rangle\\
+&\phantom{\bigl[}+\langle km'|H_{1}|km\rangle\bigr]a_{m}=\delta\omega a_{m'}.
+\end{aligned}
+\end{eqn}
+Using symmetry arguments, it can be shown that the splitting matrix has zero trace -- this implies that the
+eigenfrequency perturbations sum to zero.
+
+This is the \textbf{diagonal sum rule} due to Freeman Gilbert.
+
+It provides a rigorous basis for averaging observations of split eigenfrequencies within inversion for the
+spherically averaged structure.
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.55\paperheight]{widmer2007_bfo_sumatra_spectrum.jpg}
+
+\raggedright
+It is relatively rare that all split singlets for a multiplet can be identified and measured, but the diagonal sum
+rule still forms the basis for more sophisticated methods for measuring eigenfrequencies.
+\credit{Widmer-Schnidrig \& Laske (2007)}
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.72\paperheight]{widmer2007_measured_eigenfrequencies.jpg}
+
+\raggedright
+By the late 1970s, about 1000 eigenfrequencies had been measured.
+\credit{Widmer-Schnidrig \& Laske (2007)}
+\end{frame}
+
+\begin{frame}
+Using first-order perturbation theory, \textbf{sensitivity kernels} for the eigenfrequencies with respect to radial
+perturbations can be determined:
+\begin{eqn}
+\delta\omega_{k}=\int_{0}^{b}\left(K_{\kappa}\,\delta\kappa+K_{\mu}\,\delta\mu+K_{\rho}\,\delta\rho\right)\dd r.
+\end{eqn}
+For toroidal modes they follow directly from the radial weak form:
+\begin{eqn}
+K_{\mu}=\frac{1}{2\omega_{k}}\left[\left(r\frac{\ddns W}{\ddns r}-W\right)^{2}+(\zeta^{2}-2)W^{2}\right], \quad
+K_{\rho}=-\frac{\omega_{k}}{2}W^{2}r^{2},
+\end{eqn}
+with the normalisation $\int_{0}^{b}\rho W^{2}r^{2}\dd r=1$.
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.74\paperheight]{L12F7.pdf}
+
+\raggedright
+The density kernel can be of either sign, and each mode is sensitive only where its eigenfunction is large.
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.7\paperheight]{L12F4.pdf}
+
+\raggedright
+Eigenfrequencies along with mass and moment of inertia used to constrain the spherically symmetric density
+variation within the Earth.
+\end{frame}
+
+\sectionslide{Lateral density variations}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.75\paperheight]{L12F5.png}
+
+\raggedright
+What are the \textbf{large low shear velocity provinces} (LLSVPs) at the base of the mantle?
+\credit{Ritsema \emph{et al.} (2011)}
+\end{frame}
+
+\begin{frame}
+Thermal or compositional? The \textbf{bulk sound speed} is defined by:
+\begin{eqn}
+v_{\phi}=\sqrt{\frac{\kappa}{\rho}}.
+\end{eqn}
+If velocity variations are due to \textbf{temperature alone}:
+\begin{eqn}
+\frac{\delta v_{\phi}}{\delta\beta}=\frac{\partial v_{\phi}/\partial T}{\partial\beta/\partial T}>0.
+\end{eqn}
+Joint P- and S-wave tomography suggest these velocities anti-correlate in the lower mantle -- suggests a role
+for \textbf{compositional heterogeneity}.
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.62\paperheight]{ishii1999_density_model.jpg}
+
+\raggedright
+Early free oscillation tomography suggested LLSVPs are \textbf{dense features} -- but conclusions have been
+questioned due to \textbf{approximations in forward modelling}.
+\credit{Ishii \& Tromp (1999)}
+\end{frame}
+
+\begin{frame}
+First-order splitting theory assumes that distinct multiplets do not interact. In \textbf{full coupling}, any eigenfunction
+of the aspherical model is expanded in the spherical basis:
+\begin{eqn}
+\mathbf{s}=\sum_{k'm'}\langle k'm'|P_{0}|\mathbf{s}\rangle|k'm'\rangle.
+\end{eqn}
+This gives a non-linear eigenvalue problem for the expansion coefficients:
+\begin{eqn}
+\begin{aligned}
+\sum_{k'm'}&\bigl[-\omega^{2}\langle km|P|k'm'\rangle+\ii\omega\langle km|W|k'm'\rangle\\
+&\phantom{\bigl[}+\langle km|H|k'm'\rangle\bigr]\langle k'm'|P_{0}|\mathbf{s}\rangle=0.
+\end{aligned}
+\end{eqn}
+Truncating the basis gives a finite problem, as accurate as desired.
+\end{frame}
+
+\begin{frame}
+In practice we compute the spectrum directly. For a given source, at each frequency:
+\begin{eqn}
+\begin{aligned}
+(\omega_{k}^{2}-\omega^{2})\langle km|P_{0}|\tilde{\mathbf{u}}(\omega)\rangle&+\sum_{k'm'}A_{km,k'm'}(\omega)\langle k'm'|P_{0}|\tilde{\mathbf{u}}(\omega)\rangle\\
+&=\langle km|\tilde{\mathbf{f}}(\omega)\rangle.
+\end{aligned}
+\end{eqn}
+The coupling matrix $A$ is small but not sparse, and the system is dominated by its diagonal.
+
+Solved by iterative methods along a line shifted slightly into the complex frequency plane: the \textbf{direct solution method}
+(Al-Attar \emph{et al.} 2012).
+\end{frame}
+
+\begin{frame}
+Keeping only the $2l+1$ singlets of one multiplet recovers first-order theory (\textbf{self-coupling}).
+
+Full-coupling calculations show that self-coupling is not accurate enough for density, with errors comparable to the
+density signal itself (Akbarashrafi \emph{et al.} 2018).
+
+Adjoint methods now give the sensitivity of spectra to Earth structure, so free oscillations can be fitted directly,
+as in waveform inversion (Adourian \emph{et al.} 2024).
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.7\paperheight]{adourian2024_spectrum_kernels.png}
+
+\raggedright
+Sensitivity of a spectrum, in a narrow band about ${}_{0}S_{2}$ (top) and ${}_{2}S_{2}$ (bottom), to density, S-wave speed
+and P-wave speed, on a section through the source (star) and the receiver (triangle).
+\credit{Adourian \emph{et al.} (2024)}
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.58\paperheight]{lau2017_tidal_tomography.jpg}
+
+\raggedright
+Solid Earth tides are also sensitive to deep mantle density. Results are consistent with dense LLSVPs.
+\credit{Lau \emph{et al.} (2017)}
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[width=0.85\textwidth]{garnero2008_lower_mantle_cartoon.jpg}
+
+\raggedright
+LLSVP origin? A ``slab graveyard'' of subducted material, or ancient features from the Earth's differentiation?
+\credit{Garnero \& McNamara (2008)}
+\end{frame}
+
+\begin{frame}[t]
+\heading{What you need to know and be able to do}
+\begin{enumerate}
+\item[(i)] How eigenfunctions of a spherically symmetric model can be classified in terms of mode type, degree,
+overtone number, and order. You do not need to learn the definition of vector spherical harmonics, and will not be
+asked to perform detailed calculations with them.
+\item[(ii)] How the toroidal mode eigenvalue problem reduces to a one-dimensional problem for the radial
+eigenfunction, and the general properties of its solutions (overtone number, nodes, boundary condition at the
+core--mantle boundary).
+\item[(iii)] How degenerate perturbation theory can be used to understand mode splitting due to rotation and lateral
+heterogeneity.
+\item[(iv)] What the diagonal sum rule says (but not the derivation), and how it was applied in determining
+spherically averaged density variations.
+\item[(v)] The idea that convection in the mantle might be driven in part by compositional variations, and how this
+complicates the dynamic interpretation of tomographic velocity models.
+\item[(vi)] The idea of full coupling, namely that the eigenfunctions or the forced response of a laterally
+heterogeneous earth model can be expanded in the modes of a spherical reference model, and why the simpler first-order
+splitting theory can be inadequate, particularly for density. You do not need the details of how such calculations are
+done, nor anything about splitting functions or adjoint methods for spectra.
+\end{enumerate}
+\end{frame}
+
+\end{document}

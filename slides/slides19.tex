@@ -1,0 +1,435 @@
+\documentclass[14pt]{beamer}
+\usepackage{pepslides}
+\title{Delay time tomography}
+\lecturenumber{19}
+\hypersetup{pdftitle={Lecture 19: Delay time tomography}}
+
+\begin{document}
+
+\titleslide
+
+\begin{frame}[t]
+\heading{From last time\ldots}
+\centering
+\includegraphics[height=0.7\paperheight]{seismology_pioneers.jpg}
+\end{frame}
+
+\sectionslide{Lateral velocity variations}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.85\paperheight]{mantle_convection_cartoon.jpg}
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.75\paperheight]{mantle_convection_models.jpg}
+
+Can we do better than drawing cartoons?
+\end{frame}
+
+\begin{frame}
+\begin{columns}[c]
+\begin{column}{0.48\textwidth}
+\centering
+\includegraphics[width=\linewidth]{L7F1.png}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Seismic tomography}: quantitative models for lateral variations within the Earth derived from seismological
+observations.
+
+Most models show perturbations in elastic wave speeds relative to a spherically symmetric reference model.
+
+Other parameters (e.g.\ density, attenuation) can be sought with more difficulty.
+
+Simple interpretation:
+
+\textbf{Red = slow = hot}
+
+\textbf{Blue = fast = cold}
+\end{column}
+\end{columns}
+\credit{Woodhouse \& Dziewonski (1989)}
+\end{frame}
+
+\sectionslide{Setting up the inverse problem}
+
+\begin{frame}
+The \textbf{delay time} is the measured travel time minus that predicted by a spherical reference model:
+\begin{center}
+\includegraphics[width=0.75\textwidth]{delay_time_seismograms.jpg}
+\end{center}
+\begin{eqn}
+\delta T = T - T_{0}.
+\end{eqn}
+\end{frame}
+
+\begin{frame}
+Rays determined through integration of Hamilton's equations:
+\begin{eqn}
+\frac{\ddns x_{i}}{\ddns\sigma}=\frac{\partial H_{k}}{\partial p_{i}}, \quad \frac{\ddns p_{i}}{\ddns\sigma}=-\frac{\partial H_{k}}{\partial x_{i}}.
+\end{eqn}
+Once the ray path is known, the travel time can be written:
+\begin{eqn}
+T = \int_{\mathrm{ray}} \frac{1}{v} \dd s.
+\end{eqn}
+If velocity variations are sufficiently small, we can seek to linearise:
+\begin{eqn}
+T(v+\delta v) = T(v) + \langle DT(v)|\delta v \rangle + O(\delta v^{2}).
+\end{eqn}
+\end{frame}
+
+\begin{frame}
+Using Fermat's principle, we find that:
+\begin{eqn}
+\delta T = -\int_{\mathrm{ray}} \frac{\delta v}{v^{2}} \dd s.
+\end{eqn}
+First-order contribution from varying ray geometry vanishes, and so we need only
+integrate the velocity perturbation along the reference ray path.
+
+Functional derivative identified by using the standard inner product:
+\begin{eqn}
+\langle u|w \rangle = \int_{M} uw \dd^{3}\mathbf{x}.
+\end{eqn}
+Note that the functional derivative is singular on the ray path and zero elsewhere.
+\end{frame}
+
+\begin{frame}
+For the $i$th delay time measurement:
+\begin{eqn}
+\delta T_{i} = -\int_{\mathrm{ray}_{i}} \frac{\delta\alpha}{\alpha^{2}} \dd s + e_{i}.
+\end{eqn}
+Expand the velocity perturbation in a finite-dimensional basis:
+\begin{eqn}
+\delta\alpha(\mathbf{x}) = \sum_{j=1}^{m} \delta\alpha_{j} \varphi_{j}(\mathbf{x}).
+\end{eqn}
+Choice of basis functions determined by assumptions about the Earth and the potential
+resolution of the data as set by its dominant frequencies.
+\end{frame}
+
+\begin{frame}
+Using the model parametrisation, we now have:
+\begin{eqn}
+\delta T_{i} = \sum_{j=1}^{m} \left(-\int_{\mathrm{ray}_{i}} \frac{\varphi_{j}}{\alpha^{2}} \dd s \right) \delta\alpha_{j} + e_{i}.
+\end{eqn}
+We can now use a familiar matrix-vector notation:
+\begin{eqn}
+\mathbf{d} = \mathbf{A}\mathbf{m} + \mathbf{e},
+\end{eqn}
+where we have set:
+\begin{eqn}
+A_{ij} = -\int_{\mathrm{ray}_{i}} \frac{\varphi_{j}}{\alpha^{2}} \dd s.
+\end{eqn}
+\end{frame}
+
+\begin{frame}
+A toy problem: straight rays crossing a square divided into $24\times24$ blocks, a \textbf{pixel basis}.
+\begin{center}
+\includegraphics[width=0.85\textwidth]{L7F2.pdf}
+\end{center}
+$A_{ij}$ is minus the length of the $i$th ray within the $j$th block divided by $\alpha^{2}$, and so most entries are zero.
+\end{frame}
+
+\sectionslide{Solving the inverse problem}
+
+\begin{frame}
+Tomographic problem with perfect data:
+\begin{eqn}
+\mathbf{d} = \mathbf{A}\mathbf{m}.
+\end{eqn}
+Is there a unique model that solves this problem?
+
+The \textbf{null space} of the matrix $\mathbf{A}$ comprises those vectors satisfying:
+\begin{eqn}
+\mathbf{A}\mathbf{m}_{\mathrm{null}} = \mathbf{0}.
+\end{eqn}
+This is a linear subspace. If non-trivial (not just the zero vector), then the linear system
+cannot have a unique solution.
+
+\textbf{The null space is always non-trivial for under-determined problems, $\bm{m > n}$.}
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[width=0.9\textwidth]{L7F3.pdf}
+
+\raggedright
+Lack of ray coverage is the most obvious way null spaces are generated.
+
+Adding the null-space model (left) to the input model gives exactly the same data.
+\end{frame}
+
+\begin{frame}
+The null space can be found from the eigenvalue problem for the symmetric matrix $\mathbf{A}^{T}\mathbf{A}$, whose
+eigenvalues are non-negative:
+\begin{eqn}
+\mathbf{A}^{T}\mathbf{A}\mathbf{v}_{j}=s_{j}^{2}\mathbf{v}_{j}.
+\end{eqn}
+The null space is spanned by the eigenvectors with $s_{j}=0$.
+
+Setting $\mathbf{u}_{j}=\mathbf{A}\mathbf{v}_{j}/s_{j}$ for $s_{j}>0$, we obtain the \textbf{singular value decomposition}:
+\begin{eqn}
+\mathbf{A}=\sum_{s_{j}>0}s_{j}\mathbf{u}_{j}\mathbf{v}_{j}^{T}.
+\end{eqn}
+The data depend only on the components of the model along $\mathbf{v}_{j}$ with $s_{j}>0$.
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[width=\textwidth]{L7F4.pdf}
+
+\raggedright
+Directions with small singular values contribute little to the data, and are lost within the errors: they are
+effectively unresolved.
+\end{frame}
+
+\begin{frame}
+An obvious way to proceed is through a \textbf{least-squares solution}.
+
+We define the least-squares misfit through:
+\begin{eqn}
+J(\mathbf{m}) = \frac{1}{2} \sum_{i=1}^{n} \frac{[(\mathbf{A}\mathbf{m})_{i} - d_{i}]^{2}}{\sigma_{i}^{2}}.
+\end{eqn}
+In matrix notation, this becomes:
+\begin{eqn}
+J(\mathbf{m}) = \frac{1}{2} (\mathbf{A}\mathbf{m} - \mathbf{d})^{T} \mathbf{C}^{-1} (\mathbf{A}\mathbf{m} - \mathbf{d}).
+\end{eqn}
+If there is a non-trivial null space there is \textbf{no unique minimum}!
+\end{frame}
+
+\begin{frame}
+The idea is to penalise models with undesirable properties within the inversion.
+
+Suppose we prefer models with a small norm:
+\begin{eqn}
+\int_{M} \delta\alpha^{2} \dd^{3}\mathbf{x}.
+\end{eqn}
+Relative to our model parametrisation, this becomes:
+\begin{eqn}
+\begin{gathered}
+\int_{M} \delta\alpha^{2} \dd^{3}\mathbf{x} = \mathbf{m}^{T}\mathbf{B}\mathbf{m},\\[\eqgap]
+B_{jk} = \int_{M} \varphi_{j}\varphi_{k} \dd^{3}\mathbf{x}.
+\end{gathered}
+\end{eqn}
+\end{frame}
+
+\begin{frame}
+We modify the least-squares misfit to incorporate regularisation:
+\begin{eqn}
+J(\mathbf{m}) = \frac{1}{2} (\mathbf{A}\mathbf{m} - \mathbf{d})^{T} \mathbf{C}^{-1} (\mathbf{A}\mathbf{m} -
+\mathbf{d}) + \frac{\lambda}{2} \mathbf{m}^{T}\mathbf{B}\mathbf{m}.
+\end{eqn}
+Models with a small value of $J$ now represent a balance between fitting the data well and
+keeping the chosen model property small.
+
+This balance is reflected in the choice of the \textbf{damping parameter}, $\lambda$.
+
+Many choices of regularisation possible such as \textbf{norm or gradient damping}.
+\end{frame}
+
+\begin{frame}
+\begin{columns}[c]
+\begin{column}{0.5\textwidth}
+\centering
+\includegraphics[width=\linewidth]{L7F5.pdf}
+\end{column}
+\begin{column}{0.46\textwidth}
+How should the damping parameter be chosen?
+
+Fit the data to within their errors, but no better:
+\begin{eqn}
+\chi^{2}\approx n.
+\end{eqn}
+This is the \textbf{discrepancy principle}.
+
+Fitting the data more closely than this serves only to fit the noise.
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+Misfit is quadratic, and so has at most one minimum value when:
+\begin{eqn}
+\nabla J(\mathbf{m}) = \mathbf{0}.
+\end{eqn}
+Through a calculation (detailed in the handout) this implies:
+\begin{eqn}
+(\mathbf{A}^{T}\mathbf{C}^{-1}\mathbf{A} + \lambda \mathbf{B})\mathbf{m} = \mathbf{A}^{T}\mathbf{C}^{-1}\mathbf{d}.
+\end{eqn}
+If the matrix on the left-hand side is invertible, there is a unique solution to the problem.
+\end{frame}
+
+\begin{frame}
+Consider the associated eigenvalue problem:
+\begin{eqn}
+(\mathbf{A}^{T}\mathbf{C}^{-1}\mathbf{A} + \lambda \mathbf{B})\mathbf{m} = \mu \mathbf{m}.
+\end{eqn}
+If the eigenvalues are all non-zero, then the matrix is invertible.
+
+Take the inner product with a normalised eigenvector:
+\begin{eqn}
+(\mathbf{A}\mathbf{m})^{T}\mathbf{C}^{-1}(\mathbf{A}\mathbf{m}) + \lambda \mathbf{m}^{T}\mathbf{B}\mathbf{m} = \mu.
+\end{eqn}
+The left-hand side is positive so long as the damping parameter is positive.
+
+Regularised least squares is a means of calculating solutions to the inverse problem that
+also have desirable physical properties. But there are a \textbf{lot of arbitrary choices}.
+\end{frame}
+
+\begin{frame}
+Taking $\mathbf{B}=\mathbf{I}$ and $\mathbf{C}=\sigma^{2}\mathbf{I}$, the solution can be written using the singular value decomposition:
+\begin{eqn}
+\mathbf{m}=\sum_{s_{j}>0}\frac{s_{j}}{s_{j}^{2}+\lambda\sigma^{2}}(\mathbf{u}_{j}\cdot\mathbf{d})\,\mathbf{v}_{j}.
+\end{eqn}
+Components with $s_{j}^{2}\gg\lambda\sigma^{2}$ are recovered, while those with $s_{j}^{2}\ll\lambda\sigma^{2}$ are suppressed.
+
+Damping acts by discarding those parts of the model to which the data are least sensitive.
+\end{frame}
+
+\begin{frame}
+We can also ask that the model stays ``close'' to a preferred point:
+\begin{eqn}
+J(\mathbf{m}) = \frac{1}{2}(\mathbf{A}\mathbf{m}-\mathbf{d})^{T}\mathbf{C}^{-1}(\mathbf{A}\mathbf{m}-\mathbf{d})
++ \frac{\lambda}{2}(\mathbf{m}-\mathbf{m}_{0})^{T}\mathbf{B}(\mathbf{m}-\mathbf{m}_{0}).
+\end{eqn}
+For positive damping parameter, we obtain the unique solution:
+\begin{eqn}
+\mathbf{m} = (\mathbf{A}^{T}\mathbf{C}^{-1}\mathbf{A} + \lambda \mathbf{B})^{-1} (\mathbf{A}^{T}\mathbf{C}^{-1}\mathbf{d}
++ \lambda \mathbf{B}\mathbf{m}_{0}).
+\end{eqn}
+\end{frame}
+
+\begin{frame}
+\begin{columns}[c]
+\begin{column}{0.5\textwidth}
+\centering
+\includegraphics[width=\linewidth]{L7F6.pdf}
+\end{column}
+\begin{column}{0.46\textwidth}
+A \textbf{spike test} inverts synthetic data for a model that is zero except within a single block.
+
+The recovered spike is reduced in amplitude and smeared along the rays, to an extent set by the ray coverage.
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.74\paperheight]{dewit2012_nullspace_model.jpg}
+
+Which features in the model can be believed? Not an easy question!
+\credit{de Wit \emph{et al.} (2012)}
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.74\paperheight]{dewit2012_nullspace_robust.jpg}
+
+Can vary arbitrary parameters to see what has to be there to fit the data.
+\credit{de Wit \emph{et al.} (2012)}
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.74\paperheight]{L12F5.png}
+
+Different data sets and methods lead to broadly consistent results.
+\credit{Ritsema \emph{et al.} (2011)}
+\end{frame}
+
+\sectionslide{A Bayesian perspective}
+
+\begin{frame}
+\textbf{Bayes' theorem} expressed in terms of conditional probability density functions:
+\begin{eqn}
+p(\mathbf{m}|\mathbf{d}) = \frac{ p(\mathbf{d}|\mathbf{m}) p(\mathbf{m})}{\int p(\mathbf{d}|\mathbf{m}) p(\mathbf{m}) \dd \mathbf{m}}.
+\end{eqn}
+This is a complete recipe to update prior beliefs given data.
+
+But what do probabilities mean in this context?
+
+And how do you arrive at the ``correct prior''?
+\end{frame}
+
+\begin{frame}
+\centering
+\begin{minipage}{0.72\textwidth}
+\emph{Now any decision that depends on the data that is being used in making the inference only requires from the data
+the posterior distribution. Consequently the problem of inference is effectively solved by stating the posteriori
+distribution. This is the reason I feel that the basic problem of inference is solved.}
+
+D.~V. Lindley, \emph{Foundations of Statistical Inference}
+
+\vspace{0.5em}
+\emph{I am often asked if the method gives the right answer; or, more particularly, how do you know if you have got the
+right prior. My reply is that I don't know what is meant by ``right'' in this context. The Bayesian theory is about
+coherence, not about right or wrong.}
+
+D.~V. Lindley, \emph{Bayesian Statistics}
+\end{minipage}
+\end{frame}
+
+\begin{frame}
+Prior and likelihood take the form:
+\begin{eqn}
+\begin{gathered}
+p(\mathbf{m}) = \frac{1}{\sqrt{(2\pi)^{m}\det \mathbf{C}_{m}}} \exp\left[-\frac{1}{2}(\mathbf{m}-\mathbf{m}_{0})^{T}
+\mathbf{C}_{m}^{-1}(\mathbf{m}-\mathbf{m}_{0})\right],\\[\eqgap]
+p(\mathbf{d}|\mathbf{m}) = \frac{1}{\sqrt{(2\pi)^{n}\det \mathbf{C}}} \exp\left[-\frac{1}{2}(\mathbf{A}\mathbf{m}
+-\mathbf{d})^{T}\mathbf{C}^{-1}(\mathbf{A}\mathbf{m}-\mathbf{d})\right].
+\end{gathered}
+\end{eqn}
+Bayes' theorem results in a posterior PDF that is also Gaussian.
+\end{frame}
+
+\begin{frame}
+Posterior mean has the same form as a regularised least-squares solution:
+\begin{eqn}
+\mathbf{m}_{p} = (\mathbf{A}^{T}\mathbf{C}^{-1}\mathbf{A} + \mathbf{C}_{m}^{-1})^{-1} (\mathbf{A}^{T}
+\mathbf{C}^{-1}\mathbf{d} + \mathbf{C}_{m}^{-1}\mathbf{m}_{0}).
+\end{eqn}
+Method also provides the posterior covariance:
+\begin{eqn}
+\mathbf{C}_{p} = (\mathbf{A}^{T}\mathbf{C}^{-1}\mathbf{A} + \mathbf{C}_{m}^{-1})^{-1}.
+\end{eqn}
+Crucially, this quantifies uncertainty on the model -- a combination of propagated data
+errors and the limitations imposed by the physics of the problem.
+
+Any choice of regularisation amounts to a choice of prior: the Bayesian approach makes this choice explicit.
+\end{frame}
+
+\begin{frame}
+Toy problem with a smooth Gaussian prior:
+\begin{center}
+\includegraphics[width=\textwidth]{L7F7.pdf}
+\end{center}
+The posterior standard deviation shows where the recovery can be trusted.
+\end{frame}
+
+\begin{frame}
+Alternatively, pose and solve the problem for the function $\delta\alpha$ itself, discretising only at the end:
+\begin{center}
+\includegraphics[width=\textwidth]{L7F8.pdf}
+\end{center}
+You need only the idea: the answer no longer depends on an arbitrary parametrisation.
+\credit{Calculated with \texttt{pygeoinf}}
+\end{frame}
+
+\begin{frame}[t]
+\heading{What you need to know and be able to do}
+\begin{enumerate}
+\item[(i)] Why the construction of tomographic models is of interest: it gives the main quantitative constraint on
+mantle convection and hence on the dynamics of the Earth's deep interior. Here you should be familiar with the idea
+that seismic slow regions are likely to be hotter than average, while fast regions will be cooler.
+\item[(ii)] How Fermat's principle is used to obtain a simple linearised relation between delay times and velocity
+perturbations. From this, you should be able to outline how a tomographic problem is reduced to the standard form
+$\mathbf{d} = \mathbf{A}\mathbf{m} + \mathbf{e}$.
+\item[(iii)] What the null space of a linear(ised) inverse problem is and why it matters.
+\item[(iv)] How regularised least squares is used to obtain solutions of linearised tomographic problems. Here you
+should be able to derive the least squares equations from first principles.
+\item[(v)] How Bayes' theorem can be applied in the solution of inverse problems, and that the results obtained
+coincide with regularised least squares for linear(ised) problems with Gaussian errors and priors.
+\end{enumerate}
+\end{frame}
+
+\end{document}

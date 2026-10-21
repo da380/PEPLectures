@@ -1,0 +1,332 @@
+\documentclass[14pt]{beamer}
+\usepackage{pepslides}
+\title{Plane wave propagation}
+\lecturenumber{16}
+\hypersetup{pdftitle={Lecture 16: Plane wave propagation}}
+
+\begin{document}
+
+\titleslide
+
+\begin{frame}[t]
+\heading{From last time\ldots}
+Linearised equations of motion including a stress glut:
+\begin{eqn}
+\begin{gathered}
+\rho\frac{\partial^2 u_{i}}{\partial t^2} - \frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\right) = -\frac{\partial\overline{S}_{ij}}{\partial x_{j}},\\[\eqgap]
+A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\hat{n}_{j} = \overline{S}_{ij}\hat{n}_{j}.
+\end{gathered}
+\end{eqn}
+Definition of the elastic tensor:
+\begin{eqn}
+A_{ijkl}(\mathbf{x}) = \frac{\partial^2 W}{\partial F_{ij}\partial F_{kl}}(\mathbf{x}, \mathbf{I}).
+\end{eqn}
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.9\paperheight]{vandriel_nissenmeyer_global_wavefield.png}
+\credit{Martin van Driel \& Tarje Nissen-Meyer}
+\end{frame}
+
+\sectionslide{The Christoffel equation}
+
+\begin{frame}
+We consider an infinite and homogeneous body.
+
+Look for a plane wave solution of the form:
+\begin{eqn}
+u_{i}(\mathbf{x},t)=f(t-p_{j}x_{j})a_{i}.
+\end{eqn}
+The \textbf{slowness vector}, $\mathbf{p}$, sets the orientation and speed of the wavefronts.
+
+The \textbf{polarisation vector}, $\mathbf{a}$, sets the direction of particle motion.
+
+The \textbf{pulse shape} is set by $f$, and does not vary as the wave propagates -- in this
+sense the waves are \textbf{non-dispersive} (but\ldots).
+\end{frame}
+
+\begin{frame}
+\begin{columns}[c]
+\begin{column}{0.45\textwidth}
+Wavefronts:
+\begin{eqn}
+t-p_{j}x_{j}=\mathrm{constant}.
+\end{eqn}
+Phase speed:
+\begin{eqn}
+c=\frac{1}{\|\mathbf{p}\|}.
+\end{eqn}
+\end{column}
+\begin{column}{0.5\textwidth}
+\centering
+\begin{tikzpicture}[rotate=35,scale=1.55,>={Stealth[length=13pt,width=10pt]}]
+\foreach \x in {0,0.75,...,3}
+  \draw[line width=2.4pt,dash pattern=on 5pt off 4pt] (\x,-3.3) -- (\x,1.7);
+\draw[->,line width=2.4pt] (3,0.8) -- ++(1.3,0) node[right=3pt] {\eqsize$\mathbf{p}$};
+\draw[->,line width=2.4pt,red!85!black] (3,0.8) -- ++(62:1.9) node[above=3pt] {\eqsize$\mathbf{a}$};
+\end{tikzpicture}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+For the plane wave ansatz:
+\begin{eqn}
+\begin{gathered}
+\frac{\partial^{2}u_{i}}{\partial t^{2}}=f''(t-p_{j}x_{j})a_{i},\\[\eqgap]
+\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\right)=f''(t-p_{m}x_{m})A_{ijkl}p_{j}p_{l}a_{k}.
+\end{gathered}
+\end{eqn}
+The equations of motion are satisfied if and only if:
+\begin{eqn}
+(\rho\delta_{ik}-A_{ijkl}p_{j}p_{l})a_{k}=0.
+\end{eqn}
+This is known as the \textbf{Christoffel equation} -- it places a constraint on both the
+slowness and polarisation vectors.
+\end{frame}
+
+\begin{frame}
+It will be useful to define the \textbf{Christoffel matrix}, which is a function of $\mathbf{p}$:
+\begin{eqn}
+\Gamma_{ik}(\mathbf{p})=\frac{1}{\rho}A_{ijkl}p_{j}p_{l}.
+\end{eqn}
+The Christoffel equation can then be written:
+\begin{eqn}
+[\bm{\Gamma}(\mathbf{p})-\mathbf{I}]\mathbf{a}=\mathbf{0}.
+\end{eqn}
+This is a \textbf{homogeneous linear equation} for $\mathbf{a}$, that can have non-trivial solutions
+if and only if:
+\begin{eqn}
+\det[\bm{\Gamma}(\mathbf{p})-\mathbf{I}]=0.
+\end{eqn}
+The roots of this equation define the \textbf{slowness surface}.
+\end{frame}
+
+\sectionslide{Reduction to an eigenvalue problem}
+
+\begin{frame}
+From the definition of the Christoffel matrix, we have:
+\begin{eqn}
+\bm{\Gamma}(\gamma \mathbf{p})=\gamma^{2}\bm{\Gamma}(\mathbf{p}).
+\end{eqn}
+It is a \textbf{homogeneous function of order two}.
+
+The hyperelastic symmetry implies that the Christoffel matrix is \textbf{symmetric}:
+\begin{eqn}
+\Gamma_{ki}(\mathbf{p})=\frac{1}{\rho}A_{kjil}p_{j}p_{l}=\frac{1}{\rho}A_{ilkj}p_{j}p_{l}=\frac{1}{\rho}A_{ijkl}p_{j}p_{l}=\Gamma_{ik}(\mathbf{p}).
+\end{eqn}
+\end{frame}
+
+\begin{frame}
+Fixing the orientation of the slowness vector, we can write:
+\begin{eqn}
+\mathbf{p}=\frac{1}{c}\hat{\mathbf{p}},
+\end{eqn}
+and hence the Christoffel equation reduces to:
+\begin{eqn}
+\bm{\Gamma}(\hat{\mathbf{p}})\mathbf{a}=c^{2}\mathbf{a}.
+\end{eqn}
+This is a \textbf{symmetric eigenvalue problem}:
+\begin{enumerate}
+\item Squared phase speeds are \textbf{real}, generally \textbf{three distinct values}
+\item Polarisation vectors for distinct squared phase speeds are \textbf{orthogonal}
+\item Degenerate squared phase speeds are possible
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+The slowness surface has three sheets, which can touch along some directions:
+\begin{center}
+\includegraphics[width=0.74\textwidth]{L4F1.pdf}
+\end{center}
+\vspace{-0.6em}
+\begin{eqn}
+\begin{gathered}
+{}[\|\mathbf{p}\|^{2}c_{1}(\hat{\mathbf{p}})^{2}-1][\|\mathbf{p}\|^{2}c_{2}(\hat{\mathbf{p}})^{2}-1][\|\mathbf{p}\|^{2}c_{3}(\hat{\mathbf{p}})^{2}-1]=0,\\[\eqgap]
+c_{1}(\hat{\mathbf{p}})\le c_{2}(\hat{\mathbf{p}})\le c_{3}(\hat{\mathbf{p}}).
+\end{gathered}
+\end{eqn}
+\end{frame}
+
+\begin{frame}
+\centering
+\animation[width=0.46\textwidth]{anisotropy_iso.pdf}{anisotropy_iso.webm}\hspace{1.5em}%
+\animation[width=0.46\textwidth]{anisotropy_ti.pdf}{anisotropy_ti.webm}
+
+\raggedright
+A point force in an isotropic medium (left) and in a strongly anisotropic one (right). The quasi-P and quasi-S
+wavefronts are not circles, and the quasi-S front has cusps. These are two-dimensional solutions, with motion in
+the plane, so only two of the three sheets of the slowness surface appear.
+\end{frame}
+
+\sectionslide{Isotropic media}
+
+\begin{frame}
+We have seen that the elastic tensor in an isotropic solid takes the form:
+\begin{eqn}
+A_{ijkl}=\lambda\delta_{ij}\delta_{kl}+\mu(\delta_{ik}\delta_{jl}+\delta_{il}\delta_{jk}).
+\end{eqn}
+Putting into the definition of the Christoffel matrix, we arrive at:
+\begin{eqn}
+\begin{aligned}
+\Gamma_{ik}(\hat{\mathbf{p}})&=\frac{\lambda+\mu}{\rho}\hat{p}_{i}\hat{p}_{k}+\frac{\mu}{\rho}\delta_{ik}\\[\eqgap]
+&=\frac{\lambda+2\mu}{\rho}\hat{p}_{i}\hat{p}_{k}+\frac{\mu}{\rho}(\delta_{ik}-\hat{p}_{i}\hat{p}_{k}).
+\end{aligned}
+\end{eqn}
+In the final expression, note the \textbf{orthogonal projections} parallel and perpendicular
+to the direction of the slowness vector.
+\end{frame}
+
+\begin{frame}
+Isotropic Christoffel matrix:
+\begin{eqn}
+\Gamma_{ik}(\hat{\mathbf{p}})=\frac{\lambda+2\mu}{\rho}\hat{p}_{i}\hat{p}_{k}+\frac{\mu}{\rho}(\delta_{ik}-\hat{p}_{i}\hat{p}_{k}).
+\end{eqn}
+By inspection we identify an eigenvector and eigenvalue:
+\begin{eqn}
+\mathbf{a}\propto\hat{\mathbf{p}},\qquad \alpha=\sqrt{\frac{\lambda+2\mu}{\rho}}.
+\end{eqn}
+These plane waves are known as \textbf{P-waves}:
+\begin{itemize}
+\item Particle motion along the propagation direction
+\item Phase speed the same in all directions
+\item Associated with a non-degenerate eigenspace
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+Isotropic Christoffel matrix:
+\begin{eqn}
+\Gamma_{ik}(\hat{\mathbf{p}})=\frac{\lambda+2\mu}{\rho}\hat{p}_{i}\hat{p}_{k}+\frac{\mu}{\rho}(\delta_{ik}-\hat{p}_{i}\hat{p}_{k}).
+\end{eqn}
+By inspection we identify eigenvectors and an eigenvalue:
+\begin{eqn}
+\mathbf{a}\perp\hat{\mathbf{p}},\qquad \beta=\sqrt{\frac{\mu}{\rho}}.
+\end{eqn}
+These plane waves are known as \textbf{S-waves}:
+\begin{itemize}
+\item Particle motion perpendicular to the propagation direction
+\item Phase speed the same in all directions
+\item Associated with a two-fold degenerate eigenspace
+\end{itemize}
+\end{frame}
+
+\sectionslide{Slightly anisotropic media}
+
+\begin{frame}[t]
+\heading{Anisotropy in the Earth}
+\centering
+\includegraphics[height=0.68\paperheight]{anisotropy_rocks_photos.png}
+\end{frame}
+
+\begin{frame}
+We consider a slightly anisotropic elastic tensor:
+\begin{eqn}
+A_{ijkl}=\lambda\delta_{ij}\delta_{kl}+\mu(\delta_{ik}\delta_{jl}+\delta_{il}\delta_{jk})+s\,\delta A_{ijkl}.
+\end{eqn}
+Resulting Christoffel matrix:
+\begin{eqn}
+\Gamma_{ik}(\hat{\mathbf{p}})=\Gamma^{0}_{ik}(\hat{\mathbf{p}})+s\,\delta\Gamma_{ik}(\hat{\mathbf{p}}),\qquad
+\delta\Gamma_{ik}(\hat{\mathbf{p}})=\frac{1}{\rho}\delta A_{ijkl}\hat{p}_{j}\hat{p}_{l}.
+\end{eqn}
+Eigenvalue problem to be solved:
+\begin{eqn}
+[\bm{\Gamma}^{0}(\hat{\mathbf{p}})+s\,\delta\bm{\Gamma}(\hat{\mathbf{p}})]\mathbf{a}=c^{2}\mathbf{a}.
+\end{eqn}
+\end{frame}
+
+\begin{frame}
+Apply \textbf{non-degenerate} perturbation theory:
+\begin{eqn}
+\begin{gathered}
+c=\alpha+s\,\delta\alpha+\cdots,\\
+\mathbf{a}=\hat{\mathbf{p}}+s\,\delta \mathbf{a}+\cdots.
+\end{gathered}
+\end{eqn}
+First-order term in eigenvalue problem:
+\begin{eqn}
+\bm{\Gamma}^{0}(\hat{\mathbf{p}})\delta \mathbf{a}+\delta\bm{\Gamma}(\hat{\mathbf{p}})\hat{\mathbf{p}}=\alpha^{2}\delta\mathbf{a}+2\alpha\,\delta\alpha\,\hat{\mathbf{p}}.
+\end{eqn}
+Through a standard argument, we arrive at:
+\begin{eqn}
+\delta\alpha=\frac{1}{2\alpha}\hat{\mathbf{p}}\cdot\delta\bm{\Gamma}(\hat{\mathbf{p}})\hat{\mathbf{p}}.
+\end{eqn}
+Polarisation \textbf{almost aligned} with propagation direction, phase speed now \textbf{varies
+with the orientation}. This is a \textbf{quasi P-wave}.
+\end{frame}
+
+\begin{frame}
+Apply \textbf{degenerate} perturbation theory:
+\begin{eqn}
+\begin{gathered}
+c=\beta+s\,\delta\beta+\cdots,\\
+\mathbf{a}=a_{1}\hat{\mathbf{t}}_{1}+a_{2}\hat{\mathbf{t}}_{2}+s\,\delta \mathbf{a}+\cdots.
+\end{gathered}
+\end{eqn}
+Leads to a $2\times2$ symmetric eigenvalue problem:
+\begin{eqn}
+\begin{pmatrix} \hat{\mathbf{t}}_{1}\cdot\delta\bm{\Gamma}(\hat{\mathbf{p}})\hat{\mathbf{t}}_{1} & \hat{\mathbf{t}}_{1}
+    \cdot\delta\bm{\Gamma}(\hat{\mathbf{p}})\hat{\mathbf{t}}_{2} \\ \hat{\mathbf{t}}_{2}\cdot\delta\bm{\Gamma}(\hat{\mathbf{p}})\hat{\mathbf{t}}_{1} &
+    \hat{\mathbf{t}}_{2}\cdot\delta\bm{\Gamma}(\hat{\mathbf{p}})\hat{\mathbf{t}}_{2} \end{pmatrix} \begin{pmatrix} a_{1}
+         \\ a_{2} \end{pmatrix} = 2\beta\,\delta\beta \begin{pmatrix} a_{1} \\ a_{2} \end{pmatrix}.
+\end{eqn}
+Solution gives \textbf{two perturbed phase speeds} which are usually distinct -- the
+initial \textbf{degeneracy is split}.
+
+Zeroth-order eigenvectors orthogonal to each other and to the propagation direction; the
+first-order correction will have a component along the propagation direction.
+
+These are \textbf{quasi S-waves}, and this behaviour is known as \textbf{shear wave splitting}.
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[width=0.85\textwidth]{long2009_splitting_flow.png}
+\credit{Long \& Silver (2009)}
+
+\raggedright
+Convection in the mantle creates large-scale \textbf{alignment} of anisotropic mineral
+grains with the \textbf{flow direction} -- produces an effective seismic anisotropy.
+Example here shows the relation between shallow anisotropy and plate motion.
+\end{frame}
+
+\begin{frame}
+The \textbf{interaction of plane waves with boundaries} is not treated quantitatively in this course.
+
+The usual \textbf{reflections} and \textbf{transmissions} of waves occur when a plane elastic
+wave interacts with a boundary.
+
+The only interesting feature is the \textbf{conversion} between different wave types. For
+example, in an isotropic medium, an incident P-wave can produce reflected and
+transmitted P- and S-waves.
+\end{frame}
+
+\begin{frame}
+\centering
+\animation[height=0.72\paperheight]{boundary_t1.pdf}{boundary.webm}
+
+\raggedright
+A P-wave from a point source reaching a boundary with a faster medium.
+\end{frame}
+
+\begin{frame}
+\centering
+\animation[height=0.72\paperheight]{boundary_t2.pdf}{boundary.webm}
+
+\raggedright
+Reflected and transmitted P- and S-waves, and head waves along the boundary. Arrows show the particle motion.
+\end{frame}
+
+\begin{frame}[t]
+\heading{What you need to know and be able to do}
+\begin{enumerate}
+\item[(i)] How to derive the Christoffel equation from the linearised equations of motion.
+\item[(ii)] Reduction of the problem to a symmetric eigenvalue problem, and a qualitative description of its solution.
+\item[(iii)] How to solve the Christoffel equation for an isotropic solid, and to deduce the properties of plane P-
+and S-waves.
+\item[(iv)] How to use first-order perturbation theory to study the effect of slight anisotropy on plane waves.
+\end{enumerate}
+\end{frame}
+
+\end{document}

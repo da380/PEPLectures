@@ -109,6 +109,38 @@ class PSVSolver:
         return self.ux, self.uz
 
 
+class TIPSVSolver(PSVSolver):
+    """P-SV waves in a transversely isotropic medium whose symmetry axis is along z, in Voigt notation
+    txx = c11 exx + c13 ezz,  tzz = c13 exx + c33 ezz,  txz = 2 c55 exz
+    (c15 = c35 = 0, so that the staggered grid needs no interpolation).  The waves are quasi-P and quasi-SV."""
+
+    def __init__(self, x, z, c11, c13, c33, c55, rho, **kwargs):
+        rho = rho * np.ones_like(c11)
+        vmax = np.sqrt(np.max(np.maximum(c11, c33) / rho))
+        kwargs.setdefault("dt", 0.4 * (x[1] - x[0]) / vmax)    # qP can be a little faster off the axes
+        super().__init__(x, z, np.sqrt(np.maximum(c11, c33) / rho), np.sqrt(c55 / rho), rho, **kwargs)
+        self.c11, self.c13, self.c33 = c11, c13, c33
+
+    def step(self, force=None, explosion=None):
+        h, dt = self.h, self.dt
+        self.vx += dt / self.rho_x * (dxf(self.txx, h) + dzb(self.txz, h))
+        self.vz += dt / self.rho_z * (dxb(self.txz, h) + dzf(self.tzz, h))
+        if force is not None:
+            ix, iz, fx, fz = force
+            self.vx[ix, iz] += dt * fx; self.vz[ix, iz] += dt * fz
+        self.vx *= self.damp; self.vz *= self.damp
+        exx = dxb(self.vx, h); ezz = dzb(self.vz, h)
+        self.txx += dt * (self.c11 * exx + self.c13 * ezz)
+        self.tzz += dt * (self.c13 * exx + self.c33 * ezz)
+        self.txz += dt * self.mu_xz * (dzf(self.vx, h) + dxf(self.vz, h))
+        if explosion is not None:
+            ix, iz, q = explosion
+            self.txx[ix, iz] += dt * q; self.tzz[ix, iz] += dt * q
+        self.txx *= self.damp; self.tzz *= self.damp; self.txz *= self.damp
+        self.ux += dt * self.vx; self.uz += dt * self.vz
+        self.t += dt
+
+
 def gaussian_anomaly(x, z, centre, width, frac):
     """Fractional velocity perturbation frac * exp(-r^2 / 2 width^2)."""
     X, Z = np.meshgrid(x, z, indexing="ij")
@@ -147,6 +179,40 @@ def animate(solver, anomaly, fname, t_end, n_frames=60, quiver_step=18, vmax=1.0
         ax.set_title(f"t = {solver.t:.2f}", fontsize=10)
     anim = FuncAnimation(fig, frame, frames=n_frames)
     anim.save(fname + ".gif", writer=PillowWriter(fps=12), dpi=80)
+    plt.close(fig)
+
+
+def movie(solver, anomaly, fname, times, advance=None, view=None, unit=1.0, quiver_step=18, vmax=1.0, fps=15,
+          dpi=100):
+    """Save a WebM (VP9) movie of the displacement field at the given times, drawn as the snapshots are.
+    advance(solver, t) takes the solver to time t (by default solver.run, i.e. no source); view, a pair of
+    boolean masks on x and z, crops the picture; the displacement is drawn in multiples of unit.  The encoder
+    comes from imageio-ffmpeg."""
+    from types import SimpleNamespace
+    import warnings
+    import imageio_ffmpeg
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    from matplotlib.animation import FFMpegWriter
+    warnings.filterwarnings("ignore", "No contour levels")
+    plt.rcParams.update({"font.family": "serif", "mathtext.fontset": "cm", "font.size": 11,
+                         "animation.ffmpeg_path": imageio_ffmpeg.get_ffmpeg_exe()})
+    advance = advance or (lambda s, t: s.run(t))
+    vx, vz = view if view is not None else (np.ones(solver.nx, bool), np.ones(solver.nz, bool))
+    x, z, cut = solver.x[vx], solver.z[vz], np.ix_(vx, vz)
+    width = 7.4                                     # inches; both sides an even number of pixels
+    height = 2 * round(0.5 * dpi * (0.25 + 0.9 * width * (z[-1] - z[0]) / (x[-1] - x[0]))) / dpi
+    fig, ax = plt.subplots(figsize=(width, height))
+    writer = FFMpegWriter(fps=fps, codec="libvpx-vp9", extra_args=["-crf", "34", "-b:v", "0", "-pix_fmt", "yuv420p"])
+    with writer.saving(fig, fname + ".webm", dpi):
+        for t in times:
+            advance(solver, t)
+            ax.clear()
+            shown = SimpleNamespace(x=x, z=z, ux=solver.ux[cut] / unit, uz=solver.uz[cut] / unit)
+            _draw(ax, shown, anomaly[cut], quiver_step, vmax)
+            ax.set_title(f"t = {solver.t:.2f}", fontsize=10)
+            writer.grab_frame()
     plt.close(fig)
 
 

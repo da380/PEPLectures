@@ -1,0 +1,343 @@
+\documentclass[14pt]{beamer}
+\usepackage{pepslides}
+\title{Free oscillations}
+\lecturenumber{23}
+\hypersetup{pdftitle={Lecture 23: Free oscillations}}
+
+\definecolor{peplightblue}{RGB}{114,159,207}
+\definecolor{pepdarkblue}{RGB}{52,101,164}
+
+\begin{document}
+
+\titleslide
+
+\begin{frame}[t]
+\heading{From last time\ldots}
+\centering
+\includegraphics[height=0.62\paperheight]{L10F2.pdf}
+\credit{Dziewonski \& Anderson (1981)}
+\end{frame}
+
+\sectionslide{Operator formalism}
+
+\begin{frame}
+\eqscale{17}
+\textbf{Linearised equations with self-gravitation and rotation:}
+\begin{eqn}
+\begin{gathered}
+\rho\left(\frac{\partial^{2}u_{i}}{\partial t^{2}}+2\epsilon_{ijk}\Omega_{j}\frac{\partial u_{k}}{\partial t}
++\epsilon_{ijk}\epsilon_{klm}\Omega_{j}\Omega_{l}u_{m}\right)-\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\right)
+-\rho\gamma_{i}^{1}=-\frac{\partial\overline{S}_{ij}}{\partial x_{j}},\\[\eqgap]
+\gamma_{i}^{1}=-G\int_{M}\rho'\left(\frac{\delta_{ij}}{[(x_{k}-x_{k}')(x_{k}-x_{k}')]^{3/2}}-\frac{3(x_{i}-x_{i}')(x_{j}-x_{j}')}{[(x_{k}-x_{k}')(x_{k}-x_{k}')]^{5/2}}\right)(u_{j}-u_{j}')\dd^{3}\mathbf{x}',\\[\eqgap]
+A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}\hat{n}_{j}=\overline{S}_{ij}\hat{n}_{j}.
+\end{gathered}
+\end{eqn}
+\textbf{Simplifying notations will help a lot!}
+\end{frame}
+
+\begin{frame}
+\eqscale{18}
+For an arbitrary \textbf{test function}, we have:
+\begin{eqn}
+\begin{aligned}
+\int_{M}\Bigg[&\rho\left(\frac{\partial^{2}u_{i}}{\partial t^{2}}+2\epsilon_{ijk}\Omega_{j}\frac{\partial u_{k}}{\partial t}+\epsilon_{ijk}\epsilon_{klm}\Omega_{j}\Omega_{l}u_{m}\right)\\
+&-\frac{\partial}{\partial x_{j}}\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}-\overline{S}_{ij}\right)-\rho\gamma_{i}^{1}\Bigg]w_{i}^{*}\dd^{3}\mathbf{x}=0.
+\end{aligned}
+\end{eqn}
+Integrating by parts and using the boundary conditions:
+\begin{eqn}
+\begin{aligned}
+\int_{M}\Bigg[&\rho\left(\frac{\partial^{2}u_{i}}{\partial t^{2}}+2\epsilon_{ijk}\Omega_{j}\frac{\partial u_{k}}{\partial t}+\epsilon_{ijk}\epsilon_{klm}\Omega_{j}\Omega_{l}u_{m}-\gamma_{i}^{1}\right)w_{i}^{*}\\
+&+\left(A_{ijkl}\frac{\partial u_{k}}{\partial x_{l}}-\overline{S}_{ij}\right)\frac{\partial w_{i}^{*}}{\partial x_{j}}\Bigg]\dd^{3}\mathbf{x}=0.
+\end{aligned}
+\end{eqn}
+If the latter identity holds for all test functions, then we can recover both the equations of motion and the boundary
+conditions. This is the \textbf{weak formulation} of the problem.
+
+Weak and strong formulations are equivalent up to technicalities.
+\end{frame}
+
+\begin{frame}
+We define the \textbf{kinetic energy form}:
+\begin{eqn}
+\langle \mathbf{w}|P|\mathbf{u}\rangle=\int_{M}\rho w_{i}^{*}u_{i}\dd^{3}\mathbf{x}.
+\end{eqn}
+The acceleration term in the weak form can then be written:
+\begin{eqn}
+\langle \mathbf{w}|P|\ddot{\mathbf{u}}\rangle.
+\end{eqn}
+This \textbf{sesquilinear form} is associated with the linear operator:
+\begin{eqn}
+(P\mathbf{u})_{i}=\rho u_{i}.
+\end{eqn}
+\end{frame}
+
+\begin{frame}
+We define the \textbf{Coriolis form}:
+\begin{eqn}
+\langle \mathbf{w}|W|\mathbf{u}\rangle=\int_{M}2\rho\epsilon_{ijk}w_{i}^{*}\Omega_{j}u_{k}\dd^{3}\mathbf{x},
+\end{eqn}
+associated with the linear operator:
+\begin{eqn}
+(W\mathbf{u})_{i}=2\rho\epsilon_{ijk}\Omega_{j}u_{k}.
+\end{eqn}
+\end{frame}
+
+\begin{frame}
+\eqscale{20}
+We define the \textbf{potential energy form}:
+\begin{eqn}
+\langle \mathbf{w}|H|\mathbf{u}\rangle=\int_{M}\left(\rho\epsilon_{ijk}\epsilon_{klm}w_{i}^{*}\Omega_{j}\Omega_{l}u_{m}+A_{ijkl}\frac{\partial w_{i}^{*}}{\partial x_{j}}\frac{\partial u_{k}}{\partial x_{l}}-\rho w_{i}^{*}\gamma_{i}^{1}\right)\dd^{3}\mathbf{x},
+\end{eqn}
+along with the linear form linked to the stress glut:
+\begin{eqn}
+\langle \mathbf{w}|\mathbf{f}\rangle=\int_{M}\overline{S}_{ij}\frac{\partial w_{i}^{*}}{\partial x_{j}}\dd^{3}\mathbf{x}.
+\end{eqn}
+These two terms incorporate \textbf{both} the equations of motion and the boundary conditions.
+\end{frame}
+
+\begin{frame}
+The weak form of the equations of motion can now be written:
+\begin{eqn}
+\langle \mathbf{w}|P|\ddot{\mathbf{u}}\rangle+\langle \mathbf{w}|W|\dot{\mathbf{u}}\rangle+\langle \mathbf{w}|H|\mathbf{u}\rangle=\langle \mathbf{w}|\mathbf{f}\rangle,
+\end{eqn}
+which is to hold for all test functions, $\mathbf{w}$.
+
+We can formally think of the problem as
+\begin{eqn}
+P\ddot{\mathbf{u}}+W\dot{\mathbf{u}}+H\mathbf{u}=\mathbf{f},
+\end{eqn}
+but the boundary conditions are then left implicit.
+\end{frame}
+
+\begin{frame}
+The kinetic energy form is \textbf{self-adjoint}:
+\begin{eqn}
+\langle \mathbf{w}|P|\mathbf{u}\rangle=\langle \mathbf{u}|P|\mathbf{w}\rangle^{*}.
+\end{eqn}
+It is also positive for non-zero $\mathbf{u}$, and so defines an \textbf{inner product}.
+
+The Coriolis form is \textbf{anti-self-adjoint}:
+\begin{eqn}
+\begin{aligned}
+\langle \mathbf{w}|W|\mathbf{u}\rangle&=\int_{M}2\rho\epsilon_{ijk}w_{i}^{*}\Omega_{j}u_{k}\dd^{3}\mathbf{x}\\[\eqgap]
+&=-\left(\int_{M}2\rho\epsilon_{ijk}u_{i}^{*}\Omega_{j}w_{k}\dd^{3}\mathbf{x}\right)^{*}=-\langle \mathbf{u}|W|\mathbf{w}\rangle^{*}.
+\end{aligned}
+\end{eqn}
+\end{frame}
+
+\begin{frame}
+The potential energy form is \textbf{self-adjoint}:
+\begin{eqn}
+\langle \mathbf{w}|H|\mathbf{u}\rangle=\langle \mathbf{u}|H|\mathbf{w}\rangle^{*}.
+\end{eqn}
+Elastic term is clear due to the hyperelastic symmetry, $A_{ijkl}=A_{klij}$.
+
+Centrifugal term follows by a simple calculation -- details in the handout.
+
+Gravitational term takes more work but proceeds in the same manner -- details are not in the handout
+and are not examinable.
+\end{frame}
+
+\sectionslide{Non-rotating eigenvalue problem}
+
+\begin{frame}
+For long-period seismology, rotation is a relatively small term that is often handled through perturbation theory.
+
+Weak form in a non-rotating earth model:
+\begin{eqn}
+\langle \mathbf{w}|P|\ddot{\mathbf{u}}\rangle+\langle \mathbf{w}|H|\mathbf{u}\rangle=\langle \mathbf{w}|\mathbf{f}\rangle.
+\end{eqn}
+\textbf{Free oscillations} are time-harmonic solutions with no force term:
+\begin{eqn}
+\begin{gathered}
+u_{i}(\mathbf{x},t)=s_{i}(\mathbf{x})\ee^{\ii\omega t},\\[\eqgap]
+-\omega^{2}\langle \mathbf{w}|P|\mathbf{s}\rangle+\langle \mathbf{w}|H|\mathbf{s}\rangle=0.
+\end{gathered}
+\end{eqn}
+This is an eigenvalue problem, with the squared eigenfrequency as the eigenvalue.
+\end{frame}
+
+\begin{frame}
+You need to know how to show that:
+\begin{enumerate}
+\item Squared eigenfrequencies are real
+\item Eigenfunctions in distinct eigenspaces are orthogonal:
+\end{enumerate}
+\begin{eqn}
+\langle \mathbf{s}_{1}|P|\mathbf{s}_{2}\rangle=0.
+\end{eqn}
+Further properties to know but without proof:
+\begin{enumerate}
+\item Eigenspaces are all finite-dimensional
+\item Countably many squared eigenfrequencies, bounded from below and accumulating only at infinity
+\item Eigenfunctions form a \textbf{complete basis} for vector fields
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+We use $k$ to label the eigenspaces, and $m$ the eigenfunctions in each eigenspace.
+
+Within each eigenspace, we can choose an orthonormal basis, and hence:
+\begin{eqn}
+\langle km|P|k'm'\rangle=\delta_{kk'}\delta_{mm'}.
+\end{eqn}
+Completeness of the eigenfunctions means that we can write:
+\begin{eqn}
+\mathbf{u}=\sum_{km}\langle km|P|\mathbf{u}\rangle|km\rangle.
+\end{eqn}
+This is the \textbf{eigenfunction expansion} of the vector field.
+\end{frame}
+
+\begin{frame}
+Equations of motion in the frequency domain:
+\begin{eqn}
+-\omega^{2}\langle \mathbf{w}|P|\tilde{\mathbf{u}}\rangle+\langle \mathbf{w}|H|\tilde{\mathbf{u}}\rangle=\langle \mathbf{w}|\tilde{\mathbf{f}}\rangle.
+\end{eqn}
+Expanding the solution in the eigenfunction basis:
+\begin{eqn}
+\tilde{\mathbf{u}}=\sum_{k'm'}\langle k'm'|P|\tilde{\mathbf{u}}\rangle|k'm'\rangle.
+\end{eqn}
+Frequency-domain solution readily derived:
+\begin{eqn}
+\tilde{\mathbf{u}}=\sum_{km}\frac{\langle km|\tilde{\mathbf{f}}\rangle}{\omega_{k}^{2}-\omega^{2}}|km\rangle.
+\end{eqn}
+Time-domain solution follows by contour integration -- not examinable, but you will use it in the second problem set.
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.66\paperheight]{L11F1.pdf}
+
+\raggedright
+Ten-day record following a large earthquake (Tohoku 2011, recorded in the Black Forest, Germany).
+
+The effects of attenuation are clearly seen within real data.
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[height=0.7\paperheight]{L11F2.pdf}
+
+\raggedright
+\textbf{Resonance peaks} (or poles) associated with each eigenfrequency; vertical lines mark those of PREM.
+
+The eigenfrequencies depend only on Earth structure, avoiding the source--structure trade-off.
+\end{frame}
+
+\begin{frame}
+A real record has a finite length, $T$:
+\begin{eqn}
+\mathbf{u}_{\mathrm{obs}}(t)=h(t)\mathbf{u}(t).
+\end{eqn}
+Its spectrum is a smoothed version of the true one:
+\begin{eqn}
+\tilde{\mathbf{u}}_{\mathrm{obs}}(\omega)\propto\int_{-\infty}^{\infty}\tilde{\mathbf{u}}(\omega')\tilde{h}(\omega-\omega')\dd\omega'.
+\end{eqn}
+The resonance peaks are broadened over a width of order $T^{-1}$.
+
+For good resolution in the frequency domain, we need \textbf{long time series} -- and hence the largest earthquakes.
+\end{frame}
+
+\sectionslide{Gravitational stability}
+
+\begin{frame}
+The non-rotating eigenvalue problem:
+\begin{eqn}
+-\omega_{k}^{2}\langle \mathbf{w}|P|km\rangle+\langle \mathbf{w}|H|km\rangle=0.
+\end{eqn}
+Taking the test function to equal the eigenfunction:
+\begin{eqn}
+\omega_{k}^{2}=\langle km|H|km\rangle.
+\end{eqn}
+Sign of the squared eigenfrequency determined by the potential energy form.
+
+\textbf{Positive values} imply \textbf{stable} oscillations about equilibrium.
+
+\textbf{Negative values} imply \textbf{unstable}, exponentially growing perturbations.
+
+\textbf{Zero values} correspond to \textbf{linear growth in time} (double pole at the origin).
+\end{frame}
+
+\begin{frame}
+\eqscale{21}
+In the non-gravitating case, the potential energy form simplifies such that:
+\begin{eqn}
+\langle \mathbf{u}|H|\mathbf{u}\rangle=\frac{1}{4}\int_{M}A_{ijkl}\left(\frac{\partial u_{i}}{\partial x_{j}}
++\frac{\partial u_{j}}{\partial x_{i}}\right)^{*}\left(\frac{\partial u_{k}}{\partial x_{l}}+\frac{\partial u_{l}}{\partial x_{k}}\right)\dd^{3}\mathbf{x}.
+\end{eqn}
+This vanishes for linearised rigid body motions, with $B_{ij}$ anti-symmetric:
+\begin{eqn}
+u_{i}(\mathbf{x})=a_{i}+B_{ij}x_{j}.
+\end{eqn}
+Six-dimensional eigenspace at zero frequency, but not excited by earthquakes:
+\begin{eqn}
+\langle \mathbf{w}|\mathbf{f}\rangle=\int_{M}\overline{S}_{ij}\frac{\partial w_{i}^{*}}{\partial x_{j}}\dd^{3}\mathbf{x}.
+\end{eqn}
+\end{frame}
+
+\begin{frame}
+\eqscale{21}
+In the non-gravitating case, the potential energy form simplifies such that:
+\begin{eqn}
+\langle \mathbf{u}|H|\mathbf{u}\rangle=\frac{1}{4}\int_{M}A_{ijkl}\left(\frac{\partial u_{i}}{\partial x_{j}}
++\frac{\partial u_{j}}{\partial x_{i}}\right)^{*}\left(\frac{\partial u_{k}}{\partial x_{l}}+\frac{\partial u_{l}}{\partial x_{k}}\right)\dd^{3}\mathbf{x}.
+\end{eqn}
+Non-negative values so long as we have \textbf{uniform pointwise stability}:
+\begin{eqn}
+A_{ijkl}(\mathbf{x})e_{ij}^{*}e_{kl}\ge c_{0}\,e_{ij}^{*}e_{ij},\quad c_{0}>0.
+\end{eqn}
+Implies elastic wave speeds are all positive.
+
+In the isotropic case, it also implies that the P-wave speed is greater than the S-wave speed.
+\end{frame}
+
+\begin{frame}
+\begin{columns}[c]
+\begin{column}{0.4\textwidth}
+\centering
+\begin{tikzpicture}
+\fill[peplightblue] (0,0) circle (3.3cm);
+\draw[pepdarkblue!70!black,thin] (0,0) circle (3.3cm);
+\fill[pepdarkblue] (0,0) circle (2.6cm);
+\draw[pepdarkblue!70!black,thin] (0,0) circle (2.6cm);
+\foreach \a in {0,90,180,270}
+  \draw[-{Latex[length=2.5mm,width=2mm]},semithick] (\a:3.8cm) -- (\a:2.62cm);
+\end{tikzpicture}
+\end{column}
+\begin{column}{0.56\textwidth}
+\setlength{\parskip}{0.8em}%
+Quantitative treatment possible, but difficult; a simple case is in the second problem set.
+
+Stability depends on the interplay between gravitational and elastic forces.
+
+Elastic forces always resist further deformation.
+
+Self-gravitation is \textbf{inherently destabilising}.
+
+A spherically symmetric compression would lower the (always negative) gravitational binding energy, while
+raising the elastic potential energy.
+
+For realistic earth models such as PREM, calculations find no negative squared eigenfrequencies.
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]
+\heading{What you need to know and be able to do}
+\begin{enumerate}
+\item[(i)] The weak formulation of the equations of motion using bra-ket-like notation, and the properties of the
+different sesquilinear forms.
+\item[(ii)] How to derive the reality of the squared eigenfrequencies and orthogonality of eigenfunctions in distinct
+eigenspaces. State without proof the remaining important properties of the eigenvalue problem.
+\item[(iii)] How to obtain a solution of the forced equations of motion in a non-rotating earth model as an
+eigenfunction expansion in the frequency domain. You do not need to know how to recover the time-domain solution, but
+may be asked to verify that such a solution works.
+\item[(iv)] That eigenfrequencies are associated with resonance peaks in the amplitude spectra obtained from
+seismograms, and why it is necessary to look at data from large earthquakes to obtain adequate resolution.
+\item[(v)] What it means for a non-rotating earth model to be stable in terms of the eigenfrequencies. You should
+understand the quantitative argument for the non-gravitating case, and the qualitative one when gravity is included.
+\end{enumerate}
+\end{frame}
+
+\end{document}

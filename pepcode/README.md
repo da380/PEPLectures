@@ -22,6 +22,16 @@ Code behind the figures and problem sets of the PEP seismology lectures.
   in `data/yspec/`); `scripts/check_kernel.py` - validation of the 2D kernel against direct perturbation.
 * `scripts/slides_seismicity.py` - global seismicity map for the slides, written as PNG to `../figures/slides`
   (USGS catalogue and NASA Blue Marble cached in `data/seismicity/`).
+* Other slide figures, written as PDF to `../figures/slides`: `slides_boundary.py` (Lecture 16, P-wave meeting a
+  boundary), `slides_anisotropy.py` (Lecture 16, point force in isotropic and TI media, with
+  `fd2d_psv.TIPSVSolver`), `slides_L5F2_stills.py` (Lecture 17, stills standing in for the L5F2 animation),
+  `slides_taup.py` (Lecture 18, PKKKKP, PcP/PcS and Pdiff/Sdiff ray paths and travel times with `obspy.taup`),
+  `slides_healing.py` (Lecture 20, wavefront healing), `slides_bdkernels.py` (Lecture 20, banana-doughnut kernels
+  of P, S and SS traveltimes at 60 degrees in PREM without its ocean, by the adjoint method with YSpec's Python package `yspec-seismo`;
+  kernels and traces cached in `data/kernels/`, 4 threads by default), `slides_jb_prem.py` (Lecture 18,
+  Jeffreys–Bullen against PREM). The FD figures use `fd2d_psv` and are drawn like L5F1/L5F2; `L5F1.py`, `L5F2.py`,
+  `slides_boundary.py`, `slides_anisotropy.py`, `slides_healing.py` and `L8F3.py` take `--webm` to write the movies in
+  `../figures/anim/` for the slides (`fd2d_psv.movie`, with `imageio-ffmpeg`).
 * `data/modes/` - cached mode computations (high-degree spheroidal catalogue extension, dispersion-corrected
   fundamental-mode frequencies).
 
