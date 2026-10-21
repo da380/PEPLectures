@@ -61,6 +61,8 @@
 * Lecture 19: pixel basis stated explicitly; SVD/null space via the eigen-decomposition of `A^T A`; regularisation
   via the discrepancy principle only (no L-curve); Bayesian methods presented positively; function-space
   (pygeoinf) example at the end, not examinable beyond the idea.
+* Lecture 20: the 2D kernel code (`pepseis/kernel2d.py`) uses the adjoint source of eqs (40)–(41) exactly; it
+  matches finite differences of the measured delay to about 0.2% (a slide shows the Taylor test).
 * Lecture 20: adjoint derived with terminal conditions; time reversal introduced only as the device that turns
   the terminal-value problem into an initial-value one, with explicit time arguments in the kernels; the
   cross-correlation delay has the opposite sign convention to Lecture 19's delay time (remarked on).

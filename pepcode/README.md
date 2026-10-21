@@ -29,7 +29,7 @@ Code behind the figures and problem sets of the PEP seismology lectures.
   `slides_healing.py` (Lecture 20, wavefront healing), `slides_bdkernels.py` (Lecture 20, banana-doughnut kernels
   of P, S and SS traveltimes at 60 degrees in PREM without its ocean, by the adjoint method with YSpec's Python package `yspec-seismo`;
   kernels and traces cached in `data/kernels/`, 4 threads by default), `slides_jb_prem.py` (Lecture 18,
-  Jeffreys–Bullen against PREM). The FD figures use `fd2d_psv` and are drawn like L5F1/L5F2; `L5F1.py`, `L5F2.py`,
+  Jeffreys–Bullen against PREM), `slides_taylor.py` (Lecture 20, a Taylor test of the 2D kernel). The FD figures use `fd2d_psv` and are drawn like L5F1/L5F2; `L5F1.py`, `L5F2.py`,
   `slides_boundary.py`, `slides_anisotropy.py`, `slides_healing.py` and `L8F3.py` take `--webm` to write the movies in
   `../figures/anim/` for the slides (`fd2d_psv.movie`, with `imageio-ffmpeg`).
 * `data/modes/` - cached mode computations (high-degree spheroidal catalogue extension, dispersion-corrected

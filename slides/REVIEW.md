@@ -110,6 +110,12 @@ opens its movie (`figures/anim/*.webm`); upload the plain `slidesNN.pdf`.
 * The two Liu & Tromp kernel slides now show YSpec kernels in PREM without its ocean
   (`pepcode/scripts/slides_bdkernels.py`), each with its seismogram and window: P at 60° in two bands, and S at
   60°; a new slide shows SS. The notes still use Liu & Tromp's `L8F5`.
+* New slide after the 2D kernel: a Taylor test (`pepcode/scripts/slides_taylor.py`).
+* ⚠ The Taylor test exposed a bug in `pepseis/kernel2d.py`: its adjoint source used a single window and the derivative
+  of the unwindowed trace, not eqs (40)–(41) of the notes (s = w u, N = ∫ ṡ² dt), so the 2D kernel was about 9% off
+  the measurement it is meant to linearise. Fixed to follow the notes; `L8F3`, `L8F4` and the kernel movie are
+  regenerated (the shapes are unchanged to the eye), and the notes' footnote now reads "within about two per cent"
+  (it said ten, which was this bug).
 * The GLAD-M15 (Bozdağ et al. 2016) slide is dropped, as you asked; GLAD-M35 carries the point.
 * Questions: all four GLAD-M35 slides? Sources of the contour and local-minima images; Farnetani (1997)
   reference unchecked.

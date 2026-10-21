@@ -5,6 +5,7 @@ s * integral(K_alpha dalpha) from the one adjoint calculation.  They agree to fi
 Written as PDF to ../figures/slides.
 Usage:  poetry run python scripts/slides_taylor.py"""
 import numpy as np
+from scipy.interpolate import CubicSpline
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -39,7 +40,12 @@ a0.set_aspect("equal"); a0.set_xticks([]); a0.set_yticks([])
 a0.set_title(r"perturbation $\delta\alpha$", fontsize=13)
 s_line = np.linspace(-0.22, 0.22, 2)
 a1.plot(s_line, slope * s_line, color="tab:blue", lw=1.6, label=r"first order: $s\int K_{\alpha}\,\delta\alpha\,\mathrm{d}^2\mathbf{x}$")
-a1.plot(AMPLITUDES, exact, "o", color="k", ms=6, label="exact: forward runs")
+s_all = np.concatenate([AMPLITUDES[:4], [0.0], AMPLITUDES[4:]])     # with the reference model, where the change is zero
+t_all = np.concatenate([exact[:4], [0.0], exact[4:]])
+s_fine = np.linspace(s_all[0], s_all[-1], 200)
+a1.plot(s_fine, CubicSpline(s_all, t_all)(s_fine), color="k", lw=1.0)   # a smooth curve through the exact values
+a1.plot(AMPLITUDES, exact, "o", color="k", ms=6)
+a1.plot([], [], "-o", color="k", ms=6, lw=1.0, label="exact: forward runs")
 a1.axhline(0, color="0.7", lw=0.6); a1.axvline(0, color="0.7", lw=0.6)
 a1.set_xlabel(r"amplitude $s$ of $\delta\alpha/\alpha$"); a1.set_ylabel(r"change in delay time $\bar{\tau}$")
 a1.legend(loc="best", frameon=False, fontsize=12)

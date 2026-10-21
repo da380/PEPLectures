@@ -186,6 +186,7 @@ labels are now typeset on the slide). No originals were downloaded.
 * `healing_t1.pdf`, `healing_t2.pdf`, `healing_t3.pdf`: wavefront healing, a plane P-wave passing a small
   low-velocity anomaly, made by `pepcode/scripts/slides_healing.py` with `pepseis.fd2d_psv` (drawn as `L5F1`); they
   replace last year's three snapshots. Last year's weather-forecast aside is dropped.
+* `taylor_test.pdf`: a Taylor test of the 2D kernel of `L8F3`/`L8F4`, made by `pepcode/scripts/slides_taylor.py`.
 * `bdkernels_p.pdf`, `bdkernels_s.pdf`, `bdkernels_ss.pdf`: cross-correlation traveltime kernels in PREM without
   its ocean, by the adjoint method, from YSpec (`yspec-seismo` 0.1.0): P at 60° in bands about 25 s and 12.5 s
   (ln vp), S and SS at 25 s (ln vs), with each seismogram and its window, on sections along and across the path. Made by `pepcode/scripts/slides_bdkernels.py` (kernels cached in
